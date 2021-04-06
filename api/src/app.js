@@ -3,11 +3,11 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
-
+const { graphqlHTTP } = require("express-graphql");
 require('./db.js');
 
 const server = express();
-
+const schema = require("./graphql/")
 server.name = 'API';
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
@@ -22,6 +22,11 @@ server.use((req, res, next) => {
 });
 
 server.use('/', routes);
+server.use("/graphql", graphqlHTTP({
+  schema,
+    graphiql: true,
+  })
+);
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
