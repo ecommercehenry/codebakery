@@ -1,8 +1,4 @@
 const {buildSchema} = require('graphql');
-const {getAllProducts} = require("../services/productsService")
-const {modifyProduct, getProductById} = require("../services/productsService")
-const {updateCategory} = require("../services/updateCategory");
-const {getAllCategory} = require("../services/categories");
 const mutations = require('./mutations/mutations');
 const queries = require('./queries/queries');
 const root = require('./roots');
