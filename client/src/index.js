@@ -3,15 +3,24 @@ import ReactDOM from "react-dom"
 import "./index.css"
 import App from "./App"
 import * as serviceWorker from "./serviceWorker"
-
 import { BrowserRouter } from "react-router-dom"
+import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client'
+
+
+// cliente apollo
+const client = new ApolloClient({
+  uri: 'http://localhost:3001/graphql',
+  cache: new InMemoryCache()
+})
 
 ReactDOM.render(
+<ApolloProvider client = {client}>
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
+  </ApolloProvider>,
   document.getElementById("root")
 )
 
