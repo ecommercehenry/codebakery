@@ -13,6 +13,7 @@ async function getProductById({id}){
  * @param  {} dataToModify object that contains the data to be modified
  */
 async function modifyProduct({id, dataToModify}){
+
     if(validateNewData(dataToModify)){
         try{
             const product =  await Product.findOne({
@@ -43,3 +44,9 @@ async function modifyProduct({id, dataToModify}){
 }
 
 module.exports = {getAllProducts, modifyProduct, getProductById}
+
+// {
+//     () => {
+//         ....
+//     }
+// }
