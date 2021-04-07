@@ -11,8 +11,5 @@ mutation {
   updateCategory(id: 1 , input: {
     name: "franciscotov",
     description: "hope is a good",
-  }) {
-    id
-    name
-  }
+  })
 }

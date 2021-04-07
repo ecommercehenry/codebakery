@@ -1,0 +1,7 @@
+
+
+module.exports = `
+type Mutation{
+    modifyProduct(id: Int, dataToModify: productInput!): product
+    updateCategory(id : Int!, input: categoryInput): Int
+}`
