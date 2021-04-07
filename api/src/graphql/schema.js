@@ -3,7 +3,14 @@ const {getAllProducts} = require("../services/productsService")
 const {modifyProduct, getProductById} = require("../services/productsService")
 const {updateCategory} = require("../services/updateCategory");
 const {getAllCategory} = require("../services/categories");
+const mutations = require('./mutations/mutations');
+const queries = require('./queries/queries');
+// estos son los objetos de las consultas
+const types = require('./types');
+// párametros que reciben los modelos de las consultas
+const inputs = require('./inputs');
 
+// console.log(mutations, 'ppapspaps')
 const root = {
     product:()=>{
         console.log("----------------------------weufhwiufhiuwefhiw")
@@ -27,42 +34,27 @@ const root = {
 
 const schema = buildSchema(`
 #Queryes ( to get data )
-type Query{
-    product: [product],
-    productById(id :Int!): product
+${
+    queries
 }
 
 #Mutations ( to manipulate data )
-type Mutation{
-    modifyProduct(id: Int, dataToModify: inputProduct!): product
-    updateCategory(id : Int!, input: MessageInput): Int
-}
-type category{
-    id : Int!
-    name : String
-}
-input MessageInput {
-    name: String
-    description: String
+${
+    mutations
 }
 
 #Inputs
-input inputProduct{
-    description: String,
-    price: Int,
-    stock: Int,
-    image: String,
+${
+    inputs
 }
 
-#Object product
-type product{
-    id : Int!
-    name : String!,
-    description: String!,
-    price: Int!,
-    stock: Int!,
-    image: String!,
-}`)
+#types
+${
+    types
+}
+
+
+`)
 // solo para agregar
 // const { Product } = require('../db.js');
 // const { Category } = require('../db.js');
