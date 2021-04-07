@@ -1,0 +1,7 @@
+obtener todos los productos
+query getAllProducts{
+  product{
+    id
+    name
+  }
+}
