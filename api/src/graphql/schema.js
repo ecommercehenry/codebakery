@@ -5,32 +5,14 @@ const {updateCategory} = require("../services/updateCategory");
 const {getAllCategory} = require("../services/categories");
 const mutations = require('./mutations/mutations');
 const queries = require('./queries/queries');
+const root = require('./roots');
 // estos son los objetos de las consultas
 const types = require('./types');
 // párametros que reciben los modelos de las consultas
 const inputs = require('./inputs');
 
 // console.log(mutations, 'ppapspaps')
-const root = {
-    product:()=>{
-        console.log("----------------------------weufhwiufhiuwefhiw")
-        return getAllProducts()
-    },
-    modifyProduct:(id,dataToModify)=>{
-        return modifyProduct(id,dataToModify)
-    },
-    categories:() => {
-        return getAllCategory();
-    },
-    updateCategory: async (args) => {
-        let {name, description} = args.input;
-        let num = await updateCategory(args.id , name, description);
-        return num[0];
-    },
-    productById: (id) =>{
-        return getProductById(id)
-    }
-}
+
 
 const schema = buildSchema(`
 #Queryes ( to get data )

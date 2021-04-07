@@ -43,3 +43,9 @@ async function modifyProduct({id, dataToModify}){
 }
 
 module.exports = {getAllProducts, modifyProduct, getProductById}
+
+// {
+//     () => {
+//         ....
+//     }
+// }
