@@ -1,15 +1,20 @@
-const {buildSchema} = require('graphql');
-const {getAllProducts} = require("../services/productsService")
-const {modifyProduct} = require("../services/productsService")
+const { buildSchema } = require("graphql")
+const { getAllProducts, modifyProduct } = require("../services/productsService")
+const { deleteCategory } = require("../services/categoryService")
+
 
 const root = {
-    product:()=>{
-        console.log("----------------------------weufhwiufhiuwefhiw")
-        return getAllProducts()
-    },
-    modifyProduct:(id,dataToModify)=>{
-        return modifyProduct(id,dataToModify)
-    }
+  product: () => {
+    console.log("----------------------------weufhwiufhiuwefhiw")
+    return getAllProducts()
+  },
+  modifyProduct: (id, dataToModify) => {
+    return modifyProduct(id, dataToModify)
+  },
+  deleteCategory: (args) => {
+    // console.log(deleteCategory(args))
+    return deleteCategory(args)
+  },
 }
 
 const schema = buildSchema(`
@@ -21,6 +26,7 @@ type Query{
 #Mutations ( to manipulate data )
 type Mutation{
     modifyProduct(id: Int, dataToModify: inputProduct!): product
+    deleteCategory(id: Int!): Boolean
 }
 
 #Inputs
@@ -41,6 +47,4 @@ type product{
     image: String!,
 }`)
 
-
-
-module.exports= {schema, root}
+module.exports = { schema, root }
