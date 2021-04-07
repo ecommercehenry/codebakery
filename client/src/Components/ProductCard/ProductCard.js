@@ -9,7 +9,7 @@ function ProductCard({ name, price, quantity, img }) {
         <h1>{name}</h1>
         <p>{price}</p>
         <p>{quantity}</p>
-        <Link to={`/country/${id}`}>
+        <Link to={`/product/${id}`}>
           <button>Product Details</button>
         </Link>
       </div>
