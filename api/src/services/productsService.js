@@ -6,6 +6,13 @@ async function getAllProducts(){
 async function getProductById({id}){
     return await Product.findByPk(id)
 }
+async function deleteById({id}){
+    return await Product.destroy({
+        where: {
+            id: id,
+        }
+    })
+}
 
 /**
  * Modify a existing product, using the id as identifier
@@ -42,4 +49,4 @@ async function modifyProduct({id, dataToModify}){
     
 }
 
-module.exports = {getAllProducts, modifyProduct, getProductById}
+module.exports = {getAllProducts, modifyProduct, getProductById, deleteById}

@@ -1,6 +1,6 @@
 const {buildSchema} = require('graphql');
 const {getAllProducts} = require("../services/productsService")
-const {modifyProduct, getProductById} = require("../services/productsService")
+const {modifyProduct, getProductById, deleteById} = require("../services/productsService")
 const {updateCategory} = require("../services/updateCategory");
 const {getAllCategory} = require("../services/categories");
 
@@ -22,6 +22,9 @@ const root = {
     },
     productById: (id) =>{
         return getProductById(id)
+    },
+    deleteById: (id) =>{
+        return deleteById(id)
     }
 }
 
@@ -36,6 +39,7 @@ type Query{
 type Mutation{
     modifyProduct(id: Int, dataToModify: inputProduct!): product
     updateCategory(id : Int!, input: MessageInput): Int
+    deleteById(id: Int!): [product!]
 }
 type category{
     id : Int!
