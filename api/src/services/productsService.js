@@ -3,6 +3,9 @@ const { Product } = require('../db.js');
 async function getAllProducts(){
     return await Product.findAll({})
 }
+async function getProductById({id}){
+    return await Product.findByPk(id)
+}
 
 /**
  * Modify a existing product, using the id as identifier
@@ -39,4 +42,4 @@ async function modifyProduct({id, dataToModify}){
     
 }
 
-module.exports = {getAllProducts, modifyProduct}
+module.exports = {getAllProducts, modifyProduct, getProductById}

@@ -1,6 +1,6 @@
 const {buildSchema} = require('graphql');
 const {getAllProducts} = require("../services/productsService")
-const {modifyProduct} = require("../services/productsService")
+const {modifyProduct, getProductById} = require("../services/productsService")
 const {updateCategory} = require("../services/updateCategory");
 const {getAllCategory} = require("../services/categories");
 
@@ -19,13 +19,17 @@ const root = {
         let {name, description} = args.input;
         let num = await updateCategory(args.id , name, description);
         return num[0];
+    },
+    productById: (id) =>{
+        return getProductById(id)
     }
 }
 
 const schema = buildSchema(`
 #Queryes ( to get data )
 type Query{
-    product: [product]
+    product: [product],
+    productById(id :Int!): product
 }
 
 #Mutations ( to manipulate data )
