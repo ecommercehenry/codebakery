@@ -12,19 +12,26 @@ const root = {
     }
 }
 
-const schema = buildSchema(`#La Query raiz
+const schema = buildSchema(`
+#Queryes ( to get data )
 type Query{
     product: [product]
 }
+
+#Mutations ( to manipulate data )
 type Mutation{
     modifyProduct(id: Int, dataToModify: inputProduct!): product
 }
+
+#Inputs
 input inputProduct{
     description: String,
     price: Int,
     stock: Int,
     image: String,
 }
+
+#Object product
 type product{
     id : Int!
     name : String!,

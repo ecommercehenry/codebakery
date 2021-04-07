@@ -9,7 +9,7 @@ async function getAllProducts(){
  * @param  {} id value to define what product going to be modified
  * @param  {} dataToModify object that contains the data to be modified
  */
-async function modifyProduct(id, dataToModify){
+async function modifyProduct({id, dataToModify}){
     if(validateNewData(dataToModify)){
         try{
             const product =  await Product.findOne({
@@ -17,7 +17,6 @@ async function modifyProduct(id, dataToModify){
                     id:id,
                 }
             })
-
             await product.update(dataToModify)
             return product
         } catch(error){
@@ -40,4 +39,4 @@ async function modifyProduct(id, dataToModify){
     
 }
 
-module.exports = {getAllProducts}
+module.exports = {getAllProducts, modifyProduct}
