@@ -8,7 +8,7 @@ const root = {
         return getAllProducts()
     },
     modifyProduct:(id,dataToModify)=>{
-        return modifyProduct({id,dataToModify})
+        return modifyProduct(id,dataToModify)
     }
 }
 
@@ -17,17 +17,21 @@ type Query{
     product: [product]
 }
 type Mutation{
-    modifyProduct(id: Int): product
+    modifyProduct(id: Int, dataToModify: inputProduct!): product
 }
 input inputProduct{
     description: String,
-    price: String,
+    price: Int,
     stock: Int,
     image: String,
 }
 type product{
-    id : Int
-    name : String
+    id : Int!
+    name : String!,
+    description: String!,
+    price: Int!,
+    stock: Int!,
+    image: String!,
 }`)
 
 
