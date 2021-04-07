@@ -41,10 +41,10 @@ const root = {
     categories:() => {
         return getAllCategory();
     },
-    updateCat: (args) => {
-        console.log('yyyyyyyyyyyyyyyyyyyyyyyy')
+    updateCategory: async (args) => {
         let {name, description} = args.input;
-        return updateCategory(name, description);
+        let num = await updateCategory(args.id , name, description);
+        return num[0];
     }
 }
 
@@ -57,9 +57,9 @@ const schema = buildSchema(`#La Query raiz
         name : String
     }
     type Mutation {
-        updateCat(input: MessageInput): [categories]
+        updateCategory(id : Int!, input: MessageInput): Int
     }
-    type categories{
+    type category{
         id : Int!
         name : String
     }
@@ -70,3 +70,4 @@ const schema = buildSchema(`#La Query raiz
 `)
 
 module.exports= {schema, root}
+
