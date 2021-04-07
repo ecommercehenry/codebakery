@@ -1,5 +1,6 @@
 const {buildSchema} = require('graphql');
 const {getAllProducts} = require("../services/productsService")
+
 const root = {
     product:()=>{
         console.log("----------------------------weufhwiufhiuwefhiw")
@@ -15,5 +16,7 @@ type product{
     id : Int
     name : String
 }`)
+
+
 
 module.exports= {schema, root}
