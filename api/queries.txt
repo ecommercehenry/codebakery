@@ -1,0 +1,18 @@
+obtener todos los productos
+query getAllProducts{
+  product{
+    id
+    name
+  }
+}
+
+actualizar una categoria, recibe un para metro id y un input con la data que se va a actualizar
+mutation {
+  updateCategory(id: 1 , input: {
+    name: "franciscotov",
+    description: "hope is a good",
+  }) {
+    id
+    name
+  }
+}
