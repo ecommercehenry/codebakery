@@ -15,10 +15,7 @@ mutation {
 }
 
 mutation{
-  {
   addCategory(name: "fran", description: "entro" ){
     name
   }
-}
-
 }
