@@ -1,7 +1,8 @@
 module.exports = `
     type category{
-        id : Int!
+        id : Int
         name : String
+        description: String
     }
-
+    
 `
