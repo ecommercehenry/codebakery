@@ -48,6 +48,6 @@ function dataPopulation(){
             image: 'cuatro.jpg'
           })
     )
-}
+};
 
 module.exports ={dataPopulation};
