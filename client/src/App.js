@@ -1,34 +1,24 @@
 import React from 'react';
 import './App.css';
-import FormCRUD from './Components/FormCRUD'
+import {Route} from 'react-router-dom';
+import Home from './Components/screens/home/container/Home';
+import Admin from './Components/screens/admin/container/Admin';
+import Catalogue from './Components/screens/catalogue/container/Catalogue';
+import NavBar from './Components/screens/navBar/NavBar';
+import Cart from './Components/screens/cart/container/Cart';
+import AboutUs from './Components/screens/aboutUs/container/AboutUs';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <FormCRUD/>
-      </header>
-    </div>
-    // <>
-    //    //<Home />  Home.jsx --- Hero, Searchbar, product, cardGRid
-    //   //<Catalogue />
-    //   //<Cart />
-    //   //<AboutUs />
-    //   //<Login />
-    //   //<Sign up/>
-      
-    // </>
+    <>
+      <Route exact path="/" component={Home}/>
+      <Route path="/" component={NavBar}/>
+      <Route path="/admin" component={Admin}/>
+      <Route path="/catalogue" component={Catalogue}/>
+      <Route path="/cart" component={Cart}/>
+      <Route path="/about-us" component={AboutUs}/>
+    </>
   );
 }
 
