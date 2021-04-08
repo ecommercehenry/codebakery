@@ -1,4 +1,4 @@
-obtener todos los productos
+//////obtener todos los productos
 query getAllProducts{
   product{
     id
@@ -6,7 +6,7 @@ query getAllProducts{
   }
 }
 
-actualizar una categoria, recibe un para metro id y un input con la data que se va a actualizar
+////actualizar una categoria, recibe un para metro id y un input con la data que se va a actualizar
 mutation {
   updateCategory(id: 1 , input: {
     name: "franciscotov",
@@ -14,6 +14,7 @@ mutation {
   })
 }
 
+//// AGREGAR CATEGORIA
 mutation{
   {
   addCategory(name: "fran", description: "entro" ){
@@ -21,4 +22,9 @@ mutation{
   }
 }
 
+}
+
+//// PARA ELIMINAR UNA CATEGORIA
+mutation{
+	deleteCategory(id:1)
 }
