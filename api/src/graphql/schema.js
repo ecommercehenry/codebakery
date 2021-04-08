@@ -35,7 +35,7 @@ ${
 // solo para agregar
 // const { Product } = require('../db.js');
 // const { Category } = require('../db.js');
-// const list = [{name: 'francisco', description: 'bueno', price: 100000, stock: 1, image: 'fran.jpg'}, 
+// const list = [{name: 'francisco', description: 'malo', price: 100000, stock: 1, image: 'fran.jpg'}, 
 // {name: 'francisco', description: 'bueno'}];
 // const pushAItem = async () => {
 //     try{
@@ -52,7 +52,7 @@ ${
 //             }
 //           });
 //           if(created){
-//               console.log('fue creada', user)
+//               console.log('fue creada')
 //           }
 //           else console.log('ya estaba creado')
 //     }
