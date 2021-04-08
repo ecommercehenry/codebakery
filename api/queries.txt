@@ -13,3 +13,12 @@ mutation {
     description: "hope is a good",
   })
 }
+
+mutation{
+  {
+  addCategory(name: "fran", description: "entro" ){
+    name
+  }
+}
+
+}

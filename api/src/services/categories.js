@@ -4,4 +4,12 @@ async function getAllCategory(){
     return await Category.findAll({})
 }
 
-module.exports = {getAllCategory}
+async function addCategory({name, description}){
+    console.log(name)
+    
+    return await Category.create({
+        name, 
+        description
+    })
+}
+module.exports = {getAllCategory, addCategory}
