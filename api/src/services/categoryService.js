@@ -7,6 +7,7 @@ async function deleteCategory({ id }) {
     return true
   } catch (error) {
     console.error(error.mesage)
+    return false
   }
 }
 

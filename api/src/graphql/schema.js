@@ -1,50 +1,65 @@
-const { buildSchema } = require("graphql")
-const { getAllProducts, modifyProduct } = require("../services/productsService")
-const { deleteCategory } = require("../services/categoryService")
+const {buildSchema} = require('graphql');
+const mutations = require('./mutations/mutations');
+const queries = require('./queries/queries');
+const root = require('./roots');
+// estos son los objetos de las consultas
+const types = require('./types');
+// párametros que reciben los modelos de las consultas
+const inputs = require('./inputs');
+// console.log(mutations, 'ppapspaps')
 
-
-const root = {
-  product: () => {
-    console.log("----------------------------weufhwiufhiuwefhiw")
-    return getAllProducts()
-  },
-  modifyProduct: (id, dataToModify) => {
-    return modifyProduct(id, dataToModify)
-  },
-  deleteCategory: (args) => {
-    // console.log(deleteCategory(args))
-    return deleteCategory(args)
-  },
-}
 
 const schema = buildSchema(`
 #Queryes ( to get data )
-type Query{
-    product: [product]
+${
+    queries
 }
 
 #Mutations ( to manipulate data )
-type Mutation{
-    modifyProduct(id: Int, dataToModify: inputProduct!): product
-    deleteCategory(id: Int!): Boolean
+${
+    mutations
 }
 
 #Inputs
-input inputProduct{
-    description: String,
-    price: Int,
-    stock: Int,
-    image: String,
+${
+    inputs
 }
 
-#Object product
-type product{
-    id : Int!
-    name : String!,
-    description: String!,
-    price: Int!,
-    stock: Int!,
-    image: String!,
-}`)
+#types
+${
+    types
+}
 
-module.exports = { schema, root }
+
+`)
+// solo para agregar
+// const { Product } = require('../db.js');
+// const { Category } = require('../db.js');
+// const list = [{name: 'francisco', description: 'bueno', price: 100000, stock: 1, image: 'fran.jpg'}, 
+// {name: 'francisco', description: 'bueno'}];
+// const pushAItem = async () => {
+//     try{
+//         const [user, created] = await Product.findOrCreate({
+//             where: { id: 1 },
+//             defaults: {
+//               ...list[0]
+//             }
+//           });
+//           const [cat, createdCat] = await Category.findOrCreate({
+//             where: { id: 1 },
+//             defaults: {
+//               ...list[1]
+//             }
+//           });
+//           if(created){
+//               console.log('fue creada', user)
+//           }
+//           else console.log('ya estaba creado')
+//     }
+//     catch(e){
+//         console.log('eror', e) 
+//     }
+// }
+// pushAItem();
+
+module.exports= {schema, root}
