@@ -40,3 +40,14 @@ mutation{
    	name
   }
 }
+// PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
+query
+  {
+    getProductByCategoryName(name:"franciscotov") {
+      id
+      name
+      price
+      stock
+      image
+    }
+  }
