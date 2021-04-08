@@ -6,7 +6,6 @@ const root = require('./roots');
 const types = require('./types');
 // párametros que reciben los modelos de las consultas
 const inputs = require('./inputs');
-
 // console.log(mutations, 'ppapspaps')
 
 
