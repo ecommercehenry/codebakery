@@ -9,4 +9,5 @@ type Mutation{
     deleteById(id: Int!): Boolean
     addCategoryToProduct(idProduct: Int!,idCategory: Int!): product
     removeCategoryFromProduct(idProduct: Int!,idCategory: Int!): product
+    addProduct(category: Int, name: String!, description: String!, price: Float!, stock: Int, image: String!): product
 }`
