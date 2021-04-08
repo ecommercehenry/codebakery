@@ -1,27 +1,43 @@
 const {buildSchema} = require('graphql');
-const {getAllProducts} = require("../services/productsService")
-const {modifyProduct, getProductById} = require("../services/productsService")
+const {getAllProducts,modifyProduct, getProductById,addCategoryToProduct,removeCategoryFromProduct} = require("../services/productsService");
 const {updateCategory} = require("../services/updateCategory");
-const {getAllCategory} = require("../services/categories");
+const {getAllCategory,addCategory} = require("../services/categories");
 
 const root = {
+    //products
     product:()=>{
-        console.log("----------------------------weufhwiufhiuwefhiw")
         return getAllProducts()
     },
+
+    productById: (id) =>{
+        return getProductById(id)
+    },
+
     modifyProduct:(id,dataToModify)=>{
         return modifyProduct(id,dataToModify)
     },
+
+    addCategoryToProduct: async (idProduct,idCategory) =>{
+        return await addCategoryToProduct(idProduct,idCategory)        
+    },
+
+    removeCategoryFromProduct: async (idProduct,idCategory) =>{
+        return await removeCategoryFromProduct(idProduct,idCategory)        
+    },
+
+    //categories
     categories:() => {
         return getAllCategory();
     },
+
     updateCategory: async (args) => {
         let {name, description} = args.input;
         let num = await updateCategory(args.id , name, description);
         return num[0];
     },
-    productById: (id) =>{
-        return getProductById(id)
+    
+    addCategory: (args) => {
+        return addCategory(args);
     }
 }
 
@@ -36,6 +52,9 @@ type Query{
 type Mutation{
     modifyProduct(id: Int, dataToModify: inputProduct!): product
     updateCategory(id : Int!, input: MessageInput): Int
+    addCategoryToProduct(idProduct: Int!,idCategory: Int!): product
+    removeCategoryFromProduct(idProduct: Int!,idCategory: Int!): product
+    addCategory(name: String!, description: String!): category
 }
 type category{
     id : Int!

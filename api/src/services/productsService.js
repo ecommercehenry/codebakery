@@ -42,4 +42,32 @@ async function modifyProduct({id, dataToModify}){
     
 }
 
-module.exports = {getAllProducts, modifyProduct, getProductById}
+async function addCategoryToProduct({idProduct,idCategory}){
+    const product = await Product.findByPk(idProduct)
+    if(product != null){
+        try {
+            await product.addCategories(idCategory)
+            return product
+        } catch (error) {
+            return {error: error}
+        }
+    }else{
+        return {error: "couldn't find a product", detail: "product doesn't exist"}
+    }
+}
+
+async function removeCategoryFromProduct({idProduct,idCategory}){
+    const product = await Product.findByPk(idProduct)
+    if(product != null){
+        try {
+            await product.removeCategories(idCategory)
+            return product
+        } catch (error) {
+            return {error: error}
+        }
+    }else{
+        return {error: "couldn't find a product", detail: "product doesn't exist"}
+    }
+}
+
+module.exports = {getAllProducts, modifyProduct, getProductById,addCategoryToProduct,removeCategoryFromProduct}
