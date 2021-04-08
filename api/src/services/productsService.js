@@ -1,6 +1,9 @@
 const { Product } = require('../db.js');
+const { Category } = require('../db.js');
+// const categories = require('../graphql/roots/queriesResolvers/categories.js');
 
 async function getAllProducts(){
+    console.log('hahahahhaha')
     return await Product.findAll({})
 }
 async function getProductById({id}){
@@ -78,4 +81,17 @@ async function removeCategoryFromProduct({idProduct,idCategory}){
     }
 }
 
-module.exports = {getAllProducts, modifyProduct, getProductById,addCategoryToProduct,removeCategoryFromProduct}
+async function getProductByCategoryName({name}){
+    category = await Category.findOne({where: { name}, attributes: {exclude: ['createdAt','updatedAt']}, include: Product});
+    // console.log( category);
+    return category.dataValues.products
+}
+
+module.exports = {
+    getAllProducts, 
+    modifyProduct, 
+    getProductById,
+    addCategoryToProduct,
+    removeCategoryFromProduct,
+    getProductByCategoryName
+}
