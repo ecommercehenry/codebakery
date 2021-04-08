@@ -4,14 +4,12 @@ async function getAllCategory(){
     return await Category.findAll({})
 }
 
-async function addCategory(args){
-    let newCategory = await Category.create(
-        {
-            name: args.name, 
-            description: args.description
-        }
-    )
-    return newCategory;
+async function addCategory({name, description}){
+    console.log(name)
+    
+    return await Category.create({
+        name, 
+        description
+    })
 }
-
-module.exports = {getAllCategory,addCategory}
+module.exports = {getAllCategory, addCategory}

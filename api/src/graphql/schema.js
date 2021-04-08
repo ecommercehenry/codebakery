@@ -1,87 +1,37 @@
 const {buildSchema} = require('graphql');
-const {getAllProducts,modifyProduct, getProductById,addCategoryToProduct,removeCategoryFromProduct} = require("../services/productsService");
-const {updateCategory} = require("../services/updateCategory");
-const {getAllCategory,addCategory} = require("../services/categories");
+const mutations = require('./mutations/mutations');
+const queries = require('./queries/queries');
+const root = require('./roots');
+// estos son los objetos de las consultas
+const types = require('./types');
+// párametros que reciben los modelos de las consultas
+const inputs = require('./inputs');
+// console.log(mutations, 'ppapspaps')
 
-const root = {
-    //products
-    product:()=>{
-        return getAllProducts()
-    },
-
-    productById: (id) =>{
-        return getProductById(id)
-    },
-
-    modifyProduct:(id,dataToModify)=>{
-        return modifyProduct(id,dataToModify)
-    },
-
-    addCategoryToProduct: async (idProduct,idCategory) =>{
-        return await addCategoryToProduct(idProduct,idCategory)        
-    },
-
-    removeCategoryFromProduct: async (idProduct,idCategory) =>{
-        return await removeCategoryFromProduct(idProduct,idCategory)        
-    },
-
-    //categories
-    categories:() => {
-        return getAllCategory();
-    },
-
-    updateCategory: async (args) => {
-        let {name, description} = args.input;
-        let num = await updateCategory(args.id , name, description);
-        return num[0];
-    },
-    
-    addCategory: (args) => {
-        return addCategory(args);
-    }
-}
 
 const schema = buildSchema(`
 #Queryes ( to get data )
-type Query{
-    product: [product],
-    productById(id :Int!): product
+${
+    queries
 }
 
 #Mutations ( to manipulate data )
-type Mutation{
-    modifyProduct(id: Int, dataToModify: inputProduct!): product
-    updateCategory(id : Int!, input: MessageInput): Int
-    addCategoryToProduct(idProduct: Int!,idCategory: Int!): product
-    removeCategoryFromProduct(idProduct: Int!,idCategory: Int!): product
-    addCategory(name: String!, description: String!): category
-}
-type category{
-    id : Int!
-    name : String
-}
-input MessageInput {
-    name: String
-    description: String
+${
+    mutations
 }
 
 #Inputs
-input inputProduct{
-    description: String,
-    price: Int,
-    stock: Int,
-    image: String,
+${
+    inputs
 }
 
-#Object product
-type product{
-    id : Int!
-    name : String!,
-    description: String!,
-    price: Int!,
-    stock: Int!,
-    image: String!,
-}`)
+#types
+${
+    types
+}
+
+
+`)
 // solo para agregar
 // const { Product } = require('../db.js');
 // const { Category } = require('../db.js');
