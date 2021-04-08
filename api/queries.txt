@@ -16,13 +16,11 @@ mutation {
 
 //// AGREGAR CATEGORIA
 mutation{
-  {
   addCategory(name: "fran", description: "entro" ){
     name
   }
 }
 
-}
 
 //// PARA ELIMINAR UNA CATEGORIA
 mutation{
