@@ -18,8 +18,14 @@ mutation {
 mutation{
   addCategory(name: "fran", description: "entro" ){
     name
-  }
 }
+
+// ESTE ES UN EJEMPLO DE AGREGAR CATEGORIA PARA PETICIONES DESDE EL FRONT
+mutation addCategory ($name: String!, $description: String!){
+    addCategory(name: $name, description: $description) {
+      name
+    }
+  }
 
 
 //// PARA ELIMINAR UNA CATEGORIA

@@ -7,12 +7,14 @@ import Catalogue from './Components/screens/catalogue/container/Catalogue';
 import NavBar from './Components/screens/navBar/NavBar';
 import Cart from './Components/screens/cart/container/Cart';
 import AboutUs from './Components/screens/aboutUs/container/AboutUs';
+import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory"
 
 
 function App() {
   return (
     <>
       <Route exact path="/" component={Home}/>
+      <Route path="/" component= {FormCreateCategory}/>
       <Route path="/" component={NavBar}/>
       <Route path="/admin" component={Admin}/>
       <Route path="/catalogue" component={Catalogue}/>
