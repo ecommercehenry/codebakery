@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import FormCRUD from './Components/FormCRUD'
 
 function App() {
   return (
@@ -18,8 +18,18 @@ function App() {
         >
           Learn React
         </a>
+        <FormCRUD/>
       </header>
     </div>
+    // <>
+    //    //<Home />  Home.jsx --- Hero, Searchbar, product, cardGRid
+    //   //<Catalogue />
+    //   //<Cart />
+    //   //<AboutUs />
+    //   //<Login />
+    //   //<Sign up/>
+      
+    // </>
   );
 }
 
