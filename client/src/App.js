@@ -1,34 +1,16 @@
 import React from 'react';
 import './App.css';
-import FormCRUD from './Components/FormCRUD'
+import {Route} from 'react-router-dom';
+import Home from './Components/screens/home/container/Home';
+import Admin from './Components/screens/admin/container/Admin';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <FormCRUD/>
-      </header>
-    </div>
-    // <>
-    //    //<Home />  Home.jsx --- Hero, Searchbar, product, cardGRid
-    //   //<Catalogue />
-    //   //<Cart />
-    //   //<AboutUs />
-    //   //<Login />
-    //   //<Sign up/>
-      
-    // </>
+    <>
+      <Route exact path="/" component={Home}/>
+      <Route path="/admin" component={Admin}/>
+    </>
   );
 }
 
