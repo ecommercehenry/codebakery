@@ -1,11 +1,11 @@
 import React from 'react'
 
-const ProductCard = () => {
+const Cart = () => {
     return (
         <div>
-            
+            You are in "/cart" route
         </div>
     )
 }
 
-export default ProductCard
+export default Cart
