@@ -1,21 +1,24 @@
-import {gql, useQuery} from '@apollo/client';
-import React from 'react'
+import { useQuery } from "@apollo/client"
+import React, { useEffect } from "react"
+import getData from "../Apollo/queries/productById"
+// import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
-function FormCRUD(){
-    const getData = gql`{
-        productById (id:3){
-          name
-          description
-          price
-          stock
-          image
-        }
-      } `
+function FormCRUD() {
+  // prueba para updateCategory -- FUNCIONA
+  // let input;
+  // const [updateCategory, { data }] = useMutation(UPDATE_CATEGORY);
 
-      const {data} = useQuery(getData);
-      console.log(data)
-    return (<div>hola estoy renderizado</div>)
+  // updateCategory()
+  // console.log(data)
+
+  // original
+  const { data } = useQuery(getData)
+
+  useEffect(() => {
+    console.log(data)
+  }, [data])
+
+  return <div>hola estoy renderizado</div>
 }
 
- export default  FormCRUD
-
+export default FormCRUD
