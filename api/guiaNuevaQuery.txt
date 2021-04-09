@@ -1,0 +1,16 @@
+- Agregar el esquema de la consulta o mutación (en carpetas queries y mutations, según sea el caso)
+
+- Agregar la propiedad (que sería parte del root) en un archivo en quieriesRevolvers 
+(ó mutationsResolvers).
+
+- Importar la propiedad en el index y exportarla (en el index de quieriesRevolvers o mutationsResolvers).
+
+- Importar en el index de roots(general) y colocasla en el objeto root que ya está exportado en ese archivo.
+
+- Crear la función en la carpeta services(esta será la función que se trae o modifica cosas den la DB) 
+en el archivo correspondiente.
+
+- Nota1: Agregar la consulta que se usó en graphiQL(la consola que le sale en el navegador) 
+para que se pueda usar luego.
+
+- Nota2: Si necesita hacer input o type debe hacerlo en las carpetas correspondiente. 
