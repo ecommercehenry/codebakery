@@ -1,7 +1,7 @@
-const { getAllCategory } = require("../../../services/categories");
+const { getAllCategories } = require("../../../services/categories");
 
 module.exports= {
-    categories:() => {
-        return getAllCategory();
+    getAllCategories:() => {
+        return getAllCategories();
     }
 }
