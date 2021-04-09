@@ -1,13 +1,12 @@
 import React from "react";
-import Grid from "../../catalogue/products/grid/Grid.jsx";
+import Products from "../../catalogue/products/container/Products.jsx";
 import './Home.css'
 
 const Home = () => {
   return (
     <div className='home'>
-      Home
       <div>
-        <Grid />
+        <Products />
       </div>
     </div>
   );

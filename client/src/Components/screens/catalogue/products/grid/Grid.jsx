@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-//import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import allProducts from "../../../../../Apollo/queries/allProducts.js";
 import { useQuery } from '@apollo/client';
 import "./grid.css";
 
-const productos = [
+const product = [
   {
     id: 1,
     title: "Brawnie",
@@ -71,7 +71,7 @@ const productos = [
 
 // }
 // Debo correjir por que trae los datos pero productos sale undefined; 
-const Grid = () => {
+const Grid = ({id}) => {
 
       const { data } = useQuery(allProducts)
       console.log(data)
@@ -80,17 +80,20 @@ const Grid = () => {
     }, [data])
 
   return (
+
      <div className="container">
       {
-      productos?.map((element) => (
+      product?.map((element) => (
         <div>
           <span className="card" key={element.id}>
+          <Link to={`/product/${id}`}>
             <img
               src={element.image}
               width="250"
               height="200"
               alt="No se encontro la imagen"
             />
+            </Link>
             <h4 className='title'>{element.title}</h4>
             <p className='price'>{element.precio}</p>
           </span>
