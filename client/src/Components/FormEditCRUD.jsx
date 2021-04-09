@@ -22,3 +22,43 @@ function FormEditCRUD(props) {
   }
 
 export default FormEditCRUD
+
+// return (
+//   <div className="product-container">
+//     {data ? (
+//       data.product.map((item) => (
+//         <div className="element-container">
+//           <div className="image-container">
+//             <p>Product</p>
+//             <img src={item.image} />
+//           </div>
+//           <div className="name-container">
+//             <p>Name</p>
+//             {item.name}
+//           </div>
+//           <div className="stock-container">
+//             <p>Stock</p>
+//             {item.stock}
+//           </div>
+//           <div className="category-container">
+//             <p>Categories</p>
+//             <p>se necesitan crear funciones</p>
+//           </div>
+//           <div className="price-container">
+//             <p>Price</p>
+//             {item.price}
+//           </div>
+//           <div className="edit-button">
+//             <p>edit</p>
+//           </div>
+//           <div className="remove-button">
+//             <p>remove</p>
+//           </div>
+//         </div>
+//       ))
+//     ) : (
+//       <p>loading</p>
+//     )}
+    
+//   </div>
+// );
