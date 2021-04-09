@@ -7,6 +7,7 @@ import Catalogue from './Components/screens/catalogue/container/Catalogue';
 import NavBar from './Components/screens/navBar/NavBar';
 import Cart from './Components/screens/cart/container/Cart';
 import AboutUs from './Components/screens/aboutUs/container/AboutUs';
+//import Grid from './Components/screens/catalogue/products/grid/Grid';      <Route path="/grid" component={Grid}/>
 
 import GlobalStyle from './Components/GlobalStyle';
 
@@ -20,6 +21,7 @@ function App() {
       <Route path="/catalogue" component={Catalogue}/>
       <Route path="/cart" component={Cart}/>
       <Route path="/about-us" component={AboutUs}/>
+
     </>
   );
 }

@@ -1,10 +1,15 @@
-import React from 'react'
+import React from "react";
+import Products from "../../catalogue/products/container/Products.jsx";
+import './Home.css'; 
 
 const Home = () => {
-    return (
-        <>
-        </>
-    )
-}
+  return (
+    <div className='home'>
+      <div>
+        <Products />
+      </div>
+    </div>
+  );
+};
 
-export default Home
+export default Home;
