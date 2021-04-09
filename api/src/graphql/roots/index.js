@@ -8,7 +8,7 @@ const {updateCategory,
     addProduct
 } = require("./mutationsResolver/")
 const {
-    categories, 
+    getAllCategories,
     product, 
     productById,
     getProductByCategoryName
@@ -30,9 +30,10 @@ const root = {
     addProduct,
 
     //Queries
-    categories,
+    
     productById,
     product,
+    getAllCategories,
     
 }
 

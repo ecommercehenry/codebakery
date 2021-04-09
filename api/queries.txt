@@ -5,6 +5,19 @@ query getAllProducts{
     name
   }
 }
+/// obtener las categorias 
+
+query getAllCategories{
+  getAllCategories{
+    name
+  }
+}
+
+{
+  getAllCategories{
+    name
+  }
+}
 //// agregar un nuevo producto
 /// se puede pasar o no una categoria
 mutation {
