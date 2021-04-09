@@ -11,7 +11,7 @@ function FormCRUD() {
   // updateCategory()
   // console.log(data)
 
-  // original
+  // original 
   const { data } = useQuery(getData)
 
   useEffect(() => {
