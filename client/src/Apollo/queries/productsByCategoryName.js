@@ -2,7 +2,7 @@ import { gql } from "@apollo/client"
 
 const productsByCategoryName = gql`
 {
-    getProductByCategoryName(name:"categoria 1") {
+    getProductByCategoryName(name:"Cocina") {
       id
       name
       price
