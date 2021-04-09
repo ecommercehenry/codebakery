@@ -62,6 +62,15 @@ mutation addCategory ($name: String!, $description: String!){
       name
     }
   }
+//buscar producto con su categoria segun su id
+{
+    productCategory(id:1){
+    name
+    categories{
+      name
+    }
+  }
+  }
 
 
 //// PARA ELIMINAR UNA CATEGORIA

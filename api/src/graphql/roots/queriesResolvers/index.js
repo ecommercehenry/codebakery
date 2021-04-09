@@ -3,7 +3,8 @@ const {product} = require("./product");
 const {productById} = require("./productById");
 const {getProductByCategoryName} = require("./productByCategoryName");
 const {getAllCategories}= require("./categories");
+const {productCategory} = require("./productCategory");
 
 
 // getProductByCategoryName
-module.exports = {categories, product, productById , getProductByCategoryName, getAllCategories}
+module.exports = {categories, product, productById , getProductByCategoryName, getAllCategories,productCategory}
