@@ -54,9 +54,14 @@ mutation {
 mutation{
   addCategory(name: "fran", description: "entro" ){
     name
-  }
 }
 
+// ESTE ES UN EJEMPLO DE AGREGAR CATEGORIA PARA PETICIONES DESDE EL FRONT
+mutation addCategory ($name: String!, $description: String!){
+    addCategory(name: $name, description: $description) {
+      name
+    }
+  }
 //buscar producto con su categoria segun su id
 {
     productCategory(id:1){
