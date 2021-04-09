@@ -5,7 +5,8 @@ const MOCK_PRODUCTS = require("./MOCK_PRODUCTS.json");
 
 function dataPopulation() {
   return (
-    Category.bulkCreate(MOCK_CATEOGRIES), Product.bulkCreate(MOCK_PRODUCTS)
+    Category.bulkCreate(MOCK_CATEOGRIES), 
+    Product.bulkCreate(MOCK_PRODUCTS)
   );
 }
 
