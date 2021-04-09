@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client"
 import React, { useEffect } from "react"
-import getAllProducts from "../Apollo/queries/getAllProducts"
+import allProducts from "../Apollo/queries/allProducts"
 import './FormCRUD.css'
 import getAllCategories from '../Apollo/queries/getAllCategories'
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
@@ -8,7 +8,7 @@ import getAllCategories from '../Apollo/queries/getAllCategories'
 function FormCRUD() {
 
   // original
-  const { data } = useQuery(getAllProducts);
+  const { data } = useQuery(allProducts);
   useEffect(() => {}, [data]);
   console.log(data);
 
@@ -16,7 +16,7 @@ function FormCRUD() {
     <div className="product-container">
       {data ? (
         data.product.map((item) => (
-          <div className="element-container">
+          <div className="element-container" key={item.id}>
             <div className="image-container">
               <p>Product</p>
               <img src={item.image} />
@@ -31,7 +31,7 @@ function FormCRUD() {
             </div>
             <div className="category-container">
               <p>Categories</p>
-              <p>se necesitan crear funciones</p>
+              { item.categories.map(element => <p key={element.id}>{element.name}</p>)}
             </div>
             <div className="price-container">
               <p>Price</p>
