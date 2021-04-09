@@ -2,7 +2,7 @@ module.exports = `
     type Query{
         product: [product],
         productById(id :Int!): product
-        categories:[category]
+       getAllCategories:[category]
     }
 
 `
