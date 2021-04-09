@@ -1,9 +1,10 @@
 import React from "react";
 import Grid from "../../catalogue/products/grid/Grid.jsx";
+import './Home.css'
 
 const Home = () => {
   return (
-    <div>
+    <div className='home'>
       Home
       <div>
         <Grid />

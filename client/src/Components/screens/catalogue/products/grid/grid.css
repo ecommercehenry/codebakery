@@ -5,9 +5,45 @@
     padding: 30px; */
     /* display: flex;
     flex-wrap: wrap; */
+   
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    box-shadow: 2px 2px 7px 1px rgba(28,110,164,0.7); 
+    box-sizing: border-box;
+    left: 20px;
+    width: 80%;
+    padding: 50px;
 
+    /* border: 1px solid black;
+    box-shadow: 2px 2px 7px 1px rgba(28,110,164,0.7);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); */
+}
+.card{
+  border-radius: 10px;
+}
+.title{
+    font-family: Georgia, serif;
+font-size: 16px;
+letter-spacing: 2px;
+word-spacing: 2px;
+color: #000000;
+font-weight: normal;
+text-decoration: none;
+font-style: normal;
+font-variant: normal;
+}
+.price{
+    font-family: Georgia, serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
 }
 /* .grid{
     display: inline-block;
