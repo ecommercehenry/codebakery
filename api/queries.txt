@@ -5,6 +5,29 @@ query getAllProducts{
     name
   }
 }
+//// agregar un nuevo producto
+/// se puede pasar o no una categoria
+mutation {
+  addProduct(category: 1, name: "toritassas", description: "dsds", price: 50, stock: 50, image: "nico"){
+    id
+  }
+}
+
+//eliminar un producto por su id 
+mutation{
+  deleteById(id:2)
+}
+/// traer un producto por Id
+{
+  productById (id:6){
+    name
+    description
+    price
+    stock
+    image
+  }
+}
+/////
 
 ////actualizar una categoria, recibe un para metro id y un input con la data que se va a actualizar
 mutation {
