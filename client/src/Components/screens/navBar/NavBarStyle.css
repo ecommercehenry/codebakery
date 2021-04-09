@@ -1,17 +1,19 @@
 .navbar{
     height: 100px;
-    background-color: #7555882d;
+    background-color: #ffffff00;
     padding-right: 1%;
+    z-index: 2;
 }
 
 .left-tags{
-    width: 400px;
-    font-size: 1.1rem;
+    width: 350px;
+    font-size: 0.9rem;
 }
 
+
 .right-buttons{
-    width: 15%;
-    font-size: 1.1rem;
+    width: fit-content;
+    font-size: 0.9rem;
 }
 
 .log-in-btn{
@@ -21,17 +23,48 @@
 .white-btn{
     margin-left: 14px;
     display: block;
-    height:  50px;
-    width: 90px;
+    height:  30px;
+    width: 80px;
     border-radius: 40px;
     border: none;
     background-color: white;
     text-decoration: none !important;
     color: black;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+}
+
+.purple-btn{
+    margin-left: 14px;
+    display: block;
+    height:  30px;
+    width: 80px;
+    border-radius: 40px;
+    border: none;
+    background-color: #755588;
+    text-decoration: none !important;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem; 
 }
 
 .display-linebreak{
     white-space: pre-line;
+}
+
+.text-inactive{
+    color: #CECECE
+}
+
+.text-inactive:hover{
+    color:white
+}
+
+.active{
+    color:white;
+    font-weight: bold;
+}
+
+.active:hover{
+    cursor: default;
 }
