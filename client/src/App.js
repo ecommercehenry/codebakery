@@ -7,10 +7,12 @@ import Catalogue from "./Components/screens/catalogue/container/Catalogue";
 import NavBar from "./Components/screens/navBar/NavBar";
 import Cart from "./Components/screens/cart/container/Cart";
 import AboutUs from "./Components/screens/aboutUs/container/AboutUs";
+import GlobalStyle from "./Components/GlobalStyle";
 
 function App() {
   return (
     <>
+      <GlobalStyle />
       <Route exact path="/" component={Home} />
       <Route path="/" component={NavBar} />
       <Route path="/admin" component={Admin} />
