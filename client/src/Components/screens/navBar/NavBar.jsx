@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { RoundButton } from '../../GlobalStyle';
 import './NavBarStyle.css'
 
 const NavBar = ({color}) => {
@@ -28,11 +29,12 @@ const NavBar = ({color}) => {
 
     return (
         <nav className='navbar d-flex align-items-center mx-5'>
-            <div className='left-tags d-flex justify-content-between align-items-center me-auto text-white' >
+            <div className='left-tags d-flex justify-content-between align-items-center me-auto' >
             <Link to='/' className={brandTag}><h5 className='mb-0 text-center display-linebreak'>Code {"\n"} Bakery</h5></Link>
                 <Link id='Catalogue' to='/catalogue' className={tag1}>Catalogue</Link>
                 <Link id='Cart' to='/cart' className={tag2}>Cart</Link>
                 <Link id='About us' to='/about-us' className={tag3}>About us</Link>
+                <Link><RoundButton purple={true}>prueba</RoundButton></Link>
             </div>
             <div className='right-buttons d-flex align-items-center'>
                 <Link to="#" className={`login-btn text-decoration-none ${textColor}`}> Login </Link>
