@@ -8,7 +8,7 @@ import Cart from './Components/screens/cart/container/Cart';
 import AboutUs from './Components/screens/aboutUs/container/AboutUs';
 //import Grid from './Components/screens/catalogue/products/grid/Grid';      <Route path="/grid" component={Grid}/>
 
-import FormEditCrud from "./Components/FormEditCRUD"
+import FormCRUD from "./Components/screens/admin/FormCRUD"
 import GlobalStyle from './Components/GlobalStyle';
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
       <Route path="/about-us" component={AboutUs}/>
       
       {/* Debo agregar al componente padre que corresponda @Chu */}
-      <Route path="/form-edit-crud" component={FormEditCrud}/>
+      <Route path="/admin/form" component={FormCRUD}/>
 
     </>
   );
