@@ -21,6 +21,7 @@ function App() {
       <Route path="/catalogue" component={Catalogue}/>
       <Route path="/cart" component={Cart}/>
       <Route path="/about-us" component={AboutUs}/>
+
     </>
   );
 }
