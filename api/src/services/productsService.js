@@ -1,7 +1,8 @@
 const { Product } = require("../db.js");
 
+
 async function getAllProducts() {
-  return await Product.findAll({});
+  return await Product.findAll({include: [Category]});
 }
 async function getProductById({ id }) {
   return await Product.findByPk(id);
@@ -13,6 +14,13 @@ async function deleteById({ id }) {
     },
   });
 }
+async function productCategory({ id }) {
+  return await Product.findOne({
+    where:{id: id},
+    include: [Category],
+  });
+}
+
 async function addProduct(args) {
   const { category } = args;
   const newProduct = {
@@ -109,4 +117,5 @@ module.exports = {
   removeCategoryFromProduct,
   deleteById,
   addProduct,
+  productCategory,
 };
