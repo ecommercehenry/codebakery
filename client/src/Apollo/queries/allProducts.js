@@ -7,6 +7,7 @@ query{
     description
     id
     image
+    price
   }
 }
 
