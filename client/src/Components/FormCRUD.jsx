@@ -1,6 +1,6 @@
-import { useQuery } from "@apollo/client"
-import React, { useEffect } from "react"
-import getData from "../Apollo/queries/productById"
+import { useQuery } from "@apollo/client";
+import React, { useEffect } from "react";
+import getData from "../apollo/queries/productById";
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
 function FormCRUD() {
@@ -12,13 +12,13 @@ function FormCRUD() {
   // console.log(data)
 
   // original
-  const { data } = useQuery(getData)
+  const { data } = useQuery(getData);
 
   useEffect(() => {
-    console.log(data)
-  }, [data])
+    console.log(data);
+  }, [data]);
 
-  return <div>hola estoy renderizado</div>
+  return <div>hola estoy renderizado</div>;
 }
 
-export default FormCRUD
+export default FormCRUD;

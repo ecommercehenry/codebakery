@@ -1,10 +1,12 @@
-import React from 'react'
+import React from "react";
+import FormCategories from "../../../CategoryCard/FormCategories";
 
 const Home = () => {
-    return (
-        <>
-        </>
-    )
-}
+  return (
+    <>
+      <FormCategories />
+    </>
+  );
+};
 
-export default Home
+export default Home;
