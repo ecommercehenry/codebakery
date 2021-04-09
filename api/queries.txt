@@ -44,6 +44,15 @@ mutation{
   }
 }
 
+//traer todas las categorias 
+{
+    categories{
+      id
+      name
+      description
+    }
+  }
+
 
 //// PARA ELIMINAR UNA CATEGORIA
 mutation{
