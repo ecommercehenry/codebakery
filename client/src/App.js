@@ -4,7 +4,6 @@ import {Route} from 'react-router-dom';
 import Home from './Components/screens/home/container/Home';
 import AdminPanel from './Components/screens/admin/container/AdminPanel';
 import Catalogue from './Components/screens/catalogue/container/Catalogue';
-import NavBar from './Components/screens/navBar/NavBar';
 import Cart from './Components/screens/cart/container/Cart';
 import AboutUs from './Components/screens/aboutUs/container/AboutUs';
 //import Grid from './Components/screens/catalogue/products/grid/Grid';      <Route path="/grid" component={Grid}/>

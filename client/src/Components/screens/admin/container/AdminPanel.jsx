@@ -6,14 +6,14 @@ import styled from 'styled-components';
 //components
 import LeftPanel from '../LeftPanel';
 import AdminNavBar from '../AdminNavBar';
-import FormCRUD from '../../../FormCRUD'
+import TextCRUD from '../TextCRUD'
 
 const AdminPanel = () => {
     return (
         <StyledAdminPanel>
             <LeftPanel/>
             <AdminNavBar/>
-            {/* <FormCRUD /> */}
+            <TextCRUD />
         </StyledAdminPanel>
     )
 }
