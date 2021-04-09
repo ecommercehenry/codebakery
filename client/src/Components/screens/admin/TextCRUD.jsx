@@ -1,8 +1,7 @@
 import { useQuery } from "@apollo/client"
 import React, { useEffect } from "react"
-import allProducts from "../Apollo/queries/allProducts"
-import './FormCRUD.css'
-import getAllCategories from '../Apollo/queries/getAllCategories'
+import allProducts from "../../../Apollo/queries/allProducts"
+import './TextCRUD.css'
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
 function FormCRUD() {
