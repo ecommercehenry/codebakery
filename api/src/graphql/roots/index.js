@@ -1,4 +1,4 @@
-const {updateCategory, modifyProduct, addCategory, deleteCategory, addCategoryToProduct, removeCategoryFromProduct,deleteById} = require("./mutationsResolver/")
+const {updateCategory, modifyProduct, addCategory, deleteCategory, addCategoryToProduct, removeCategoryFromProduct,deleteById, addProduct} = require("./mutationsResolver/")
 const {categories, product, productById } = require("./queriesResolvers/")
 
 
@@ -13,6 +13,7 @@ const root = {
     deleteById,
     addCategoryToProduct,
     removeCategoryFromProduct,
+    addProduct,
 
     //Queries
     categories,
