@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import './HeroStyles.css'
 
 const Hero = () => {
     return (
-        <div>
+        <div className='hero d-flex justify-content-center align-items-center '>
             Hero
         </div>
     )

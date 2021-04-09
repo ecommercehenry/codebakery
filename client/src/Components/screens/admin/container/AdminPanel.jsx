@@ -13,7 +13,7 @@ const AdminPanel = () => {
         <StyledAdminPanel>
             <LeftPanel/>
             <AdminNavBar/>
-            {/* <FormCRUD /> */}
+            <FormCRUD />
         </StyledAdminPanel>
     )
 }

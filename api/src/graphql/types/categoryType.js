@@ -3,6 +3,7 @@ module.exports = `
         id : Int
         name : String
         description: String
+        products: [product] 
     }
     
 `

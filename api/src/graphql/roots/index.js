@@ -11,7 +11,8 @@ const {
     getAllCategories,
     product, 
     productById,
-    getProductByCategoryName
+    getProductByCategoryName,
+    productCategory
 } = require("./queriesResolvers/")
 
 
@@ -33,6 +34,7 @@ const root = {
     
     productById,
     product,
+    productCategory,
     getAllCategories,
     
 }
