@@ -6,7 +6,6 @@ async function deleteCategory({ id }) {
     await categoryToDelete.destroy()
     return true
   } catch (error) {
-    console.error(error.mesage)
     return false
   }
 }
