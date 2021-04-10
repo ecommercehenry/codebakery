@@ -1,6 +1,5 @@
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
-// const bcrypt = require("bcrypt-nodejs")
 const crypto = require("crypto")
 const { DataTypes } = require("sequelize")
 
