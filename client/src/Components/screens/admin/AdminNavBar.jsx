@@ -50,6 +50,9 @@ const StyledNavBar = styled.div`
         align-items: center;
         justify-content:center;
     }
+    .purple-btn:hover{
+        background-color: #734191
+    }
 `;
 
 export default AdminNavBar
