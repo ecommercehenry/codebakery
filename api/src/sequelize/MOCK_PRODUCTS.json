@@ -1,19 +1,4 @@
 [
-    {
-    "name":"Cake Limón con Glaseado de Blueberries",
-    "description":"Una versión más grande de nuestro cake más vendido. Esponjoso y delicioso, dulce y cítrico a la vez. La mezcla de limón y blueberries te va a encantar. El glaseado lo hacemos con blueberries naturales que le dan ese color y sabor increíble.",
-    "price":926.90,
-    "stock":286,
-    "image":"biscotti-2679.jpg"
-    },
-
-    {"name":"Cake de Ricotta y Frambuesas",
-    "description":"En donde se come :)El favorito de nuestra casa. Es un cake sencillo pero delicioso, cero empalagoso y perfecto para acompañar con un café o té. 10 porciones aproximadamente.",
-    "price":25.00,
-    "stock":10,
-    "image":"biscotti.jpg"
-    },
-
     {"name":"Cake de Doble Chocolate y Glaseado de Maracuyá",
     "description":"Esponjoso y delicioso. Así es este Cake de Chocolate con Chips de Chocolate 56% cubierto con un glaseado natural de Maracuyá. La combinación de estos dos sabores siempre ha sido una de nuestras favoritas. Si también eres fan del chocolate y maracuyá entonces no te vas a arrepentir de probarlo. Finalmente logramos crear un cake que supere las expectativas. Ideal para servir como postre en tus eventos acompañado de un café.",
     "price":30.00,
