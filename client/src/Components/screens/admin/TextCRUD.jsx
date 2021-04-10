@@ -4,18 +4,22 @@ import allProducts from "../../../Apollo/queries/allProducts"
 import './TextCRUD.css'
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
-function FormCRUD() {
+function TextCRUD({show}) {
 
   // original
   const { data } = useQuery(allProducts);
   useEffect(() => {}, [data]);
   console.log(data);
+  
 
   return (
     <div className="product-container">
       {data ? (
         data.product.map((item) => (
-          <div className="element-container" key={item.id}>
+          <div 
+          className="element-container" 
+          key={item.id}
+          onClick={show}>
             <div className="image-container">
               <p>Product</p>
               <img src={item.image} />
@@ -52,4 +56,4 @@ function FormCRUD() {
   );
 }
 
-export default FormCRUD;
+export default TextCRUD;
