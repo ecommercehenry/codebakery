@@ -9,12 +9,14 @@ import AdminNavBar from '../AdminNavBar';
 import TextCRUD from '../TextCRUD'
 
 const AdminPanel = () => {
+
     return (
         <StyledAdminPanel>
             <LeftPanel/>
-            <AdminNavBar/>
             <TextCRUD/>
+            <AdminNavBar/>
         </StyledAdminPanel>
+        
     )
 }
 
