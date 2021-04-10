@@ -8,6 +8,7 @@ import FormCRUD from "./FormCRUD"
 
 function TextCRUD({ img, name, stock, categories, price, key }) {
   const [show, setShow] = useState(true);
+  
   function handlerOnClick() {
     setShow(!show);
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", show);

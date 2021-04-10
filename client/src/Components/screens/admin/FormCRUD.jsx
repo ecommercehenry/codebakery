@@ -5,13 +5,13 @@ import React from "react"
 import './FormCRUD.css'
 
 function FormCRUD(props) {
-  props = {
-    name: "olla",
-    stock: 2,
-    categories: ["cat1", "cat2", "cat3"],
-    price: 23.99,
-    img: "URL",
-  };
+  // props = {
+  //   name: "olla",
+  //   stock: 2,
+  //   categories: ["cat1", "cat2", "cat3"],
+  //   price: 23.99,
+  //   img: "URL",
+  // };
 
   const { name, stock, categories, price, img } = props;
 
