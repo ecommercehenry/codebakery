@@ -4,6 +4,7 @@ import Hero from '../hero/Hero';
 import Products from '../products/container/Products';
 
 const Catalogue = () => {
+    
     return (
         <>
             <NavBar color='white'/>
