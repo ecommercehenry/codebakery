@@ -16,7 +16,7 @@ function FormCRUD() {
   return (
     <div className="product-container">
       {data ? (
-        data.product.map((item) => (
+        data.product.slice(0,3).map((item) => (
           <div className="element-container">
             <div className="image-container">
               <p>Product</p>

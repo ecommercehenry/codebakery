@@ -13,7 +13,7 @@ const AdminNavBar = () => {
                 <div className="optionTab">PRODUCTS</div>
                 <SearchBar/>
             </div>
-            <div className="addProduct">
+            <div className="addProduct purple-btn">
                 + ADD PRODUCT
             </div>
 
@@ -22,17 +22,18 @@ const AdminNavBar = () => {
 }
 
 const StyledNavBar = styled.div`
-    width: 87%;
+    width: 77vw;
+    max-width: 100%;
     height: 15vh;
     display:flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 6rem 0 4rem;
+    margin: 0 6rem 0 4rem;
     .onLeft{
         .optionTab{
             color:#513066;
-            height:3rem;
-            font-size:3rem;
+            height:4.5vh;
+            font-size: 2em;
             display:flex;
             align-items: center;
         }
@@ -44,14 +45,9 @@ const StyledNavBar = styled.div`
     .addProduct{
         background:#5E3F71;
         color:white;
-        width: 23%;
-        height:3rem;
-        font-size:1.5rem;
         display:flex;
         align-items: center;
         justify-content:center;
-        border-radius:20px;
-        padding: 0 2.3rem;
     }
 `;
 
