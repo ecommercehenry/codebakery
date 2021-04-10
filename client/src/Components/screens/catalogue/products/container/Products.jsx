@@ -6,6 +6,7 @@ import SortButton from '../home&sort/sortButton/SortButton'
 import Grid from '../grid/Grid'
 
 const Products = () => {
+    console.log('lucas')
     return (
         <div>
             <SearchBar />
