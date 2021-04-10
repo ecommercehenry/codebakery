@@ -23,5 +23,6 @@ img{
     border:0.1rem;
     border-style: solid;
     display:flex;
+    background-color: blue;
     
 }
