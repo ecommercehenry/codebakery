@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/client"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import allProducts from "../../../Apollo/queries/allProducts"
 import './TextCRUD.css'
+
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
 function TextCRUD({show}) {
@@ -9,9 +10,17 @@ function TextCRUD({show}) {
   // original
   const { data } = useQuery(allProducts);
   useEffect(() => {}, [data]);
-  console.log(data);
-  
 
+  const [flag, setFlag] = useState(true)
+  const clickHandler = (e) =>{
+    e.preventDefault()
+    if (flag === false){
+      setFlag(true)
+    }else{
+      setFlag(false)
+    }
+    console.log(e)
+      }
   return (
     <div className="product-container">
       {data ? (
@@ -22,11 +31,11 @@ function TextCRUD({show}) {
           onClick={show}>
             <div className="image-container">
               <p>Product</p>
-              <img src={item.image} />
+              <img src={item.image} alt=''/>
             </div>
             <div className="name-container">
-              <p>Name</p>
-              {item.name}
+              <p onClick={clickHandler}>Name</p>
+              {flag ? <p>{item.name}</p> : <input type='text' value={item.name}></input>}
             </div>
             <div className="stock-container">
               <p>Stock</p>
@@ -36,12 +45,12 @@ function TextCRUD({show}) {
               <p>Categories</p>
               { item.categories.map(element => <p key={element.id}>{element.name}</p>)}
             </div>
-            <div className="price-container">
+            <div className="price-container" >
               <p>Price</p>
-              {item.price}
+              <p >{item.price} </p>
             </div>
             <div className="edit-button">
-              <p>edit</p>
+              <p >edit</p>
             </div>
             <div className="remove-button">
               <p>remove</p>

@@ -20,13 +20,10 @@ const AdminPanel = () => {
     return (
         <StyledAdminPanel>
             <LeftPanel/>
+            <TextCRUD/>
             <AdminNavBar/>
-            <div >
-                <TextCRUD show={show}/>
-               
-                
-            </div>
         </StyledAdminPanel>
+        
     )
 }
 
@@ -34,7 +31,6 @@ const StyledAdminPanel = styled.div`
     min-height: 100vh;
     width: 100%;
     display:flex;
-
 `;
 
 export default AdminPanel

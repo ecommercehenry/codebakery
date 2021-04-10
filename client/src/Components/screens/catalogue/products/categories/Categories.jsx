@@ -1,7 +1,7 @@
-import React, {useEffect, useState}  from 'react';
+import React, {useEffect}  from 'react';
 import { useQuery } from "@apollo/client"
 import productsByCategoryName from '../../../../../Apollo/queries/productsByCategoryName';
-import getData from '../../../../../Apollo/queries/productById';
+// import getData from '../../../../../Apollo/queries/productById';
 // import  getAllCategories  from '../../../../../Apollo/queries/getAllCategories';
 
 //import  productsByCategoryName from "../../Apollo/queries/productsByCategoryName"
@@ -23,7 +23,7 @@ useEffect(() => {
     console.log(data)
   }, [data])
 
-const [categories, setCategories]= useState();
+// const [categories, setCategories]= useState();
 
 //Query para pedir las categorias
 
