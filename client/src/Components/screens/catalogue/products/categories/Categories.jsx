@@ -19,8 +19,9 @@ const Categories = () => {
 
     products = products?.data?.getProductByCategoryName ? products.data.getProductByCategoryName :products.data;
     
-    //Obtenemos el estado global de los productos de redux
+    //Obtenemos el estado global de los productos de redux (ESTA ES TU DATA JOHANNA)
     const {stateproducts}= useSelector(state =>  state);
+
 
     const dispatch= useDispatch();
     //Obtenemos todos los productos de apolo client 
@@ -49,30 +50,29 @@ const Categories = () => {
 
     //caso BASE: Al presionar un btn ALL/TODOS, se hace un llamado a todos los productos
 
-
     const handleClick = (e) =>{
         setName(e.target.name);
     }
 
     return (
         <div className={styles.categories}>
-            <button  name = 'All' onClick={handleClick}>All</button>
+            <div><button  name = 'All' onClick={handleClick} className={styles.btn}>All</button></div>
 
            {
                categories?.data?.getAllCategories.map(cate =>(
                    <div>
-                   <button name = {cate.name} onClick={handleClick}>
-                       {cate.name}
-                    </button>
+                        <button name = {cate.name} onClick={handleClick} className={styles.btn}>
+                            {cate.name}
+                        </button>
                     </div>
                ))
            }
-           {    
+           {/* {    
                stateproducts && stateproducts?.length>0 ? stateproducts.map(product =>(
                  <div>{product.name}</div>
                ) ): 'No hay productos'
            } 
-           
+            */}
         </div>
     )
 }
