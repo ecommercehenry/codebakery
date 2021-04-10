@@ -56,6 +56,16 @@ mutation{
     name
 }
 
+
+//traer todas las categorias 
+{
+    categories{
+      id
+      name
+      description
+    }
+  }
+
 // ESTE ES UN EJEMPLO DE AGREGAR CATEGORIA PARA PETICIONES DESDE EL FRONT
 mutation addCategory ($name: String!, $description: String!){
     addCategory(name: $name, description: $description) {
@@ -71,6 +81,7 @@ mutation addCategory ($name: String!, $description: String!){
     }
   }
   }
+
 
 
 //// PARA ELIMINAR UNA CATEGORIA
