@@ -1,3 +1,4 @@
+
 import { useQuery } from "@apollo/client"
 import React, { useEffect } from "react"
 import getAllProducts from "../Apollo/queries/getAllProducts"

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import './App.css';
 import {Route} from 'react-router-dom';
@@ -20,7 +21,6 @@ function App() {
       <Route path="/catalogue" component={Catalogue}/>
       <Route path="/cart" component={Cart}/>
       <Route path="/about-us" component={AboutUs}/>
-
     </>
   );
 }
