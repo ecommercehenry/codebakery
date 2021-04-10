@@ -1,7 +1,8 @@
 import React,{ useState,useEffect } from 'react';
 import Select from 'react-select';
-import { useQuery } from "@apollo/client"
-import getAllProducts from "../Apollo/queries/getAllCategories"
+import { useMutation, useQuery } from '@apollo/client';
+import getAllCategories from "../Apollo/queries/getAllCategories"
+import ADD_PRODUCT from "../Apollo/mutations/addProduct";
 import Creatable from 'react-select/creatable';
 
 //styles
@@ -9,7 +10,8 @@ import styled from 'styled-components';
 
 const AddProductForm = () => {
 
-    const { data } = useQuery(getAllProducts);
+    const categories = useQuery(getAllCategories);
+    const [addProduct, { data }] = useMutation(ADD_PRODUCT)
     useEffect(() => {
     },[data]);
 
@@ -18,7 +20,8 @@ const AddProductForm = () => {
     const [preview,setPreview] = useState('');
     const [info, setInfo] = useState({
         name:'',
-        categories:[],
+        description:'',
+        category:[],
         stock:'',
         price:'',
         image:''
@@ -42,24 +45,35 @@ const AddProductForm = () => {
         }
     }
 
-    const categoryHandler = (option,value) => {                        //************************************************************
+    const categoryHandler = (option,value) => {                        
         switch (option) {
             case 'options':
                 setCategory(value)
         }
         setSelected([...value])
-
     }
 
     category && (selected = selected.map(elem=>elem.value));
+    selected = selected.toString();
     let options =  [];
-    data && data['getAllCategories'].map(elem=> options.push({label:elem.name,value:elem.name}))                 
+    categories['data'] && categories['data']['getAllCategories'].map(elem=> options.push({label:elem.name,value:elem.name}))                 
 
     const submitHandler = (e) => {
         e.preventDefault();
-        if(info.image == ''){alert('Please add an image')};
-        info.categories=selected;
-        console.log(info)
+        if(info.image == ''){alert('Please add an image')}else{
+            info.category=selected;
+            addProduct({variables:
+                {
+                    name:info.name,
+                    description:info.description,
+                    stock:Number(info.stock),
+                    price:Number(info.price),
+                    category:selected,
+                    image:info.image
+                }
+            })
+        }
+        
     }
 
     return (
@@ -92,6 +106,16 @@ const AddProductForm = () => {
                         onChange={inputHandler}
                     />
                 </div>
+                <div className="description">
+                    <label>Description</label>
+                    <textarea 
+                        name="description"
+                        type="text" 
+                        placeholder="add a description..." 
+                        value={info.description} 
+                        onChange={inputHandler}
+                    />
+                </div>
                 <div className="numeric">
                     <div className="stock">
                         <label htmlFor="">Stock</label>
@@ -117,7 +141,7 @@ const AddProductForm = () => {
                 <div className="categories">
                     <label>Categories</label>
                     <Creatable
-                        onChange={value => categoryHandler('options',value)} //************************************************************ */
+                        onChange={value => categoryHandler('options',value)} 
                         options={options}
                         value={category}
                         className="inputs"
@@ -137,10 +161,10 @@ const StyledForm = styled.form`
     height: 80vh;
     background: white;
     border-radius:65px;
-    padding: 4rem 4rem;
+    padding: 3rem 4rem;
     .imageLoader{
         width:100%;
-        height:35%;
+        height:30%;
         //background:red;
         display:flex;
         justify-content:space-between;
@@ -169,21 +193,38 @@ const StyledForm = styled.form`
         }
     }
     .infoProduct{
-        //background:red;
-        height:50%;
+        //background:blue;
+        height:60%;
         display:flex;
         flex-direction:column;
         justify-content:space-between;
         .name{
             //background:green;
-            height:33%;
+            height:28%;
             display:flex;
             flex-direction:column;
             justify-content:center;
         }
+        .description{
+            //background:lightblue;
+            height:37%;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            textarea{
+                width:100%;
+                margin-top:0.5rem;
+                padding: 0 1rem;
+                //height:3rem;
+                border-radius:23px;
+                border:1px solid #dad7dc;
+                background:#E3DDE7;
+            }
+        }
         .categories{
             //background:yellow;
-            height:33%;
+            height:30%;
             display:flex;
             flex-direction:column;
             justify-content:center;
@@ -195,9 +236,9 @@ const StyledForm = styled.form`
             } */
         }
         .numeric{
-            //background:blue;
+            //background:red;
             width:100%;
-            height:33%;
+            height:28%;
             display:flex;
             flex-direction:row;
             justify-content:space-between;
@@ -234,7 +275,7 @@ const StyledForm = styled.form`
         }
         }
     .submit{
-        height:15%;
+        height:10%;
         display:flex;
         justify-content: center;
         align-items: center;
