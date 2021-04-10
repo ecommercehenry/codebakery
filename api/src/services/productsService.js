@@ -1,7 +1,7 @@
+const { cloudinary } = require('../../utils/cloudinary')
 const { Product } = require('../db.js');
 const { Category } = require('../db.js');
 // const categories = require('../graphql/roots/queriesResolvers/categories.js');
-
 
 async function getAllProducts() {
   return await Product.findAll({include: [Category]});
@@ -24,18 +24,28 @@ async function productCategory({ id }) {
 }
 
 async function addProduct(args) {
-  const { category } = args;
-  const newProduct = {
-    name: args.name,
-    description: args.description,
-    price: args.price,
-    stock: args.stock,
-    image: args.image,
-  };
+  try {
+    const imageString = args.image
+    const uploadedResponse = await cloudinary.uploader.upload(imageString,{upload_preset:'code_bakery'});
+    const imageUrl = uploadedResponse.url;
+    // const newProduct = await Product.create({
+    //   name: args.name,
+    //   description: args.description,
+    //   price: args.price,
+    //   stock: args.stock,
+    //   image: imageUrl,
+    // });
+    console.log(imageUrl);  
+  } catch (error) {
+    console.log(error)
+  }
+                                                    //##################################################
+  // const { category } = args;
+  
 
-  await Product.create(newProduct).then((product) =>
-    product.addCategory(category)
-  );
+  // await Product.create(newProduct).then((product) =>
+  //   product.addCategory(category)
+  // );
 }
 
 /**
