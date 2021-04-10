@@ -5,8 +5,8 @@ const root = require("./roots")
 // estos son los objetos de las consultas
 const types = require("./types")
 // párametros que reciben los modelos de las consultas
-const inputs = require("./inputs")
-// console.log(mutations, 'ppapspaps')
+const inputs = require('./inputs');
+// console.log(mutations, 'ppapspaps') 
 
 const schema = buildSchema(`
 #Queryes ( to get data )

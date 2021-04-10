@@ -1,6 +1,6 @@
 const { Category } = require('../db.js');
 
-async function getAllCategory(){
+async function getAllCategories(){
     return await Category.findAll({})
 }
 
@@ -10,4 +10,4 @@ async function addCategory({name, description}){
         description
     })
 }
-module.exports = {getAllCategory, addCategory}
+module.exports = {getAllCategories, addCategory}

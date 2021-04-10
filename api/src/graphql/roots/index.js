@@ -1,33 +1,45 @@
 const {
-  updateCategory,
-  modifyProduct,
-  addCategory,
-  deleteCategory,
-  addCategoryToProduct,
-  removeCategoryFromProduct,
-  deleteById,
-  addProduct,
-  createUser,
+    updateCategory, 
+    modifyProduct, 
+    addCategory, 
+    deleteCategory, 
+    addCategoryToProduct, 
+    removeCategoryFromProduct,
+    deleteById,
+    addProduct,
+    createUser
 } = require("./mutationsResolver/")
-const { categories, product, productById } = require("./queriesResolvers/")
+const {
+    getAllCategories,
+    product, 
+    productById,
+    getProductByCategoryName,
+    productCategory
+} = require("./queriesResolvers/")
+
+
 
 // product
 const root = {
-  //Mutations
-  modifyProduct,
-  updateCategory,
-  addCategory,
-  deleteCategory,
-  deleteById,
-  addCategoryToProduct,
-  removeCategoryFromProduct,
-  addProduct,
-  createUser,
+    //Mutations
+    modifyProduct,
+    updateCategory,
+    addCategory, 
+    deleteCategory,
+    deleteById,
+    addCategoryToProduct,
+    removeCategoryFromProduct,
+    addProduct,
+    createUser,
 
-  //Queries
-  categories,
-  productById,
-  product,
+    //Queries
+    
+    productById,
+    product,
+    productCategory,
+    getAllCategories,
+    getProductByCategoryName,
+    
 }
 
 module.exports = root
