@@ -28,24 +28,28 @@ async function addProduct(args) {
     const imageString = args.image
     const uploadedResponse = await cloudinary.uploader.upload(imageString,{upload_preset:'code_bakery'});
     const imageUrl = uploadedResponse.url;
-    // const newProduct = await Product.create({
-    //   name: args.name,
-    //   description: args.description,
-    //   price: args.price,
-    //   stock: args.stock,
-    //   image: imageUrl,
-    // });
-    console.log(imageUrl);  
+    const newProduct = await Product.create({
+      name: args.name,
+      description: args.description,
+      price: args.price,
+      stock: args.stock,
+      image: imageUrl,
+    });
+    let newProductCategories = args.category.split(',')
+    let allCategories = await Category.findAll();
+    // console.log(allCategories['dataValues'])
+    allCategories = allCategories.map( elem=>elem['dataValues'].name)
+    newProductCategories.map(async(category)=>{
+      if(allCategories.includes(category)){
+        let findCategory = await Category.findOne({where:{name:category}})
+        newProduct.addCategory(findCategory.id)
+      }else{
+        return await Category.create({name:category}).then(res=>newProduct.addCategory(res.id))
+      }
+    })
   } catch (error) {
     console.log(error)
   }
-                                                    //##################################################
-  // const { category } = args;
-  
-
-  // await Product.create(newProduct).then((product) =>
-  //   product.addCategory(category)
-  // );
 }
 
 /**
