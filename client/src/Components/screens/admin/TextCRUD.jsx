@@ -1,18 +1,24 @@
 import { useQuery } from "@apollo/client"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import allProducts from "../../../Apollo/queries/allProducts"
 import './TextCRUD.css'
+
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
 function TextCRUD() {
 
   // original
   const { data } = useQuery(allProducts);
-
   useEffect(() => {}, [data]);
 
+  const [flag, setFlag] = useState(true)
   const clickHandler = (e) =>{
     e.preventDefault()
+    if (flag === false){
+      setFlag(true)
+    }else{
+      setFlag(false)
+    }
     console.log(e)
       }
   return (
@@ -25,8 +31,8 @@ function TextCRUD() {
               <img src={item.image} alt=''/>
             </div>
             <div className="name-container">
-              <p>Name</p>
-              {item.name}
+              <p onClick={clickHandler}>Name</p>
+              {flag ? <p>{item.name}</p> : <input type='text' value={item.name}></input>}
             </div>
             <div className="stock-container">
               <p>Stock</p>
@@ -38,7 +44,7 @@ function TextCRUD() {
             </div>
             <div className="price-container" >
               <p>Price</p>
-              <p onClick={clickHandler}>{item.price} </p>
+              <p >{item.price} </p>
             </div>
             <div className="edit-button">
               <p >edit</p>
