@@ -42,6 +42,8 @@ Users.belongsToMany(Product, {through: "user-products"})
 Product.belongsToMany(Users, {through: "user-products"})
 Product.belongsToMany(Review, {through: "review-products" })
 Review.hasOne(Product)
+Users.belongsToMany(Review, {through: "user-reviews"})
+Review.hasOne(Users)
 
 
 module.exports = {
