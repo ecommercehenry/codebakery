@@ -6,15 +6,27 @@ import { useQuery } from '@apollo/client';
 
 const Detail = () => {
     useEffect(() => {
-        window.scrollTo(0, 0)
-        document.body.style.overflow = "hidden"
+            window.scrollTo(0, 0)
 
+            setTimeout(() => {
+                document.body.style.overflow = "hidden"
+            }, 1000);
+        
         return () => {
             document.body.style.overflow = "visible"
         }
     }, [])
 
-    // const {data} = useQuery(getData({id:1}))
+    const path = window.location.pathname
+    const id = parseInt(((path.split("/")).pop()), 10)
+
+    const {data} = useQuery(getData, {variables: {id}})
+    useEffect(() => {
+        
+    }, [data])
+    
+
+    console.log(data)
 
     return (
         <div className="detail-container">
@@ -34,7 +46,7 @@ const Detail = () => {
                         <form action="/action_page.php" className="all-btn d-flex flex-column position-absolute align-items-center">
                             <div className="up-btns d-flex justify-content-center">
                                 <input type="number" id="quantity" name="quantity" className="select-quantity" min="1" max="5" />
-                                <input type="text" />
+                                {/* <input type="text" /> */}
                             </div>
                             
                             <div className="bottom-btns d-flex justify-content-center">
