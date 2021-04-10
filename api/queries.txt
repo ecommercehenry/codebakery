@@ -51,8 +51,9 @@ mutation {
 
 //// AGREGAR CATEGORIA
 mutation{
-  addCategory(name: "spicy"){
-    name
+  addCategory(name:"Spicy"){
+   	id
+  }
 }
 
 
