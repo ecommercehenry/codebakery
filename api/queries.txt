@@ -56,6 +56,8 @@ mutation{
     name
 }
 
+<<<<<<< HEAD
+=======
 
 //traer todas las categorias 
 {
@@ -83,6 +85,7 @@ mutation addCategory ($name: String!, $description: String!){
   }
 
 
+>>>>>>> 40e401303ef15b56c1111ab15d6e69673489c6f7
 
 //// PARA ELIMINAR UNA CATEGORIA
 mutation{
@@ -101,6 +104,9 @@ mutation{
   removeCategoryFromProduct(idProduct:1,idCategory:1){
    	name
   }
+<<<<<<< HEAD
+}
+=======
 }
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
 query
@@ -113,3 +119,4 @@ query
       image
     }
   }
+>>>>>>> 40e401303ef15b56c1111ab15d6e69673489c6f7
