@@ -1,16 +1,14 @@
-/* Paleta de colores */
---primario-1: #fff7f7;
---primario-2: #ffd5d7;
---primario-3: #ffb3b7;
---primario-4: #ff5e67;
+html {
+  /* Paleta de colores */
+  --primario-1: #fff7f7;
+  --primario-2: #ffd5d7;
+  --primario-3: #ffb3b7;
 
---secundario-1: #45797b;
---secundario-2: #2d4e4f;
---secundario-3: #142324;
+  --secundario-1: #45797b;
+  --secundario-2: #2d4e4f;
+  --secundario-3: #142324;
 
---terciario-1: #fcfa51;
---terciario-2: #fc3838;
---terciario-3: #1ea7fc;
---terciario-4: #49f60d;
---terciario-5: #195603;
---terciario-6: #061401;
+  --terciario-1: #fcfa51;
+  --terciario-2: #fc3838;
+  --terciario-3: #1ea7fc;
+}
