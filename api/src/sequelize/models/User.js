@@ -40,7 +40,8 @@ module.exports = (sequelize) => {
         return () => this.getDataValue("salt")
       },
     },
-  })
+  }, { timestamps: false })
+  
 
   Users.generateSalt = function () {
     return crypto.randomBytes(16).toString("base64")
