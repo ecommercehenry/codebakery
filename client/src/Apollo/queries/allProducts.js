@@ -1,12 +1,16 @@
 import { gql } from "@apollo/client"
 
 const allProducts = gql`
-query allProducts{
+query{
   product{
-    id
     name
+    description
+    id
+    image
+    price
   }
 }
+
 `
 
-export default allProducts;
+export default allProducts

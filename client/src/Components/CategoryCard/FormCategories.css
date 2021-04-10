@@ -1,0 +1,162 @@
+/* .create-category-conteiner {
+}
+
+.onboard-card {
+  display: flex;
+  margin-top: 2em;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-category-conteiner,
+.onboard-conteiner {
+  border: none;
+  width: 50%;
+  margin: 10px 20px;
+  padding: 20px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.09);
+  background: whitesmoke;
+  border-radius: 45px;
+}
+
+.upload-image {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+ */
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-container {
+  border-radius: 80px;
+  border: 2px solid gainsboro;
+  background-color: white;
+  padding: 120px 50px;
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  font-size: 21px;
+  color: whitesmoke;
+  width: 60%;
+}
+
+.input-container label {
+  padding: 1px;
+  margin: inherit;
+  color: #760485;
+}
+
+.input-container input,
+select {
+  height: 50px;
+  margin: inherit;
+  border-radius: 80px;
+  border: 1px solid #e2d7e2;
+  padding-left: 10px;
+  background-color: #e2d7e2;
+  color: #555;
+}
+
+.input-number {
+  height: 50px;
+  margin: inherit;
+  border-radius: 20px;
+  border: 1px solid black;
+  padding-left: 10px;
+  width: 30%;
+}
+
+.input-number-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  color: #9206a5;
+}
+
+.input-container button {
+  margin-top: 2rem;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 20px;
+  width: 30%;
+  position: relative;
+  left: 35%;
+  border: transparent;
+  background-color: #760585;
+  color: white;
+  font-weight: 900;
+  box-shadow: 4px 4px 4px #aaaaaa;
+}
+
+.input-container button:hover {
+  cursor: pointer;
+
+  transform: scale(1.02);
+  box-shadow: 4px 4px 5px #aaaaaa;
+}
+
+.input-container input::placeholder {
+  padding: 7px;
+  opacity: 0.5;
+  padding-left: 10px;
+}
+
+.input-container input:focus,
+button:focus {
+  outline: none;
+}
+
+/* File input */
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.file-input {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+.file-input label {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background: linear-gradient(40deg, #92058b, #760585);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+}
+
+.file-name {
+  position: absolute;
+  bottom: -35px;
+  left: 10px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+input:hover + label,
+input:focus + label {
+  transform: scale(1.02);
+}
+
+/* Adding an outline to the label on focus */
+input:focus + label {
+  outline: 1px solid #000;
+  outline: -webkit-focus-ring-color auto 2px;
+}
