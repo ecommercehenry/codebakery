@@ -1,3 +1,3 @@
-[{"name":"Olla","description":"En donde haces la mejor comida","price":"$926.90","stock":286,"image":"http://dummyimage.com/209x100.png/ff4444/ffffff"},
-{"name":"Mesa","description":"En donde se come :)","price":"$195.36","stock":2949,"image":"http://dummyimage.com/223x100.png/dddddd/000000"},
-{"name":"Cuchillo","description":"Con lo que haces comida :)","price":"$883.78","stock":1836,"image":"http://dummyimage.com/221x100.png/5fa2dd/ffffff"}]
+[{"name":"Olla","description":"En donde haces la mejor comida","price":926.90,"stock":286,"image":"http://dummyimage.com/209x100.png/ff4444/ffffff"},
+{"name":"Mesa","description":"En donde se come :)","price":195.36,"stock":2949,"image":"http://dummyimage.com/223x100.png/dddddd/000000"},
+{"name":"Cuchillo","description":"Con lo que haces comida :)","price":883.78,"stock":1836,"image":"http://dummyimage.com/221x100.png/5fa2dd/ffffff"}]

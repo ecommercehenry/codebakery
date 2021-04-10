@@ -5,6 +5,19 @@ query getAllProducts{
     name
   }
 }
+/// obtener las categorias 
+
+query getAllCategories{
+  getAllCategories{
+    name
+  }
+}
+
+{
+  getAllCategories{
+    name
+  }
+}
 //// agregar un nuevo producto
 /// se puede pasar o no una categoria
 mutation {
@@ -41,9 +54,38 @@ mutation {
 mutation{
   addCategory(name: "fran", description: "entro" ){
     name
-  }
 }
 
+<<<<<<< HEAD
+=======
+
+//traer todas las categorias 
+{
+    categories{
+      id
+      name
+      description
+    }
+  }
+
+// ESTE ES UN EJEMPLO DE AGREGAR CATEGORIA PARA PETICIONES DESDE EL FRONT
+mutation addCategory ($name: String!, $description: String!){
+    addCategory(name: $name, description: $description) {
+      name
+    }
+  }
+//buscar producto con su categoria segun su id
+{
+    productCategory(id:1){
+    name
+    categories{
+      name
+    }
+  }
+  }
+
+
+>>>>>>> 40e401303ef15b56c1111ab15d6e69673489c6f7
 
 //// PARA ELIMINAR UNA CATEGORIA
 mutation{
@@ -62,4 +104,19 @@ mutation{
   removeCategoryFromProduct(idProduct:1,idCategory:1){
    	name
   }
+<<<<<<< HEAD
 }
+=======
+}
+// PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
+query
+  {
+    getProductByCategoryName(name:"franciscotov") {
+      id
+      name
+      price
+      stock
+      image
+    }
+  }
+>>>>>>> 40e401303ef15b56c1111ab15d6e69673489c6f7

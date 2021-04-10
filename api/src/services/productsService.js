@@ -1,7 +1,10 @@
-const { Product } = require("../db.js");
+const { Product } = require('../db.js');
+const { Category } = require('../db.js');
+// const categories = require('../graphql/roots/queriesResolvers/categories.js');
+
 
 async function getAllProducts() {
-  return await Product.findAll({});
+  return await Product.findAll({include: [Category]});
 }
 async function getProductById({ id }) {
   return await Product.findByPk(id);
@@ -13,6 +16,13 @@ async function deleteById({ id }) {
     },
   });
 }
+async function productCategory({ id }) {
+  return await Product.findOne({
+    where:{id: id},
+    include: [Category],
+  });
+}
+
 async function addProduct(args) {
   const { category } = args;
   const newProduct = {
@@ -82,6 +92,26 @@ async function addCategoryToProduct({ idProduct, idCategory }) {
       detail: "product doesn't exist",
     };
   }
+<<<<<<< HEAD
+}
+
+async function removeCategoryFromProduct({ idProduct, idCategory }) {
+  const product = await Product.findByPk(idProduct);
+  if (product != null) {
+    try {
+      await product.removeCategories(idCategory);
+      return product;
+    } catch (error) {
+      return { error: error };
+    }
+  } else {
+    return {
+      error: "couldn't find a product",
+      detail: "product doesn't exist",
+    };
+  }
+}
+=======
 }
 
 async function removeCategoryFromProduct({ idProduct, idCategory }) {
@@ -101,6 +131,14 @@ async function removeCategoryFromProduct({ idProduct, idCategory }) {
   }
 }
 
+async function getProductByCategoryName({name}){
+    category = await Category.findOne({where: { name}, attributes: {exclude: ['createdAt','updatedAt']}, include: Product});
+    // console.log( category);
+    return category.dataValues.products
+}
+
+>>>>>>> 40e401303ef15b56c1111ab15d6e69673489c6f7
+
 module.exports = {
   getAllProducts,
   modifyProduct,
@@ -109,4 +147,9 @@ module.exports = {
   removeCategoryFromProduct,
   deleteById,
   addProduct,
+<<<<<<< HEAD
+=======
+  productCategory,
+  getProductByCategoryName
+>>>>>>> 40e401303ef15b56c1111ab15d6e69673489c6f7
 };
