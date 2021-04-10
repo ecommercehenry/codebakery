@@ -9,8 +9,7 @@ const NavBar = ({color}) => {
     const navTag = `text-decoration-none ${textColor}`
     const btnColor = color === 'white' ? 'white' : 'purple'
     const brand = color === 'white' ? 'text-white' : 'text-dark'
-    const brandTag = `text-decoration-none ${brand}`
-    console.log(window.location.pathname)
+    const brandTag = `text-decoration-none ${brand}` 
     const actualPath = window.location.pathname;
 
     let isActive = {
@@ -34,11 +33,10 @@ const NavBar = ({color}) => {
                 <Link id='Catalogue' to='/catalogue' className={tag1}>Catalogue</Link>
                 <Link id='Cart' to='/cart' className={tag2}>Cart</Link>
                 <Link id='About us' to='/about-us' className={tag3}>About us</Link>
-                <Link><RoundButton purple={true}>prueba</RoundButton></Link>
             </div>
             <div className='right-buttons d-flex align-items-center'>
                 <Link to="#" className={`login-btn text-decoration-none ${textColor}`}> Login </Link>
-                <Link to="#" className='text-decoration-none'>
+                <Link to="#" id="sign-up-link" className='text-decoration-none'>
                 <div className={`${btnColor}-btn d-flex justify-content-center align-items-center`}>
                     <span>Sign Up</span>
                 </div>
