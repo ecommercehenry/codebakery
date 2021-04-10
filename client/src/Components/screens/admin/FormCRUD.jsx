@@ -20,30 +20,41 @@ function FormCRUD(props) {
     <div className="F-element-container">
       <div className="F-image-container">
         <p>Product</p>
-        <img src={img} />
+        <img src={img} alt="imagen" />
         <button onClick ="" >Edit Photo</button>
       </div>
 
       <div className="F-name-container">
-      <span>Name</span>
+      <p>Name</p>
       <input
         value = {name}
       />
         
       </div>
       <div className="F-stock-container">
-       
-        <p>Stock</p>
+      <p>Stock</p>
       <input
           value = {stock}
         />
-        
       </div>
+
       <div className="F-category-container">
         <p>Categories</p>
-        {categories.map(cat => <input value = {cat}/>)}
-       
+        <div className="F-categories">
+        {categories.map(cat => (
+        <>
+        {/* <input value = {cat}/> */}
+        <span>{cat}
+        <button> x </button>
+        </span>
         
+        
+        </>)
+        
+        )}
+        <button onClick=""> add </button>
+       
+       </div>
       </div>
       <div className="F-price-container">
         <p>Price</p>

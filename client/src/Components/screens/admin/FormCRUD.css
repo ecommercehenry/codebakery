@@ -1,22 +1,28 @@
 .F-element-container{
-    margin:1rem;
+    margin:auto;
+    width: fit-content;
     padding: 2rem;
-    border:0.1rem;
-    border-style: solid;
+    border-radius: 1.5rem;
+   border: 2px solid;
+   border-color:grey;
     display:flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgb(233, 214, 214);
     
 }
 
 .F-image-container{
-    background-color:rgb(152, 223, 158);
+   
     display:flex;
     flex-direction:column;
+    align-items: center;
     width: 10rem;
 }
 
 .F-name-container{
     padding: 0.5rem;
+    /* box-sizing: border-box; */
    
     
 }
@@ -31,19 +37,65 @@
     
 }
 .F-stock-container{
-    background-color: rgb(140, 181, 214);
+    padding: 0.5rem;
+    
+}
+.F-stock-container input{
+   border-radius: 1.5rem;
+   border: 2px solid;
+   border-color:grey;
+   width:5rem;
+   height: 4rem;
+   padding:0.5rem;
+   background-color: rgb(233, 214, 214); 
+
 }
 .F-category-container{
-    background-color: rgb(211, 197, 224);
+    padding: 0.5rem;
+   
+   
+}
+.F-categories{
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+    border: 2px solid;
+    border-color:grey;
+    width:15rem;
+   height: 4rem;
+}
+.F-category-container span{
+    background-color: rgb(190, 128, 209); 
+    border-radius: 1.5rem;
+   border: 2px solid;
+   border-color:grey;
+  
+   padding:0.3rem;
+
+}
+.F-category-container button{
+    border-radius: 100%;
+    height: 1.5rem;
+    margin:auto;
+    padding: 2px;
+   
 }
 .F-price-container{
-    background-color: rgb(120, 221, 187);
+    padding: 0.5rem;
+}
+.F-price-container input{
+    border-radius: 1.5rem;
+   border: 2px solid;
+   border-color:grey;
+   width:5rem;
+   height: 4rem;
+   padding:0.5rem;
+   background-color: rgb(233, 214, 214); 
 }
 .F-edit-button{
-
+margin: 1rem;
 }
 .F-remove-button{
-
+    margin: 1rem;
 }
 
 
