@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link, Route} from 'react-router-dom'
 
 //styles
 import styled from 'styled-components';
@@ -13,9 +14,9 @@ const AdminNavBar = () => {
                 <div className="optionTab">PRODUCTS</div>
                 <SearchBar/>
             </div>
-            <div className="addProduct purple-btn">
+            <Link to="/admin/add-product" className="addProduct purple-btn">
                 + ADD PRODUCT
-            </div>
+            </Link>
 
         </StyledNavBar>
     )

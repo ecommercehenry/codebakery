@@ -6,7 +6,7 @@ import styled from 'styled-components';
 //components
 import LeftPanel from '../LeftPanel';
 import AdminNavBar from '../AdminNavBar';
-import FormCRUD from '../../../FormCRUD'
+import FormCRUD from '../../../FormCRUD';
 
 const AdminPanel = () => {
     return (
