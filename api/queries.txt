@@ -45,14 +45,13 @@ mutation{
 ////actualizar una categoria, recibe un para metro id y un input con la data que se va a actualizar
 mutation {
   updateCategory(id: 1 , input: {
-    name: "franciscotov",
-    description: "hope is a good",
+    name: "bittersweet"
   })
 }
 
 //// AGREGAR CATEGORIA
 mutation{
-  addCategory(name: "fran", description: "entro" ){
+  addCategory(name: "spicy"){
     name
 }
 
@@ -62,13 +61,12 @@ mutation{
     categories{
       id
       name
-      description
     }
   }
 
 // ESTE ES UN EJEMPLO DE AGREGAR CATEGORIA PARA PETICIONES DESDE EL FRONT
-mutation addCategory ($name: String!, $description: String!){
-    addCategory(name: $name, description: $description) {
+mutation addCategory ($name: String!){
+    addCategory(name: $name) {
       name
     }
   }
@@ -105,7 +103,7 @@ mutation{
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
 query
   {
-    getProductByCategoryName(name:"franciscotov") {
+    getProductByCategoryName(name:"Bitter") {
       id
       name
       price
