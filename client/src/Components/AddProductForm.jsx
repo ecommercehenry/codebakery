@@ -1,13 +1,21 @@
-import React from 'react';
-import {useState} from 'react';
+import React,{ useState,useEffect } from 'react';
 import Select from 'react-select';
+import { useQuery } from "@apollo/client"
+import getAllProducts from "../Apollo/queries/getAllCategories"
+import Creatable from 'react-select/creatable';
 
 //styles
 import styled from 'styled-components';
 
 const AddProductForm = () => {
 
-    const[preview,setPreview] = useState('');
+    const { data } = useQuery(getAllProducts);
+    useEffect(() => {
+    },[data]);
+
+    const [category,setCategory] = useState('');
+    let [selected,setSelected] = useState('');
+    const [preview,setPreview] = useState('');
     const [info, setInfo] = useState({
         name:'',
         categories:[],
@@ -17,7 +25,7 @@ const AddProductForm = () => {
     })
 
     const inputHandler = (e) => {
-        return setInfo({...info,[e.target.name]:[e.target.value]})
+        return setInfo({...info,[e.target.name]:e.target.value})
     }
 
     const imageHandler = (e) => {
@@ -34,20 +42,28 @@ const AddProductForm = () => {
         }
     }
 
-    const categoryHandler = () => {
+    const categoryHandler = (option,value) => {                        //************************************************************
+        switch (option) {
+            case 'options':
+                setCategory(value)
+        }
+        setSelected([...value])
 
     }
 
-    //apollo magic!!!!
-    const categories = []; //here categories!
-    
+    category && (selected = selected.map(elem=>elem.value));
+    let options =  [];
+    data && data['getAllCategories'].map(elem=> options.push({label:elem.name,value:elem.name}))                 
+
     const submitHandler = (e) => {
         e.preventDefault();
         if(info.image == ''){alert('Please add an image')};
-        //mutation receive info that contains all the fields
+        info.categories=selected;
+        console.log(info)
     }
 
     return (
+        
         <StyledForm onSubmit={submitHandler}>
             <div className="imageLoader">
                 <div className="preview">
@@ -76,14 +92,6 @@ const AddProductForm = () => {
                         onChange={inputHandler}
                     />
                 </div>
-                <div className="categories">
-                    <label>Categories</label>
-                    <input 
-                        type="text" 
-                        // value={info.}  
-                        onChange={categoryHandler} //how to!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    />
-                </div>
                 <div className="numeric">
                     <div className="stock">
                         <label htmlFor="">Stock</label>
@@ -105,6 +113,16 @@ const AddProductForm = () => {
                             onChange={inputHandler}
                         />
                     </div>
+                </div>
+                <div className="categories">
+                    <label>Categories</label>
+                    <Creatable
+                        onChange={value => categoryHandler('options',value)} //************************************************************ */
+                        options={options}
+                        value={category}
+                        className="inputs"
+                        isMulti
+                    />
                 </div>
             </div>
             <div className="submit" >
@@ -169,8 +187,8 @@ const StyledForm = styled.form`
             display:flex;
             flex-direction:column;
             justify-content:center;
-            /* input{
-                height:3rem;
+            /* .inputs{
+                height:1rem;
                 border-radius:23px;
                 border:1px solid #e2dae9;
                 background:#EBE7EE;
