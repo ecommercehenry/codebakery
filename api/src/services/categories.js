@@ -4,9 +4,7 @@ async function getAllCategory(){
     return await Category.findAll({})
 }
 
-async function addCategory({name, description}){
-    console.log(name)
-    
+async function addCategory({name, description}){    
     return await Category.create({
         name, 
         description

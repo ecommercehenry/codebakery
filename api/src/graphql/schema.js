@@ -1,41 +1,32 @@
-const {buildSchema} = require('graphql');
-const mutations = require('./mutations/mutations');
-const queries = require('./queries/queries');
-const root = require('./roots');
+const { buildSchema } = require("graphql")
+const mutations = require("./mutations/mutations")
+const queries = require("./queries/queries")
+const root = require("./roots")
 // estos son los objetos de las consultas
-const types = require('./types');
+const types = require("./types")
 // párametros que reciben los modelos de las consultas
-const inputs = require('./inputs');
+const inputs = require("./inputs")
 // console.log(mutations, 'ppapspaps')
-
 
 const schema = buildSchema(`
 #Queryes ( to get data )
-${
-    queries
-}
+${queries}
 
 #Mutations ( to manipulate data )
-${
-    mutations
-}
+${mutations}
 
 #Inputs
-${
-    inputs
-}
+${inputs}
 
 #types
-${
-    types
-}
+${types}
 
 
 `)
 // solo para agregar
 // const { Product } = require('../db.js');
 // const { Category } = require('../db.js');
-// const list = [{name: 'francisco', description: 'malo', price: 100000, stock: 1, image: 'fran.jpg'}, 
+// const list = [{name: 'francisco', description: 'malo', price: 100000, stock: 1, image: 'fran.jpg'},
 // {name: 'francisco', description: 'bueno'}];
 // const pushAItem = async () => {
 //     try{
@@ -57,9 +48,9 @@ ${
 //           else console.log('ya estaba creado')
 //     }
 //     catch(e){
-//         console.log('eror', e) 
+//         console.log('eror', e)
 //     }
 // }
 // pushAItem();
 
-module.exports= {schema, root}
+module.exports = { schema, root }

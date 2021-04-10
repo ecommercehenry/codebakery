@@ -1,6 +1,7 @@
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
-const bcrypt = require("bcrypt-nodejs")
+// const bcrypt = require("bcrypt-nodejs")
+const crypto = require("crypto")
 const { DataTypes } = require("sequelize")
 
 module.exports = (sequelize) => {
@@ -20,6 +21,9 @@ module.exports = (sequelize) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
+        get() {
+          return () => this.getDataValue("password")
+        },
       },
       email: {
         type: DataTypes.STRING,
@@ -27,21 +31,37 @@ module.exports = (sequelize) => {
       },
       role: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
-    },
-    // Esto es para hashear la contraseña
-    {
-      freezeTableName: true,
-      instanceMethods: {
-        generateHash(password) {
-          return bcrypt.hash(password, bcrypt.genSaltSync(8))
-        },
-        validPassword(password) {
-          return bcrypt.compare(password, this.password)
+      salt: {
+        type: DataTypes.STRING,
+        get() {
+          return () => this.getDataValue("salt")
         },
       },
     }
   )
-  return Users
+  
+  Users.generateSalt = function () {
+    return crypto.randomBytes(16).toString("base64")
+  }
+
+  Users.encryptPassword = function (plainText, salt) {
+    return crypto
+      .createHash("RSA-SHA256")
+      .update(plainText)
+      .update(salt)
+      .digest("hex")
+  }
+
+  const setSaltAndPassword = (user) => {
+    if (user.changed("password")) {
+      user.salt = Users.generateSalt()
+      user.password = Users.encryptPassword(user.password(), user.salt())
+    }
+  }
+  
+  Users.beforeCreate(setSaltAndPassword)
+  Users.beforeUpdate(setSaltAndPassword)
+
 }
