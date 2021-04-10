@@ -1,3 +1,11 @@
-[{"name":"Cocina","description":"Todo lo relacionado a comida"},
-{"name":"Tecnologia","description":"Todo lo relacionado a tecnologia"},
-{"name":"Ropa","description":"La ropa jaja"}]
+[
+    {
+        "name": "Sweet"
+    },
+    {
+        "name": "Bitter"
+    },
+    {
+        "name": "Creamy"
+    }
+]
