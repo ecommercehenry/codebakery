@@ -72,6 +72,7 @@ const AddProductForm = () => {
                     image:info.image
                 }
             })
+            alert("Producto agregado!")
         }
         
     }
