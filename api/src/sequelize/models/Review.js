@@ -4,28 +4,24 @@ const { DataTypes } = require("sequelize")
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "product",
+    "review",
     {
-      name: {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       description: {
-        type: DataTypes.TEXT(),
-        allowNull: false,
-      },
-      price: {
-        type: DataTypes.DOUBLE,
-        allowNull: false,
-      },
-      stock: {
-        type: DataTypes.INTEGER,
-        allowNull: true, //puede no haber informacion de stock en el momento..?
-        // o el stock hacese cero/nulo..
-      },
-      image: {
         type: DataTypes.STRING,
-        allowNull: false, //al menos una imagen debe tener
+        allowNull: false,
+      },
+      stars: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
     },
     { timestamps: false }
