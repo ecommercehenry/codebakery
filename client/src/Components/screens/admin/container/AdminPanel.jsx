@@ -8,16 +8,26 @@ import LeftPanel from '../LeftPanel';
 import AdminNavBar from '../AdminNavBar';
 // import TextCRUD from '../TextCRUD'
 import ListCRUD from "../ListCRUD"
-
+import AddProductForm from '../../../AddProductForm';
 
 const AdminPanel = () => {
    
     return (
         <StyledAdminPanel>
-            <LeftPanel/>
-            {/* <TextCRUD/> */}
-            <ListCRUD/>
-            <AdminNavBar/>
+            <div className="left">
+                <LeftPanel/>
+            </div>
+            <div className="right">
+                <div className="top">
+                <AdminNavBar/>
+                </div>
+                <div className="bottom">
+                    <AddProductForm/>
+                </div>
+                <ListCRUD/>
+                {/* <FormCRUD /> */}
+            </div>
+            
         </StyledAdminPanel>
         
     )
@@ -27,6 +37,28 @@ const StyledAdminPanel = styled.div`
     min-height: 100vh;
     width: 100%;
     display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    background: black;
+    .left{
+        width:13%;
+        //background:green;
+    }
+    .right{
+        width:87%;
+        //background:yellow;
+        display:flex;
+        flex-direction:column;
+        .top{
+            height:15vh;
+        }
+        .bottom{
+            height:85vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+    }
 `;
 
 export default AdminPanel
