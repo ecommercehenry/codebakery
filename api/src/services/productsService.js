@@ -4,7 +4,10 @@ const { Category } = require('../db.js');
 // const categories = require('../graphql/roots/queriesResolvers/categories.js');
 
 async function getAllProducts() {
-  return await Product.findAll({include: [Category]});
+  return await Product.findAll({
+    order: [["name","ASC"]],
+    include: [Category],
+  });
 }
 async function getProductById({ id }) {
   return await Product.findByPk(id);

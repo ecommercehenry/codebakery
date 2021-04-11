@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize")
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('category', {
@@ -8,5 +8,5 @@ module.exports = (sequelize) => {
       allowNull: false,
     }
     
-  });
+  },{ timestamps: false });
 }; 

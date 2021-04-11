@@ -1,3 +1,4 @@
+
 import React from 'react';
 import './App.css';
 import {Route} from 'react-router-dom';
@@ -8,6 +9,7 @@ import Cart from './Components/screens/cart/container/Cart';
 import AboutUs from './Components/screens/aboutUs/container/AboutUs';
 import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory"
 
+import FormCRUD from "./Components/screens/admin/FormCRUD"
 import GlobalStyle from './Components/GlobalStyle';
 
 function App() {
@@ -20,6 +22,9 @@ function App() {
       <Route path="/catalogue" component={Catalogue}/>
       <Route path="/cart" component={Cart}/>
       <Route path="/about-us" component={AboutUs}/>
+      
+      {/* Debo agregar al componente padre que corresponda @Chu */}
+      <Route path="/admin/form" component={FormCRUD}/>
 
     </>
   );

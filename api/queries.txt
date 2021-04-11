@@ -101,6 +101,14 @@ mutation{
    	name
   }
 }
+
+
+// PARA AGREGAR UN USUARIO
+mutation {
+  createUser(name: "ivan", password: "helloworld", email: "ivan@ivan.com", role:"admin"){
+    name
+  }
+}
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
 query
   {

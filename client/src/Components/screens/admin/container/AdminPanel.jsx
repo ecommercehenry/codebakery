@@ -6,10 +6,12 @@ import styled from 'styled-components';
 //components
 import LeftPanel from '../LeftPanel';
 import AdminNavBar from '../AdminNavBar';
+// import TextCRUD from '../TextCRUD'
+import ListCRUD from "../ListCRUD"
 import AddProductForm from '../../../AddProductForm';
-import FormCRUD from '../../../FormCRUD'
 
 const AdminPanel = () => {
+   
     return (
         <StyledAdminPanel>
             <div className="left">
@@ -22,11 +24,12 @@ const AdminPanel = () => {
                 <div className="bottom">
                     <AddProductForm/>
                 </div>
-                
+                <ListCRUD/>
                 {/* <FormCRUD /> */}
             </div>
             
         </StyledAdminPanel>
+        
     )
 }
 
