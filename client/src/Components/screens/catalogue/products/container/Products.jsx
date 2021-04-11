@@ -7,6 +7,7 @@ import Grid from '../grid/Grid'
 import "./Products.css"; 
 
 const Products = () => {
+    console.log('lucas')
     return (
         <div className='cardProduct'>
             <SearchBar />

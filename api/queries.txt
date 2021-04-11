@@ -54,9 +54,24 @@ mutation {
 mutation{
   addCategory(name: "fran", description: "entro" ){
     name
-  }
 }
 
+
+//traer todas las categorias 
+{
+    categories{
+      id
+      name
+      description
+    }
+  }
+
+// ESTE ES UN EJEMPLO DE AGREGAR CATEGORIA PARA PETICIONES DESDE EL FRONT
+mutation addCategory ($name: String!, $description: String!){
+    addCategory(name: $name, description: $description) {
+      name
+    }
+  }
 //buscar producto con su categoria segun su id
 {
     productCategory(id:1){
@@ -66,6 +81,7 @@ mutation{
     }
   }
   }
+
 
 
 //// PARA ELIMINAR UNA CATEGORIA
@@ -84,6 +100,14 @@ mutation{
 mutation{
   removeCategoryFromProduct(idProduct:1,idCategory:1){
    	name
+  }
+}
+
+
+// PARA AGREGAR UN USUARIO
+mutation {
+  createUser(name: "ivan", password: "helloworld", email: "ivan@ivan.com", role:"admin"){
+    name
   }
 }
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
