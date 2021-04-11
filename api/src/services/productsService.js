@@ -37,7 +37,6 @@ async function addProduct(args) {
     });
     let newProductCategories = args.category.split(',')
     let allCategories = await Category.findAll();
-    // console.log(allCategories['dataValues'])
     allCategories = allCategories.map( elem=>elem['dataValues'].name)
     newProductCategories.map(async(category)=>{
       if(allCategories.includes(category)){
