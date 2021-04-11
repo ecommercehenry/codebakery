@@ -8,7 +8,11 @@ import FormCRUD from "./FormCRUD"
 
 function TextCRUD({ img, name, stock, categories, price, key }) {
   const [show, setShow] = useState(true);
-  
+
+  //harcodeo pa que aparezca algo... 
+  categories = [{id: 1, name:"postres "},{id: 2, name:"masas finas "} ]
+  stock = 10
+  //fin del hardcodeo.........
   function handlerOnClick() {
     setShow(!show);
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", show);
@@ -33,7 +37,7 @@ function TextCRUD({ img, name, stock, categories, price, key }) {
           <div className="category-container">
             <p>Categories</p>
             {categories.map((element) => (
-              <p key={element.id}>{element.name}</p>
+              <span key={element.id}>{element.name}</span>
             ))}
           </div>
           <div className="price-container">

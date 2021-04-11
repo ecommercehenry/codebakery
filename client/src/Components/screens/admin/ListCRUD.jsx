@@ -7,6 +7,7 @@ import allProducts from "../../../Apollo/queries/allProducts"
 function ListCRUD(){
     const { data } = useQuery(allProducts);
     useEffect(() => {}, [data]);
+    // console.log("esto es lo que usa ListCRUD...",data)
     return (
         <div className="product-container">
           {data ? (

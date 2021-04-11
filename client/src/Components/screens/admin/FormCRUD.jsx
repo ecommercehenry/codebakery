@@ -5,16 +5,17 @@ import React from "react"
 import './FormCRUD.css'
 
 function FormCRUD(props) {
-  // props = {
-  //   name: "olla",
-  //   stock: 2,
-  //   categories: ["cat1", "cat2", "cat3"],
-  //   price: 23.99,
-  //   img: "URL",
-  // };
-
+  
   const { name, stock, categories, price, img, handlerOnClick } = props;
-
+  function agregarCategoria(){
+    //hacer query mutation para agregar una categoria nueva
+    //luego relacionar esa categoria con el producto
+  }
+  function quitarCategoria(e){
+    //Hacer query para modificar un producto, quitandole esa categoria
+    e.preventDefault()
+    console.log("............................evento quitar categoria",e)
+  }
   return (
     <form 
     
@@ -41,12 +42,12 @@ function FormCRUD(props) {
             <>
               {/* <input value = {cat}/> */}
               <span>
-                {cat}
-                <button> x </button>
+                {cat.name}
+                <button value={cat.id} onClick={quitarCategoria}> x </button>
               </span>
             </>
           ))}
-          <button onClick=""> add </button>
+          <button onClick={agregarCategoria}> add </button>
         </div>
       </div>
       <div className="F-price-container">
