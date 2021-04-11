@@ -1,0 +1,80 @@
+.navbar{
+    height: 100px;
+    background-color: #ffffff00;
+    padding-right: 1%;
+    z-index: 2;
+}
+
+.left-tags{
+    width: 350px;
+    font-size: 0.9rem;
+}
+
+
+.right-buttons{
+    display: flex;
+    width: 17vw;
+    font-size: 0.9rem;
+    justify-content: flex-end;
+}
+
+.log-in-btn{
+    margin-right: 14px;
+}
+
+.white-btn{
+    display: block;
+    height:  4.5vh;
+    width: fit-content!important;
+    border-radius: 40px;
+    border: none;
+    background-color: white;
+    text-decoration: none !important;
+    color: black;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 0 1.5vw 0 1.5vw;
+}
+
+.purple-btn{
+    display: block;
+    height:  4.5vh;
+    width: fit-content!important;
+    border-radius: 40px;
+    border: none;
+    background-color: #755588;
+    text-decoration: none !important;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    padding-bottom: 0.5%;
+    padding: 0 1.5vw 0 1.5vw;
+}
+
+.display-linebreak{
+    white-space: pre-line;
+}
+
+.text-inactive{
+    color: #CECECE
+}
+
+.text-inactive:hover{
+    color:white
+}
+
+.active{
+    color:white;
+    font-weight: bold;
+}
+
+.active:hover{
+    cursor: default;
+}
+
+#sign-up-link{
+    width:100%;
+    margin-left: 3vw;
+    display: flex;
+    width: fit-content
+}
