@@ -14,6 +14,7 @@ function ListCRUD(){
             data.product.map((item) => (
              
               <TextCRUD
+                  id ={item.id}
                   key= {item.id}
                   img ={item.image}
                   name= {item.name}
