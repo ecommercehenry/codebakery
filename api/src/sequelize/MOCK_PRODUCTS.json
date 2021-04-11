@@ -76,11 +76,11 @@
         "image":"https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099199/code_bakery/2Pack-cheesecake-newyorkino_yk5dz3.jpg"
     },
     
-    {"name":"2Pack – 2 cheesecakes newyorkinos + confitura de frutos rojos",
-        "description":"Dos cheesecake al estilo newyorkino acompañados de dos confituras de frutos rojos",
+    {"name":"Bagel tradiciona ",
+        "description":"Bagel tradicional de masa madre",
         "price":18.00,
         "stock":10,
-        "image":"top-view-rolls-candies-sweet-confitures-inside-plate-on-white-background.jpg"
+        "image":"https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099210/code_bakery/homemade-crunchy-bread-with-grains_pnnny1.jpg"
     }
 
 ]
