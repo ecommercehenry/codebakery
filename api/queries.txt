@@ -113,3 +113,12 @@ query
       image
     }
   }
+
+  // PARA OBTENER UN PRODUCTO POR NOMBRE
+  query 
+  {
+  getProductByName(name : "Cuchillo"){
+    name
+
+  }
+}

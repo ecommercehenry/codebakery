@@ -59,8 +59,8 @@ const Categories = () => {
             <button  name = 'All' onClick={handleClick}>All</button>
 
            {
-               categories?.data?.getAllCategories.map(cate =>(
-                   <div>
+               categories?.data?.getAllCategories.map((cate, i)  =>(
+                   <div key ={i}>
                    <button name = {cate.name} onClick={handleClick}>
                        {cate.name}
                     </button>
@@ -68,8 +68,8 @@ const Categories = () => {
                ))
            }
            {    
-               stateproducts && stateproducts?.length>0 ? stateproducts.map(product =>(
-                 <div>{product.name}</div>
+               stateproducts && stateproducts?.length>0 ? stateproducts.map((product, i ) =>(
+                 <div key={i}>{product.name}</div>
                ) ): 'No hay productos'
            } 
            
