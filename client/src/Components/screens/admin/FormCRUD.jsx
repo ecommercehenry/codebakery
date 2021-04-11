@@ -1,24 +1,18 @@
 // import { useQuery } from "@apollo/client"
 // import getData from "../Apollo/queries/productById"
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
-import React from "react"
-import './FormCRUD.css'
+import React, { useState } from "react";
+import "./FormCRUD.css";
+import { useForm } from "react-hook-form";
 
 function FormCRUD(props) {
-  // props = {
-  //   name: "olla",
-  //   stock: 2,
-  //   categories: ["cat1", "cat2", "cat3"],
-  //   price: 23.99,
-  //   img: "URL",
-  // };
-
+  const { register, handleSubmit } = useForm();
   const { name, stock, categories, price, img } = props;
 
+  const onSubmit = (data) => console.log(data);
+
   return (
-    <form 
-    
-    className="F-element-container">
+    <form className="F-element-container" onSubmit={handleSubmit(onSubmit)}>
       <div className="F-image-container">
         <p>Product</p>
         <img src={img} alt="imagen" />
@@ -27,11 +21,15 @@ function FormCRUD(props) {
 
       <div className="F-name-container">
         <p>Name</p>
-        <input value={name} />
+        <input
+          type="text"
+          {...register("name", { required: true })}
+          placeholder={name}
+        />
       </div>
       <div className="F-stock-container">
         <p>Stock</p>
-        <input value={stock} />
+        <input type="number" {...register("stock", { required: true })} />
       </div>
 
       <div className="F-category-container">
@@ -51,10 +49,10 @@ function FormCRUD(props) {
       </div>
       <div className="F-price-container">
         <p>Price</p>
-        <input value={price} />
+        <input type="number" {...register("price", { required: true })} />
       </div>
       <div className="F-edit-button">
-        <button type="submit" >edit</button>
+        <button type="submit">edit</button>
       </div>
       <div className="F-remove-button">
         <button onClick="">cancel</button>
@@ -63,5 +61,4 @@ function FormCRUD(props) {
   );
 }
 
-export default FormCRUD
-
+export default FormCRUD;

@@ -1,21 +1,20 @@
-
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 // import allProducts from "../../../Apollo/queries/allProducts"
-import './TextCRUD.css'
-import FormCRUD from "./FormCRUD"
+import "./TextCRUD.css";
+import FormCRUD from "./FormCRUD";
 
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
 function TextCRUD({ img, name, stock, categories, price, key }) {
   const [show, setShow] = useState(true);
-  
+
   function handlerOnClick() {
     setShow(!show);
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", show);
   }
 
   return (
-    <div className="product-container" onClick={handlerOnClick}>
+    <div className="product-container" onDoubleClick={handlerOnClick}>
       {show ? (
         <div className="element-container" id={key}>
           <div className="image-container">
