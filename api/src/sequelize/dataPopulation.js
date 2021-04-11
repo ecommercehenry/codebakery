@@ -7,6 +7,7 @@ function dataPopulation() {
   return (
     Category.bulkCreate(MOCK_CATEOGRIES), 
     Product.bulkCreate(MOCK_PRODUCTS)
+    //crear relaciones entre producto y categoria por favor  
   );
 }
 
