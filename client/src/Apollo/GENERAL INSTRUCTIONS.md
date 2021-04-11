@@ -67,7 +67,11 @@ query {
 ## modifyProduct
 
 ```
-AGREGAR MUTATION
+mutation{
+  modifyProduct(id: 1, dataToModify: {description: "ejemplo", price: 10{
+    name
+  }
+}
 
 ```
 
