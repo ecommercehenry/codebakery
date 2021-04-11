@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 
 function FormCRUD(props) {
   const { register, handleSubmit } = useForm();
-  const { name, stock, categories, price, img } = props;
+  const { name, stock, categories, price, img, handlerOnClick } = props;
 
   const onSubmit = (data) => console.log(data);
 
@@ -55,7 +55,7 @@ function FormCRUD(props) {
         <button type="submit">edit</button>
       </div>
       <div className="F-remove-button">
-        <button onClick="">cancel</button>
+        <button onClick={handlerOnClick}>cancel</button>
       </div>
     </form>
   );

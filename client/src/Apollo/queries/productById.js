@@ -1,15 +1,15 @@
 import { gql } from "@apollo/client"
 
 const getData = gql`
-  {
-    productById(id: 1) {
+    query productById($id: Int!) {
+      productById(id: $id){
       name
       description
       price
       stock
       image
     }
-  }
+    }
 `
 
 export default getData

@@ -54,6 +54,7 @@ function TextCRUD({ img, name, stock, categories, price, key }) {
           stock={stock}
           categories={categories}
           price={price}
+          handlerOnClick={handlerOnClick}
         />
       )}
     </div>

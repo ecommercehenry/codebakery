@@ -1,11 +1,13 @@
-const {updateCategory, 
+const {
+    updateCategory, 
     modifyProduct, 
     addCategory, 
     deleteCategory, 
     addCategoryToProduct, 
     removeCategoryFromProduct,
     deleteById,
-    addProduct
+    addProduct,
+    createUser
 } = require("./mutationsResolver/")
 const {
     getAllCategories,
@@ -27,8 +29,8 @@ const root = {
     deleteById,
     addCategoryToProduct,
     removeCategoryFromProduct,
-    getProductByCategoryName,
     addProduct,
+    createUser,
 
     //Queries
     
@@ -36,6 +38,7 @@ const root = {
     product,
     productCategory,
     getAllCategories,
+    getProductByCategoryName,
     
 }
 

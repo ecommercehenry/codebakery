@@ -5,6 +5,9 @@ import App from "./App"
 import * as serviceWorker from "./serviceWorker"
 import { BrowserRouter } from "react-router-dom"
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client'
+import { Provider } from 'react-redux';
+import { store } from "./store"
+
 
 
 // cliente apollo
@@ -15,11 +18,13 @@ const client = new ApolloClient({
 
 ReactDOM.render(
 <ApolloProvider client = {client}>
-  <React.StrictMode>
+<Provider store={store} >
+ 
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>
+  
+  </Provider>
   </ApolloProvider>,
   document.getElementById("root")
 )

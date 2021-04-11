@@ -3,11 +3,12 @@
     flex-direction:column;
     align-items:center;
     width:50rem;
+    margin: 2rem;
 }
 .image-container{
-    background-color:blueviolet;
     display:flex;
     flex-direction:column;
+    align-items: center;
     width: 10rem;
 }
 img{
@@ -15,14 +16,52 @@ img{
     height: auto
 }
 .name-container{
-    background-color:red;
+    border-radius: 1.5rem;
+   
+  
+   width:fit-content;
+   height: 4rem;
+   padding:0.5rem;
+   background-color: rgb(233, 214, 214); 
 }
 .element-container{
-    margin:1rem;
+    margin:auto;
+    width: fit-content;
     padding: 2rem;
-    border:0.1rem;
-    border-style: solid;
+    border-radius: 1.5rem;
+  
+  
     display:flex;
-    background-color: blue;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(233, 214, 214);
+}
+
+.stock-conteiner{
+    border-radius: 1.5rem;
     
+    
+    width:5rem;
+    height: 4rem;
+    padding:0.5rem;
+    background-color: rgb(233, 214, 214); 
+ 
+}
+.category-container{
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+   
+   
+    width:15rem;
+    height: 4rem;
+   
+}
+.price-container {
+    padding: 0.5rem;
+    border-radius: 1.5rem;
+  
+   width:5rem;
+   height: 4rem;
+   padding:0.5rem;
+   background-color: rgb(233, 214, 214); 
 }

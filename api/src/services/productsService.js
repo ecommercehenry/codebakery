@@ -1,10 +1,14 @@
-const { Product } = require("../db.js");
-const { Category } = require("../db.js");
+const { cloudinary } = require('../../utils/cloudinary')
+const { Product } = require('../db.js');
+const { Category } = require('../db.js');
 // const categories = require('../graphql/roots/queriesResolvers/categories.js');
 
 async function getAllProducts() {
   try {
-    return await Product.findAll({ include: [Category] });
+    return await Product.findAll({
+      order: [["name","ASC"]],
+      include: [Category],
+    });
   } catch (error) {
     throw new Error(error);
   }
@@ -40,20 +44,29 @@ async function productCategory({ id }) {
 
 async function addProduct(args) {
   try {
-    const { category } = args;
-    const newProduct = {
+    const imageString = args.image
+    const uploadedResponse = await cloudinary.uploader.upload(imageString,{upload_preset:'code_bakery'});
+    const imageUrl = uploadedResponse.url;
+    const newProduct = await Product.create({
       name: args.name,
       description: args.description,
       price: args.price,
       stock: args.stock,
-      image: args.image,
-    };
-
-    await Product.create(newProduct).then((product) =>
-      product.addCategory(category)
-    );
+      image: imageUrl,
+    });
+    let newProductCategories = args.category.split(',')
+    let allCategories = await Category.findAll();
+    allCategories = allCategories.map( elem=>elem['dataValues'].name)
+    newProductCategories.map(async(category)=>{
+      if(allCategories.includes(category)){
+        let findCategory = await Category.findOne({where:{name:category}})
+        newProduct.addCategory(findCategory.id)
+      }else{
+        return await Category.create({name:category}).then(res=>newProduct.addCategory(res.id))
+      }
+    })
   } catch (error) {
-    throw new Error(error);
+    console.log("ERROR "+error)
   }
 }
 

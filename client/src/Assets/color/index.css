@@ -1,0 +1,18 @@
+html {
+  /* Paleta de colores */
+  --primario-1: #8a6db1;
+  --primario-2:#E8DAEF; 
+  --primario-3: #f4f2f8;
+  --primario-4: #402e57;
+
+  --fontColor-1:#f4f2f8;  
+  --fontColor-2:#e8daef85;
+  --fontColor-3:#4a235a3b;
+
+ 
+  --terciario-3:#DAF7A6;
+  --terciario-3:#FFC300;
+  --terciario-3:#d0293e;
+  --terciario-3:#0f8b2d;
+ 
+}
