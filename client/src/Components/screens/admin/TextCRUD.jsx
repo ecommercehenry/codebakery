@@ -15,7 +15,7 @@ function TextCRUD({ img, name, stock, categories, price, key }) {
   }
 
   return (
-    <div className="product-container" onClick={handlerOnClick}>
+    <div className="product-container" onDoubleClick={handlerOnClick}>
       {show ? (
         <div className="element-container" id={key}>
           <div className="image-container">
@@ -55,6 +55,7 @@ function TextCRUD({ img, name, stock, categories, price, key }) {
           stock={stock}
           categories={categories}
           price={price}
+          handlerOnClick={handlerOnClick}
         />
       )}
     </div>

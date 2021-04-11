@@ -13,7 +13,7 @@ function FormCRUD(props) {
   //   img: "URL",
   // };
 
-  const { name, stock, categories, price, img } = props;
+  const { name, stock, categories, price, img, handlerOnClick } = props;
 
   return (
     <form 
@@ -57,7 +57,7 @@ function FormCRUD(props) {
         <button type="submit" >edit</button>
       </div>
       <div className="F-remove-button">
-        <button onClick="">cancel</button>
+        <button onClick={handlerOnClick}>cancel</button>
       </div>
     </form>
   );
