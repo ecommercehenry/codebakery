@@ -1,8 +1,10 @@
 module.exports = `
     input productInput{
+        name: String
         description: String,
-        price: Int,
+        price: Float,
         stock: Int,
         image: String,
+        categories: [String]
     }
 `

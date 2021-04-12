@@ -14,7 +14,7 @@ import "./grid.css";
 
 const Grid = () => {
 
-  let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state);
+  let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state.reducer);
   let arr = []
   let dispatch = useDispatch();
   //me traigo el estado filterProduct y comparo si no esta renderizo ese componente;
@@ -27,9 +27,15 @@ const Grid = () => {
   return (
     <StyledGrid>
       {
-      allProduct?.map((product) => (
-        <ProductCard id={product.id} name={product.name} image={product.image}/>
-      ))
+      allProduct?.map((product) => {
+        if(filterProduct === ""){
+          return <ProductCard key={product.id} id={product.id} name={product.name} image={product.image}/>
+        }else{
+          if(filterProduct === product.name){
+            return <ProductCard key={product.id} id={product.id} name={product.name} image={product.image}/>
+          }
+        }
+      })
       }
     </StyledGrid>
   );
