@@ -14,7 +14,7 @@ import "./grid.css";
 
 const Grid = () => {
 
-  let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state);
+  let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state.reducer);
   let arr = []
   let dispatch = useDispatch();
   //me traigo el estado filterProduct y comparo si no esta renderizo ese componente;
