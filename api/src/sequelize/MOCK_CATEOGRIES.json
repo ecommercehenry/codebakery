@@ -1,3 +1,8 @@
-[{"name":"Cocina","description":"Todo lo relacionado a comida"},
-{"name":"Tecnologia","description":"Todo lo relacionado a tecnologia"},
-{"name":"Ropa","description":"La ropa jaja"}]
+[{"name":"Vegan"},
+{"name":"Cakes"},
+{"name":"Granola"},
+{"name":"Gluten-Free"},
+{"name":"Negritos-Bars"},
+{"name":"Cookies"},
+{"name":"Breads"}
+]
