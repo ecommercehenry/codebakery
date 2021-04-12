@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 // import { Link } from "react-router-dom";
 import allProducts from "../../../../../Apollo/queries/allProducts.js";
 import { useQuery } from '@apollo/client';
-import "./grid.css";
+import styled from 'styled-components';
+
+//Components
+import ProductCard from './ProductCard';
+//import "./grid.css";
 
 
 import "./grid.css";
@@ -61,6 +65,16 @@ const Grid = () => {
     </div>
   );
 };
+
+const StyledGrid = styled.div`
+  //background:red;
+  width:100%;
+  height: auto;
+  display:flex;
+  padding:0rem 4rem;
+  flex-wrap:wrap;
+  justify-content:space-between;
+`;
 
 export default Grid;
 
