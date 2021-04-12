@@ -8,6 +8,7 @@ import allProducts from '../../../../../Apollo/queries/allProducts';
 import { getAllProducts, setSearch } from '../../../../../actions';
 import styles from './Categories.module.css';
 
+
 const Categories = () => {
     //Iniciamos el estado en all para que se rendericen todos los productos
     const [name, setName] = React.useState('All');
@@ -56,13 +57,15 @@ const Categories = () => {
     }
 
     return (
+
         <div className={styles.categories}>
+           
             <div><button  name = 'All' onClick={handleClick} className={styles.btn}>All</button></div>
 
            {
                categories?.data?.getAllCategories.map((cate, i)  =>(
                    <div key ={i}>
-                   <button name = {cate.name} onClick={handleClick}>
+                   <button name = {cate.name} onClick={handleClick} className={styles.btn}>
                        {cate.name}
                     </button>
                     </div>

@@ -12,9 +12,9 @@
     z-index: 0;
     margin-top: -100px;
     padding-top: 100px;
-} */
+}  */
 
-/* .categories{
+ .categories{
     display: flex;
     margin: 150px auto;
     text-align: center;
@@ -28,7 +28,7 @@
     z-index: 0;
     margin-top: -100px;
     padding-top: 100px;
-}
+} 
 
 .btn {
     padding: 4px 10px;
@@ -73,4 +73,4 @@
     -webkit-transform: scale(1, 1);
     -ms-transform: scale(1, 1);
     transform: scale(1, 1)
-  } */
+  }
