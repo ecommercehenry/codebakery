@@ -7,12 +7,14 @@ import allProducts from "../../../Apollo/queries/allProducts"
 function ListCRUD(){
     const { data } = useQuery(allProducts);
     useEffect(() => {}, [data]);
+    // console.log("esto es lo que usa ListCRUD...",data)
     return (
         <div className="product-container">
           {data ? (
             data.product.map((item) => (
              
               <TextCRUD
+                  id ={item.id}
                   key= {item.id}
                   img ={item.image}
                   name= {item.name}
