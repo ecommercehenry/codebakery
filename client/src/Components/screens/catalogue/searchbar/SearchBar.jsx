@@ -15,11 +15,12 @@ const SearchBar = ({setSearch}) => {
     };
   
     return (
+      <div style={{width:100+"vw", display:"flex", justifyContent:"center"}}>
       <StyledSearchBar>
         <form onSubmit={submitHandler}>
           <input
             type="text"
-            placeholder="Busqueda..."
+            placeholder="Encuentra tu dulce favorito"
             value={input}
             onChange={(e) => {
               setInput(e.target.value);
@@ -28,11 +29,16 @@ const SearchBar = ({setSearch}) => {
            <button type='submit'>Busqueda</button> 
         </form>
       </StyledSearchBar>
+      </div>
     )
 };
 
 const StyledSearchBar = styled.div`
     background: #e9e8e8;
+    position:absolute;
+    z-index:2;
+    transform:translateY(-50%);
+    margin:auto;
     height: 3rem;
     width: 50%;
     padding: 0 0.5rem;
