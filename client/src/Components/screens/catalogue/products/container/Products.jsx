@@ -1,22 +1,35 @@
-import React from 'react'
-import SearchBar from '../../searchbar/SearchBar'
-import Categories from '../categories/Categories'
-import HomeButton from '../home&sort/homeButton/HomeButton'
-import SortButton from '../home&sort/sortButton/SortButton'
-import Grid from '../grid/Grid'
-//import "./Products.css"; 
+import React, { useState, useEffect } from "react";
+import SearchBar from "../../searchbar/SearchBar";
+import Categories from "../categories/Categories";
+import HomeButton from "../home&sort/homeButton/HomeButton";
+import SortButton from "../home&sort/sortButton/SortButton";
+import { useSelector, useDispatch } from "react-redux";
+import allProducts from "../../../../../Apollo/queries/allProducts";
+import { useQuery } from "@apollo/client";
+import { guardarProductos } from "../../../../../actions/index";
+import Grid from "../grid/Grid";
+import "./Products.css";
 
 const Products = () => {
-    console.log('lucas')
-    return (
-        <div className='cardProduct'>
-            <SearchBar />
-            <Categories />
-            <HomeButton />
-            <SortButton />
-            <Grid />
-        </div>
-    )
-}
+//   const [search, setSearch] = useState(false);
+//   const { stateSearch } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
-export default Products
+  let { data } = useQuery(allProducts);
+  useEffect(() => {
+    dispatch(guardarProductos(data));
+  }, []);
+
+  return (
+    <div className="cardProduct">
+      <SearchBar />
+      <Categories />
+      <HomeButton />
+      <SortButton />
+      <Grid
+      />
+    </div>
+  );
+};
+
+export default Products;
