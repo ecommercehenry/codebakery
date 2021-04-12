@@ -1,6 +1,9 @@
 const { cloudinary } = require('../../utils/cloudinary')
 const { Product } = require('../db.js');
 const { Category } = require('../db.js');
+const { Op } = require("sequelize");
+const categories = require('../graphql/roots/queriesResolvers/categories');
+
 // const categories = require('../graphql/roots/queriesResolvers/categories.js');
 
 async function getAllProducts() {
@@ -61,17 +64,47 @@ async function addProduct(args) {
  * @param  {} dataToModify object that contains the data to be modified
  */
 async function modifyProduct({ id, dataToModify }) {
-  if (validateNewData(dataToModify)) {
-    try {
-      const product = await Product.findOne({
-        where: {
-          id: id,
+  async function getCategoriesDB(categoriesStr){
+    let out = []
+    for(categorie of categoriesStr){
+      const cate = await Category.findOrCreate({
+        where:{
+          name:categorie
         },
-        include: [Category],
+        defaults:{
+          name:categorie
+        }
+      })
+      out.push(cate[0])
+    }
+    return out
+  }
+  async function getProductById(id){
+    const product = await Product.findOne({
+      where: {
+        id: id,
+      },
+      include: [Category],
+    });
+    return product
+  }
+  const categories = dataToModify["categories"]
+  const dataProduct = dataToModify
+  delete dataProduct["categories"]
+  if (validateNewData(dataProduct)) {
+    try {
+      const product = await getProductById(id)
+      //Update with new info
+      await product.update(dataProduct); 
 
-      });
-      await product.update(dataToModify);
-      return product;
+      //If is necessary change categories   
+      if(categories && categories.length>0){
+        const dbCategories = await getCategoriesDB(categories)
+        await product.setCategories(dbCategories)
+      }
+      //Find again and get product with the changes
+      const updatedProduct = await getProductById(id)
+      return updatedProduct;
     } catch (error) {
       return {
         error: "Problem finding the id of product",
@@ -86,9 +119,10 @@ async function modifyProduct({ id, dataToModify }) {
   }
 
   function validateNewData(data) {
-    const validInputs = ["name", "description", "price", "stock", "image"];
+    const validInputs = ["name", "description", "price", "stock", "image","categories"];
     for (element in data) {
       if (!validInputs.includes(element)) {
+        console.log("FALSOOOOOOO")
         return false;
       }
     }
