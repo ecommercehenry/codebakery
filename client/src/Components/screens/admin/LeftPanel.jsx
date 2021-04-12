@@ -37,7 +37,7 @@ const StyledPanel = styled.div`
     background:#5E3F71;
     box-shadow: 5px 5px 25px rgb(167, 167, 167);
     min-height: 100vh;
-    width: 13%;
+    width: 100%;
     border-top-right-radius: 60px;
     border-bottom-right-radius: 60px;
     display: flex;
