@@ -6,16 +6,21 @@ import styled from 'styled-components';
 //components
 import SearchBar from './SearchBar';
 
-const AdminNavBar = () => {
+const AdminNavBar = ({setAddProduct}) => {
+
+    const buttonHandler = () => {
+        setAddProduct(true)
+    }
+
     return (
         <StyledNavBar>
             <div className="onLeft">   
                 <div className="optionTab">PRODUCTS</div>
                 <SearchBar/>
             </div>
-            <div className="addProduct">
+            <button className="addProduct" onClick={buttonHandler}>
                 + ADD PRODUCT
-            </div>
+            </button>
 
         </StyledNavBar>
     )
@@ -23,11 +28,14 @@ const AdminNavBar = () => {
 
 const StyledNavBar = styled.div`
     width: 87%;
-    height: 100%;
+    height: 13vh;
     display:flex;
     align-items: center;
     justify-content: space-between;
+    position:fixed;
+    top: 0;
     padding: 0 6rem 0 4rem;
+    background:white;
     .onLeft{
         .optionTab{
             color:#513066;
@@ -52,6 +60,7 @@ const StyledNavBar = styled.div`
         justify-content:center;
         border-radius:20px;
         padding: 0 2.3rem;
+        border:none;
     }
 `;
 
