@@ -12,6 +12,7 @@ async function getAllProducts() {
 async function getProductById({ id }) {
   return await Product.findByPk(id);
 }
+
 async function deleteById({ id }) {
   return await Product.destroy({
     where: {
@@ -133,6 +134,15 @@ async function getProductByCategoryName({name}){
     return category.dataValues.products
 }
 
+async function getProductByName({ name }) {
+  product = await Product.findOne({
+    where: {
+      name
+    } 
+  })
+  return product
+}
+
 
 module.exports = {
   getAllProducts,
@@ -143,5 +153,6 @@ module.exports = {
   deleteById,
   addProduct,
   productCategory,
-  getProductByCategoryName
+  getProductByCategoryName, 
+  getProductByName,
 };
