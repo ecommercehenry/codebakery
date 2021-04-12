@@ -1,156 +1,99 @@
-// import { useQuery } from "@apollo/client"
-// import getData from "../Apollo/queries/productById"
-// import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
-import React, { useState } from "react";
-import "./FormCRUD.css";
+import React, { useState } from "react"
+import { useMutation } from "@apollo/client";
 import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct"
-import { useMutation, useQuery } from '@apollo/client';
-
-// import getAllCategories from "../../Apollo/queries/getAllCategories";
-// import styled from 'styled-components';
-import Creatable from 'react-select/creatable';//para colocar categorias
+import './FormCRUD.css'
 
 function FormCRUD(props) {
-  const { name, stock, categories, price, img, handlerOnClick, id } = props;
+   const { name, stock, categories, price, img, handlerOnClick,id } = props;
+  //  console.log("------------------------"+ props.stock)
 
-  const [category, setCategory] = useState("");
-  let [selected, setSelected] = useState("");
-  const [preview, setPreview] = useState("");
-  const [info, setInfo] = useState({
-    name, //como estado inicial toma de las props del componente padre TextCRUD
-    description: "",
+  
+  const [inputs, setInputs] = useState({    
+    //como estado inicial toma de las props del componente padre TextCRUD
+    name, 
+    // description: "", -----> FRONT:-----> falta agregar descripcion del producto para poder editarla?
     category: categories,
     stock,
     price,
     image: img,
   });
+  function inputHandler(e){
+    setInputs({ 
+      ...inputs, 
+      [e.target.name]: e.target.value 
+    });
+  }
+
+  const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT, {variables: {id: id, description: inputs.description, price: inputs.price, stock: inputs.stock, imagen:inputs.image}})
+ 
+  function handlerSubmit(e){
+    e.preventDefault()
+    modificar()
+  }
   
-  const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT, {variables: {id: id, description: info.description, price: info.price, stock: info.stock, imagen:info.image}})
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log({variables: {id: id, description: info.description, price: info.price, stock: info.stock, imagen:info.image}})
-  
-    
-    
-    
-    // if(info.image == ''){alert('Please add an image')}else{
-    //     info.category=selected;
-    //     addProduct({variables:
-    //         {
-    //             name:info.name,
-    //             description:info.description,
-    //             stock:Number(info.stock),
-    //             price:Number(info.price),
-    //             category:selected,
-    //             image:info.image
-    //         }
-    //     })
-    //     alert("Producto agregado!")
-    // }
-  };
-  const imageHandler = (e) => {
-    const image = e.target.files[0];
-    previewImage(image);
-  };
-  const previewImage = (image) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(image);
-    fileReader.onloadend = () => {
-      setPreview(fileReader.result);
-      setInfo({ ...info, image: fileReader.result });
-    };
-  };
-  const inputHandler = (e) => {
-    return setInfo({ ...info, [e.target.name]: e.target.value });
-  };
-  //--------------------
-  const categoryHandler = (option, value) => {
-    switch (option) {
-      case "options":
-        setCategory(value);
-    }
-    setSelected([...value]);
-  };
-  category && (selected = selected.map((elem) => elem.value));
-  selected = selected.toString();
-  let options = [];
-  categories["data"] &&
-    categories["data"]["getAllCategories"].map((elem) =>
-      options.push({ label: elem.name, value: elem.name })
-    );
-  //-----------------
   return (
-    <form onSubmit={submitHandler} className="F-element-container">
+    <form 
+    onSubmit={handlerSubmit}    
+    className="F-element-container">
       <div className="F-image-container">
-        <p>Product</p>
+        <label>Product</label>
         <img src={img} alt="imagen" />
-        <div className="chargeImage">
-          <input type="file" name="image-product" onChange={imageHandler} />
-        </div>
+        <button type="file">Edit Photo</button>
+      </div>
 
-        <div className="F-name-container">
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            value={info.name}
-            onChange={inputHandler}
-          />
-        </div>
+      <div className="F-name-container">
+        <label>Name</label>
+        <input 
+          value={inputs.name} 
+          name="name"
+          onChange={inputHandler}  
+        />
+      </div>
+      <div className="F-stock-container">
+        <label>Stock</label>
+        <input 
+          type="number"
+          value={inputs.stock}         
+          name="stock"
+          onChange={inputHandler}  
+       />
+      </div>
 
-        <div className="F-name-container">
-          <label>Description</label>
-          <textarea
-            name="description"
-            type="text"
-            name="name"
-            value={info.description}
-            onChange={inputHandler}
-          />
+      <div className="F-category-container">
+        <label>Categories</label>
+        <div className="F-categories">
+          {categories.map((cat) => (
+            <>
+              {/* <input value = {cat}/> */}
+              <span>
+                {cat.name}
+                <button> x </button>
+              </span>
+            </>
+          ))}
+          <button> add </button>
         </div>
+      </div>
+      <div className="F-price-container">
+        <label>Price</label>
+        <input 
+           value={inputs.price}          
+           name="price"
+           type="number"
+           onChange={inputHandler} />
+      </div>
 
-        <div className="F-stock-container">
-          <label>Stock</label>
-          <input
-            name="stock"
-            type="number"
-            // placeholder={stock}
-            value={info.stock}
-            onChange={inputHandler}
-          />
-        </div>
+      <div className="F-edit-button">
+        <button type="submit" >edit</button>
+        
+      </div>
 
-        <div className="F-price-container">
-          <p>Price</p>
-          <input
-            name="price"
-            type="number"
-            // placeholder={price}
-            value={info.price}
-            onChange={inputHandler}
-          />
-        </div>
-
-        {/* <div className="categories">
-          <label>Categories</label>
-          <Creatable
-            onChange={(value) => categoryHandler("options", value)}
-            options={options}
-            value={category}
-            className="inputs"
-            isMulti
-          />
-        </div> */}
-
-        <div className="F-edit-button">
-          <button onClick={()=>modificar()}>edit</button>
-        </div>
-        <div className="F-remove-button">
-          <button onClick={handlerOnClick}>cancel</button>
-        </div>
+      <div className="F-remove-button">
+        <button onClick={handlerOnClick}>cancel</button>
       </div>
     </form>
   );
 }
 
-export default FormCRUD;
+export default FormCRUD
+

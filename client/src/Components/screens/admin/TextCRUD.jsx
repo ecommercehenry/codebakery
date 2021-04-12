@@ -15,7 +15,7 @@ function TextCRUD({ img, name, stock, categories, price, id }) {
   //fin del hardcodeo.........
   function handlerOnClick() {
     setShow(!show);
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", show);
+    // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", show);
   }
 
   return (
