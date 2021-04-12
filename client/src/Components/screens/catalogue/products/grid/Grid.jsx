@@ -42,7 +42,7 @@ const Grid = () => {
 };
 
 const StyledGrid = styled.div`
-  background:red;
+  //background:red;
   width:100%;
   height: auto;
   display:flex;
