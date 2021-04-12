@@ -16,7 +16,6 @@ function ListCRUD(){
               <TextCRUD
                   id ={item.id}
                   key= {item.id}
-                  key1= {item.id}
                   img ={item.image}
                   name= {item.name}
                   stock = {item.stock}

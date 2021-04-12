@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { useMutation } from "@apollo/client";
 import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct"
 import './FormCRUD.css'
 import Creatable from 'react-select/creatable';
@@ -8,10 +7,10 @@ import getAllCategories from "../../../Apollo/queries/getAllCategories";
 
 
 function FormCRUD(props) {
-   const { name, stock, categories, price, img, handlerOnClick,id } = props;
+   /* const { name, stock, categories, price, img, handlerOnClick,id } = props; */
   //  console.log("------------------------"+ props.stock)
 
-  const { name, stock, categories2, price, img, handlerOnClick } = props;
+  const { name, stock, categories2, price, img, handlerOnClick, id } = props;
   const categories = useQuery(getAllCategories);
 
 
@@ -90,16 +89,13 @@ function FormCRUD(props) {
       <div className="F-category-container">
         <label>Categories</label>
         <div className="F-categories">
-          {categories.map((cat) => (
-            <>
-              {/* <input value = {cat}/> */}
-              <span>
-                {cat.name}
-                <button> x </button>
-              </span>
-            </>
-          ))}
-          <button> add </button>
+        <Creatable
+              onChange={value => categoryHandler('options',value)} 
+              options={options}
+              value={category}
+              className="inputs"
+              isMulti
+          />
         </div>
       </div>
       <div className="F-price-container">

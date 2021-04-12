@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react"
 // import allProducts from "../../../Apollo/queries/allProducts"
 import './TextCRUD.css'
 import FormCRUD from "./FormCRUD"
+import { borderRadius } from "react-select/src/theme";
 
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
@@ -23,11 +24,12 @@ function TextCRUD({ img, name, stock, categories, price, id }) {
   return (
     <div className="product-container-edit" onDoubleClick={handlerOnClick}>
       {show ? (
-        <div className="element-container" id={key1}>
+        <div className="element-container" id={id}>
           <div className="info-container">
           <div className="image-container">
             <p>Product</p>
-            <img src={img} alt="" />
+            <div className="img-circle" style={{backgroundImage: `url(${img})`, width: "80px", height: "80px",borderRadius: '50%',backgroundSize: "fill", backgroundColor: "#eeeeee00"}}/>
+            {/* <img src={img} alt="" /> */}
           </div>
           <div className="name-container">
             <p>Name</p>

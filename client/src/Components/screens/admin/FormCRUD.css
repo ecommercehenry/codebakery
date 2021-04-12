@@ -25,7 +25,8 @@
 .F-name-container{
     padding: 0.5rem;
     /* box-sizing: border-box; */  
-    
+    display: flex;
+    flex-direction: column;
 }
 .F-name-container input{
    border-radius: 1.5rem;
@@ -38,7 +39,9 @@
     
 }
 .F-stock-container{
-    padding: 0.5rem;    
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;    
 }
 .F-stock-container input{
    border-radius: 1.5rem;
@@ -50,19 +53,14 @@
    background-color: rgb(233, 214, 214); 
 }
 .F-category-container{
-    padding: 0.5rem;   
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;   
 }
 .categories{
     padding: 0.5rem;
     width:15rem;
    height: 4rem;
-}
-.F-category-container span{
-    background-color: rgb(190, 128, 209); 
-    border-radius: 1.5rem;
-   border: 2px solid;
-   border-color:grey;  
-   padding:0.3rem;
 }
 .F-category-container button{
     border-radius: 100%;
@@ -72,6 +70,8 @@
 }
 .F-price-container{
     padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
 }
 .F-price-container input{
     border-radius: 1.5rem;
