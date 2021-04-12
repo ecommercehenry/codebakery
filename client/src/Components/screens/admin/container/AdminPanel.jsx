@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import React from 'react';
+import React, {useState} from 'react';
 import {Route} from 'react-router-dom'
-=======
-import React,{useState} from 'react'
->>>>>>> a37a81dd751b47c75658864dc5cffaba3dd87328
 
 //styles
 import styled from 'styled-components';

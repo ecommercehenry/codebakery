@@ -26,7 +26,7 @@ function TextCRUD({ img, name, stock, categories, price, id }) {
           <div className="info-container">
           <div className="image-container">
             <p>Product</p>
-            <div className="img-circle" style={{backgroundImage: `url(${img})`, width: "80px", height: "80px",borderRadius: '50%',backgroundSize: "fill", backgroundColor: "#eeeeee00"}}/>
+            <div className="img-circle" style={{backgroundImage: `url(${img})`, width: "75px", height: "75px",borderRadius: '50%',backgroundSize: "cover", backgroundColor: "#eeeeee00", backgroundPosition: "center"}}/>
             {/* <img src={img} alt="" /> */}
           </div>
           <div className="name-container">
