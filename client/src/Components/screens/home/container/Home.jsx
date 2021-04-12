@@ -9,11 +9,6 @@ const Home = () => {
     return (
         <>
         <NavBar color='black'/>
-        <div className='home'>
-          <div>
-            <Products />
-          </div>
-        </div>
         </>
     )
 }
