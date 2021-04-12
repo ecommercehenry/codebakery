@@ -98,7 +98,7 @@ async function modifyProduct({ id, dataToModify }) {
       await product.update(dataProduct); 
 
       //If is necessary change categories   
-      if(categories && categories.length>0){
+      if(categories){
         const dbCategories = await getCategoriesDB(categories)
         await product.setCategories(dbCategories)
       }
