@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import React from 'react';
 import {Route} from 'react-router-dom'
+=======
+import React,{useState} from 'react'
+>>>>>>> a37a81dd751b47c75658864dc5cffaba3dd87328
 
 //styles
 import styled from 'styled-components';
@@ -13,7 +17,7 @@ import AddProductForm from '../../../AddProductForm';
 import FormCategories from '../../../CategoryCard/FormCategories';
 
 const AdminPanel = () => {
-   
+   const [addProduct,setAddProduct] =  useState(false);
     return (
         <StyledAdminPanel>
             <div className="left">
@@ -21,11 +25,11 @@ const AdminPanel = () => {
             </div>
             <div className="right">
                 <div className="top">
-                    <AdminNavBar />
+                <AdminNavBar setAddProduct={setAddProduct}/>
                 </div>
                 <Route path="/admin/add-product">
                 <div className="bottom">
-                    <AddProductForm/>
+                    {addProduct === false ? <ListCRUD/> : <AddProductForm setAddProduct={setAddProduct}/>}
                 </div>
                 </Route>
                 <div className="edit-grid">
@@ -40,11 +44,15 @@ const AdminPanel = () => {
 }
 
 const StyledAdminPanel = styled.div`
-    min-height: 100vh;
+    height: fit-content;
     width: 100%;
     display:flex;
     flex-direction:row;
     justify-content:space-between;
+<<<<<<< HEAD
+=======
+    //background: black;
+>>>>>>> a37a81dd751b47c75658864dc5cffaba3dd87328
     .left{
         width:13%;
         z-index: 5;
@@ -57,10 +65,14 @@ const StyledAdminPanel = styled.div`
             height:15vh;
         }
         .bottom{
+<<<<<<< HEAD
             position: absolute
             background: black;
             height:100vh;
             width: 100vw;
+=======
+            height:auto;
+>>>>>>> a37a81dd751b47c75658864dc5cffaba3dd87328
             display:flex;
             justify-content:center;
             align-items:center;

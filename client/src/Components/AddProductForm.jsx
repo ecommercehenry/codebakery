@@ -8,7 +8,9 @@ import Creatable from 'react-select/creatable';
 //styles
 import styled from 'styled-components';
 
-const AddProductForm = () => {
+import closeIcon from '../icons/close2.svg'
+
+const AddProductForm = ({setAddProduct}) => {
 
     const categories = useQuery(getAllCategories);
     const [addProduct, { data }] = useMutation(ADD_PRODUCT)
@@ -26,6 +28,10 @@ const AddProductForm = () => {
         price:'',
         image:''
     })
+
+    const closeHandler = () => {
+        setAddProduct(false)
+    }
 
     const inputHandler = (e) => {
         return setInfo({...info,[e.target.name]:e.target.value})
@@ -72,7 +78,16 @@ const AddProductForm = () => {
                     image:info.image
                 }
             })
+            setInfo({
+                name:'',
+                description:'',
+                category:[],
+                stock:'',
+                price:'',
+                image:''
+            })
             alert("Producto agregado!")
+            setAddProduct(false)
         }
         
     }
@@ -81,13 +96,14 @@ const AddProductForm = () => {
     return (
         
         <StyledForm onSubmit={submitHandler}>
-            <div className="imageLoader">
-                <div className="preview">
+            <div className="close" onClick={closeHandler}><img src={closeIcon} alt="closeIcon"/></div>
+            <div className="imageLoaderr">
+                <div className="previeww">
                     {
                         preview && <img src={preview} alt="image-preview"/>
                     }
                 </div>
-                <div className="fakeButton">
+                <div className="fakeButtonn">
                     <input 
                         type="file"
                         accept=".jpg,.png"
@@ -97,8 +113,8 @@ const AddProductForm = () => {
                     />
                 </div>
             </div>
-            <div className="infoProduct">
-                <div className="name">
+            <div className="infoProductt">
+                <div className="namee">
                     <label>Name</label>
                     <input 
                         name="name"
@@ -108,7 +124,7 @@ const AddProductForm = () => {
                         onChange={inputHandler}
                     />
                 </div>
-                <div className="description">
+                <div className="descriptionn">
                     <label>Description</label>
                     <textarea 
                         name="description"
@@ -118,8 +134,8 @@ const AddProductForm = () => {
                         onChange={inputHandler}
                     />
                 </div>
-                <div className="numeric">
-                    <div className="stock">
+                <div className="numericc">
+                    <div className="stockk">
                         <label htmlFor="">Stock</label>
                             <input 
                             name="stock"
@@ -129,7 +145,7 @@ const AddProductForm = () => {
                             onChange={inputHandler}
                         />
                     </div>
-                    <div className="price">
+                    <div className="pricee">
                         <label htmlFor="">Price</label>
                         <input 
                             name="price"
@@ -140,7 +156,7 @@ const AddProductForm = () => {
                         />
                     </div>
                 </div>
-                <div className="categories">
+                <div className="categoriess">
                     <label>Categories</label>
                     <Creatable
                         onChange={value => categoryHandler('options',value)} 
@@ -151,7 +167,7 @@ const AddProductForm = () => {
                     />
                 </div>
             </div>
-            <div className="submit" >
+            <div className="submitt" >
                 <button type="submit">SAVE CHANGES</button>
             </div>
         </StyledForm>
@@ -164,14 +180,26 @@ const StyledForm = styled.form`
     background: white;
     border-radius:65px;
     padding: 3rem 4rem;
-    .imageLoader{
+    border:1px solid #f3dff3;
+    position: relative;
+    .close{
+        position:absolute;
+        top:2.5rem;
+        right:2.5rem;
+        cursor:pointer;
+        img{
+            width:1rem;
+            height:1rem;
+        }
+    }
+    .imageLoaderr{
         width:100%;
         height:30%;
         //background:red;
         display:flex;
         justify-content:space-between;
         align-items:center;
-        .preview{
+        .previeww{
             height:100%;
             background: #E3DDE7;
             width:55%;
@@ -183,7 +211,7 @@ const StyledForm = styled.form`
                 object-fit:fill;
             }
         }
-        .fakeButton{
+        .fakeButtonn{
             //background:red;
             width:60%;
             display:flex;
@@ -194,20 +222,20 @@ const StyledForm = styled.form`
             }
         }
     }
-    .infoProduct{
+    .infoProductt{
         //background:blue;
         height:60%;
         display:flex;
         flex-direction:column;
         justify-content:space-between;
-        .name{
+        .namee{
             //background:green;
             height:28%;
             display:flex;
             flex-direction:column;
             justify-content:center;
         }
-        .description{
+        .descriptionn{
             //background:lightblue;
             height:37%;
             display:flex;
@@ -224,7 +252,7 @@ const StyledForm = styled.form`
                 background:#E3DDE7;
             }
         }
-        .categories{
+        .categoriess{
             //background:yellow;
             height:30%;
             display:flex;
@@ -237,7 +265,7 @@ const StyledForm = styled.form`
                 background:#EBE7EE;
             } */
         }
-        .numeric{
+        .numericc{
             //background:red;
             width:100%;
             height:28%;
@@ -245,7 +273,7 @@ const StyledForm = styled.form`
             flex-direction:row;
             justify-content:space-between;
             align-items:center;
-            .stock{
+            .stockk{
                 width:45%;
                 height: 100%;
                 //background:yellow;
@@ -253,7 +281,7 @@ const StyledForm = styled.form`
                 flex-direction:column;
                 justify-content:center;
             }
-            .price{
+            .pricee{
                 width:45%;
                 //background:green;
                 height: 100%;
@@ -276,7 +304,7 @@ const StyledForm = styled.form`
             width:100%;
         }
         }
-    .submit{
+    .submitt{
         height:10%;
         display:flex;
         justify-content: center;

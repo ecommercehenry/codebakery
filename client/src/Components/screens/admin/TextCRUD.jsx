@@ -1,9 +1,7 @@
-
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 // import allProducts from "../../../Apollo/queries/allProducts"
-import './TextCRUD.css'
-import FormCRUD from "./FormCRUD"
-import { borderRadius } from "react-select/src/theme";
+import "./TextCRUD.css";
+import FormCRUD from "./FormCRUD";
 
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
