@@ -7,27 +7,43 @@ const categories = require('../graphql/roots/queriesResolvers/categories');
 // const categories = require('../graphql/roots/queriesResolvers/categories.js');
 
 async function getAllProducts() {
-  return await Product.findAll({
-    order: [["name","ASC"]],
-    include: [Category],
-  });
+  try {
+    return await Product.findAll({
+      order: [["name","ASC"]],
+      include: [Category],
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 async function getProductById({ id }) {
-  return await Product.findByPk(id);
+  try {
+    return await Product.findByPk(id);
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function deleteById({ id }) {
-  return await Product.destroy({
-    where: {
-      id: id,
-    },
-  });
+  try {
+    return await Product.destroy({
+      where: {
+        id: id,
+      },
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 async function productCategory({ id }) {
-  return await Product.findOne({
-    where:{id: id},
-    include: [Category],
-  });
+  try {
+    return await Product.findOne({
+      where: { id: id },
+      include: [Category],
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function addProduct(args) {
@@ -54,7 +70,7 @@ async function addProduct(args) {
       }
     })
   } catch (error) {
-    console.log(error)
+    console.log("ERROR "+error)
   }
 }
 
@@ -164,10 +180,17 @@ async function removeCategoryFromProduct({ idProduct, idCategory }) {
   }
 }
 
-async function getProductByCategoryName({name}){
-    category = await Category.findOne({where: { name}, attributes: {exclude: ['createdAt','updatedAt']}, include: Product});
-    // console.log( category);
-    return category.dataValues.products
+async function getProductByCategoryName({ name }) {
+  try {
+    category = await Category.findOne({
+      where: { name },
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+      include: Product,
+    });
+    return category.dataValues.products;
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function getProductByName({ name }) {

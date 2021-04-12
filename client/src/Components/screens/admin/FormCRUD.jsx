@@ -140,5 +140,4 @@ function FormCRUD({id, handlerOnClick}) {
   }
 }
 
-export default FormCRUD
-
+export default FormCRUD;

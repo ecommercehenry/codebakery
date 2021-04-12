@@ -1,5 +1,4 @@
-
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 // import allProducts from "../../../Apollo/queries/allProducts"
 import './TextCRUD.css'
 import FormCRUD from "./FormCRUD"
