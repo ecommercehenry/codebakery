@@ -1,13 +1,11 @@
 .F-element-container{
-    margin:auto;
+    
     width: fit-content;
     padding: 2rem;
     border-radius: 1.5rem;
    border: 2px solid;
    border-color:grey;
     display:flex;
-    align-items: center;
-    justify-content: center;
     background-color: rgb(233, 214, 214);
 }
 
