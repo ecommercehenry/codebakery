@@ -27,9 +27,15 @@ const Grid = () => {
   return (
     <StyledGrid>
       {
-      allProduct?.map((product) => (
-        <ProductCard id={product.id} name={product.name} image={product.image}/>
-      ))
+      allProduct?.map((product) => {
+        if(filterProduct === ""){
+          return <ProductCard key={product.id} id={product.id} name={product.name} image={product.image}/>
+        }else{
+          if(filterProduct === product.name){
+            return <ProductCard key={product.id} id={product.id} name={product.name} image={product.image}/>
+          }
+        }
+      })
       }
     </StyledGrid>
   );
