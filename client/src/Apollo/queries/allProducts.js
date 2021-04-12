@@ -8,6 +8,7 @@ query{
     id
     image
     price
+    stock
     categories{
       name
       id
