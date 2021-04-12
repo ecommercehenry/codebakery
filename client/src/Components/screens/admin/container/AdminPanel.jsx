@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 
 //styles
 import styled from 'styled-components';
@@ -11,7 +11,7 @@ import ListCRUD from "../ListCRUD"
 import AddProductForm from '../../../AddProductForm';
 
 const AdminPanel = () => {
-   
+   const [addProduct,setAddProduct] =  useState(false);
     return (
         <StyledAdminPanel>
             <div className="left">
@@ -19,12 +19,12 @@ const AdminPanel = () => {
             </div>
             <div className="right">
                 <div className="top">
-                <AdminNavBar/>
+                <AdminNavBar setAddProduct={setAddProduct}/>
                 </div>
                 <div className="bottom">
-                    <AddProductForm/>
+                    {addProduct === false ? <ListCRUD/> : <AddProductForm setAddProduct={setAddProduct}/>}
                 </div>
-                <ListCRUD/>
+                
                 {/* <FormCRUD /> */}
             </div>
             
@@ -34,12 +34,12 @@ const AdminPanel = () => {
 }
 
 const StyledAdminPanel = styled.div`
-    min-height: 100vh;
+    height: fit-content;
     width: 100%;
     display:flex;
     flex-direction:row;
     justify-content:space-between;
-    background: black;
+    //background: black;
     .left{
         width:13%;
         //background:green;
@@ -53,7 +53,7 @@ const StyledAdminPanel = styled.div`
             height:15vh;
         }
         .bottom{
-            height:85vh;
+            height:auto;
             display:flex;
             justify-content:center;
             align-items:center;

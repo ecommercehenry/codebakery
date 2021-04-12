@@ -20,6 +20,7 @@ async function getProductById({ id }) {
     throw new Error(error);
   }
 }
+
 async function deleteById({ id }) {
   try {
     return await Product.destroy({
@@ -156,6 +157,16 @@ async function getProductByCategoryName({ name }) {
   }
 }
 
+async function getProductByName({ name }) {
+  product = await Product.findOne({
+    where: {
+      name
+    } 
+  })
+  return product
+}
+
+
 module.exports = {
   getAllProducts,
   modifyProduct,
@@ -165,5 +176,6 @@ module.exports = {
   deleteById,
   addProduct,
   productCategory,
-  getProductByCategoryName,
+  getProductByCategoryName, 
+  getProductByName,
 };
