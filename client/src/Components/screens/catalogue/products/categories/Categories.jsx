@@ -40,15 +40,15 @@ const Categories = () => {
 
     //Se envia la acción para actualizar los productos que se renderizan
     useEffect(() => {
+        console.log('lo que sea')
         dispatch(getAllProducts(products));
-    }, [products]);
+    console.log('otra vz')
+    }, [products, name]);
 
     //tenemos un query para pedir los productos por categorias
     //cada categoria sera renderizada como un boton que al hacer clic llama a la query
     //de productos por categorias(filtrado por categorias)
-
     //caso BASE: Al presionar un btn ALL/TODOS, se hace un llamado a todos los productos
-
 
     const handleClick = (e) =>{
         setName(e.target.name);
@@ -67,11 +67,11 @@ const Categories = () => {
                     </div>
                ))
            }
-           {    
+           {/* {    
                stateproducts && stateproducts?.length>0 ? stateproducts.map((product, i ) =>(
                  <div key={i}>{product.name}</div>
                ) ): 'No hay productos'
-           } 
+           }  */}
            
         </div>
     )

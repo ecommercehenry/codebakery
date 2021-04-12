@@ -1,35 +1,57 @@
-import { GET_ALL_PRODUCTS, GET_PRODUCT_BY_NAME } from "../actions";
-
+import {
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_BY_NAME,
+  GUARDAR_PRODUCTOS,
+} from "../actions";
+//import allProducts from "../Apollo/queries/allProducts";
 
 const initialState = {
-
-    stateproducts:{},
-    stateSearch: {}, 
+  stateproducts: {},
+  stateSearch: {},
+  filterProduct: "",
+  allProduct: [],
+  search: false, 
 };
 
-const reducer =  (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_ALL_PRODUCTS:
 
-    switch(action.type){
-
-        case GET_ALL_PRODUCTS:
-            
-            return {
-                ...state,
-                stateproducts:action.payload
-        };
-
-        case GET_PRODUCT_BY_NAME: 
-
-            return {
-
-                ...state, stateSearch: state.stateproducts.filter((e) => e.name === action.payload)
-            }
-     
-            default:
-                console.log(state);
-            return state;
+    if(action.payload && state.allProduct.length === 0){
+        console.log('hola')
+        return  {
+            ...state,
+            stateproducts: action.payload, 
+            allProduct: action.payload,
+            search: false 
+        }
+    }else{
+        console.log('chao', action.payload)
+        return{
+            ...state,
+            stateproducts: action.payload,
+            search: false
+        }
     }
 
+    case GET_PRODUCT_BY_NAME:
+      return {
+        ...state,
+        filterProduct: action.payload,
+        search: true
+      };
+
+    case GUARDAR_PRODUCTOS:
+      return {
+        ...state,
+        stateSearch: action.payload,
+     
+      };
+
+    default:
+      console.log(state);
+      return state;
+  }
 };
 
 export default reducer;
