@@ -1,7 +1,6 @@
-// import { useQuery } from "@apollo/client"
-// import getData from "../Apollo/queries/productById"
-// import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
-import React, {useState} from "react"
+import React, { useState } from "react"
+import { useMutation } from "@apollo/client";
+import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct"
 import './FormCRUD.css'
 import Creatable from 'react-select/creatable';
 import { useMutation, useQuery } from '@apollo/client';
@@ -9,13 +8,8 @@ import getAllCategories from "../../../Apollo/queries/getAllCategories";
 
 
 function FormCRUD(props) {
-  // props = {
-  //   name: "olla",
-  //   stock: 2,
-  //   categories: ["cat1", "cat2", "cat3"],
-  //   price: 23.99,
-  //   img: "URL",
-  // };
+   const { name, stock, categories, price, img, handlerOnClick,id } = props;
+  //  console.log("------------------------"+ props.stock)
 
   const { name, stock, categories2, price, img, handlerOnClick } = props;
   const categories = useQuery(getAllCategories);
@@ -39,44 +33,89 @@ function FormCRUD(props) {
   // Sets every existing category as an option for select
   let options =  [];
   categories['data'] && categories['data']['getAllCategories'].map(elem=> options.push({label:elem.name,value:elem.name}))
+  
+  const [inputs, setInputs] = useState({    
+    //como estado inicial toma de las props del componente padre TextCRUD
+    name, 
+    // description: "", -----> FRONT:-----> falta agregar descripcion del producto para poder editarla?
+    category: categories,
+    stock,
+    price,
+    image: img,
+  });
+  function inputHandler(e){
+    setInputs({ 
+      ...inputs, 
+      [e.target.name]: e.target.value 
+    });
+  }
 
+  const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT, {variables: {id: id, description: inputs.description, price: inputs.price, stock: inputs.stock, imagen:inputs.image}})
+ 
+  function handlerSubmit(e){
+    e.preventDefault()
+    modificar()
+  }
+  
   return (
     <form 
     
+    onSubmit={handlerSubmit}
     className="element-container">
       <div className="info-container">
       <div className="F-image-container">
-        <p>Product</p>
+        <label>Product</label>
         <img src={img} alt="imagen" />
-        <button onClick="">Edit Photo</button>
+        <button type="file">Edit Photo</button>
       </div>
 
       <div className="F-name-container">
-        <p>Name</p>
-        <textarea value={name} />
+        <label>Name</label>
+        <input 
+          value={inputs.name} 
+          name="name"
+          onChange={inputHandler}  
+        />
       </div>
       <div className="F-stock-container">
-        <p>Stock</p>
-        <input type="number" value={stock} />
+        <label>Stock</label>
+        <input 
+          type="number"
+          value={inputs.stock}         
+          name="stock"
+          onChange={inputHandler}  
+       />
       </div>
 
-      <div className="categories">
-          <label>Categories</label>
-          <Creatable
-              onChange={value => categoryHandler('options',value)} 
-              options={options}
-              value={category}
-              className="inputs"
-              isMulti
-          />
+      <div className="F-category-container">
+        <label>Categories</label>
+        <div className="F-categories">
+          {categories.map((cat) => (
+            <>
+              {/* <input value = {cat}/> */}
+              <span>
+                {cat.name}
+                <button> x </button>
+              </span>
+            </>
+          ))}
+          <button> add </button>
+        </div>
       </div>
       <div className="F-price-container">
-        <p>Price</p>
-        <input type="number" value={price} />
+        <label>Price</label>
+        <input 
+           value={inputs.price}          
+           name="price"
+           type="number"
+           onChange={inputHandler} />
       </div>
+
       <div className="F-edit-button">
         <button type="submit" >edit</button>
+        
       </div>
+
       <div className="F-remove-button">
         <button onClick={handlerOnClick}>cancel</button>
       </div>
