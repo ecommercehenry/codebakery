@@ -51,8 +51,8 @@ Product.hasMany(Review);
 Users.hasMany(Review);
 Users.hasMany(Order);
 Order.belongsTo(Users);
-Product.belongsToMany(Order, { through: "product-order" });
-Order.belongsToMany(Product, { through: "product-order" });
+Product.belongsToMany(Order, { through: Lineal_Order });
+Order.belongsToMany(Product, { through: Lineal_Order });
 
 
 
