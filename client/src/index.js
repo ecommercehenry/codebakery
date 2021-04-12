@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker"
 import { BrowserRouter } from "react-router-dom"
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client'
 import { Provider } from 'react-redux';
-import { store } from "./store"
+import store from "./store"
 
 
 
@@ -19,11 +19,9 @@ const client = new ApolloClient({
 ReactDOM.render(
 <ApolloProvider client = {client}>
 <Provider store={store} >
- 
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  
   </Provider>
   </ApolloProvider>,
   document.getElementById("root")
