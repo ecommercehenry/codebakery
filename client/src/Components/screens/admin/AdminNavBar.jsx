@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link, Route} from 'react-router-dom'
 
 //styles
 import styled from 'styled-components';
+import FormCreateCategory from '../../FormCreateCategory/FormCreateCategory';
 
 //components
 import SearchBar from './SearchBar';
@@ -13,12 +14,17 @@ const AdminNavBar = ({setAddProduct}) => {
         setAddProduct(true)
     }
 
+    const [add, setAdd] = useState(false)
+
     return (
         <StyledNavBar>
             <div className="onLeft">   
                 <div className="optionTab">PRODUCTS</div>
                 <SearchBar/>
             </div>
+            
+            {add ? <div className="add-category" onClick={() => setAdd(!add)}>"+ ADD CATEGORY"</div> : <div className="add-category"> <FormCreateCategory setAdd={setAdd}/></div>}
+
             <Link to="/admin/add-product" className="addProduct purple-btn" onClick={buttonHandler}>
                 + ADD PRODUCT
             </Link>
@@ -60,6 +66,17 @@ const StyledNavBar = styled.div`
     }
     .purple-btn:hover{
         background-color: #734191
+    }
+    .add-category{
+        background:#5E3F7100;
+        display:flex;
+        align-items: center;
+        justify-content:center;
+        color: rgba(0, 0, 0, 0.726)
+    }
+    .add-category:hover{
+        color: black;
+        cursor: pointer;
     }
 `;
 

@@ -37,7 +37,7 @@ const StyledSearchBar = styled.div`
         margin-left: -1%
     }
     input{
-        width:20vw;
+        width:15vw;
         height:4.5vh;
         border:none;
         font-size:1rem;

@@ -4,7 +4,8 @@
     align-items:flex-start;
     width:77vw;
     margin: 2rem;
-    margin-left: 4rem;
+    margin-top: 0.5rem;
+    height: 100%
 }
 
 .product-container-edit{

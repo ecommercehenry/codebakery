@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom'
 
 //styles
 import styled from 'styled-components';
@@ -8,6 +9,7 @@ import ButtonAddCart from './ButtonAddCart';
 
 const ProductCard = ({id,name,image}) => {
     return (
+        <Link to={`/catalogue/detail/${id}`} className='text-decoration-none text-body' style={{width:'fit-content'}}>
         <StyledCard>
             <div className="image">
                 <img src={image} alt={name}/>
@@ -15,12 +17,13 @@ const ProductCard = ({id,name,image}) => {
             <div className="name"><span>{name}</span></div>
             <div className="btn"><ButtonAddCart/></div>
         </StyledCard>
+        </Link>
     )
 }
 
 const StyledCard = styled.div`
     //background:green;
-    width:23%;
+    width:23vw;
     height:20rem;
     margin: 3rem 2rem;
     display:flex;

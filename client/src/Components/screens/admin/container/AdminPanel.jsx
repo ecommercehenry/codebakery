@@ -14,6 +14,7 @@ import FormCategories from '../../../CategoryCard/FormCategories';
 
 const AdminPanel = () => {
    const [addProduct,setAddProduct] =  useState(false);
+
     return (
         <StyledAdminPanel>
             <div className="left">
@@ -23,15 +24,16 @@ const AdminPanel = () => {
                 <div className="top">
                 <AdminNavBar setAddProduct={setAddProduct}/>
                 </div>
-                <Route path="/admin/add-product">
                 <div className="bottom">
-                    {addProduct === false ? <ListCRUD/> : <AddProductForm setAddProduct={setAddProduct}/>}
-                </div>
-                </Route>
+                    <ListCRUD/>
+                </div>{/* 
                 <div className="edit-grid">
                     <ListCRUD/>
-                </div>
+                </div> */}
                 {/* <FormCRUD /> */}
+                <Route path="/admin/add-product">
+                    <AddProductForm/>
+                </Route>
             </div>
             
         </StyledAdminPanel>
@@ -45,13 +47,9 @@ const StyledAdminPanel = styled.div`
     display:flex;
     flex-direction:row;
     justify-content:space-between;
-<<<<<<< HEAD
-=======
-    //background: black;
->>>>>>> a37a81dd751b47c75658864dc5cffaba3dd87328
     .left{
         width:13%;
-        z-index: 5;
+        z-index: 10;
     }
     .right{
         width:87%;
@@ -61,14 +59,10 @@ const StyledAdminPanel = styled.div`
             height:15vh;
         }
         .bottom{
-<<<<<<< HEAD
-            position: absolute
+            position: relative
             background: black;
             height:100vh;
-            width: 100vw;
-=======
-            height:auto;
->>>>>>> a37a81dd751b47c75658864dc5cffaba3dd87328
+            width: 77vw;
             display:flex;
             justify-content:center;
             align-items:center;
