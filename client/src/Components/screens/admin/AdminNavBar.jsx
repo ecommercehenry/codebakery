@@ -23,7 +23,7 @@ const AdminNavBar = () => {
 
 const StyledNavBar = styled.div`
     width: 87%;
-    height: 15vh;
+    height: 100%;
     display:flex;
     align-items: center;
     justify-content: space-between;

@@ -1,0 +1,8 @@
+/* Aca importamos la tipografia */
+@import url("../Assets/fonts/index.css");
+
+/* Aca importamos la paleta de colores */
+@import url("../Assets/color/index.css");
+
+/* Aca importamos el header */
+@import url("../Assets/header.css");

@@ -17,9 +17,11 @@ const Categories = () => {
         variables: { name: name },
     });
     products = products?.data?.getProductByCategoryName ? products.data.getProductByCategoryName :products.data;
-    // console.log(products, 'aysyyaysyays')
-    //Obtenemos el estado global de los productos de redux
+    
+    //Obtenemos el estado global de los productos de redux (ESTA ES TU DATA JOHANNA)
     const {stateproducts}= useSelector(state =>  state);
+
+
     const dispatch= useDispatch();
     //Obtenemos todos los productos de apolo client 
     let todosproductos=useQuery(allProducts);
@@ -55,7 +57,7 @@ const Categories = () => {
 
     return (
         <div className={styles.categories}>
-            <button  name = 'All' onClick={handleClick}>All</button>
+            <div><button  name = 'All' onClick={handleClick} className={styles.btn}>All</button></div>
 
            {
                categories?.data?.getAllCategories.map((cate, i)  =>(

@@ -23,7 +23,7 @@ function FormCreateCategory() {
   function handleSubmit(e) {
     e.preventDefault()
     addCategory({
-      variables: { name: input.name, description: input.description },
+      variables: { name: input.name },
     })
     setInput({
       ...input,
@@ -41,14 +41,6 @@ function FormCreateCategory() {
         placeholder="Type an activity here"
         onChange={handleInputChange}
         value={input.name}
-        required
-      />
-      <input
-        type="text"
-        name="description"
-        placeholder="Type an activity here"
-        onChange={handleInputChange}
-        value={input.description}
         required
       />
       <button type="submit">Add Category</button>

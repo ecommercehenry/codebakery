@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=RocknRoll+One&display=swap');
+/* ----Asi llamar a la fuente---
+ font-family: 'Montserrat', sans-serif-----> PARRAFOS;
+font-family: 'RocknRoll One', sans-serif;---> TITULOS */
+html {
+    /*tamaños*/
+  --caption: 14px;
+  --note: 16px;
+  --base: 20px;
+  --subheader: 30px;
+  --title: 48px;
+  --headline: 72px;
+  --display: 96px;
+  --jumbo: 144px;
+}

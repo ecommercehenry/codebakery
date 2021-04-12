@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client"
 
 const CREATE_CATEGORY = gql`
-  mutation addCategory ($name: String!, $description: String!){
-    addCategory(name: $name, description: $description) {
+  mutation addCategory ($name: String!){
+    addCategory(name: $name) {
       name
     }
   }

@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+// import { Link } from "react-router-dom";
+import allProducts from "../../../../../Apollo/queries/allProducts.js";
+import { useQuery } from '@apollo/client';
+import "./grid.css";
+
 
 import "./grid.css";
 
