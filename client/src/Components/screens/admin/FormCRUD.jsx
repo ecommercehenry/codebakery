@@ -32,7 +32,7 @@ function FormCRUD(props) {
     e.preventDefault();
     modificar({variables: 
       {
-        id: 1, 
+        id, 
         data:
         {
           name:info.name, 
