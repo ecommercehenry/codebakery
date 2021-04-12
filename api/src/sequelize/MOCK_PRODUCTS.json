@@ -1,65 +1,65 @@
 [
-    {"name":"Cake de Doble Chocolate y Glaseado de Maracuyá",
-    "description":"Esponjoso y delicioso. Así es este Cake de Chocolate con Chips de Chocolate 56% cubierto con un glaseado natural de Maracuyá. La combinación de estos dos sabores siempre ha sido una de nuestras favoritas. Si también eres fan del chocolate y maracuyá entonces no te vas a arrepentir de probarlo. Finalmente logramos crear un cake que supere las expectativas. Ideal para servir como postre en tus eventos acompañado de un café.",
-    "price":30.00,
-    "stock":9,
-    "image":"biscotti2.jpg"
+    {
+        "name": "Cake de Doble Chocolate y Glaseado de Maracuyá",
+        "description": "Esponjoso y delicioso. Así es este Cake de Chocolate con Chips de Chocolate 56% cubierto con un glaseado natural de Maracuyá. La combinación de estos dos sabores siempre ha sido una de nuestras favoritas. Si también eres fan del chocolate y maracuyá entonces no te vas a arrepentir de probarlo. Finalmente logramos crear un cake que supere las expectativas. Ideal para servir como postre en tus eventos acompañado de un café.",
+        "price": 30.00,
+        "stock": 9,
+        "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099199/code_bakery/biscotti2_sltcnf.jpg"
     },
-
-    {"name":"Cake de Doble Chocolate y Glaseado de Maracuyá",
-    "description":"Esponjoso y delicioso. Así es este Cake de Chocolate con Chips de Chocolate 56% cubierto con un glaseado natural de Maracuyá. La combinación de estos dos sabores siempre ha sido una de nuestras favoritas. Si también eres fan del chocolate y maracuyá entonces no te vas a arrepentir de probarlo. Finalmente logramos crear un cake que supere las expectativas. Ideal para servir como postre en tus eventos acompañado de un café.",
-    "price":30.00,
-    "stock":9,
-    "image":"biscotti2.jpg"
+    {
+        "name": "Pan de Banano y Chocolate Marmoleado",
+        "description": "Nueva versión de nuestro Pan de Banano delicioso. Combinamos el clásico Banana Bread con chocolate y mas chips de chocolate 56%. Lo mejor de los dos sabores en un solo cake.Es ideal para servir como postre o para el desayuno",
+        "price": 15.00,
+        "stock": 12,
+        "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099199/code_bakery/biscotti-2513-scaled_recuny.jpg"
     },
-    {"name":"Pan de Banano y Chocolate Marmoleado",
-        "description":"Nueva versión de nuestro Pan de Banano delicioso. Combinamos el clásico Banana Bread con chocolate y mas chips de chocolate 56%. Lo mejor de los dos sabores en un solo cake.Es ideal para servir como postre o para el desayuno",
-        "price":15.00,
-        "stock":12,
-        "image":"biscotti-2513-scaled.jpg"
+    {
+        "name": "Galletas de Café Rellenas de Chocolate 80%",
+        "description": "13 deliciosas y crujientes galletas de muchísimo chocolate como nos gusta. Las galletas son de café y están rellenas de Spread de Chocolate 63% de Hacienda La Danesa y encima tienen el toque de Sal Marina que nos encanta.",
+        "price": 13.39,
+        "stock": 7,
+        "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099201/code_bakery/biscotti-2581-1-scaled_ssprdh.jpg"
     },
-    {"name":"Galletas de Café Rellenas de Chocolate 80%",
-        "description":"13 deliciosas y crujientes galletas de muchísimo chocolate como nos gusta. Las galletas son de café y están rellenas de Spread de Chocolate 63% de Hacienda La Danesa y encima tienen el toque de Sal Marina que nos encanta.",
-        "price":13.39,
-        "stock":7,
-        "image":"biscotti-2581-1-scaled.jpg"
+    {
+        "name": "Caja Grande 12 galletas",
+        "description": "Caja Mediana con 12 Biscotti Galletas. Puedes escoger tus tres sabores preferidos. Si deseas una caja con un solo sabor de galletas, escoge el mismo sabor tres veces. Este empaque es amigable con el medio ambiente. Nuestras cajitas están fabricadas a base de caña de azúcar, sin involucrar tala de árboles en su elaboración. Si es posible, recicla este empaque",
+        "price": 12.00,
+        "stock": 7,
+        "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099201/code_bakery/biscottigalletas-6567-800x533_l4ngno.jpg"
     },
-    {"name":"Caja Grande 12 galletas",
-        "description":"Caja Mediana con 12 Biscotti Galletas. Puedes escoger tus tres sabores preferidos. Si deseas una caja con un solo sabor de galletas, escoge el mismo sabor tres veces. Este empaque es amigable con el medio ambiente. Nuestras cajitas están fabricadas a base de caña de azúcar, sin involucrar tala de árboles en su elaboración. Si es posible, recicla este empaque",
-        "price":12.00,
-        "stock":7,
-        "image":"biscottigalletas-6567-800x533.jpg"
+    {
+        "name": "Lemon Bars",
+        "description": "9 barritas de limón. Nuestro masterpiece.",
+        "price": 15.00,
+        "stock": 4,
+        "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099204/code_bakery/lemonbars_trbtwc.jpg"
     },
-    {"name":"Lemon Bars",
-        "description":"9 barritas de limón. Nuestro masterpiece.",
-        "price":15.00,
-        "stock":4,
-        "image":"lemonbars.jpg"
+    {
+        "name": "Monster Chocochips",
+        "description": "Nuestras famosas chocochips pero mucho más grandes, más amelcochadas y con más chocolate de lo normal.",
+        "price": 8.00,
+        "stock": 9,
+        "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099204/code_bakery/Monstrechip_vufcnm.jpg"
     },
-    {"name":"Monster Chocochips",
-        "description":"Nuestras famosas chocochips pero mucho más grandes, más amelcochadas y con más chocolate de lo normal.",
-        "price":8.00,
-        "stock":9,
-        "image":"Monstrechip.jpg"
+    {
+        "name": "Negritos con Cheesecake de Frambuesas",
+        "description": "Negritos-con-Cheesecake-de-Frambuesas",
+        "price": 16.00,
+        "stock": 5,
+        "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099206/code_bakery/Negritos-con-Cheesecake-de-Frambuesas_dggjwn.jpg"
     },
-    {"name":"Negritos con Cheesecake de Frambuesas",
-        "description":"Negritos-con-Cheesecake-de-Frambuesas",
-        "price":16.00,
-        "stock":5,
-        "image":"Monstrechip.jpg"
+    {
+        "name": "Negritos con Pretzel y Mantequilla de Maní",
+        "description": "Negritos-con-Cheesecake-de-Frambuesas",
+        "price": 18.00,
+        "stock": 10,
+        "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099205/code_bakery/Negritos-Pretzel-1_i0lffd.jpg"
     },
-    {"name":"Negritos con Pretzel y Mantequilla de Maní",
-        "description":"Negritos-con-Cheesecake-de-Frambuesas",
-        "price":18.00,
-        "stock":10,
-        "image":"Negritos-Pretzel-1.jpg"
-    },
-    {"name":"Caja 50 Biscottinis",
-        "description":"Caja Grande con 50 Biscottinis de dos sabores. La mejor opción para brindar en tus eventos. ¡Son adictivas!Este empaque es amigable con el medio ambiente. Nuestras cajitas están fabricadas a base de caña de azúcar, sin involucrar tala de árboles en su elaboración. Si es posible, recicla este empaque.",
-        "price":18.00,
-        "stock":10,
-        "image":"prueba1-2.jpg"
+    {
+        "name": "Caja 50 Biscottinis",
+        "description": "Caja Grande con 50 Biscottinis de dos sabores. La mejor opción para brindar en tus eventos. ¡Son adictivas!Este empaque es amigable con el medio ambiente. Nuestras cajitas están fabricadas a base de caña de azúcar, sin involucrar tala de árboles en su elaboración. Si es posible, recicla este empaque.",
+        "price": 18.00,
+        "stock": 10,
+        "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099205/code_bakery/prueba1-2_tjcdjh.jpg"
     }
-
-
 ]
