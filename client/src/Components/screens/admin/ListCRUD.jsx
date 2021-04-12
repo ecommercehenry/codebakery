@@ -1,8 +1,8 @@
-import React from "react"
-import TextCRUD from "./TextCRUD"
-import { useQuery } from "@apollo/client"
-import  { useEffect, useState } from "react"
-import allProducts from "../../../Apollo/queries/allProducts"
+import React from "react";
+import TextCRUD from "./TextCRUD";
+import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
+import allProducts from "../../../Apollo/queries/allProducts";
 
 function ListCRUD(){
     const { data } = useQuery(allProducts);

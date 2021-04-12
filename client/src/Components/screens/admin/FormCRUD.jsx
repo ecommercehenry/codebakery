@@ -95,5 +95,4 @@ function FormCRUD(props) {
   );
 }
 
-export default FormCRUD
-
+export default FormCRUD;
