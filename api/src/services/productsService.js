@@ -66,6 +66,8 @@ async function modifyProduct({ id, dataToModify }) {
         where: {
           id: id,
         },
+        include: [Category],
+
       });
       await product.update(dataToModify);
       return product;
