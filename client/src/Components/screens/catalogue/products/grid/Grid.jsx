@@ -24,7 +24,7 @@ const Grid = () => {
   return (
 
     <StyledGrid>
-      <div className="container">
+      <>
         {
           search === false ?  
         (stateproducts && stateproducts?.length > 0
@@ -36,7 +36,7 @@ const Grid = () => {
             }): "No se encontraron Productos" 
             )
           }
-      </div>
+      </>
     </StyledGrid>
   );
 };
