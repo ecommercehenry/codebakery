@@ -1,5 +1,10 @@
 import React from 'react'
 
+//icons
+import  productsIcon from '../../../icons/product.svg'
+import  ordersIcon from '../../../icons/orders.svg'
+import usersIcon from '../../../icons/user.svg'
+
 //styles
 import styled from 'styled-components';
 
@@ -17,13 +22,13 @@ const LeftPanel = () => {
                 </div>
                 <div className="tabs">
                     <div className="tab">
-                        <span>i </span>Products
+                    <div className="icon"><img src={productsIcon} alt="icon"/></div>Products
                     </div>
                     <div className="tab">
-                        <span>i </span>Orders
+                        <div className="icon"><img src={ordersIcon} alt="icon"/></div> Orders
                     </div>
                     <div className="tab">
-                    <span>i </span>Users
+                    <div className="icon"><img src={usersIcon} alt="icon"/></div>Users
                     </div>
                 </div>
                 
@@ -85,7 +90,18 @@ const StyledPanel = styled.div`
             .tab{
                 margin: 2.5rem 0 0 0;
                 font-size: 1.3rem;
-                //font-weight: bold;
+                display: flex;
+                flex-direction:row;
+                align-items:center;
+                .icon{
+                    margin-right:0.5rem;
+                    display:flex;
+                    align-items:center;
+                    img{
+                        height:1.3rem;
+                        width:1.3rem;
+                    }
+                }
             }
         }
     }
