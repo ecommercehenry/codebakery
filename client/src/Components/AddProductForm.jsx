@@ -77,6 +77,7 @@ const AddProductForm = () => {
         
     }
 
+    console.log(selected)
     return (
         
         <StyledForm onSubmit={submitHandler}>

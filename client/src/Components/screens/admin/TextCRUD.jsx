@@ -6,7 +6,7 @@ import FormCRUD from "./FormCRUD"
 
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
-function TextCRUD({ img, name, stock, categories, price, key }) {
+function TextCRUD({ img, name, stock, categories, price, key1 }) {
   const [show, setShow] = useState(true);
   
   function handlerOnClick() {
@@ -14,10 +14,13 @@ function TextCRUD({ img, name, stock, categories, price, key }) {
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", show);
   }
 
+  console.log('me rendericé')
+
   return (
     <div className="product-container-edit" onDoubleClick={handlerOnClick}>
       {show ? (
-        <div className="element-container" id={key}>
+        <div className="element-container" id={key1}>
+          <div className="info-container">
           <div className="image-container">
             <p>Product</p>
             <img src={img} alt="" />
@@ -46,10 +49,11 @@ function TextCRUD({ img, name, stock, categories, price, key }) {
           <div className="remove-button">
             <p>remove</p>
           </div>
+          </div>
         </div>
       ) : (
         <FormCRUD
-          key={key}
+          key={key1}
           img={img}
           name={name}
           stock={stock}

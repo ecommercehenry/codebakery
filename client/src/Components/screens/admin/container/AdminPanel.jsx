@@ -22,7 +22,6 @@ const AdminPanel = () => {
             <div className="right">
                 <div className="top">
                     <AdminNavBar />
-                    
                 </div>
                 <Route path="/admin/add-product">
                 <div className="bottom">

@@ -1,8 +1,12 @@
 // import { useQuery } from "@apollo/client"
 // import getData from "../Apollo/queries/productById"
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
-import React from "react"
+import React, {useState} from "react"
 import './FormCRUD.css'
+import Creatable from 'react-select/creatable';
+import { useMutation, useQuery } from '@apollo/client';
+import getAllCategories from "../../../Apollo/queries/getAllCategories";
+
 
 function FormCRUD(props) {
   // props = {
@@ -13,12 +17,34 @@ function FormCRUD(props) {
   //   img: "URL",
   // };
 
-  const { name, stock, categories, price, img, handlerOnClick } = props;
+  const { name, stock, categories2, price, img, handlerOnClick } = props;
+  const categories = useQuery(getAllCategories);
+
+
+  const [category,setCategory] = useState('');
+  let [selected,setSelected] = useState('');
+
+
+  const categoryHandler = (option,value) => {                        
+    switch (option) {
+        case 'options':
+            setCategory(value)
+    }
+    setSelected([...value])
+  }
+
+  category && (selected = selected.map(elem=>elem.value));
+  selected = selected.toString();
+
+  // Sets every existing category as an option for select
+  let options =  [];
+  categories['data'] && categories['data']['getAllCategories'].map(elem=> options.push({label:elem.name,value:elem.name}))
 
   return (
     <form 
     
     className="element-container">
+      <div className="info-container">
       <div className="F-image-container">
         <p>Product</p>
         <img src={img} alt="imagen" />
@@ -27,37 +53,33 @@ function FormCRUD(props) {
 
       <div className="F-name-container">
         <p>Name</p>
-        <input value={name} />
+        <textarea value={name} />
       </div>
       <div className="F-stock-container">
         <p>Stock</p>
-        <input value={stock} />
+        <input type="number" value={stock} />
       </div>
 
-      <div className="F-category-container">
-        <p>Categories</p>
-        <div className="F-categories">
-          {categories.map((cat) => (
-            <>
-              {/* <input value = {cat}/> */}
-              <span>
-                {cat}
-                <button> x </button>
-              </span>
-            </>
-          ))}
-          <button onClick=""> add </button>
-        </div>
+      <div className="categories">
+          <label>Categories</label>
+          <Creatable
+              onChange={value => categoryHandler('options',value)} 
+              options={options}
+              value={category}
+              className="inputs"
+              isMulti
+          />
       </div>
       <div className="F-price-container">
         <p>Price</p>
-        <input value={price} />
+        <input type="number" value={price} />
       </div>
       <div className="F-edit-button">
         <button type="submit" >edit</button>
       </div>
       <div className="F-remove-button">
         <button onClick={handlerOnClick}>cancel</button>
+      </div>
       </div>
     </form>
   );

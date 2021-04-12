@@ -7,6 +7,7 @@ import allProducts from "../../../Apollo/queries/allProducts"
 function ListCRUD(){
     const { data } = useQuery(allProducts);
     useEffect(() => {}, [data]);
+
     console.log(data)
     return (
         <div className="product-container">
@@ -15,6 +16,7 @@ function ListCRUD(){
              
               <TextCRUD
                   key= {item.id}
+                  key1= {item.id}
                   img ={item.image}
                   name= {item.name}
                   stock = {item.stock}

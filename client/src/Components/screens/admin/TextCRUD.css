@@ -35,7 +35,6 @@ img{
 .element-container{
     margin:auto;
     width: 100%;
-    padding: 2rem;
     border-radius: 1.5rem;
     height: 20vh;
     display:flex;
@@ -72,4 +71,10 @@ img{
    height: 4rem;
    padding:0.5rem;
    background-color: rgb(233, 214, 214); 
+}
+
+.info-container{
+    height: 80%;
+    width: 90%;
+    display: flex;
 }
