@@ -19,12 +19,12 @@ const Grid = () => {
   if(search === true){
     arr = allProduct.filter((element) => element.name === filterProduct) 
   }
-  console.log(allProduct)
-  console.log(stateproducts)
+  // console.log(allProduct)
+  // console.log(stateproducts)
   return (
 
     <StyledGrid>
-      <div className="container">
+      <>
         {
           search === false ?  
         (stateproducts && stateproducts?.length > 0
@@ -36,7 +36,7 @@ const Grid = () => {
             }): "No se encontraron Productos" 
             )
           }
-      </div>
+      </>
     </StyledGrid>
   );
 };

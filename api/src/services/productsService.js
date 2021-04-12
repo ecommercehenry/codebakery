@@ -196,7 +196,7 @@ async function getProductByCategoryName({ name }) {
 async function getProductByName({ name }) {
   product = await Product.findOne({
     where: {
-      name
+      name: { iLike: name + "%"}
     } 
   })
   return product

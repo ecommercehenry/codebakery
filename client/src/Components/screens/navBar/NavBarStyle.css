@@ -49,6 +49,11 @@
     font-size: 1em;
     padding-bottom: 0.5%;
     padding: 0 1.5vw 0 1.5vw;
+    transition: background-color 0.2s ease;
+}
+
+.purple-btn:hover{
+    background-color: #734191
 }
 
 .display-linebreak{
