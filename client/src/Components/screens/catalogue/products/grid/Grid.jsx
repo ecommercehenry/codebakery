@@ -9,12 +9,9 @@ import styled from 'styled-components';
 import ProductCard from './ProductCard';
 //import "./grid.css";
 
-
-import "./grid.css";
-
 const Grid = () => {
 
-  let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state);
+  let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state.reducer);
   let arr = []
   let dispatch = useDispatch();
   //me traigo el estado filterProduct y comparo si no esta renderizo ese componente;
@@ -25,46 +22,22 @@ const Grid = () => {
   // console.log(allProduct)
   // console.log(stateproducts)
   return (
-     <div className="container">
-       {
-        
-        search === false ?  
-       (stateproducts && stateproducts?.length > 0
-        ? stateproducts.map((element, i) => {
-              return (
-                <div key={i}>
-                  <span className="card" key={element.id}>
-                    <img
-                      src={element.image}
-                      width="250"
-                      height="200"
-                      alt="No se encontro la imagen"
-                    />
-                    <h4 className="title">{element.name}</h4>
-                    <p className="price">{element.price}</p>
-                  </span>
-                </div>
-              )   
-          }) : "Cargando")
-          : (arr.length > 0 ? arr.map((element, i ) => {
-              return (
-                <div key={i}>
-                  <span className="card" key={element.id}>
-                    <img
-                      src={element.image}
-                      width="250"
-                      height="200"
-                      alt="No se encontro la imagen"
-                    />
-                    <h4 className="title">{element.name}</h4>
-                    <p className="price">{element.price}</p>
-                  </span>
-                </div>
-              );
-          }): "No se encontraron Productos" 
-          )
-        }
-    </div>
+
+    <StyledGrid>
+      <div className="container">
+        {
+          search === false ?  
+        (stateproducts && stateproducts?.length > 0
+          ? stateproducts.map((element, i) => {
+                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price}/>
+            }) : "Cargando")
+            : (arr.length > 0 ? arr.map((element, i ) => {
+                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price}/>
+            }): "No se encontraron Productos" 
+            )
+          }
+      </div>
+    </StyledGrid>
   );
 };
 

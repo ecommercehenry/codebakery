@@ -1,30 +1,49 @@
 const { cloudinary } = require('../../utils/cloudinary')
 const { Product } = require('../db.js');
 const { Category } = require('../db.js');
+const { Op } = require("sequelize");
+const categories = require('../graphql/roots/queriesResolvers/categories');
+
 // const categories = require('../graphql/roots/queriesResolvers/categories.js');
 
 async function getAllProducts() {
-  return await Product.findAll({
-    order: [["name","ASC"]],
-    include: [Category],
-  });
+  try {
+    return await Product.findAll({
+      order: [["name","ASC"]],
+      include: [Category],
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 async function getProductById({ id }) {
-  return await Product.findByPk(id);
+  try {
+    return await Product.findByPk(id);
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function deleteById({ id }) {
-  return await Product.destroy({
-    where: {
-      id: id,
-    },
-  });
+  try {
+    return await Product.destroy({
+      where: {
+        id: id,
+      },
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 async function productCategory({ id }) {
-  return await Product.findOne({
-    where:{id: id},
-    include: [Category],
-  });
+  try {
+    return await Product.findOne({
+      where: { id: id },
+      include: [Category],
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function addProduct(args) {
@@ -51,7 +70,7 @@ async function addProduct(args) {
       }
     })
   } catch (error) {
-    console.log(error)
+    console.log("ERROR "+error)
   }
 }
 
@@ -61,15 +80,47 @@ async function addProduct(args) {
  * @param  {} dataToModify object that contains the data to be modified
  */
 async function modifyProduct({ id, dataToModify }) {
-  if (validateNewData(dataToModify)) {
-    try {
-      const product = await Product.findOne({
-        where: {
-          id: id,
+  async function getCategoriesDB(categoriesStr){
+    let out = []
+    for(categorie of categoriesStr){
+      const cate = await Category.findOrCreate({
+        where:{
+          name:categorie
         },
-      });
-      await product.update(dataToModify);
-      return product;
+        defaults:{
+          name:categorie
+        }
+      })
+      out.push(cate[0])
+    }
+    return out
+  }
+  async function getProductById(id){
+    const product = await Product.findOne({
+      where: {
+        id: id,
+      },
+      include: [Category],
+    });
+    return product
+  }
+  const categories = dataToModify["categories"]
+  const dataProduct = dataToModify
+  delete dataProduct["categories"]
+  if (validateNewData(dataProduct)) {
+    try {
+      const product = await getProductById(id)
+      //Update with new info
+      await product.update(dataProduct); 
+
+      //If is necessary change categories   
+      if(categories){
+        const dbCategories = await getCategoriesDB(categories)
+        await product.setCategories(dbCategories)
+      }
+      //Find again and get product with the changes
+      const updatedProduct = await getProductById(id)
+      return updatedProduct;
     } catch (error) {
       return {
         error: "Problem finding the id of product",
@@ -84,9 +135,10 @@ async function modifyProduct({ id, dataToModify }) {
   }
 
   function validateNewData(data) {
-    const validInputs = ["name", "description", "price", "stock", "image"];
+    const validInputs = ["name", "description", "price", "stock", "image","categories"];
     for (element in data) {
       if (!validInputs.includes(element)) {
+        console.log("FALSOOOOOOO")
         return false;
       }
     }
@@ -128,10 +180,17 @@ async function removeCategoryFromProduct({ idProduct, idCategory }) {
   }
 }
 
-async function getProductByCategoryName({name}){
-    category = await Category.findOne({where: { name}, attributes: {exclude: ['createdAt','updatedAt']}, include: Product});
-    // console.log( category);
-    return category.dataValues.products
+async function getProductByCategoryName({ name }) {
+  try {
+    category = await Category.findOne({
+      where: { name },
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+      include: Product,
+    });
+    return category.dataValues.products;
+  } catch (error) {
+    throw new Error(error);
+  }
 }
 
 async function getProductByName({ name }) {

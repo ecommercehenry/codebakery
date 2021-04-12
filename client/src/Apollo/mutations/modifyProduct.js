@@ -3,18 +3,18 @@ import { gql } from "@apollo/client"
 const MODIFY_PRODUCT = gql`
  
 
- mutation modifyProduct( $id:Int!, $description:String, $price:Int, $stock:Int, $image:String) {
-     modifyProduct( id:$id, dataToModify:{
-           
-            description:$description
-            price:$price
-            stock:$stock             
-            image:$image
-    })
-    {
-      name 
-    }
-   }
+ mutation modifyProduct( $id:Int!, $data:productInput!) {
+     modifyProduct( id:$id, dataToModify:$data){
+       name
+       description
+       price
+       stock
+       image
+       categories{
+         name
+       }
+     }
+ }
 `
 export default MODIFY_PRODUCT
 

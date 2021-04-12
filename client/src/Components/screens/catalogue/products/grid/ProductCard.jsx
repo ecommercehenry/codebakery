@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import ButtonAddCart from './ButtonAddCart';
 
 const ProductCard = ({id,name,image}) => {
+    console.log(image)
     return (
         <StyledCard>
             <div className="image">
