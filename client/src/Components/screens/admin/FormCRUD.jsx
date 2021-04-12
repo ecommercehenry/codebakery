@@ -18,7 +18,7 @@ function FormCRUD(props) {
   return (
     <form 
     
-    className="F-element-container">
+    className="element-container">
       <div className="F-image-container">
         <p>Product</p>
         <img src={img} alt="imagen" />

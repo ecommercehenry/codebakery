@@ -1,9 +1,17 @@
 .product-container{
     display:flex;
     flex-direction:column;
-    align-items:center;
-    width:50rem;
+    align-items:flex-start;
+    width:77vw;
     margin: 2rem;
+    margin-left: 4rem;
+}
+
+.product-container-edit{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 4rem;
 }
 .image-container{
     display:flex;
@@ -26,15 +34,15 @@ img{
 }
 .element-container{
     margin:auto;
-    width: fit-content;
+    width: 100%;
     padding: 2rem;
     border-radius: 1.5rem;
-  
-  
+    height: 20vh;
     display:flex;
     align-items: center;
     justify-content: center;
     background-color: rgb(233, 214, 214);
+    border-radius: 100px;
 }
 
 .stock-conteiner{

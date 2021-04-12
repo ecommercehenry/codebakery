@@ -1,14 +1,16 @@
-import React from 'react'
+import React from 'react';
+import {Route} from 'react-router-dom'
 
 //styles
 import styled from 'styled-components';
 
 //components
 import LeftPanel from '../LeftPanel';
-import AdminNavBar from '../AdminNavBar';
+import AdminNavBar from '../AdminNavBar'
 // import TextCRUD from '../TextCRUD'
 import ListCRUD from "../ListCRUD"
 import AddProductForm from '../../../AddProductForm';
+import FormCategories from '../../../CategoryCard/FormCategories';
 
 const AdminPanel = () => {
    
@@ -19,12 +21,17 @@ const AdminPanel = () => {
             </div>
             <div className="right">
                 <div className="top">
-                <AdminNavBar/>
+                    <AdminNavBar />
+                    
                 </div>
+                <Route path="/admin/add-product">
                 <div className="bottom">
                     <AddProductForm/>
                 </div>
-                <ListCRUD/>
+                </Route>
+                <div className="edit-grid">
+                    <ListCRUD/>
+                </div>
                 {/* <FormCRUD /> */}
             </div>
             
@@ -37,32 +44,37 @@ const StyledAdminPanel = styled.div`
     min-height: 100vh;
     width: 100%;
     display:flex;
-<<<<<<< HEAD
-    max-width: 100vw;
-=======
     flex-direction:row;
     justify-content:space-between;
-    background: black;
     .left{
         width:13%;
-        //background:green;
+        z-index: 5;
     }
     .right{
         width:87%;
-        //background:yellow;
         display:flex;
         flex-direction:column;
         .top{
             height:15vh;
         }
         .bottom{
-            height:85vh;
+            position: absolute
+            background: black;
+            height:100vh;
+            width: 100vw;
             display:flex;
             justify-content:center;
             align-items:center;
+            z-index: 4;
+        }
+        .edit-grid{
+            position: absolute;
+            z-index: 3;
+            background: #eeeeee00;
+            top: 12vh;
+            width: 85vw;
         }
     }
->>>>>>> ea17e28fde9c2a907425c861ece2d074b16cab93
 `;
 
 export default AdminPanel
