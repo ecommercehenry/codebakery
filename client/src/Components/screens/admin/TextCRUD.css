@@ -1,9 +1,18 @@
 .product-container{
     display:flex;
     flex-direction:column;
-    align-items:center;
-    width:50rem;
+    align-items:flex-start;
+    width:77vw;
     margin: 2rem;
+    margin-top: 0.5rem;
+    height: 100%
+}
+
+.product-container-edit{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 2rem;
 }
 .image-container{
     display:flex;
@@ -26,15 +35,14 @@ img{
 }
 .element-container{
     margin:auto;
-    width: fit-content;
-    padding: 2rem;
+    width: 100%;
     border-radius: 1.5rem;
-  
-  
+    height: 20vh;
     display:flex;
     align-items: center;
     justify-content: center;
     background-color: rgb(233, 214, 214);
+    border-radius: 100px;
 }
 
 .stock-conteiner{
@@ -64,4 +72,10 @@ img{
    height: 4rem;
    padding:0.5rem;
    background-color: rgb(233, 214, 214); 
+}
+
+.info-container{
+    height: 80%;
+    width: 90%;
+    display: flex;
 }

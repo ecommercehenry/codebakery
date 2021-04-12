@@ -29,3 +29,29 @@ getProductById(id: Int): [product]
 nuestraNuevaFuncion(Si recibe parametros): retornar el type que definimos abajo: [prodcut] o [category]
 }
 ```
+
+## FLOW DE GRAPHQL
+
+**_App.js_**
+
+Aqui creamos nuestro endpoint `/graphql`
+
+**_schema.js_**
+
+Aqui importamos nuestras `queries` `mutations` `types` `inputs`
+
+**_/queries /mutations_**
+
+En estas dos carpetas definimos y exportamos nuestras queries y mutations respectivamente.
+
+**_/root_**
+
+Aqui se encuentra dos carpetas llamadas `/mutationResolver` y `/queriesResolvers` que se encargan de solicitar un servicio que resolvera nuestras queries o mutation, respectivamente,
+
+**_/services_**
+
+Recibe ordenes de las queries/mutations y realiza las peticiones pertinentes a nuestra BD.
+
+**_/root_**
+
+Una vez obtenido el resultado de el servicio volvemos al root y aqui se envia la respuesta a quien lo solicite.
