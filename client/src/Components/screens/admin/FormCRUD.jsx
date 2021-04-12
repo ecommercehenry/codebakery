@@ -55,7 +55,8 @@ function FormCRUD({id, handlerOnClick}) {
           categories:inputs.categories.map(c=>c.name)}
         }
       }
-      )
+    )
+    alert("producto modificado!")
 
   };
   
