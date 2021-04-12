@@ -24,8 +24,22 @@ server.use((req, res, next) => {
 });
 server.use('/graphql', graphqlHTTP({
   schema: schema,
+  extensions({
+    result,
+    variables,
+    document
+  }) {
+    console.log("VARIABLES")
+    console.log(variables);
+    console.log("RESULT")
+    console.log(result)
+    console.log("DOCUMENT")
+    console.log(document.name)
+
+  },
   rootValue: root,
   graphiql: true
+  
 }))
 
 
