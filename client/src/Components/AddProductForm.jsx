@@ -4,8 +4,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import getAllCategories from "../Apollo/queries/getAllCategories"
 import ADD_PRODUCT from "../Apollo/mutations/addProduct";
 import Creatable from 'react-select/creatable';
-import {Link} from 'react-router-dom'
-
+import {Link, Redirect} from 'react-router-dom'
 //styles
 import styled from 'styled-components';
 
@@ -66,6 +65,7 @@ const AddProductForm = ({setAddProduct}) => {
     categories['data'] && categories['data']['getAllCategories'].map(elem=> options.push({label:elem.name,value:elem.name}))                 
 
     const submitHandler = (e) => {
+        
         e.preventDefault();
         if(info.image == ''){alert('Please add an image')}else{
             info.category=selected;
@@ -88,7 +88,7 @@ const AddProductForm = ({setAddProduct}) => {
                 image:''
             })
             alert("Producto agregado!")
-            setAddProduct(false)
+            
         }
         
     }
