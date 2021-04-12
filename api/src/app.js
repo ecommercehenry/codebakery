@@ -29,10 +29,10 @@ server.use('/graphql', graphqlHTTP({
     variables,
     document
   }) {
-    console.log("VARIABLES")
-    console.log(variables);
-    console.log("RESULT")
-    console.log(result)
+    //console.log("VARIABLES")
+    //console.log(variables);
+    //console.log("RESULT")
+    //console.log(result)
 
   },
   rootValue: root,
@@ -45,7 +45,7 @@ server.use('/graphql', graphqlHTTP({
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;
-  console.error(err);
+  //console.error(err);
   res.status(status).send(message);
 });
 
