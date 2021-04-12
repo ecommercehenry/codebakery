@@ -97,11 +97,13 @@
   }
 
   .title{
-      font-size: 3.0em;
+      font-size: 1.5em;
+      letter-spacing: 0;
+      text-align: center;
   }
 
   .price{
-      font-size: 1.8rem;
+      font-size: 1.3rem;
       color: #755588;
       font-weight: bold;
   }

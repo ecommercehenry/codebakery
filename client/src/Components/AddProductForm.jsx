@@ -4,6 +4,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import getAllCategories from "../Apollo/queries/getAllCategories"
 import ADD_PRODUCT from "../Apollo/mutations/addProduct";
 import Creatable from 'react-select/creatable';
+import {Link} from 'react-router-dom'
 
 //styles
 import styled from 'styled-components';
@@ -92,10 +93,24 @@ const AddProductForm = ({setAddProduct}) => {
         
     }
 
+    useEffect(() => {
+
+        setTimeout(() => {
+            document.body.style.overflow = "hidden"
+        }, 1000);
+    
+    return () => {
+        document.body.style.overflow = "visible"
+    }
+}, [])
+
+    console.log(selected)
     return (
         
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.664)', zIndex: 5, position: 'fixed', height: '100vh', width: '100vw', top: '0', left: '0', paddingLeft: '10vw'}}>
         <StyledForm onSubmit={submitHandler}>
-            <div className="close" onClick={closeHandler}><img src={closeIcon} alt="closeIcon"/></div>
+            {/* <div className="close" onClick={closeHandler}><img src={closeIcon} alt="closeIcon"/></div> */}
+            <Link to="/admin" className="close"><img src={closeIcon} alt="closeIcon"/></Link>
             <div className="imageLoaderr">
                 <div className="previeww">
                     {
@@ -170,6 +185,7 @@ const AddProductForm = ({setAddProduct}) => {
                 <button type="submit">SAVE CHANGES</button>
             </div>
         </StyledForm>
+        </div>
     )
 }
 
