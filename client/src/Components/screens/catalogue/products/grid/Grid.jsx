@@ -22,8 +22,8 @@ const Grid = () => {
   if(search === true){
     arr = allProduct.filter((element) => element.name === filterProduct) 
   }
-  console.log(allProduct)
-  console.log(stateproducts)
+  // console.log(allProduct)
+  // console.log(stateproducts)
   return (
      <div className="container">
        {

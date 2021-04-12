@@ -6,14 +6,26 @@
     /* display: flex;
     flex-wrap: wrap; */
    
-    display: grid;
+    /* display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     box-shadow: 2px 2px 7px 1px rgba(28,110,164,0.7); 
     box-sizing: border-box;
     left: 20px;
     width: 80%;
-    padding: 50px;
+    padding: 50px; */
+
+    width:100%;
+    height: auto;
+    display:flex;
+    padding:0rem 4rem;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items: center;
+    gap:1rem;
+    margin: 0 auto;
+    margin-right: 10px;
+    padding-left: 20px;
 
     /* border: 1px solid black;
     box-shadow: 2px 2px 7px 1px rgba(28,110,164,0.7);
@@ -22,11 +34,17 @@
 }
 
 .card{
-  border-radius: 10px;
+    width: 250px;
+    padding: 0.5rem 1rem;
+    position: relative;
+    height: 350px;
 }
+
+
 .title{
-    font-family: Georgia, serif;
-font-size: 16px;
+
+font-family: Georgia, serif;
+font-size: 9px;
 letter-spacing: 2px;
 word-spacing: 2px;
 color: #000000;
@@ -34,10 +52,12 @@ font-weight: normal;
 text-decoration: none;
 font-style: normal;
 font-variant: normal;
+
 }
+
 .price{
     font-family: Georgia, serif;
-    font-size: 16px;
+    font-size: 10px;
     letter-spacing: 2px;
     word-spacing: 2px;
     color: #000000;
