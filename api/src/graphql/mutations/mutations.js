@@ -11,4 +11,5 @@ type Mutation{
     removeCategoryFromProduct(idProduct: Int!,idCategory: Int!): product
     addProduct(category: Int, name: String!, description: String!, price: Float!, stock: Int, image: String!): product
     createUser(name: String!, password: String!, email: String!, role: String!): user
+    modifyUser(id: Int!, name:String, password: String, email: String, role: String): Int
 }`
