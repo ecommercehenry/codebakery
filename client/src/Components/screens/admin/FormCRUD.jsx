@@ -24,7 +24,7 @@ function FormCRUD(props) {
     });
   }
 
-  const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT, {variables: {id: id, description: inputs.description, price: inputs.price, stock: inputs.stock, imagen:inputs.image}})
+  const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT)
  
  /**
    * When edit button is clicked
@@ -37,7 +37,6 @@ function FormCRUD(props) {
         data:
         {
           name:inputs.name, 
-          description:inputs.description, 
           price:inputs.price , 
           stock:inputs.stock , 
           image:inputs.image}

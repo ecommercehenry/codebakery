@@ -21,7 +21,6 @@ async function dataPopulation() {
     await conn.query(`insert into "product-category" ("productId","categoryId") values (7,2)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (8,3)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (9,4)`)
-    await conn.query(`insert into "product-category" ("productId","categoryId") values (10,5)`)
 
     return true
 
