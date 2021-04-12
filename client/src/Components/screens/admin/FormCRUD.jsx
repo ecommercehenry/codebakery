@@ -5,6 +5,7 @@ import './FormCRUD.css'
 import { useDispatch, useSelector } from "react-redux";
 import { modifyProduct } from "../../../actions/modifyProductAction";
 import {addCategoryToProductAction} from "../../../actions/addCategoryToProductAction"
+
 function FormCRUD({id, handlerOnClick}) {
   const product = useSelector(state => state.productsReducer.products[id])
   const [newCategory, setNewCategory] = useState(false)
@@ -64,7 +65,8 @@ function FormCRUD({id, handlerOnClick}) {
     return (
       <form 
       onSubmit={submitHandler}    
-      className="F-element-container">
+      className="element-container">
+        <div className="info-container">
         <div className="F-image-container">
           <label>Product</label>
           <img src={product.image} alt="imagen" />
@@ -133,6 +135,7 @@ function FormCRUD({id, handlerOnClick}) {
   
         <div className="F-remove-button">
           <button onClick={handlerOnClick}>cancel</button>
+        </div>
         </div>
       </form>
     );

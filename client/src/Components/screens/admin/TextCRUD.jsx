@@ -13,11 +13,17 @@ function TextCRUD({ id }) {
     setShow(!show);
   }
 
+  {/* <div className="product-container-edit" onDoubleClick={handlerOnClick}>
+      {show ? (
+        <div className="element-container" id={id}>
+           */}
+
   if(product){
     return (
       <div className="product-container" onDoubleClick={handlerOnClick}>
         {show ? (
           <div className="element-container" id={id}>
+            <div className="info-container">
             <div className="image-container">
               <p>Product</p>
               <img src={product.image} alt="" />
@@ -45,6 +51,7 @@ function TextCRUD({ id }) {
             </div>
             <div className="remove-button">
               <p>remove</p>
+              </div>
             </div>
           </div>
         ) : (

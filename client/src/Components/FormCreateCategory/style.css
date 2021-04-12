@@ -1,0 +1,35 @@
+.category-input{
+    width: 20vw;
+    border-radius: 40px;
+    border: 1.3px solid #949494;
+    height: 2rem;
+    text-indent: 2%;
+}
+
+.category-input:focus{
+    outline: none;
+}
+
+.category-btn{
+    position: absolute;
+    right: 0;
+    top: 5px;
+    right: 2%;
+    border-radius: 40px;
+    border: none;
+    background:#5E3F71;
+    color: white;
+    padding: 0 2%;
+}
+
+.Success-btnn{
+    width: 20vw;
+    border-radius: 40px;
+    border: none;
+    height: 2rem;
+    background-color: green;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
