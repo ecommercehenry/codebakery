@@ -11,43 +11,42 @@ import { useMutation, useQuery } from '@apollo/client';
 import Creatable from 'react-select/creatable';//para colocar categorias
 
 function FormCRUD(props) {
-  const { name, stock, categories, price, img, handlerOnClick, id } = props;
-
+  const { name, stock,description, categories, price, img, handlerOnClick, id } = props;
+  const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT)
   const [category, setCategory] = useState("");
   let [selected, setSelected] = useState("");
   const [preview, setPreview] = useState("");
   const [info, setInfo] = useState({
     name, //como estado inicial toma de las props del componente padre TextCRUD
-    description: "",
+    description,
     category: categories,
     stock,
     price,
     image: img,
   });
   
-  const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT, {variables: {id: id, description: info.description, price: info.price, stock: info.stock, imagen:info.image}})
-  const submitHandler = (e) => {
+  /**
+   * When edit button is clicked
+   */
+  function submitHandler(e){
     e.preventDefault();
-    console.log({variables: {id: id, description: info.description, price: info.price, stock: info.stock, imagen:info.image}})
-  
-    
-    
-    
-    // if(info.image == ''){alert('Please add an image')}else{
-    //     info.category=selected;
-    //     addProduct({variables:
-    //         {
-    //             name:info.name,
-    //             description:info.description,
-    //             stock:Number(info.stock),
-    //             price:Number(info.price),
-    //             category:selected,
-    //             image:info.image
-    //         }
-    //     })
-    //     alert("Producto agregado!")
-    // }
+    modificar({variables: 
+      {
+        id: 1, 
+        data:
+        {
+          name:info.name, 
+          description: info.description, 
+          price: info.price, 
+          stock: info.stock, 
+          image:info.image}
+        }
+      }
+      )
+
   };
+
+
   const imageHandler = (e) => {
     const image = e.target.files[0];
     previewImage(image);
@@ -60,6 +59,7 @@ function FormCRUD(props) {
       setInfo({ ...info, image: fileReader.result });
     };
   };
+
   const inputHandler = (e) => {
     return setInfo({ ...info, [e.target.name]: e.target.value });
   };
@@ -103,7 +103,7 @@ function FormCRUD(props) {
           <textarea
             name="description"
             type="text"
-            name="name"
+            name="description"
             value={info.description}
             onChange={inputHandler}
           />
@@ -143,7 +143,7 @@ function FormCRUD(props) {
         </div> */}
 
         <div className="F-edit-button">
-          <button onClick={()=>modificar()}>edit</button>
+          <button type="submit">edit</button>
         </div>
         <div className="F-remove-button">
           <button onClick={handlerOnClick}>cancel</button>

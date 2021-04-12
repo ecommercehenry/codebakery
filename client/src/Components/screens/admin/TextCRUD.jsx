@@ -6,16 +6,10 @@ import FormCRUD from "./FormCRUD"
 
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
-function TextCRUD({ img, name, stock, categories, price, id }) {
+function TextCRUD({ img, name, description, stock, categories, price, id }) {
   const [show, setShow] = useState(true);
-
-  //harcodeo pa que aparezca algo... 
-  // categories = [{id: 1, name:"postres "},{id: 2, name:"masas finas "} ]
-  // stock = 10
-  //fin del hardcodeo.........
   function handlerOnClick() {
     setShow(!show);
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", show);
   }
 
   return (
@@ -32,7 +26,7 @@ function TextCRUD({ img, name, stock, categories, price, id }) {
           </div>
           <div className="stock-container">
             <p>Stock</p>
-            {stock}
+            <p>{stock}</p>
           </div>
           <div className="category-container">
             <p>Categories</p>
@@ -58,6 +52,7 @@ function TextCRUD({ img, name, stock, categories, price, id }) {
           img={img}
           name={name}
           stock={stock}
+          description = {description}
           categories={categories}
           price={price}
           handlerOnClick={handlerOnClick}
