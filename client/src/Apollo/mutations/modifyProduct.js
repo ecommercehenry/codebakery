@@ -7,7 +7,12 @@ const MODIFY_PRODUCT = gql`
      modifyProduct( id:$id, dataToModify:$data){
        name
        description
+       price
        stock
+       image
+       categories{
+         name
+       }
      }
  }
 `

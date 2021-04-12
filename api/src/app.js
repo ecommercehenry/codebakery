@@ -33,8 +33,6 @@ server.use('/graphql', graphqlHTTP({
     console.log(variables);
     console.log("RESULT")
     console.log(result)
-    console.log("DOCUMENT")
-    console.log(document.name)
 
   },
   rootValue: root,

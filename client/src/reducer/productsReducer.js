@@ -1,4 +1,5 @@
 import {SAVE_PRODUCTS} from "../actions/saveProductsAction";
+import {MODIFY_PRODUCT} from "../actions/modifyProductAction";
   
   const initialState = {
     products:{}
@@ -11,7 +12,18 @@ import {SAVE_PRODUCTS} from "../actions/saveProductsAction";
           products: action.payload,
        
         };
-  
+      case MODIFY_PRODUCT:
+        let productsModified = state.products
+       for(let key in state.products){
+         if(Number(key) === Number(action.payload.id)){
+            productsModified[key]=action.payload.data
+         }
+       }
+        return {
+          ...state,
+          products: productsModified
+       
+        }; 
       default:
         return state;
     }

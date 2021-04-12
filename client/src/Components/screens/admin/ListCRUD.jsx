@@ -21,12 +21,6 @@ function ListCRUD(){
               return <TextCRUD
                   id ={item.id}
                   key= {item.id}
-                  img ={item.image}
-                  name= {item.name}
-                  description = {item.description}
-                  stock = {item.stock}
-                  categories = {item.categories}
-                  price = {item.price}
               />                    
            })
           ) : (
