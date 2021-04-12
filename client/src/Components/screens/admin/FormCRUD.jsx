@@ -4,9 +4,17 @@ import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct"
 import './FormCRUD.css'
 import { useDispatch, useSelector } from "react-redux";
 import { modifyProduct } from "../../../actions/modifyProductAction";
-
+import {addCategoryToProductAction} from "../../../actions/addCategoryToProductAction"
 function FormCRUD({id, handlerOnClick}) {
   const product = useSelector(state => state.productsReducer.products[id])
+  const [newCategory, setNewCategory] = useState(false)
+  const [valueNewCategory, setValueNewCategory] = useState("")
+  function onChangeNewCategory(e){
+    setValueNewCategory(e.target.value)
+  }
+  function submitNewCategory(){
+    setInputs(...inputs, )
+  }
   const [inputs, setInputs] = useState({    
     name:product.name, 
     description: product.description,
@@ -88,13 +96,24 @@ function FormCRUD({id, handlerOnClick}) {
                 <span>
                   {cat.name}
                   <button onClick={()=>{
-                    // dispatch(deleteCategoryFromProduct)
                     setInputs({...inputs, categories:inputs.categories.filter(ca=>ca.name !== cat.name)})
                   }}> x </button>
                 </span>
               </div>
             ))}
-            <button> add </button>
+            {newCategory? <div className="F-price-container">
+                    <label>New category</label>
+                    <input 
+                      value={valueNewCategory}          
+                      name="newCategory"
+                      onChange={onChangeNewCategory} />
+                    <button onClick={()=>{
+                       setInputs({...inputs, categories:[...inputs.categories, {name:valueNewCategory}]})
+                       setValueNewCategory("")
+                       setNewCategory(false)
+                    }}>Add new category</button>
+                  </div> : <button onClick={()=>setNewCategory(true)}> add </button>}
+            
           </div>
         </div>
         <div className="F-price-container">
