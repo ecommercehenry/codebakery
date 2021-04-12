@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 // import { Link } from "react-router-dom";
 import allProducts from "../../../../../Apollo/queries/allProducts.js";
 import { useQuery } from '@apollo/client';
-import "./grid.css";
+import styled from 'styled-components';
+
+//Components
+import ProductCard from './ProductCard';
+//import "./grid.css";
 
 
 // {
@@ -23,25 +27,24 @@ const Grid = ({id}) => {
 
   return (
 
-     <div className="container">
+    <StyledGrid>
       {
-      data?.product.map((element) => (
-        <div>
-          <span className="card" key={element.id}>
-            <img
-              src={element.image}
-              width="250"
-              height="200"
-              alt="No se encontro la imagen"
-            />
-            <h4 className='title'>{element.name}</h4>
-            <p className='price'>{element.price}</p>
-          </span>
-        </div>
+      data?.product.map((product) => (
+        <ProductCard id={product.id} name={product.name} image={product.image}/>
       ))
       }
-    </div>
+    </StyledGrid>
   );
 };
+
+const StyledGrid = styled.div`
+  //background:red;
+  width:100%;
+  height: auto;
+  display:flex;
+  padding:0rem 4rem;
+  flex-wrap:wrap;
+  justify-content:space-between;
+`;
 
 export default Grid;
