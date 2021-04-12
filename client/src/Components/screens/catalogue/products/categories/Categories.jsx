@@ -5,23 +5,21 @@ import productsByCategoryName from '../../../../../Apollo/queries/productsByCate
 // import getData from '../../../../../Apollo/queries/productById';
 import getAllCategories from '../../../../../Apollo/queries/getAllCategories';
 import allProducts from '../../../../../Apollo/queries/allProducts';
-import { getAllProducts } from '../../../../../actions';
+import { getAllProducts, setSearch } from '../../../../../actions';
 import styles from './Categories.module.css';
 
 const Categories = () => {
     //Iniciamos el estado en all para que se rendericen todos los productos
     const [name, setName] = React.useState('All');
-
+    // console.log(name, 'arsrrarsras')
     //Obtenemos productos por nombre de categoria (apolo client)
     let  products = useQuery(productsByCategoryName, {
         variables: { name: name },
     });
-
     products = products?.data?.getProductByCategoryName ? products.data.getProductByCategoryName :products.data;
-    
+    // console.log(products, 'aysyyaysyays')
     //Obtenemos el estado global de los productos de redux
     const {stateproducts}= useSelector(state =>  state);
-
     const dispatch= useDispatch();
     //Obtenemos todos los productos de apolo client 
     let todosproductos=useQuery(allProducts);
@@ -40,17 +38,18 @@ const Categories = () => {
 
     //Se envia la acción para actualizar los productos que se renderizan
     useEffect(() => {
-        console.log('lo que sea')
+        // console.log('lo que sea');
         dispatch(getAllProducts(products));
-    console.log('otra vz')
-    }, [products, name]);
+        // console.log('otra vz');
+    }, [products]);
 
     //tenemos un query para pedir los productos por categorias
     //cada categoria sera renderizada como un boton que al hacer clic llama a la query
     //de productos por categorias(filtrado por categorias)
     //caso BASE: Al presionar un btn ALL/TODOS, se hace un llamado a todos los productos
-
     const handleClick = (e) =>{
+        // accion para modificar el estado del booleano 'search'
+        dispatch(setSearch());
         setName(e.target.name);
     }
 

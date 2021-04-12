@@ -9,7 +9,7 @@ const Grid = () => {
   let arr = []
   let dispatch = useDispatch();
   //me traigo el estado filterProduct y comparo si no esta renderizo ese componente;
-console.log(search, stateproducts,  'state')
+// console.log(search, stateproducts,  'state')
   if(search === true){
     arr = allProduct.filter((element) => element.name === filterProduct) 
   }

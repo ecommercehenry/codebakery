@@ -2,6 +2,7 @@ import {
   GET_ALL_PRODUCTS,
   GET_PRODUCT_BY_NAME,
   GUARDAR_PRODUCTOS,
+  SET_SEARCH,
 } from "../actions";
 //import allProducts from "../Apollo/queries/allProducts";
 
@@ -10,15 +11,16 @@ const initialState = {
   stateSearch: {},
   filterProduct: "",
   allProduct: [],
-  search: false, 
+  search: false,
 };
-
+// SET_SEARCH
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_SEARCH:
+      return  {...state, search: false};
     case GET_ALL_PRODUCTS:
 
     if(action.payload && state.allProduct.length === 0){
-        console.log('hola')
         return  {
             ...state,
             stateproducts: action.payload, 
@@ -26,7 +28,6 @@ const reducer = (state = initialState, action) => {
             search: false 
         }
     }else{
-        console.log('chao', action.payload)
         return{
             ...state,
             stateproducts: action.payload,
@@ -49,7 +50,6 @@ const reducer = (state = initialState, action) => {
       };
 
     default:
-      console.log(state);
       return state;
   }
 };
