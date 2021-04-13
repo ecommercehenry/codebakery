@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const { graphqlHTTP } = require("express-graphql");
 const cors = require('cors')
-
+const {errorType} = require("./graphql/roots/errorsHandlers/errors")
 require('./db.js');
 
 const server = express();
@@ -22,23 +22,35 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
-server.use('/graphql', graphqlHTTP({
+
+
+const getErrorCode = errorName =>{
+  console.log("owefjwoiefjweofjweoifjwoeifjAAAAAAAAAAAAAAAAAAAA"+errorName)
+  return errorType[errorName]
+}
+
+server.use('/graphql', graphqlHTTP((req)=>{
+  console.log("HEADER: "+req.headers.authtoken)
+  return ({
   schema: schema,
+  formatError:(err)=>{
+    const error = getErrorCode(err)
+    return ({message: error.message, statusCode:error.statusode})
+  },
   extensions({
     result,
     variables,
     document
   }) {
-    //console.log("VARIABLES")
-    //console.log(variables);
-    //console.log("RESULT")
-    //console.log(result)
-
+    // console.log("VARIABLES")
+    // console.log(variables);
+    // console.log("RESULT")
+    // console.log(result)
   },
   rootValue: root,
   graphiql: true
   
-}))
+})}))
 
 
 // Error catching endware.
