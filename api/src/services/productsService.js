@@ -209,7 +209,6 @@ async function getProductByName({ name }) {
   return product
 }
 
-
 module.exports = {
   getAllProducts,
   modifyProduct,
