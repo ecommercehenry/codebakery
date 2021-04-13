@@ -1,4 +1,3 @@
-console.log('queires')
 module.exports = `
     type Query{
         product: [product],
@@ -7,5 +6,6 @@ module.exports = `
         getProductByCategoryName(name: String!): [product],
         getAllCategories:[category],
         getProductByName(name: String!): product, 
+        getAllUsers: [user]
     }
 `

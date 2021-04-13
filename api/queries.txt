@@ -129,3 +129,24 @@ query
 
   }
 }
+
+// PARA OBTENER TODOS LOS USUARIOS (SIN CONTRASEÑA) CON SUS PRODUCTOS Y CON SUS REVIEWS
+{
+  getAllUsers{name, email, products{
+    id
+    name
+    description
+    price
+    stock
+    image
+    categories{
+      id 
+      name  
+    }  
+  }, reviews{
+    id
+    title
+  	description
+    stars
+  }}
+}
