@@ -21,7 +21,7 @@ async function modifyUser(id, name, password, email, role) {
   if(email) obj.email = email;
   if(role) obj.role = role;
   let user = await Users.findOne({ where: { id } });
-  return await user.update(obj);
+  return await user.update(obj, {attributes: {exclude: ['password', 'salt']}});
 }
 
 module.exports = { getAllUsers, createUser, modifyUser}

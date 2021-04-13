@@ -114,6 +114,9 @@ mutation {
 mutation {
   modifyUser(id: 1 ,name: "NAME", password: "12333334", email: "email@email.com", role:"role"){
     name
+    id
+    email
+    role
   }
 }
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
