@@ -1,8 +1,10 @@
 import React from "react";
 import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 import "./UserAcount.css";
+import styled from "styled-components";
 
 import CREATE_USER from "../../Apollo/mutations/createUser";
 
@@ -21,87 +23,82 @@ const UserAcount = () => {
   };
 
   // Google login
-  const handleLogin = async (googleData) => {
-    console.log("********************");
-    console.log(googleData);
-    /* const res = await fetch("/api/v1/auth/google", {
-      method: "POST",
-      body: JSON.stringify({
-        token: googleData.tokenId,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json(); */
-    // store returned user somehow
+  const handleLogin = async (data) => {
+    // Aqui iria la mutation
+
+    console.log(data);
   };
 
   return (
-    <div class="wrapper fadeInDown">
-      <div id="formContent">
-        <form>
+    <div className="wrapper fadeInDown">
+      <div className="formContent">
+        <Login />
+        <StyledAcheDos> OR </StyledAcheDos>
+        <hr />
+        <form onSubmit={handleSubmit(handleLogin)}>
           <input
             type="text"
-            id="login"
-            class="fadeIn second"
+            className="fadeIn second"
             name="login"
-            placeholder="login"
+            placeholder="Email o Username"
+            {...register("login", { required: true })}
           />
           <input
-            type="text"
-            id="password"
-            class="fadeIn third"
-            name="login"
-            placeholder="password"
+            type="password"
+            className="fadeIn third"
+            name="password"
+            placeholder="Password"
+            {...register("password", { required: true })}
           />
-          <input type="submit" class="fadeIn fourth" value="Log In" />
+          <input type="submit" className="fadeIn fourth" value="Log In" />
         </form>
+        <p className="formFooter">
+          ¿No tienes cuenta? <Link to="/create">Creala aqui</Link>
+        </p>
       </div>
     </div>
   );
 };
 
+const StyledAcheDos = styled.h2`
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 40px 8px 10px 8px;
+  color: #cccccc;
+`;
+
+const StyledUserPanel = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+  .formContent {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+    text-align: center;
+    .formFooter {
+      background-color: #f6f6f6;
+      border-top: 1px solid #dce8f1;
+      padding: 25px;
+      text-align: center;
+      -webkit-border-radius: 0 0 10px 10px;
+      border-radius: 0 0 10px 10px;
+    }
+  }
+`;
+
 export default UserAcount;
-
-{
-  /* <div className="login">
-      <div className="heading">
-        <form action="">
-          <div className="input-group input-group-lg">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter your username o email"
-              {...register("username", { required: true, maxLength: 18 })}
-            />
-          </div>
-
-          <div className="input-group input-group-lg">
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Password"
-              {...register("password", { required: true, maxLength: 18 })}
-            />
-          </div>
-
-          <div className="input-group input-group-lg">
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Email"
-              {...register("email", { required: true, maxLength: 18 })}
-            />
-          </div>
-          <div>
-            <button onClick={handleSubmit(onSubmit)} type="submit">
-              Login
-            </button>
-          </div>
-          <div> <Login />
-            <Logout /> </div>
-            </form>
-            </div>
-          </div> */
-}
