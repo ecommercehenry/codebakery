@@ -38,7 +38,7 @@ const StyledListCRUD = styled.div`
 display:flex;
 flex-direction:column;
 align-items:flex-start;
-width:72vw;
+width:80vw;
 margin: 2rem;
 margin-top: 0.5rem;
 height: 100%;`;

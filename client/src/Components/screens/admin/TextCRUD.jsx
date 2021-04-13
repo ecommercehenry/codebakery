@@ -79,9 +79,9 @@ export default TextCRUD;
 const StyledTextCRUD = styled.div`
   
     display:flex;
-    flex-direction:column;
     align-items:flex-start;
-    width:72vw;
+    justify-content:space-around;
+    width:70vw;
     margin: 2rem;
     margin-top: 0.5rem;
     height: 100%;
