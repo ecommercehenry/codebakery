@@ -7,5 +7,6 @@ module.exports = `
         getProductByCategoryName(name: String!): [product],
         getAllCategories:[category],
         getProductByName(name: String!): product, 
+        getProductByArray(array: [Int!]): [product]
     }
 `
