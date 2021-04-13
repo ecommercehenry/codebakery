@@ -20,11 +20,8 @@ async function modifyUser(id, name, password, email, role) {
   if(password) obj.password = password;
   if(email) obj.email = email;
   if(role) obj.role = role;
-  return await Users.update({ ...obj }, { where: { id } });
-  // si se pide retorno de usuario modificado
-  let user = await Users.update({ ...obj }, { where: { id } });
-  if(user[0] == 1) return await Users.findOne({ where: { id } });
-  else return {id, name: 'Error', password, email, role};
+  let user = await Users.findOne({ where: { id } });
+  return await user.update(obj);
 }
 
 module.exports = { getAllUsers, createUser, modifyUser}
