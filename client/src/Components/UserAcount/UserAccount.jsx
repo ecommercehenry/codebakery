@@ -1,5 +1,5 @@
-import React from "react";
-import { useMutation } from "@apollo/client";
+import React, { useEffect } from "react";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -11,22 +11,26 @@ import CREATE_USER from "../../Apollo/mutations/createUser";
 // Login/ out
 import Login from "./Login";
 import Logout from "./Logout";
-
+import { useDispatch } from "react-redux";
+import validateUser from "../../Apollo/queries/validateUser"
 const UserAcount = () => {
-  const [createUser, { data }] = useMutation(CREATE_USER);
+  // const [createUser, { data }] = useMutation(CREATE_USER);
   const { register, handleSubmit } = useForm();
-
-  const onSubmit = ({ username, password, email }) => {
-    createUser({
-      variables: { name: username, password, email },
-    });
-  };
+  const [login, { loading, data }] = useLazyQuery(validateUser);
 
   // Google login
-  const handleLogin = async (data) => {
-    // Aqui iria la mutation
+  const dispatch = useDispatch()
 
-    console.log(data);
+  useEffect(()=>{
+    if(!loading && data && data.token){
+      localStorage.setItem('token', data.token);
+    }
+          console.log(data)
+
+  })
+  const handleLogin = async (form) => {
+    login({variables: {name:form.login,password:form.password}})    
+
   };
 
   return (
@@ -59,6 +63,8 @@ const UserAcount = () => {
     </div>
   );
 };
+
+
 
 const StyledAcheDos = styled.h2`
   text-align: center;

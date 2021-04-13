@@ -33,10 +33,6 @@ server.use('/graphql', graphqlHTTP((req)=>{
   console.log("HEADER: "+req.headers.authtoken)
   return ({
   schema: schema,
-  formatError:(err)=>{
-    const error = getErrorCode(err)
-    return ({message: error.message, statusCode:error.statusode})
-  },
   extensions({
     result,
     variables,

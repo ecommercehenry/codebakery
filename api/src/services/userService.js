@@ -40,17 +40,24 @@ async function loginUser(name,password){
     }
   })
   if(!user){
-    return "the user dont exists"
+    return {name:"the user dont exists",detail:"hola"}
   }
   if(user){
     const hashed = Users.encryptPassword(password, user.salt())
     if(hashed === user.password()){
-      return jwt.sign({
+      const token = jwt.sign({
         id:user.id,
         name:user.name
       },"secret",{ expiresIn: 60 * 60 }) //60*60 = 3600 seg = 1 hour
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        token:token,
+        role: user.role,
+      }
     }else{
-      return "invalid password"
+      return {name:"invalid password", detail:"hola"}
     }
   }
 }
