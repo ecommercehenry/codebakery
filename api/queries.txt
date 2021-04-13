@@ -5,6 +5,16 @@ query getAllProducts{
     name
   }
 }
+///
+obtener todos los elementos de un array de ids 
+
+{
+  getProductByArray(array:[1,2,2,3,4]) {
+    id
+    name
+  }
+}
+
 /// obtener las categorias 
 
 query getAllCategories{
