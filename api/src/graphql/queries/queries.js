@@ -8,5 +8,6 @@ module.exports = `
         getAllCategories:[category],
         getProductByName(name: String!): product, 
         getProductByArray(array: [Int!]): [product]
+        validateUser(name:String, password:String): user
     }
 `
