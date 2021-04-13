@@ -1,6 +1,6 @@
-
+const { loginUser } = require("../../../services/userService")
 
 // getAllProducts
 module.exports = {validateUser:({name,password}) => {
-    return {name:"Juan"}
+    return loginUser(name,password)
 }}
