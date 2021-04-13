@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-import "./UserAcount.css";
+import "./UserAccount.css";
 import styled from "styled-components";
 
 import CREATE_USER from "../../Apollo/mutations/createUser";
@@ -40,14 +40,14 @@ const UserAcount = () => {
             type="text"
             className="fadeIn second"
             name="login"
-            placeholder="Email o Username"
+            placeholder="Entra tu email o usuario"
             {...register("login", { required: true })}
           />
           <input
             type="password"
             className="fadeIn third"
             name="password"
-            placeholder="Password"
+            placeholder="Contraseña"
             {...register("password", { required: true })}
           />
           <input type="submit" className="fadeIn fourth" value="Log In" />

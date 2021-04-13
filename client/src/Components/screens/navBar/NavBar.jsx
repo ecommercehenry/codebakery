@@ -45,13 +45,12 @@ const NavBar = ({ color }) => {
       </div>
       <div className="right-buttons d-flex align-items-center">
         <Link
-          to="/login"
+          to="/log-in"
           className={`login-btn text-decoration-none ${textColor}`}
         >
-          {" "}
-          Login{" "}
+          Login
         </Link>
-        <Link to="#" id="sign-up-link" className="text-decoration-none">
+        <Link to="/sign-up" id="sign-up-link" className="text-decoration-none">
           <div
             className={`${btnColor}-btn d-flex justify-content-center align-items-center`}
           >

@@ -10,7 +10,8 @@ import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCatego
 
 import FormCRUD from "./Components/screens/admin/FormCRUD";
 import GlobalStyle from "./Components/GlobalStyle";
-import UserAcount from "./Components/UserAcount/UserAcount";
+import UserAccount from "./Components/UserAcount/UserAccount";
+import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
       <Route path="/catalogue" component={Catalogue} />
       <Route path="/cart" component={Cart} />
       <Route path="/about-us" component={AboutUs} />
-      <Route path="/login" component={UserAcount} />
+      <Route path="/log-in" component={UserAccount} />
+      <Route path="/sign-up" component={CreateUserAccount} />
 
       {/* Debo agregar al componente padre que corresponda @Chu */}
       <Route path="/admin/form" component={FormCRUD} />
