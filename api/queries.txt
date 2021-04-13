@@ -5,6 +5,16 @@ query getAllProducts{
     name
   }
 }
+///
+obtener todos los elementos de un array de ids 
+
+{
+  getProductByArray(array:[1,2,2,3,4]) {
+    id
+    name
+  }
+}
+
 /// obtener las categorias 
 
 query getAllCategories{
@@ -45,15 +55,15 @@ mutation{
 ////actualizar una categoria, recibe un para metro id y un input con la data que se va a actualizar
 mutation {
   updateCategory(id: 1 , input: {
-    name: "franciscotov",
-    description: "hope is a good",
+    name: "bittersweet"
   })
 }
 
 //// AGREGAR CATEGORIA
 mutation{
-  addCategory(name: "fran", description: "entro" ){
-    name
+  addCategory(name:"Spicy"){
+   	id
+  }
 }
 
 
@@ -62,13 +72,12 @@ mutation{
     categories{
       id
       name
-      description
     }
   }
 
 // ESTE ES UN EJEMPLO DE AGREGAR CATEGORIA PARA PETICIONES DESDE EL FRONT
-mutation addCategory ($name: String!, $description: String!){
-    addCategory(name: $name, description: $description) {
+mutation addCategory ($name: String!){
+    addCategory(name: $name) {
       name
     }
   }
@@ -122,7 +131,7 @@ mutation {
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
 query
   {
-    getProductByCategoryName(name:"franciscotov") {
+    getProductByCategoryName(name:"Bitter") {
       id
       name
       price
@@ -130,3 +139,12 @@ query
       image
     }
   }
+
+  // PARA OBTENER UN PRODUCTO POR NOMBRE
+  query 
+  {
+  getProductByName(name : "Cuchillo"){
+    name
+
+  }
+}

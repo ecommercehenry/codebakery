@@ -1,12 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useMutation } from "@apollo/client"
 import CREATE_CATEGORY from "../../Apollo/mutations/createCategory"
+import './style.css'
 
 function FormCreateCategory() {
   const [input, setInput] = useState({
     name: "",
     description: "",
   })
+
+  const [added, setAdded] = useState(false)
 
   function handleInputChange(e) {
     setInput({
@@ -23,35 +26,30 @@ function FormCreateCategory() {
   function handleSubmit(e) {
     e.preventDefault()
     addCategory({
-      variables: { name: input.name, description: input.description },
+      variables: { name: input.name },
     })
     setInput({
       ...input,
       name: "",
       description: ""
     })
+    setAdded(true)
   }
 
+
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <h1>ADD A NEW CATEGORY</h1>
-      <input
+    <form onSubmit={(e) => handleSubmit(e)} style={{position:"relative"}}>
+      {added? <div className="Success-btnn" onClick={() => setAdded(false)}>Category added</div> : <> <input
         type="text"
         name="name"
-        placeholder="Type an activity here"
+        placeholder="Type category name"
         onChange={handleInputChange}
         value={input.name}
         required
-      />
-      <input
-        type="text"
-        name="description"
-        placeholder="Type an activity here"
-        onChange={handleInputChange}
-        value={input.description}
-        required
-      />
-      <button type="submit">Add Category</button>
+        className="category-input"
+      >
+      </input>
+      <button type="submit" className="category-btn">Add Category</button></>}
     </form>
   )
 }

@@ -8,9 +8,13 @@ query{
     id
     image
     price
+    stock
+    categories{
+      name
+      id
+    }
   }
 }
-
 `
 
 export default allProducts
