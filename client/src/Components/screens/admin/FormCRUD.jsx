@@ -24,7 +24,6 @@ function FormCRUD({id, handlerOnClick}) {
     price: product.price,
     image: product.image,
   });
-
   const dispatch = useDispatch()
   function inputHandler(e){
     setInputs({ 
@@ -32,7 +31,6 @@ function FormCRUD({id, handlerOnClick}) {
       [e.target.name]: e.target.value 
     });
   }
-
   const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT)
   useEffect(()=>{
     if(data && !loading){
@@ -65,7 +63,7 @@ function FormCRUD({id, handlerOnClick}) {
     return (
       <form 
       onSubmit={submitHandler}    
-      className="element-container">
+      className="containerForm">
         <div className="info-container">
         <div className="F-image-container">
           <label>Product</label>
