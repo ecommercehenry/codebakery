@@ -1,7 +1,6 @@
+import { gql } from "@apollo/client"
 
-  import { gql } from "@apollo/client"
-
-const getProductByName = gql`
+const getProductByArray = gql`
 {
   getProductByArray($array:[Int!]) {
     id
@@ -9,5 +8,4 @@ const getProductByName = gql`
   }
 }
 `
-
-export default getProductByName
+export default getProductByArray
