@@ -112,7 +112,9 @@ mutation {
 }
 // PARA LA MODIFICACION DE UN USUARIO
 mutation {
-  modifyUser(id: 1 ,name: "NAME", password: "12333334", email: "email@email.com", role:"role")
+  modifyUser(id: 1 ,name: "NAME", password: "12333334", email: "email@email.com", role:"role"){
+    name
+  }
 }
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
 query

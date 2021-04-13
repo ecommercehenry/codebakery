@@ -28,6 +28,6 @@ module.exports = (sequelize) => {
         allowNull: false, //al menos una imagen debe tener
       },
     },
-    { timestamps: false }
+    { timestamps: true }
   )
 }
