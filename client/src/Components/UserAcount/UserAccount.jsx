@@ -30,27 +30,19 @@ const UserAcount = () => {
         localStorage.setItem('email', data.validateUser.email);
         localStorage.setItem('role', data.validateUser.role);
         localStorage.setItem('token', data.validateUser.token);
+        // es necesario el reloaded para luego poder redirigir
         window.location.reload();
-        // return <Redirect to='/admin' />
-        // localStorage
       }else{
         alert("error")
       }
-  //     let role = localStorage.getItem('role');
-  // let token = localStorage.getItem('token');
-  // if(role  && token){
-  //   console.log('aysyayysyays')
-    
-  //   return <Redirect to='/admin' />
-  //   // window.location = '/admin'
-  // }
     console.log(data)
   }})
   let role = localStorage.getItem('role');
   let token = localStorage.getItem('token');
   if(role  && token){
-    return <Redirect to='/admin' />
-    // window.location = '/admin'
+    // la redireccion se debe cambiar seún el role del usuario
+    if(role === 'admin') return <Redirect to='/admin' />;
+    else return <Redirect to='/catalogue' />;
   }
   const handleLogin = async (form) => {
     login({variables: {name:form.login,password:form.password}})    
