@@ -18,6 +18,7 @@ async function createUser(name, password, email, role) {
       role
     })
   } catch (error) {
+    console.log(error.message)
     throw new Error(error);
   }
 }

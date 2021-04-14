@@ -7,11 +7,12 @@ const jwt = require('jsonwebtoken');
 module.exports = {
 	addCategory: (_, args) => {
 		try{
-		const authToken = args.headers.authtoken
-		const decoded = jwt.verify(authToken, "secret")
-		return addCategory(_.name)
+			const authToken = args.headers.authtoken
+			console.log(authToken, 'ausuuausuasuas')
+			const decoded = jwt.verify(authToken, "secret")
+			return addCategory(_.name)
 		}catch(err){
-			return {name:"error", id:-1}
+			return {__typename: 'error', name:"error", detail: 'No admin'}
 		}
 	}
 }

@@ -5,6 +5,8 @@ query validateUser($name: String!, $password: String!){
     validateUser(name:$name,password:$password){
         __typename
          ... on user{
+           name
+           email
            role
            token
          }
