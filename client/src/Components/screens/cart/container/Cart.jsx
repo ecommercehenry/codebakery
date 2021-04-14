@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import getProductByArray from "../../../../Apollo/queries/getProductByArray";
+import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { gql } from "graphql-tag";
 
@@ -14,18 +13,17 @@ const Cart = () => {
 }
   `;
   // localStorage.setItem("cart", aca va la otra cosa);
-  // var cart = localStorage.getItem('cart');
-  let [items, setItems] = useState([]);
+  var cart = localStorage.getItem('cart');
   const { data } = useQuery(query);
 
   useEffect(() => {
-    data?.getProductByArray.forEach( product =>
-      setItems(product, ...items)
-    );
+    if (data){
+      localStorage.setItem("cart", JSON.stringify(data.getProductByArray))
+    } 
   }, [data]);
 
-  console.log(data, items);
-  return <div> carrito </div>;
+  console.log( storage);
+  return <div> {JSON.parse(cart).map(producto => <li>{producto.name}</li>)} </div>;
 };
 
 export default Cart;
