@@ -6,6 +6,7 @@ module.exports = `
         role: String!,
         products: [product],
         reviews: [review]
+        token: String,
     }
 
 `

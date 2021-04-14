@@ -45,6 +45,13 @@ async function productCategory({ id }) {
     throw new Error(error);
   }
 }
+async function getProductByArray({array}) {
+  return await Product.findAll({
+    where:{
+      id:array,
+    }
+  })
+}
 
 async function addProduct(args) {
   try {
@@ -202,7 +209,6 @@ async function getProductByName({ name }) {
   return product
 }
 
-
 module.exports = {
   getAllProducts,
   modifyProduct,
@@ -214,4 +220,5 @@ module.exports = {
   productCategory,
   getProductByCategoryName, 
   getProductByName,
+  getProductByArray
 };
