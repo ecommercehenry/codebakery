@@ -55,7 +55,7 @@ function TextCRUD({ id }) {
               </div>
               <div className="edit-button">
                 
-                <button>Edit</button>
+                <button onClick={handlerOnClick}>Edit</button>
               </div>
               
             </div>
@@ -94,7 +94,7 @@ const StyledTextCRUD = styled.div`
     height: 15vh;
     display:flex;
     align-items: center;
-    justify-content: center;
+    justify-content:center;
     background-color: rgb(236, 227, 250);
     border-radius: 40px;
 }

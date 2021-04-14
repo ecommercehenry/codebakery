@@ -57,6 +57,7 @@ function FormCRUD({id, handlerOnClick}) {
       }
     )
     alert("producto modificado!")
+    handlerOnClick()
 
   };
   
