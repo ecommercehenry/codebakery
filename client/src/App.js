@@ -11,6 +11,7 @@ import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCatego
 
 import FormCRUD from "./Components/screens/admin/FormCRUD"
 import GlobalStyle from './Components/GlobalStyle';
+import GuestCart from './Components/screens/cart/GuestCart';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
       {/* <Route path="/" component={NavBar}/> */}
       <Route path="/admin" component={AdminPanel}/>
       <Route path="/catalogue" component={Catalogue}/>
-      <Route path="/cart" component={Cart}/>
+      <Route path="/cart" component={GuestCart}/>
+      {/* <Route path="/guestCart" component={GuestCart}/> */}
       <Route path="/about-us" component={AboutUs}/>
       
       {/* Debo agregar al componente padre que corresponda @Chu */}

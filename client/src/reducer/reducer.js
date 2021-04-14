@@ -3,6 +3,7 @@ import {
   GET_PRODUCT_BY_NAME,
   GUARDAR_PRODUCTOS,
   SET_SEARCH,
+  ADD_PRODUCT_TO_CART
 } from "../actions";
 //import allProducts from "../Apollo/queries/allProducts";
 
@@ -12,6 +13,7 @@ const initialState = {
   filterProduct: "",
   allProduct: [],
   search: false,
+  itemsToCart:[],
 };
 // SET_SEARCH
 const reducer = (state = initialState, action) => {
@@ -48,6 +50,27 @@ const reducer = (state = initialState, action) => {
         stateSearch: action.payload,
      
       };
+
+    case ADD_PRODUCT_TO_CART:
+      let id = action.payload;
+      let cart = state.itemsToCart;
+
+      
+      if(typeof id !== 'number'){
+        cart.push(id)
+      }else{
+        if(cart.length===0){
+            cart.push({id:id,quantity:1})   
+        }else{
+          let found = cart.find(obj=>obj.id===id)
+          if(found === undefined){
+              cart.push({id:id,quantity:1})
+          }else{
+              found.quantity++
+          }
+        }
+      }
+      state.itemsToCart=cart;
 
     default:
       return state;
