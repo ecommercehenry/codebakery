@@ -27,9 +27,7 @@ function App() {
       <Route path="/log-in" component={UserAccount} />
       <Route path="/sign-up" component={CreateUserAccount} />
 
-      {/* Debo agregar al componente padre que corresponda @Chu */}
-      <Route path="/admin/form" component={FormCRUD} />
-    </>
+     </>
   );
 }
 
