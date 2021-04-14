@@ -1,11 +1,10 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 const getProductByArray = gql`
-{
-  getProductByArray($array:[Int!]) {
-    id
-    name
+  {
+    getProductByArray(array: [Int] ) {
+      name
+    }
   }
-}
-`
-export default getProductByArray
+`;
+export default getProductByArray;
