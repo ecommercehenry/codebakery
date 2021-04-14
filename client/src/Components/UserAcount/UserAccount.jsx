@@ -29,11 +29,12 @@ const UserAcount = () => {
         localStorage.setItem('name', data.validateUser.name);
         localStorage.setItem('email', data.validateUser.email);
         localStorage.setItem('role', data.validateUser.role);
-        localStorage.setItem('token', data.validateUser.token);
         // es necesario el reloaded para luego poder redirigir
+        alert(`Bienvenido ${data.validateUser.name}`)
+
         window.location.reload();
       }else{
-        alert("error")
+        alert(data.validateUser.detail)
       }
     console.log(data)
   }})
