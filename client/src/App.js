@@ -22,7 +22,6 @@ function App() {
       <Route path="/admin" component={AdminPanel}/>
       <Route path="/catalogue" component={Catalogue}/>
       <Route path="/cart" component={GuestCart}/>
-      {/* <Route path="/guestCart" component={GuestCart}/> */}
       <Route path="/about-us" component={AboutUs}/>
       
       {/* Debo agregar al componente padre que corresponda @Chu */}

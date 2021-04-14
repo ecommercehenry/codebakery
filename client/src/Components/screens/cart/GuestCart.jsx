@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 import {useSelector} from 'react-redux';
 import { useQuery, gql} from '@apollo/client';
 
@@ -10,7 +10,7 @@ import ProductOnCart from './ProductOnCart';
 
 
 const GuestCart = () => {
-    
+    let storage = window.localStorage;
     let {itemsToCart} = useSelector((state)=>state.reducer);
     let productsArray = itemsToCart.map(elem=>elem.id);
     productsArray = JSON.stringify(productsArray)
@@ -39,6 +39,21 @@ const GuestCart = () => {
     //la info de produc esta en local storage!
     //si usuario se loguea => local storage pasa a tabla orden con status = carrito
 
+    //modelo de carrito guest price INT! quantity INT! en cuanto se loguea y se convierte en orden
+    //se lo relaciona con una orden y con los productos
+    let toLocalStore =[]
+    if(itemsToCart.length){
+        itemsToCart.map(item => 
+            {let newItem= {
+                id:item.id,
+                quantity: item.quantity,
+                price: item.price
+            }
+            toLocalStore.push(newItem)
+        })
+        localStorage.setItem("cart", JSON.stringify(toLocalStore))
+    }
+
     if(data!==undefined){
         itemsToCart.forEach(item=>{ 
             data['getProductByArray'].forEach(elem=> {
@@ -50,7 +65,7 @@ const GuestCart = () => {
                 }
             })
         })
-        console.log('nuevo',itemsToCart)
+        console.log('nuevo',itemsToCart, storage)
     }
 
     return (

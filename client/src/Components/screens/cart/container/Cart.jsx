@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { gql } from "graphql-tag";
+import {useSelector} from 'react-redux';
+
 
 const Cart = () => {
+  let {itemsToCart} = useSelector((state)=>state.reducer);
   let dataDePrueba = JSON.stringify([2, 1, 5, 3]);
   let storage = window.localStorage;
   let query = gql`
@@ -22,7 +25,7 @@ const Cart = () => {
     } 
   }, [data]);
 
-  console.log( storage);
+  console.log( storage, itemsToCart);
   return <div> {JSON.parse(cart).map(producto => <li>{producto.name}</li>)} </div>;
 };
 
