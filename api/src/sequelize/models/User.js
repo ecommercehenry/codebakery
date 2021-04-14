@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
         return () => this.getDataValue("salt")
       },
     },
-  }, { timestamps: false })
+  }, { timestamps: true })
   
 
   Users.generateSalt = function () {

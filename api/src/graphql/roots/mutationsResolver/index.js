@@ -1,12 +1,13 @@
-const { modifyProduct } = require("./modifyProduct")
-const { updateCategory } = require("./updateCategory")
-const { addCategory } = require("./addCategory")
-const { deleteCategory } = require("./deleteCategory")
-const { addCategoryToProduct } = require("./addCategoryToProduct")
-const { removeCategoryFromProduct } = require("./removeCategoryFromProduct")
-const { deleteById } = require("./deleteById")
-const { addProduct } = require("./addProduct")
-const { createUser } = require("./createUser")
+const { modifyProduct } = require("./modifyProduct");
+const { updateCategory } = require("./updateCategory");
+const { addCategory } = require("./addCategory");
+const { deleteCategory } = require("./deleteCategory");
+const { addCategoryToProduct } = require("./addCategoryToProduct");
+const { removeCategoryFromProduct } = require("./removeCategoryFromProduct");
+const { deleteById } = require("./deleteById");
+const { addProduct } = require("./addProduct");
+const { createUser } = require("./createUser");
+const { modifyUser } = require("./modifyUser");
 
 module.exports = {
   modifyProduct,
@@ -18,4 +19,5 @@ module.exports = {
   deleteById,
   addProduct,
   createUser,
+  modifyUser,
 }
