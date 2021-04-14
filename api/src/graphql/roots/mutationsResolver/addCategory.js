@@ -1,7 +1,6 @@
 const { addCategory } = require("../../../services/categories")
 const jwt = require("jsonwebtoken")
 
-// getAllProducts
 module.exports = {
   addCategory: (_, args) => {
     try {

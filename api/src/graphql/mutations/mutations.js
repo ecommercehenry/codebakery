@@ -1,13 +1,13 @@
 module.exports = `
-union resultAddCategory = category | error
+union resultCategory = category | error
 union resultProduct = product | error
 
 union resultUsers = user | error
 
 type Mutation{
     modifyProduct(id: Int!, dataToModify: productInput!): resultProduct
-    updateCategory(id : Int!, input: categoryInput): Int
-    addCategory(name: String!): resultAddCategory
+    updateCategory(id : Int!, input: categoryInput): resultCategory
+    addCategory(name: String!): resultCategory
     deleteCategory(id: Int!): Boolean
     deleteById(id: Int!): Boolean
     addCategoryToProduct(idProduct: Int!,idCategory: Int!): resultProduct

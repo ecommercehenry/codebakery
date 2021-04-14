@@ -182,3 +182,43 @@ query
     }
   }
 }
+
+// MUTATION PARA MODIFICAR PRODUCTOS
+mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
+  modifyProduct(id: $id, dataToModify: $dataToModify){
+    __typename
+    ... on product {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+{
+  "id": 1,
+  "dataToModify": {
+    "name": "Bonito"
+  }
+}
+
+
+// MUTATION PARA ACTUALIZAR UNA CATEGORIA
+mutation updateCategory ($id: Int!, $input: categoryInput!){
+  updateCategory(id: $id, input: $input){
+    __typename
+    ... on category {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
