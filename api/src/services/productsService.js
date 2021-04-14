@@ -128,7 +128,8 @@ async function modifyProduct(id, dataToModify) {
       }
       //Find again and get product with the changes
       const updatedProduct = await getProductById(id)
-      return updatedProduct;
+      let obj = {__typename: 'product', ...updatedProduct.dataValues}  
+      return obj;
     } catch (error) {
       return {__typename: 'error', name:"The was a problem finding the id of product", detail: "The id doesn't exist"}
     }
