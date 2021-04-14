@@ -1,10 +1,19 @@
 import React,{useState} from 'react'
-
+import {useDispatch} from 'react-redux';
+import {removeProductFromCart} from '../../../actions/index'
+//styles
 import styled from 'styled-components';
+//components
 import StockCounter from './StockCounter'
+
 
 const ProductOnCart = ({id,image,name,price,stock,quantity}) => {
     let [newQuantity,setNewQuantity] = useState(quantity);
+    const dispatch = useDispatch()
+    const deleteHandler = (id) => {
+        dispatch(removeProductFromCart(id)) //action
+    }
+
     return (
         <StyledProductOnCart>
             <div className="imagee">
@@ -20,7 +29,7 @@ const ProductOnCart = ({id,image,name,price,stock,quantity}) => {
                 <div className="unitary">Precio: ${price}</div>
             </div>
 
-            <button className="deleteItemm">D</button>
+            <button className="deleteItemm" onClick={()=>deleteHandler(id)}>D</button>
             
         </StyledProductOnCart>
     )
