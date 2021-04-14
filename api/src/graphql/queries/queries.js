@@ -1,4 +1,4 @@
-console.log('queires')
+// console.log('queires') 
 module.exports = `
 union resultValidate = user | error
     type Query{

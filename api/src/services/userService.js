@@ -58,7 +58,7 @@ async function loginUser(name,password){
         role: user.role,
       }
     }else{
-      return {__typename:"error",name:"invalid password", detail:"invalid password"}
+      return {__typename:"error", name:"invalid password", detail:"invalid password"}
     }
   }
 }

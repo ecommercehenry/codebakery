@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
 import "./UserAccount.css";
 import styled from "styled-components";
-
 import CREATE_USER from "../../Apollo/mutations/createUser";
+
+import { Redirect } from "react-router-dom";
 
 // Login/ out
 import Login from "./Login";
@@ -24,14 +24,34 @@ const UserAcount = () => {
   useEffect(()=>{
     if(!loading && data){
       if(data.validateUser.token){
-        alert("logueado")
+        // alert("logueado")
         localStorage.setItem('token', data.validateUser.token);
+        localStorage.setItem('name', data.validateUser.name);
+        localStorage.setItem('email', data.validateUser.email);
+        localStorage.setItem('role', data.validateUser.role);
+        localStorage.setItem('token', data.validateUser.token);
+        window.location.reload();
+        // return <Redirect to='/admin' />
+        // localStorage
       }else{
         alert("error")
       }
+  //     let role = localStorage.getItem('role');
+  // let token = localStorage.getItem('token');
+  // if(role  && token){
+  //   console.log('aysyayysyays')
+    
+  //   return <Redirect to='/admin' />
+  //   // window.location = '/admin'
+  // }
     console.log(data)
   }})
-
+  let role = localStorage.getItem('role');
+  let token = localStorage.getItem('token');
+  if(role  && token){
+    return <Redirect to='/admin' />
+    // window.location = '/admin'
+  }
   const handleLogin = async (form) => {
     login({variables: {name:form.login,password:form.password}})    
 
