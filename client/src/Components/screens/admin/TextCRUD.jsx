@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 // import allProducts from "../../../Apollo/queries/allProducts"
 // import './TextCRUD.css'
+// import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 import FormCRUD from "./FormCRUD"
 import { useSelector } from "react-redux";
-
 import styled from 'styled-components';
 
-// import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"
 
 function TextCRUD({ id }) {
   const product = useSelector((state) => state.productsReducer.products[id]);
@@ -24,9 +23,10 @@ function TextCRUD({ id }) {
 
   if (product) {
     return (
-      <StyledTextCRUD 
-       onDoubleClick={handlerOnClick}>
-        {show ? (
+      <>
+      {show ? (
+        <StyledTextCRUD 
+        onDoubleClick={handlerOnClick}>
           <div className="element-container" id={id}>
             <div className="info-container">
               <div className="image-container">
@@ -60,6 +60,7 @@ function TextCRUD({ id }) {
               
             </div>
           </div>
+          </StyledTextCRUD>
         ) : (
           <FormCRUD
            id={id} 
@@ -67,7 +68,7 @@ function TextCRUD({ id }) {
            handlerOnClick={handlerOnClick}
             />
         )}
-      </StyledTextCRUD>
+    </>
     );
   } else {
     return "Loading";
