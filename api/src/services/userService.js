@@ -40,7 +40,7 @@ async function loginUser(name,password){
     }
   })
   if(!user){
-    return {name:"the user dont exists",detail:"hola"}
+    return {__typename:"error",name:"the user dont exists",detail:"the user dont exists"}
   }
   if(user){
     const hashed = Users.encryptPassword(password, user.salt())
@@ -50,6 +50,7 @@ async function loginUser(name,password){
         name:user.name
       },"secret",{ expiresIn: 60 * 60 }) //60*60 = 3600 seg = 1 hour
       return {
+        __typename:"user",
         id: user.id,
         name: user.name,
         email: user.email,
@@ -57,7 +58,7 @@ async function loginUser(name,password){
         role: user.role,
       }
     }else{
-      return {name:"invalid password", detail:"hola"}
+      return {__typename:"error",name:"invalid password", detail:"invalid password"}
     }
   }
 }

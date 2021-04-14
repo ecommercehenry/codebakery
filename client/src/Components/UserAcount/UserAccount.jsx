@@ -22,12 +22,16 @@ const UserAcount = () => {
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    if(!loading && data && data.token){
-      localStorage.setItem('token', data.token);
-    }
-          console.log(data)
+    if(!loading && data){
+      if(data.validateUser.token){
+        alert("logueado")
+        localStorage.setItem('token', data.validateUser.token);
+      }else{
+        alert("error")
+      }
+    console.log(data)
+  }})
 
-  })
   const handleLogin = async (form) => {
     login({variables: {name:form.login,password:form.password}})    
 
