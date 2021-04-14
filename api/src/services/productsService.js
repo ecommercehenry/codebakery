@@ -86,7 +86,7 @@ async function addProduct(args) {
  * @param  {} id value to define what product going to be modified
  * @param  {} dataToModify object that contains the data to be modified
  */
-async function modifyProduct({ id, dataToModify }) {
+async function modifyProduct(id, dataToModify) {
   async function getCategoriesDB(categoriesStr){
     let out = []
     for(categorie of categoriesStr){
@@ -102,6 +102,7 @@ async function modifyProduct({ id, dataToModify }) {
     }
     return out
   }
+  
   async function getProductById(id){
     const product = await Product.findOne({
       where: {
@@ -129,16 +130,10 @@ async function modifyProduct({ id, dataToModify }) {
       const updatedProduct = await getProductById(id)
       return updatedProduct;
     } catch (error) {
-      return {
-        error: "Problem finding the id of product",
-        detail: "Possibly the id passed dont exists",
-      };
+      return {__typename: 'error', name:"The was a problem finding the id of product", detail: "The id doesn't exist"}
     }
   } else {
-    return {
-      error: "the data passed is not valid",
-      detail: "A element of the object not is a valid attribute",
-    };
+    return {__typename: 'error', name:"The data passed is not valid", detail: "The element of the object not is a valid attribute"}
   }
 
   function validateNewData(data) {
