@@ -4,6 +4,7 @@ module.exports = `
         name : String!,
         email: String!,
         role: String!,
+        token: String,
     }
 
 `

@@ -8,11 +8,11 @@ async function getAllCategories() {
   }
 }
 
-async function addCategory({name}){
+async function addCategory(name){
   try {  
-    return await Category.create({
-        name
-    })
+      return await Category.create({
+          name
+        })
   } catch (error) {
     throw new Error(error);
   }

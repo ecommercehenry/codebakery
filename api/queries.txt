@@ -148,3 +148,18 @@ query
 
   }
 }
+
+
+
+{
+  validateUser(name: "Fran", password: "hw"){
+  	__typename
+    ...on user {
+      name
+    }
+    ...on error {
+      name
+      detail
+    }
+  }
+}
