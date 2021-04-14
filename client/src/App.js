@@ -2,7 +2,7 @@
 import React from 'react';
 import './App.css';
 import {Route} from 'react-router-dom';
-import Home from './Components/screens/home/container/Home';
+import Landing from './Components/screens/landing/Landing';
 import AdminPanel from './Components/screens/admin/container/AdminPanel';
 import Catalogue from './Components/screens/catalogue/container/Catalogue';
 import Cart from './Components/screens/cart/container/Cart';
@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <GlobalStyle/>
-      <Route exact path="/" component={Home}/>
+      <Route exact path="/" component={Landing}/>
       {/* <Route path="/" component={NavBar}/> */}
       <Route path="/admin" component={AdminPanel}/>
       <Route path="/catalogue" component={Catalogue}/>
