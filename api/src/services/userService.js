@@ -10,22 +10,21 @@ async function getAllUsers() {
 }
 
 async function createUser(name, password, email, role) {
-  try {  
-    return await Users.create({
+  try {
+    let newUser = await Users.create({
       name,
       password,
       email,
       role
-    })
+    });
+    return {__typename: 'user' , ...newUser.dataValues};
   } catch (error) {
-    console.log(error.message)
+    // console.log('erroe')
     throw new Error(error);
   }
 }
 
 async function modifyUser(id, name, password, email, role) {
-  // return await Users.findAll()
-  console.log('vamos a la DB')
   let obj = {}; 
   if(name) obj.name = name;
   if(password) obj.password = password;

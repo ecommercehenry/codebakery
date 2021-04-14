@@ -107,19 +107,30 @@ mutation{
 
 //PARA ELIMINAR UNA CATEGORIA DE UN PRODUCTO
 mutation{
-  removeCategoryFromProduct(idProduct:1,idCategory:1){
+  removeCategoryFromProduct(idProduct: 1, idCategory: 1){
    	name
   }
 }
 
 
-// PARA AGREGAR UN USUARIO
-mutation {
-  createUser(name: "ivan", password: "helloworld", email: "ivan@ivan.com", role:"admin"){
-    name
+// PARA AGREGAR UN USUARIO actualizada con nuevo modelo
+mutation createUser($name: String!, $password: String!, $email: String!, $role: String!){
+  createUser(name: $name, password: $password, email: $email, role:$role){
+    __typename
+    ... on user{
+      name
+      id
+      email
+      role
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
   }
 }
-// PARA LA MODIFICACION DE UN USUARIO
+// PARA LA MODIFICACION DE UN USUARIO Actualizada con proteccion
 mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, $role:String){
   modifyUser(id: $id ,name: $name, password: $password, email: $email, role:$role){
     __typename
