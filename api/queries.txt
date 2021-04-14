@@ -147,6 +147,24 @@ query
     name
 
   }
+
+  // Para obtener todas las ordenes que ya atravesaron el checkout
+  query{
+    getAllOrders(){
+      order{
+        id
+        status
+        lineal_order{
+          price
+          quantity
+          product{
+            id
+            name
+          }
+        }
+      }
+    }
+  }
 }
 
 // PARA OBTENER TODOS LOS USUARIOS (SIN CONTRASEÑA) CON SUS PRODUCTOS Y CON SUS REVIEWS

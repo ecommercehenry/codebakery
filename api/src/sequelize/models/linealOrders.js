@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
     "Lineal_Order",
     {
       price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
         allowNull: false,
       },
       quantity: {
