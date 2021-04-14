@@ -10,6 +10,7 @@ const {
     createUser,
     modifyUser
 } = require("./mutationsResolver/")
+
 const {
     getAllCategories,
     product, 
@@ -17,11 +18,10 @@ const {
     getProductByCategoryName,
     productCategory, 
     getProductByName,
+    getAllUsers,
     getProductByArray,
     validateUser
 } = require("./queriesResolvers/")
-
-
 
 // product
 const root = {
@@ -45,6 +45,7 @@ const root = {
     getProductByName,
     getProductByCategoryName,
     getProductByArray,
+    getAllUsers,
     validateUser
     
 }
