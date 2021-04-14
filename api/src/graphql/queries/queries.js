@@ -1,8 +1,8 @@
 // console.log('queires') 
 module.exports = `
-union resultValidate = user | error
-    type Query{
+    union resultValidate = user | error
 
+    type Query{
         product: [product],
         productById(id :Int!): product,
         productCategory(id: Int!): product
