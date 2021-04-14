@@ -25,13 +25,19 @@ async function createUser(name, password, email, role) {
 
 async function modifyUser(id, name, password, email, role) {
   // return await Users.findAll()
-  let obj = {};
+  console.log('vamos a la DB')
+  let obj = {}; 
   if(name) obj.name = name;
   if(password) obj.password = password;
   if(email) obj.email = email;
   if(role) obj.role = role;
-  let user = await Users.findOne({ where: { id } });
-  return await user.update(obj, {attributes: {exclude: ['password', 'salt']}});
+  try{
+    let user = await Users.findOne({ where: { id } });
+    let newUser = await user.update(obj, {attributes: {exclude: ['password', 'salt']}});
+    return {__typename: 'user', ...newUser.dataValues};
+  }catch{
+    throw new Error(error);
+  }
 }
 
 async function loginUser(name,password){

@@ -120,12 +120,20 @@ mutation {
   }
 }
 // PARA LA MODIFICACION DE UN USUARIO
-mutation {
-  modifyUser(id: 1 ,name: "NAME", password: "12333334", email: "email@email.com", role:"role"){
-    name
-    id
-    email
-    role
+mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, $role:String){
+  modifyUser(id: $id ,name: $name, password: $password, email: $email, role:$role){
+    __typename
+    ... on user{
+      name
+      id
+      email
+      role
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
   }
 }
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)

@@ -8,7 +8,7 @@ async function getAllCategories() {
   }
 }
 
-async function addCategory(name){
+async function addCategory(name){ 
   try { 
     let  category = await Category.create({ name });
     // console.log(category, 'tatstats')
