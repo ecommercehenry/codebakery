@@ -7,18 +7,21 @@ const {
     removeCategoryFromProduct,
     deleteById,
     addProduct,
-    createUser
+    createUser,
+    modifyUser
 } = require("./mutationsResolver/")
+
 const {
     getAllCategories,
     product, 
     productById,
     getProductByCategoryName,
     productCategory, 
-    getProductByName 
+    getProductByName,
+    getAllUsers,
+    getProductByArray,
+    validateUser
 } = require("./queriesResolvers/")
-
-
 
 // product
 const root = {
@@ -32,7 +35,7 @@ const root = {
     removeCategoryFromProduct,
     addProduct,
     createUser,
-
+    modifyUser,
     //Queries
     
     productById,
@@ -41,6 +44,9 @@ const root = {
     getAllCategories,
     getProductByName,
     getProductByCategoryName,
+    getProductByArray,
+    getAllUsers,
+    validateUser
     
 }
 

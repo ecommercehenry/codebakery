@@ -1,6 +1,6 @@
 import React from "react";
 
-const buttonAdd = () => {
+const ButtonAdd = () => {
   return (
     <div>
       <div className="button-create-conteiner">
@@ -12,4 +12,4 @@ const buttonAdd = () => {
   );
 };
 
-export default button;
+export default ButtonAdd;

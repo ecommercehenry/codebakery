@@ -42,13 +42,18 @@
     width: fit-content!important;
     border-radius: 40px;
     border: none;
-    background-color: #755588;
+    background-color: #5E3F71;
     text-decoration: none !important;
     color: white;
     font-weight: bold;
     font-size: 1em;
     padding-bottom: 0.5%;
     padding: 0 1.5vw 0 1.5vw;
+    transition: background-color 0.2s ease;
+}
+
+.purple-btn:hover{
+    background-color: #532c6b
 }
 
 .display-linebreak{

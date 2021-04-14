@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react';
+import {Link, Route} from 'react-router-dom'
 
 //styles
 import styled from 'styled-components';
+import FormCreateCategory from '../../FormCreateCategory/FormCreateCategory';
 
 //components
 import SearchBar from './SearchBar';
@@ -12,35 +14,41 @@ const AdminNavBar = ({setAddProduct}) => {
         setAddProduct(true)
     }
 
+    const [add, setAdd] = useState(false)
+
     return (
         <StyledNavBar>
             <div className="onLeft">   
                 <div className="optionTab">PRODUCTS</div>
                 <SearchBar/>
             </div>
-            <button className="addProduct" onClick={buttonHandler}>
+            
+            {add ? <div className="add-category" onClick={() => setAdd(!add)}>"+ ADD CATEGORY"</div> : <div className="add-category"> <FormCreateCategory setAdd={setAdd}/></div>}
+
+            <Link to="/admin/add-product" className="addProduct purple-btn" onClick={buttonHandler}>
                 + ADD PRODUCT
-            </button>
+            </Link>
+            {/* <button className="addProduct" onClick={buttonHandler}>
+                + ADD PRODUCT
+            </button> */}
 
         </StyledNavBar>
     )
 }
 
 const StyledNavBar = styled.div`
-    width: 87%;
-    height: 13vh;
+    width: 77vw;
+    max-width: 100%;
+    height: 15vh;
     display:flex;
     align-items: center;
     justify-content: space-between;
-    position:fixed;
-    top: 0;
-    padding: 0 6rem 0 4rem;
-    background:white;
+    margin: 0 6rem 0 4rem;
     .onLeft{
         .optionTab{
             color:#513066;
-            height:3rem;
-            font-size:3rem;
+            height:4.5vh;
+            font-size: 2em;
             display:flex;
             align-items: center;
         }
@@ -52,15 +60,23 @@ const StyledNavBar = styled.div`
     .addProduct{
         background:#5E3F71;
         color:white;
-        width: 23%;
-        height:3rem;
-        font-size:1.5rem;
         display:flex;
         align-items: center;
         justify-content:center;
-        border-radius:20px;
-        padding: 0 2.3rem;
-        border:none;
+    }
+    .purple-btn:hover{
+        background-color: #734191
+    }
+    .add-category{
+        background:#5E3F7100;
+        display:flex;
+        align-items: center;
+        justify-content:center;
+        color: rgba(0, 0, 0, 0.726)
+    }
+    .add-category:hover{
+        color: black;
+        cursor: pointer;
     }
 `;
 

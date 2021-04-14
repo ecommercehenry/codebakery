@@ -12,22 +12,21 @@
     z-index: 0;
     margin-top: -100px;
     padding-top: 100px;
-} */
+}  */
 
-/* .categories{
+ .categories{
     display: flex;
-    margin: 150px auto;
     text-align: center;
-    
     background-color: #DAD7DC;
     width: 100%;
-    height: 200px;
+    height: 180px;
     position: relative;
     justify-content: center;
     align-items: center;
     z-index: 0;
     margin-top: -100px;
     padding-top: 100px;
+    padding-bottom: 2px;
 }
 
 .btn {
@@ -73,4 +72,4 @@
     -webkit-transform: scale(1, 1);
     -ms-transform: scale(1, 1);
     transform: scale(1, 1)
-  } */
+  }

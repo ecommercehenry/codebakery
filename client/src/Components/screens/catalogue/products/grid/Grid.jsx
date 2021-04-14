@@ -9,9 +9,6 @@ import styled from 'styled-components';
 import ProductCard from './ProductCard';
 //import "./grid.css";
 
-
-import "./grid.css";
-
 const Grid = () => {
 
   let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state.reducer);
@@ -22,21 +19,24 @@ const Grid = () => {
   if(search === true){
     arr = allProduct.filter((element) => element.name === filterProduct) 
   }
-  console.log(allProduct)
-  console.log(stateproducts)
+  // console.log(allProduct)
+  // console.log(stateproducts)
   return (
+
     <StyledGrid>
-      {
-      allProduct?.map((product) => {
-        if(filterProduct === ""){
-          return <ProductCard key={product.id} id={product.id} name={product.name} image={product.image}/>
-        }else{
-          if(filterProduct === product.name){
-            return <ProductCard key={product.id} id={product.id} name={product.name} image={product.image}/>
+      <>
+        {
+          search === false ?  
+        (stateproducts && stateproducts?.length > 0
+          ? stateproducts.map((element, i) => {
+                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price}/>
+            }) : "Cargando")
+            : (arr.length > 0 ? arr.map((element, i ) => {
+                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price}/>
+            }): "No se encontraron Productos" 
+            )
           }
-        }
-      })
-      }
+      </>
     </StyledGrid>
   );
 };

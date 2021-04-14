@@ -5,6 +5,16 @@ query getAllProducts{
     name
   }
 }
+///
+obtener todos los elementos de un array de ids 
+
+{
+  getProductByArray(array:[1,2,2,3,4]) {
+    id
+    name
+  }
+}
+
 /// obtener las categorias 
 
 query getAllCategories{
@@ -109,6 +119,15 @@ mutation {
     name
   }
 }
+// PARA LA MODIFICACION DE UN USUARIO
+mutation {
+  modifyUser(id: 1 ,name: "NAME", password: "12333334", email: "email@email.com", role:"role"){
+    name
+    id
+    email
+    role
+  }
+}
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
 query
   {
@@ -127,5 +146,39 @@ query
   getProductByName(name : "Cuchillo"){
     name
 
+  }
+}
+
+// PARA OBTENER TODOS LOS USUARIOS (SIN CONTRASEÑA) CON SUS PRODUCTOS Y CON SUS REVIEWS
+{
+  getAllUsers{name, email, products{
+    id
+    name
+    description
+    price
+    stock
+    image
+    categories{
+      id 
+      name  
+    }  
+  }, reviews{
+    id
+    title
+  	description
+    stars
+  }}
+
+
+{
+  validateUser(name: "Fran", password: "hw"){
+  	__typename
+    ...on user {
+      name
+    }
+    ...on error {
+      name
+      detail
+    }
   }
 }

@@ -11,19 +11,19 @@ import store from "./store"
 
 
 // cliente apollo
+const token = localStorage.getItem('token');
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  headers: {authtoken:token}
 })
 
 ReactDOM.render(
 <ApolloProvider client = {client}>
 <Provider store={store} >
- 
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  
   </Provider>
   </ApolloProvider>,
   document.getElementById("root")

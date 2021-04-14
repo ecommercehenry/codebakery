@@ -1,36 +1,57 @@
-import React from "react";
-import { useMutation } from "@apollo/client";
+import React, { useEffect } from "react";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
 import "./UserAccount.css";
 import styled from "styled-components";
-
 import CREATE_USER from "../../Apollo/mutations/createUser";
+
+import { Redirect } from "react-router-dom";
 
 // Login/ out
 import Login from "./Login";
 import Logout from "./Logout";
+import { useDispatch } from "react-redux";
+import validateUser from "../../Apollo/queries/validateUser"
 
 const UserAcount = () => {
-  const [createUser, { data }] = useMutation(CREATE_USER);
+  const [login, { loading, data }] = useLazyQuery(validateUser);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = ({ username, password, email }) => {
-    createUser({
-      variables: { name: username, password, email },
-    });
-  };
-
   // Google login
-  const handleLogin = async (data) => {
-    // Aqui iria la mutation
+  const dispatch = useDispatch()
 
-    console.log(data);
+  useEffect(()=>{
+    if(!loading && data){
+      if(data.validateUser.token){
+        // alert("logueado")
+        localStorage.setItem('token', data.validateUser.token);
+        localStorage.setItem('name', data.validateUser.name);
+        localStorage.setItem('email', data.validateUser.email);
+        localStorage.setItem('role', data.validateUser.role);
+        // es necesario el reloaded para luego poder redirigir
+        alert(`Bienvenido ${data.validateUser.name}`)
+
+        window.location.reload();
+      }else{
+        alert(data.validateUser.detail)
+      }
+    console.log(data)
+  }})
+  let role = localStorage.getItem('role');
+  let token = localStorage.getItem('token');
+  if(role  && token){
+    // la redireccion se debe cambiar seún el role del usuario
+    if(role === 'admin') return <Redirect to='/admin' />;
+    else return <Redirect to='/catalogue' />;
+  }
+  const handleLogin = async (form) => {
+    login({variables: {name:form.login,password:form.password}})    
+
   };
 
   return (
@@ -75,6 +96,8 @@ const UserAcount = () => {
     </div>
   );
 };
+
+
 
 const StyledAcheDos = styled.h2`
   text-align: center;
