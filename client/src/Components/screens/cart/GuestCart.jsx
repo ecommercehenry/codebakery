@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {useSelector} from 'react-redux';
 import { useQuery, gql} from '@apollo/client';
 
@@ -31,7 +31,6 @@ const GuestCart = () => {
     //??????? existe tabla order??? => SI EXISTE
     ///si existe tabla order -> faltaria mutation --->> condicional para saber si esta logueado o not//
     //si esta logueado se dispara mutation que guarda los productos en tabla order con status: carrito
-
     //meter info cartItems a local storage
     //cliente no logueado => entra a este carrito y puede ver productos 
                             //img | nombre | cant | precio 
@@ -41,18 +40,7 @@ const GuestCart = () => {
 
     //modelo de carrito guest price INT! quantity INT! en cuanto se loguea y se convierte en orden
     //se lo relaciona con una orden y con los productos
-    let toLocalStore =[]
-    if(itemsToCart.length){
-        itemsToCart.map(item => 
-            {let newItem= {
-                id:item.id,
-                quantity: item.quantity,
-                price: item.price
-            }
-            toLocalStore.push(newItem)
-        })
-        localStorage.setItem("cart", JSON.stringify(toLocalStore))
-    }
+useEffect( () => {}, [storage.cart])
 
     if(data!==undefined){
         itemsToCart.forEach(item=>{ 
@@ -65,15 +53,20 @@ const GuestCart = () => {
                 }
             })
         })
+        if (itemsToCart.length){
+            localStorage.setItem(`cart`, JSON.stringify(itemsToCart))
+        }
         console.log('nuevo',itemsToCart, storage)
     }
-
+    
+    // storage.clear() // para vaciar el storage
     return (
         <StyledCart>
             {
-                data && itemsToCart.map(elem=>
-                    <ProductOnCart id={elem.id} name={elem.name} price={elem.price} stock={elem.stock} image={elem.image} quantity={elem.quantity}/>
-                )
+                // data && itemsToCart.map(elem=>
+                //     <ProductOnCart id={elem.id} name={elem.name} price={elem.price} stock={elem.stock} image={elem.image} quantity={elem.quantity}/>
+                // )
+                storage.length? JSON.parse(storage.cart).map( elem => <ProductOnCart id={elem.id} name={elem.name} price={elem.price} stock={elem.stock} image={elem.image} quantity={elem.quantity}/>) : <p>vacio</p>
             }
         </StyledCart>
     )

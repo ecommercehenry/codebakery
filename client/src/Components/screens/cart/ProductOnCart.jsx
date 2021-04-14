@@ -8,6 +8,8 @@ import StockCounter from './StockCounter'
 
 
 const ProductOnCart = ({id,image,name,price,stock,quantity}) => {
+    let storage = window.localStorage;
+
     let [newQuantity,setNewQuantity] = useState(quantity);
     const dispatch = useDispatch()
     const deleteHandler = (id) => {
@@ -16,6 +18,7 @@ const ProductOnCart = ({id,image,name,price,stock,quantity}) => {
 
     return (
         <StyledProductOnCart>
+            
             <div className="imagee">
                 <img src={image} alt={name}/>
             </div>
