@@ -1,4 +1,3 @@
-// console.log('queires') 
 module.exports = `
     union resultValidate = user | error
 
@@ -9,6 +8,7 @@ module.exports = `
         getProductByCategoryName(name: String!): [product],
         getAllCategories:[category],
         getProductByName(name: String!): product, 
+        getAllUsers: [user],
         getProductByArray(array: [Int!]): [product]
         validateUser(name:String, password:String): resultValidate
     }

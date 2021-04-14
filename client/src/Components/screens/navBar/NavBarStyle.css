@@ -42,7 +42,7 @@
     width: fit-content!important;
     border-radius: 40px;
     border: none;
-    background-color: #755588;
+    background-color: #5E3F71;
     text-decoration: none !important;
     color: white;
     font-weight: bold;
@@ -53,7 +53,7 @@
 }
 
 .purple-btn:hover{
-    background-color: #734191
+    background-color: #532c6b
 }
 
 .display-linebreak{

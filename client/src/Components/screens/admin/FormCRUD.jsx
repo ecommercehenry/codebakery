@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { useMutation } from "@apollo/client";
 import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct"
-import './FormCRUD.css'
+// import './FormCRUD.css'
 import { useDispatch, useSelector } from "react-redux";
 import { modifyProduct } from "../../../actions/modifyProductAction";
 import {addCategoryToProductAction} from "../../../actions/addCategoryToProductAction"
+import styled from 'styled-components';
 
 function FormCRUD({id, handlerOnClick}) {
   const product = useSelector(state => state.productsReducer.products[id])
@@ -24,7 +25,6 @@ function FormCRUD({id, handlerOnClick}) {
     price: product.price,
     image: product.image,
   });
-
   const dispatch = useDispatch()
   function inputHandler(e){
     setInputs({ 
@@ -32,7 +32,6 @@ function FormCRUD({id, handlerOnClick}) {
       [e.target.name]: e.target.value 
     });
   }
-
   const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT)
   useEffect(()=>{
     if(data && !loading){
@@ -63,9 +62,8 @@ function FormCRUD({id, handlerOnClick}) {
   
   if(inputs){
     return (
-      <form 
-      onSubmit={submitHandler}    
-      className="element-container">
+      <StyledFormCRUD 
+      onSubmit={submitHandler}>
         <div className="info-container">
         <div className="F-image-container">
           <label>Product</label>
@@ -96,15 +94,15 @@ function FormCRUD({id, handlerOnClick}) {
           <div className="F-categories">
             {inputs.categories.map((cat, i) => (
               <div key={i}>
-                <span>
+                <p>
                   {cat.name}
                   <button onClick={()=>{
                     setInputs({...inputs, categories:inputs.categories.filter(ca=>ca.name !== cat.name)})
                   }}> x </button>
-                </span>
+                </p>
               </div>
             ))}
-            {newCategory? <div className="F-price-container">
+            {newCategory? <div className="newCategory">
                     <label>New category</label>
                     <input 
                       value={valueNewCategory}          
@@ -128,16 +126,13 @@ function FormCRUD({id, handlerOnClick}) {
              onChange={inputHandler} />
         </div>
   
-        <div className="F-edit-button">
-          <button type="submit" >edit</button>
-          
+        <div className="F-button">
+          <button type="submit" >Save</button>             
+          <button className="cancel"onClick={handlerOnClick}>Cancel</button>
+      
         </div>
-  
-        <div className="F-remove-button">
-          <button onClick={handlerOnClick}>cancel</button>
-        </div>
-        </div>
-      </form>
+      </div>
+    </StyledFormCRUD>
     );
   }else{
     return "loading"
@@ -145,3 +140,172 @@ function FormCRUD({id, handlerOnClick}) {
 }
 
 export default FormCRUD;
+
+
+const StyledFormCRUD = styled.form`
+  
+
+  width: 100%;
+  height: 25vh;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(236, 227, 250);
+  border-radius: 40px;
+
+label{
+  font-weight: 700;
+  color:rgb(123, 87, 156);
+}
+
+.F-image-container{  
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content: space-around;
+  width: 10rem;
+  
+}
+.F-image-container button{
+  border-radius: 18px;
+  border:none;
+  padding: 6px;
+  background-color: rgb(87, 46, 126);
+  color:rgb(226, 213, 238)
+}
+.chargeImage{
+  max-width: 2rem;   
+}
+
+.F-name-container{
+  padding: 0.5rem;
+
+}
+.F-name-container input{
+ margin-top: 1rem;
+  border-radius: 1.5rem;
+ border: 1.5px solid;
+ border-color:grey;
+ width: 18vw;
+ height: 4rem;
+ padding:1rem;
+ text-overflow: ellipsis;
+ background-color: rgb(236, 227, 250);
+
+     
+}
+.F-stock-container{
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column; 
+
+}
+.F-stock-container input{
+  margin-top: 1rem;
+  width:5vw;
+  height: 4rem;
+  padding:10px;
+  border: 1.5px solid;
+  border-color:grey;    
+  border-radius: 1.5rem;
+  background-color: rgb(236, 227, 250);
+
+}
+.F-category-container{
+  padding: 0.5rem;
+}
+.F-categories{
+  margin-top: 10px;
+  border: 1.5px solid grey;
+  border-radius: 35px;
+  width: 18vw;
+  height: 5rem;
+  padding:0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+.F-categories p{
+  background-color: rgb(87, 46, 126);
+  color:rgb(203, 181, 224);
+  font-size: 0.7rem;
+  width: fit-content;
+  margin: 0;
+  margin-top: 3px;
+  margin-right:3px;
+  border-radius: 15px;
+  display: flex;
+  justify-content:center;
+  padding: 3px;
+  align-items: center;   
+
+  
+}
+.F-categories p button{
+  background-color: rgb(126, 96, 155);
+  border:none;
+  color:beige;
+}
+.F-category-container button{
+  border-radius: 15px;
+  padding: 1px; 
+  margin-left: 6px;  
+  height: fit-content;
+  background-color: rgba(128, 128, 128, 0.363);
+  border:none;
+  padding: 6px
+
+}
+.newCategory input{
+  border: 1.5px solid;
+  border-color:grey;    
+  border-radius: 1.5rem;
+  background-color:rgb(203, 181, 224);
+}
+.newCategory button{
+  border: 1.5px solid;
+  border-color:grey;    
+  border-radius: 1.5rem;
+  background-color:rgb(40, 19, 59);
+  color:rgb(199, 177, 219);
+  padding: 6px;
+  margin-top:2px;
+}
+
+.F-price-container{
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.F-price-container input{
+  margin-top: 1rem;
+  width:5vw;
+  height: 4rem;
+  padding:10px;
+  border: 1.5px solid;
+  border-color:grey;    
+  border-radius: 1.5rem;
+  background-color: rgb(236, 227, 250);
+
+}
+.F-button{
+  margin:auto;
+}
+.F-button button{
+  margin: 0.5rem;
+  
+border-radius: 30px;
+color:rgb(78, 160, 78);
+padding: 4px;
+background-color: rgba(117, 250, 161, 0.328);
+}
+button.cancel {
+  background-color:rgb(250, 121, 121);
+  margin: 0.5rem;
+border-radius: 30px;
+color:rgb(39, 39, 36);
+padding: 4px;
+}
+
+
+
+`;
