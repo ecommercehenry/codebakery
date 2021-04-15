@@ -7,6 +7,7 @@ async function getAllUsers() {
       { include: [{ model: Product }, { model: Review }] },
       { attributes: { exclude: ["password"] } }
     )
+
   } catch (error) {
     throw new Error(error)
   }
@@ -20,16 +21,23 @@ async function getUserByEmail({email}) {
 }
 
 async function createUser(name, password, email, role) {
-  try {
-    let newUser = await Users.create({
-      name,
-      password,
-      email,
-      role
-    });
-    return {__typename: 'user' , ...newUser.dataValues};
-  } catch (error) {
-    return {__typename: 'error' , name: 'error', detail: 'User already exist'};
+  const validationUser = await Users.findOne({
+    where: { email },
+  });
+
+  if (validationUser.length === 0) {
+    try {
+      return await Users.create({
+        name,
+        password,
+        email,
+        role,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  } else {
+  return {__typename: "error", name: "the user already exists", detail: "the user already exists"}
   }
 }
 

@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
     "order",
     {
       placeStatus: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM('cart', 'ticket'),
         allowNull: false,
         defaultValue: 'cart'
       },

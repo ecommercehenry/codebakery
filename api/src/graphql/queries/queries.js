@@ -11,7 +11,8 @@ module.exports = `
         getAllUsers: [user],
         getProductByArray(array: [Int!]): [product],
         getAllOrders: [order],
-        getOrdersByUserId(userId: Int!): [order],
+        getOrdersByUserIdInCart(userId: Int!): [order],
+        getOrdersByUserIdInTicket(userId: Int!): [order],
         validateUser(name:String, password:String): resultValidate,
         getOrderById(id: Int!): order,
         getUserByEmail(email: String!): user

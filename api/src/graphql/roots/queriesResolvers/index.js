@@ -10,7 +10,8 @@ const { getAllUsers } = require("./getAllUsers")
 const {validateUser} = require("./validateUser")
 const {getOrderById} = require("./getOrderById")
 const {getAllOrders} = require("./getAllOrders")
-const {getOrdersByUserId} = require("./getOrdersByUserId")
+const {getOrdersByUserIdInCart} = require("./getOrdersByUserIdInCart")
+const {getOrdersByUserIdInTicket} = require("./getOrdersByUserIdInTicket")
 const {getUserByEmail} = require("./getUserByEmail")
 
 // getProductByCategoryName
@@ -27,6 +28,7 @@ module.exports = {
   validateUser,
   getOrderById,
   getAllOrders,
-  getOrdersByUserId,
+  getOrdersByUserIdInCart,
+  getOrdersByUserIdInTicket,
   getUserByEmail
 }

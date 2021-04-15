@@ -213,24 +213,9 @@ query
 
   }
 
-  // Para obtener todas las ordenes que ya atravesaron el checkout
-  query{
-    getAllOrders(){
-      order{
-        id
-        status
-        lineal_order{
-          price
-          quantity
-          product{
-            id
-            name
-          }
-        }
-      }
-    }
-  }
-}
+  
+
+
 
 // PARA OBTENER TODOS LOS USUARIOS (SIN CONTRASEÑA) CON SUS PRODUCTOS Y CON SUS REVIEWS
 {
@@ -298,6 +283,7 @@ mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //OBTENER ORDEN POR SU ID
 {
   getOrderById(id:1){
@@ -319,6 +305,10 @@ mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
     "name": "Bonito"
   }
 }
+=======
+
+
+>>>>>>> 8cd4889275f5247f2f951863a700282ada6f0f12
 
 
 // MUTATION PARA ACTUALIZAR UNA CATEGORIA
@@ -357,6 +347,7 @@ mutation addCategoryToProduct($idProduct:Int!, $idCategory:Int!){
     ... on error {
       name
       detail
+<<<<<<< HEAD
 >>>>>>> 6180deb8082ec585adf539901dffab981be324ca
     }
   }
@@ -385,6 +376,12 @@ mutation addCategoryToProduct($idProduct:Int!, $idCategory:Int!){
   "idProduct": 9,
   "idCategory": 5
 }
+=======
+    }
+  }
+}
+
+>>>>>>> 8cd4889275f5247f2f951863a700282ada6f0f12
 
 
 // PARA ELIMINAR CATEGORIA
@@ -402,13 +399,7 @@ mutation deleteCategory($id:Int!){
   }
 }
 
-{
- "id": 8
-}
 
-{
- "id": 1
-}
 
 
 // MUTACIÓN PARA ELIMINAR PRODUCTO POR ID
@@ -426,7 +417,162 @@ mutation deleteById($id:Int!){
   }
 }
 
+<<<<<<< HEAD
 {
  "id": 2
 }
 >>>>>>> 6180deb8082ec585adf539901dffab981be324ca
+=======
+
+	
+//CREAR NUEVA ORDEN
+	mutation createOrder($idUser:Int! , $dataProducts:[dataProductsOrderInput]!){
+	  createOrder(idUser:$idUser, dataProducts:$dataProducts)
+	  {
+		... on order{
+		  id
+		  status
+		}
+		... on error{
+		  detail
+		}
+	  }
+	}
+	Con variables:
+	{
+	  "idUser": 1,
+	  "dataProducts": [
+		{"id": 1, "quantity": 100},
+		{"id": 2, "quantity": 200},
+		{"id": 3, "quantity": 1}
+	  ]
+	}
+//Actualizar precios de una orden
+	mutation updateOrderPrices($orderId:Int!){
+	 updateOrderPrices(orderId:$orderId){
+		... on booleanResponse{
+		  boolean
+		}
+	  	... on error{
+		  name
+		  detail
+		}
+		}
+	}
+	con variable 100 para error, 1 para correcto:
+	{
+	  "orderId": 1
+	}
+//Eliminar producto de una order ya existente solo si esta en status cart	
+	mutation addProductToOrder($orderId:Int!, $productId:Int!){
+	  deleteProductOrder(orderId:$orderId, productId:$productId,)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	variables
+	{
+	  "orderId":1,
+	  "productId": 1
+	}
+
+
+//Agregar producto a una orden ya existente solo si esta en status cart
+	mutation addProductToOrder($orderId:Int!, $productId:Int!, $quantity:Int!){
+	  addProductToOrder(orderId:$orderId, productId:$productId, quantity:$quantity)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	variables:
+	{
+	  "orderId":1,
+	  "productId": 1,
+	  "quantity": 5
+	}
+
+
+	
+//Actualizar precios de una orden
+	mutation updateOrderPrices($orderId:Int!){
+	 updateOrderPrices(orderId:$orderId){
+		... on booleanResponse{
+		  boolean
+		}
+	  	... on error{
+		  name
+		  detail
+		}
+		}
+	}
+	con variable 100 para error, 1 para correcto:
+	{
+	  "orderId": 1
+	}
+//Eliminar una orden siempre y cuando este en cart place status
+	mutation deleteOrder($orderId:Int!){
+	  deleteOrder(orderId:$orderId)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	con variable 
+	{
+	  "orderId":1
+	}
+//Actualizar el place state de una order de "cart" a "ticket"
+	mutation updateOrderToTicket($orderId:Int!){
+	  updateOrderToTicket(orderId:$orderId)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	Con variables:
+	{
+	  "orderId":1
+	}
+//Actualizar el estado de una query, unpaid, paid, sent, received
+	mutation modifyStatusOrder($orderId:Int! , $status:String!){
+	  modifyStatusOrder(orderId:$orderId, status:$status)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	Con variables:
+	{
+	  "orderId":1,
+	  "status": "paid"
+	}
+
+
+>>>>>>> 8cd4889275f5247f2f951863a700282ada6f0f12
