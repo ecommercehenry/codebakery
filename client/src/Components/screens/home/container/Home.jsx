@@ -4,8 +4,6 @@ import Products from "../../catalogue/products/container/Products.jsx";
 import './Home.css'; 
 
 const Home = () => {
-
-  console.log('francisco');
     return (
         <>
         <NavBar color='black'/>
