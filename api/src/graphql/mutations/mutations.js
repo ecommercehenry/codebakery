@@ -3,7 +3,7 @@ union resultCategory = category | error
 union resultProduct = product | error
 union deletes = booleanDelete | error    
 union resultUsers = user | error
-
+ 
 type Mutation{
     modifyProduct(id: Int!, dataToModify: productInput!): resultProduct
     updateCategory(id : Int!, input: categoryInput): resultCategory

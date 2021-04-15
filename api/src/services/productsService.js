@@ -168,7 +168,7 @@ async function addCategoryToProduct(idProduct, idCategory) {
       return { __typename: "error", name: "error", detail: "Product not found" }
     }
   } else {
-    return { __typename: "error", name: "error", detail: "Product not found" } ;
+    return { __typename: "error", name: "error", detail: "Category not found" } ;
   }
 }
 
