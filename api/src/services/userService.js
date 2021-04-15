@@ -11,6 +11,13 @@ async function getAllUsers() {
     throw new Error(error)
   }
 }
+async function getUserByEmail({email}) {
+  try {
+    return await Users.findOne({where:{ email: email}})
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 
 async function createUser(name, password, email, role) {
   try {
@@ -67,4 +74,4 @@ async function loginUser(name,password){
   }
 }
 
-module.exports = { getAllUsers, createUser, modifyUser,loginUser}
+module.exports = { getAllUsers, createUser, modifyUser,loginUser, getUserByEmail}

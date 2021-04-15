@@ -14,6 +14,6 @@ union resultValidate = user | error
         getOrdersByUserId(userId: Int!): [order],
         validateUser(name:String, password:String): resultValidate,
         getOrderById(id: Int!): order,
-
+        getUserByEmail(email: String!): user
     }
 `

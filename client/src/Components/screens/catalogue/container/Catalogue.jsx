@@ -4,6 +4,7 @@ import NavBar from "../../navBar/NavBar";
 import Hero from "../hero/Hero";
 import Products from "../products/container/Products";
 import Detail from "../../detail/Detail.jsx";
+import { useMutation, gql } from "@apollo/client";
 
 const Catalogue = () => {
   let storage = window.localStorage;
@@ -11,7 +12,37 @@ const Catalogue = () => {
   let cart = storage.cart ? true : false;
 
   if (logged && cart){
-      //crear carrito nuevo en la base de datos 
+      const createOrder = gql`
+      mutation{
+  createOrder(idUser:1,
+    dataProducts:
+    [
+    {id:1,quantity:100},
+    {id:5,quantity:10},
+    {id:4,quantity:11}
+    ]
+  ){
+    id
+    status
+    lineal_order{
+      userId
+      price
+      quantity
+      product{
+        id
+        name
+        description
+        price
+        stock
+        image
+        categories{
+          id
+          name
+        }
+      }
+    }
+  }
+}`
   }
   return (
     <>
