@@ -24,17 +24,23 @@ async function getProductById({ id }) {
   }
 }
 
-async function deleteById({ id }) {
+async function deleteById(id) {
   try {
-    return await Product.destroy({
+    const productToDestroy = await Product.destroy({
       where: {
         id: id,
       },
     });
+    if (productToDestroy === 1) {
+      return {__typename: "booleanDelete", booleanDelete: true}
+    } else {
+      return {__typename: "booleanDelete", booleanDelete: false}
+    }  
   } catch (error) {
-    throw new Error(error);
+    return { __typename: "error", name: "error", detail: "Product not found" }
   }
 }
+
 async function productCategory({ id }) {
   try {
     return await Product.findOne({
@@ -89,7 +95,7 @@ async function addProduct(args) {
  * @param  {} id value to define what product going to be modified
  * @param  {} dataToModify object that contains the data to be modified
  */
-async function modifyProduct({ id, dataToModify }) {
+async function modifyProduct(id, dataToModify) {
   async function getCategoriesDB(categoriesStr){
     let out = []
     for(categorie of categoriesStr){
@@ -105,6 +111,7 @@ async function modifyProduct({ id, dataToModify }) {
     }
     return out
   }
+  
   async function getProductById(id){
     const product = await Product.findOne({
       where: {
@@ -130,18 +137,13 @@ async function modifyProduct({ id, dataToModify }) {
       }
       //Find again and get product with the changes
       const updatedProduct = await getProductById(id)
-      return updatedProduct;
+      let obj = {__typename: 'product', ...updatedProduct.dataValues}  
+      return obj;
     } catch (error) {
-      return {
-        error: "Problem finding the id of product",
-        detail: "Possibly the id passed dont exists",
-      };
+      return {__typename: 'error', name:"The was a problem finding the id of product", detail: "The id doesn't exist"}
     }
   } else {
-    return {
-      error: "the data passed is not valid",
-      detail: "A element of the object not is a valid attribute",
-    };
+    return {__typename: 'error', name:"The data passed is not valid", detail: "The element of the object not is a valid attribute"}
   }
 
   function validateNewData(data) {
@@ -156,20 +158,17 @@ async function modifyProduct({ id, dataToModify }) {
   }
 }
 
-async function addCategoryToProduct({ idProduct, idCategory }) {
+async function addCategoryToProduct(idProduct, idCategory) {
   const product = await Product.findByPk(idProduct);
-  if (product != null) {
+  if (product !== null) {
     try {
-      await product.addCategories(idCategory);
-      return product;
+      const productToBeReturned = await product.addCategories(idCategory);
+      return {__typename: "product", ...product.dataValues }
     } catch (error) {
-      return { error: error };
+      return { __typename: "error", name: "error", detail: "Product not found" }
     }
   } else {
-    return {
-      error: "couldn't find a product",
-      detail: "product doesn't exist",
-    };
+    return { __typename: "error", name: "error", detail: "Product not found" } ;
   }
 }
 

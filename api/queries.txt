@@ -190,6 +190,25 @@ query
   }
 }
 
+// PARA OBTENER TODOS LOS USUARIOS (SIN CONTRASEÑA) CON SUS PRODUCTOS Y CON SUS REVIEWS
+{
+  getAllUsers{name, email, products{
+    id
+    name
+    description
+    price
+    stock
+    image
+    categories{
+      id 
+      name  
+    }  
+  }, reviews{
+    id
+    title
+  	description
+    stars
+  }}
 
 
 {
@@ -199,6 +218,108 @@ query
       name
     }
     ...on error {
+      name
+      detail
+    }
+  }
+}
+
+// MUTATION PARA MODIFICAR PRODUCTOS
+mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
+  modifyProduct(id: $id, dataToModify: $dataToModify){
+    __typename
+    ... on product {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+{
+  "id": 1,
+  "dataToModify": {
+    "name": "Bonito"
+  }
+}
+
+
+// MUTATION PARA ACTUALIZAR UNA CATEGORIA
+mutation updateCategory ($id: Int!, $input: categoryInput!){
+  updateCategory(id: $id, input: $input){
+    __typename
+    ... on category {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+
+// MUTACIÓN PARA AGREGAR CATEGORÍA A UN PRODUCTO
+mutation addCategoryToProduct($idProduct:Int!, $idCategory:Int!){
+  addCategoryToProduct(idProduct: $idProduct, idCategory: $idCategory){
+      __typename
+     ... on product {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+{
+  "idProduct": 9,
+  "idCategory": 5
+}
+
+
+// PARA ELIMINAR CATEGORIA
+mutation deleteCategory($id:Int!){
+  deleteCategory(id: $id){
+      __typename
+     ... on booleanDelete {
+      booleanDelete
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+{
+ "id": 8
+}
+
+{
+ "id": 1
+}
+
+
+// MUTACIÓN PARA ELIMINAR PRODUCTO POR ID
+mutation deleteById($id:Int!){
+  deleteById(id: $id){
+      __typename
+     ... on booleanDelete {
+      booleanDelete
+    }
+    __typename
+    ... on error {
       name
       detail
     }

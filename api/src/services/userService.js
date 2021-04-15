@@ -1,11 +1,14 @@
-const { Users } = require("../db")
+const { Users, Product, Review } = require("../db")
 const jwt = require('jsonwebtoken');
 
 async function getAllUsers() {
   try {
-    return await Users.findAll()
+    return await Users.findAll(
+      { include: [{ model: Product }, { model: Review }] },
+      { attributes: { exclude: ["password"] } }
+    )
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error)
   }
 }
 
