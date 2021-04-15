@@ -4,6 +4,5 @@ const {updateOrderPrices} = require("../../../services/orderService")
 module.exports = {
 	updateOrderPrices: (_, args) => {
 		return updateOrderPrices(_.orderId)
-
 	}
 }

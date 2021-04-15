@@ -11,6 +11,7 @@ const { modifyUser } = require("./modifyUser");
 const {createOrder } = require("./createOrder");
 const {updateOrderPrices} = require("./updateOrderPrices");
 const { deleteProductOrder } = require("./deleteProductOrder");
+const {addProductToOrder} = require("./addProductToOrder")
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -25,4 +26,5 @@ module.exports = {
   createOrder,
   updateOrderPrices,
   deleteProductOrder,
+  addProductToOrder,
 }

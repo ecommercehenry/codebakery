@@ -236,7 +236,7 @@ async function deleteProductOrder(orderId, productId){
  * @param  {} productId
  * @param  {} quantity
  */
-async function addProductOrder(orderId, productId, quantity){
+async function addProductToOrder(orderId, productId, quantity){
     try {
         const order = await Order.findOne({where: {id: orderId}})
 
@@ -325,7 +325,7 @@ module.exports = {
     getOrderById,
     createOrder,
     deleteProductOrder,
-    addProductOrder,
+    addProductToOrder,
     deleteOrder,
     updateOrderToTicket,
     modifyStatusOrder,
