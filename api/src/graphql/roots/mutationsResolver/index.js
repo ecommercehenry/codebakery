@@ -8,7 +8,13 @@ const { deleteById } = require("./deleteById");
 const { addProduct } = require("./addProduct");
 const { createUser } = require("./createUser");
 const { modifyUser } = require("./modifyUser");
-const {createOrder } = require("./createOrder")
+const {createOrder } = require("./createOrder");
+const {updateOrderPrices} = require("./updateOrderPrices");
+const { deleteProductOrder } = require("./deleteProductOrder");
+const {addProductToOrder} = require("./addProductToOrder")
+const {deleteOrder} = require("./deleteOrder")
+const {updateOrderToTicket} = require("./updateOrderToTicket")
+const {modifyStatusOrder} = require("./modifyStatusOrder")
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -21,4 +27,10 @@ module.exports = {
   createUser,
   modifyUser,
   createOrder,
+  updateOrderPrices,
+  deleteProductOrder,
+  addProductToOrder,
+  deleteOrder,
+  updateOrderToTicket,
+  modifyStatusOrder
 }

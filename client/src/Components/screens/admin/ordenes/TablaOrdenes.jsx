@@ -8,38 +8,31 @@ import styled from 'styled-components';
 
 export default function TablaOrdenes(){
 
+    
+
     //a eliminar cuando  pueda traer los datos
     const ordenes = [
     {
         date: "02-04-2021",
         orderId: "02A24cd11",
-        status: {
-            paid: true,
-            sent: false,
-            recived: false,
-        },
+        userId: 344,
+        status: 1,
         cancelled: false,
         total: 98.50,
     },
     {
         date: "02-04-2021",
         orderId: "02A24cd11",
-        status: {
-            paid: true,
-            sent: false,
-            recived: false,
-        },
+        userId: 304,
+        status: 2,
         cancelled: false,
         total: 98.50,
     },
     {
         date: "02-04-2021",
         orderId: "02A24cd11",
-        status: {
-            paid: true,
-            sent: false,
-            recived: false,
-        },
+        userId: 444,
+        status: 3,
         cancelled: false,
         total: 98.50,
     },
@@ -69,11 +62,8 @@ export default function TablaOrdenes(){
 ]
 // date: "02-04-2021",
 // orderId: "02A24cd11",
-// status: {
-//     paid: true,
-//     sent: false,
-//     recived: false,
-// },
+// userId: "344"
+// status: 1,
 // cancelled: false,
 // total: 98.50,
     return (
@@ -102,9 +92,5 @@ width:80vw;
 margin: 2rem;
 margin-top: 0.5rem;
 height: 100%;
-
-
-background-color: black;
-color: red;
 
 `;

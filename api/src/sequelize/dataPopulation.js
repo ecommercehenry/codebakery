@@ -1,5 +1,5 @@
 const { Product, Category, Users, conn } = require("../db");
-const { createOrder, getOrderById } = require("../services/orderService");
+const { createOrder, getOrderById, updateOrderToTicket } = require("../services/orderService");
 const { createUser } = require("../services/userService");
 
 const MOCK_CATEOGRIES = require("./MOCK_CATEOGRIES.json");

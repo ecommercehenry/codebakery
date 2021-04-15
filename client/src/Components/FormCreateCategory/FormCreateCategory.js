@@ -21,7 +21,7 @@ function FormCreateCategory() {
   
 
   // let input
-  const [addCategory, { data }] = useMutation(CREATE_CATEGORY)
+  const [addCategory, { data, loading}] = useMutation(CREATE_CATEGORY)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -33,9 +33,24 @@ function FormCreateCategory() {
       name: "",
       description: ""
     })
-    setAdded(true)
+    // setAdded(true)
   }
-
+//   addCategory: {__typename: "error", name: "error", detail: "No admin"}
+// __proto__: Object
+  // console.log(data)
+  useEffect(()=>{
+    if(!loading){
+      if(data?.addCategory.__typename === 'error'){
+        console.log('poner el boton el rojo')
+        setAdded(false)
+      }
+      else if(data?.addCategory.__typename === 'category'){
+        console.log('poner el bptn en verde');
+        setAdded(true);
+      }
+    }
+  },[data])
+  
 
   return (
     <form onSubmit={(e) => handleSubmit(e)} style={{position:"relative"}}>

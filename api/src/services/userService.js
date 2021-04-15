@@ -7,34 +7,46 @@ async function getAllUsers() {
       { include: [{ model: Product }, { model: Review }] },
       { attributes: { exclude: ["password"] } }
     )
+
   } catch (error) {
     throw new Error(error)
   }
 }
 
 async function createUser(name, password, email, role) {
-  try {
-    return await Users.create({
-      name,
-      password,
-      email,
-      role,
-    })
-  } catch (error) {
-    console.log(error.message)
-    throw new Error(error);
+  const validationUser = await Users.findOne({
+    where: { email },
+  });
+
+  if (validationUser?.length === 0) { 
+    try {
+      return await Users.create({
+        name,
+        password,
+        email,
+        role,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  } else {
+  return {__typename: "error", name: "the user already exists", detail: "the user already exists"}
   }
 }
 
 async function modifyUser(id, name, password, email, role) {
-  // return await Users.findAll()
-  let obj = {};
+  let obj = {}; 
   if(name) obj.name = name;
   if(password) obj.password = password;
   if(email) obj.email = email;
   if(role) obj.role = role;
-  let user = await Users.findOne({ where: { id } });
-  return await user.update(obj, {attributes: {exclude: ['password', 'salt']}});
+  try{
+    let user = await Users.findOne({ where: { id } });
+    let newUser = await user.update(obj, {attributes: {exclude: ['password', 'salt']}});
+    return {__typename: 'user', ...newUser.dataValues};
+  }catch{
+    return {__typename: 'user', name: 'error', detail: 'Invalid user'}
+  }
 }
 
 async function loginUser(name,password){
@@ -68,3 +80,4 @@ async function loginUser(name,password){
 }
 
 module.exports = { getAllUsers, createUser, modifyUser,loginUser}
+
