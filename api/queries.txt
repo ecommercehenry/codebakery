@@ -28,7 +28,7 @@ query getAllCategories{
     name
   }
 }
-//// agregar un nuevo producto modificada con seguridad
+//// agregar un nuevo producto modificado con seguridad
 mutation addProduct($category: String!, $name: String!, $description: String!, $price: Float!, $stock: Int!, $image: String!){
   addProduct(category: $category, name: $name, description: $description, price: $price, stock:$stock, image:$image){
     __typename
@@ -117,10 +117,19 @@ mutation{
   }
 }
 
-//PARA ELIMINAR UNA CATEGORIA DE UN PRODUCTO
-mutation{
-  removeCategoryFromProduct(idProduct: 1, idCategory: 1){
-   	name
+//PARA ELIMINAR UNA CATEGORIA DE UN PRODUCTO, actualizada con seguridad
+mutation removeCategoryFromProduct($idProduct:Int!, $idCategory:Int!){
+  removeCategoryFromProduct(idProduct: $idProduct, idCategory: $idCategory){
+      __typename
+     ... on product {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
   }
 }
 

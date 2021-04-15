@@ -173,20 +173,17 @@ async function addCategoryToProduct({ idProduct, idCategory }) {
   }
 }
 
-async function removeCategoryFromProduct({ idProduct, idCategory }) {
+async function removeCategoryFromProduct( idProduct, idCategory ) {
   const product = await Product.findByPk(idProduct);
-  if (product != null) {
+  if (product !== null) {
     try {
       await product.removeCategories(idCategory);
-      return product;
+      return {__typename: 'product', ...product.dataValues};
     } catch (error) {
-      return { error: error };
+      throw new Error(error);
     }
   } else {
-    return {
-      error: "couldn't find a product",
-      detail: "product doesn't exist",
-    };
+    return {__typename: 'error', name:"error", detail: 'Product not found'};
   }
 }
 
