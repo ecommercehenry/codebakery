@@ -33,9 +33,9 @@ function App() {
       
       {/* ruta provisoria, a acomodar en el adminPanel al dar click en "Orders"     */}
       <Route path="/ordenes" component={TablaOrdenes} />
-      <Route path="/price" com9ponent={SortByPrice} />
+      <Route path="/price" component={SortByPrice} />
       
-3
+
     </>
   );
 }
