@@ -1,17 +1,19 @@
 import React,{ useState,useEffect } from 'react';
 import Orden from "./Orden"
 import styled from 'styled-components';
+import { useQuery } from '@apollo/client';
+import getAllOrders from '../../../../Apollo/queries/getAllOrders';
 
 //traerme todas las ordenes hechas.. estan en la BD
 //mostrarlas haciendo un mapeo sobre la data, renderizando cada vez un componente Orden
 
 
 export default function TablaOrdenes(){
-    
-    
-    
+
+
 
     //a eliminar cuando  pueda traer los datos
+    
     const ordenes = [
     {
         date: "02-04-2021",
@@ -61,12 +63,9 @@ export default function TablaOrdenes(){
     },
    
 ]
-// date: "02-04-2021",
-// orderId: "02A24cd11",
-// userId: "344"
-// status: 1,
-// cancelled: false,
-// total: 98.50,
+   const { data, loading }= useQuery(getAllOrders)
+   console.log("ddddddddddddddddddddddddddd",data)
+
     return (
         <StyledTablaOrdenes>ESTE ES EL COMPONENTE TABLA ORDENES
              {ordenes ? (
