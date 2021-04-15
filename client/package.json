@@ -22,6 +22,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
+    "rsuite": "^5.0.0-alpha.5",
     "styled-components": "^5.2.3"
   },
   "scripts": {
