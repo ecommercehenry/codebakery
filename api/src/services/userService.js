@@ -22,8 +22,7 @@ async function createUser(name, password, email, role) {
     });
     return {__typename: 'user' , ...newUser.dataValues};
   } catch (error) {
-    // console.log('erroe')
-    throw new Error(error);
+    return {__typename: 'error' , name: 'error', detail: 'User already exist'};
   }
 }
 
@@ -38,7 +37,7 @@ async function modifyUser(id, name, password, email, role) {
     let newUser = await user.update(obj, {attributes: {exclude: ['password', 'salt']}});
     return {__typename: 'user', ...newUser.dataValues};
   }catch{
-    throw new Error(error);
+    return {__typename: 'user', name: 'error', detail: 'Invalid user'}
   }
 }
 

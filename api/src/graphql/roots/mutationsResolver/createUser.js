@@ -1,6 +1,5 @@
 const { createUser } = require("../../../services/userService")
 const jwt = require('jsonwebtoken');
-// getAllProducts
 
 module.exports = {
   createUser:  ({name, password, email, role}, args) => {
@@ -8,7 +7,7 @@ module.exports = {
       let newUser =  createUser(name, password, email, role);
       return newUser;
     }catch{
-      return {__typename: 'error', name:"error", detail: 'No admin'};
+      return {__typename: 'error', name: "error", detail: 'No admin'};
     }
   },
 }

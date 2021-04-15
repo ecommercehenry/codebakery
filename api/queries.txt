@@ -48,6 +48,15 @@ mutation addProduct($category: String!, $name: String!, $description: String!, $
   }
 }
 
+{
+ "category": "NuevaCat",
+ "name": "Nombre",
+ "description": "....",
+ "price": 3.4,
+ "stock": 2,
+ "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099205/code_bakery/prueba1-2_tjcdjh.jpg"
+}
+
 //eliminar un producto por su id 
 mutation{
   deleteById(id:2)

@@ -61,9 +61,9 @@ async function getProductByArray({array}) {
 
 async function addProduct(args) {
   try {
-    const imageString = args.image
+    const imageString = args.image;
+    // preguntar como manejar el error de cludinary
     const uploadedResponse = await cloudinary.uploader.upload(imageString,{upload_preset:'code_bakery'});
-    
     const imageUrl = uploadedResponse.url;
     const newProduct = await Product.create({
       name: args.name,
@@ -72,21 +72,20 @@ async function addProduct(args) {
       stock: args.stock,
       image: imageUrl,
     });
-    let newProductCategories = args.category.split(',')
+    let newProductCategories = args.category.split(',');
     let allCategories = await Category.findAll();
-    allCategories = allCategories.map( elem=>elem['dataValues'].name)
+    allCategories = allCategories.map( elem=>elem['dataValues'].name);
     newProductCategories.map(async(category)=>{
       if(allCategories.includes(category)){
-        let findCategory = await Category.findOne({where:{name:category}})
-        newProduct.addCategory(findCategory.id)
+        let findCategory = await Category.findOne({where:{name:category}});
+        newProduct.addCategory(findCategory.id);
       }else{
         await Category.create({name:category}).then(res=>newProduct.addCategory(res.id))
       }
     });
     return {__typename: 'product', ...newProduct.dataValues};
   } catch (error) {
-    console.log("ERROR "+error);
-    throw new Error(error);
+    return {__typename: 'error', name: 'error', detail: 'Product already exist'};
   }
 }
 
@@ -176,8 +175,9 @@ async function removeCategoryFromProduct( idProduct, idCategory ) {
   const product = await Product.findByPk(idProduct);
   if (product !== null) {
     try {
-      await product.removeCategories(idCategory);
-      return {__typename: 'product', ...product.dataValues};
+      let cat = await product.removeCategories(idCategory);
+      if(cat === 1 ) return {__typename: 'product', ...product.dataValues};
+      else return {__typename: 'error', name:"error", detail: 'Category not found'};
     } catch (error) {
       throw new Error(error);
     }
