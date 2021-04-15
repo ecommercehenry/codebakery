@@ -13,6 +13,7 @@ import GlobalStyle from './Components/GlobalStyle';
 import Login from './Components/screens/login/login';
 import UserAccount from "./Components/UserAcount/UserAccount";
 import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
+import GuestCart from './Components/screens/cart/GuestCart';
 
 function App() {
   return (
