@@ -4,7 +4,9 @@ import { useSelector } from "react-redux";
 
 import styled from 'styled-components';
 
-
+import { Button } from 'rsuite';
+import { Steps } from 'rsuite';
+// import 'rsuite/lib/styles/index.less';
 
 export default function Orden({ id, orden }) {
   //   const product = useSelector((state) => state.productsReducer.products[id]);
@@ -12,7 +14,16 @@ export default function Orden({ id, orden }) {
   //   function handlerOnClick() {
   //     setShow(!show);
   //   }
-
+  const instance = (
+    <Steps current={4}>
+      <Steps.Item />
+      <Steps.Item />
+      <Steps.Item />
+      <Steps.Item />
+    </Steps>
+  );
+  
+  
   if (orden) {
     return (
       <StyledOrden>
@@ -28,10 +39,7 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="text-container">
               <span>Status</span>
-              {/* <div className="container-mapeo">
-                  {product.categories.map((element) => (
-                    <p key={element.id}>{element.name}</p>
-                ))} */}
+              {instance}
             </div>
             <div className="text-container">
               <span>Cancelled</span>
@@ -44,6 +52,7 @@ export default function Orden({ id, orden }) {
             <div className="edit-button">
               <button>Detail</button>
             </div>
+           
           </div>
         </div>
       </StyledOrden>
@@ -74,7 +83,7 @@ const StyledOrden = styled.div`
 
 .element-container{   
     width: 100%;
-    height: 15vh;
+    height: 50vh;
     display:flex;
     align-items: center;
     justify-content: center;
