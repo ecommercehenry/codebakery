@@ -11,6 +11,7 @@ const {validateUser} = require("./validateUser")
 const {getOrderById} = require("./getOrderById")
 const {getAllOrders} = require("./getAllOrders")
 const {getOrdersByUserIdInCart} = require("./getOrdersByUserIdInCart")
+const {getOrdersByUserIdInTicket} = require("./getOrdersByUserIdInTicket")
 
 // getProductByCategoryName
 module.exports = {
@@ -27,4 +28,5 @@ module.exports = {
   getOrderById,
   getAllOrders,
   getOrdersByUserIdInCart,
+  getOrdersByUserIdInTicket,
 }
