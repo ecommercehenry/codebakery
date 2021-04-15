@@ -16,4 +16,5 @@ type Mutation{
     updateOrderPrices(orderId: Int!) : Boolean
     deleteProductOrder(orderId: Int!, productId: Int!): Boolean
     addProductToOrder(orderId: Int!, productId: Int!, quantity: Int!): Boolean
+    deleteOrder(orderId: Int!) : Boolean
 }`
