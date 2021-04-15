@@ -1,31 +1,41 @@
 const { Order, Lineal_Order, Product, Users } = require("../db")
 const {getProductById} = require("./productsService")
+
 async function getAllOrders(){
     try {
-        const response = await Order.findAll({
-            where: {placeStatus: 'checkout'},
-            include:{
-                    model: Lineal_Order,
-                    include: [Product]
-                }
-        })
-        console.log(response)
-        return response
+        const order = await Order.findAll();
+        const out = [];
+
+        for(let i = 0; i < order.length; i++) {
+            const element = order[i];
+            const formatted = await _formatOrder(element)
+            out.push(formatted)
+        }
+
+        console.log(out)
+        return out
     } catch (err) {
-        console.log(err)
         throw new Error(err)
     }
 }
 
 
 
-async function getOrdersByUserID(userId){
+async function getOrdersByUserId(userId){
     try {
-        return await Order.findAll({
-            where: {userId},
-            order: ['id', "DESC"],
-            include: [Lineal]
+        const order = await Order.findAll({
+            where: {userId}
         })
+        const out = [];
+
+        for(let i = 0; i < order.length; i++) {
+            const element = order[i];
+            const formatted = await _formatOrder(element)
+            out.push(formatted)
+        }
+
+        console.log(out)
+        return out
     } catch (err) {
         return {
             error: "Problem finding the user ID of order",
@@ -138,7 +148,7 @@ async function getOrderById(id){
   }
 module.exports = {
     getAllOrders,
-    getOrdersByUserID,
+    getOrdersByUserId,
     getOrderById,
     createOrder
 }

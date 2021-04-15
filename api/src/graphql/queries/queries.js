@@ -12,7 +12,7 @@ union resultValidate = user | error
         getProductByArray(array: [Int!]): [product],
         getAllOrders: [order],
         getOrdersByUserId(userId: Int!): [order],
-        validateUser(name:String, password:String): resultValidate
+        validateUser(name:String, password:String): resultValidate,
         getOrderById(id: Int!): order,
 
     }

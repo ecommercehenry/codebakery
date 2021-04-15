@@ -1,8 +1,7 @@
-const { getAllOrders } = require("../../../services/productsService")
+const { getAllOrders } = require("../../../services/orderService")
 
 
 // getAllProducts
 module.exports = {getAllOrders:() => {
-    console.log("----------------------------FUNCIONA!")
     return getAllOrders()
 }}

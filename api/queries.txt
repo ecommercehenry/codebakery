@@ -233,7 +233,7 @@ mutation{
   }
 }
 
-//OBTENER ORDEN POR ID
+//OBTENER ORDEN POR SU ID
 {
   getOrderById(id:1){
     id
@@ -243,16 +243,27 @@ mutation{
       price
       quantity
       product{
-        id
         name
-        description
-        price
         stock
         image
-        categories{
-          id
-          name
-        }
+      }
+    }
+  }
+}
+
+//OBTENER ORDENES POR USER ID
+{
+  getOrdersByUserId(userId: 1) {
+    id
+    status
+    lineal_order {
+      userId
+      price
+      quantity
+      product {
+        name
+        stock
+        image
       }
     }
   }

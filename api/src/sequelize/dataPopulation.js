@@ -11,7 +11,12 @@ async function dataPopulation() {
     await Product.bulkCreate(MOCK_PRODUCTS)
     await createUser("admin","12345","admin@admin.com","admin")
     await createUser("juan","12345","juan@gmail.com","user")
-    await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1,100,999)
+    await createUser("pepe","12345","pepe@gmail.com","user")
+    await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
+    await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
+    await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)
+    await createOrder([{id:4,quantity:1},{id:8,quantity:1}],1)
+    await createOrder([{id:5,quantity:2},{id:9,quantity:1}],2)
     
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,1)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,2)`)

@@ -23,6 +23,8 @@ const {
     getProductByArray,
     validateUser,
     getOrderById,
+    getAllOrders,
+    getOrdersByUserId,
 } = require("./queriesResolvers/")
 
 // product
@@ -50,8 +52,9 @@ const root = {
     getProductByArray,
     getAllUsers,
     validateUser,
-    getOrderById
-    
+    getOrderById,
+    getAllOrders,
+    getOrdersByUserId,
 }
 
 module.exports = root
