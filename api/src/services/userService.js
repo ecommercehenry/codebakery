@@ -7,6 +7,7 @@ async function getAllUsers() {
       { include: [{ model: Product }, { model: Review }] },
       { attributes: { exclude: ["password"] } }
     )
+
   } catch (error) {
     throw new Error(error)
   }
@@ -72,3 +73,4 @@ async function loginUser(name,password){
 }
 
 module.exports = { getAllUsers, createUser, modifyUser,loginUser}
+
