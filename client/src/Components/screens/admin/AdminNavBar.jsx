@@ -23,7 +23,9 @@ const AdminNavBar = ({setAddProduct}) => {
                 <SearchBar/>
             </div>
             
-            {add ? <div className="add-category" onClick={() => setAdd(!add)}>"+ ADD CATEGORY"</div> : <div className="add-category"> <FormCreateCategory setAdd={setAdd}/></div>}
+            {add ? <div className="add-category" onClick={() => setAdd(!add)}>
+                "+ ADD CATEGORY"</div> : 
+                <div className="add-category"> <FormCreateCategory setAdd={setAdd}/></div>}
 
             <Link to="/admin/add-product" className="addProduct purple-btn" onClick={buttonHandler}>
                 + ADD PRODUCT

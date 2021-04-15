@@ -33,6 +33,7 @@ const {
     getOrdersByUserIdInCart,
     getOrdersByUserIdInTicket,
     
+    // getAllUsers,
 } = require("./queriesResolvers/")
 
 // product
@@ -69,7 +70,9 @@ const root = {
     getOrdersByUserIdInCart,
     getOrdersByUserIdInTicket,
     deleteProductOrder,
-    modifyStatusOrder
+    modifyStatusOrder,
+    validateUser
+    // getAllUsers,
     
 }
 

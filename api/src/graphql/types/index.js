@@ -5,6 +5,7 @@ const reviewType = require("./reviewType")
 const errorType = require("./errorType")
 const orderType = require("./orderType")
 const linealOrderType = require("./linealOrderType")
+const booleanType = require("./booleanType")
 
 // aqui exportas tu type
 module.exports = `
@@ -15,4 +16,5 @@ module.exports = `
     ${errorType}
     ${orderType}
     ${linealOrderType}
+    ${booleanType}
 `
