@@ -13,10 +13,14 @@ import Login from "./Login";
 import Logout from "./Logout";
 import { useDispatch } from "react-redux";
 import validateUser from "../../Apollo/queries/validateUser"
+
 const UserAcount = () => {
-  // const [createUser, { data }] = useMutation(CREATE_USER);
-  const { register, handleSubmit } = useForm();
   const [login, { loading, data }] = useLazyQuery(validateUser);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   // Google login
   const dispatch = useDispatch()
@@ -62,19 +66,31 @@ const UserAcount = () => {
             className="fadeIn second"
             name="login"
             placeholder="Entra tu email o usuario"
+            aria-invalid={errors.name ? "true" : "false"}
             {...register("login", { required: true })}
           />
+          {errors.name && errors.name.type === "required" && (
+            <p className="error" role="alert">
+              This is required
+            </p>
+          )}
           <input
             type="password"
             className="fadeIn third"
             name="password"
             placeholder="Contraseña"
+            aria-invalid={errors.name ? "true" : "false"}
             {...register("password", { required: true })}
           />
+          {errors.name && errors.name.type === "required" && (
+            <p className="error" role="alert">
+              This is required
+            </p>
+          )}
           <input type="submit" className="fadeIn fourth" value="Log In" />
         </form>
         <p className="formFooter">
-          ¿No tienes cuenta? <Link to="/create">Creala aqui</Link>
+          ¿No tienes cuenta? <Link to="/sign-up">Creala aqui</Link>
         </p>
       </div>
     </div>

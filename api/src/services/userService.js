@@ -7,22 +7,30 @@ async function getAllUsers() {
       { include: [{ model: Product }, { model: Review }] },
       { attributes: { exclude: ["password"] } }
     )
+
   } catch (error) {
     throw new Error(error)
   }
 }
 
 async function createUser(name, password, email, role) {
-  try {
-    return await Users.create({
-      name,
-      password,
-      email,
-      role,
-    })
-  } catch (error) {
-    console.log(error.message)
-    throw new Error(error);
+  const validationUser = await Users.findOne({
+    where: { email },
+  });
+
+  if (validationUser.length === 0) {
+    try {
+      return await Users.create({
+        name,
+        password,
+        email,
+        role,
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  } else {
+  return {__typename: "error", name: "the user already exists", detail: "the user already exists"}
   }
 }
 
@@ -68,3 +76,4 @@ async function loginUser(name,password){
 }
 
 module.exports = { getAllUsers, createUser, modifyUser,loginUser}
+
