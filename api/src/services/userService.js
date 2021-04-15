@@ -14,12 +14,7 @@ async function getAllUsers() {
 }
 
 async function createUser(name, password, email, role) {
-  const validationUser = await Users.findOne({
-    where: { email },
-  });
-
-  if (validationUser?.length === 0) { 
-    try {
+  try {
       return await Users.create({
         name,
         password,
@@ -29,9 +24,6 @@ async function createUser(name, password, email, role) {
     } catch (error) {
       throw new Error(error);
     }
-  } else {
-  return {__typename: "error", name: "the user already exists", detail: "the user already exists"}
-  }
 }
 
 async function modifyUser(id, name, password, email, role) {
