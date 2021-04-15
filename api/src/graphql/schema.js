@@ -9,7 +9,7 @@ const inputs = require('./inputs');
 // console.log(mutations, 'ppapspaps') 
 
 const schema = buildSchema(`
-#Queries ( to get data )
+#Queryes ( to get data )
 ${queries}
 
 #Mutations ( to manipulate data )
