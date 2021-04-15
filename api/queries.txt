@@ -268,3 +268,19 @@ mutation deleteCategory($id:Int!){
 {
  "id": 1
 }
+
+
+// MUTACIÓN PARA ELIMINAR PRODUCTO POR ID
+mutation deleteById($id:Int!){
+  deleteById(id: $id){
+      __typename
+     ... on booleanDelete {
+      booleanDelete
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}

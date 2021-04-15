@@ -6,7 +6,10 @@ module.exports = {
     try {
       const authToken = args.headers.authtoken
       const decoded = jwt.verify(authToken, "secret")
-      return addCategoryToProduct(_.idProduct, _.idCategory)
+      let { authrole } = args.headers
+      if (authrole === "admin") {
+        return addCategoryToProduct(_.idProduct, _.idCategory)
+      } else return { __typename: "error", name: "error", detail: "No admin" }
     } catch (err) {
       return { __typename: "error", name: "error", detail: "No admin" }
     }
