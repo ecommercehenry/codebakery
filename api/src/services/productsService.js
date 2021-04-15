@@ -165,10 +165,10 @@ async function addCategoryToProduct(idProduct, idCategory) {
       const productToBeReturned = await product.addCategories(idCategory);
       return {__typename: "product", ...product.dataValues }
     } catch (error) {
-      return { __typename: "error", name: "error", detail: "Product not found" }
+      return { __typename: "error", name: "error", detail: "Not found" }
     }
   } else {
-    return { __typename: "error", name: "error", detail: "Category not found" } ;
+    return { __typename: "error", name: "error", detail: "Not found" } ;
   }
 }
 
