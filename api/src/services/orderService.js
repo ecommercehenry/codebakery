@@ -210,6 +210,24 @@ async function deleteProductOrder(orderId, productId){
  * @param  {} quantity
  */
 async function addProductOrder(orderId, productId, quantity){
+    try {
+        const order = await Order.findOne({where: {id: orderId}})
+
+        if(order.placeStatus === 'cart'){
+            const newProduct = await Product.findOne({
+                where:{
+                    id:productId
+                }
+            })
+            let has = await order.addProduct(newProduct, {through:{price:newProduct.price, quantity}})            
+            return true
+        } else {
+            throw new Error('You cannot add a product in a ticket')
+        }
+        
+    } catch (err) {
+        throw new Error(err)
+    }
     
 }
 /**
@@ -219,9 +237,16 @@ async function addProductOrder(orderId, productId, quantity){
  */
  async function deleteOrder(orderId){
     try {
+        const order = await Order.findOne({where: {id: orderId}})
+        if(order.placeStatus === 'cart'){
+            await order.destroy()
+            return true
+        } else {
+            throw new Error('You cannot delete a order in ticket status')
+        }
         
     } catch (err) {
-        return 
+        throw new Error(err.message)
     }
 }
 /**
