@@ -12,8 +12,7 @@ async function getAllOrders(){
         console.log(response)
         return response
     } catch (err) {
-        console.log(err)
-        throw new Error(err)
+        throw new Error("Problem getting all orders "+err.message)
     }
 }
 
@@ -136,9 +135,65 @@ async function getOrderById(id){
     const out = await _formatOrder(order)
     return await _formatOrder(order)
   }
+
+async function updatePricesOrder(orderId){
+
+}
+/**
+ * ONLY IF PLACE STATUS IS CART
+ * Delete a existing product in the order
+ * @param  {} orderId
+ * @param  {} productId
+ */
+async function deleteProductOrder(orderId, productId){
+
+}
+/**
+ * ONLY IF PLACE STATUS IS CART
+ * Add new product to existing order
+ * 
+ * If the product already exist in the order only modify the quantity
+ * @param  {} orderId
+ * @param  {} productId
+ * @param  {} quantity
+ */
+async function addProductOrder(orderId, productId, quantity){
+
+}
+/**
+ * ONLY IF PLACESTATUS IS CART
+ * Delete order 
+ * @param  {Int} orderId 
+ */
+ async function deleteOrder(orderId){
+    
+}
+/**
+ * Modify the place status of the orden beetwen "cart" and "ticket"
+ * @param  {Int} orderId 
+ * @param  {String} status  only acept value "cart" or "ticket"
+ */
+async function modifyPlaceStatusOrder(orderId, status){
+
+}
+/**
+ * Modify the status of the order between unpaid, paid, sent, received
+ *  See: model order datatype ENUM
+ * @param  {Int} orderId 
+ * @param  {String} status string between unpaid, paid, sent, received
+ */
+async function modifyStatusOrder(orderId, status){
+
+}
+
 module.exports = {
     getAllOrders,
     getOrdersByUserID,
     getOrderById,
-    createOrder
+    createOrder,
+    deleteProductOrder,
+    addProductOrder,
+    deleteOrder,
+    modifyPlaceStatusOrder,
+    modifyStatusOrder
 }
