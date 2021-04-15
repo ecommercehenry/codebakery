@@ -4,46 +4,47 @@ import NavBar from "../../navBar/NavBar";
 import Hero from "../hero/Hero";
 import Products from "../products/container/Products";
 import Detail from "../../detail/Detail.jsx";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation, gql, useQuery } from "@apollo/client";
 
 const Catalogue = () => {
   let storage = window.localStorage;
   let logged = storage.token ? true : false;
-  let cart = storage.cart ? true : false;
+  let cartExistence = storage.cart ? true : false;
 
-  if (logged && cart){
-      const createOrder = gql`
+  if (logged) {
+    let email = JSON.stringify(storage.email);
+    const getUserByEmail = gql`
+  {
+  getUserByEmail(email: ${email}) {
+    id
+  }
+}
+  `;
+    let { data ,loading} = useQuery(getUserByEmail);
+    if (!loading){
+      let userId = JSON.stringify(data.getUserByEmail.id)
+      if (cartExistence) {
+        let newCart = JSON.stringify(storage.cart)    
+        
+        
+        
+        const createOrder = gql`
       mutation{
   createOrder(idUser:1,
     dataProducts:
     [
-    {id:1,quantity:100},
-    {id:5,quantity:10},
-    {id:4,quantity:11}
+    {id: ,quantity:100}
     ]
-  ){
+  ) {
     id
-    status
-    lineal_order{
-      userId
-      price
-      quantity
-      product{
-        id
-        name
-        description
-        price
-        stock
-        image
-        categories{
-          id
-          name
-        }
+  }
+}
+      `
+      useMutation(createOrder)
       }
     }
   }
-}`
-  }
+
   return (
     <>
       <NavBar color="white" />
