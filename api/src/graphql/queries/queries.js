@@ -9,7 +9,11 @@ union resultValidate = user | error
         getAllCategories:[category],
         getProductByName(name: String!): product, 
         getAllUsers: [user],
-        getProductByArray(array: [Int!]): [product]
-        validateUser(name:String, password:String): resultValidate
+        getProductByArray(array: [Int!]): [product],
+        getAllOrders: [order],
+        getOrdersByUserId(userId: Int!): [order],
+        validateUser(name:String, password:String): resultValidate,
+        getOrderById(id: Int!): order,
+
     }
 `

@@ -49,7 +49,10 @@ Users.belongsToMany(Product, { through: "user-products" });
 Product.belongsToMany(Users, { through: "user-products" });
 Product.hasMany(Review);
 Users.hasMany(Review);
-Users.hasMany(Order);
+Users.hasMany(Order,{foreignKey: {
+  allowNull: false
+}});
+//Agregado ya que el id del usuario estaba siendo posible dejarlo en null
 Order.belongsTo(Users);
 Product.belongsToMany(Order, { through: Lineal_Order });
 Order.belongsToMany(Product, { through: Lineal_Order });

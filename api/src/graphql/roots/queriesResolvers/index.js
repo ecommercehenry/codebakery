@@ -8,7 +8,9 @@ const {getProductByName } = require("./getProductByProductName")
 const {getProductByArray} = require("./getProductByArray")
 const { getAllUsers } = require("./getAllUsers")
 const {validateUser} = require("./validateUser")
-
+const {getOrderById} = require("./getOrderById")
+const {getAllOrders} = require("./getAllOrders")
+const {getOrdersByUserId} = require("./getOrdersByUserId")
 
 // getProductByCategoryName
 module.exports = {
@@ -21,4 +23,8 @@ module.exports = {
   getProductByName, 
   getProductByArray,
   getAllUsers, 
-  validateUser}
+  validateUser,
+  getOrderById,
+  getAllOrders,
+  getOrdersByUserId,
+}
