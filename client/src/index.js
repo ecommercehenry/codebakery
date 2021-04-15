@@ -10,9 +10,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 import {store,persistor} from "./store/index"
 
 // cliente apollo
+const token = localStorage.getItem('token');
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  headers: {authtoken:token}
 })
 
 ReactDOM.render(
