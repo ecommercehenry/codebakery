@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import { useSelector } from "react-redux";
-
 import styled from 'styled-components';
-
 import { Button } from 'rsuite';
 import { Steps } from 'rsuite';
 // import 'rsuite/lib/styles/index.less';
@@ -14,6 +11,7 @@ export default function Orden({ id, orden }) {
   //   function handlerOnClick() {
   //     setShow(!show);
   //   }
+  
   const instance = (
     <Steps current={4}>
       <Steps.Item />

@@ -13,7 +13,9 @@ import GlobalStyle from './Components/GlobalStyle';
 import Login from './Components/screens/login/login';
 import UserAccount from "./Components/UserAcount/UserAccount";
 import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
-import TablaOrdenes from "./Components/screens/admin/ordenes/TablaOrdenes"
+import TablaOrdenes from "./Components/screens/admin/ordenes/TablaOrdenes";
+import SortByPrice from "./Components/screens/admin/ordenes/SortByPrice";
+
 
 function App() {
   return (
@@ -31,7 +33,9 @@ function App() {
       
       {/* ruta provisoria, a acomodar en el adminPanel al dar click en "Orders"     */}
       <Route path="/ordenes" component={TablaOrdenes} />
-
+      <Route path="/price" com9ponent={SortByPrice} />
+      
+3
     </>
   );
 }
