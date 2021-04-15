@@ -149,20 +149,17 @@ async function modifyProduct(id, dataToModify) {
   }
 }
 
-async function addCategoryToProduct({ idProduct, idCategory }) {
+async function addCategoryToProduct(idProduct, idCategory) {
   const product = await Product.findByPk(idProduct);
-  if (product != null) {
+  if (product !== null) {
     try {
-      await product.addCategories(idCategory);
-      return product;
+      const productToBeReturned = await product.addCategories(idCategory);
+      return {__typename: "product", ...product.dataValues }
     } catch (error) {
-      return { error: error };
+      return { __typename: "error", name: "error", detail: "Product not found" }
     }
   } else {
-    return {
-      error: "couldn't find a product",
-      detail: "product doesn't exist",
-    };
+    return { __typename: "error", name: "error", detail: "Product not found" } ;
   }
 }
 
