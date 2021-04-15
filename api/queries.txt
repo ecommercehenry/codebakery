@@ -232,3 +232,28 @@ mutation{
     }
   }
 }
+
+//OBTENER ORDEN POR ID
+{
+  getOrderById(id:1){
+    id
+    status
+    lineal_order{
+      userId
+      price
+      quantity
+      product{
+        id
+        name
+        description
+        price
+        stock
+        image
+        categories{
+          id
+          name
+        }
+      }
+    }
+  }
+}
