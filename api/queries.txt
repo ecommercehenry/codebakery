@@ -28,11 +28,23 @@ query getAllCategories{
     name
   }
 }
-//// agregar un nuevo producto
-/// se puede pasar o no una categoria
-mutation {
-  addProduct(category: 1, name: "toritassas", description: "dsds", price: 50, stock: 50, image: "nico"){
-    id
+//// agregar un nuevo producto modificada con seguridad
+mutation addProduct($category: String!, $name: String!, $description: String!, $price: Float!, $stock: Int!, $image: String!){
+  addProduct(category: $category, name: $name, description: $description, price: $price, stock:$stock, image:$image){
+    __typename
+    ... on product{
+      id
+      name
+      description
+      price
+      stock
+      image
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
   }
 }
 

@@ -57,6 +57,7 @@ async function addProduct(args) {
   try {
     const imageString = args.image
     const uploadedResponse = await cloudinary.uploader.upload(imageString,{upload_preset:'code_bakery'});
+    
     const imageUrl = uploadedResponse.url;
     const newProduct = await Product.create({
       name: args.name,
@@ -73,11 +74,13 @@ async function addProduct(args) {
         let findCategory = await Category.findOne({where:{name:category}})
         newProduct.addCategory(findCategory.id)
       }else{
-        return await Category.create({name:category}).then(res=>newProduct.addCategory(res.id))
+        await Category.create({name:category}).then(res=>newProduct.addCategory(res.id))
       }
-    })
+    });
+    return {__typename: 'product', ...newProduct.dataValues};
   } catch (error) {
-    console.log("ERROR "+error)
+    console.log("ERROR "+error);
+    throw new Error(error);
   }
 }
 
