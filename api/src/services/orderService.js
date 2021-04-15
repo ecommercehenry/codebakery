@@ -301,7 +301,21 @@ async function updateOrderToTicket(orderId){
  * @param  {String} status string between unpaid, paid, sent, received
  */
 async function modifyStatusOrder(orderId, status){
-
+    try {
+        const order = await Order.findOne({
+            where: {id: orderId}
+        })
+        if(order.placeStatus === 'ticket'){
+            order.status = status
+            await order.save()
+            return true
+        } else {
+            throw new Error('You cannot edit the status of an order in cart status')
+        }
+        
+    } catch (err) {
+        throw new Error(err)
+    }
 }
 
 module.exports = {
