@@ -81,7 +81,38 @@ async function createOrder(products, idUser){
 
     }
 
-    return order
+    //Get elements with more order
+    const productsOrden = await order.getProducts()
+    const userOrden = await order.getUser()
+    const lineal_Order = productsOrden.map(p => p.Lineal_Order)
+
+    //Add every product in the order in a array to return after :)
+    let productsOrdersSalida = []
+    for(let i in lineal_Order){
+        productsOrdersSalida.push({
+            userId:userOrden.id,
+            price: lineal_Order[i].price,
+            quantity: lineal_Order[i].quantity,
+            product:[
+                {
+                    id:productsOrden[i].id,
+                    name: productsOrden[i].name,
+                    description: productsOrden[i].description,
+                    price: productsOrden[i].price,
+                    stock: productsOrden[i].stock,
+                    image: productsOrden[i].image,
+                    categories: await productsOrden[i].getCategories()
+                }
+            ]
+        })
+    }
+
+    const out = {
+        id:order.id,
+        status:order.status,
+        lineal_order: productsOrdersSalida
+    }
+    return out
 }
 async function getOrderById(id){
     // order = await Order.findOne({

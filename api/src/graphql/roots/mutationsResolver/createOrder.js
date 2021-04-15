@@ -5,30 +5,8 @@ const {
 
 // getAllProducts
 module.exports = {
-	createOrder: (_, args) => {
-		return {
-			id: 1,
-			status: "hola",
-			lineal_order: [
-				{
-					userId: 1,
-					price: 3,
-					quantity: 1,
-					product: [
-						{
-							id: 1,
-							name: "prid1",
-							description: "fwe",
-							price: 1,
-							stock: 1,
-							image: "ffw",
-							categories: []
-
-                        }
-                    ]
-                }
-            ]
-		}
-		return createOrder(_.productsData)
+	createOrder: async (_, args) => {
+		const orden  = await createOrder(_.dataProducts, _.idUser)
+		return orden
 	}
 }
