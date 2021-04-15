@@ -244,3 +244,27 @@ mutation addCategoryToProduct($idProduct:Int!, $idCategory:Int!){
   "idProduct": 9,
   "idCategory": 5
 }
+
+
+// PARA ELIMINAR CATEGORIA
+mutation deleteCategory($id:Int!){
+  deleteCategory(id: $id){
+      __typename
+     ... on booleanDelete {
+      booleanDelete
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+{
+ "id": 8
+}
+
+{
+ "id": 1
+}

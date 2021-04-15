@@ -24,17 +24,23 @@ async function getProductById({ id }) {
   }
 }
 
-async function deleteById({ id }) {
+async function deleteById(id) {
   try {
-    return await Product.destroy({
+    const productToDestroy = await Product.destroy({
       where: {
         id: id,
       },
     });
+    if (productToDestroy === 1) {
+      return {__typename: "booleanDelete", booleanDelete: true}
+    } else {
+      return {__typename: "booleanDelete", booleanDelete: false}
+    }  
   } catch (error) {
-    throw new Error(error);
+    return { __typename: "error", name: "error", detail: "Product not found" }
   }
 }
+
 async function productCategory({ id }) {
   try {
     return await Product.findOne({

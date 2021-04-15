@@ -1,7 +1,14 @@
 const { deleteById } = require("../../../services/productsService")
+const jwt = require("jsonwebtoken")
 
-
-// getAllProducts
-module.exports = {deleteById: (id) =>{
-    return deleteById(id)
-}}
+module.exports = {
+    deleteById: (_, args) => {
+    try {
+      const authToken = args.headers.authtoken
+      const decoded = jwt.verify(authToken, "secret")
+      return deleteById(_.id)
+    } catch (err) {
+      return { __typename: "error", name: "error", detail: "No admin" }
+    }
+  },
+}
