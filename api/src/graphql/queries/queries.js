@@ -11,5 +11,6 @@ module.exports = `
         getAllUsers: [user],
         getProductByArray(array: [Int!]): [product]
         validateUser(name:String, password:String): resultValidate
+        validateCredentials(token: String!, role: String!): Boolean
     }
 `

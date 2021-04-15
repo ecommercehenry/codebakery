@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import "./UserAccount";
@@ -30,6 +30,10 @@ const CreateUserAccount = () => {
     });
     SetExit(true);
   };
+  // SetExit(false);
+  // useEffect(()=>{
+  //   SetExit(false);
+  // }, [exit])
 
   return (
     <div className="container-two">
@@ -84,13 +88,20 @@ const CreateUserAccount = () => {
                   placeholder="Escribe tu email"
                   className="placeholder"
                   aria-invalid={errors.name ? "true" : "false"}
+                  // required
                   {...register("email", {
                     required: true,
-                    minLength: 3,
+                    minLength: 0,
                     maxLength: 30,
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                      message: "Enter a valid e-mail address",
+                    },
                   })}
                 />
-                {errors.name && errors.name.type === "required" && (
+                {errors.email && <p className="error">{errors.email.message}</p>}
+                {
+                errors.name && errors.name.type === "required" && (
                   <p className="error" role="alert">
                     This is required
                   </p>

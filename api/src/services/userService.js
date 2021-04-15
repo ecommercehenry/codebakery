@@ -21,9 +21,9 @@ async function createUser(name, password, email, role) {
       email,
       role
     });
-    return {__typename: 'user' , ...newUser.dataValues};
+    return {__typename: 'user', ...newUser.dataValues};
   } catch (error) {
-    return {__typename: 'error' , name: 'error', detail: 'User already exist'};
+    return {__typename: 'error' , name: 'error', detail: 'Email already exist o invalid email'};
   }
 }
 

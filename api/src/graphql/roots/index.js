@@ -21,6 +21,7 @@ const {
     getAllUsers,
     getProductByArray,
     validateUser,
+    validateCredentials,
     // getAllUsers,
 } = require("./queriesResolvers/")
 
@@ -47,7 +48,8 @@ const root = {
     getProductByCategoryName,
     getProductByArray,
     getAllUsers,
-    validateUser
+    validateUser,
+    validateCredentials,
     // getAllUsers,
     
 }
