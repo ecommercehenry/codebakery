@@ -213,30 +213,7 @@ query
 
   }
 
-  // Para obtener todas las ordenes que ya atravesaron el checkout
-  query{
- getAllOrders{
-  	id
-    status
-    lineal_order{
-      userId
-      price
-      quantity
-      product{
-        id
-        name
-        description
-        price
-        stock
-        image
-        categories{
-          id
-          name
-        }
-      }
-    }
-  }
-}
+  
 
 
 
@@ -274,34 +251,7 @@ query
   }
 }
 
-//CREAR UNA ORDEN
-mutation{
-  createOrder(idUser:1,
-    dataProducts:
-    [
-    {id:1,quantity:100},
-    {id:5,quantity:10},
-    {id:4,quantity:11}
-    ]
-  ){
-    id
-    status
-    lineal_order{
-      userId
-      price
-      quantity
-      product{
-        id
-        name
-        description
-        price
-        stock
-        image
-        categories{
-          id
-          name
-        }
-      }
+
 // MUTATION PARA MODIFICAR PRODUCTOS
 mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
   modifyProduct(id: $id, dataToModify: $dataToModify){
@@ -318,20 +268,7 @@ mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
   }
 }
 
-//OBTENER ORDEN POR SU ID
-{
-  getOrderById(id:1){
-    id
-    status
-    lineal_order{
-      userId
-      price
-      quantity
-      product{
-        name
-        stock
-        image
-      }
+
 
 
 
@@ -375,24 +312,6 @@ mutation addCategoryToProduct($idProduct:Int!, $idCategory:Int!){
   }
 }
 
-//OBTENER ORDENES EN CARRITO POR USER ID 
-{
-  getOrdersByUserIdInCart(userId:1){
-    id
-    status
-    lineal_order{
-      userId
-      price
-      quantity
-      product{
-        name
-        stock
-        image
-      }
-{
-  "idProduct": 9,
-  "idCategory": 5
-}
 
 
 // PARA ELIMINAR CATEGORIA
@@ -410,23 +329,7 @@ mutation deleteCategory($id:Int!){
   }
 }
 
-//Actualizar el precio fijo de la orden carrito
-mutation{
-  updateOrderPrices(orderId:1)
-}
 
-
-//Actualizar estado de place status de cart a ticket
-mutation{
- updateOrderToTicket(orderId:1)
-}
-{
- "id": 8
-}
-
-{
- "id": 1
-}
 
 
 // MUTACIÓN PARA ELIMINAR PRODUCTO POR ID
@@ -444,6 +347,155 @@ mutation deleteById($id:Int!){
   }
 }
 
-{
- "id": 2
-}
+
+	
+//CREAR NUEVA ORDEN
+	mutation createOrder($idUser:Int! , $dataProducts:[dataProductsOrderInput]!){
+	  createOrder(idUser:$idUser, dataProducts:$dataProducts)
+	  {
+		... on order{
+		  id
+		  status
+		}
+		... on error{
+		  detail
+		}
+	  }
+	}
+	Con variables:
+	{
+	  "idUser": 1,
+	  "dataProducts": [
+		{"id": 1, "quantity": 100},
+		{"id": 2, "quantity": 200},
+		{"id": 3, "quantity": 1}
+	  ]
+	}
+//Actualizar precios de una orden
+	mutation updateOrderPrices($orderId:Int!){
+	 updateOrderPrices(orderId:$orderId){
+		... on booleanResponse{
+		  boolean
+		}
+	  	... on error{
+		  name
+		  detail
+		}
+		}
+	}
+	con variable 100 para error, 1 para correcto:
+	{
+	  "orderId": 1
+	}
+//Eliminar producto de una order ya existente solo si esta en status cart	
+	mutation addProductToOrder($orderId:Int!, $productId:Int!){
+	  deleteProductOrder(orderId:$orderId, productId:$productId,)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	variables
+	{
+	  "orderId":1,
+	  "productId": 1
+	}
+
+
+//Agregar producto a una orden ya existente solo si esta en status cart
+	mutation addProductToOrder($orderId:Int!, $productId:Int!, $quantity:Int!){
+	  addProductToOrder(orderId:$orderId, productId:$productId, quantity:$quantity)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	variables:
+	{
+	  "orderId":1,
+	  "productId": 1,
+	  "quantity": 5
+	}
+
+
+	
+//Actualizar precios de una orden
+	mutation updateOrderPrices($orderId:Int!){
+	 updateOrderPrices(orderId:$orderId){
+		... on booleanResponse{
+		  boolean
+		}
+	  	... on error{
+		  name
+		  detail
+		}
+		}
+	}
+	con variable 100 para error, 1 para correcto:
+	{
+	  "orderId": 1
+	}
+//Eliminar una orden siempre y cuando este en cart place status
+	mutation deleteOrder($orderId:Int!){
+	  deleteOrder(orderId:$orderId)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	con variable 
+	{
+	  "orderId":1
+	}
+//Actualizar el place state de una order de "cart" a "ticket"
+	mutation updateOrderToTicket($orderId:Int!){
+	  updateOrderToTicket(orderId:$orderId)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	Con variables:
+	{
+	  "orderId":1
+	}
+//Actualizar el estado de una query, unpaid, paid, sent, received
+	mutation modifyStatusOrder($orderId:Int! , $status:String!){
+	  modifyStatusOrder(orderId:$orderId, status:$status)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	Con variables:
+	{
+	  "orderId":1,
+	  "status": "paid"
+	}
+
+
