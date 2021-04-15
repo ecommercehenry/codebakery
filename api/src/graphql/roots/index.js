@@ -24,7 +24,7 @@ const {
     validateUser,
     getOrderById,
     getAllOrders,
-    getOrdersByUserId,
+    getOrdersByUserIdInCart,
 } = require("./queriesResolvers/")
 
 // product
@@ -54,7 +54,7 @@ const root = {
     validateUser,
     getOrderById,
     getAllOrders,
-    getOrdersByUserId,
+    getOrdersByUserIdInCart,
 }
 
 module.exports = root

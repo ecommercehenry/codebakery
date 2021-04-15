@@ -251,16 +251,16 @@ mutation{
   }
 }
 
-//OBTENER ORDENES POR USER ID
+//OBTENER ORDENES EN CARRITO POR USER ID 
 {
-  getOrdersByUserId(userId: 1) {
+  getOrdersByUserIdInCart(userId:1){
     id
     status
-    lineal_order {
+    lineal_order{
       userId
       price
       quantity
-      product {
+      product{
         name
         stock
         image

@@ -11,7 +11,7 @@ union resultValidate = user | error
         getAllUsers: [user],
         getProductByArray(array: [Int!]): [product],
         getAllOrders: [order],
-        getOrdersByUserId(userId: Int!): [order],
+        getOrdersByUserIdInCart(userId: Int!): [order],
         validateUser(name:String, password:String): resultValidate,
         getOrderById(id: Int!): order,
 
