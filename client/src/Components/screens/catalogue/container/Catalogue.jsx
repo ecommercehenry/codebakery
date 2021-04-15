@@ -17,7 +17,6 @@ const Catalogue = () => {
     const [createOrder, {data, loading}] =useMutation(CREATE_ORDER)
     useEffect(()=>{
       if (logged && cartExistence) {
-        console.log("i'm in")
       let userId = parseInt(storage.id)
         let cart = JSON.parse(storage.cart)
         createOrder({variables:{
