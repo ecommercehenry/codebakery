@@ -150,22 +150,30 @@ query
 
   // Para obtener todas las ordenes que ya atravesaron el checkout
   query{
-    getAllOrders(){
-      order{
+ getAllOrders{
+  	id
+    status
+    lineal_order{
+      userId
+      price
+      quantity
+      product{
         id
-        status
-        lineal_order{
-          price
-          quantity
-          product{
-            id
-            name
-          }
+        name
+        description
+        price
+        stock
+        image
+        categories{
+          id
+          name
         }
       }
     }
   }
 }
+
+
 
 // PARA OBTENER TODOS LOS USUARIOS (SIN CONTRASEÑA) CON SUS PRODUCTOS Y CON SUS REVIEWS
 {
@@ -272,4 +280,10 @@ mutation{
 //Actualizar el precio fijo de la orden carrito
 mutation{
   updateOrderPrices(orderId:1)
+}
+
+
+//Actualizar estado de place status de cart a ticket
+mutation{
+ updateOrderToTicket(orderId:1)
 }

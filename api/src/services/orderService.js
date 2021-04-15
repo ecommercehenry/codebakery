@@ -15,8 +15,7 @@ async function getAllOrders(){
             const formatted = await _formatOrder(element)
             out.push(formatted)
         }
-
-        console.log(out)
+        console.log({ __typename:"order",...out,})
         return out
     } catch (err) {
         throw new Error("Problem getting all orders "+err.message)

@@ -13,6 +13,8 @@ const {updateOrderPrices} = require("./updateOrderPrices");
 const { deleteProductOrder } = require("./deleteProductOrder");
 const {addProductToOrder} = require("./addProductToOrder")
 const {deleteOrder} = require("./deleteOrder")
+const {updateOrderToTicket} = require("./updateOrderToTicket")
+const {modifyStatusOrder} = require("./modifyStatusOrder")
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -29,4 +31,6 @@ module.exports = {
   deleteProductOrder,
   addProductToOrder,
   deleteOrder,
+  updateOrderToTicket,
+  modifyStatusOrder
 }
