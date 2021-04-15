@@ -143,13 +143,39 @@ async function getOrderById(id){
             id
         }
     })
+
     const out = await _formatOrder(order)
     return await _formatOrder(order)
   }
 
-async function updatePricesOrder(orderId){
+async function updateOrderPrices(orderId){
+    try {
+        const order = await Order.findOne({
+            where: {id: orderId}
+        })
+    
+        
+        const orderProducts = await order.getProducts()
+        const prices = {}
 
+        for (const data of orderProducts) {
+            prices[data.id] = data.price
+        }
+        
+        const lineal_Order = orderProducts.map(p => p.Lineal_Order)
+    
+        for (const data of lineal_Order) {
+            const id = data.productId
+            data.price = prices[id]
+            await data.save()
+        }
+
+        return true
+    } catch (err) {
+        return false
+    }
 }
+
 /**
  * ONLY IF PLACE STATUS IS CART
  * Delete a existing product in the order
@@ -157,7 +183,22 @@ async function updatePricesOrder(orderId){
  * @param  {} productId
  */
 async function deleteProductOrder(orderId, productId){
+    try {
+        const order = await Order.findOne({where: {id: orderId}})
+        if(order.placeStatus === 'cart'){
+            await Lineal_Order.destroy({
+                where: {orderId, productId}
+            })
 
+            return true
+        } else {
+            throw new Error('You cannot delete a product from a ticket')
+        }
+        
+    } catch (err) {
+        throw new Error(err.message)
+    }
+    
 }
 /**
  * ONLY IF PLACE STATUS IS CART
@@ -169,7 +210,7 @@ async function deleteProductOrder(orderId, productId){
  * @param  {} quantity
  */
 async function addProductOrder(orderId, productId, quantity){
-
+    
 }
 /**
  * ONLY IF PLACESTATUS IS CART
@@ -177,7 +218,11 @@ async function addProductOrder(orderId, productId, quantity){
  * @param  {Int} orderId 
  */
  async function deleteOrder(orderId){
-    
+    try {
+        
+    } catch (err) {
+        return 
+    }
 }
 /**
  * Modify the place status of the orden beetwen "cart" and "ticket"
@@ -206,5 +251,6 @@ module.exports = {
     addProductOrder,
     deleteOrder,
     modifyPlaceStatusOrder,
-    modifyStatusOrder
+    modifyStatusOrder,
+    updateOrderPrices
 }
