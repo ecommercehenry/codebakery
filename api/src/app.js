@@ -30,7 +30,7 @@ const getErrorCode = errorName =>{
 }
 
 server.use('/graphql', graphqlHTTP((req)=>{
-  console.log("HEADER: "+req.headers.authtoken)
+  console.log("HEADER: "+req.headers.authtoken+' '+req.headers.authrole )
   return ({
   schema: schema,
   extensions({

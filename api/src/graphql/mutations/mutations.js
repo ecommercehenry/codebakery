@@ -4,8 +4,8 @@ union resultCategory = category | error
 union resultProduct = product | error
 union resultUsers = user | error
  
-type Mutation{
-    modifyProduct(id: Int!, dataToModify: productInput!): resultProduct
+type Mutation{ 
+    modifyProduct(id: Int!, dataToModify: productInput!): resultProduct 
     updateCategory(id : Int!, input: categoryInput): resultCategory
     addCategory(name: String!): resultCategory
     deleteCategory(id: Int!): Boolean

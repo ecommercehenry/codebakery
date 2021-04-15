@@ -151,6 +151,7 @@ mutation createUser($name: String!, $password: String!, $email: String!, $role: 
     }
   }
 }
+
 // PARA LA MODIFICACION DE UN USUARIO Actualizada con proteccion
 mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, $role:String){
   modifyUser(id: $id ,name: $name, password: $password, email: $email, role:$role){
