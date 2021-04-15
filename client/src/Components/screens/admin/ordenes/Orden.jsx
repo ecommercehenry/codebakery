@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 
 import styled from 'styled-components';
 
-import { Button } from 'rsuite';
+
 import { Steps } from 'rsuite';
-// import 'rsuite/lib/styles/index.less';
+import 'rsuite/lib/styles/index.less';
+import "./prueba.css"
 
 export default function Orden({ id, orden }) {
   //   const product = useSelector((state) => state.productsReducer.products[id]);
@@ -15,11 +16,10 @@ export default function Orden({ id, orden }) {
   //     setShow(!show);
   //   }
   const instance = (
-    <Steps current={4}>
-      <Steps.Item />
-      <Steps.Item />
-      <Steps.Item />
-      <Steps.Item />
+    <Steps current={2}>
+      <Steps.Item  />
+      <Steps.Item  />
+      <Steps.Item  />     
     </Steps>
   );
   
@@ -38,7 +38,15 @@ export default function Orden({ id, orden }) {
               <p>{id}</p>
             </div>
             <div className="text-container">
-              <span>Status</span>
+              <span>UserId</span>
+              <p>{id}</p>
+            </div>
+            <div className="status-container">
+              <div className="titulos">
+                <span>Paid</span>
+                <span>Sent</span>
+                <span>Recived</span>
+              </div>
               {instance}
             </div>
             <div className="text-container">
@@ -52,7 +60,6 @@ export default function Orden({ id, orden }) {
             <div className="edit-button">
               <button>Detail</button>
             </div>
-           
           </div>
         </div>
       </StyledOrden>
@@ -74,6 +81,15 @@ const StyledOrden = styled.div`
     margin-top: 0.5rem;
     height: 100%;
 
+ .status-container{
+  width:350px;
+  height: 80px;
+  padding:0.5rem;
+  align-items:center; 
+
+}
+
+
 .info-container{
     height: 80%;
     width: 90%;
@@ -83,7 +99,7 @@ const StyledOrden = styled.div`
 
 .element-container{   
     width: 100%;
-    height: 50vh;
+    height: 16vh;
     display:flex;
     align-items: center;
     justify-content: center;
