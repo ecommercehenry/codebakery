@@ -3,7 +3,11 @@ const {getProductById} = require("./productsService")
 
 async function getAllOrders(){
     try {
-        const order = await Order.findAll();
+        const order = await Order.findAll({
+            where:{
+                placeStatus:"ticket"
+            }
+        });
         const out = [];
 
         for(let i = 0; i < order.length; i++) {
@@ -19,12 +23,13 @@ async function getAllOrders(){
     }
 }
 
-
-
-async function getOrdersByUserId(userId){
+async function getOrdersByUserIdInTicket(userId){
     try {
         const order = await Order.findAll({
-            where: {userId}
+            where: {
+                id:userId,
+                placeStatus:"ticket"
+            }
         })
         const out = [];
 
@@ -33,8 +38,30 @@ async function getOrdersByUserId(userId){
             const formatted = await _formatOrder(element)
             out.push(formatted)
         }
+        return out
+    } catch (err) {
+        return {
+            error: "Problem finding the user ID of order",
+            detail: "Possibly the id passed dont exists",
+          }
+    }
+}
 
-        console.log(out)
+async function getOrdersByUserIdInCart(userId){
+    try {
+        const order = await Order.findAll({
+            where: {
+                id:userId,
+                placeStatus:"cart"
+            }
+        })
+        const out = [];
+
+        for(let i = 0; i < order.length; i++) {
+            const element = order[i];
+            const formatted = await _formatOrder(element)
+            out.push(formatted)
+        }
         return out
     } catch (err) {
         return {
@@ -250,12 +277,22 @@ async function addProductOrder(orderId, productId, quantity){
     }
 }
 /**
- * Modify the place status of the orden beetwen "cart" and "ticket"
+ * Modify the place status of the orden to "ticket"
  * @param  {Int} orderId 
  * @param  {String} status  only acept value "cart" or "ticket"
  */
-async function modifyPlaceStatusOrder(orderId, status){
+async function updateOrderToTicket(orderId){
+    try {
+        const order = await Order.findOne({
+            where: {id: orderId}
+        })
+        order.placeStatus = "ticket"
+        await order.save()
 
+        return true
+    } catch (err) {
+        return false
+    }
 }
 /**
  * Modify the status of the order between unpaid, paid, sent, received
@@ -269,13 +306,15 @@ async function modifyStatusOrder(orderId, status){
 
 module.exports = {
     getAllOrders,
-    getOrdersByUserId,
+    getOrdersByUserIdInCart,
+    getOrdersByUserIdInTicket,
     getOrderById,
     createOrder,
     deleteProductOrder,
     addProductOrder,
     deleteOrder,
-    modifyPlaceStatusOrder,
+    updateOrderToTicket,
     modifyStatusOrder,
-    updateOrderPrices
+    updateOrderPrices,
+    
 }

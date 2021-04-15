@@ -5,12 +5,14 @@
 
  const { conn } = require("./src/db.js");
  const { dataPopulation } = require("./src/sequelize/dataPopulation");
- const {createOrder, getOrderById, updateOrderPrices, deleteProductOrder, addProductOrder, deleteOrder} = require("./src/services/orderService")
+ const {getOrdersByUserIdInCart,getOrdersByUserIdInTicket, updateOrderToTicket} = require("./src/services/orderService")
  
  // Syncing all the models at once.
  conn.sync({ force: true }).then(() => {
    dataPopulation().then(async ()=>{
-      deleteOrder(1)
+      // await updateOrderToTicket(1)
+      const a = await getOrdersByUserIdInTicket(1)
+      console.log(a)
    })
    
  });
