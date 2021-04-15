@@ -10,7 +10,8 @@ const {
     createUser,
     modifyUser,
     createOrder,
-    updateOrderPrices
+    updateOrderPrices,
+    deleteProductOrder
 } = require("./mutationsResolver/")
 
 const {
@@ -59,6 +60,7 @@ const root = {
     getAllOrders,
     getOrdersByUserIdInCart,
     getOrdersByUserIdInTicket,
+    deleteProductOrder,
 }
 
 module.exports = root
