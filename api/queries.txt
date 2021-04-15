@@ -268,3 +268,8 @@ mutation{
     }
   }
 }
+
+//Actualizar el precio fijo de la orden carrito
+mutation{
+  updateOrderPrices(orderId:1)
+}

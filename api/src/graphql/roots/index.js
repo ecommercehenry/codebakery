@@ -10,6 +10,7 @@ const {
     createUser,
     modifyUser,
     createOrder,
+    updateOrderPrices
 } = require("./mutationsResolver/")
 
 const {
@@ -42,6 +43,7 @@ const root = {
     createUser,
     modifyUser,
     createOrder,
+    updateOrderPrices,
     //Queries
     
     productById,

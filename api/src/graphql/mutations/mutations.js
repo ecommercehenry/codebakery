@@ -13,4 +13,5 @@ type Mutation{
     createUser(name: String!, password: String!, email: String!, role: String!): user
     modifyUser(id: Int!, name:String, password: String, email: String, role: String): user
     createOrder(idUser: Int!, dataProducts: [dataProductsOrderInput]) : order
+    updateOrderPrices(orderId: Int!) : Boolean
 }`
