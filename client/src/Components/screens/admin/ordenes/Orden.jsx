@@ -16,7 +16,7 @@ export default function Orden({ id, orden }) {
   //     setShow(!show);
   //   }
   const instance = (
-    <Steps current={orden.status}>
+    <Steps current={0}>
       <Steps.Item  />
       <Steps.Item  />
       <Steps.Item  />     
@@ -31,7 +31,7 @@ export default function Orden({ id, orden }) {
           <div className="info-container">
             <div className="text-container">
               <span>Date</span>
-              <p>{orden.date}</p>
+              <p>{"esperando al BACK"}</p>
             </div>
             <div className="text-container">
               <span>Order</span>
@@ -39,7 +39,7 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="text-container">
               <span>UserId</span>
-              <p>{orden.userId}</p>
+              <p>{orden.lineal_order[0].userId}</p>
             </div>
             <div className="status-container">
               <div className="titulos">
@@ -51,7 +51,7 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="text-container">
               <span>Cancelled</span>
-              <p>{orden.cancelled.toString()} </p>
+              <p>{"esperando cancell del BACK"} </p>
             </div>
             <div className="text-container">
               <span>Total</span>

@@ -18,7 +18,8 @@ const Grid = () => {
 // console.log(search, stateproducts,  'state')
   if(search === true){
     arr = allProduct.filter((element) => 
-      element.name.toLowerCase().includes(filterProduct.toLowerCase())  ) //con includes la busq ya no pide exactitud en el string. @Lizen
+      element.name.toLowerCase().includes(filterProduct.toLowerCase())  )
+       //con includes la busq ya no pide exactitud en el string. @Lizen
   }
   
   // console.log(allProduct)

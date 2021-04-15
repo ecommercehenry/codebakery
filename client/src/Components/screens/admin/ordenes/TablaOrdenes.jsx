@@ -68,11 +68,11 @@ export default function TablaOrdenes(){
 
     return (
         <StyledTablaOrdenes>ESTE ES EL COMPONENTE TABLA ORDENES
-             {ordenes ? (
-            ordenes.map((ord) => {
+             {data ? (
+            data.getAllOrders.map((ord) => {
               return <Orden
-                  id ={ord.orderId}
-                  key = {ord.orderId}
+                  id ={ord.id}
+                  key = {ord.id}
                   orden = {ord}
               />                    
            })
