@@ -38,10 +38,10 @@ server.use('/graphql', graphqlHTTP((req)=>{
     variables,
     document
   }) {
-    /* console.log("VARIABLES")
+    console.log("VARIABLES")
     console.log(variables);
     console.log("RESULT")
-    console.log(result) */
+    console.log(result) 
   },
   rootValue: root,
   graphiql: true

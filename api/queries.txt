@@ -266,36 +266,21 @@ query
   }
 }
 
-<<<<<<< HEAD
-//CREAR UNA ORDEN
-mutation{
-  createOrder(idUser:1,
-    dataProducts:
-    [
-    {id:1,quantity:100},
-    {id:5,quantity:10},
-    {id:4,quantity:11}
-    ]
-  ){
-    id
-    status
-    lineal_order{
-      userId
-      price
-      quantity
-      product{
-        id
-        name
-        description
-        price
-        stock
-        image
-        categories{
-          id
-          name
-        }
-      }
-=======
+//CREAR UNA ORDEN (actualizado)
+mutation createOrder($idUser: Int!, $dataProducts: [dataProductsOrderInput]){
+    createOrder(idUser: $idUser, dataProducts: $dataProducts){
+     id
+      status
+  }
+  }
+
+  /*variables de crear una orden */
+  {
+  "idUser":1,
+  "dataProducts": [{"id":1,"quantity": 2 }]
+}
+
+
 // MUTATION PARA MODIFICAR PRODUCTOS
 mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
   modifyProduct(id: $id, dataToModify: $dataToModify){
@@ -308,7 +293,6 @@ mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
     ... on error {
       name
       detail
->>>>>>> 6180deb8082ec585adf539901dffab981be324ca
     }
   }
 }
