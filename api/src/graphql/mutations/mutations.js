@@ -1,8 +1,10 @@
 module.exports = `
 union resultCategory = category | error
 union resultProduct = product | error
-union deletes = booleanDelete | error    
+union deletes = booleanResponse | error    
 union resultUsers = user | error
+union resultBoolean  = booleanResponse | error 
+union resultOrder = order | error
  
 type Mutation{
     modifyProduct(id: Int!, dataToModify: productInput!): resultProduct
@@ -15,11 +17,11 @@ type Mutation{
     addProduct(category: String!, name: String!, description: String!, price: Float!, stock: Int!, image: String!): resultProduct
     createUser(name: String!, password: String!, email: String!, role: String!): resultUsers
     modifyUser(id: Int!, name:String, password: String, email: String, role: String): resultUsers
-    createOrder(idUser: Int!, dataProducts: [dataProductsOrderInput]) : order
-    updateOrderPrices(orderId: Int!) : Boolean
-    deleteProductOrder(orderId: Int!, productId: Int!): Boolean
-    addProductToOrder(orderId: Int!, productId: Int!, quantity: Int!): Boolean
-    deleteOrder(orderId: Int!) : Boolean
-    updateOrderToTicket(orderId: Int!): Boolean
-    modifyStatusOrder(orderId: Int!, status: String!): Boolean
+    createOrder(idUser: Int!, dataProducts: [dataProductsOrderInput]) : resultOrder
+    updateOrderPrices(orderId: Int!) : resultBoolean
+    deleteProductOrder(orderId: Int!, productId: Int!): resultBoolean
+    addProductToOrder(orderId: Int!, productId: Int!, quantity: Int!): resultBoolean
+    deleteOrder(orderId: Int!) : resultBoolean
+    updateOrderToTicket(orderId: Int!): resultBoolean
+    modifyStatusOrder(orderId: Int!, status: String!): resultBoolean
 }`

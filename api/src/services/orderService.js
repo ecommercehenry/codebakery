@@ -79,13 +79,14 @@ async function getOrdersByUserIdInCart(userId){
  */
 async function createOrder(products, idUser){
     if(!Array.isArray(products)){
-        throw new Error("products, must be a array")
+        return { __typename: "error" , name:"input error",detail:"products, must be a array"}
     }else if(!products[0]){
-        throw new Error("Must be send minimum a 1 product")
+        return { __typename: "error" , name:"input error",detail:"Must be send minimum a 1 product"}
     }else if(!products[0].id){
-        throw new Error("object of array must contain a id of product")
+        return { __typename: "error" , name:"input error",detail:"object of array must contain a id of product"}
+        throw new Error()
     }else if(!products[0].quantity){
-        throw new Error("object of array must contain a quantity of the product")
+        return { __typename: "error" , name:"input error",detail:"object of array must contain a quantity of the product"}
     }else{
         const pass = ()=>"pass!" //Es solo por poner algo 
     }
@@ -103,7 +104,7 @@ async function createOrder(products, idUser){
             userId:user.id
         })
     }catch(err){
-        throw Error("Error creating new order, orderService "+err.message)
+        return { __typename: "error" , name:"db error",detail:"Error creating new order, orderService "+err.message}
     }
     //Get all products and vinculate with the order
     try{
@@ -113,10 +114,16 @@ async function createOrder(products, idUser){
             let has = await order.addProduct(result, {through:{price:result.price, quantity: product.quantity}})
         }
     }catch(err){
-        throw Error("Error in vinculation current products to order, orderService "+err.message)
+        return { __typename: "error" , name:"db error",detail:"Error in vinculation current products to order, orderService "+err.message}
 
     }
-    return _formatOrder(order)
+    let formatedOrder = null
+    try{
+        formatedOrder = await _formatOrder(order)
+    }catch(err){
+        return { __typename: "error" , name:"db error",detail:"Error formating order"+err.message}
+    }
+    return {__typename:"order", ...formatedOrder}
 }
 /**
  * When sequelize generate a order this generata a order with values unordered
@@ -164,14 +171,19 @@ async function _formatOrder(order){
  * @param  {Int} id id of the order searched
  */
 async function getOrderById(id){
-    const order = await Order.findOne({
-        where:{
-            id
-        }
-    })
+    try{
+        const order = await Order.findOne({
+            where:{
+                id
+            }
+        })
+    
+        const out = await _formatOrder(order)
+        return {__typename:"order", ...out}
 
-    const out = await _formatOrder(order)
-    return await _formatOrder(order)
+    }catch(err){
+        return { __typename: "error" , name:"db error",detail:"unknow error: "+err.message}
+    }
   }
 
 async function updateOrderPrices(orderId){
@@ -196,9 +208,9 @@ async function updateOrderPrices(orderId){
             await data.save()
         }
 
-        return true
+        return {__typename: "booleanResponse" , boolean:true}
     } catch (err) {
-        return false
+        return { __typename: "error" , name:"unknow",detail:err.message}
     }
 }
 
@@ -215,14 +227,13 @@ async function deleteProductOrder(orderId, productId){
             await Lineal_Order.destroy({
                 where: {orderId, productId}
             })
-
-            return true
+            return {__typename: "booleanResponse" , boolean:true}
         } else {
-            throw new Error('You cannot delete a product from a ticket')
+            return { __typename: "error" , name:"concept error, see detail",detail:"You cannot delete a product from a ticket"}
         }
         
     } catch (err) {
-        throw new Error(err.message)
+        return { __typename: "error" , name:"unknow",detail:err.message}
     }
     
 }
@@ -246,13 +257,13 @@ async function addProductToOrder(orderId, productId, quantity){
                 }
             })
             let has = await order.addProduct(newProduct, {through:{price:newProduct.price, quantity}})            
-            return true
+            return {__typename: "booleanResponse" , boolean:true}
         } else {
-            throw new Error('You cannot add a product in a ticket')
+            return { __typename: "error" , name:"concept error, see detail",detail:"You cannot delete a product from a ticket"}
         }
         
     } catch (err) {
-        throw new Error(err)
+        return { __typename: "error" , name:"unknow",detail:err.message}
     }
     
 }
@@ -266,13 +277,13 @@ async function addProductToOrder(orderId, productId, quantity){
         const order = await Order.findOne({where: {id: orderId}})
         if(order.placeStatus === 'cart'){
             await order.destroy()
-            return true
+            return {__typename: "booleanResponse" , boolean:true}
         } else {
-            throw new Error('You cannot delete a order in ticket status')
+            return { __typename: "error" , name:"concept error, see detail",detail:"You cannot delete a order in place status ticket"}
         }
         
     } catch (err) {
-        throw new Error(err.message)
+        return { __typename: "error" , name:"unknow",detail:err.message}
     }
 }
 /**
@@ -288,9 +299,9 @@ async function updateOrderToTicket(orderId){
         order.placeStatus = "ticket"
         await order.save()
 
-        return true
+        return {__typename: "booleanResponse" , boolean:true}
     } catch (err) {
-        return false
+        return { __typename: "error" , name:"unknow",detail:err.message}
     }
 }
 /**
@@ -307,13 +318,13 @@ async function modifyStatusOrder(orderId, status){
         if(order.placeStatus === 'ticket'){
             order.status = status
             await order.save()
-            return true
+            return {__typename: "booleanResponse" , boolean:true}
         } else {
-            throw new Error('You cannot edit the status of an order in cart status')
+            return { __typename: "error" , name:"concept error, see detail",detail:"You cannot edit the status of an order in cart status"}
         }
         
     } catch (err) {
-        throw new Error(err)
+        return { __typename: "error" , name:"unknow",detail:err.message}
     }
 }
 
