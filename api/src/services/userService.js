@@ -21,24 +21,28 @@ async function getUserByEmail({email}) {
 }
 
 async function createUser(name, password, email, role) {
-  const validationUser = await Users.findOne({
-    where: { email },
-  });
+  // const validationUser = await Users.findOne({  
+  //   where: { email },
+  // });
+  // try{
+    // if (validationUser.length === 0) {  deberia ser validatio === null
+      try {
+        return await Users.create({
+          name,
+          password,
+          email,
+          role,
+        });
+      } catch (error) {
+        return {__typename: "error", name: "no se pudo crear el user", detail: "the user already exists"}
+      }
+    // } else {
+    // return {__typename: "error", name: "the user already exists", detail: "the user already exists"}
+    // }
+  // }catch{
+  //   return {__typename: "error", name: "no se pudo crear el user", detail: "the user already exists"}
 
-  if (validationUser.length === 0) {
-    try {
-      return await Users.create({
-        name,
-        password,
-        email,
-        role,
-      });
-    } catch (error) {
-      throw new Error(error);
-    }
-  } else {
-  return {__typename: "error", name: "the user already exists", detail: "the user already exists"}
-  }
+  // }
 }
 
 async function modifyUser(id, name, password, email, role) {

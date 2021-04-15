@@ -13,16 +13,23 @@ const Catalogue = () => {
   let cartExistence = storage.cart ? true : false;
 
   // if (logged && cartExistence) {
+    
+    const [createOrder, {data, loading}] =useMutation(CREATE_ORDER)
+    useEffect(()=>{
+      if (logged && cartExistence) {
+        console.log("i'm in")
       let userId = parseInt(storage.id)
         let cart = JSON.parse(storage.cart)
-        const [createOrder, {data, loading}] =useMutation(CREATE_ORDER)
-      useEffect(()=>{
-
         createOrder({variables:{
           idUser: userId,
-          dataProducts: cart
+          dataProducts: cart.map((elem) => {
+            return{
+              id: elem.id,
+              quantity: elem.quantity
+            }
+          })
         }})
-
+      }
       },[])
       // }
 
