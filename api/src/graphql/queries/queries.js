@@ -13,6 +13,7 @@ union resultValidate = user | error
         getAllOrders: [order],
         getOrdersByUserId(userId: Int!): [order],
         validateUser(name:String, password:String): resultValidate
+        getOrderById(id: Int!): order,
 
     }
 `
