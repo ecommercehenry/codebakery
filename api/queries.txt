@@ -222,3 +222,25 @@ mutation updateCategory ($id: Int!, $input: categoryInput!){
     }
   }
 }
+
+
+// MUTACIÓN PARA AGREGAR CATEGORÍA A UN PRODUCTO
+mutation addCategoryToProduct($idProduct:Int!, $idCategory:Int!){
+  addCategoryToProduct(idProduct: $idProduct, idCategory: $idCategory){
+      __typename
+     ... on product {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+{
+  "idProduct": 9,
+  "idCategory": 5
+}

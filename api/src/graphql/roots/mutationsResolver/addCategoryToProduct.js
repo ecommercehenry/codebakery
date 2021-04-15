@@ -1,12 +1,6 @@
 const { addCategoryToProduct } = require("../../../services/productsService")
 const jwt = require("jsonwebtoken")
 
-// module.exports = {
-//   addCategoryToProduct: async (idProduct, idCategory) => {
-//     return await addCategoryToProduct(idProduct, idCategory)
-//   },
-// }
-
 module.exports = {
   addCategoryToProduct: (_, args) => {
     try {

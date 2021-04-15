@@ -3,6 +3,7 @@ const productType = require("./productType")
 const userType = require("./userType")
 const reviewType = require("./reviewType")
 const errorType = require("./errorType")
+const booleanType = require("./booleanType")
 
 // aqui exportas tu type
 module.exports = `
@@ -11,4 +12,5 @@ module.exports = `
     ${userType}
     ${reviewType}
     ${errorType}
+    ${booleanType}
 `

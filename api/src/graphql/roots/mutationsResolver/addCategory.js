@@ -5,7 +5,6 @@ module.exports = {
   addCategory: (_, args) => {
     try {
       const authToken = args.headers.authtoken
-      console.log(authToken, "ausuuausuasuas")
       const decoded = jwt.verify(authToken, "secret")
       return addCategory(_.name)
     } catch (err) {

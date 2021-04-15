@@ -1,12 +1,12 @@
 const { Category } = require("../db.js")
 
-async function deleteCategory({ id }) {
+async function deleteCategory(id) {
   try {
     const categoryToDelete = await Category.findByPk(id)
     await categoryToDelete.destroy()
-    return true
+    return {__typename: "booleanDelete", booleanDelete: true}
   } catch (error) {
-    return false
+    return { __typename: "error", name: "error", detail: "Category not found" }
   }
 }
 
