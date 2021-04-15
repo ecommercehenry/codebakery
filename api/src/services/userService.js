@@ -18,7 +18,7 @@ async function createUser(name, password, email, role) {
     where: { email },
   });
 
-  if (validationUser.length === 0) {
+  if (validationUser?.length === 0) { 
     try {
       return await Users.create({
         name,

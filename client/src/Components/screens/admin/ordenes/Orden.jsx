@@ -16,7 +16,7 @@ export default function Orden({ id, orden }) {
   //     setShow(!show);
   //   }
   const instance = (
-    <Steps current={2}>
+    <Steps current={orden.status}>
       <Steps.Item  />
       <Steps.Item  />
       <Steps.Item  />     
@@ -39,7 +39,7 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="text-container">
               <span>UserId</span>
-              <p>{id}</p>
+              <p>{orden.userId}</p>
             </div>
             <div className="status-container">
               <div className="titulos">
