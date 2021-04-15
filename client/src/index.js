@@ -6,9 +6,8 @@ import * as serviceWorker from "./serviceWorker"
 import { BrowserRouter } from "react-router-dom"
 import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client'
 import { Provider } from 'react-redux';
-import store from "./store"
-
-
+import { PersistGate } from 'redux-persist/integration/react';
+import {store,persistor} from "./store/index"
 
 // cliente apollo
 const token = localStorage.getItem('token');
@@ -19,12 +18,14 @@ const client = new ApolloClient({
 })
 
 ReactDOM.render(
-<ApolloProvider client = {client}>
-<Provider store={store} >
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
+  <ApolloProvider client = {client}>
+    <Provider store={store} >
+      <BrowserRouter>
+        <PersistGate persistor={persistor}>
+          <App/>
+        </PersistGate>
+      </BrowserRouter>
+    </Provider>
   </ApolloProvider>,
   document.getElementById("root")
 )

@@ -26,8 +26,7 @@ const Products = () => {
       <Categories />
       <HomeButton />
       <SortButton />
-      <Grid
-      />
+      <Grid/>
     </div>
   );
 };
