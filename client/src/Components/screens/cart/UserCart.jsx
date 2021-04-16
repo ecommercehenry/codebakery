@@ -15,11 +15,11 @@ const UserCart = () => {
 console.log(data)
   return <StyledCart>
   {data ? (
-    data.getOrdersByUserIdInCart.map((elem) => (
+    data.getOrdersByUserIdInCart[0].lineal_order.map((elem) => (
       <ProductOnCart
         id={elem.id}
         name={elem.lineal_order[0].product[0].name}
-        price={elem.lineal_order[0].price}
+        price={elem.lineal_order[0].product[0].price}
         stock={elem.lineal_order[0].product[0].stock}
         image={elem.lineal_order[0].product[0].image}
         quantity={elem.lineal_order[0].quantity}

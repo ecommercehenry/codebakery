@@ -145,8 +145,9 @@ async function _formatOrder(order){
             userId:userOrden.id,
             price: lineal_Order[i].price,
             quantity: lineal_Order[i].quantity,
-            product:[
+            product:
                 {
+                    quantity: lineal_Order[i].quantity,
                     id:productsOrden[i].id,
                     name: productsOrden[i].name,
                     description: productsOrden[i].description,
@@ -155,7 +156,6 @@ async function _formatOrder(order){
                     image: productsOrden[i].image,
                     categories: await productsOrden[i].getCategories()
                 }
-            ]
         })
     }
 
