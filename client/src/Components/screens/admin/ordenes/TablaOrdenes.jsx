@@ -3,68 +3,28 @@ import Orden from "./Orden"
 import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 import getAllOrders from '../../../../Apollo/queries/getAllOrders';
+import { useDispatch } from 'react-redux';
+import { saveOrders } from "../../../../actions"
 
-//traerme todas las ordenes hechas.. estan en la BD
+// @-WenLi
+//traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
+//guardo en el reducer ordersReducer las ordenes para aplicar busquedas y filtros uso dispatch
 //mostrarlas haciendo un mapeo sobre la data, renderizando cada vez un componente Orden
 
 
 export default function TablaOrdenes(){
-
-
-
-    //a eliminar cuando  pueda traer los datos
-    
-    const ordenes = [
-    {
-        date: "02-04-2021",
-        orderId: "02A24cd11",
-        userId: 344,
-        status: 1,
-        cancelled: false,
-        total: 98.50,
-    },
-    {
-        date: "02-04-2021",
-        orderId: "02A24cd11",
-        userId: 304,
-        status: 2,
-        cancelled: false,
-        total: 98.50,
-    },
-    {
-        date: "02-04-2021",
-        orderId: "02A24cd11",
-        userId: 444,
-        status: 3,
-        cancelled: false,
-        total: 98.50,
-    },
-    {
-        date: "02-04-2021",
-        orderId: "02A24cd11",
-        status: {
-            paid: true,
-            sent: false,
-            recived: false,
-        },
-        cancelled: false,
-        total: 98.50,
-    },
-    {
-        date: "02-04-2021",
-        orderId: "02A24cd11",
-        status: {
-            paid: true,
-            sent: false,
-            recived: false,
-        },
-        cancelled: false,
-        total: 98.50,
-    },
-   
-]
-   const { data, loading }= useQuery(getAllOrders)
+        
+   let { data } = useQuery(getAllOrders)    
    console.log("ddddddddddddddddddddddddddd",data)
+    
+   //guarda las ordenes en el store redux...
+   const dispatch = useDispatch()
+   useEffect(() => {
+    dispatch(saveOrders(data?.getAllOrders));
+  }, [data]);
+
+  //Debe renderizar todas las ordenes si no hay una busqueda 
+  //Si hay busqueda, renderiza el filtrado de la busqueda
 
     return (
         <StyledTablaOrdenes>ESTE ES EL COMPONENTE TABLA ORDENES
