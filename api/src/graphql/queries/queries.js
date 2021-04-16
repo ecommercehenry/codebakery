@@ -1,5 +1,7 @@
 module.exports = `
     union resultValidate = user | error
+    union ordersResult = orders | error
+    union orderResult = order | error
 
     type Query{
         product: [product],
@@ -8,13 +10,13 @@ module.exports = `
         getProductByCategoryName(name: String!): [product],
         getAllCategories:[category],
         getProductByName(name: String!): product, 
-        getAllUsers: [user],
+        getAllUsers: [user],    
         getProductByArray(array: [Int!]): [product],
-        getAllOrders: [order],
-        getOrdersByUserIdInCart(userId: Int!): [order],
-        getOrdersByUserIdInTicket(userId: Int!): [order],
+        getAllOrders: ordersResult,
+        getOrdersByUserIdInCart(userId: Int!): ordersResult,
+        getOrdersByUserIdInTicket(userId: Int!): ordersResult,
         validateUser(name:String, password:String): resultValidate,
-        getOrderById(id: Int!): order,
+        getOrderById(id: Int!): orderResult,
 
     }
 `

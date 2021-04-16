@@ -1,0 +1,17 @@
+mutation deleteOrder($orderId:Int!){
+	  deleteOrder(orderId:$orderId)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+      name
+		  detail
+		}
+	}
+}
+
+variables
+{
+  "orderId": 3
+}
