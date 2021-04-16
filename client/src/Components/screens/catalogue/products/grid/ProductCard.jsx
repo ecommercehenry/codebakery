@@ -8,17 +8,18 @@ import styled from 'styled-components';
 import ButtonAddCart from './ButtonAddCart';
 
 const ProductCard = ({id,name,image}) => {
-    console.log(image)
     return (
-        <Link to={`/catalogue/detail/${id}`} className='text-decoration-none text-body' style={{width:'fit-content'}}>
         <StyledCard>
-            <div className="image">
-                <img src={image} alt={name}/>
-            </div>
-            <div className="name"><span>{name}</span></div>
-            <div className="btn"><ButtonAddCart/></div>
+            <Link to={`/catalogue/detail/${id}`} className='link'>
+                <div className="image">
+                    <img src={image} alt={name}/>
+                </div>
+                <div className="name"><span>{name}</span></div>
+            </Link>
+            <div className="btn"><ButtonAddCart id={id}/></div>
         </StyledCard>
-        </Link>
+            
+        
     )
 }
 
@@ -32,7 +33,12 @@ const StyledCard = styled.div`
     justify-content:space-between;
     align-items:center;
     padding: 0 2rem;
-    .image{
+    .link{
+        width:100%;
+        height:80%;
+        text-decoration:none;
+        color:inherit;
+        .image{
         //background:yellow;
         width:100%;
         height:60%;
@@ -52,12 +58,15 @@ const StyledCard = styled.div`
         display:flex;
         justify-content:center;
         align-items:center;
-        //background:lightblue;
+        background:lightblue;
         span{
             text-align:center;
         }
     }
+    }
+    
     .btn{
+        background:green;
         //background:violet;
         height:20%;
         width:100%;

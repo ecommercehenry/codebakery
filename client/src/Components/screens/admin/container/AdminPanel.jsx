@@ -59,8 +59,8 @@ const StyledAdminPanel = styled.div`
             height:15vh;
         }
         .bottom{
-            position: relative
-            background: black;
+            position: relative;
+            //background: black;
             height:100vh;
             width: 77vw;
             display:flex;
