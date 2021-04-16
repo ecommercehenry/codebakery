@@ -14,65 +14,65 @@ export default function TablaOrdenes(){
 
     //a eliminar cuando  pueda traer los datos
     
-    const ordenes = [
-    {
-        date: "02-04-2021",
-        orderId: "02A24cd11",
-        userId: 344,
-        status: 1,
-        cancelled: false,
-        total: 98.50,
-    },
-    {
-        date: "02-04-2021",
-        orderId: "02A24cd11",
-        userId: 304,
-        status: 2,
-        cancelled: false,
-        total: 98.50,
-    },
-    {
-        date: "02-04-2021",
-        orderId: "02A24cd11",
-        userId: 444,
-        status: 3,
-        cancelled: false,
-        total: 98.50,
-    },
-    {
-        date: "02-04-2021",
-        orderId: "02A24cd11",
-        status: {
-            paid: true,
-            sent: false,
-            recived: false,
-        },
-        cancelled: false,
-        total: 98.50,
-    },
-    {
-        date: "02-04-2021",
-        orderId: "02A24cd11",
-        status: {
-            paid: true,
-            sent: false,
-            recived: false,
-        },
-        cancelled: false,
-        total: 98.50,
-    },
-   
-]
+    // const ordenes = [
+    // {
+    //     date: "02-04-2021",
+    //     orderId: "02A24cd11",
+    //     userId: 344,
+    //     status: 1,
+    //     cancelled: false,
+    //     total: 98.50,
+    // },
+    // {
+    //     date: "02-04-2021",
+    //     orderId: "02A24cd11",
+    //     userId: 304,
+    //     status: 2,
+    //     cancelled: false,
+    //     total: 98.50,
+    // },
+    // {
+    //     date: "02-04-2021",
+    //     orderId: "02A24cd11",
+    //     userId: 444,
+    //     status: 3,
+    //     cancelled: false,
+    //     total: 98.50,
+    // },
+    // {
+    //     date: "02-04-2021",
+    //     orderId: "02A24cd11",
+    //     status: {
+    //         paid: true,
+    //         sent: false,
+    //         recived: false,
+    //     },
+    //     cancelled: false,
+    //     total: 98.50,
+    // },
+    // {
+    //     date: "02-04-2021",
+    //     orderId: "02A24cd11",
+    //     status: {
+    //         paid: true,
+    //         sent: false,
+    //         recived: false,
+    //     },
+    //     cancelled: false,
+    //     total: 98.50,
+    // },
+// ]
+
    const { data, loading }= useQuery(getAllOrders)
    console.log("ddddddddddddddddddddddddddd",data)
 
     return (
         <StyledTablaOrdenes>ESTE ES EL COMPONENTE TABLA ORDENES
-             {ordenes ? (
-            ordenes.map((ord) => {
+             {data ? (
+            data.getAllOrders.map((ord) => {
               return <Orden
-                  id ={ord.orderId}
-                  key = {ord.orderId}
+                  id ={ord.id}
+                  key = {ord.id}
                   orden = {ord}
               />                    
            })

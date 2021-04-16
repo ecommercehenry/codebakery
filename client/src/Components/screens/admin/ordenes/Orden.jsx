@@ -47,13 +47,10 @@ export default function Orden({ id, orden }) {
               </div>
               {instance}
             </div>
-            <div className="text-container">
-              <span>Cancelled</span>
-              <p>{orden.cancelled.toString()} </p>
-            </div>
+    
             <div className="text-container">
               <span>Total</span>
-              <p>{"total"} </p>
+              <p>{orden.lineal_order[0].price} </p>
             </div>
             <div className="edit-button">
               <button>Detail</button>
