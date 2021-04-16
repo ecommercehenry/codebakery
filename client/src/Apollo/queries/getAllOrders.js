@@ -8,6 +8,8 @@ query getAllOrders{
         id
         status
         userId
+        creation
+        lastModified
         cancelled
         lineal_order{
           id
