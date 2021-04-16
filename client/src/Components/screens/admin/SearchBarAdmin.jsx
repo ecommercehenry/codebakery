@@ -23,7 +23,7 @@ const SearchBarAdmin = ({ setSearch }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             type="text"
-            placeholder="Encuentra tu dulce favorito"
+            placeholder=""
             {...register("search", { required: true })}
           />
           <ButtonSearch type="submit">Busqueda</ButtonSearch>
