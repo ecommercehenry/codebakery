@@ -2,27 +2,29 @@ import { gql } from "@apollo/client"
 
 const getAllOrders = gql`
 query getAllOrders{
-    getAllOrders{
-     id
-      status
-      lineal_order{
+  getAllOrders{
+   	...on orders{
+      orders{
+        id
+        status
         userId
-        price
-        quantity
-        product{
+        cancelled
+        lineal_order{
           id
           name
-          description
           stock
           image
-          categories{
-            id
-            name
-          }
+          price
+          quantity
         }
       }
     }
+    ...on error{
+      name
+      detail
+    }
   }
+}
 `
 
 export default getAllOrders;

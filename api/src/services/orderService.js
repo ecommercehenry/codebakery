@@ -151,6 +151,7 @@ async function _formatOrder(order){
         userId:userOrden.id,
         creation:order.createdAt.toUTCString(),
         lastModified: order.updatedAt.toUTCString(),
+        cancelled:order.cancelled,
         lineal_order: productsOrdersSalida
     }
     return out

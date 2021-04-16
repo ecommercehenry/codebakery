@@ -4,7 +4,8 @@ module.exports = `
         status: String!,
         userId: Int!,
         creation: String!,
-        lastModified: String!
+        lastModified: String!,
+        cancelled: Boolean!
         lineal_order: [lineal_order]
     }
 `
