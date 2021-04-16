@@ -31,3 +31,16 @@ export const fetchByName = (product) => {
     payload: product,
   };
 };
+
+export const getAllOrders = (ordenes)=>{
+  return{
+    type: "GET_ALL_ORDERS",
+    payload: ordenes
+  }
+}
+export const saveOrders = (ordenes)=>{
+  return{
+    type: "SAVE_ORDERS",
+    payload: ordenes
+  }
+}

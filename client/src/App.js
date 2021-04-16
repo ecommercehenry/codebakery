@@ -13,6 +13,7 @@ import GuestCart from './Components/screens/cart/GuestCart';
 import Login from './Components/screens/login/login';
 import UserAccount from "./Components/UserAcount/UserAccount";
 import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
+import TablaOrdenes from "./Components/screens/admin/ordenes/TablaOrdenes"
 
 function App() {
   return (
@@ -27,8 +28,10 @@ function App() {
       <Route path="/log-in" component={UserAccount} />
       <Route path="/sign-up" component={CreateUserAccount} />
 
-      {/* Debo agregar al componente padre que corresponda @Chu */}
-      <Route path="/admin/form" component={FormCRUD} />
+      
+      {/* ruta provisoria, a acomodar en el adminPanel al dar click en "Orders"     */}
+      <Route path="/ordenes" component={TablaOrdenes} />
+
     </>
   );
 }

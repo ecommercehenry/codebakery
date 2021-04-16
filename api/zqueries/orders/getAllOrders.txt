@@ -1,0 +1,31 @@
+//OBTENER TODAS LAS ORDENES 
+
+query getAllOrders{
+  getAllOrders{
+   	...on orders{
+      orders{
+        id
+        status
+        userId
+        cancelled
+        lineal_order{
+          id
+          name
+          stock
+          image
+          price
+          quantity
+        }
+      }
+    }
+    ...on error{
+      name
+      detail
+    }
+  }
+}
+
+variables
+{
+    "id":1
+}
