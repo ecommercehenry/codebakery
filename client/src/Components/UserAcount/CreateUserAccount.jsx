@@ -209,7 +209,7 @@ useEffect(() => {
             </div>
           </form>
           {exit === "error" ? (
-            <span>"Email already exist, please try with another"</span>
+            <span>"Email already exists, please try with another"</span>
           ) : exit === true ? <span>"User created successfully"</span> : null}
         </div>
       </div>
