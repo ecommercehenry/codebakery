@@ -16,6 +16,7 @@ img{
 }
 .name-container{
     background-color:red;
+    justify-content:space-between
 }
 .element-container{
     margin:1rem;

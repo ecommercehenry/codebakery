@@ -57,6 +57,7 @@ function FormCRUD({id, handlerOnClick}) {
       }
     )
     alert("producto modificado!")
+    handlerOnClick()
 
   };
   
@@ -144,6 +145,36 @@ export default FormCRUD;
 
 const StyledFormCRUD = styled.form`
   
+
+
+
+
+
+.image-container{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    margin-right: 30px
+}
+img{
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+}
+
+
+
+.info-container{
+    height: 80%;
+    width: 90%;
+    display: flex;
+}
+
+
+
+
+
+
 
   width: 100%;
   height: 25vh;

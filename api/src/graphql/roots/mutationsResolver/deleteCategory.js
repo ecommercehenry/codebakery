@@ -1,7 +1,17 @@
 const { deleteCategory } = require("../../../services/categoryService")
+const jwt = require("jsonwebtoken")
 
-
-// getAllProducts
-module.exports = {deleteCategory:(id)=>{
-    return deleteCategory(id)
-}}
+module.exports = {
+  deleteCategory: (_, args) => {
+    try {
+      const authToken = args.headers.authtoken;
+      const decoded = jwt.verify(authToken, "secret");
+      let {authrole} = args.headers;
+      if (authrole === "admin") {
+        return deleteCategory(_.id);
+      } else return { __typename: "error", name: "error", detail: "No admin" };
+    } catch (err) {
+      return { __typename: "error", name: "error", detail: "No admin" };
+    }
+  },
+}
