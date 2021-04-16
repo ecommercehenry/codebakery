@@ -50,7 +50,7 @@ async function getOrdersByUserIdInCart(userId){
     try {
         const order = await Order.findAll({
             where: {
-                id:userId,
+                userId: userId,                
                 placeStatus:"cart"
             }
         })
