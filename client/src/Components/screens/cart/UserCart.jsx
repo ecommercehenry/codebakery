@@ -10,25 +10,26 @@ import ProductOnCart from "./ProductOnCart";
 const UserCart = () => {
   let storage = window.localStorage;
   let userId = parseInt(storage.id);
-  const {data, loading} = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {variables:{userId: userId} });
+  const {data, loading} = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {variables:{idUser: userId} });
 
 console.log(data)
-  return <StyledCart>
-  {data ? (
-    data.getOrdersByUserIdInCart[0].lineal_order.map((elem) => (
-      <ProductOnCart
-        id={elem.id}
-        name={elem.lineal_order[0].product[0].name}
-        price={elem.lineal_order[0].product[0].price}
-        stock={elem.lineal_order[0].product[0].stock}
-        image={elem.lineal_order[0].product[0].image}
-        quantity={elem.lineal_order[0].quantity}
-      />
-    ))
-  ) : (
-    <p>vacio</p>
-  )}
-</StyledCart>
+  return <p>si ves esto no rompi</p>
+//   <StyledCart>
+//   {data ? (
+//     data.getOrdersByUserIdInCart[0].lineal_order.map((elem) => (
+//       <ProductOnCart
+//         id={elem.id}
+//         name={elem.lineal_order[0].product[0].name}
+//         price={elem.lineal_order[0].product[0].price}
+//         stock={elem.lineal_order[0].product[0].stock}
+//         image={elem.lineal_order[0].product[0].image}
+//         quantity={elem.lineal_order[0].quantity}
+//       />
+//     ))
+//   ) : (
+//     <p>vacio</p>
+//   )}
+// </StyledCart>
 };
 const StyledCart = styled.div`
   //background: black;

@@ -1,16 +1,24 @@
 import { gql } from "@apollo/client";
 
 const GET_ORDERS_BY_USER_ID_IN_CART = gql`
- query getOrdersByUserIdInCart($userId: Int!){
-  getOrdersByUserIdInCart(userId: $userId){
-    lineal_order {
-      quantity
-      product {
-        name
-        stock
-        image
-        price
+query getOrdersByUserIdInCart($idUser: Int!){
+  getOrdersByUserIdInCart(userId:$idUser){
+   	...on orders{
+      orders{
+        status
+        lineal_order{
+          id
+          name
+          stock
+          image
+          price
+          quantity
+        }
       }
+    }
+    ...on error{
+      name
+      detail
     }
   }
 }
