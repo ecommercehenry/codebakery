@@ -4,7 +4,7 @@ import Orden from "./Orden"
 import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 import getAllOrders from '../../../../Apollo/queries/getAllOrders';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveOrders } from "../../../../actions"
 
 // @-WenLi
@@ -29,7 +29,7 @@ export default function TablaOrdenes(){
   //Debe renderizar todas las ordenes si no hay una busqueda 
   //Si hay busqueda, renderiza el filtrado de la busqueda
 
-  
+
     return (
         <StyledTablaOrdenes>ESTE ES EL COMPONENTE TABLA ORDENES
              {data ? (
