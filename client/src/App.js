@@ -16,10 +16,10 @@ import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
 import TablaOrdenes from "./Components/screens/admin/ordenes/TablaOrdenes"
 import { useLazyQuery, useQuery } from "@apollo/client"
 import VALIDATE_CREDENTIALS from "./Apollo/queries/validateCredentials"
+import AddProductForm from "./Components/AddProductForm"
 
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
-
 
 function App() {
   const [validateUser, { data, loading }] = useLazyQuery(VALIDATE_CREDENTIALS)
@@ -27,7 +27,7 @@ function App() {
     validateUser({ variables: { token: token, role: role } })
   }, [data])
   const isAuthenticated = data?.validateCredentials
-  console.log("autenticado", isAuthenticated)
+  
   if (isAuthenticated && role === "admin") {
     return (
       <>
@@ -42,6 +42,7 @@ function App() {
           <Route exact path="/sign-up" component={CreateUserAccount} />
           <Route exact path="/ordenes" component={TablaOrdenes} />
           <Route exact path="/admin/form" component={FormCRUD} />
+          <Route exact path="/admin/add-product" component={AddProductForm} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
