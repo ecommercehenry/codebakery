@@ -23,9 +23,8 @@ const Catalogue = () => {
   useEffect(() => {
     if (logged && cartExistence) {
       let cart = JSON.parse(storage.cart);
-      console.log(queryData);
       if (!queryData.loading) {
-        if (!queryData.data.getOrdersByUserIdInCart.orders.length) {
+        if (queryData.data.getOrdersByUserIdInCart.orders.length != 0) {
           let orderId = queryData.data.getOrdersByUserIdInCart.orders[0].id;
           cart.map((elem) => {
             console.log(elem);
@@ -52,6 +51,7 @@ const Catalogue = () => {
         }
       }
     }
+    console.log(queryData);
   }, [queryData]);
   return (
     <>

@@ -9,8 +9,10 @@ const UserCart = () => {
   let storage = window.localStorage;
   let userId = parseInt(storage.id);
   const { data, loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
-    variables: { idUser: userId },
+    variables: { idUser: userId }
   });
+  useEffect(() => {}, [data])
+  console.log(data)
   return (
     <StyledCart>
       {data?.getOrdersByUserIdInCart ? (
