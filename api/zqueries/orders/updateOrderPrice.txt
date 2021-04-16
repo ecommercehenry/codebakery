@@ -1,0 +1,16 @@
+mutation updateOrderPrices($idOrder:Int!){
+	  updateOrderPrices(orderId:$idOrder)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  detail
+		}
+	  }
+	}
+
+variables
+{
+    "idOrder":1
+}

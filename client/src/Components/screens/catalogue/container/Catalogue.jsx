@@ -11,7 +11,7 @@ const Catalogue = () => {
         <>
             <NavBar color='white'/>
             <Hero />
-            <Products />
+            <Products/>
             <Link to="/catalogue/detail/1">Producto</Link>
             <Route path="/catalogue/detail/:id" >
                 <Detail></Detail>

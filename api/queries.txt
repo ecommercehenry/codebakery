@@ -28,12 +28,33 @@ query getAllCategories{
     name
   }
 }
-//// agregar un nuevo producto
-/// se puede pasar o no una categoria
-mutation {
-  addProduct(category: 1, name: "toritassas", description: "dsds", price: 50, stock: 50, image: "nico"){
-    id
+//// agregar un nuevo producto modificado con seguridad
+mutation addProduct($category: String!, $name: String!, $description: String!, $price: Float!, $stock: Int!, $image: String!){
+  addProduct(category: $category, name: $name, description: $description, price: $price, stock:$stock, image:$image){
+    __typename
+    ... on product{
+      id
+      name
+      description
+      price
+      stock
+      image
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
   }
+}
+
+{
+ "category": "NuevaCat",
+ "name": "Nombre",
+ "description": "....",
+ "price": 3.4,
+ "stock": 2,
+ "image": "https://res.cloudinary.com/ggonzalescbs/image/upload/v1618099205/code_bakery/prueba1-2_tjcdjh.jpg"
 }
 
 //eliminar un producto por su id 
@@ -77,10 +98,25 @@ mutation{
 
 // ESTE ES UN EJEMPLO DE AGREGAR CATEGORIA PARA PETICIONES DESDE EL FRONT
 mutation addCategory ($name: String!){
-    addCategory(name: $name) {
+  addCategory(name: $name){
+    __typename
+    ... on category {
+      id
       name
     }
+    __typename
+    ... on error {
+      name
+      detail
+    }
   }
+}
+
+{
+    "name": "Bonito"
+}
+
+
 //buscar producto con su categoria segun su id
 {
     productCategory(id:1){
@@ -105,27 +141,56 @@ mutation{
   }
 }
 
-//PARA ELIMINAR UNA CATEGORIA DE UN PRODUCTO
-mutation{
-  removeCategoryFromProduct(idProduct:1,idCategory:1){
-   	name
+//PARA ELIMINAR UNA CATEGORIA DE UN PRODUCTO, actualizada con seguridad
+mutation removeCategoryFromProduct($idProduct:Int!, $idCategory:Int!){
+  removeCategoryFromProduct(idProduct: $idProduct, idCategory: $idCategory){
+      __typename
+     ... on product {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
   }
 }
 
 
-// PARA AGREGAR UN USUARIO
-mutation {
-  createUser(name: "ivan", password: "helloworld", email: "ivan@ivan.com", role:"admin"){
-    name
+// PARA AGREGAR UN USUARIO actualizada con nuevo modelo
+mutation createUser($name: String!, $password: String!, $email: String!, $role: String!){
+  createUser(name: $name, password: $password, email: $email, role:$role){
+    __typename
+    ... on user{
+      name
+      id
+      email
+      role
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
   }
 }
-// PARA LA MODIFICACION DE UN USUARIO
-mutation {
-  modifyUser(id: 1 ,name: "NAME", password: "12333334", email: "email@email.com", role:"role"){
-    name
-    id
-    email
-    role
+
+// PARA LA MODIFICACION DE UN USUARIO Actualizada con proteccion
+mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, $role:String){
+  modifyUser(id: $id ,name: $name, password: $password, email: $email, role:$role){
+    __typename
+    ... on user{
+      name
+      id
+      email
+      role
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
   }
 }
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
@@ -147,4 +212,313 @@ query
     name
 
   }
+
+  
+
+
+
+// PARA OBTENER TODOS LOS USUARIOS (SIN CONTRASEÑA) CON SUS PRODUCTOS Y CON SUS REVIEWS
+{
+  getAllUsers{name, email, products{
+    id
+    name
+    description
+    price
+    stock
+    image
+    categories{
+      id 
+      name  
+    }  
+  }, reviews{
+    id
+    title
+  	description
+    stars
+  }}
+
+
+{
+  validateUser(name: "Fran", password: "hw"){
+  	__typename
+    ...on user {
+      name
+    }
+    ...on error {
+      name
+      detail
+    }
+  }
 }
+
+
+// MUTATION PARA MODIFICAR PRODUCTOS
+mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
+  modifyProduct(id: $id, dataToModify: $dataToModify){
+    __typename
+    ... on product {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+
+
+
+
+// MUTATION PARA ACTUALIZAR UNA CATEGORIA
+mutation updateCategory ($id: Int!, $input: categoryInput!){
+  updateCategory(id: $id, input: $input){
+    __typename
+    ... on category {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+// para probar la consulta anterior
+{
+  "id": 1,
+  "input": {
+    "name": "Bonito"
+  }
+}
+
+
+// MUTACIÓN PARA AGREGAR CATEGORÍA A UN PRODUCTO
+mutation addCategoryToProduct($idProduct:Int!, $idCategory:Int!){
+  addCategoryToProduct(idProduct: $idProduct, idCategory: $idCategory){
+      __typename
+     ... on product {
+      id
+      name
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+
+
+// PARA ELIMINAR CATEGORIA
+mutation deleteCategory($id:Int!){
+  deleteCategory(id: $id){
+      __typename
+     ... on booleanDelete {
+      booleanDelete
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+
+
+
+// MUTACIÓN PARA ELIMINAR PRODUCTO POR ID
+mutation deleteById($id:Int!){
+  deleteById(id: $id){
+      __typename
+     ... on booleanDelete {
+      booleanDelete
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+//OBTENER TODAS LAS ORDENES
+query getAllOrders{
+  getAllOrders{
+   id
+    status
+    lineal_order{
+      userId
+      price
+      quantity
+      product{
+        id
+        name
+        description
+        stock
+        image
+        categories{
+          id
+          name
+        }
+      }
+    }
+  }
+}
+
+	
+//CREAR NUEVA ORDEN
+	mutation createOrder($idUser:Int! , $dataProducts:[dataProductsOrderInput]!){
+	  createOrder(idUser:$idUser, dataProducts:$dataProducts)
+	  {
+		... on order{
+		  id
+		  status
+		}
+		... on error{
+		  detail
+		}
+	  }
+	}
+	Con variables:
+	{
+	  "idUser": 1,
+	  "dataProducts": [
+		{"id": 1, "quantity": 100},
+		{"id": 2, "quantity": 200},
+		{"id": 3, "quantity": 1}
+	  ]
+	}
+//Actualizar precios de una orden
+	mutation updateOrderPrices($orderId:Int!){
+	 updateOrderPrices(orderId:$orderId){
+		... on booleanResponse{
+		  boolean
+		}
+	  	... on error{
+		  name
+		  detail
+		}
+		}
+	}
+	con variable 100 para error, 1 para correcto:
+	{
+	  "orderId": 1
+	}
+//Eliminar producto de una order ya existente solo si esta en status cart	
+	mutation addProductToOrder($orderId:Int!, $productId:Int!){
+	  deleteProductOrder(orderId:$orderId, productId:$productId,)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	variables
+	{
+	  "orderId":1,
+	  "productId": 1
+	}
+
+
+//Agregar producto a una orden ya existente solo si esta en status cart
+	mutation addProductToOrder($orderId:Int!, $productId:Int!, $quantity:Int!){
+	  addProductToOrder(orderId:$orderId, productId:$productId, quantity:$quantity)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	variables:
+	{
+	  "orderId":1,
+	  "productId": 1,
+	  "quantity": 5
+	}
+
+
+	
+//Actualizar precios de una orden
+	mutation updateOrderPrices($orderId:Int!){
+	 updateOrderPrices(orderId:$orderId){
+		... on booleanResponse{
+		  boolean
+		}
+	  	... on error{
+		  name
+		  detail
+		}
+		}
+	}
+	con variable 100 para error, 1 para correcto:
+	{
+	  "orderId": 1
+	}
+//Eliminar una orden siempre y cuando este en cart place status
+	mutation deleteOrder($orderId:Int!){
+	  deleteOrder(orderId:$orderId)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	con variable 
+	{
+	  "orderId":1
+	}
+//Actualizar el place state de una order de "cart" a "ticket"
+	mutation updateOrderToTicket($orderId:Int!){
+	  updateOrderToTicket(orderId:$orderId)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	Con variables:
+	{
+	  "orderId":1
+	}
+//Actualizar el estado de una query, unpaid, paid, sent, received
+	mutation modifyStatusOrder($orderId:Int! , $status:String!){
+	  modifyStatusOrder(orderId:$orderId, status:$status)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  name
+		  detail
+		}
+	  }
+	}
+	Con variables:
+	{
+	  "orderId":1,
+	  "status": "paid"
+	}
+
+

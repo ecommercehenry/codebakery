@@ -2,32 +2,53 @@ import React, { useEffect } from "react";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
 import "./UserAccount.css";
 import styled from "styled-components";
-
 import CREATE_USER from "../../Apollo/mutations/createUser";
+
+import { Redirect } from "react-router-dom";
 
 // Login/ out
 import Login from "./Login";
 import Logout from "./Logout";
 import { useDispatch } from "react-redux";
 import validateUser from "../../Apollo/queries/validateUser"
+
 const UserAcount = () => {
-  // const [createUser, { data }] = useMutation(CREATE_USER);
-  const { register, handleSubmit } = useForm();
   const [login, { loading, data }] = useLazyQuery(validateUser);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   // Google login
   const dispatch = useDispatch()
 
   useEffect(()=>{
-    if(!loading && data && data.token){
-      localStorage.setItem('token', data.token);
-    }
-          console.log(data)
+    if(!loading && data){
+      if(data.validateUser.token){
+        // alert("logueado")
+        localStorage.setItem('token', data.validateUser.token);
+        localStorage.setItem('name', data.validateUser.name);
+        localStorage.setItem('email', data.validateUser.email);
+        localStorage.setItem('role', data.validateUser.role);
+        // es necesario el reloaded para luego poder redirigir
+        alert(`Bienvenido ${data.validateUser.name}`)
 
-  })
+        window.location.reload();
+      }else{
+        alert(data.validateUser.detail)
+      }
+    console.log(data)
+  }})
+  let role = localStorage.getItem('role');
+  let token = localStorage.getItem('token');
+  if(role  && token){
+    // la redireccion se debe cambiar seún el role del usuario
+    if(role === 'admin') return <Redirect to='/admin' />;
+    else return <Redirect to='/catalogue' />;
+  }
   const handleLogin = async (form) => {
     login({variables: {name:form.login,password:form.password}})    
 
@@ -45,19 +66,31 @@ const UserAcount = () => {
             className="fadeIn second"
             name="login"
             placeholder="Entra tu email o usuario"
+            aria-invalid={errors.name ? "true" : "false"}
             {...register("login", { required: true })}
           />
+          {errors.name && errors.name.type === "required" && (
+            <p className="error" role="alert">
+              This is required
+            </p>
+          )}
           <input
             type="password"
             className="fadeIn third"
             name="password"
             placeholder="Contraseña"
+            aria-invalid={errors.name ? "true" : "false"}
             {...register("password", { required: true })}
           />
+          {errors.name && errors.name.type === "required" && (
+            <p className="error" role="alert">
+              This is required
+            </p>
+          )}
           <input type="submit" className="fadeIn fourth" value="Log In" />
         </form>
         <p className="formFooter">
-          ¿No tienes cuenta? <Link to="/create">Creala aqui</Link>
+          ¿No tienes cuenta? <Link to="/sign-up">Creala aqui</Link>
         </p>
       </div>
     </div>

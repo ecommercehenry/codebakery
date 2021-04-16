@@ -30,7 +30,7 @@ const getErrorCode = errorName =>{
 }
 
 server.use('/graphql', graphqlHTTP((req)=>{
-  console.log("HEADER: "+req.headers.authtoken)
+  /* console.log("HEADER: "+req.headers.authtoken) */
   return ({
   schema: schema,
   extensions({
@@ -38,10 +38,10 @@ server.use('/graphql', graphqlHTTP((req)=>{
     variables,
     document
   }) {
-    // console.log("VARIABLES")
-    // console.log(variables);
-    // console.log("RESULT")
-    // console.log(result)
+    /* console.log("VARIABLES")
+    console.log(variables);
+    console.log("RESULT")
+    console.log(result) */
   },
   rootValue: root,
   graphiql: true
