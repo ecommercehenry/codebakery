@@ -3,6 +3,7 @@ export const GET_PRODUCT_BY_NAME = "GET_PRODUCT_BY_NAME";
 export const GUARDAR_PRODUCTOS = "GUARDAR_PRODUCTOS";
 export const SET_SEARCH = 'SET_SEARCH'; 
 
+
 export const setSearch = () => {
   return {
     type: SET_SEARCH,
@@ -30,3 +31,16 @@ export const fetchByName = (product) => {
     payload: product,
   };
 };
+
+export const getAllOrders = (ordenes)=>{
+  return{
+    type: "GET_ALL_ORDERS",
+    payload: ordenes
+  }
+}
+export const saveOrders = (ordenes)=>{
+  return{
+    type: "SAVE_ORDERS",
+    payload: ordenes
+  }
+}

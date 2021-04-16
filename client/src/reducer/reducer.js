@@ -2,7 +2,7 @@ import {
   GET_ALL_PRODUCTS,
   GET_PRODUCT_BY_NAME,
   GUARDAR_PRODUCTOS,
-  SET_SEARCH,
+  SET_SEARCH
 } from "../actions";
 //import allProducts from "../Apollo/queries/allProducts";
 
@@ -17,36 +17,34 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_SEARCH:
-      return  {...state, search: false};
+      return { ...state, search: false };
     case GET_ALL_PRODUCTS:
-
-    if(action.payload && state.allProduct.length === 0){
-        return  {
-            ...state,
-            stateproducts: action.payload, 
-            allProduct: action.payload,
-            search: false 
-        }
-    }else{
-        return{
-            ...state,
-            stateproducts: action.payload,
-            search: false
-        }
-    }
+      if (action.payload && state.allProduct.length === 0) {
+        return {
+          ...state,
+          stateproducts: action.payload,
+          allProduct: action.payload,
+          search: false,
+        };
+      } else {
+        return {
+          ...state,
+          stateproducts: action.payload,
+          search: false,
+        };
+      }
 
     case GET_PRODUCT_BY_NAME:
       return {
         ...state,
         filterProduct: action.payload,
-        search: true
+        search: true,
       };
 
     case GUARDAR_PRODUCTOS:
       return {
         ...state,
         stateSearch: action.payload,
-     
       };
 
     default:
