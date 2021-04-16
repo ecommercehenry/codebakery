@@ -17,7 +17,8 @@ async function dataPopulation() {
     await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)
     await createOrder([{id:4,quantity:1},{id:8,quantity:1}],1)
     await createOrder([{id:5,quantity:2},{id:9,quantity:1}],2)
-    
+    await updateOrderToTicket(1)
+    await updateOrderToTicket(2)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,1)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,2)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,3)`)
