@@ -6,6 +6,7 @@ query getOrdersByUserIdInCart($idUser: Int!){
    	...on orders{
       orders{
         status
+        id
         lineal_order{
           id
           name
