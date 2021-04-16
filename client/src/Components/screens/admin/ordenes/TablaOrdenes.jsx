@@ -26,6 +26,15 @@ export default function TablaOrdenes() {
   //Debe renderizar todas las ordenes si no hay una busqueda
   //Si hay busqueda, renderiza el filtrado de la busqueda
 
+  /**
+  let components;
+  if (ordersFilter.length) {
+    components = ordersFilter;
+  } else {
+    components = orders;
+  }
+   */
+
   return (
     <StyledTablaOrdenes>
       ESTE ES EL COMPONENTE TABLA ORDENES
