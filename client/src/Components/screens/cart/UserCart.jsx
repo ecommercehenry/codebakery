@@ -11,18 +11,22 @@ const UserCart = () => {
   let storage = window.localStorage;
   let userId = parseInt(storage.id);
   const {data, loading} = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {variables:{idUser: userId} });
-
-console.log(data)
+  // useEffect(() => {
+  //   if(!loading){
+  //    var renderCart = data.getOrdersByUserIdInCart.orders[0].lineal_order
+  //   }
+  //  },[loading])
+  console.log(data)
   return   <StyledCart>
   {data?.getOrdersByUserIdInCart? (
-    data.getOrdersByUserIdInCart.orders.map((order) => (
+    data.getOrdersByUserIdInCart.orders[0].lineal_order.map((order) => (
         <ProductOnCart
-          id={5}
-          name={'queso crema'}
-          price={3}
-          stock={15}
-          image={'lol'}
-          quantity={10}
+          id={order.id}
+          name={order.name}
+          price={order.price}
+          stock={order.stock}
+          image={order.image}
+          quantity={order.quantity}
         />
     ))
   ) : (
