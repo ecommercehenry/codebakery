@@ -8,15 +8,16 @@ import Cart from "./Components/screens/cart/container/Cart"
 import AboutUs from "./Components/screens/aboutUs/container/AboutUs"
 import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory"
 import FormCRUD from "./Components/screens/admin/FormCRUD"
-import GlobalStyle from './Components/GlobalStyle';
-import GuestCart from './Components/screens/cart/GuestCart';
-import Login from './Components/screens/login/login';
-import UserAccount from "./Components/UserAcount/UserAccount";
-import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
+import GlobalStyle from "./Components/GlobalStyle"
+import GuestCart from "./Components/screens/cart/GuestCart"
+import Login from "./Components/screens/login/login"
+import UserAccount from "./Components/UserAcount/UserAccount"
+import CreateUserAccount from "./Components/UserAcount/CreateUserAccount"
 import TablaOrdenes from "./Components/screens/admin/ordenes/TablaOrdenes"
 import { useLazyQuery, useQuery } from "@apollo/client"
 import VALIDATE_CREDENTIALS from "./Apollo/queries/validateCredentials"
 import AddProductForm from "./Components/AddProductForm"
+import Detail from "./Components/screens/detail/Detail"
 
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
@@ -27,14 +28,14 @@ function App() {
     validateUser({ variables: { token: token, role: role } })
   }, [data])
   const isAuthenticated = data?.validateCredentials
-  
+
   if (isAuthenticated && role === "admin") {
     return (
       <>
         <GlobalStyle />
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/admin" component={AdminPanel}></Route>
+          <Route path="/admin" component={AdminPanel}></Route>
           <Route exact path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/about-us" component={AboutUs} />
@@ -42,7 +43,8 @@ function App() {
           <Route exact path="/sign-up" component={CreateUserAccount} />
           <Route exact path="/ordenes" component={TablaOrdenes} />
           <Route exact path="/admin/form" component={FormCRUD} />
-          <Route exact path="/admin/add-product" component={AddProductForm} />
+          <Route path="/admin/add-product" component={AddProductForm} />
+          <Route exact path="/detail:id" component={Detail} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
@@ -51,12 +53,13 @@ function App() {
     return (
       <>
         <Switch>
-        <Route exact path="/" component={Landing} />
+          <Route exact path="/" component={Landing} />
           <Route exact path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
+          <Route exact path="/detail:id" component={Detail} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
