@@ -6,6 +6,7 @@ import { Steps } from 'rsuite';
 import 'rsuite/lib/styles/index.less';
 import "./prueba.css"
 
+
 export default function Orden({ id, orden }) {
   //   const product = useSelector((state) => state.productsReducer.products[id]);
   //   const [show, setShow] = useState(true);
@@ -15,11 +16,14 @@ export default function Orden({ id, orden }) {
   
   const instance = (
     <Steps current={0}>
-      <Steps.Item  />
+     
+      <Steps.Item onClick={()=> console.log("Me hiciste click")}  />
+     
       <Steps.Item  />
       <Steps.Item  />     
     </Steps>
   );
+  console.log("--------------------->>>>",orden)
   
   
   if (orden) {

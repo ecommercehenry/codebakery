@@ -1,16 +1,10 @@
-import { gql } from "@apollo/client"
-
-const getAllOrders = gql`
-query getAllOrders{
-  getAllOrders{
+query getOrdersByUserIdInCart($idUser: Int!){
+  getOrdersByUserIdInCart(userId:$idUser){
    	...on orders{
       orders{
         id
         status
         userId
-        creation
-        lastModified
-        cancelled
         lineal_order{
           id
           name
@@ -27,6 +21,8 @@ query getAllOrders{
     }
   }
 }
-`
 
-export default getAllOrders;
+variables
+{
+  "idUser":1
+}

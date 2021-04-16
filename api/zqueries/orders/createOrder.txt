@@ -1,0 +1,28 @@
+mutation createOrder($idUser:Int! , $dataProducts:[dataProductsOrderInput]!){
+	  createOrder(idUser:$idUser, dataProducts:$dataProducts)
+	  {
+		... on order{
+		  id
+		  status
+      userId
+      creation
+      lastModified
+      lineal_order{
+        name
+      }
+		}
+		... on error{
+		  detail
+		}
+	  }
+	}
+
+variables
+{
+	  "idUser": 1,
+	  "dataProducts": [
+		{"id": 1, "quantity": 100},
+		{"id": 2, "quantity": 200},
+		{"id": 3, "quantity": 1}
+	  ]
+	}

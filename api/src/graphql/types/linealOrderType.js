@@ -1,8 +1,10 @@
 module.exports = `
 type lineal_order {
-    userId: Int!,
+    id: Int!,
+    name: String!,
     price: Float!,
     quantity: Int!
-    product:[product]
+    stock: Int!
+    image: String!
 }
 `

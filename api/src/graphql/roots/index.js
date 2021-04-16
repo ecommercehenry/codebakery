@@ -32,8 +32,7 @@ const {
     getAllOrders,
     getOrdersByUserIdInCart,
     getOrdersByUserIdInTicket,
-    
-    // getAllUsers,
+    validateCredentials,
 } = require("./queriesResolvers/")
 
 // product
@@ -65,6 +64,7 @@ const root = {
     getProductByArray,
     getAllUsers,
     validateUser,
+    validateCredentials,
     getOrderById,
     getAllOrders,
     getOrdersByUserIdInCart,
@@ -72,8 +72,6 @@ const root = {
     deleteProductOrder,
     modifyStatusOrder,
     validateUser
-    // getAllUsers,
-    
 }
 
 module.exports = root
