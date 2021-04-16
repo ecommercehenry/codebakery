@@ -24,15 +24,23 @@ export default function TablaOrdenes(){
   }, [data]);
   
   //traigo info del reducer..
-  let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
+  const {search, filterOrders } = useSelector((state) => state.reducer);
+  console.log("SEARCH--------",search)
+  console.log("FILTERORDERS--------",filterOrders)
+  
   //Debe renderizar todas las ordenes si no hay una busqueda 
   //Si hay busqueda, renderiza el filtrado de la busqueda
-
+  let dataRENDER;  
+  if(search){
+    dataRENDER = filterOrders
+  }else{
+    dataRENDER = data?.getAllOrders;
+  }
 
     return (
         <StyledTablaOrdenes>ESTE ES EL COMPONENTE TABLA ORDENES
-             {data ? (
-            data.getAllOrders.map((ord) => {
+             {dataRENDER ? (
+            dataRENDER.map((ord) => {
               return <Orden
                   id ={ord.id}
                   key = {ord.id}

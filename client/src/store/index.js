@@ -7,9 +7,6 @@ import productsReducer from "../reducer/productsReducer";
 import reducer from "../reducer/reducer"
 import ordersReducer from "../reducer/ordersReducer"
 
-
-
-
 import rootReducer from "./rootReducer"
 
 export const store = createStore(rootReducer,composeWithDevTools(
