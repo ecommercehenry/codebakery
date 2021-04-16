@@ -13,6 +13,11 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM('unpaid', 'paid', 'sent', 'received'),
         defaultValue: 'unpaid',
         allowNull: false,
+      },
+      cancelled:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
       }
     }
   )

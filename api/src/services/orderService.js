@@ -13,12 +13,11 @@ async function getAllOrders(){
         for(let i = 0; i < order.length; i++) {
             const element = order[i];
             const formatted = await _formatOrder(element)
-            out.push(formatted)
+            out.push({__typename:"order",...formatted})
         }
-        console.log({ __typename:"order",...out,})
-        return out
+        return {__typename:"orders",orders:out}
     } catch (err) {
-        throw new Error("Problem getting all orders "+err.message)
+        return { __typename: "error" , name:"db error",detail:`Problem getting orders: ${err.message}`}
     }
 }
 
@@ -26,7 +25,7 @@ async function getOrdersByUserIdInTicket(userId){
     try {
         const order = await Order.findAll({
             where: {
-                id:userId,
+                userId:userId,
                 placeStatus:"ticket"
             }
         })
@@ -35,14 +34,11 @@ async function getOrdersByUserIdInTicket(userId){
         for(let i = 0; i < order.length; i++) {
             const element = order[i];
             const formatted = await _formatOrder(element)
-            out.push(formatted)
+            out.push({__typename:order,...formatted})
         }
-        return out
+        return {__typename:"orders", orders:out}
     } catch (err) {
-        return {
-            error: "Problem finding the user ID of order",
-            detail: "Possibly the id passed dont exists",
-          }
+        return { __typename: "error" , name:"db error",detail:`Problem getting order: ${err.message}`}
     }
 }
 
@@ -59,14 +55,11 @@ async function getOrdersByUserIdInCart(userId){
         for(let i = 0; i < order.length; i++) {
             const element = order[i];
             const formatted = await _formatOrder(element)
-            out.push(formatted)
+            out.push({__typename:order,...formatted})
         }
-        return out
+        return {__typename:"orders", orders:out}
     } catch (err) {
-        return {
-            error: "Problem finding the user ID of order",
-            detail: "Possibly the id passed dont exists",
-          }
+        return { __typename: "error" , name:"db error",detail:`Problem getting order: ${err.message}`}
     }
 }
 /**
@@ -100,6 +93,8 @@ async function createOrder(products, idUser){
                 id:idUser
             }
         })
+        if(!user) return { __typename: "error" , name:"id user error",detail:`El usuario ${idUser} no existe`}
+        
         order = await Order.create({
             userId:user.id
         })
@@ -142,26 +137,21 @@ async function _formatOrder(order){
     let productsOrdersSalida = []
     for(let i in lineal_Order){
         productsOrdersSalida.push({
-            userId:userOrden.id,
-            price: lineal_Order[i].price,
-            quantity: lineal_Order[i].quantity,
-            product:[
-                {
                     id:productsOrden[i].id,
                     name: productsOrden[i].name,
-                    description: productsOrden[i].description,
-                    price: productsOrden[i].price,
+                    price: lineal_Order[i].price,
+                    quantity: lineal_Order[i].quantity,
                     stock: productsOrden[i].stock,
                     image: productsOrden[i].image,
-                    categories: await productsOrden[i].getCategories()
-                }
-            ]
         })
     }
-
     const out = {
         id:order.id,
         status:order.status,
+        userId:userOrden.id,
+        creation:order.createdAt.toUTCString(),
+        lastModified: order.updatedAt.toUTCString(),
+        cancelled:order.cancelled,
         lineal_order: productsOrdersSalida
     }
     return out
@@ -177,7 +167,6 @@ async function getOrderById(id){
                 id
             }
         })
-    
         const out = await _formatOrder(order)
         return {__typename:"order", ...out}
 
@@ -224,10 +213,14 @@ async function deleteProductOrder(orderId, productId){
     try {
         const order = await Order.findOne({where: {id: orderId}})
         if(order.placeStatus === 'cart'){
-            await Lineal_Order.destroy({
+            const a = await Lineal_Order.destroy({
                 where: {orderId, productId}
             })
-            return {__typename: "booleanResponse" , boolean:true}
+            if(a === 1){
+                return {__typename: "booleanResponse" , boolean:true}
+            }else{
+                return { __typename: "error" , name:"not existent product",detail:`Product ${productId} not exist in the order`}
+            }
         } else {
             return { __typename: "error" , name:"concept error, see detail",detail:"You cannot delete a product from a ticket"}
         }
@@ -249,7 +242,7 @@ async function deleteProductOrder(orderId, productId){
 async function addProductToOrder(orderId, productId, quantity){
     try {
         const order = await Order.findOne({where: {id: orderId}})
-
+        if(!order) return { __typename: "error" , name:"not exist, see detail",detail:`The order with id ${orderId} dont exist`}
         if(order.placeStatus === 'cart'){
             const newProduct = await Product.findOne({
                 where:{
@@ -259,7 +252,7 @@ async function addProductToOrder(orderId, productId, quantity){
             let has = await order.addProduct(newProduct, {through:{price:newProduct.price, quantity}})            
             return {__typename: "booleanResponse" , boolean:true}
         } else {
-            return { __typename: "error" , name:"concept error, see detail",detail:"You cannot delete a product from a ticket"}
+            return { __typename: "error" , name:"concept error, see detail",detail:"You cannot add a product in a ticket order"}
         }
         
     } catch (err) {
@@ -275,6 +268,7 @@ async function addProductToOrder(orderId, productId, quantity){
  async function deleteOrder(orderId){
     try {
         const order = await Order.findOne({where: {id: orderId}})
+        if(!order) return { __typename: "error" , name:"not exist, see detail",detail:`The order with id ${orderId} dont exist`}
         if(order.placeStatus === 'cart'){
             await order.destroy()
             return {__typename: "booleanResponse" , boolean:true}
@@ -296,6 +290,7 @@ async function updateOrderToTicket(orderId){
         const order = await Order.findOne({
             where: {id: orderId}
         })
+        if(!order) return { __typename: "error" , name:"not exist, see detail",detail:`The order with id ${orderId} dont exist`}
         order.placeStatus = "ticket"
         await order.save()
 

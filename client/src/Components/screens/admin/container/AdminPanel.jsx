@@ -12,6 +12,8 @@ import ListCRUD from "../ListCRUD"
 import AddProductForm from '../../../AddProductForm';
 import TablaOrdenes from '../../admin/ordenes/TablaOrdenes';
 
+
+
 const AdminPanel = () => {
   const [addProduct, setAddProduct] = useState(false);
 
