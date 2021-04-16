@@ -18,6 +18,7 @@ import { useLazyQuery, useQuery } from "@apollo/client"
 import VALIDATE_CREDENTIALS from "./Apollo/queries/validateCredentials"
 import AddProductForm from "./Components/AddProductForm"
 import Detail from "./Components/screens/detail/Detail"
+import Hola from "./Components/Hola"
 
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
@@ -34,17 +35,22 @@ function App() {
       <>
         <GlobalStyle />
         <Switch>
+        {/* {DEBEMOS ARREGLAR EL TEMA DEL RENDERIZADO DE LA RUTA DE AddProductForm - PODEMOS USAR Z-INDEX } 
+        
+        TAMBIÉN REVISAR EL TEMA DE 
+        */}
           <Route exact path="/" component={Landing} />
           <Route path="/admin" component={AdminPanel}></Route>
-          <Route exact path="/catalogue" component={Catalogue} />
+          <Route path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
           <Route exact path="/ordenes" component={TablaOrdenes} />
-          <Route exact path="/admin/form" component={FormCRUD} />
+          {/* <Route path="/admin" component={FormCRUD} /> */}
           <Route path="/admin/add-product" component={AddProductForm} />
-          <Route exact path="/detail:id" component={Detail} />
+          <Route exact path="/catalogue/detail/:id" component={Detail} />
+          <Route exact path="/admin/algo" component={Hola} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
@@ -54,12 +60,12 @@ function App() {
       <>
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/catalogue" component={Catalogue} />
+          <Route path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
-          <Route exact path="/detail:id" component={Detail} />
+          <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
