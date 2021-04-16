@@ -25,7 +25,7 @@ async function getOrdersByUserIdInTicket(userId){
     try {
         const order = await Order.findAll({
             where: {
-                id:userId,
+                userId:userId,
                 placeStatus:"ticket"
             }
         })
