@@ -4,6 +4,8 @@ export const GUARDAR_PRODUCTOS = "GUARDAR_PRODUCTOS";
 export const SET_SEARCH = 'SET_SEARCH'; 
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS"; 
 export const SAVE_ORDERS = "SAVE_ORDERS"; 
+export const PRICE_LOW_TO_HIGH = "PRICE_LOW_TO_HIGH"; 
+
 
 
 
@@ -46,5 +48,13 @@ export const saveOrders = (ordenes)=>{
   return{
     type: SAVE_ORDERS,
     payload: ordenes
+  }
+}
+
+export const pricetolow = (value)=>{
+  console.log('pricetolow', value)
+  return{
+    type: PRICE_LOW_TO_HIGH,
+    payload: value
   }
 }

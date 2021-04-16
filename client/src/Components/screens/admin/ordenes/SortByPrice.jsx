@@ -3,22 +3,25 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import { withStyles } from '@material-ui/core/styles';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import styled from 'styled-components';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 // import InboxIcon from '@material-ui/icons/MoveToInbox';
 // import DraftsIcon from '@material-ui/icons/Drafts';
 // import SendIcon from '@material-ui/icons/Send';
 
 import styles from './SortByPrice.module.css';
+import { pricetolow } from "../../../../actions";
 
 const useStyles = makeStyles({
     root: {
       padding:15,
       width: 300,
       height:80,
+     
     },
   });
 
@@ -31,19 +34,19 @@ const useStyles = makeStyles({
       border: '1px solid #d3d4d5',
     },
 
-  })((props) => (
-    <Menu
-      elevation={0}
-      getContentAnchorEl={null}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'center',
-      }}
-      {...props}
+        })((props) => (
+          <Menu
+            elevation={0}
+            getContentAnchorEl={null}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+            {...props}
     />
   ));
 
@@ -64,11 +67,15 @@ export default function SortByPrice() {
 
     const classes = useStyles();
     const [value, setValue] = React.useState([20, 37]);
+    //estado local del rango
 
     console.log('value', value);
     console.log('setValue', setValue);
 
+    let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
+
     const [anchorEl, setAnchorEl] = React.useState(null);
+
   
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -82,6 +89,18 @@ export default function SortByPrice() {
         setAnchorEl(event.currentTarget);
     };
 
+    const dispatch = useDispatch();
+
+    const low = (event) => {
+      
+      event.preventDefault();
+      console.log(event);
+      dispatch(pricetolow);
+      console.log('low',event);
+
+      
+    }
+
     return (
 
         (
@@ -90,10 +109,10 @@ export default function SortByPrice() {
                 aria-controls="customized-menu"
                 aria-haspopup="true"
                 variant="contained"
-                color="primary"
+                className="addProduct purple-btn"
                 onClick={handleClick}
               >
-                Open Menu
+               Sort By Price
               </Button>
               <StyledMenu
                 id="customized-menu"
@@ -103,54 +122,59 @@ export default function SortByPrice() {
                 onClose={handleClose}
               >
                     <StyledMenuItem>
-                    <ListItemText  />
-                        <div className={classes.root}>
-                            <div id="range-slider">
-                                Temperature range
-                            </div>
-                
-                            <Slider
-                                value={value}
-                                onChange={handleChange}
-                                valueLabelDisplay="auto"
-                                aria-labelledby="range-slider"
-                                getAriaValueText={valuetext}
-                            />
-                        </div>
+                    
+                          <div className={classes.root}>
+                              <div id="range-slider">
+                                  Temperature range
+                              </div>
+                  
+                              <Slider
+                                  value={value}
+                                  onChange={handleChange}
+                                  valueLabelDisplay="auto"
+                                  aria-labelledby="range-slider"
+                                  getAriaValueText={valuetext}
+                                  
+                              />
+                          </div>
 
                     </StyledMenuItem>
 
                     <StyledMenuItem>
-                    <ListItemText primary="Price-low to high" />
+                        <ListItemText primary="Price-low to high"  onClick={low} />
                     </StyledMenuItem>
                     
                     <StyledMenuItem>
-                    <ListItemText primary="Price-high to low" />
+                        <ListItemText primary="Price-high to low" />
                     </StyledMenuItem>
 
               </StyledMenu>
             </div>
           )
-        
-        
-                
-                
+                 
     )
 
 }
 
-
-
-{/* <form action="#">
+const StyledAdminPanel = styled.div`
  
-            <div className={styles.select_box}>
-            
-                <label for="select_box1" className={styles.label.select_box1}><span className={styles.label_desc}>Choose your country</span> </label>
-                    <select id="select-box1" className="select">
-                        <option value="Choice 1">Price-low to high</option>
-                        <option value="Choice 2">Price-high to low</option>
-                        <option value="Choice 3">Neverland</option>
-                    </select>
-            
-            </div>
-        </form>  */}
+    .right{
+        width:87%;
+        display:flex;
+        flex-direction:column;
+        .top{
+            height:15vh;
+        }
+        .addProduct{
+          background:#5E3F71;
+          color:white;
+          display:flex;
+          align-items: center;
+          justify-content:center;
+      }
+      .purple-btn:hover{
+          background-color: #734191
+      }
+       
+    }
+`;

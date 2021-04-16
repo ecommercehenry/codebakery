@@ -47,16 +47,17 @@
 
 
   .dropbtn {
-	background-color: #3498DB;
+
 	color: white;
 	padding: 16px;
 	font-size: 16px;
-	border: none;
+	border: 2px;
+  border-color: #755588;
 	cursor: pointer;
   }
   
   .dropbtn:hover, .dropbtn:focus {
-	background-color: #2980B9;
+	background-color: #755588;
   }
   
   .dropdown {

@@ -1,4 +1,4 @@
-import {SAVE_ORDERS} from "../actions/index";
+import {SAVE_ORDERS, PRICE_LOW_TO_HIGH} from "../actions/index";
 
   const initialState = {
     orders:[],
@@ -27,7 +27,10 @@ import {SAVE_ORDERS} from "../actions/index";
     //       orders: productsModified
        
     //     }; 
-      
+    case PRICE_LOW_TO_HIGH:
+
+        console.log('reducer', action.payload)
+        
       default:
         return state;
     }

@@ -5,6 +5,9 @@ import { useQuery } from '@apollo/client';
 import getAllOrders from '../../../../Apollo/queries/getAllOrders';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveOrders } from "../../../../actions"
+import SortByPrice from './SortByPrice';
+
+
 
 // @-WenLi
 //traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
@@ -30,6 +33,8 @@ export default function TablaOrdenes(){
 
 
     return (
+      <>
+        <SortByPrice/>
         <StyledTablaOrdenes>ESTE ES EL COMPONENTE TABLA ORDENES
              {data ? (
             data.getAllOrders.map((ord) => {
@@ -43,6 +48,7 @@ export default function TablaOrdenes(){
             <p>loading...</p>
           )}
         </StyledTablaOrdenes>
+      </>
     )
 
 }
