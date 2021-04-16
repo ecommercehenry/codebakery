@@ -13,19 +13,30 @@ import Login from "./Login";
 import Logout from "./Logout";
 import { useDispatch } from "react-redux";
 import validateUser from "../../Apollo/queries/validateUser"
+import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 
 const UserAcount = () => {
   const [login, { loading, data }] = useLazyQuery(validateUser);
+  // const validate = useLazyQuery(VALIDATE_CREDENTIALS);
+  const validateCredentials = useLazyQuery(VALIDATE_CREDENTIALS);
+  const loadingValidate = validateCredentials[1]?.loading?.validateCredentials, 
+  dataValidate = validateCredentials[1]?.data?.validateCredentials,
+  functionValidate = validateCredentials[0];
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  // console.log(functionValidate, 'iiiiiiiiiiiiiiiiiiiiiiiiiii');
+ 
+  // console.log(dataValidate, 'yysayysyas')
   // Google login
   const dispatch = useDispatch()
 
   useEffect(()=>{
+    if(localStorage.getItem('token')){
+      functionValidate({ variables: { token: localStorage.getItem('token'), role: localStorage.getItem('role') } });
+   }
     if(!loading && data){
       if(data.validateUser.token){
         // alert("logueado")
@@ -34,20 +45,28 @@ const UserAcount = () => {
         localStorage.setItem('email', data.validateUser.email);
         localStorage.setItem('role', data.validateUser.role);
         // es necesario el reloaded para luego poder redirigir
-        alert(`Bienvenido ${data.validateUser.name}`)
+        alert(`Bienvenido ${data.validateUser.name}`);
 
         window.location.reload();
       }else{
         alert(data.validateUser.detail)
       }
     console.log(data)
-  }})
+  }},[loading, data, dataValidate])
   let role = localStorage.getItem('role');
   let token = localStorage.getItem('token');
   if(role  && token){
     // la redireccion se debe cambiar seún el role del usuario
-    if(role === 'admin') return <Redirect to='/admin' />;
-    else return <Redirect to='/catalogue' />;
+    if(role === 'admin' && dataValidate){
+      console.log('yaysyyayysa', dataValidate)
+      return <Redirect to='/admin' />;
+    }
+    else if(role === 'user' && dataValidate) return <Redirect to='/catalogue' />;
+    // else {
+    //   console.log('log-in')
+    //   // localStorage.clear();
+    //   return <Redirect to='/log-in' />;
+    // };
   }
   const handleLogin = async (form) => {
     login({variables: {name:form.login,password:form.password}})    
