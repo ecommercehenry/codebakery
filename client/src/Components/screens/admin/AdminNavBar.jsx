@@ -18,11 +18,26 @@ const AdminNavBar = ({setAddProduct}) => {
 
     return (
         <StyledNavBar>
-            <div className="onLeft">   
+            <div className="onLeft">
+                <Route path='/admin/products'> 
+                <>
                 <div className="optionTab">PRODUCTS</div>
-                <SearchBar/>
+                <SearchBar/> 
+                </>
+                </Route>
+                <Route path='/admin/orders'> 
+                <>
+                <div className="optionTab">ORDERS</div>
+                {/*  PABLO */}
+                {/*  PATSY */}
+                </>
+                </Route>
+                   
+                
             </div>
-            
+            <Route path='/admin/products' >
+             <>   
+                 
             {add ? <div className="add-category" onClick={() => setAdd(!add)}>
                 "+ ADD CATEGORY"</div> : 
                 <div className="add-category"> <FormCreateCategory setAdd={setAdd}/></div>}
@@ -30,9 +45,10 @@ const AdminNavBar = ({setAddProduct}) => {
             <Link to="/admin/add-product" className="addProduct purple-btn" onClick={buttonHandler}>
                 + ADD PRODUCT
             </Link>
-            {/* <button className="addProduct" onClick={buttonHandler}>
-                + ADD PRODUCT
-            </button> */}
+           </>
+                
+            </Route> 
+           
 
         </StyledNavBar>
     )
