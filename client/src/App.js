@@ -7,21 +7,19 @@ import Catalogue from "./Components/screens/catalogue/container/Catalogue"
 import Cart from "./Components/screens/cart/container/Cart"
 import AboutUs from "./Components/screens/aboutUs/container/AboutUs"
 import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory"
-
 import FormCRUD from "./Components/screens/admin/FormCRUD"
-import GlobalStyle from "./Components/GlobalStyle"
-import Login from "./Components/screens/login/login"
-import UserAccount from "./Components/UserAcount/UserAccount"
-import CreateUserAccount from "./Components/UserAcount/CreateUserAccount"
-import ProtectedRoute from "./Components/Protected/ProtectedRoute"
-import Hola from "./Components/Hola"
+import GlobalStyle from './Components/GlobalStyle';
+import GuestCart from './Components/screens/cart/GuestCart';
+import Login from './Components/screens/login/login';
+import UserAccount from "./Components/UserAcount/UserAccount";
+import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
+import TablaOrdenes from "./Components/screens/admin/ordenes/TablaOrdenes"
 import { useLazyQuery, useQuery } from "@apollo/client"
 import VALIDATE_CREDENTIALS from "./Apollo/queries/validateCredentials"
 
-// Hola
-// ProtectedRoute
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
+
 
 function App() {
   const [validateUser, { data, loading }] = useLazyQuery(VALIDATE_CREDENTIALS)
@@ -36,18 +34,13 @@ function App() {
         <GlobalStyle />
         <Switch>
           <Route exact path="/" component={Landing} />
-          {/* <Route path="/" component={NavBar}/> */}
           <Route exact path="/admin" component={AdminPanel}></Route>
-          {/* <ProtectedRoute exact path="/add-product" component={Hola}> </ProtectedRoute> */}
-
-          {/* <Route path="/admin" component={AdminPanel} /> */}
           <Route exact path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
-
-          {/* Debo agregar al componente padre que corresponda @Chu */}
+          <Route exact path="/ordenes" component={TablaOrdenes} />
           <Route exact path="/admin/form" component={FormCRUD} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>

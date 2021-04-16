@@ -7,10 +7,14 @@ const {productCategory} = require("./productCategory");
 const {getProductByName } = require("./getProductByProductName")
 const {getProductByArray} = require("./getProductByArray")
 const { getAllUsers } = require("./getAllUsers")
-const {validateUser} = require("./validateUser");
-const {validateCredentials} = require("./validateCredentials");
+const {validateUser} = require("./validateUser")
+const {getOrderById} = require("./getOrderById")
+const {getAllOrders} = require("./getAllOrders")
+const {getOrdersByUserIdInCart} = require("./getOrdersByUserIdInCart")
+const {getOrdersByUserIdInTicket} = require("./getOrdersByUserIdInTicket")
+const {validateCredentials} = require("./validateCredentials"); 
+const {validateCredentials} = require("./validateCredentials"); 
 
-// getProductByCategoryName
 module.exports = {
   categories, 
   product, 
@@ -22,5 +26,9 @@ module.exports = {
   getProductByArray,
   getAllUsers, 
   validateUser,
-  validateCredentials
+  validateCredentials,
+  getOrderById,
+  getAllOrders,
+  getOrdersByUserIdInCart,
+  getOrdersByUserIdInTicket,
 }

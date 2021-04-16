@@ -1,5 +1,5 @@
 module.exports = `
-    type booleanDelete {
-        booleanDelete: Boolean!
+    type booleanResponse {
+        boolean: Boolean!
     }
 `
