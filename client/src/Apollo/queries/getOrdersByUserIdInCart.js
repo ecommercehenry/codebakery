@@ -1,9 +1,8 @@
 import { gql } from "@apollo/client";
 
-const getOrdersByUserIdInCart = gql`
-{
-  query getOrdersByUserIdInCart($userId: Int!)
-  getOrdersByUserIdInCart(userId: $userId) {
+const GET_ORDERS_BY_USER_ID_IN_CART = gql`
+  query getOrdersByUserIdInCart($userId: Int!){
+  getOrdersByUserIdInCart(userId: $userId){
     id
     status
     lineal_order {
@@ -19,4 +18,4 @@ const getOrdersByUserIdInCart = gql`
   }
 }
 `;
-export default getOrdersByUserIdInCart;
+export default GET_ORDERS_BY_USER_ID_IN_CART;

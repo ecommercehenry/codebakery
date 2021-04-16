@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import getOrdersByUserIdInCart from '../../../Apollo/queries/getOrdersByUserIdInCart'
-import {useQuery} from '@apollo/client'
-
+import GET_ORDERS_BY_USER_ID_IN_CART from "../../../Apollo/queries/getOrdersByUserIdInCart";
+import { useQuery } from "@apollo/client";
 
 const UserCart = () => {
-   let storage = window.localStorage;
-  let logueado = storage.token? true: false;
-  let userId = parseInt(localStorage.id)
-  const [getOrdersByUserIdInCart, {data, loading}] = useQuery(getOrdersByUserIdInCart)
+  let storage = window.localStorage;
+  let userId = parseInt(storage.id);
+  const [getOrder, { data, loading }] = useQuery(GET_ORDERS_BY_USER_ID_IN_CART);
 
-  getOrdersByUserIdInCart({variables:{
-      userId: userId,
-  }})
-  console.log(data)
+  useEffect(() => {
+    getOrder({
+      variables: {
+        userId: userId,
+      },
+    });
+  });
+  console.log(data);
 
-  return <div> 
-       </div>;
+  return (<div> si ves esto es porque no rompi  </div>);
 };
 
 export default UserCart;
