@@ -5,7 +5,7 @@ import Hero from "../hero/Hero";
 import Products from "../products/container/Products";
 import Detail from "../../detail/Detail.jsx";
 import { useMutation } from "@apollo/client";
-import CREATE_ORDER from '../../../../Apollo/mutations/createOrder'
+import CREATE_ORDER from "../../../../Apollo/mutations/createOrder";
 
 const Catalogue = () => {
   let storage = window.localStorage;
@@ -13,24 +13,26 @@ const Catalogue = () => {
   let cartExistence = storage.cart ? true : false;
 
   // if (logged && cartExistence) {
-    
-    const [createOrder, {data, loading}] =useMutation(CREATE_ORDER)
-    useEffect(()=>{
-      if (logged && cartExistence) {
-      let userId = parseInt(storage.id)
-        let cart = JSON.parse(storage.cart)
-        createOrder({variables:{
+
+  const [createOrder, { data, loading }] = useMutation(CREATE_ORDER);
+  useEffect(() => {
+    if (logged && cartExistence) {
+      let userId = parseInt(storage.id);
+      let cart = JSON.parse(storage.cart);
+      createOrder({
+        variables: {
           idUser: userId,
           dataProducts: cart.map((elem) => {
-            return{
+            return {
               id: elem.id,
-              quantity: elem.quantity
-            }
-          })
-        }})
-      }
-      },[])
-      // }
+              quantity: elem.quantity,
+            };
+          }),
+        },
+      });
+    }
+  }, []);
+  // }
 
   return (
     <>
