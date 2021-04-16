@@ -27,8 +27,8 @@ const AdminPanel = () => {
           <AdminNavBar setAddProduct={setAddProduct} />
         </div>
         <div className="bottom">
-           <Route path='/admin/products' component={<ListCRUD />}/>            
-           <Route path='/admin/orders' component={<TablaOrdenes/>}/>    
+           <Route path='/admin/products' component={ListCRUD}/>            
+           <Route path='/admin/orders' component={TablaOrdenes}/>    
           
         </div>
        

@@ -33,15 +33,15 @@ function App() {
         <GlobalStyle />
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/admin" component={AdminPanel}></Route>
+          <Route  path="/admin" component={AdminPanel}></Route>
           <Route exact path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
-          <Route exact path="/ordenes" component={TablaOrdenes} />
-          <Route exact path="/admin/form" component={FormCRUD} />
-          <Route path="/*" component={() => "404 NOT FOUND"} />
+          {/* <Route exact path="/ordenes" component={TablaOrdenes} /> */}
+          {/* <Route exact path="/admin/form" component={FormCRUD} /> */}
+          {/* <Route path="/*" component={() => "404 NOT FOUND"} /> */}
         </Switch>
       </>
     )
@@ -55,7 +55,7 @@ function App() {
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
-          <Route path="/*" component={() => "404 NOT FOUND"} />
+          {/* <Route path="/*" component={() => "404 NOT FOUND"} /> */}
         </Switch>
       </>
     )

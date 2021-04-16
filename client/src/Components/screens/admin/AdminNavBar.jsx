@@ -28,7 +28,8 @@ const AdminNavBar = ({setAddProduct}) => {
                 <Route path='/admin/orders'> 
                 <>
                 <div className="optionTab">ORDERS</div>
-                {/* <SearchBar/> PABLO */}
+                {/*  PABLO */}
+                {/*  PATSY */}
                 </>
                 </Route>
                    
