@@ -44,7 +44,7 @@ const UserAcount = () => {
   }})
   let role = localStorage.getItem('role');
   let token = localStorage.getItem('token');
-  if(role  && token){
+  if(role && token){
     // la redireccion se debe cambiar seún el role del usuario
     if(role === 'admin') return <Redirect to='/admin' />;
     else return <Redirect to='/catalogue' />;

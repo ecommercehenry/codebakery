@@ -14,16 +14,17 @@ async function getAllUsers() {
 }
 
 async function createUser(name, password, email, role) {
-    try {
-      return await Users.create({
-        name,
-        password,
-        email,
-        role,
-      });
-    } catch (error) {
-      throw new Error(error);
-    }
+  try {
+    let newUser = await Users.create({
+      name,
+      password,
+      email,
+      role
+    });
+    return {__typename: 'user', ...newUser.dataValues};
+  } catch (error) {
+    return {__typename: 'error' , name: 'error', detail: 'Email already exist o invalid email'};
+  }
 }
 
 async function modifyUser(id, name, password, email, role) {
