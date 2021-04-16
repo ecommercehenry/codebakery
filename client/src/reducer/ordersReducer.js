@@ -1,4 +1,4 @@
-import {getAllOrders} from "../actions";
+import {SAVE_ORDERS} from "../actions/index";
 
   const initialState = {
     orders:[],
@@ -10,7 +10,7 @@ import {getAllOrders} from "../actions";
     // let ordersModified = state.orders
     
     switch (action.type) {
-      case "SAVE_ORDERS":
+      case SAVE_ORDERS:
         return {
           ...state,
           orders: action.payload

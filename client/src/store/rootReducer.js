@@ -11,10 +11,10 @@ const persistConfig = {
     storage,
     whitelist: ['cart']
 }
-const rootReducer = combineReducers({
+const rootReducer_ = combineReducers({
     productsReducer: productsReducer,
     reducer: reducer,
     cart:cartReducer,
     loginReducer:loginReducer,
   })
-export default persistReducer(persistConfig,rootReducer);
+export default persistReducer(persistConfig,rootReducer_);

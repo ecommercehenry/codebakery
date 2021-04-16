@@ -4,8 +4,9 @@ import {composeWithDevTools} from "redux-devtools-extension"
 import thunk from "redux-thunk"
 import loginReducer from "../reducer/loginReducer";
 import productsReducer from "../reducer/productsReducer";
-import reducer from "../reducer/reducer"
-import ordersReducer from "../reducer/ordersReducer"
+import reducer from "../reducer/reducer";
+import ordersReducer from "../reducer/ordersReducer";
+import rootReducer_ from "./rootReducer";
 
 const rootReducer = combineReducers({
   productsReducer,
@@ -14,12 +15,13 @@ const rootReducer = combineReducers({
   ordersReducer
 })
 
-const store = createStore(rootReducer,composeWithDevTools(
-    applyMiddleware(thunk)
-))
-import rootReducer from "./rootReducer"
+// const store = createStore(rootReducer,composeWithDevTools(
+//     applyMiddleware(thunk)
+// ))
 
-export const store = createStore(rootReducer,composeWithDevTools(
+
+
+export const store = createStore(rootReducer_ ,composeWithDevTools(
   applyMiddleware(thunk)
 ))
 export const persistor = persistStore(store);
