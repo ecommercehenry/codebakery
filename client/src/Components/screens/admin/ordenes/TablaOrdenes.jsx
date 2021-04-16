@@ -22,10 +22,13 @@ export default function TablaOrdenes(){
    useEffect(() => {
     dispatch(saveOrders(data?.getAllOrders));
   }, [data]);
-
+  
+  //traigo info del reducer..
+  let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
   //Debe renderizar todas las ordenes si no hay una busqueda 
   //Si hay busqueda, renderiza el filtrado de la busqueda
 
+  
     return (
         <StyledTablaOrdenes>ESTE ES EL COMPONENTE TABLA ORDENES
              {data ? (
