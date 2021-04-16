@@ -1,18 +1,35 @@
-import React, { useEffect } from "react";
+import React,{useEffect} from "react";
 import { useSelector } from "react-redux";
 import { useQuery, gql } from "@apollo/client";
-
+import {useDispatch} from 'react-redux';
+import {removeAll} from '../../../actions/cartActions';
 //styles
 import styled from "styled-components";
-
 //components
 import ProductOnCart from "./ProductOnCart";
+import EmptyAlert from "./EmptyAlert"
+import TotalToOrder from "./TotalToOrder"
 
 const GuestCart = () => {
+  const dispatch = useDispatch()
   let storage = window.localStorage;
-  let { itemsToCart } = useSelector((state) => state.reducer);
+  let { itemsToCart } = useSelector((state) => state.cart);
   let productsArray = itemsToCart.map((elem) => elem.id);
   productsArray = JSON.stringify(productsArray);
+
+  const resetCartHandler = () => {
+    dispatch(removeAll())
+  }
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //       document.body.style.overflow = "hidden"
+  //   }, 1000);
+  //     return () => {
+  //       document.body.style.overflow = "visible"
+  //   }
+  // }, [])
+
   const getProductByArray = gql`
     {
         getProductByArray(array:${productsArray}) {
@@ -52,42 +69,51 @@ const GuestCart = () => {
         }
       });
     });
-    if (itemsToCart.length) {
-      localStorage.setItem(`cart`, JSON.stringify(itemsToCart));
-    }
-    console.log("nuevo", itemsToCart, storage);
+    localStorage.setItem(`cart`, JSON.stringify(itemsToCart));
   }
-  let cart = localStorage.getItem("cart");
+  //let cart = localStorage.getItem("cart");
   // storage.clear() // para vaciar el storage
   return (
     <StyledCart>
-      <button onClick={() => storage.clear()}>vaciar carrito</button>
-      {cart ? (
-        JSON.parse(storage.cart).map((elem) => (
-          <ProductOnCart
-            id={elem.id}
-            name={elem.name}
-            price={elem.price}
-            stock={elem.stock}
-            image={elem.image}
-            quantity={elem.quantity}
-          />
-        ))
-      ) : (
-        <p>vacio</p>
-      )}
+      
+        <button onClick={resetCartHandler}>vaciar carrito</button>
+        {data && itemsToCart.length !==0 ? (
+          itemsToCart.map((elem) => (
+            <ProductOnCart
+              id={elem.id}
+              name={elem.name}
+              price={elem.price}
+              stock={elem.stock}
+              image={elem.image}
+              quantity={elem.quantity}
+            />
+          ))
+        ) : (
+          <EmptyAlert/>
+        )}
+        <TotalToOrder/> 
+      
+      
+      {/* <TotalToOrder/> */}
     </StyledCart>
   );
 };
 
 const StyledCart = styled.div`
-  //background: black;
+  margin-top:10rem;
+  //background: red;
   height: fit-content;
   width: 100%;
   display: flex;
+  flex-wrap:wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index:2;
+  button{
+    z-index:1;
+  }
+  
 `;
 
 export default GuestCart;

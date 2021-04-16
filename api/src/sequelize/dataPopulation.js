@@ -7,6 +7,7 @@ const MOCK_PRODUCTS = require("./MOCK_PRODUCTS.json");
 const MOCK_USER = require("./MOCK_USER.json");
 
 async function dataPopulation() {
+    console.log("estoy adentroooooooooooooooooooo")
     await Category.bulkCreate(MOCK_CATEOGRIES),
     await Product.bulkCreate(MOCK_PRODUCTS)
     await createUser("admin","12345","admin@admin.com","admin")
@@ -17,7 +18,10 @@ async function dataPopulation() {
     await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)
     await createOrder([{id:4,quantity:1},{id:8,quantity:1}],1)
     await createOrder([{id:5,quantity:2},{id:9,quantity:1}],2)
-    
+    await updateOrderToTicket(1)
+    await updateOrderToTicket(2)
+    await updateOrderToTicket(4)
+
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,1)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,2)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,3)`)
@@ -33,6 +37,8 @@ async function dataPopulation() {
     await conn.query(`insert into "product-category" ("productId","categoryId") values (7,2)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (8,3)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (9,4)`)
+
+    
 
     return true
 

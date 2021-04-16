@@ -1,17 +1,15 @@
 import React from 'react'
 import styled from 'styled-components';
 import cartIcon from '../../../../../icons/cart.svg';
-import {addProductToCart} from '../../../../../actions';
+import {addProductToCart} from '../../../../../actions/cartActions';
 import {useDispatch} from 'react-redux';
 
 const ButtonAddCart = ({id}) => {
 
-    //console.log("**********************",id)
-
     const dispatch = useDispatch();
 
     const buttonHandler = (id) => {
-        dispatch(addProductToCart(id))
+        dispatch(addProductToCart(id));
     }
 
     return (

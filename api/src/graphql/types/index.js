@@ -6,7 +6,7 @@ const errorType = require("./errorType")
 const orderType = require("./orderType")
 const linealOrderType = require("./linealOrderType")
 const booleanType = require("./booleanType")
-
+const ordersType = require("./ordersType")
 // aqui exportas tu type
 module.exports = `
     ${categoryType}
@@ -17,4 +17,5 @@ module.exports = `
     ${orderType}
     ${linealOrderType}
     ${booleanType}
+    ${ordersType}
 `

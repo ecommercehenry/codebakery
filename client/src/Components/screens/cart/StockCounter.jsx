@@ -1,21 +1,23 @@
 import React,{useState} from 'react'
-
+import {useDispatch} from 'react-redux';
+import {changeQuantity} from '../../../actions/cartActions'
 //style
 import styled from 'styled-components';
 
-const StockCounter = ({newQuantity,setNewQuantity,stock}) => {
-
+const StockCounter = ({id,newQuantity,setNewQuantity,stock}) => {
     
-
+    const dispatch = useDispatch()
     const removeHandler = () => {
-        if(newQuantity>0){
+        if(newQuantity>1){
             setNewQuantity(newQuantity=newQuantity-1);
+            dispatch(changeQuantity(id,newQuantity))
         }
     }
 
     const addHandler = () => {
         if(newQuantity<stock){
             setNewQuantity(newQuantity=newQuantity+1);
+            dispatch(changeQuantity(id,newQuantity))
         }
         
     }
@@ -31,7 +33,7 @@ const StockCounter = ({newQuantity,setNewQuantity,stock}) => {
 
 const StyledCounter = styled.div`
     display:flex;
-    
+    box-sizing:border-box;
     button,.state{
         width:2rem;
         height:3rem;
@@ -40,7 +42,6 @@ const StyledCounter = styled.div`
         align-items:center;
         display:flex;
         justify-content: center;
-        
     }
     .leftB{
         border-right:none;

@@ -1,19 +1,17 @@
 import React,{useState} from 'react'
 import {useDispatch} from 'react-redux';
-import {removeProductFromCart} from '../../../actions/index'
-//styles
+import {removeProductFromCart} from '../../../actions/cartActions'
 import styled from 'styled-components';
-//components
 import StockCounter from './StockCounter'
-
+import deleteIcon from '../../../icons/delete.svg'
 
 const ProductOnCart = ({id,image,name,price,stock,quantity}) => {
-    let storage = window.localStorage;
 
     let [newQuantity,setNewQuantity] = useState(quantity);
+    
     const dispatch = useDispatch()
     const deleteHandler = (id) => {
-        dispatch(removeProductFromCart(id)) //action
+        dispatch(removeProductFromCart(id))
     }
 
     return (
@@ -24,15 +22,17 @@ const ProductOnCart = ({id,image,name,price,stock,quantity}) => {
             </div>
             <div className="namee">{name}</div>
             <div className="quantityy">
-                <StockCounter newQuantity={newQuantity} setNewQuantity={setNewQuantity} stock={stock}/>
+                <StockCounter id={id} newQuantity={newQuantity} setNewQuantity={setNewQuantity} stock={stock}/>
                 <div className="stockk">{stock} disponibles</div>
             </div>
             <div className="pricee">
                 <div className="subtotal">${newQuantity*price}</div>
-                <div className="unitary">Precio: ${price}</div>
+                <div className="unitaryy">Precio: ${price}</div>
             </div>
 
-            <button className="deleteItemm" onClick={()=>deleteHandler(id)}>D</button>
+            <button className="deleteItemm" onClick={()=>deleteHandler(id)}>
+                <img src={deleteIcon} alt=""/>
+            </button>
             
         </StyledProductOnCart>
     )
@@ -41,20 +41,20 @@ const ProductOnCart = ({id,image,name,price,stock,quantity}) => {
 const StyledProductOnCart = styled.div`
     //background:lightblue;
     border-radius:13px;
-    border: 1px solid violet;
+    border: 1px solid #755588;
     display:flex;
     width:65%;
-    height: 12vh;
+    height: 17vh;
     justify-content:space-between;
     align-items:center;
-    margin: 1rem 0;
-    padding: 0.3rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
     .imagee{
         display:flex;
         justify-content:center;
         align-items:center;
         border-radius:100%;
-        width:7rem;
+        width:6rem;
         //background:blue;
         height:100%;
         overflow:hidden;
@@ -78,9 +78,9 @@ const StyledProductOnCart = styled.div`
         justify-content:space-between;
         align-items:center;
         width:18%;
-        height:100%;
+        height:90%;
         //background:violet;
-        padding:1rem 0;
+        
     }
     .pricee{
         display:flex;
@@ -88,18 +88,22 @@ const StyledProductOnCart = styled.div`
         justify-content:space-between;
         align-items:center;
         width:18%;
-        height:100%;
-        padding:1rem 0;
+        height:89%;
+        //padding:0.rem 0;
         //background:green;
+        box-sizing:border-box;
         .subtotal{
-            height:3rem;
+            //height:80%;
+            padding-top:0.5rem;
             font-size:1.5rem;
             //background:red;
-            display:flex;
+            /* display:flex;
             flex-direction:column;
             justify-content:center;
-            align-items:center;
+            align-items:center; */
+            //box-sizing:border-box;
         }
+        
     }
     .deleteItemm{
         width:4%;
@@ -111,6 +115,9 @@ const StyledProductOnCart = styled.div`
         border:none;
         background:none;
         //background:yellow;
+        img{
+            height:1rem;
+        }
     }
 `;
 

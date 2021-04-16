@@ -1,0 +1,17 @@
+mutation updateOrderToTicket($orderId:Int!){
+	  updateOrderToTicket(orderId:$orderId)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+      name
+		  detail
+		}
+	}
+}
+
+variables
+{
+  "orderId": 4
+}

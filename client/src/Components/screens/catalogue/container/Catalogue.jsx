@@ -11,6 +11,19 @@ const Catalogue = () => {
   let storage = window.localStorage;
   let logged = storage.token ? true : false;
   let cartExistence = storage.cart ? true : false;
+    
+    return (
+        <>
+            <NavBar color='white'/>
+            <Hero />
+            <Products/>
+            <Link to="/catalogue/detail/1">Producto</Link>
+            <Route path="/catalogue/detail/:id" >
+                <Detail></Detail>
+            </Route>
+        </>
+    )
+}
 
   // if (logged && cartExistence) {
 
@@ -45,6 +58,6 @@ const Catalogue = () => {
       </Route>
     </>
   );
-};
+
 
 export default Catalogue;

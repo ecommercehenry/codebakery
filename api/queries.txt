@@ -418,11 +418,37 @@ mutation deleteById($id:Int!){
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 {
  "id": 2
 }
 >>>>>>> 6180deb8082ec585adf539901dffab981be324ca
 =======
+=======
+//OBTENER TODAS LAS ORDENES
+query getAllOrders{
+  getAllOrders{
+   id
+    status
+    lineal_order{
+      userId
+      price
+      quantity
+      product{
+        id
+        name
+        description
+        stock
+        image
+        categories{
+          id
+          name
+        }
+      }
+    }
+  }
+}
+>>>>>>> 86e5546e5ff830df9674eb5ef63e85faf8f6622a
 
 	
 //CREAR NUEVA ORDEN
