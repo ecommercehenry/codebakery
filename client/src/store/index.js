@@ -7,16 +7,9 @@ import productsReducer from "../reducer/productsReducer";
 import reducer from "../reducer/reducer"
 import ordersReducer from "../reducer/ordersReducer"
 
-const rootReducer = combineReducers({
-  productsReducer,
-  reducer,
-  loginReducer,
-  ordersReducer
-})
 
-const store = createStore(rootReducer,composeWithDevTools(
-    applyMiddleware(thunk)
-))
+
+
 import rootReducer from "./rootReducer"
 
 export const store = createStore(rootReducer,composeWithDevTools(
