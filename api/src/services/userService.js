@@ -14,7 +14,7 @@ async function getAllUsers() {
 }
 
 async function createUser(name, password, email, role) {
-  try {
+    try {
       return await Users.create({
         name,
         password,
