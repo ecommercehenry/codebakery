@@ -37,7 +37,7 @@ function App() {
         <Switch>
         {/* {DEBEMOS ARREGLAR EL TEMA DEL RENDERIZADO DE LA RUTA DE AddProductForm - PODEMOS USAR Z-INDEX } 
         
-        TAMBIÉN REVISAR EL TEMA DE 
+        TAMBIÉN REVISAR EL TEMA DEL FORMCRUD DONDE RENDERIZA
         */}
           <Route exact path="/" component={Landing} />
           <Route path="/admin" component={AdminPanel}></Route>
