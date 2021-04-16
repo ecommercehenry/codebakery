@@ -11,7 +11,6 @@ import GlobalStyle from "./Components/GlobalStyle";
 import Login from "./Components/screens/login/login";
 import UserAccount from "./Components/UserAcount/UserAccount";
 import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
-import SearchBarAdmin from "./Components/screens/admin/SearchBarAdmin";
 import Cart from "./Components/screens/cart/container/Cart";
 import TablaOrdenes from "./Components/screens/admin/ordenes/TablaOrdenes";
 
@@ -27,8 +26,6 @@ function App() {
       <Route path="/about-us" component={AboutUs} />
       <Route path="/log-in" component={UserAccount} />
       <Route path="/sign-up" component={CreateUserAccount} />
-
-      <Route path="/pablo" component={SearchBarAdmin} />
       {/* ruta provisoria, a acomodar en el adminPanel al dar click en "Orders"     */}
       <Route path="/ordenes" component={TablaOrdenes} />
     </>
