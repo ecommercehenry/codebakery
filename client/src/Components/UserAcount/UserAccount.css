@@ -1,3 +1,10 @@
+/* BASIC */
+
+body {
+  font-family: "Montserrat", sans-serif;
+  height: 100vh;
+}
+
 /* STRUCTURE */
 
 .wrapper {
@@ -73,32 +80,36 @@ button[type="submit"] {
 }
 
 input[type="text"],
-input[type="password"],
-input[type="email"] {
+input[type="password"] {
+  background-color: #f6f6f6;
+
+  color: #0d0d0d;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  font-size: 16px;
   margin: 5px;
   width: 85%;
+
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
+
+  background-color: #fff;
   border: none;
   border-bottom: 2px solid #402e57;
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"] {
+input[type="password"]:focus {
   outline: none;
 }
 
 input[type="text"]:placeholder,
-input[type="password"]:placeholder,
-input[type="email"] {
+input[type="password"]:placeholder {
   color: #402e57;
 }
 
@@ -233,7 +244,6 @@ input[type="email"] {
   background: url("./4391857.jpg");
   display: block;
   flex-basis: 40%;
-
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50%;
@@ -241,8 +251,6 @@ input[type="email"] {
 }
 
 .container-two .onboard-card .onboard-form {
-  font-family: "Montserrat", sans-serif;
-
   min-height: 600px;
   padding: 20px;
   display: flex;
@@ -306,15 +314,4 @@ form {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   width: 30%;
-}
-
-.error {
-  color: red;
-  font-size: 0.8rem;
-  opacity: 0.5;
-}
-
-p::before {
-  display: inline;
-  content: "⚠ ";
 }
