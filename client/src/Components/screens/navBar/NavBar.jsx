@@ -25,6 +25,7 @@ const NavBar = ({ color }) => {
   const tag2 = `${navTag} ${isActive["cart"]}`;
   const tag3 = `${navTag} ${isActive["about-us"]}`;
   let logged = localStorage.token ? true : false;
+  
   let logout = () =>{
     localStorage.clear();
   }
@@ -52,20 +53,21 @@ const NavBar = ({ color }) => {
           to="/"
           className={`login-btn text-decoration-none ${textColor}`} onClick={logout}
         >
-          Loguot
-        </Link> :<Link
+          Logout
+        </Link> : <><Link
           to="/log-in"
           className={`login-btn text-decoration-none ${textColor}`}
         >
           Login
-        </Link>}
+        </Link> 
         <Link to="/sign-up" id="sign-up-link" className="text-decoration-none">
-          <div
-            className={`${btnColor}-btn d-flex justify-content-center align-items-center`}
-          >
-            <span>Sign Up</span>
-          </div>
-        </Link>
+        <div
+          className={`${btnColor}-btn d-flex justify-content-center align-items-center`}
+        >
+          <span>Sign Up</span>
+        </div>
+      </Link> </>}
+        
       </div>
     </nav>
   );

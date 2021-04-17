@@ -33,7 +33,8 @@ const ProductOnCart = ({
           orderId: orderId,
           productId: id,
         },
-      });
+      })
+      window.location.reload()
     }
   };
   return (
@@ -48,6 +49,9 @@ const ProductOnCart = ({
           newQuantity={newQuantity}
           setNewQuantity={setNewQuantity}
           stock={stock}
+          logged = {logged}
+          orderId= {orderId}
+          productId= {id}
         />
         <div className="stockk">{stock} disponibles</div>
       </div>
