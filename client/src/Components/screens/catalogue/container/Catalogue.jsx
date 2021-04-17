@@ -54,11 +54,14 @@ const Catalogue = () => {
         }
       }
     }
-    console.log(queryData);
   },[queryData, itemsToCart])
+
+  console.log(queryData.data, 'queryData');
+  let inCartQuantity =  queryData.loading? false : queryData.data.getOrdersByUserIdInCart.orders[0].lineal_order;
+  console.log(inCartQuantity, 'in cart quantity')
   return (
     <>
-      <NavBar color="white" />
+      <NavBar color="white" inCartQuantity= {inCartQuantity}/>
       <Hero />
       <Products />
       <Route path="/catalogue/detail/:id">

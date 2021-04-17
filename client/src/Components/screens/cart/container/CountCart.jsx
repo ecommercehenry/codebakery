@@ -5,7 +5,7 @@ import cartIcon from "../../../../../src/icons/cartNav.svg";
 import styled from "styled-components";
 
 
-const Count = () => {
+const Count = ({inCartQuantity}) => {
   const itemsFromCart = useSelector((state) => state.cart.itemsToCart); 
 
   let sum = 0;

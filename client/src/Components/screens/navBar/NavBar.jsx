@@ -5,7 +5,7 @@ import CountCart from "../cart/container/CountCart"
 import "./NavBarStyle.css";
 
 
-const NavBar = ({ color }) => {
+const NavBar = ({ color, inCartQuantity }) => {
   const textColor = color === "white" ? "text-inactive" : "text-dark";
   const navTag = `text-decoration-none ${textColor}`;
   const btnColor = color === "white" ? "white" : "purple";
@@ -46,7 +46,7 @@ const NavBar = ({ color }) => {
           </h5>
         </Link>
         <Link id="Cart" to="/cart" className={tag2}>
-        <div><CountCart/></div>
+        <div><CountCart inCartQuantity={inCartQuantity}/></div>
         </Link>
         <Link id="Catalogue" to="/catalogue" className={tag1}>
           Catalogue
