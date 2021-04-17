@@ -15,7 +15,9 @@ const {
     addProductToOrder,
     deleteOrder,
     updateOrderToTicket,
-    modifyStatusOrder
+    modifyStatusOrder, 
+    incrementQuantity, 
+    decrementQuantity, 
 } = require("./mutationsResolver/")
 
 const {
@@ -56,6 +58,9 @@ const root = {
     addProductToOrder,
     deleteOrder,
     updateOrderToTicket,
+    incrementQuantity, 
+    decrementQuantity, 
+  
     //Queries
     
     productById,

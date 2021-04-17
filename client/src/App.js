@@ -35,7 +35,7 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route  path="/admin" component={AdminPanel}></Route>
           <Route exact path="/catalogue" component={Catalogue} />
-          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/cart" component={GuestCart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
