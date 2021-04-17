@@ -5,12 +5,9 @@ import { useQuery } from '@apollo/client';
 import getAllOrders from '../../../../Apollo/queries/getAllOrders';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveOrders } from "../../../../actions"
-<<<<<<< HEAD
-=======
 import SortByPrice from './SortByPrice';
 
 
->>>>>>> origin/SE
 
 // @-WenLi
 //traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
@@ -18,11 +15,6 @@ import SortByPrice from './SortByPrice';
 //mostrarlas haciendo un mapeo sobre la data, renderizando cada vez un componente Orden
 
 
-<<<<<<< HEAD
-  //guarda las ordenes en el store redux...
-  const dispatch = useDispatch();
-  useEffect(() => {
-=======
 
 export default function TablaOrdenes(){
         
@@ -32,18 +24,13 @@ export default function TablaOrdenes(){
    //guarda las ordenes en el store redux...
    const dispatch = useDispatch()
    useEffect(() => {
->>>>>>> origin/SE
     dispatch(saveOrders(data?.getAllOrders));
   }, [data]);
   
   
   //traigo info del reducer..
-<<<<<<< HEAD
-  const {search, filterOrders } = useSelector((state) => state.reducer);
-=======
   const {search, filterOrders, sortbyPrice,sort} = useSelector((state) => state.ordersReducer);
   //let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
->>>>>>> origin/SE
   
 
   //Debe renderizar todas las ordenes si no hay una busqueda 
@@ -80,14 +67,10 @@ export default function TablaOrdenes(){
             <p>loading...</p>
           )}
         </StyledTablaOrdenes>
-<<<<<<< HEAD
-    )  
-=======
       
     )
 
   
->>>>>>> origin/SE
 }
 
 const StyledTablaOrdenes = styled.div`
