@@ -19,6 +19,13 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW} from "../actions/inde
           orders: action.payload
        
         };
+        case FILTER_ORDER:
+      return {
+        ...state,
+        filterOrders: state.orders.filter(
+          (o) => o.id === Number(action.payload)
+        ),
+      };
     //   case MODIFY_ORDER:
     //    for(let key in state.orders){
     //      if(Number(key) === Number(action.payload.id)){

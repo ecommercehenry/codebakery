@@ -14,6 +14,9 @@ import SortByPrice from './SortByPrice';
 //guardo en el reducer ordersReducer las ordenes para aplicar busquedas y filtros uso dispatch
 //mostrarlas haciendo un mapeo sobre la data, renderizando cada vez un componente Orden
 
+export default function TablaOrdenes() {
+  let { data } = useQuery(getAllOrders);
+  console.log("ddddddddddddddddddddddddddd", data);
 
 export default function TablaOrdenes(){
         
@@ -29,6 +32,7 @@ export default function TablaOrdenes(){
   
   //traigo info del reducer..
   const {search, filterOrders } = useSelector((state) => state.reducer);
+  //let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
   
   //Debe renderizar todas las ordenes si no hay una busqueda 
   //Si hay busqueda, renderiza el filtrado de la busqueda
@@ -67,15 +71,26 @@ export default function TablaOrdenes(){
       
     )
 
+  return (
+    <StyledTablaOrdenes>
+      ESTE ES EL COMPONENTE TABLA ORDENES
+      {data ? (
+        data.getAllOrders.map((ord) => {
+          return <Orden id={ord.id} key={ord.id} orden={ord} />;
+        })
+      ) : (
+        <p>loading...</p>
+      )}
+    </StyledTablaOrdenes>
+  );
 }
 
-const StyledTablaOrdenes =styled.div`
-display:flex;
-flex-direction:column;
-align-items:flex-start;
-width:80vw;
-margin: 2rem;
-margin-top: 0.5rem;
-height: 100%;
-
+const StyledTablaOrdenes = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80vw;
+  margin: 2rem;
+  margin-top: 0.5rem;
+  height: 100%;
 `;
