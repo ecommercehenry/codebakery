@@ -7,7 +7,6 @@ import Catalogue from "./Components/screens/catalogue/container/Catalogue"
 import Cart from "./Components/screens/cart/container/Cart"
 import AboutUs from "./Components/screens/aboutUs/container/AboutUs"
 import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory"
-import FormCRUD from "./Components/screens/admin/FormCRUD"
 import GlobalStyle from './Components/GlobalStyle';
 import GuestCart from './Components/screens/cart/GuestCart';
 import Login from './Components/screens/login/login';
@@ -34,15 +33,15 @@ function App() {
         <GlobalStyle />
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/admin" component={AdminPanel}></Route>
+          <Route  path="/admin" component={AdminPanel}></Route>
           <Route exact path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={GuestCart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
-          <Route exact path="/ordenes" component={TablaOrdenes} />
-          <Route exact path="/admin/form" component={FormCRUD} />
-          <Route path="/*" component={() => "404 NOT FOUND"} />
+          {/* <Route exact path="/ordenes" component={TablaOrdenes} /> */}
+          {/* <Route exact path="/admin/form" component={FormCRUD} /> */}
+          {/* <Route path="/*" component={() => "404 NOT FOUND"} /> */}
         </Switch>
       </>
     )
@@ -56,7 +55,7 @@ function App() {
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
-          <Route path="/*" component={() => "404 NOT FOUND"} />
+          {/* <Route path="/*" component={() => "404 NOT FOUND"} /> */}
         </Switch>
       </>
     )

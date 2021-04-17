@@ -1,16 +1,26 @@
-import React,{useState} from 'react'
+import React from 'react'
 import {useDispatch} from 'react-redux';
 import {changeQuantity} from '../../../actions/cartActions'
+import { useMutation } from "@apollo/client";
 //style
 import styled from 'styled-components';
 
-const StockCounter = ({id,newQuantity,setNewQuantity,stock}) => {
+const StockCounter = ({id,newQuantity,setNewQuantity,stock, logged, orderId, productId}) => {
     
     const dispatch = useDispatch()
+
     const removeHandler = () => {
         if(newQuantity>1){
             setNewQuantity(newQuantity=newQuantity-1);
             dispatch(changeQuantity(id,newQuantity))
+            /* if (logged){
+                decrementQuantity({
+                    variable:{
+                        orderId: {orderId}
+                        productId: {productId}
+                    }
+                })
+            } */
         }
     }
 

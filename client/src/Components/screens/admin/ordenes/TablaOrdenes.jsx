@@ -15,8 +15,7 @@ import { saveOrders } from "../../../../actions"
 export default function TablaOrdenes(){
         
    let { data } = useQuery(getAllOrders)    
-   console.log("ddddddddddddddddddddddddddd",data)
-    
+      
    //guarda las ordenes en el store redux...
    const dispatch = useDispatch()
    useEffect(() => {
@@ -24,15 +23,21 @@ export default function TablaOrdenes(){
   }, [data]);
   
   //traigo info del reducer..
-  let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
+  const {search, filterOrders } = useSelector((state) => state.reducer);
+  
   //Debe renderizar todas las ordenes si no hay una busqueda 
   //Si hay busqueda, renderiza el filtrado de la busqueda
-
+  let dataRENDER;  
+  if(search){
+    dataRENDER = filterOrders
+  }else{
+    dataRENDER = data?.getAllOrders;
+  }
   
     return (
-        <StyledTablaOrdenes>ESTE ES EL COMPONENTE TABLA ORDENES
-             {data ? (
-            data.getAllOrders.map((ord) => {
+        <StyledTablaOrdenes>
+             {dataRENDER ? (
+            dataRENDER.orders.map((ord) => {
               return <Orden
                   id ={ord.id}
                   key = {ord.id}

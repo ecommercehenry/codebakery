@@ -29,6 +29,11 @@ const NavBar = ({ color }) => {
   const tag1 = `${navTag} ${isActive["catalogue"]}`;
   const tag2 = `${navTag} ${isActive["cart"]}`;
   const tag3 = `${navTag} ${isActive["about-us"]}`;
+  let logged = localStorage.token ? true : false;
+  
+  let logout = () =>{
+    localStorage.clear();
+  }
 
   let storage = window.localStorage; 
   let logeed = storage.token ? true : false; 
@@ -51,19 +56,29 @@ const NavBar = ({ color }) => {
         </Link>
       </div>
       <div className="right-buttons d-flex align-items-center">
+<<<<<<< HEAD
         <div className="usuario">Hi! {logeed ? localStorage.name : "Guess"}</div>
         <Link
+=======
+        { logged? <Link
+          to="/"
+          className={`login-btn text-decoration-none ${textColor}`} onClick={logout}
+        >
+          Logout
+        </Link> : <><Link
+>>>>>>> 0b003aa7f6bdf16e66d77d4bf43245e6ad48338e
           to="/log-in"
           className={`login-btn text-decoration-none ${textColor}`}>
           Login
-        </Link>
+        </Link> 
         <Link to="/sign-up" id="sign-up-link" className="text-decoration-none">
-          <div
-            className={`${btnColor}-btn d-flex justify-content-center align-items-center`}
-          >
-            <span>Sign Up</span>
-          </div>
-        </Link>
+        <div
+          className={`${btnColor}-btn d-flex justify-content-center align-items-center`}
+        >
+          <span>Sign Up</span>
+        </div>
+      </Link> </>}
+        
       </div>
     </nav>
   );

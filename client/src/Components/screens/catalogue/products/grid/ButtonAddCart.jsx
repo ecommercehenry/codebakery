@@ -3,13 +3,38 @@ import styled from 'styled-components';
 import cartIcon from '../../../../../icons/cart.svg';
 import {addProductToCart} from '../../../../../actions/cartActions';
 import {useDispatch} from 'react-redux';
+import ADD_PRODUCT_TO_ORDER from '../../../../../Apollo/mutations/addProductToOrder'
+import { useMutation, useQuery } from "@apollo/client";
+import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../Apollo/queries/getOrdersByUserIdInCart"
+
+
 
 const ButtonAddCart = ({id}) => {
+    const [addProductToOrder, addData] = useMutation(ADD_PRODUCT_TO_ORDER);
+    let logged = localStorage.token ? true : false;
+    let userId = logged ? parseInt(localStorage.id) : null;
 
+    const queryData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+        variables: { idUser: userId },
+      });
     const dispatch = useDispatch();
 
     const buttonHandler = (id) => {
-        dispatch(addProductToCart(id));
+        if (!logged){
+            dispatch(addProductToCart(id));
+        }else {
+            if(!queryData.loading){
+                let orderId = queryData.data.getOrdersByUserIdInCart.orders[0].id;
+                addProductToOrder({
+                    variables:{
+                      orderId: orderId,
+                       productId: id,
+                       quantity: 1,
+                    }
+                  })
+            }
+
+        }
     }
 
     return (
