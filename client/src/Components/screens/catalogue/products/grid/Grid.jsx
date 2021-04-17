@@ -60,7 +60,7 @@ const StyledGrid = styled.div`
   ${media.laptop}{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    grid-auto-rows:40vh;
+    grid-auto-rows:45vh;
     gap:4rem;
   }
 `;
