@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { RoundButton } from "../../GlobalStyle";
+import cartIcon from '../../../../../client/src/icons/cart.svg';
 import "./NavBarStyle.css";
 
 const NavBar = ({ color }) => {
@@ -44,6 +45,8 @@ const NavBar = ({ color }) => {
         </Link>
       </div>
       <div className="right-buttons d-flex align-items-center">
+      <span>{localStorage ? localStorage.name : "Guess"}</span>
+      <img src={cartIcon} alt="cat icon" style={{height:"1.1rem" ,width:"1.1rem"}}/>
         <Link
           to="/log-in"
           className={`login-btn text-decoration-none ${textColor}`}

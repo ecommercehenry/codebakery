@@ -18,6 +18,7 @@ const Cart = () => {
   // localStorage.setItem("cart", aca va la otra cosa);
   var cart = localStorage.getItem('cart');
   const { data } = useQuery(query);
+  console.log(data); 
 
   useEffect(() => {
     if (data){
@@ -26,7 +27,10 @@ const Cart = () => {
   }, [data]);
 
   console.log( storage, itemsToCart);
-  return <div> {JSON.parse(cart).map(producto => <li>{producto.name}</li>)} </div>;
+  // return (
+  //   <div>hola</div>
+  // )
+   return <div> {JSON.parse(cart).map(producto => <li>{producto.name}</li>)} </div>;
 };
 
 export default Cart;

@@ -323,6 +323,23 @@ async function modifyStatusOrder(orderId, status){
     }
 }
 
+// async function updateQuantity(orderId, productId, idUser, quantity){
+//     try {
+//         const order = await Order.findOne({
+//             where: {id: orderId, 
+//                 include: [{model: User}]
+//             }
+//         })
+//     }catch (err) {
+//         return { __typename: "error" , name:"unknow",detail:err.message}
+//     }
+// }
+    
+        
+   
+
+
+
 module.exports = {
     getAllOrders,
     getOrdersByUserIdInCart,
