@@ -17,5 +17,6 @@ module.exports = `
         getOrdersByUserIdInTicket(userId: Int!): ordersResult,
         validateUser(name:String, password:String): resultValidate,
         getOrderById(id: Int!): orderResult,
+        validateCredentials(token: String!, role: String!): Boolean
     }
 `

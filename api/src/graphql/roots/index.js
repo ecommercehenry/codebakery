@@ -35,6 +35,7 @@ const {
     getUserByEmail,
     
     // getAllUsers,
+    validateCredentials,
 } = require("./queriesResolvers/")
 
 // product
@@ -66,6 +67,7 @@ const root = {
     getProductByArray,
     getAllUsers,
     validateUser,
+    validateCredentials,
     getOrderById,
     getAllOrders,
     getOrdersByUserIdInCart,
