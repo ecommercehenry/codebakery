@@ -10,36 +10,35 @@ import AdminNavBar from '../AdminNavBar'
 // import TextCRUD from '../TextCRUD'
 import ListCRUD from "../ListCRUD"
 import AddProductForm from '../../../AddProductForm';
-import FormCategories from '../../../CategoryCard/FormCategories';
+import TablaOrdenes from '../../admin/ordenes/TablaOrdenes';
+
+
 
 const AdminPanel = () => {
-   const [addProduct,setAddProduct] =  useState(false);
+  const [addProduct, setAddProduct] = useState(false);
 
-    return (
-        <StyledAdminPanel>
-            <div className="left">
-                <LeftPanel/>
-            </div>
-            <div className="right">
-                <div className="top">
-                <AdminNavBar setAddProduct={setAddProduct}/>
-                </div>
-                <div className="bottom">
-                    <ListCRUD/>
-                </div>{/* 
-                <div className="edit-grid">
-                    <ListCRUD/>
-                </div> */}
-                {/* <FormCRUD /> */}
-                <Route path="/admin/add-product">
-                    <AddProductForm/>
-                </Route>
-            </div>
-            
-        </StyledAdminPanel>
-        
-    )
-}
+  return (
+    <StyledAdminPanel>
+      <div className="left">
+        <LeftPanel />
+      </div>
+      <div className="right">
+        <div className="top">
+          <AdminNavBar setAddProduct={setAddProduct} />
+        </div>
+        <div className="bottom">
+           <Route path='/admin/products' component={ListCRUD}/>            
+           <Route path='/admin/orders' component={TablaOrdenes}/>    
+          
+        </div>
+       
+        <Route path="/admin/add-product">
+          <AddProductForm />
+        </Route>
+      </div>
+    </StyledAdminPanel>
+  );
+};
 
 const StyledAdminPanel = styled.div`
     height: fit-content;

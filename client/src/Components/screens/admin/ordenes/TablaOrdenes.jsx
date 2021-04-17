@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Orden from "./Orden";
-import styled from "styled-components";
-import { useQuery } from "@apollo/client";
-import getAllOrders from "../../../../Apollo/queries/getAllOrders";
-import { useDispatch, useSelector } from "react-redux";
-import { saveOrders } from "../../../../actions";
+import React,{ useState,useEffect } from 'react';
+import Orden from "./Orden"
+import styled from 'styled-components';
+import { useQuery } from '@apollo/client';
+import getAllOrders from '../../../../Apollo/queries/getAllOrders';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveOrders } from "../../../../actions"
 
 // @-WenLi
 //traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
@@ -22,31 +22,32 @@ export default function TablaOrdenes() {
   }, [data]);
 
   //traigo info del reducer..
-  let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
-  //Debe renderizar todas las ordenes si no hay una busqueda
+  const {search, filterOrders } = useSelector((state) => state.reducer);
+  
+  //Debe renderizar todas las ordenes si no hay una busqueda 
   //Si hay busqueda, renderiza el filtrado de la busqueda
-
-  /**
-  let components;
-  if (ordersFilter.length) {
-    components = ordersFilter;
-  } else {
-    components = orders;
+  let dataRENDER;  
+  if(search){
+    dataRENDER = filterOrders
+  }else{
+    dataRENDER = data?.getAllOrders;
   }
-   */
-
-  return (
-    <StyledTablaOrdenes>
-      ESTE ES EL COMPONENTE TABLA ORDENES
-      {data ? (
-        data.getAllOrders.map((ord) => {
-          return <Orden id={ord.id} key={ord.id} orden={ord} />;
-        })
-      ) : (
-        <p>loading...</p>
-      )}
-    </StyledTablaOrdenes>
-  );
+  
+    return (
+        <StyledTablaOrdenes>
+             {dataRENDER ? (
+            dataRENDER.orders.map((ord) => {
+              return <Orden
+                  id ={ord.id}
+                  key = {ord.id}
+                  orden = {ord}
+              />                    
+           })
+          ) : (
+            <p>loading...</p>
+          )}
+        </StyledTablaOrdenes>
+    )  
 }
 
 const StyledTablaOrdenes = styled.div`

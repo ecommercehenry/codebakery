@@ -6,7 +6,7 @@ module.exports = `
         price: Float!,
         stock: Int!,
         image: String!,
-        categories: [category] 
+        categories: [category]
     }
 
 `

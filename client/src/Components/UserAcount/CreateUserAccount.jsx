@@ -1,23 +1,24 @@
-import { useMutation } from "@apollo/client";
-import React, { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useMutation } from "@apollo/client"
+import React, { useEffect, useRef, useState } from "react"
+import { Redirect } from "react-router-dom";
+import { useForm } from "react-hook-form"
 
-import "./UserAccount";
+import "./UserAccount"
 
-import CREATE_USER from "../../Apollo/mutations/createUser";
+import CREATE_USER from "../../Apollo/mutations/createUser"
 
 const CreateUserAccount = () => {
-  const [createUser] = useMutation(CREATE_USER);
-  const [exit, SetExit] = useState(false);
+  const [createUser, { data }] = useMutation(CREATE_USER)
+  const [exit, SetExit] = useState(false)
 
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
-  const password = useRef({});
-  password.current = watch("password", "");
+  } = useForm()
+  const password = useRef({})
+  password.current = watch("password", "")
 
   const handleLogin = async (data) => {
     createUser({
@@ -27,9 +28,19 @@ const CreateUserAccount = () => {
         email: data.email,
         role: "user",
       },
-    });
-    SetExit(true);
-  };
+    })
+    SetExit(true)
+  }
+useEffect(() => {
+  if (data?.createUser?.name === "error") {
+    SetExit("error")
+  }
+}, [data])
+  
+  // SetExit(false);
+  // useEffect(()=>{
+  //   SetExit(false);
+  // }, [exit])
 
   return (
     <div className="container-two">
@@ -37,9 +48,9 @@ const CreateUserAccount = () => {
         <div className="onboard-img"></div>
         <div className="onboard-form">
           <div className="info">
-            <h2 className="step-title">Bienvenido</h2>
+            <h2 className="step-title">Welcome</h2>
             <h5 className="parrafo">
-              Complete este formulario para registrarse en el sitio
+              Fill out this form to register in this site
             </h5>
           </div>
           <form>
@@ -48,7 +59,7 @@ const CreateUserAccount = () => {
                 <input
                   type="text"
                   name="name"
-                  placeholder="Escriba tu nombre"
+                  placeholder="Name"
                   className="placeholder"
                   aria-invalid={errors.name ? "true" : "false"}
                   {...register("name", {
@@ -65,12 +76,12 @@ const CreateUserAccount = () => {
                 )}
                 {errors.name && errors.name.type === "maxLength" && (
                   <p className="error" role="alert">
-                    No puede tener mas de 30 caracteres
+                    This field cannot have more than 30 characters
                   </p>
                 )}
                 {errors.name && errors.name.type === "minLength" && (
                   <p className="error" role="alert">
-                    Detener al menos 5 caracteres
+                    This field should have at least 5 characters
                   </p>
                 )}
               </div>
@@ -81,15 +92,23 @@ const CreateUserAccount = () => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Escribe tu email"
+                  placeholder="Email"
                   className="placeholder"
                   aria-invalid={errors.name ? "true" : "false"}
+                  // required
                   {...register("email", {
                     required: true,
-                    minLength: 3,
+                    minLength: 5,
                     maxLength: 30,
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                      message: "Enter a valid e-mail address",
+                    },
                   })}
                 />
+                {errors.email && (
+                  <p className="error">{errors.email.message}</p>
+                )}
                 {errors.name && errors.name.type === "required" && (
                   <p className="error" role="alert">
                     This is required
@@ -97,12 +116,12 @@ const CreateUserAccount = () => {
                 )}
                 {errors.name && errors.name.type === "maxLength" && (
                   <p className="error" role="alert">
-                    No puede tener mas de 30 caracteres
+                  This field cannot have more than 30 characters
                   </p>
                 )}
                 {errors.name && errors.name.type === "minLength" && (
                   <p className="error" role="alert">
-                    Detener al menos 5 caracteres
+                  This field should have at least 5 characters
                   </p>
                 )}
               </div>
@@ -113,7 +132,7 @@ const CreateUserAccount = () => {
                 <input
                   type="password"
                   name="password"
-                  placeholder="Escribe tu contraseña"
+                  placeholder="Password"
                   className="placeholder"
                   //aria-invalid={errors.name ? "true" : "false"}
                   {...register("password", {
@@ -130,12 +149,12 @@ const CreateUserAccount = () => {
                 )}
                 {errors.name && errors.name.type === "maxLength" && (
                   <p className="error" role="alert">
-                    No puede tener mas de 30 caracteres
+                  This field cannot have more than 30 characters
                   </p>
                 )}
                 {errors.name && errors.name.type === "minLength" && (
                   <p className="error" role="alert">
-                    Detener al menos 5 caracteres
+                  This field should have at least 5 characters
                   </p>
                 )}
               </div>
@@ -146,7 +165,7 @@ const CreateUserAccount = () => {
                 <input
                   type="password"
                   name="password_repeat"
-                  placeholder="Repite tu contraseña"
+                  placeholder="Repeat your password"
                   className="placeholder"
                   aria-invalid={errors.name ? "true" : "false"}
                   {...register("password_repeat", {
@@ -155,7 +174,7 @@ const CreateUserAccount = () => {
                     maxLength: 30,
                     validate: (value) =>
                       value === password.current ||
-                      "Las contraseñas no son iguales",
+                      "Passwords are not equal",
                   })}
                 />
                 {errors.password_repeat && (
@@ -168,12 +187,12 @@ const CreateUserAccount = () => {
                 )}
                 {errors.name && errors.name.type === "maxLength" && (
                   <p className="error" role="alert">
-                    No puede tener mas de 30 caracteres
+                  This field cannot have more than 30 characters
                   </p>
                 )}
                 {errors.name && errors.name.type === "minLength" && (
                   <p className="error" role="alert">
-                    Detener al menos 5 caracteres
+                  This field should have at least 5 characters
                   </p>
                 )}
               </div>
@@ -185,15 +204,17 @@ const CreateUserAccount = () => {
                 type="submit"
                 value="Enviar"
               >
-                Enviar
+                Register
               </button>
             </div>
           </form>
-          {exit ? <span>"Usuario creado con exito"</span> : null}
+          {exit === "error" ? (
+            <span>"Email already exists, please try with another"</span>
+          ) : exit === true ? <span>"User created successfully"</span> : null}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CreateUserAccount;
+export default CreateUserAccount
