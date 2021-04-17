@@ -213,10 +213,6 @@ query
 
   }
 
-  
-
-
-
 // PARA OBTENER TODOS LOS USUARIOS (SIN CONTRASEÑA) CON SUS PRODUCTOS Y CON SUS REVIEWS
 {
   getAllUsers{name, email, products{
@@ -520,5 +516,32 @@ query getAllOrders{
 	  "orderId":1,
 	  "status": "paid"
 	}
+
+// MUTATION PARA INCREMENTAR LA CANTIDAD DE UN PRODUCTO
+  	mutation incrementQuantity($orderId:Int!, $productId:Int!, $quantity:Int!){
+	 incrementQuantity(orderId:$orderId, productId:$productId, quantity:$quantity){
+		... on booleanResponse{
+		  boolean
+		}
+	  	... on error{
+		  name
+		  detail
+			}
+		}
+	}
+
+// MUTATION PARA DECREMENTAR LA CANTIDAD DE UN PRODUCTO
+  	mutation decrementQuantity($orderId:Int!, $productId:Int!, $quantity:Int!){
+	 decrementQuantity(orderId:$orderId, productId:$productId, quantity:$quantity){
+		... on booleanResponse{
+		  boolean
+		}
+	  	... on error{
+		  name
+		  detail
+			}
+		}
+	}
+
 
 

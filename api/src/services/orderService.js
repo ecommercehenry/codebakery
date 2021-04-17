@@ -180,8 +180,6 @@ async function updateOrderPrices(orderId){
         const order = await Order.findOne({
             where: {id: orderId}
         })
-    
-        
         const orderProducts = await order.getProducts()
         const prices = {}
 
@@ -323,21 +321,37 @@ async function modifyStatusOrder(orderId, status){
     }
 }
 
-// async function updateQuantity(orderId, productId, idUser, quantity){
-//     try {
-//         const order = await Order.findOne({
-//             where: {id: orderId, 
-//                 include: [{model: User}]
-//             }
-//         })
-//     }catch (err) {
-//         return { __typename: "error" , name:"unknow",detail:err.message}
-//     }
-// }
-    
-        
-   
+ async function incrementQuantity(orderId, productId, quantity){
+     console.log('aqui')
+     let obj = {};
+     if(quantity) obj.quantity = quantity 
+    try {
+        let order = await Lineal_Order.findOne({
+            where: { orderId: orderId, 
+            productId: productId }
+        })
+        order.increment(['quantity'], { by: 1})
+        return {__typename: "booleanResponse", boolean: true }
+    }catch (err) {
+        return { __typename: "error" , name:"error",detail:err.message}
+    }
+}
 
+async function decrementQuantity(orderId, productId, quantity){
+    let obj = {};
+    console.log('aqui')
+    if(quantity) obj.quantity = quantity 
+   try {
+       let order = await Lineal_Order.findOne({
+           where: { orderId: orderId, 
+           productId: productId }
+       })
+       order.decrement(['quantity'], { by: 1})
+       return {__typename: "booleanResponse", boolean: true }
+   }catch (err) {
+       return { __typename: "error" , name:"error",detail:err.message}
+   }
+}
 
 
 module.exports = {
@@ -352,5 +366,7 @@ module.exports = {
     updateOrderToTicket,
     modifyStatusOrder,
     updateOrderPrices,
+    incrementQuantity, 
+    decrementQuantity
     
 }

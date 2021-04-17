@@ -6,6 +6,6 @@ module.exports = `
         creation: String!,
         lastModified: String!,
         cancelled: Boolean!
-        lineal_order: [lineal_order]
+        lineal_order: [lineal_order], 
     }
 `

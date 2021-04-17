@@ -24,7 +24,8 @@ type Mutation{
     deleteOrder(orderId: Int!) : resultBoolean
     updateOrderToTicket(orderId: Int!): resultBoolean
     modifyStatusOrder(orderId: Int!, status: String!): resultBoolean
-    
+    incrementQuantity(orderId: Int!, productId: Int!, quantity: Int!): resultBoolean
+    decrementQuantity(orderId: Int!, productId: Int!, quantity: Int!): resultBoolean
+
    
 }`
-//updateQuantity(orderId: Int!, idUser: Int!, productId: Int!, quantity: Int!)
