@@ -14,7 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 // import SendIcon from '@material-ui/icons/Send';
 
 import styles from './SortByPrice.module.css';
-import { pricetolow } from "../../../../actions";
+import { pricetolow, pricetohigh } from "../../../../actions";
 
 const useStyles = makeStyles({
     root: {
@@ -69,10 +69,6 @@ export default function SortByPrice() {
     const [value, setValue] = React.useState([20, 37]);
     //estado local del rango
 
-
-    console.log('value', value);
-    console.log('setValue', setValue);
-
     let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -92,14 +88,17 @@ export default function SortByPrice() {
 
     const dispatch = useDispatch();
 
-    const low = () => {
-      
-      
-      console.log('event');
-      dispatch(pricetolow());
-      console.log('low');
+    const low = (event) => {
 
-      
+      event.preventDefault();
+      dispatch(pricetolow());
+    }
+
+    const high = (event) => {
+      console.log('highantes')
+      event.preventDefault();
+      dispatch(pricetohigh());
+      console.log('highdespues')
     }
 
    
@@ -124,7 +123,7 @@ export default function SortByPrice() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                    <StyledMenuItem>
+                    {/* <StyledMenuItem>
                     
                           <div className={classes.root}>
                               <div id="range-slider">
@@ -141,17 +140,17 @@ export default function SortByPrice() {
                               />
                           </div>
 
-                    </StyledMenuItem>
+                    </StyledMenuItem> */}
 
                     <StyledMenuItem>
-                        <div onClick={low}>
-                            <ListItemText primary="Price-low to high"   />
-                        </div>
+                      
+                            <ListItemText primary="Price-low to high" onClick={low} onClose={handleClose} />
+                      
                         
                     </StyledMenuItem>
                     
                     <StyledMenuItem>
-                        <ListItemText primary="Price-high to low" />
+                        <ListItemText primary="Price-high to low" onClick={high}/>
                     </StyledMenuItem>
 
               </StyledMenu>

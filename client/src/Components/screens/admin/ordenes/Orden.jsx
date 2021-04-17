@@ -23,9 +23,7 @@ export default function Orden({ id, orden }) {
       <Steps.Item  />     
     </Steps>
   );
-  console.log("--------------------->>>>",orden)
-  
-  
+
   if (orden) {
     return (
       <StyledOrden>

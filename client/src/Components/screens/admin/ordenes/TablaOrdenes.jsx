@@ -38,6 +38,17 @@ export default function TablaOrdenes(){
   }else{
     dataRENDER = data?.getAllOrders;
   }
+
+//   dataRENDER?.orders.map(o => {
+//     let filter = {
+//       id: o.id,
+//       userId: o.userId,
+//       date:o.creation,
+//       price:o.lineal_order.map(u=> u).map(g => g.price),
+//       cancelled: o.cancelled
+//     }
+//   console.log('filter', filter);
+// })
   
     return (
         <StyledTablaOrdenes>

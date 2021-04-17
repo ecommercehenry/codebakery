@@ -5,10 +5,7 @@ export const SET_SEARCH = 'SET_SEARCH';
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS"; 
 export const SAVE_ORDERS = "SAVE_ORDERS"; 
 export const PRICE_LOW_TO_HIGH = "PRICE_LOW_TO_HIGH"; 
-
-
-
-
+export const PRICE_HIGH_TO_LOW = "PRICE_HIGH_TO_LOW"; 
 
 export const setSearch = () => {
   return {
@@ -55,6 +52,14 @@ export const pricetolow = ()=>{
   
   return{
     type: PRICE_LOW_TO_HIGH
+   
+  }
+}
+
+export const pricetohigh = ()=>{
+  
+  return{
+    type: PRICE_HIGH_TO_LOW
    
   }
 }
