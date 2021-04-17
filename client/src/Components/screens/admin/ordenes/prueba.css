@@ -8,6 +8,14 @@
     border-radius: 20px;
     
 }
+/*tuve que usar esta clase para separar las ordenes ..no se de donde salio*/
+/* <div class="sc-kDThTU eTohOH"><div class="element-container" id="1"><div class="info-container"><div  */
+.eTohOH {
+    margin: 0 !important;
+    height: 170px !important;
+
+}
+
 .rs-steps{
     display: flex;
 }
@@ -77,6 +85,7 @@ align-items: center;
 justify-content: center;
 background-color: rgb(236, 227, 250);
 border-radius: 40px;
+
 
 }
 .element-container span {

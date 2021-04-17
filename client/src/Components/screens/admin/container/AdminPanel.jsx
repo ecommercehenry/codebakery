@@ -56,6 +56,7 @@ const StyledAdminPanel = styled.div`
         flex-direction:column;
         .top{
             height:15vh;
+            margin-bottom: 50px;
         }
         .bottom{
             position: relative;

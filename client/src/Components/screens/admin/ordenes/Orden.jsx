@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import styled from 'styled-components';
-import { Button } from 'rsuite';
 import { Steps } from 'rsuite';
 import 'rsuite/lib/styles/index.less';
 import "./prueba.css"
 
-
+// @-WenLi
+//Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
-  //   const product = useSelector((state) => state.productsReducer.products[id]);
-  //   const [show, setShow] = useState(true);
-  //   function handlerOnClick() {
-  //     setShow(!show);
-  //   }
+
+  console.log("Esta es la orden: ", orden)
+ 
   
   const instance = (
     <Steps current={0}>
