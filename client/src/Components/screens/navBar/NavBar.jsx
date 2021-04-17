@@ -52,13 +52,13 @@ const NavBar = ({ color }) => {
           to="/"
           className={`login-btn text-decoration-none ${textColor}`} onClick={logout}
         >
-          Loguot
-        </Link> :<Link
+          Logout
+        </Link> : <><Link
           to="/log-in"
           className={`login-btn text-decoration-none ${textColor}`}
         >
           Login
-        </Link>}
+        </Link>
         <Link to="/sign-up" id="sign-up-link" className="text-decoration-none">
           <div
             className={`${btnColor}-btn d-flex justify-content-center align-items-center`}
@@ -66,6 +66,8 @@ const NavBar = ({ color }) => {
             <span>Sign Up</span>
           </div>
         </Link>
+        </>
+        }
       </div>
     </nav>
   );
