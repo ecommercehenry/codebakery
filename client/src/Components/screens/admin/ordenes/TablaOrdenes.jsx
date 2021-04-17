@@ -14,9 +14,7 @@ import SortByPrice from './SortByPrice';
 //guardo en el reducer ordersReducer las ordenes para aplicar busquedas y filtros uso dispatch
 //mostrarlas haciendo un mapeo sobre la data, renderizando cada vez un componente Orden
 
-export default function TablaOrdenes() {
-  let { data } = useQuery(getAllOrders);
-  console.log("ddddddddddddddddddddddddddd", data);
+
 
 export default function TablaOrdenes(){
         
@@ -31,9 +29,10 @@ export default function TablaOrdenes(){
   
   
   //traigo info del reducer..
-  const {search, filterOrders } = useSelector((state) => state.reducer);
+  const {search, filterOrders, sortbyPrice,sort} = useSelector((state) => state.ordersReducer);
   //let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
   
+
   //Debe renderizar todas las ordenes si no hay una busqueda 
   //Si hay busqueda, renderiza el filtrado de la busqueda
   let dataRENDER;  
@@ -82,4 +81,4 @@ const StyledTablaOrdenes = styled.div`
   margin: 2rem;
   margin-top: 0.5rem;
   height: 100%;
-`}
+`

@@ -69,7 +69,7 @@ export default function SortByPrice() {
     const [value, setValue] = React.useState([20, 37]);
     //estado local del rango
 
-    let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
+   
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -100,8 +100,6 @@ export default function SortByPrice() {
       dispatch(pricetohigh());
       console.log('highdespues')
     }
-
-   
 
     return (
 

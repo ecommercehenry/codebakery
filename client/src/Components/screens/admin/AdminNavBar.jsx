@@ -8,6 +8,8 @@ import SortByPrice from './ordenes/SortByPrice';
 
 //components
 import SearchBar from './SearchBar';
+import SearchBarAdmin from './SearchBarAdmin';
+
 
 const AdminNavBar = ({setAddProduct}) => {
 
@@ -29,8 +31,15 @@ const AdminNavBar = ({setAddProduct}) => {
                 <Route path='/admin/orders'> 
                 <>
                 <div className="optionTab">ORDERS</div>
-                {/*  PABLO */}
-                <SortByPrice/>
+                <div>
+                        <SortByPrice/>
+                    </div>
+                    <div>
+                        <SearchBarAdmin/>
+                    </div>
+
+                    
+                
                 </>
                 </Route>
                    
@@ -46,6 +55,7 @@ const AdminNavBar = ({setAddProduct}) => {
             <Link to="/admin/add-product" className="addProduct purple-btn" onClick={buttonHandler}>
                 + ADD PRODUCT
             </Link>
+
            </>
                 
             </Route> 

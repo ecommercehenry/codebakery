@@ -1,4 +1,4 @@
-import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW} from "../actions/index";
+import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from "../actions/index";
 
   const initialState = {
     orders:[],
@@ -22,9 +22,10 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW} from "../actions/inde
         case FILTER_ORDER:
       return {
         ...state,
-        filterOrders: state.orders.filter(
+        filterOrders: state.orders.orders.filter(
           (o) => o.id === Number(action.payload)
         ),
+        search:true
       };
     //   case MODIFY_ORDER:
     //    for(let key in state.orders){
