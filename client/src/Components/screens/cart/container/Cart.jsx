@@ -27,10 +27,8 @@ const Cart = () => {
   }, [data]);
 
   console.log( storage, itemsToCart);
-  // return (
-  //   <div>hola</div>
-  // )
-   return <div> {JSON.parse(cart).map(producto => <li>{producto.name}</li>)} </div>;
+
+  return <div> {JSON.parse(cart).map(producto => <li>{producto.name}</li>)} </div>;
 };
 
 export default Cart;
