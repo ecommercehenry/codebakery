@@ -23,6 +23,7 @@ const ProductOnCart = ({
   );
 
   const dispatch = useDispatch();
+
   const deleteHandler = (id) => {
     if (!logged) {
       dispatch(removeProductFromCart(id));

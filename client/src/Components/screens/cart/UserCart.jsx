@@ -1,21 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useQuery } from "@apollo/client";
+import PayButton from './PayButton'
 
 import styled from "styled-components";
 import ProductOnCart from "./ProductOnCart";
+import { useSelector } from "react-redux";
+
 
 const UserCart = () => {
   let storage = window.localStorage;
   let userId = parseInt(storage.id);
-  const { data, loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
-    variables: { idUser: userId }
+  const { data, previousData } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+    variables: { idUser: userId },
+    fetchPolicy: "no-cache"
   });
-  useEffect(() => {}, [data])
-  console.log(data)
+  let { itemsToCart } = useSelector((state) => state.cart);
+  useEffect(() => {}, [itemsToCart])
+  console.log(data, previousData)
   return (
     <StyledCart>
-      {data?.getOrdersByUserIdInCart ? (
+      {data?.getOrdersByUserIdInCart.orders[0] ? (
         data.getOrdersByUserIdInCart.orders[0].lineal_order.map((order) => (
           <ProductOnCart
             id={order.id}
@@ -30,6 +35,7 @@ const UserCart = () => {
       ) : (
         <p>vacio</p>
       )}
+      <PayButton/>
     </StyledCart>
   );
 };

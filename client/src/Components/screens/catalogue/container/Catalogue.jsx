@@ -8,11 +8,14 @@ import { useMutation, useQuery } from "@apollo/client";
 import CREATE_ORDER from "../../../../Apollo/mutations/createOrder";
 import ADD_PRODUCT_TO_ORDER from "../../../../Apollo/mutations/addProductToOrder";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
+import { useSelector } from "react-redux";
+
+
 const Catalogue = () => {
   let storage = window.localStorage;
   let logged = storage.token ? true : false;
-  let cartExistence = storage.cart ? true : false;
   let userId = logged ? parseInt(storage.id) : null;
+  let { itemsToCart } = useSelector((state) => state.cart);
 
   const queryData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
@@ -20,39 +23,39 @@ const Catalogue = () => {
 
   const [addProductToOrder, addData] = useMutation(ADD_PRODUCT_TO_ORDER);
   const [createOrder, createData] = useMutation(CREATE_ORDER);
-  useEffect(() => {
-    if (logged && cartExistence) {
-      let cart = JSON.parse(storage.cart);
-      if (!queryData.loading) {
+  
+  useEffect(()=>{
+    if(logged && itemsToCart.length){
+      if (!queryData.loading){
         if (queryData.data.getOrdersByUserIdInCart.orders.length != 0) {
           let orderId = queryData.data.getOrdersByUserIdInCart.orders[0].id;
-          cart.map((elem) => {
-            console.log(elem);
+          itemsToCart.map((elem, i) => {
+             console.log(elem);
             addProductToOrder({
-              variables: {
+              variables:{
                 orderId: orderId,
-                productId: elem.id,
-                quantity: elem.quantity,
-              },
-            });
-          });
-        } else {
+                 productId: elem.id,
+                 quantity: elem.quantity,
+              }
+            })
+          })
+        }else{
           createOrder({
-            variables: {
-              idUser: userId,
-              dataProducts: cart.map((elem) => {
-                return {
-                  id: elem.id,
+            variables:{
+              idUser:userId,
+              dataProducts: itemsToCart.map((elem) => {
+                return{
+                  id:elem.id,
                   quantity: elem.quantity,
-                };
-              }),
-            },
-          });
+                }
+              })
+            }
+          })
         }
       }
     }
     console.log(queryData);
-  }, [queryData]);
+  },[queryData, itemsToCart])
   return (
     <>
       <NavBar color="white" />
