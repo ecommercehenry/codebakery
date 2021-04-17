@@ -48,19 +48,19 @@ const StyledGrid = styled.div`
   //background:red;
   display:grid;
   grid-template-columns:repeat(1,1fr);
-  grid-auto-rows:56vh;
+  grid-auto-rows:37vh;
   gap:4rem;
   height:auto;
   ${media.tablet}{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    grid-auto-rows:60vh;
+    grid-auto-rows:40vh;
     gap:3rem;
   }
   ${media.laptop}{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    grid-auto-rows:57vh;
+    grid-auto-rows:40vh;
     gap:4rem;
   }
 `;
