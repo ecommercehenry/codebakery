@@ -71,18 +71,7 @@ export default function TablaOrdenes(){
       
     )
 
-  return (
-    <StyledTablaOrdenes>
-      ESTE ES EL COMPONENTE TABLA ORDENES
-      {data ? (
-        data.getAllOrders.map((ord) => {
-          return <Orden id={ord.id} key={ord.id} orden={ord} />;
-        })
-      ) : (
-        <p>loading...</p>
-      )}
-    </StyledTablaOrdenes>
-  );
+  
 }
 
 const StyledTablaOrdenes = styled.div`
@@ -93,4 +82,4 @@ const StyledTablaOrdenes = styled.div`
   margin: 2rem;
   margin-top: 0.5rem;
   height: 100%;
-`;
+`}
