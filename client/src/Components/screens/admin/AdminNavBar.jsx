@@ -4,6 +4,7 @@ import {Link, Route} from 'react-router-dom'
 //styles
 import styled from 'styled-components';
 import FormCreateCategory from '../../FormCreateCategory/FormCreateCategory';
+import SortByPrice from './ordenes/SortByPrice';
 
 //components
 import SearchBar from './SearchBar';
@@ -29,7 +30,7 @@ const AdminNavBar = ({setAddProduct}) => {
                 <>
                 <div className="optionTab">ORDERS</div>
                 {/*  PABLO */}
-                {/*  PATSY */}
+                <SortByPrice/>
                 </>
                 </Route>
                    

@@ -51,10 +51,10 @@ export const saveOrders = (ordenes)=>{
   }
 }
 
-export const pricetolow = (value)=>{
-  console.log('pricetolow', value)
+export const pricetolow = ()=>{
+  
   return{
-    type: PRICE_LOW_TO_HIGH,
-    payload: value
+    type: PRICE_LOW_TO_HIGH
+   
   }
 }

@@ -9,6 +9,7 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH} from "../actions/index";
   const reducer = (state = initialState, action) => {
     // let ordersModified = state.orders
     
+
     switch (action.type) {
       case SAVE_ORDERS:
         return {
@@ -27,11 +28,16 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH} from "../actions/index";
     //       orders: productsModified
        
     //     }; 
+    
     case PRICE_LOW_TO_HIGH:
 
-        console.log('reducer', action.payload)
-        
-      default:
+        console.log('reducer')
+        if (state.orders.lentgh>0){
+
+            
+        }
+
+        default:
         return state;
     }
   };

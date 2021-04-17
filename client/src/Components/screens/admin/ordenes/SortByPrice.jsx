@@ -69,6 +69,7 @@ export default function SortByPrice() {
     const [value, setValue] = React.useState([20, 37]);
     //estado local del rango
 
+
     console.log('value', value);
     console.log('setValue', setValue);
 
@@ -91,15 +92,17 @@ export default function SortByPrice() {
 
     const dispatch = useDispatch();
 
-    const low = (event) => {
+    const low = () => {
       
-      event.preventDefault();
-      console.log(event);
-      dispatch(pricetolow);
-      console.log('low',event);
+      
+      console.log('event');
+      dispatch(pricetolow());
+      console.log('low');
 
       
     }
+
+   
 
     return (
 
@@ -125,7 +128,7 @@ export default function SortByPrice() {
                     
                           <div className={classes.root}>
                               <div id="range-slider">
-                                  Temperature range
+                                  Price
                               </div>
                   
                               <Slider
@@ -141,7 +144,10 @@ export default function SortByPrice() {
                     </StyledMenuItem>
 
                     <StyledMenuItem>
-                        <ListItemText primary="Price-low to high"  onClick={low} />
+                        <div onClick={low}>
+                            <ListItemText primary="Price-low to high"   />
+                        </div>
+                        
                     </StyledMenuItem>
                     
                     <StyledMenuItem>
