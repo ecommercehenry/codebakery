@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-
 import { useSelector } from "react-redux";
-
 import styled from 'styled-components';
-
-
+import { Button } from 'rsuite';
 import { Steps } from 'rsuite';
 import 'rsuite/lib/styles/index.less';
 import "./prueba.css"
+
 
 export default function Orden({ id, orden }) {
   //   const product = useSelector((state) => state.productsReducer.products[id]);
@@ -15,15 +13,17 @@ export default function Orden({ id, orden }) {
   //   function handlerOnClick() {
   //     setShow(!show);
   //   }
+  
   const instance = (
     <Steps current={0}>
-      <Steps.Item  />
+     
+      <Steps.Item onClick={()=> console.log("Me hiciste click")}  />
+     
       <Steps.Item  />
       <Steps.Item  />     
     </Steps>
   );
-  
-  
+
   if (orden) {
     return (
       <StyledOrden>
@@ -55,7 +55,7 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="text-container">
               <span>Total</span>
-              <p>{"total"} </p>
+              <p>{orden.lineal_order[0].price} </p>
             </div>
             <div className="edit-button">
               <button>Detail</button>

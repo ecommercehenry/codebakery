@@ -4,9 +4,12 @@ import {Link, Route} from 'react-router-dom'
 //styles
 import styled from 'styled-components';
 import FormCreateCategory from '../../FormCreateCategory/FormCreateCategory';
+import SortByPrice from './ordenes/SortByPrice';
 
 //components
 import SearchBar from './SearchBar';
+import SearchBarAdmin from './SearchBarAdmin';
+
 
 const AdminNavBar = ({setAddProduct}) => {
 
@@ -18,11 +21,33 @@ const AdminNavBar = ({setAddProduct}) => {
 
     return (
         <StyledNavBar>
-            <div className="onLeft">   
+            <div className="onLeft">
+                <Route path='/admin/products'> 
+                <>
                 <div className="optionTab">PRODUCTS</div>
-                <SearchBar/>
+                <SearchBar/> 
+                </>
+                </Route>
+                <Route path='/admin/orders'> 
+                <>
+                <div className="optionTab">ORDERS</div>
+                <div>
+                        <SortByPrice/>
+                    </div>
+                    <div>
+                        <SearchBarAdmin/>
+                    </div>
+
+                    
+                
+                </>
+                </Route>
+                   
+                
             </div>
-            
+            <Route path='/admin/products' >
+             <>   
+                 
             {add ? <div className="add-category" onClick={() => setAdd(!add)}>
                 "+ ADD CATEGORY"</div> : 
                 <div className="add-category"> <FormCreateCategory setAdd={setAdd}/></div>}
@@ -30,9 +55,11 @@ const AdminNavBar = ({setAddProduct}) => {
             <Link to="/admin/add-product" className="addProduct purple-btn" onClick={buttonHandler}>
                 + ADD PRODUCT
             </Link>
-            {/* <button className="addProduct" onClick={buttonHandler}>
-                + ADD PRODUCT
-            </button> */}
+
+           </>
+                
+            </Route> 
+           
 
         </StyledNavBar>
     )

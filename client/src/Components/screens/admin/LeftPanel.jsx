@@ -7,35 +7,46 @@ import usersIcon from '../../../icons/user.svg'
 
 //styles
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const LeftPanel = () => {
     return (
-        <StyledPanel>
-            <div className="content">
-                <div className="userInfo">
-                    <div className="userAvatar">
-                        avatar
-                    </div>
-                    <div className="userName">
-                        User Name
-                    </div>
+      <StyledPanel>
+        <div className="content">
+          <div className="userInfo">
+            <div className="userAvatar">avatar</div>
+            <div className="userName">User Name</div>
+          </div>
+
+          <div className="tabs">
+            <Link className="text-decoration-none text-white" to="/admin/products">
+              <div className="tab">
+                <div className="icon">
+                  <img src={productsIcon} alt="icon" />
                 </div>
-                <div className="tabs">
-                    <div className="tab">
-                    <div className="icon"><img src={productsIcon} alt="icon"/></div>Products
-                    </div>
-                    <div className="tab">
-                        <div className="icon"><img src={ordersIcon} alt="icon"/></div> Orders
-                    </div>
-                    <div className="tab">
-                    <div className="icon"><img src={usersIcon} alt="icon"/></div>Users
-                    </div>
+                Products
+              </div>
+            </Link>
+            <Link className="text-decoration-none text-white" to="/admin/orders">
+              <div className="tab">
+                <div className="icon">
+                  <img src={ordersIcon} alt="icon" />
+                </div>{" "}
+                Orders
+              </div>
+            </Link>
+            <Link className="text-decoration-none text-white" to="/admin/orders">
+              <div className="tab">
+                <div className="icon">
+                  <img src={usersIcon} alt="icon" />
                 </div>
-                
-            </div>
-            
-        </StyledPanel>
-    )
+                Users
+              </div>
+            </Link>
+          </div>
+        </div>
+      </StyledPanel>
+    );
 }
 
 const StyledPanel = styled.div`
