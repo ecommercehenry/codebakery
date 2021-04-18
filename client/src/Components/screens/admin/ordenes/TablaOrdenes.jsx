@@ -20,18 +20,18 @@ export default function TablaOrdenes(){
         
   
   let { data } = useQuery(getAllOrders)  
-  let orders = data?.getAllOrders.orders
+  let ordersQ= data?.getAllOrders.orders
 
-  console.log("DATAAAAAAA",orders);
+  
   //guarda las ordenes en el store redux...
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(saveOrders(orders));
+    dispatch(saveOrders(ordersQ));
   }, [data]);
  
   
   //traigo info del reducer..
-  const {search, filterOrders, sortbyPrice, sort} = useSelector((state) => state.ordersReducer);
+  const {ordersRender, search, filterOrders, sortbyPrice, sort} = useSelector((state) => state.ordersReducer);
   //let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
   
 
@@ -39,14 +39,16 @@ export default function TablaOrdenes(){
   //Si hay busqueda, renderiza el filtrado de la busqueda
   let dataRENDER;  
   if(search){
+    console.log("MUESTRA DATA RENDER POR..SEARCH")
     dataRENDER = filterOrders
-  }
-  if(sort){
+  }else if(sort){
+    console.log("MUESTRA DATA RENDER POR..SORT")
     dataRENDER = sortbyPrice
     // console.log("SORT-BY-PRICE", sortbyPrice)
   }
   else{
-    dataRENDER = orders
+    console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS")
+    dataRENDER = ordersRender
   }
 
   

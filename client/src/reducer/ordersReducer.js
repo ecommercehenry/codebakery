@@ -2,6 +2,7 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
 
   const initialState = {
     orders:[],
+    ordersRender:[],//agrego estado para emparejar a el que recibo en filtro
     filterOrders:[],
     search: false,
     sortbyPrice:[],
@@ -13,30 +14,43 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
     
 
     switch (action.type) {
-      case SAVE_ORDERS:
+      case SAVE_ORDERS:          
         return {
           ...state,
-          orders: action.payload
+          orders:action.payload,
+          ordersRender: action.payload?.map(o => {
+            let filter = {
+               id: o.id,
+               userId: o.userId,
+               date:o.creation,
+               price:o.lineal_order.map(u=> u).map(g => g.price),
+               cancelled: o.cancelled
+             }
+             return filter;
+           
+           })
        
         };
-        case FILTER_ORDER:
+
+    case FILTER_ORDER: 
+        let searchOrder = state. ordersRender.filter( //tuve que cambiar para emparejar con filtros //@ Lau
+          (o) => o.id === Number(action.payload)
+        )
       return {
         ...state,
-        filterOrders: state.orders.filter(
-          (o) => o.id === Number(action.payload)
-        ),
-        search:true
+        filterOrders: searchOrder,
+        search:true,
+        sort :false // agregado@ Lau
       };
         
     case PRICE_LOW_TO_HIGH:
-
       //getAllOrders.orders.map(e => e).map(u=> u.lineal_order).map(g => g.map(h => h.price))
-
       //console.log('stateorderSKLDMLSMD', state.orders)
       let filterlow;
       if (state.orders.length>0 && state.filterOrders.length>0){
         //console.log('stateorder', state.orders)
-          filterlow=state.filterOrders.orders.map(o => {
+          filterlow=state.filterOrders.map(o => {
+            console.log("oooooooooooooo", o)
               let filter = {
                   id: o.id,
                   userId: o.userId,
@@ -59,7 +73,7 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
             });
       } else {
 
-        filterlow=state.orders.orders.map(o => {
+        filterlow=state.orders.map(o => {
           let filter = {
              id: o.id,
              userId: o.userId,
@@ -85,7 +99,8 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
         return {
           ...state,
           sortbyPrice:filterlow,
-          sort:true
+          sort:true,
+          search: false //@ Lau
        
         };
 
@@ -99,7 +114,7 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
                         id: o.id,
                         userId: o.userId,
                         date:o.creation,
-                        price:o.lineal_order.map(u=> u).map(g => g.price),
+                        price: o.lineal_order.map(u=> u).map(g => g.price),
                         cancelled: o.cancelled
                       }
                       return filter;
@@ -117,7 +132,7 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
                   });
             } else {
 
-              filterhigh=state.orders.orders.map(o => {
+              filterhigh=state.orders.map(o => {
                 let filter = {
                    id: o.id,
                    userId: o.userId,

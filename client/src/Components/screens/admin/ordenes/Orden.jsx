@@ -8,7 +8,7 @@ import "./prueba.css"
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
 
-  console.log("Esta es la orden: ", orden)
+  console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
  
   
   const instance = (
@@ -53,7 +53,8 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="text-container">
               <span>Total</span>
-              <p>{orden.lineal_order[0].price} </p>
+              <p>{orden.price[0]} </p>
+              {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
             <div className="edit-button">
               <button>Detail</button>
