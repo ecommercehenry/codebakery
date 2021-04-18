@@ -5,7 +5,7 @@ import CountCart from "../cart/container/CountCart"
 import "./NavBarStyle.css";
 
 
-const NavBar = ({ color }) => {
+const NavBar = ({ color}) => {
   const textColor = color === "white" ? "text-inactive" : "text-dark";
   const navTag = `text-decoration-none ${textColor}`;
   const btnColor = color === "white" ? "white" : "purple";
@@ -46,7 +46,7 @@ const NavBar = ({ color }) => {
           </h5>
         </Link>
         <Link id="Cart" to="/cart" className={tag2}>
-        <div><CountCart/></div>
+        <div><CountCart /></div>
         </Link>
         <Link id="Catalogue" to="/catalogue" className={tag1}>
           Catalogue
@@ -56,12 +56,17 @@ const NavBar = ({ color }) => {
         </Link>
       </div>
       <div className="right-buttons d-flex align-items-center">
-        { logged? <Link
+        { logged? 
+        <>
+          <div className="usuario">Hi! {logeed ? localStorage.name : "Guess"}</div>
+        <Link
           to="/"
           className={`login-btn text-decoration-none ${textColor}`} onClick={logout}
         >
           Logout
-        </Link> : <><Link
+        </Link>
+        </> : <>
+        <Link
           to="/log-in"
           className={`login-btn text-decoration-none ${textColor}`}>
           Login

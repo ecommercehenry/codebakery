@@ -54,14 +54,12 @@ const Catalogue = () => {
         }
       }
     }
-    console.log(queryData);
   },[queryData, itemsToCart])
   return (
     <>
       <NavBar color="white" />
       <Hero />
       <Products />
-      <Link to="/catalogue/detail/1">Producto</Link>
       <Route path="/catalogue/detail/:id">
         <Detail></Detail>
       </Route>

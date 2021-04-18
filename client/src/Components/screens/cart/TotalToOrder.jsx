@@ -1,17 +1,29 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
+import { toast } from "react-toastify";
+import '../../../Assets/toast.css'; 
+
+
 //styles
 import styled from "styled-components";
 
+toast.configure()
+
 const TotalToOrder = () => {
+    const customId = "custom-id-yes";
     const itemsFromCart = useSelector(state=>state.cart.itemsToCart);
     console.log(itemsFromCart)
     let total = 0;
     if(itemsFromCart!=undefined){itemsFromCart.map(elem => {total = total + (elem.price)*(elem.quantity)} )}
     
-    const orderHandler = () => {
-
+    const clickHandler = () => {
+       toast('Debe estar logueado para comprar, doble click en "comprar" para loguearse',{
+        toastId: customId
+      }) 
     }
+    const doubleClickHandler = () => {
+        window.location.href = "http://localhost:3000/log-in"; 
+     }
 
     return (
         <StyledTotal>
@@ -24,7 +36,7 @@ const TotalToOrder = () => {
                 </div>
             </div>
             <div className="buttonContainer">
-                <button className="payMee" onClick={orderHandler}>Comprar</button>
+                <button className="payMee" onClick={clickHandler} onDoubleClick={doubleClickHandler}>Comprar</button>
             </div>
             
         </StyledTotal>

@@ -6,8 +6,8 @@ module.exports = {
             const authToken = args.headers.authtoken;
             const decoded = jwt.verify(authToken, "secret");
             let {authrole} = args.headers
-            if(authrole === 'admin'){
-                console.log('yaysyaysyayysays')
+            if(authrole){
+                // console.log('yaysyaysyayysays')
                 return true;
             }
             else return false;

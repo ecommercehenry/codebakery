@@ -63,7 +63,7 @@ async function loginUser(name,password){
     if(hashed === user.password()){
       const token = jwt.sign({
         id:user.id,
-        name:user.name
+        name:user.name 
       },"secret",{ expiresIn: 60 * 60 }) //60*60 = 3600 seg = 1 hour
       return {
         __typename:"user",
