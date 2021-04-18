@@ -95,11 +95,10 @@ useEffect(() => {
                   placeholder="Email"
                   className="placeholder"
                   aria-invalid={errors.name ? "true" : "false"}
-                  // required
                   {...register("email", {
-                    required: true,
-                    minLength: 5,
-                    maxLength: 30,
+                    required: {value: true, message: 'This is requeired'},
+                    minLength: {value: 5, message: 'min 5 characters '},
+                    maxLength: {value: 30, message: 'max 30 characters '},
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                       message: "Enter a valid e-mail address",
@@ -109,21 +108,7 @@ useEffect(() => {
                 {errors.email && (
                   <p className="error">{errors.email.message}</p>
                 )}
-                {errors.name && errors.name.type === "required" && (
-                  <p className="error" role="alert">
-                    This is required
-                  </p>
-                )}
-                {errors.name && errors.name.type === "maxLength" && (
-                  <p className="error" role="alert">
-                  This field cannot have more than 30 characters
-                  </p>
-                )}
-                {errors.name && errors.name.type === "minLength" && (
-                  <p className="error" role="alert">
-                  This field should have at least 5 characters
-                  </p>
-                )}
+                
               </div>
             </div>
 
@@ -136,27 +121,13 @@ useEffect(() => {
                   className="placeholder"
                   //aria-invalid={errors.name ? "true" : "false"}
                   {...register("password", {
-                    required: true,
-                    minLength: 3,
-                    maxLength: 30,
+                    required: {value: true, message: 'This is requeired'},
+                    minLength: {value: 3, message: 'min 3 characters '},
+                    maxLength: {value: 30, message: 'max 30 characters '},
                   })}
                 />
-                {errors.password && <p>{errors.password.message}</p>}
-                {errors.name && errors.name.type === "required" && (
-                  <p className="error" role="alert">
-                    This is required
-                  </p>
-                )}
-                {errors.name && errors.name.type === "maxLength" && (
-                  <p className="error" role="alert">
-                  This field cannot have more than 30 characters
-                  </p>
-                )}
-                {errors.name && errors.name.type === "minLength" && (
-                  <p className="error" role="alert">
-                  This field should have at least 5 characters
-                  </p>
-                )}
+                {errors.password && <p className="error">{errors.password.message}</p>}
+                
               </div>
             </div>
 
@@ -169,31 +140,16 @@ useEffect(() => {
                   className="placeholder"
                   aria-invalid={errors.name ? "true" : "false"}
                   {...register("password_repeat", {
-                    required: true,
-                    minLength: 3,
-                    maxLength: 30,
+                    required: {value: true, message: 'This is requeired'},
+                    minLength: {value: 3, message: 'min 3 characters '},
+                    maxLength: {value: 30, message: 'max 30 characters '},
                     validate: (value) =>
                       value === password.current ||
                       "Passwords are not equal",
                   })}
                 />
                 {errors.password_repeat && (
-                  <p>{errors.password_repeat.message}</p>
-                )}
-                {errors.name && errors.name.type === "required" && (
-                  <p className="error" role="alert">
-                    This is required
-                  </p>
-                )}
-                {errors.name && errors.name.type === "maxLength" && (
-                  <p className="error" role="alert">
-                  This field cannot have more than 30 characters
-                  </p>
-                )}
-                {errors.name && errors.name.type === "minLength" && (
-                  <p className="error" role="alert">
-                  This field should have at least 5 characters
-                  </p>
+                  <p className="error">{errors.password_repeat.message}</p>
                 )}
               </div>
             </div>
