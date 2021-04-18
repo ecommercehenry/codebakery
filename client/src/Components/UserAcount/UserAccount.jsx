@@ -14,6 +14,10 @@ import Logout from "./Logout";
 import { useDispatch } from "react-redux";
 import validateUser from "../../Apollo/queries/validateUser"
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
+import { toast } from "react-toastify";
+import '../../Assets/toast.css'; 
+
+toast.configure()
 
 const UserAcount = () => {
   const [login, { loading, data }] = useLazyQuery(validateUser);
@@ -46,11 +50,10 @@ const UserAcount = () => {
         localStorage.setItem('role', data.validateUser.role);
         localStorage.setItem('id', data.validateUser.id);
         // es necesario el reloaded para luego poder redirigir
-        alert(`Bienvenido ${data.validateUser.name}`);
-
+        toast(`Bienvenido ${data.validateUser.name}`);
         window.location.reload();
       }else{
-        alert(data.validateUser.detail)
+        toast(data.validateUser.detail)
       }
     console.log(data)
   }},[loading, data, dataValidate])
