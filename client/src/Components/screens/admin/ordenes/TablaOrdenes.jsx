@@ -18,18 +18,20 @@ import SortByPrice from './SortByPrice';
 
 export default function TablaOrdenes(){
         
-   let { data } = useQuery(getAllOrders)    
-      
-   console.log(data);
-   //guarda las ordenes en el store redux...
-   const dispatch = useDispatch()
-   useEffect(() => {
-    dispatch(saveOrders(data?.getAllOrders));
-  }, [data]);
   
+  let { data } = useQuery(getAllOrders)  
+  let orders = data?.getAllOrders.orders
+
+  console.log("DATAAAAAAA",orders);
+  //guarda las ordenes en el store redux...
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(saveOrders(orders));
+  }, [data]);
+ 
   
   //traigo info del reducer..
-  const {search, filterOrders, sortbyPrice,sort} = useSelector((state) => state.ordersReducer);
+  const {search, filterOrders, sortbyPrice, sort} = useSelector((state) => state.ordersReducer);
   //let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
   
 
@@ -38,25 +40,20 @@ export default function TablaOrdenes(){
   let dataRENDER;  
   if(search){
     dataRENDER = filterOrders
-  }else{
-    dataRENDER = data?.getAllOrders;
+  }
+  if(sort){
+    dataRENDER = sortbyPrice
+    // console.log("SORT-BY-PRICE", sortbyPrice)
+  }
+  else{
+    dataRENDER = orders
   }
 
-//   dataRENDER?.orders.map(o => {
-//     let filter = {
-//       id: o.id,
-//       userId: o.userId,
-//       date:o.creation,
-//       price:o.lineal_order.map(u=> u).map(g => g.price),
-//       cancelled: o.cancelled
-//     }
-//   console.log('filter', filter);
-// })
   
     return (
         <StyledTablaOrdenes>
              {dataRENDER ? (
-            dataRENDER.orders.map((ord) => {
+            dataRENDER.map((ord) => {
               return <Orden
                   id ={ord.id}
                   key = {ord.id}

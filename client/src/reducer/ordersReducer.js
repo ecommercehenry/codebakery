@@ -22,23 +22,12 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
         case FILTER_ORDER:
       return {
         ...state,
-        filterOrders: state.orders.orders.filter(
+        filterOrders: state.orders.filter(
           (o) => o.id === Number(action.payload)
         ),
         search:true
       };
-    //   case MODIFY_ORDER:
-    //    for(let key in state.orders){
-    //      if(Number(key) === Number(action.payload.id)){
-    //         productsModified[key]=action.payload.data
-    //      }
-    //    }
-    //     return {
-    //       ...state,
-    //       orders: productsModified
-       
-    //     }; 
-    
+        
     case PRICE_LOW_TO_HIGH:
 
       //getAllOrders.orders.map(e => e).map(u=> u.lineal_order).map(g => g.map(h => h.price))

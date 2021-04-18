@@ -28,7 +28,7 @@ export default function Orden({ id, orden }) {
           <div className="info-container">
             <div className="text-container">
               <span>Date</span>
-              <p>{"esperando al BACK"}</p>
+              <p>{orden.creation}</p>
             </div>
             <div className="text-container">
               <span>Order</span>
@@ -36,7 +36,7 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="text-container">
               <span>UserId</span>
-              <p>{orden.lineal_order[0].userId}</p>
+              <p>{orden.userId}</p>
             </div>
             <div className="status-container">
               <div className="titulos">
@@ -48,7 +48,8 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="text-container">
               <span>Cancelled</span>
-              <p>{"esperando cancell del BACK"} </p>
+              <p>{orden.cancelled === false ? <p>O</p>:<p>X</p>}</p>
+             
             </div>
             <div className="text-container">
               <span>Total</span>
