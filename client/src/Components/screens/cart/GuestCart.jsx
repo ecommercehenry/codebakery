@@ -21,15 +21,6 @@ const GuestCart = () => {
     dispatch(removeAll())
   }
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //       document.body.style.overflow = "hidden"
-  //   }, 1000);
-  //     return () => {
-  //       document.body.style.overflow = "visible"
-  //   }
-  // }, [])
-
   const getProductByArray = gql`
     {
         getProductByArray(array:${productsArray}) {
