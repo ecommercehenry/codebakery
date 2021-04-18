@@ -8,15 +8,15 @@ import loginReducer from "../reducer/loginReducer";
 import ordersReducer from "../reducer/ordersReducer";
 
 const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["cart"],
-};
+    key:'root',
+    storage,
+    whitelist: ['cart']
+}
 const rootReducer = combineReducers({
-  productsReducer: productsReducer,
-  reducer: reducer,
-  cart: cartReducer,
-  loginReducer: loginReducer,
-  ordersReducer: ordersReducer,
-});
-export default persistReducer(persistConfig, rootReducer);
+    productsReducer: productsReducer,
+    reducer: reducer,
+    cart:cartReducer,
+    loginReducer:loginReducer,
+    ordersReducer:ordersReducer,
+  })
+export default persistReducer(persistConfig,rootReducer);
