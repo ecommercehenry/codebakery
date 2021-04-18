@@ -23,50 +23,70 @@ const ProductCard = ({id,name,image}) => {
     )
 }
 
+const media = {
+    tablet: '@media(min-width:768px)',
+    laptop: '@media(min-width:992px)',
+    desktop: '@media(min-width:1200px)',
+}
+
 const StyledCard = styled.div`
     //background:green;
-    width:23vw;
+    //width:23vw;
     height:20rem;
-    margin: 3rem 2rem;
+    margin: 2rem 3rem;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
     align-items:center;
-    padding: 0 2rem;
+    //padding: 0 2rem;
+    ${media.tablet}{
+        //background:red;
+        //margin:1rem;
+        //border:1px solid yellow;
+        height:22rem;
+        margin: 2rem 2rem;
+    }
     .link{
         width:100%;
         height:80%;
         text-decoration:none;
         color:inherit;
-        .image{
         //background:yellow;
-        width:100%;
-        height:60%;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        img{
+        .image{
             width:100%;
-            height:100%;
-            object-fit:cover;
+            height:72%;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            img{
+                width:100%;
+                height:100%;
+                object-fit:cover;
+            }
         }
-    }
-    .name{
-        width:100%;
-        height:20%;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        background:lightblue;
-        span{
-            text-align:center;
+        .name{
+            width:100%;
+            height:28%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            //background:lightblue;
+            font-size: calc(0.8rem + 6 * ((100vw - 320px) / 680));
+            span{
+                text-align:center;
+            }
+            ${media.tablet}{
+                font-size: calc(0.6rem + 6 * ((100vw - 320px) / 680));
+            }
+            ${media.laptop}{
+                font-size: calc(0.5rem + 6 * ((100vw - 320px) / 680));
+            }
         }
-    }
     }
     
     .btn{
-        background:green;
+        //background:green;
         //background:violet;
         height:20%;
         width:100%;

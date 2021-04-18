@@ -44,6 +44,7 @@ const UserAcount = () => {
         localStorage.setItem('name', data.validateUser.name);
         localStorage.setItem('email', data.validateUser.email);
         localStorage.setItem('role', data.validateUser.role);
+        localStorage.setItem('id', data.validateUser.id);
         // es necesario el reloaded para luego poder redirigir
         alert(`Bienvenido ${data.validateUser.name}`);
 
