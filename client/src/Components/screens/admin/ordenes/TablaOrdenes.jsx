@@ -5,6 +5,9 @@ import { useQuery } from '@apollo/client';
 import getAllOrders from '../../../../Apollo/queries/getAllOrders';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveOrders } from "../../../../actions"
+import SortByPrice from './SortByPrice';
+
+
 
 // @-WenLi
 //traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
@@ -12,19 +15,24 @@ import { saveOrders } from "../../../../actions"
 //mostrarlas haciendo un mapeo sobre la data, renderizando cada vez un componente Orden
 
 
+
 export default function TablaOrdenes(){
         
    let { data } = useQuery(getAllOrders)    
       
+   console.log(data);
    //guarda las ordenes en el store redux...
    const dispatch = useDispatch()
    useEffect(() => {
     dispatch(saveOrders(data?.getAllOrders));
   }, [data]);
   
-  //traigo info del reducer..
-  const {search, filterOrders } = useSelector((state) => state.reducer);
   
+  //traigo info del reducer..
+  const {search, filterOrders, sortbyPrice,sort} = useSelector((state) => state.ordersReducer);
+  //let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
+  
+
   //Debe renderizar todas las ordenes si no hay una busqueda 
   //Si hay busqueda, renderiza el filtrado de la busqueda
   let dataRENDER;  
@@ -33,6 +41,17 @@ export default function TablaOrdenes(){
   }else{
     dataRENDER = data?.getAllOrders;
   }
+
+//   dataRENDER?.orders.map(o => {
+//     let filter = {
+//       id: o.id,
+//       userId: o.userId,
+//       date:o.creation,
+//       price:o.lineal_order.map(u=> u).map(g => g.price),
+//       cancelled: o.cancelled
+//     }
+//   console.log('filter', filter);
+// })
   
     return (
         <StyledTablaOrdenes>
@@ -48,17 +67,18 @@ export default function TablaOrdenes(){
             <p>loading...</p>
           )}
         </StyledTablaOrdenes>
+      
     )
 
+  
 }
 
-const StyledTablaOrdenes =styled.div`
-display:flex;
-flex-direction:column;
-align-items:flex-start;
-width:80vw;
-margin: 2rem;
-margin-top: 0.5rem;
-height: 100%;
-
-`;
+const StyledTablaOrdenes = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80vw;
+  margin: 2rem;
+  margin-top: 0.5rem;
+  height: 100%;
+`
