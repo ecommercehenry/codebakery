@@ -7,18 +7,21 @@ import Catalogue from "./Components/screens/catalogue/container/Catalogue"
 import Cart from "./Components/screens/cart/container/Cart"
 import AboutUs from "./Components/screens/aboutUs/container/AboutUs"
 import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory"
-import GlobalStyle from './Components/GlobalStyle';
-import GuestCart from './Components/screens/cart/GuestCart';
-import Login from './Components/screens/login/login';
-import UserAccount from "./Components/UserAcount/UserAccount";
-import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
+import FormCRUD from "./Components/screens/admin/FormCRUD"
+import GlobalStyle from "./Components/GlobalStyle"
+import GuestCart from "./Components/screens/cart/GuestCart"
+import Login from "./Components/screens/login/login"
+import UserAccount from "./Components/UserAcount/UserAccount"
+import CreateUserAccount from "./Components/UserAcount/CreateUserAccount"
 import TablaOrdenes from "./Components/screens/admin/ordenes/TablaOrdenes"
 import { useLazyQuery, useQuery } from "@apollo/client"
 import VALIDATE_CREDENTIALS from "./Apollo/queries/validateCredentials"
+import AddProductForm from "./Components/AddProductForm"
+import Detail from "./Components/screens/detail/Detail"
+import Hola from "./Components/Hola"
 
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
-
 
 function App() {
   const [validateUser, { data, loading }] = useLazyQuery(VALIDATE_CREDENTIALS)
@@ -26,22 +29,29 @@ function App() {
     validateUser({ variables: { token: token, role: role } })
   }, [data])
   const isAuthenticated = data?.validateCredentials
-  console.log("autenticado", isAuthenticated)
+
   if (isAuthenticated && role === "admin") {
     return (
       <>
         <GlobalStyle />
         <Switch>
+        {/* {DEBEMOS ARREGLAR EL TEMA DEL RENDERIZADO DE LA RUTA DE AddProductForm - PODEMOS USAR Z-INDEX } 
+        
+        TAMBIÉN REVISAR EL TEMA DEL FORMCRUD DONDE RENDERIZA
+        */}
           <Route exact path="/" component={Landing} />
-          <Route  path="/admin" component={AdminPanel}></Route>
-          <Route exact path="/catalogue" component={Catalogue} />
+          <Route path="/admin" component={AdminPanel}></Route>
+          <Route path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
-          {/* <Route exact path="/ordenes" component={TablaOrdenes} /> */}
-          {/* <Route exact path="/admin/form" component={FormCRUD} /> */}
-          {/* <Route path="/*" component={() => "404 NOT FOUND"} /> */}
+          <Route exact path="/ordenes" component={TablaOrdenes} />
+          {/* <Route path="/admin" component={FormCRUD} /> */}
+          <Route path="/admin/add-product" component={AddProductForm} />
+          <Route exact path="/catalogue/detail/:id" component={Detail} />
+          <Route exact path="/admin/algo" component={Hola} />
+          <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
     )
@@ -49,13 +59,14 @@ function App() {
     return (
       <>
         <Switch>
-        <Route exact path="/" component={Landing} />
-          <Route exact path="/catalogue" component={Catalogue} />
+          <Route exact path="/" component={Landing} />
+          <Route path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
-          {/* <Route path="/*" component={() => "404 NOT FOUND"} /> */}
+          <Route exact path="/catalogue/detail/:id" component={Detail} />
+          <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
     )

@@ -259,6 +259,11 @@ mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
     ... on product {
       id
       name
+      stock
+      price
+      categories {
+        name
+      }
     }
     __typename
     ... on error {
