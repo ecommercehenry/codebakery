@@ -50,7 +50,7 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
       if (state.orders.length>0 && state.filterOrders.length>0){
         //console.log('stateorder', state.orders)
           filterlow=state.filterOrders.map(o => {
-            console.log("oooooooooooooo", o)
+            // console.log("oooooooooooooo", o)
               let filter = {
                   id: o.id,
                   userId: o.userId,
