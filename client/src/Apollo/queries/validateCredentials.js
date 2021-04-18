@@ -6,4 +6,4 @@ query validateCredentials($token: String!, $role: String!){
 }
 `
 
-export default VALIDATE_CREDENTIALS;
+export default VALIDATE_CREDENTIALS; 

@@ -9,6 +9,7 @@ query validateUser($name: String!, $password: String!){
            email
            role
            token
+           id
          }
          ... on error{
            detail

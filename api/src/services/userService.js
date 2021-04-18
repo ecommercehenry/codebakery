@@ -12,6 +12,13 @@ async function getAllUsers() {
     throw new Error(error)
   }
 }
+async function getUserByEmail({email}) {
+  try {
+    return await Users.findOne({where:{ email: email}})
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 
 async function createUser(name, password, email, role) {
   try {
@@ -56,7 +63,7 @@ async function loginUser(name,password){
     if(hashed === user.password()){
       const token = jwt.sign({
         id:user.id,
-        name:user.name
+        name:user.name 
       },"secret",{ expiresIn: 60 * 60 }) //60*60 = 3600 seg = 1 hour
       return {
         __typename:"user",
@@ -72,5 +79,4 @@ async function loginUser(name,password){
   }
 }
 
-module.exports = { getAllUsers, createUser, modifyUser,loginUser}
-
+module.exports = { getAllUsers, createUser, modifyUser,loginUser, getUserByEmail}

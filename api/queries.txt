@@ -213,10 +213,6 @@ query
 
   }
 
-  
-
-
-
 // PARA OBTENER TODOS LOS USUARIOS (SIN CONTRASEÑA) CON SUS PRODUCTOS Y CON SUS REVIEWS
 {
   getAllUsers{name, email, products{
@@ -251,6 +247,20 @@ query
   }
 }
 
+//CREAR UNA ORDEN (actualizado)
+mutation createOrder($idUser: Int!, $dataProducts: [dataProductsOrderInput]){
+    createOrder(idUser: $idUser, dataProducts: $dataProducts){
+     id
+      status
+  }
+  }
+
+  /*variables de crear una orden */
+  {
+  "idUser":1,
+  "dataProducts": [{"id":1,"quantity": 2 }]
+}
+
 
 // MUTATION PARA MODIFICAR PRODUCTOS
 mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
@@ -259,6 +269,11 @@ mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
     ... on product {
       id
       name
+      stock
+      price
+      categories {
+        name
+      }
     }
     __typename
     ... on error {
@@ -268,8 +283,33 @@ mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
   }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+//OBTENER ORDEN POR SU ID
+{
+  getOrderById(id:1){
+    id
+    status
+    lineal_order{
+      userId
+      price
+      quantity
+      product{
+        name
+        stock
+        image
+      }
+=======
+{
+  "id": 1,
+  "dataToModify": {
+    "name": "Bonito"
+  }
+}
+=======
 
 
+>>>>>>> 8cd4889275f5247f2f951863a700282ada6f0f12
 
 
 // MUTATION PARA ACTUALIZAR UNA CATEGORIA
@@ -308,10 +348,41 @@ mutation addCategoryToProduct($idProduct:Int!, $idCategory:Int!){
     ... on error {
       name
       detail
+<<<<<<< HEAD
+>>>>>>> 6180deb8082ec585adf539901dffab981be324ca
     }
   }
 }
 
+<<<<<<< HEAD
+//OBTENER ORDENES POR USER ID
+{
+  getOrdersByUserId(userId: 1) {
+    id
+    status
+    lineal_order {
+      userId
+      price
+      quantity
+      product {
+        name
+        stock
+        image
+      }
+    }
+  }
+}
+=======
+{
+  "idProduct": 9,
+  "idCategory": 5
+}
+=======
+    }
+  }
+}
+
+>>>>>>> 8cd4889275f5247f2f951863a700282ada6f0f12
 
 
 // PARA ELIMINAR CATEGORIA
@@ -347,6 +418,14 @@ mutation deleteById($id:Int!){
   }
 }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+{
+ "id": 2
+}
+>>>>>>> 6180deb8082ec585adf539901dffab981be324ca
+=======
+=======
 //OBTENER TODAS LAS ORDENES
 query getAllOrders{
   getAllOrders{
@@ -370,6 +449,7 @@ query getAllOrders{
     }
   }
 }
+>>>>>>> 86e5546e5ff830df9674eb5ef63e85faf8f6622a
 
 	
 //CREAR NUEVA ORDEN
@@ -521,4 +601,32 @@ query getAllOrders{
 	  "status": "paid"
 	}
 
+// MUTATION PARA INCREMENTAR LA CANTIDAD DE UN PRODUCTO
+  	mutation incrementQuantity($orderId:Int!, $productId:Int!, $quantity:Int!){
+	 incrementQuantity(orderId:$orderId, productId:$productId, quantity:$quantity){
+		... on booleanResponse{
+		  boolean
+		}
+	  	... on error{
+		  name
+		  detail
+			}
+		}
+	}
 
+// MUTATION PARA DECREMENTAR LA CANTIDAD DE UN PRODUCTO
+  	mutation decrementQuantity($orderId:Int!, $productId:Int!, $quantity:Int!){
+	 decrementQuantity(orderId:$orderId, productId:$productId, quantity:$quantity){
+		... on booleanResponse{
+		  boolean
+		}
+	  	... on error{
+		  name
+		  detail
+			}
+		}
+	}
+
+
+
+>>>>>>> 8cd4889275f5247f2f951863a700282ada6f0f12
