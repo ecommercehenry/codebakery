@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import styled from 'styled-components';
-import { Button } from 'rsuite';
 import { Steps } from 'rsuite';
 import 'rsuite/lib/styles/index.less';
 import "./prueba.css"
 
-
+// @-WenLi
+//Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
-  //   const product = useSelector((state) => state.productsReducer.products[id]);
-  //   const [show, setShow] = useState(true);
-  //   function handlerOnClick() {
-  //     setShow(!show);
-  //   }
+
+  console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
+ 
   
   const instance = (
     <Steps current={0}>
@@ -31,7 +28,7 @@ export default function Orden({ id, orden }) {
           <div className="info-container">
             <div className="text-container">
               <span>Date</span>
-              <p>{"esperando al BACK"}</p>
+              <p>{orden.creation}</p>
             </div>
             <div className="text-container">
               <span>Order</span>
@@ -39,7 +36,7 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="text-container">
               <span>UserId</span>
-              <p>{orden.lineal_order[0].userId}</p>
+              <p>{orden.userId}</p>
             </div>
             <div className="status-container">
               <div className="titulos">
@@ -51,11 +48,13 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="text-container">
               <span>Cancelled</span>
-              <p>{"esperando cancell del BACK"} </p>
+              <p>{orden.cancelled === false ? <p>O</p>:<p>X</p>}</p>
+             
             </div>
             <div className="text-container">
               <span>Total</span>
-              <p>{orden.lineal_order[0].price} </p>
+              <p>{orden.price[0]} </p>
+              {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
             <div className="edit-button">
               <button>Detail</button>

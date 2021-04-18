@@ -1,11 +1,9 @@
+
 .status-container{
     width:600px !important;
-    height: 200px ;
-    /* padding:1rem; */
-    /* background-color: rgba(123, 69, 134, 0.493); */
-    margin: 10px;
-    margin-top: 0px;
-    border-radius: 20px;
+    height: 80px !important; 
+    align-items:center !important;   
+   
     
 }
 .rs-steps{
@@ -13,36 +11,22 @@
 }
 .rs-steps-horizontal{
     display: flex;
-   
 }
 
-.titulos {
+.titulos {    
+    display:flex;
+    justify-content: space-around;
+}
+.rs-steps-item-status-process {
     
-      display:flex;
-      justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    padding: 6px;
+    border-radius: 15px;    
 }
 
 .rs-steps-item{
     width: 20px;
-}
-.rs-steps-item-active{
-   
-
-}
-.rs-steps-item-status-process {
-   
-    width: 30px;
-    height: 30px;
-    /* border: solid 1px rgba(71, 49, 49, 0.445); */
-    padding: 6px;
-    border-radius: 15px;
-}
-.rs-steps-item-status-finish{
-   
-}
-
-.rs-steps-item-icon-wrapper{
-
 }
 .rs-icon{
     width: 30px;
@@ -52,23 +36,31 @@
     border-radius: 15px;
 }
 
-
-.status-container{
-width:350px;
-height: 80px;
-padding:0.5rem;
-align-items:center; 
-
+.rs-steps-item-active{
+    
+    
+}
+.rs-steps-item-status-finish{
+    
 }
 
+.rs-steps-item-icon-wrapper{
+    
+}
 
+/* --------- */
+
+/*tuve que usar esta clase para separar las ordenes ..no se de donde salio*/
+/* <div class="sc-kDThTU eTohOH"><div class="element-container" id="1"><div class="info-container"><div  */
+.eTohOH {
+    margin: 0 !important;
+    height: 170px !important;
+}
 .info-container{
 height: 80%;
 width: 90%;
 display: flex;
-
 }
-
 .element-container{   
 width: 100%;
 height: 16vh;
@@ -77,13 +69,11 @@ align-items: center;
 justify-content: center;
 background-color: rgb(236, 227, 250);
 border-radius: 40px;
-
 }
 .element-container span {
 font-weight: 700;
 color:rgb(123, 87, 156);
 }
-
 .text-container{
 width:250px;
 height: 80px;
@@ -96,19 +86,13 @@ margin:0;
 color:grey;
 font-weight: 700;
 }
-
-
-
-
 .edit-button{
 width:5rem;
 height: 80px;
 padding:0.5rem;
 margin-top: 20px;
-margin-left: 20px;    
-
+margin-left: 20px; 
 }
-
 .edit-button button{
 border-radius: 30px;
 color:rgb(78, 160, 78);
