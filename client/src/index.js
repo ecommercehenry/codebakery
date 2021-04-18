@@ -11,10 +11,11 @@ import {store,persistor} from "./store/index"
 
 // cliente apollo
 const token = localStorage.getItem('token');
+const role = localStorage.getItem('role');
 const client = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
-  headers: {authtoken:token}
+  headers: {authtoken:token, authrole: role}
 })
 
 ReactDOM.render(

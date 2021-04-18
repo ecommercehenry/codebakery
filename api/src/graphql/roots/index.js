@@ -8,7 +8,14 @@ const {
     deleteById,
     addProduct,
     createUser,
-    modifyUser
+    modifyUser,
+    createOrder,
+    updateOrderPrices,
+    deleteProductOrder,
+    addProductToOrder,
+    deleteOrder,
+    updateOrderToTicket,
+    modifyStatusOrder
 } = require("./mutationsResolver/")
 
 const {
@@ -20,7 +27,12 @@ const {
     getProductByName,
     getAllUsers,
     getProductByArray,
-    validateUser
+    validateUser,
+    getOrderById,
+    getAllOrders,
+    getOrdersByUserIdInCart,
+    getOrdersByUserIdInTicket,
+    validateCredentials,
 } = require("./queriesResolvers/")
 
 // product
@@ -36,6 +48,11 @@ const root = {
     addProduct,
     createUser,
     modifyUser,
+    createOrder,
+    updateOrderPrices,
+    addProductToOrder,
+    deleteOrder,
+    updateOrderToTicket,
     //Queries
     
     productById,
@@ -46,8 +63,15 @@ const root = {
     getProductByCategoryName,
     getProductByArray,
     getAllUsers,
+    validateUser,
+    validateCredentials,
+    getOrderById,
+    getAllOrders,
+    getOrdersByUserIdInCart,
+    getOrdersByUserIdInTicket,
+    deleteProductOrder,
+    modifyStatusOrder,
     validateUser
-    
 }
 
 module.exports = root

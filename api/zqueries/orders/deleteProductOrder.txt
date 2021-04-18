@@ -1,0 +1,17 @@
+mutation deleteProductOrder($orderId:Int!, $productId:Int!){
+	  deleteProductOrder(orderId:$orderId, productId:$productId)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+		  detail
+		}
+	  }
+	}
+
+variables
+{
+  "orderId": 400,
+  "productId": 4
+}

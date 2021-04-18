@@ -8,7 +8,7 @@ import loginReducer from "../../../reducer/loginReducer";
 const Login = ()=>{
    
     const dispatch = useDispatch()
-    let user = useQuery(validateUser,{variables: {name:"ivan",password:"helloworld"}},);
+    let user = useQuery(validateUser,{variables: {name:"ivan", password:"helloworld"}},);
     
     const token = useSelector(state=> state.loginReducer.token)
     useEffect(()=>{

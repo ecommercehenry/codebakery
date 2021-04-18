@@ -1,0 +1,19 @@
+mutation addProductToOrder($orderId:Int!, $productId:Int!, $quantity:Int!){
+	  addProductToOrder(orderId:$orderId, productId:$productId, quantity:$quantity)
+	  {
+		... on booleanResponse{
+		  boolean
+		}
+		... on error{
+      name
+		  detail
+		}
+	}
+}
+
+variables
+{
+  "orderId": 5,
+  "productId": 4,
+  "quantity":100
+}

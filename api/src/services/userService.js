@@ -14,27 +14,32 @@ async function getAllUsers() {
 }
 
 async function createUser(name, password, email, role) {
-    try {
-      return await Users.create({
-        name,
-        password,
-        email,
-        role,
-      });
-    } catch (error) {
-      throw new Error(error);
-    }
+  try {
+    let newUser = await Users.create({
+      name,
+      password,
+      email,
+      role
+    });
+    return {__typename: 'user', ...newUser.dataValues};
+  } catch (error) {
+    return {__typename: 'error' , name: 'error', detail: 'Email already exist o invalid email'};
+  }
 }
 
 async function modifyUser(id, name, password, email, role) {
-  // return await Users.findAll()
-  let obj = {};
+  let obj = {}; 
   if(name) obj.name = name;
   if(password) obj.password = password;
   if(email) obj.email = email;
   if(role) obj.role = role;
-  let user = await Users.findOne({ where: { id } });
-  return await user.update(obj, {attributes: {exclude: ['password', 'salt']}});
+  try{
+    let user = await Users.findOne({ where: { id } });
+    let newUser = await user.update(obj, {attributes: {exclude: ['password', 'salt']}});
+    return {__typename: 'user', ...newUser.dataValues};
+  }catch{
+    return {__typename: 'user', name: 'error', detail: 'Invalid user'}
+  }
 }
 
 async function loginUser(name,password){

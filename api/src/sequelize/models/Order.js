@@ -4,11 +4,21 @@ module.exports = (sequelize) => {
   sequelize.define(
     "order",
     {
-      status: {
-        type: DataTypes.STRING,
+      placeStatus: {
+        type: DataTypes.ENUM('cart', 'ticket'),
         allowNull: false,
+        defaultValue: 'cart'
+      },
+      status: {
+        type: DataTypes.ENUM('unpaid', 'paid', 'sent', 'received'),
+        defaultValue: 'unpaid',
+        allowNull: false,
+      },
+      cancelled:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
       }
-    },
-    { timestamps: false }
+    }
   )
 }

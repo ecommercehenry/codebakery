@@ -1,21 +1,18 @@
-import React, { useState,useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-// import { Link } from "react-router-dom";
-import allProducts from "../../../../../Apollo/queries/allProducts.js";
-import { useQuery } from '@apollo/client';
+import React from "react";
+import { useSelector } from "react-redux";
 import styled from 'styled-components';
-
 //Components
 import ProductCard from './ProductCard';
-//import "./grid.css";
+
 
 const Grid = () => {
   
   let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state.reducer);
   let arr = []
-  let dispatch = useDispatch();
   if(search === true){
-    arr = allProduct.filter((element) => element.name === filterProduct) 
+    arr = allProduct.filter((element) => 
+      element.name.toLowerCase().includes(filterProduct.toLowerCase())  )
+       //con includes la busq ya no pide exactitud en el string. @Lizen
   }
   
   return (
