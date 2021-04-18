@@ -56,17 +56,12 @@ const NavBar = ({ color }) => {
         </Link>
       </div>
       <div className="right-buttons d-flex align-items-center">
-<<<<<<< HEAD
-        <div className="usuario">Hi! {logeed ? localStorage.name : "Guess"}</div>
-        <Link
-=======
         { logged? <Link
           to="/"
           className={`login-btn text-decoration-none ${textColor}`} onClick={logout}
         >
           Logout
         </Link> : <><Link
->>>>>>> 0b003aa7f6bdf16e66d77d4bf43245e6ad48338e
           to="/log-in"
           className={`login-btn text-decoration-none ${textColor}`}>
           Login
