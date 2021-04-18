@@ -53,7 +53,7 @@ const ButtonSearch = styled.button`
   text-decoration: none;
   display: inline-block;
   text-transform: uppercase;
-  font-size: 30px;
+  font-size: 25px;
   -webkit-border-radius: 5px 5px 5px 5px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -69,8 +69,8 @@ const StyledSearchBar = styled.div`
   position: absolute;
   z-index: 2;
   transform: translateY(-50%);
-  margin: auto;
-  height: 3rem;
+  margin: 50px auto;
+
   width: 50%;
   padding: 0 0.5rem;
   display: flex;
