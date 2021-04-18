@@ -45,19 +45,19 @@ const StyledGrid = styled.div`
   //background:red;
   display:grid;
   grid-template-columns:repeat(1,1fr);
-  grid-auto-rows:40vh;
-  gap:5rem;
+  grid-auto-rows:37vh;
+  gap:4rem;
   height:auto;
   ${media.tablet}{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    grid-auto-rows:35vh;
+    grid-auto-rows:40vh;
     gap:3rem;
   }
   ${media.laptop}{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    grid-auto-rows:38vh;
+    grid-auto-rows:45vh;
     gap:4rem;
   }
 `;
