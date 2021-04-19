@@ -2,9 +2,7 @@
 .status-container{
     width:600px !important;
     height: 80px !important; 
-    align-items:center !important;   
-   
-    
+    align-items:center !important;      
 }
 .rs-steps{
     display: flex;
@@ -16,35 +14,48 @@
 .titulos {    
     display:flex;
     justify-content: space-around;
-}
-.rs-steps-item-status-process {
     
-    width: 30px;
-    height: 30px;
-    padding: 6px;
-    border-radius: 15px;    
+}
+.rs-steps-item-status-process {    
+    /* width: 40px;
+    height: 30px;     */
+    
+}
+span.rs-steps-item-icon.rs-steps-item-icon-process{
+    padding: 5px;
+    /* width: 100px !important; */
+    border-radius: 100%;
+    /* border: solid 1px rgba(71, 49, 49, 0.445); */
+    
 }
 
 .rs-steps-item{
-    width: 20px;
+    width: 60px;
+    
 }
 .rs-icon{
     width: 30px;
     height: 30px;
-    border: solid 1px rgba(71, 49, 49, 0.445);
+    border: solid 3px rgba(41, 161, 17, 0.445);
     padding: 6px;
     border-radius: 15px;
 }
+p.order-cancelled {
+    color:red;
+    font-size: xx-large;
+}
 
 .rs-steps-item-active{
-    
+    /* border: solid 1px rgba(71, 49, 49, 0.445); */
     
 }
 .rs-steps-item-status-finish{
+     
     
 }
 
 .rs-steps-item-icon-wrapper{
+   
     
 }
 
@@ -107,4 +118,101 @@ color:rgb(232, 208, 243);
 background-color: rgb(55, 10, 85);
 }
 
-  /* <div class="rs-steps rs-steps-horizontal"><div class="rs-steps-item rs-steps-item-status-finish" style="flex-basis: 33.3333%;"><div class="rs-steps-item-tail"></div><div class="rs-steps-item-icon-wrapper"><span class="rs-steps-item-icon rs-steps-item-icon-finish"><svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false" class="rs-icon" aria-label="check" data-category="application"><path d="M14.136 3.157a.5.5 0 01.783.616l-.056.071-8.5 9a.5.5 0 01-.665.056l-.07-.064-4.5-5a.5.5 0 01.677-.73l.066.061 4.136 4.596 8.129-8.605z"></path></svg></span></div><div class="rs-steps-item-content"><div class="rs-steps-item-title">Finished</div></div></div><div class="rs-steps-item-active rs-steps-item rs-steps-item-status-process" style="flex-basis: 33.3333%;"><div class="rs-steps-item-tail"></div><div class="rs-steps-item-icon-wrapper"><span class="rs-steps-item-icon rs-steps-item-icon-process">2</span></div><div class="rs-steps-item-content"><div class="rs-steps-item-title">In progress</div></div></div><div class="rs-steps-item rs-steps-item-status-wait" style="flex-basis: 33.3333%;"><div class="rs-steps-item-tail"></div><div class="rs-steps-item-icon-wrapper"><span class="rs-steps-item-icon rs-steps-item-icon-wait">3</span></div><div class="rs-steps-item-content"><div class="rs-steps-item-title">Waiting</div></div></div><div class="rs-steps-item rs-steps-item-status-wait" style="max-width: 25%;"><div class="rs-steps-item-tail"></div><div class="rs-steps-item-icon-wrapper"><span class="rs-steps-item-icon rs-steps-item-icon-wait">4</span></div><div class="rs-steps-item-content"><div class="rs-steps-item-title">Waiting</div></div></div></div> */
+  /* <div class="rs-steps rs-steps-horizontal">
+  <div class="rs-steps-item rs-steps-item-status-finish" style="flex-basis: 33.3333%;">
+  <div class="rs-steps-item-tail"></div>
+  
+  <div class="rs-steps-item-icon-wrapper">
+  <span class="rs-steps-item-icon rs-steps-item-icon-finish">
+  <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false" class="rs-icon" aria-label="check" data-category="application">
+  <path d="M14.136 3.157a.5.5 0 01.783.616l-.056.071-8.5 9a.5.5 0 01-.665.056l-.07-.064-4.5-5a.5.5 0 01.677-.73l.066.061 4.136 4.596 8.129-8.605z">
+  </path></svg></span></div>
+  
+  <div class="rs-steps-item-content">
+  <div class="rs-steps-item-title">Finished</div></div></div>
+  
+  <div class="rs-steps-item-active rs-steps-item rs-steps-item-status-process" style="flex-basis: 33.3333%;"><div class="rs-steps-item-tail"></div>
+  
+  <div class="rs-steps-item-icon-wrapper">
+  <span class="rs-steps-item-icon rs-steps-item-icon-process">2</span></div><div class="rs-steps-item-content"><div class="rs-steps-item-title">In progress</div></div></div><div class="rs-steps-item rs-steps-item-status-wait" style="flex-basis: 33.3333%;">
+  
+  <div class="rs-steps-item-tail"></div>
+  <div class="rs-steps-item-icon-wrapper"><span class="rs-steps-item-icon rs-steps-item-icon-wait">3</span></div>
+  <div class="rs-steps-item-content"><div class="rs-steps-item-title">Waiting</div></div></div><div class="rs-steps-item rs-steps-item-status-wait" style="max-width: 25%;"><div class="rs-steps-item-tail"></div><div class="rs-steps-item-icon-wrapper"><span class="rs-steps-item-icon rs-steps-item-icon-wait">4</span></div><div class="rs-steps-item-content"><div class="rs-steps-item-title">Waiting</div></div></div></div> 
+  
+   display:flex;
+    align-items:flex-start;
+    justify-content:space-around;
+    width:70vw;
+    margin: 2rem;
+    margin-top: 0.5rem;
+    height: 100%;
+
+ .status-container{
+  width:350px;
+  height: 80px;
+  padding:0.5rem;
+  align-items:center; 
+
+}
+
+
+.info-container{
+    height: 80%;
+    width: 90%;
+    display: flex;
+   
+}
+
+.element-container{   
+    width: 100%;
+    height: 16vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(236, 227, 250);
+    border-radius: 40px;
+   
+}
+.element-container span {
+    font-weight: 700;
+    color:rgb(123, 87, 156);
+}
+
+.text-container{
+   width:250px;
+   height: 80px;
+   padding:0.5rem;
+   overflow: hidden;   
+}
+.text-container p{
+    margin:0;
+    color:grey;
+    font-weight: 700;
+}
+
+
+
+
+.edit-button{
+    width:5rem;
+    height: 80px;
+    padding:0.5rem;
+    margin-top: 20px;
+    margin-left: 20px;    
+    
+}
+
+.edit-button button{
+    border-radius: 30px;
+    color:rgb(78, 160, 78);
+    padding: 4px;
+    background-color: rgba(117, 250, 161, 0.328);
+}
+.edit-button button:hover{
+    border-radius: 30px;
+    color:rgb(78, 160, 78);
+    padding: 6px;
+    color:rgb(232, 208, 243);
+    background-color: rgb(55, 10, 85);
+}*/

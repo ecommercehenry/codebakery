@@ -24,7 +24,8 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
                userId: o.userId,
                date:o.creation,
                price:o.lineal_order.map(u=> u).map(g => g.price),
-               cancelled: o.cancelled
+               cancelled: o.cancelled,
+               status: "unpaid"
              }
              return filter;
            
@@ -56,7 +57,8 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
                   userId: o.userId,
                   date:o.creation,
                   price:o.lineal_order.map(u=> u).map(g => g.price),
-                  cancelled: o.cancelled
+                  cancelled: o.cancelled,
+                  status: "unpaid" //necesitaba este estado @ Lau
                 }
                 return filter;
           
@@ -79,7 +81,8 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
              userId: o.userId,
              date:o.creation,
              price:o.lineal_order.map(u=> u).map(g => g.price),
-             cancelled: o.cancelled
+             cancelled: o.cancelled,
+             status: "unpaid" 
            }
            return filter;
          
@@ -115,7 +118,8 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
                         userId: o.userId,
                         date:o.creation,
                         price: o.lineal_order.map(u=> u).map(g => g.price),
-                        cancelled: o.cancelled
+                        cancelled: o.cancelled,
+                        status: "unpaid" 
                       }
                       return filter;
                 
@@ -138,7 +142,8 @@ import {SAVE_ORDERS, PRICE_LOW_TO_HIGH, PRICE_HIGH_TO_LOW, FILTER_ORDER} from ".
                    userId: o.userId,
                    date:o.creation,
                    price:o.lineal_order.map(u=> u).map(g => g.price),
-                   cancelled: o.cancelled
+                   cancelled: o.cancelled,
+                   status: "unpaid" //necesitaba este estado @ Lau
                  }
                  return filter;
                
