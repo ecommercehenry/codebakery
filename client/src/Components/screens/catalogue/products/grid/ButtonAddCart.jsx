@@ -6,6 +6,10 @@ import {useDispatch} from 'react-redux';
 import ADD_PRODUCT_TO_ORDER from '../../../../../Apollo/mutations/addProductToOrder'
 import { useMutation, useQuery } from "@apollo/client";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../Apollo/queries/getOrdersByUserIdInCart"
+import { toast } from "react-toastify";
+import '../../../../../Assets/toast.css'
+
+toast.configure()
 
 
 
@@ -22,6 +26,7 @@ const ButtonAddCart = ({id}) => {
     const buttonHandler = (id) => {
         if (!logged){
             dispatch(addProductToCart(id));
+            toast('Producto añadido al carrito')
         }else {
             if(!queryData.loading){
                 let orderId = queryData.data.getOrdersByUserIdInCart.orders[0].id;
@@ -33,7 +38,7 @@ const ButtonAddCart = ({id}) => {
                     }
                   })
             }
-
+            toast('Producto añadido al carrito')
         }
     }
 
