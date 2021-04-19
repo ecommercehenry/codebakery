@@ -4,7 +4,7 @@ import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct"
 // import './FormCRUD.css'
 import { useDispatch, useSelector } from "react-redux";
 import { modifyProduct } from "../../../actions/modifyProductAction";
-import {addCategoryToProductAction} from "../../../actions/addCategoryToProductAction"
+//import {addCategoryToProductAction} from "../../../actions/addCategoryToProductAction"
 import styled from 'styled-components';
 
 function FormCRUD({id, handlerOnClick}) {
@@ -14,9 +14,9 @@ function FormCRUD({id, handlerOnClick}) {
   function onChangeNewCategory(e){
     setValueNewCategory(e.target.value)
   }
-  function submitNewCategory(){
-    setInputs(...inputs, )
-  }
+  // function submitNewCategory(){
+  //   setInputs(...inputs, )
+  // }
   const [inputs, setInputs] = useState({    
     name:product.name, 
     description: product.description,
