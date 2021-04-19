@@ -29,8 +29,6 @@ let userId = parseInt(storage.id);
       valor = valor + element.quantity
     }); 
   } 
-  
-  
 
   return (
     <StyledCount>
