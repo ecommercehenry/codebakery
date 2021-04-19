@@ -3,6 +3,7 @@ export const GET_PRODUCT_BY_NAME = "GET_PRODUCT_BY_NAME";
 export const GUARDAR_PRODUCTOS = "GUARDAR_PRODUCTOS";
 export const SET_SEARCH = "SET_SEARCH";
 export const FILTER_ORDER = "FILTER_ORDER";
+export const FILTER_USERS = "FILTER_USERS";
 export const GET_ALL_ORDERS = "GET_ALL_ORDERS";
 export const SAVE_ORDERS = "SAVE_ORDERS";
 export const PRICE_LOW_TO_HIGH = "PRICE_LOW_TO_HIGH";
@@ -48,6 +49,13 @@ export const filterOrders = (orderId) => {
   return {
     type: FILTER_ORDER,
     payload: orderId,
+  };
+};
+
+export const filterUsers = (usersId) => {
+  return {
+    type: FILTER_USERS,
+    payload: usersId,
   };
 };
 
