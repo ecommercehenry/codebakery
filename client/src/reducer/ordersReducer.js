@@ -56,21 +56,6 @@ const reducer = (state = initialState, action) => {
       let filterlow;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
         //console.log('stateorder', state.orders)
-<<<<<<< HEAD
-          filterlow=state.filterOrders.map(o => {
-            // console.log("oooooooooooooo", o)
-              let filter = {
-                  id: o.id,
-                  userId: o.userId,
-                  date:o.creation,
-                  price:o.lineal_order.map(u=> u).map(g => g.price),
-                  cancelled: o.cancelled,
-                  status: "unpaid" //necesitaba este estado @ Lau
-                }
-                return filter;
-          
-          })
-=======
         filterlow = state.filterOrders.map((o) => {
           // console.log("oooooooooooooo", o)
           let filter = {
@@ -82,7 +67,6 @@ const reducer = (state = initialState, action) => {
           };
           return filter;
         });
->>>>>>> 1e4380ac54c42f2175469acf3be32ff8dcc2828c
 
         filterlow = filterlow.sort(function (a, b) {
           if (a.price[0] > b.price[0]) {
@@ -149,27 +133,6 @@ const reducer = (state = initialState, action) => {
       } else {
         filterhigh = state.orders.map((o) => {
           let filter = {
-<<<<<<< HEAD
-             id: o.id,
-             userId: o.userId,
-             date:o.creation,
-             price:o.lineal_order.map(u=> u).map(g => g.price),
-             cancelled: o.cancelled,
-             status: "unpaid" 
-           }
-           return filter;
-         
-         })
-         filterlow=filterlow.sort(function (a, b) {
-           if (a.price[0] > b.price[0]) {
-             return 1;
-           }
-           if (a.price[0] < b.price[0]) {
-             return -1;
-           }
-           return 0;
-         });
-=======
             id: o.id,
             userId: o.userId,
             date: o.creation,
@@ -187,28 +150,8 @@ const reducer = (state = initialState, action) => {
           }
           return 0;
         });
->>>>>>> 1e4380ac54c42f2175469acf3be32ff8dcc2828c
       }
 
-<<<<<<< HEAD
-        case PRICE_HIGH_TO_LOW:
-        
-          let filterhigh;
-            if (state.orders.length>0 && state.filterOrders.length>0){
-              //console.log('stateorder', state.orders)
-                filterhigh=state.filterOrders.orders.map(o => {
-                    let filter = {
-                        id: o.id,
-                        userId: o.userId,
-                        date:o.creation,
-                        price: o.lineal_order.map(u=> u).map(g => g.price),
-                        cancelled: o.cancelled,
-                        status: "unpaid" 
-                      }
-                      return filter;
-                
-                })
-=======
       return {
         ...state,
         sortbyPrice: filterhigh,
@@ -220,52 +163,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         search: false,
       };
->>>>>>> 1e4380ac54c42f2175469acf3be32ff8dcc2828c
 
     default:
       return state;
   }
 };
 
-<<<<<<< HEAD
-              filterhigh=state.orders.map(o => {
-                let filter = {
-                   id: o.id,
-                   userId: o.userId,
-                   date:o.creation,
-                   price:o.lineal_order.map(u=> u).map(g => g.price),
-                   cancelled: o.cancelled,
-                   status: "unpaid" //necesitaba este estado @ Lau
-                 }
-                 return filter;
-               
-               })
-               filterhigh=filterhigh.sort(function (a, b) {
-                 if (a.price[0] < b.price[0]) {
-                   return 1;
-                 }
-                 if (a.price[0] > b.price[0]) {
-                   return -1;
-                 }
-                 return 0;
-               });
-            }
-           
-            return {
-              ...state,
-              sortbyPrice:filterhigh,
-              sort:true
-           
-            };
-        default:
-        return state;
-    }
-  };
-  
-  export default reducer;
-  
-  
-  
-=======
 export default reducer;
->>>>>>> 1e4380ac54c42f2175469acf3be32ff8dcc2828c

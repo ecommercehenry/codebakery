@@ -74,9 +74,9 @@ const StyledTablaOrdenes = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 80vw;
-  margin: 2rem;
+  width: 100%;
   margin-top: 0.5rem;
+  margin-left: 0;
   height: 100%;
 `
 

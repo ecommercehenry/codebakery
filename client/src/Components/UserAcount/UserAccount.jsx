@@ -63,7 +63,7 @@ const UserAcount = () => {
     // la redireccion se debe cambiar seún el role del usuario
     if(role === 'admin' && dataValidate){
       console.log('yaysyyayysa', dataValidate)
-      return <Redirect to='/admin' />;
+      return <Redirect to='/admin/orders' />;
     }
     else if(role === 'user' && dataValidate) return <Redirect to='/catalogue' />;
     // else {

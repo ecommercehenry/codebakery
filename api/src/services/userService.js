@@ -56,7 +56,7 @@ async function loginUser(name,password){
     }
   })
   if(!user){
-    return {__typename:"error",name:"the user dont exists",detail:"the user dont exists"}
+    return {__typename:"error",name:"The user doesn't exists",detail:"The user doesn't exists"}
   }
   if(user){
     const hashed = Users.encryptPassword(password, user.salt())

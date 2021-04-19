@@ -9,7 +9,6 @@ import { useQuery, useMutation } from "@apollo/client";
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
   const [orderStatus, setOrderStatus] = useState('unpaid')
-  const sts = useQuery()
 
   console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
   let status;
@@ -79,10 +78,8 @@ const StyledOrden = styled.div`
 display:flex;
 align-items:flex-start;
 justify-content:space-around;
-width:70vw;
-margin: 2rem;
-margin-top: 0.5rem;
-height: 100%;
+width:100%;
+margin-top: 2rem;
 
 .status-container{
 width:350px;

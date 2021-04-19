@@ -12,8 +12,8 @@ const EmptyAlert = () => {
     return (
         <StyledLevelUp>
             <StyledAlert>
-                <span>Your cart is as empty <br/> as your soul</span> 
-                <button onClick={shameHandler}>shame button</button>
+                <span>Your cart is empty</span> 
+                <button onClick={shameHandler}>Go shopping!</button>
                 { shame ? <Redirect to='/catalogue'/> : ""}
             </StyledAlert>
         </StyledLevelUp>
