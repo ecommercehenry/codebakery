@@ -1,13 +1,21 @@
-import React from "react";
-import styled from "styled-components";
-import cartIcon from "../../../../../icons/cart.svg";
-import { addProductToCart } from "../../../../../actions/cartActions";
-import { useDispatch } from "react-redux";
-import ADD_PRODUCT_TO_ORDER from "../../../../../Apollo/mutations/addProductToOrder";
+import React from 'react'
+import styled from 'styled-components';
+import cartIcon from '../../../../../icons/cart.svg';
+import {addProductToCart} from '../../../../../actions/cartActions';
+import {useDispatch} from 'react-redux';
+import ADD_PRODUCT_TO_ORDER from '../../../../../Apollo/mutations/addProductToOrder'
+import { useMutation, useQuery } from "@apollo/client";
+import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../Apollo/queries/getOrdersByUserIdInCart"
+import { toast } from "react-toastify";
+import '../../../../../Assets/toast.css'
 import CREATE_ORDER from "../../../../../Apollo/mutations/createOrder";
 
-import { useMutation, useQuery } from "@apollo/client";
-import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../Apollo/queries/getOrdersByUserIdInCart";
+
+toast.configure()
+
+
+// import { useMutation, useQuery } from "@apollo/client";
+// import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../Apollo/queries/getOrdersByUserIdInCart";
 
 const ButtonAddCart = ({ id }) => {
   const [createOrder, createData] = useMutation(CREATE_ORDER);
@@ -24,6 +32,8 @@ const ButtonAddCart = ({ id }) => {
   const buttonHandler = (id) => {
     if (!logged) {
       dispatch(addProductToCart(id));
+      toast('Producto añadido al carrito')
+
     } else {
       if (!queryData.loading) {
         if (queryData.data.getOrdersByUserIdInCart.orders.length != 0) {
@@ -45,6 +55,7 @@ const ButtonAddCart = ({ id }) => {
               },
             },
           });
+          toast('Producto añadido al carrito')
         }
       }
     }

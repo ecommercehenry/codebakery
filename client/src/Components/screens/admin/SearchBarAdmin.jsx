@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { filterOrders } from "../../../actions";
+import { changedStatus, filterOrders } from "../../../actions";
 
 import getOrdersByUserIdInTicket from "../../../Apollo/queries/getOrdersByUserIdInTicket";
 
@@ -19,9 +19,13 @@ const SearchBarAdmin = () => {
   const onSubmit = ({ id, type }) => {
     if (!id) return alert("Ingrese un ID");
     const idUser = Number(id);
-    type === "user"
-      ? ordersUsers({ variables: { idUser } })
-      : dispatch(filterOrders(id));
+    if (type === "user") {
+      dispatch(changedStatus());
+      ordersUsers({ variables: { idUser } });
+    }
+    if (type === "order") {
+      dispatch(filterOrders(id));
+    }
   };
 
   return (
