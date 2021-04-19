@@ -10,4 +10,16 @@ async function deleteReview(id) {
   }
 }
 
-module.exports = { deleteReview }
+async function getAllReviewsFromAProduct(idProduct) {
+  try {
+    return await Review.findAll({
+      where: {
+        id: idProduct
+      },
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+module.exports = { deleteReview, getAllReviewsFromAProduct }
