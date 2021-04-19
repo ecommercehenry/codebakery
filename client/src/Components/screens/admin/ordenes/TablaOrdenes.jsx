@@ -49,9 +49,7 @@ export default function TablaOrdenes(){
   else{
     console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS")
     dataRENDER = ordersRender
-  }
-
-  
+  }  
     return (
         <StyledTablaOrdenes>
              {dataRENDER ? (
@@ -81,3 +79,22 @@ const StyledTablaOrdenes = styled.div`
   margin-top: 0.5rem;
   height: 100%;
 `
+
+//Actualizar el estado de una query, unpaid, paid, sent, received
+// mutation modifyStatusOrder($orderId:Int! , $status:String!){
+//   modifyStatusOrder(orderId:$orderId, status:$status)
+//   {
+//   ... on booleanResponse{
+//     boolean
+//   }
+//   ... on error{
+//     name
+//     detail
+//   }
+//   }
+// }
+// Con variables:
+// {
+//   "orderId":1,
+//   "status": "paid"
+// }

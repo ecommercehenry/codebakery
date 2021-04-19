@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import { Steps } from 'rsuite';
 import 'rsuite/lib/styles/index.less';
 import "./prueba.css"
+import { useQuery } from "@apollo/client";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
+  const sts = useQuery()
 
   console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
   let status;
