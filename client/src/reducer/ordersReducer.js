@@ -4,6 +4,7 @@ import {
   PRICE_HIGH_TO_LOW,
   FILTER_ORDER,
   CHANGE_STATUS,
+  FILTER_USERS,
 } from "../actions/index";
 
 const initialState = {
@@ -40,11 +41,24 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (o) => o.id === Number(action.payload)
       );
-      console.log(searchOrder);
       if (searchOrder.length) {
         return {
           ...state,
           filterOrders: searchOrder,
+          search: true,
+          sort: false, // agregado@ Lau
+        };
+      }
+
+    case FILTER_USERS:
+      let searchUsers = state.ordersRender.filter(
+        //tuve que cambiar para emparejar con filtros //@ Lau
+        (u) => u.userId === Number(action.payload)
+      );
+      if (searchUsers.length) {
+        return {
+          ...state,
+          filterOrders: searchUsers,
           search: true,
           sort: false, // agregado@ Lau
         };

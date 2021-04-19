@@ -5,23 +5,20 @@ import { useForm } from "react-hook-form";
 
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { changedStatus, filterOrders } from "../../../actions";
+import { changedStatus, filterOrders, filterUsers } from "../../../actions";
 
 import getOrdersByUserIdInTicket from "../../../Apollo/queries/getOrdersByUserIdInTicket";
 
 const SearchBarAdmin = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  let [ordersUsers, { data }] = useLazyQuery(getOrdersByUserIdInTicket);
-
-  // console.log(data);
 
   const onSubmit = ({ id, type }) => {
     if (!id) return alert("Ingrese un ID");
     const idUser = Number(id);
     if (type === "user") {
       dispatch(changedStatus());
-      ordersUsers({ variables: { idUser } });
+      dispatch(filterUsers(id));
     }
     if (type === "order") {
       dispatch(filterOrders(id));
