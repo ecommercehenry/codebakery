@@ -14,7 +14,7 @@ const UserCart = () => {
   const { data, previousData } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
     fetchPolicy: "no-cache"
-  });
+  }); 
   let { itemsToCart } = useSelector((state) => state.cart);
   useEffect(() => {}, [itemsToCart])
   console.log(data, previousData)
