@@ -144,12 +144,6 @@ export default FormCRUD;
 
 
 const StyledFormCRUD = styled.form`
-  
-
-
-
-
-
 .image-container{
     display:flex;
     flex-direction:column;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useMutation } from "@apollo/client"
 import CREATE_CATEGORY from "../../Apollo/mutations/createCategory"
+import styled from 'styled-components'
 import './style.css'
 
 function FormCreateCategory() {
@@ -53,7 +54,7 @@ function FormCreateCategory() {
   
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)} style={{position:"relative"}}>
+    <CreateCategoryBtn onSubmit={(e) => handleSubmit(e)} style={{position:"relative"}}>
       {added? <div className="Success-btnn" onClick={() => setAdded(false)}>Category added</div> : <> <input
         type="text"
         name="name"
@@ -65,8 +66,52 @@ function FormCreateCategory() {
       >
       </input>
       <button type="submit" className="category-btn">Add Category</button></>}
-    </form>
+    </CreateCategoryBtn>
   )
 }
+
+const CreateCategoryBtn = styled.form`
+margin-top: 0;
+.category-input{
+  width: 20vw;
+  border-radius: 40px;
+  border: 1.3px solid #949494;
+  height: 2rem;
+  text-indent: 2%;
+  margin: 0;
+  text-align: left;
+}
+
+.category-input:focus{
+  outline: none;
+}
+
+.category-btn{
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 40px;
+  border: none;
+  background:#5E3F71;
+  color: white;
+  padding: 0 2%;
+  height: 100%;
+  width: 40%;
+  transform: none!important;
+  margin: 0;
+}
+
+.Success-btnn{
+  width: 20vw;
+  border-radius: 40px;
+  border: none;
+  height: 2rem;
+  background-color: green;
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+`
 
 export default FormCreateCategory

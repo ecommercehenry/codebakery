@@ -29,22 +29,15 @@ const AdminNavBar = ({setAddProduct}) => {
                 </>
                 </Route>
                 <Route path='/admin/orders'> 
-                <>
                 <div className="optionTab">ORDERS</div>
-                <div>
+                </Route>
+            </div>
+                <Route path='/admin/orders'> 
+                    <div className="onRight">
+                        <SearchBarAdmin/>
                         <SortByPrice/>
                     </div>
-                    <div>
-                        <SearchBarAdmin/>
-                    </div>
-
-                    
-                
-                </>
                 </Route>
-                   
-                
-            </div>
             <Route path='/admin/products' >
              <>   
                  
@@ -81,10 +74,16 @@ const StyledNavBar = styled.div`
             display:flex;
             align-items: center;
         }
-        width:43%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    .onRight{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-left: 5vw;
+        justify-content: space-between
     }
     .addProduct{
         background:#5E3F71;

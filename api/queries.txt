@@ -583,8 +583,8 @@ query getAllOrders{
 	  "orderId":1
 	}
 //Actualizar el estado de una query, unpaid, paid, sent, received
-	mutation modifyStatusOrder($orderId:Int! , $status:String!){
-	  modifyStatusOrder(orderId:$orderId, status:$status)
+	mutation modifyOrderStatus($orderId:Int! , $status:String!){
+	  modifyOrderStatus(orderId:$orderId, status:$status)
 	  {
 		... on booleanResponse{
 		  boolean

@@ -14,7 +14,7 @@ const { deleteProductOrder } = require("./deleteProductOrder");
 const {addProductToOrder} = require("./addProductToOrder")
 const {deleteOrder} = require("./deleteOrder")
 const {updateOrderToTicket} = require("./updateOrderToTicket")
-const {modifyStatusOrder} = require("./modifyStatusOrder")
+const {modifyOrderStatus} = require("./modifyOrderStatus")
 const { incrementQuantity } = require("./incrementQuantity"); 
 const { decrementQuantity } = require("./decrementQuantity"); 
 
@@ -35,7 +35,7 @@ module.exports = {
   addProductToOrder,
   deleteOrder,
   updateOrderToTicket,
-  modifyStatusOrder,
+  modifyOrderStatus,
   incrementQuantity, 
   decrementQuantity, 
 
