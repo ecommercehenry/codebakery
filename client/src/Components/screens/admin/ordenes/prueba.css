@@ -21,6 +21,7 @@
     height: 30px;     */
     
 }
+
 span.rs-steps-item-icon.rs-steps-item-icon-process{
     padding: 5px;
     /* width: 100px !important; */
@@ -58,6 +59,16 @@ p.order-cancelled {
    
     
 }
+.rs-steps-item-tail{
+border: 1px solid rgb(30, 124, 18);
+background-color: rgb(54, 196, 66);
+width: 70px;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+align-items: flex-end;
+
+}
 
 /* --------- */
 
@@ -65,12 +76,14 @@ p.order-cancelled {
 /* <div class="sc-kDThTU eTohOH"><div class="element-container" id="1"><div class="info-container"><div  */
 .eTohOH {
     margin: 0 !important;
-    height: 170px !important;
+    height: 150px !important;
 }
 .info-container{
 height: 80%;
 width: 90%;
 display: flex;
+align-items: center;
+
 }
 .element-container{   
 width: 100%;
