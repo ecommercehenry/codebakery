@@ -72,8 +72,6 @@ export default function Orden({ id, orden }) {
   }
 }
 
-
-
 const StyledOrden = styled.div`
 display:flex;
 align-items:flex-start;
