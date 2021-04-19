@@ -18,6 +18,7 @@ const {
     modifyStatusOrder, 
     incrementQuantity, 
     decrementQuantity, 
+    deleteReview,
 } = require("./mutationsResolver/")
 
 const {
@@ -35,8 +36,6 @@ const {
     getOrdersByUserIdInCart,
     getOrdersByUserIdInTicket,
     getUserByEmail,
-    
-    // getAllUsers,
     validateCredentials,
 } = require("./queriesResolvers/")
 
@@ -60,9 +59,9 @@ const root = {
     updateOrderToTicket,
     incrementQuantity, 
     decrementQuantity, 
-  
-    //Queries
-    
+    deleteReview,
+
+    //Queries    
     productById,
     product,
     productCategory,
@@ -80,9 +79,7 @@ const root = {
     deleteProductOrder,
     modifyStatusOrder,
     validateUser,
-    getUserByEmail
-    // getAllUsers,
-    
+    getUserByEmail    
 }
 
 module.exports = root
