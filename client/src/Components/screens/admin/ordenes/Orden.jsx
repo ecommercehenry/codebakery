@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import { Steps } from 'rsuite';
 import 'rsuite/lib/styles/index.less';
 import "./prueba.css"
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
+  const [orderStatus, setOrderStatus] = useState('unpaid')
   const sts = useQuery()
 
   console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
   let status;
   if(orden.status === "unpaid") status = 0
   if(orden.status === "paid") status = 1
-  if(orden.status === "recived") status = 2
+  if(orden.status === "received") status = 2
   
   
   const instance = (

@@ -78,7 +78,8 @@ const UserAcount = () => {
   };
 
   return (
-    <div className="wrapper fadeInDown">
+    <div classname="page" style={{height: "100vh", display: "flex", alignItems: "center"}}>
+    <div className="wrapper fadeInDown" style={{marginBottom: "10vh"}}>
       <div className="formContent">
         <Login />
         <StyledAcheDos> OR </StyledAcheDos>
@@ -116,6 +117,7 @@ const UserAcount = () => {
           ¿No tienes cuenta? <Link to="/sign-up">Creala aqui</Link>
         </p>
       </div>
+    </div>
     </div>
   );
 };

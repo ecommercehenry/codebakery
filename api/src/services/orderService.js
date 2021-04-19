@@ -312,7 +312,7 @@ async function updateOrderToTicket(orderId){
  * @param  {Int} orderId 
  * @param  {String} status string between unpaid, paid, sent, received
  */
-async function modifyStatusOrder(orderId, status){
+async function modifyOrderStatus(orderId, status){
     try {
         const order = await Order.findOne({
             where: {id: orderId}
@@ -373,7 +373,7 @@ module.exports = {
     addProductToOrder,
     deleteOrder,
     updateOrderToTicket,
-    modifyStatusOrder,
+    modifyOrderStatus,
     updateOrderPrices,
     incrementQuantity, 
     decrementQuantity
