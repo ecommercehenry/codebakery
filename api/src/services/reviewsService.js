@@ -46,7 +46,7 @@ async function addReview(productId, userId, dataReview){
       id:userId
     }
   })
-  if(!product) return { __typename: "error", name: "error id usuario", detail: `El id ${userId} no existe` } 
+  if(!user) return { __typename: "error", name: "error id usuario", detail: `El id ${userId} no existe` } 
 
   //Create the review
   let review = null
