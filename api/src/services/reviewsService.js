@@ -10,11 +10,11 @@ async function deleteReview(id) {
   }
 }
 
-async function getAllReviewsFromAProduct(idProduct) {
+async function getAllReviewsFromAProduct(productId) {
   try {
     const reviewsProduct = await Review.findAll({
       where: {
-        productId: idProduct
+        productId: productId
       },
     });
     return reviewsProduct

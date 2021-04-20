@@ -4,6 +4,6 @@ const {
 
 module.exports = {
   getAllReviewsFromAProduct: (_, args) => {
-    return getAllReviewsFromAProduct(_.idProduct)
+    return getAllReviewsFromAProduct(_.productId)
   },
 }

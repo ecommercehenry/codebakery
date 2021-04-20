@@ -1,5 +1,5 @@
-query getAllReviewsFromAProduct($idProduct:Int!){
-        getAllReviewsFromAProduct(idProduct: $idProduct) {
+query getAllReviewsFromAProduct($productId:Int!){
+        getAllReviewsFromAProduct(productId: $productId) {
                 id
                 title
                 description
@@ -8,5 +8,5 @@ query getAllReviewsFromAProduct($idProduct:Int!){
 }
 
 {
-  "idProduct": 1
+  "productId": 1
 }
