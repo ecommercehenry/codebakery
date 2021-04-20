@@ -44,7 +44,8 @@ const ButtonAddCart = ({ id }) => {
               productId: id,
               quantity: 1,
             },
-          });
+          })
+          toast('Producto añadido al carrito');
         } else {
           createOrder({
             variables: {

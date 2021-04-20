@@ -12,7 +12,6 @@ toast.configure()
 const TotalToOrder = () => {
     const customId = "custom-id-yes";
     const itemsFromCart = useSelector(state=>state.cart.itemsToCart);
-    console.log(itemsFromCart)
     let total = 0;
     if(itemsFromCart!=undefined){itemsFromCart.map(elem => {total = total + (elem.price)*(elem.quantity)} )}
     

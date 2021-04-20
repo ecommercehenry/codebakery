@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
 import axios from 'axios'
 
 const FORM_ID = 'payment-form';
 
-export default function PayButton(){
+export default function PayButton({total}){
 
-    const { id } = useParams(); // id de producto
     const [preferenceId, setPreferenceId] = useState(null);
-  
     useEffect(() => {
-      axios.post('http://localhost:3001/create_preference', { description: "harcodeo", //se crea la preferencia 
-      price: "30",
-      quantity: "3"  }).then((order) => {
+      axios.post('http://localhost:3001/create_preference', { description: "item harcodeado", //se crea la preferencia 
+      price: total,
+      quantity: "1"  }).then((order) => {
         setPreferenceId(order.data.id);    // se guarda la respuesta en el estado local (la respuesta de crear la preferencia es un id)
       });
-    }, [id]);
+    }, [total]);
   
     useEffect(() => {
       if (preferenceId) {

@@ -1,22 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import ProductOnCart from "./ProductOnCart";
-import { useSelector } from "react-redux";
-import PayButton from './PayButton'
-
+import PayButton from "./PayButton";
 
 const UserCart = () => {
   let storage = window.localStorage;
   let userId = parseInt(storage.id);
-  const { data, previousData } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+  const { data,loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
-    fetchPolicy: "no-cache"
-  }); 
-  let { itemsToCart } = useSelector((state) => state.cart);
-  useEffect(() => {}, [itemsToCart])
-  console.log(data, previousData)
+    fetchPolicy: "no-cache",
+  });
+  let total =0
+  
+  if(!loading && data){
+    data.getOrdersByUserIdInCart.orders[0].lineal_order.map((order) =>{
+      total = total + (order.price * order.quantity)})
+  }
   return (
     <StyledCart>
       {data?.getOrdersByUserIdInCart.orders[0] ? (
@@ -31,11 +32,13 @@ const UserCart = () => {
             orderId={data.getOrdersByUserIdInCart.orders[0].id}
           />
         ))
-      ) 
-      : (
+      ) : (
         <p>vacio</p>
       )}
-      <PayButton/>
+      <div className="total-container">
+        <h1>el total es = {total}</h1>
+        <PayButton total={JSON.stringify(total)}/>
+      </div>
     </StyledCart>
   );
 };
