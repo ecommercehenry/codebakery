@@ -12,11 +12,12 @@ async function deleteReview(id) {
 
 async function getAllReviewsFromAProduct(idProduct) {
   try {
-    return await Review.findAll({
+    const reviewsProduct = await Review.findAll({
       where: {
-        id: idProduct
+        productId: idProduct
       },
     });
+    return reviewsProduct
   } catch (error) {
     throw new Error(error);
   }
