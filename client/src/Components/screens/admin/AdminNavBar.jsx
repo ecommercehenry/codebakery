@@ -1,111 +1,135 @@
-import React, { useState } from 'react';
-import {Link, Route} from 'react-router-dom'
+import React, { useState } from "react";
+import { Link, Route } from "react-router-dom";
 
 //styles
-import styled from 'styled-components';
-import FormCreateCategory from '../../FormCreateCategory/FormCreateCategory';
-import SortByPrice from './ordenes/SortByPrice';
+import styled from "styled-components";
+import FormCreateCategory from "../../FormCreateCategory/FormCreateCategory";
+import SortByPrice from "./ordenes/SortByPrice";
 
 //components
-import SearchBar from './SearchBar';
-import SearchBarAdmin from './SearchBarAdmin';
+import SearchBar from "./SearchBar";
+import SearchBarAdmin from "./SearchBarAdmin";
 
+const AdminNavBar = ({ setAddProduct }) => {
+  const buttonHandler = () => {
+    setAddProduct(true);
+  };
 
-const AdminNavBar = ({setAddProduct}) => {
+  const [add, setAdd] = useState(false);
 
-    const buttonHandler = () => {
-        setAddProduct(true)
-    }
+  return (
+    <StyledNavBar>
+      <div className="onLeft">
+        <Route path="/admin/products">
+          <div className="optionTab">PRODUCTS</div>
+          <SearchBar />
+        </Route>
 
-    const [add, setAdd] = useState(false)
-
-    return (
-        <StyledNavBar>
-            <div className="onLeft">
-                <Route path='/admin/products'> 
-                <>
-                <div className="optionTab">PRODUCTS</div>
-                <SearchBar/> 
-                </>
-                </Route>
-                <Route path='/admin/orders'> 
-                <div className="optionTab">ORDERS</div>
-                </Route>
+        <Route path="/admin/orders">
+          <div className="optionTab">ORDERS</div>
+          <SearchBarAdmin />
+        </Route>
+      </div>
+      
+      <Route path="/admin/orders">
+        <div className="onRight">
+          <SortByPrice />
+        </div>
+      </Route>
+      <Route path="/admin/products">
+        <>
+          {add ? (
+            <div className="add-category" onClick={() => setAdd(!add)}>
+              "+ ADD CATEGORY"
             </div>
-                <Route path='/admin/orders'> 
-                    <div className="onRight">
-                        <SearchBarAdmin/>
-                        <SortByPrice/>
-                    </div>
-                </Route>
-            <Route path='/admin/products' >
-             <>   
-                 
-            {add ? <div className="add-category" onClick={() => setAdd(!add)}>
-                "+ ADD CATEGORY"</div> : 
-                <div className="add-category"> <FormCreateCategory setAdd={setAdd}/></div>}
+          ) : (
+            <div className="add-category">
+              {" "}
+              <FormCreateCategory setAdd={setAdd} />
+            </div>
+          )}
 
-            <Link to="/admin/add-product" className="addProduct purple-btn" onClick={buttonHandler}>
-                + ADD PRODUCT
-            </Link>
-
-           </>
-                
-            </Route> 
-           
-
-        </StyledNavBar>
-    )
-}
+          <Link
+            to="/admin/add-product"
+            className="addProduct purple-btn"
+            onClick={buttonHandler}
+          >
+            + ADD PRODUCT
+          </Link>
+        </>
+      </Route>
+    </StyledNavBar>
+  );
+};
 
 const StyledNavBar = styled.div`
-    width: 77vw;
-    max-width: 100%;
-    height: 15vh;
-    display:flex;
-    align-items: center;
+  width: 77vw;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 6rem 0 4rem;
+  .onLeft {
+    .optionTab {
+      color: #513066;
+      height: 4.5vh;
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+    }
+    display: flex;
     justify-content: space-between;
-    margin: 0 6rem 0 4rem;
-    .onLeft{
-        .optionTab{
-            color:#513066;
-            height:4.5vh;
-            font-size: 2em;
-            display:flex;
-            align-items: center;
-        }
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .onRight{
-        display: flex;
-        width: 100%;
-        align-items: center;
-        margin-left: 5vw;
-        justify-content: space-between
-    }
-    .addProduct{
-        background:#5E3F71;
-        color:white;
-        display:flex;
-        align-items: center;
-        justify-content:center;
-    }
-    .purple-btn:hover{
-        background-color: #734191
-    }
-    .add-category{
-        background:#5E3F7100;
-        display:flex;
-        align-items: center;
-        justify-content:center;
-        color: rgba(0, 0, 0, 0.726)
-    }
-    .add-category:hover{
-        color: black;
-        cursor: pointer;
-    }
+    align-items: center;
+  }
+  .onRight {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-left: 5vw;
+    justify-content: flex-end;
+  }
+  .addProduct {
+    background: #5e3f71;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .purple-btn:hover {
+    background-color: #734191;
+  }
+  .add-category {
+    background: #5e3f7100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.726);
+  }
+  .add-category:hover {
+    color: black;
+    cursor: pointer;
+  }
+
+  .purple-btn {
+    display: flex;
+    height: 4.5vh;
+    width: fit-content !important;
+    border-radius: 40px;
+    border: none;
+    background-color: #5e3f71;
+    text-decoration: none !important;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    padding-bottom: 0.5%;
+    padding: 0 1.5vw 0 1.5vw;
+    transition: background-color 0.2s ease;
+  }
+
+  .purple-btn:hover {
+    background-color: #532c6b;
+  }
 `;
 
-export default AdminNavBar
+export default AdminNavBar;

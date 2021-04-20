@@ -1,4 +1,5 @@
 import React from 'react';
+import { HiOutlineSearch } from 'react-icons/hi';
 
 //styles
 import styled from 'styled-components';
@@ -6,14 +7,12 @@ import styled from 'styled-components';
 const SearchBar = () => {
     return (
         <StyledSearchBar>
-            <button>L</button>
+            <HiOutlineSearch size="1.5rem" color="#5E3F71"/>
             <input type="text" placeholder="Search"/>
             <div className="vertical-line"></div>
-            <div className="custom-select">
                 <select name="" id="">
                     <option value="">All</option>
                 </select>
-            </div>
         </StyledSearchBar>
     )
 }
@@ -50,16 +49,25 @@ const StyledSearchBar = styled.div`
     .vertical-line{
         border-left: 1px solid grey;
         height: 60%;
+        margin-right: 2%;
     }
     select{
         width:fit-content;
-        height:80%;
+        height:90%;
         font-size:1.1rem;
-        border-radius:13px;
+        border-radius:40px;
         padding: 0 0.5rem;
-        background:#cfcfcf00;
-        border:none;
+        background: #c4c4c485;
+        border: none;
+        font-weight: bold;
     }
+    select:focus {
+        outline: none;
+      }
+      select:before {
+        color: red
+        outline: none;
+      }
 `;
 
 export default SearchBar

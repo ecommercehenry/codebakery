@@ -2,6 +2,7 @@ import { useLazyQuery } from "@apollo/client";
 import React from "react";
 import { Children } from "react";
 import { useForm } from "react-hook-form";
+import { HiOutlineSearch } from "react-icons/hi";
 
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -27,29 +28,28 @@ const SearchBarAdmin = () => {
 
   return (
     <StyledSearchBar>
-      <div style={{display: "flex", position: "relative", alignItems: "center"}}>
-      <input
-        {...register("id")}
-        className="input-vertical-c"
-        type="text"
-        placeholder="Search"
-        style={{textAlign: "left"}}
-      />
-      <div className="vertical-line"></div>
-      <div className="custom-select" style={{position: "absolute", right: 0}}>
-        <select {...register("type")}>
-          <option value="user">Filter users by id</option>
-          <option value="order">Filter orders by id</option>
-        </select>
-      </div>
-      </div>
-      <ButtonSearch onClick={handleSubmit(onSubmit)}>Search</ButtonSearch>
+        <form onSubmit={handleSubmit(onSubmit)}>
+        <HiOutlineSearch size="1.5rem" color="#5E3F71"/>
+        <input
+          {...register("id")}
+          className="input-vertical-c"
+          type="text"
+          placeholder="Search"
+          style={{ textAlign: "left" }}
+        />
+        <div className="vertical-line">‎‎‎‏‏‎ ‎</div>
+          <select {...register("type")}>
+            <option value="user">User ID</option>
+            <option value="order">Order ID</option>
+          </select>
+        </form>
     </StyledSearchBar>
   );
 };
 
 const ButtonSearch = styled.button`
   background-color: #8a6db1;
+  position: relative;
   height: 80%;
   border: none;
   color: #dce8f1;
@@ -71,38 +71,49 @@ const ButtonSearch = styled.button`
 `;
 
 const StyledSearchBar = styled.div`
-  background: #8a6db1;
-  position: relative;
-  z-index: 2;
-  height: 5vh;
-  width: fit-content;
+  background: #e9e8e8;
+  height: 4.6vh;
+  width: 30rem;
   padding: 0 0.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   border: 1.3px solid #949494;
-  border-radius: 20px;
+  border-radius:20px;
+  margin-left: 3vw;
+  form{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    position: relative;
+    height: 4.5vh;
+  }
   input::placeholder {
-    color: white;
+    color: black;
     font-size: 20px;
     opacity: 0.5;
   }
   input {
-    color: white;
+    color: black;
     width: 70%;
     height: 2rem;
     border: none;
     font-size: 1.3rem;
     background: none;
+    text-align: left;
+    padding-left: 2%;
   }
   select {
+    display: inline-block;
     width: fit-content;
-    height: 2rem;
+    height: 80%;
     font-size: 1.1rem;
-    border-radius: 13px;
+    border-radius: 40px;
     padding: 0 0.5rem;
-    background: #f6f6f6;
-    border: 1px solid black;
+    background: #c4c4c485;
+    border: none;
+    font-weight: bold;
   }
   select:focus {
     outline: none;
@@ -111,6 +122,11 @@ const StyledSearchBar = styled.div`
     color: red
     outline: none;
   }
+  .vertical-line{
+    border-left: 1px solid grey;
+    height: 60%;
+    margin-right: 2%;
+}
 `;
 
 export default SearchBarAdmin;

@@ -1,127 +1,132 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
-import { withStyles } from '@material-ui/core/styles';
-import { useDispatch, useSelector } from 'react-redux';
-import Button from '@material-ui/core/Button';
-import styled from 'styled-components';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
+import { withStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "@material-ui/core/Button";
+import styled from "styled-components";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import ListItemText from "@material-ui/core/ListItemText";
 // import InboxIcon from '@material-ui/icons/MoveToInbox';
 // import DraftsIcon from '@material-ui/icons/Drafts';
 // import SendIcon from '@material-ui/icons/Send';
 
-import styles from './SortByPrice.module.css';
+import styles from "./SortByPrice.module.css";
 import { pricetolow, pricetohigh } from "../../../../actions";
 
 const useStyles = makeStyles({
-    root: {
-      padding:15,
-      width: 300,
-      height:80,
-     
-    },
-  });
+  root: {
+    padding: 15,
+    width: 300,
+    height: 80,
+  },
+});
 
-  function valuetext(value) {
-    return `${value}°C`;
-  }
+function valuetext(value) {
+  return `${value}°C`;
+}
 
-  const StyledMenu = withStyles({
-    paper: {
-      border: '1px solid #d3d4d5',
-    },
+const StyledMenu = withStyles({
+  paper: {
+    border: "1px solid #d3d4d5",
+  },
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "center",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "center",
+    }}
+    {...props}
+  />
+));
 
-        })((props) => (
-          <Menu
-            elevation={0}
-            getContentAnchorEl={null}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
-            }}
-            {...props}
-    />
-  ));
-
-  const StyledMenuItem = withStyles((theme) => ({
-    root: {
-      '&:focus': {
-        backgroundColor: theme.palette.primary.main,
-        '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-          color: theme.palette.common.white,
-        },
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    "&:focus": {
+      backgroundColor: theme.palette.primary.main,
+      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+        color: theme.palette.common.white,
       },
     },
-  }))(MenuItem);
-
- 
+  },
+}))(MenuItem);
 
 export default function SortByPrice() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState([20, 37]);
+  //estado local del rango
 
-    const classes = useStyles();
-    const [value, setValue] = React.useState([20, 37]);
-    //estado local del rango
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-   
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-  
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-      };
+  const dispatch = useDispatch();
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const low = (event) => {
+    event.preventDefault();
+    dispatch(pricetolow());
+  };
 
-    const dispatch = useDispatch();
+  const high = (event) => {
+    event.preventDefault();
+    dispatch(pricetohigh());
+  };
 
-    const low = (event) => {
+  return (
+    <div>
+      <Button
+        aria-controls="customized-menu"
+        aria-haspopup="true"
+        variant="contained"
+        className="addProduct"
+        onClick={handleClick}
+        style={{height: "4.5vh"}}
+      >
+        Sort By Price
+      </Button>
+      <StyledMenu
+        id="customized-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <StyledMenuItem>
+          <ListItemText
+            primary="Price-low to high"
+            onClick={low}
+            onClose={handleClose}
+          />
+        </StyledMenuItem>
 
-      event.preventDefault();
-      dispatch(pricetolow());
-    }
+        <StyledMenuItem>
+          <ListItemText primary="Price-high to low" onClick={high} />
+        </StyledMenuItem>
+      </StyledMenu>
+    </div>
+  );
+}
 
-    const high = (event) => {
-      console.log('highantes')
-      event.preventDefault();
-      dispatch(pricetohigh());
-      console.log('highdespues')
-    }
-
-    return (
-
-        (
-            <div>
-              <Button
-                aria-controls="customized-menu"
-                aria-haspopup="true"
-                variant="contained"
-                className="addProduct purple-btn"
-                onClick={handleClick}
-              >
-               Sort By Price
-              </Button>
-              <StyledMenu
-                id="customized-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                    {/* <StyledMenuItem>
+{
+  /* <StyledMenuItem>
                     
                           <div className={classes.root}>
                               <div id="range-slider">
@@ -138,46 +143,5 @@ export default function SortByPrice() {
                               />
                           </div>
 
-                    </StyledMenuItem> */}
-
-                    <StyledMenuItem>
-                      
-                            <ListItemText primary="Price-low to high" onClick={low} onClose={handleClose} />
-                      
-                        
-                    </StyledMenuItem>
-                    
-                    <StyledMenuItem>
-                        <ListItemText primary="Price-high to low" onClick={high}/>
-                    </StyledMenuItem>
-
-              </StyledMenu>
-            </div>
-          )
-                 
-    )
-
+                    </StyledMenuItem> */
 }
-
-const StyledAdminPanel = styled.div`
- 
-    .right{
-        width:87%;
-        display:flex;
-        flex-direction:column;
-        .top{
-            height:15vh;
-        }
-        .addProduct{
-          background:#5E3F71;
-          color:white;
-          display:flex;
-          align-items: center;
-          justify-content:center;
-      }
-      .purple-btn:hover{
-          background-color: #734191
-      }
-       
-    }
-`;
