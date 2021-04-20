@@ -15,7 +15,7 @@ module.exports = `
         getAllOrders: ordersResult,
         getOrdersByUserIdInCart(userId: Int!): ordersResult,
         getOrdersByUserIdInTicket(userId: Int!): ordersResult,
-        validateUser(name:String, password:String): resultValidate,
+        validateUser(email:String, password:String): resultValidate,
         getOrderById(id: Int!): orderResult,
         validateCredentials(token: String!, role: String!): Boolean
     }

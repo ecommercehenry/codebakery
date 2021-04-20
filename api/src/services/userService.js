@@ -49,10 +49,10 @@ async function modifyUser(id, name, password, email, role) {
   }
 }
 
-async function loginUser(name,password){
+async function loginUser(email,password){
   const user = await Users.findOne({
     where:{
-      name
+      email: email
     }
   })
   if(!user){
