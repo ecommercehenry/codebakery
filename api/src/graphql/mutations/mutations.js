@@ -5,7 +5,7 @@ union deletes = booleanResponse | error
 union resultUsers = user | error
 union resultBoolean  = booleanResponse | error 
 union resultOrder = order | error
- 
+union reviewResult = review | error
 type Mutation{
     modifyProduct(id: Int!, dataToModify: productInput!): resultProduct
     updateCategory(id : Int!, input: categoryInput): resultCategory
@@ -27,4 +27,5 @@ type Mutation{
     incrementQuantity(orderId: Int!, productId: Int!, quantity: Int!): resultBoolean
     decrementQuantity(orderId: Int!, productId: Int!, quantity: Int!): resultBoolean
     deleteReview(id: Int!): deletes
+    addReview(productId: Int!, userId: Int!, dataReview: reviewInput!): reviewResult
 }`

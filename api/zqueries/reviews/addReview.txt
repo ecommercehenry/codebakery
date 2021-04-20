@@ -1,0 +1,25 @@
+mutation addReview($productId:Int!, $userId:Int!, $dataReview:reviewInput!){
+  addReview(productId:$productId,userId:$userId,dataReview:$dataReview){
+    __typename
+    ... on review{
+      id
+      stars
+      description
+      title
+    }
+    __typename
+    ...on error{
+      detail
+    }
+  }
+}
+
+{
+  "productId": 1,
+  "userId": 1,
+  "dataReview": {
+    "title": "Una review",
+    "description": "Los pastelitos son lo mejor",
+    "stars": "5"
+  }
+}
