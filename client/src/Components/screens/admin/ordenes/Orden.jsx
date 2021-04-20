@@ -11,21 +11,7 @@ import { useQuery, useMutation } from "@apollo/client";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
-<<<<<<< HEAD
 export default function Orden({ id, orden, setDetail }) {
-  const dispatch = useDispatch()// prueba 
-  let { orders } = useSelector((state) => state.ordersReducer); // prueba
-
-  console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
-  console.log(orders, 'prueba de estado'); 
-  console.log(id, "id")
-  const instance = (
-      <Steps current={0}>
-      <Steps.Item onClick={()=> console.log("Me hiciste click")}  />
-      <Steps.Item  />
-      <Steps.Item  />     
-=======
-export default function Orden({ id, orden }) {
   const [orderStatus, setOrderStatus] = useState('unpaid')
 
   console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
@@ -40,7 +26,6 @@ export default function Orden({ id, orden }) {
       <Steps.Item onClick={()=> console.log("cambiar status a paid")} />  
       <Steps.Item onClick={()=> console.log("cambiar status a send")} />
       <Steps.Item onClick={()=> console.log("cambiar status a recived")}/>     
->>>>>>> ef58221bf508017580586363d59e724e74876494
     </Steps>
   );
 
