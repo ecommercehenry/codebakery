@@ -31,6 +31,14 @@ async function addReview(productId, userId, dataReview){
   if(!dataReview.hasOwnProperty("title")) return { __typename: "error", name: "error entrada", detail: `No se envio un titulo para la review` }
   if(!dataReview.hasOwnProperty("description")) return { __typename: "error", name: "error entrada", detail: `No se envio una descripcion para la review` }
   if(!dataReview.hasOwnProperty("stars")) return { __typename: "error", name: "error entrada", detail: `No se envio la propiedad stars para la review` }
+  //Validate if the use already make a review of this product
+  const reviewRealized = await Review.findOne({
+    where:{
+      userId:userId,
+      productId:productId
+    }
+  })
+  if(reviewRealized) return { __typename: "error", name: "Ya realizaste esta review", detail: `Este usuario (${userId}) ya realizo una review a el producto ${productId}` } 
   
   //Get the product
   const product = await Product.findOne({
@@ -48,14 +56,6 @@ async function addReview(productId, userId, dataReview){
   })
   if(!user) return { __typename: "error", name: "error id usuario", detail: `El id ${userId} no existe` } 
 
-  //Validate if the use already make a review of this product
-  const reviewRealized = await Review.findOne({
-    where:{
-      userId:userId,
-      productId:productId
-    }
-  })
-  if(reviewRealized) return { __typename: "error", name: "Ya realizaste esta review", detail: `Este usuario (${userId}) ya realizo una review a el producto ${productId}` } 
   //Create the review
   let review = null
   try{
