@@ -6,7 +6,7 @@ async function deleteReview(id) {
     await reviewToDelete.destroy()
     return {__typename: "booleanResponse", boolean: true}
   } catch (error) {
-    return { __typename: "error", name: "error", detail: "Review not found" }
+    return { __typename: "error", name: "error", detail: `Review not found: ${error.message}` }
   }
 }
 
