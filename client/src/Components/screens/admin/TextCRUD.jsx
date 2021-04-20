@@ -82,9 +82,8 @@ const StyledTextCRUD = styled.div`
     display:flex;
     align-items:flex-start;
     justify-content:space-around;
-    width:70vw;
-    margin: 2rem;
-    margin-top: 0.5rem;
+    width:100%;
+    margin-top: 1.5rem;
     height: 100%;
    
 

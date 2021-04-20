@@ -19,6 +19,8 @@ async function dataPopulation() {
     await createOrder([{id:4,quantity:1},{id:8,quantity:1}],1)
     await createOrder([{id:5,quantity:2},{id:9,quantity:1}],2)
     await updateOrderToTicket(1)
+    await updateOrderToTicket(5)
+
     await updateOrderToTicket(2)
     await updateOrderToTicket(4)
 
