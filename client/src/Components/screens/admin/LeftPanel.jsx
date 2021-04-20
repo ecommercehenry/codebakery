@@ -10,6 +10,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const LeftPanel = () => {
+    const path = window.location.pathname;
+    const activeTab = {
+      products: path.includes("products") ? "active" : "inactive",
+      orders: path.includes("orders") ? "active" : "inactive",
+      users: path.includes("users") ? "active" : "inactive"
+    }
+
+
     return (
       <StyledPanel>
         <div className="content">
@@ -20,7 +28,7 @@ const LeftPanel = () => {
 
           <div className="tabs">
             <Link className="text-decoration-none text-white" to="/admin/products">
-              <div className="tab">
+              <div className={`tab ${activeTab.products}`}>
                 <div className="icon">
                   <img src={productsIcon} alt="icon" />
                 </div>
@@ -28,7 +36,7 @@ const LeftPanel = () => {
               </div>
             </Link>
             <Link className="text-decoration-none text-white" to="/admin/orders">
-              <div className="tab">
+              <div className={`tab ${activeTab.orders}`}>
                 <div className="icon">
                   <img src={ordersIcon} alt="icon" />
                 </div>{" "}
@@ -36,7 +44,7 @@ const LeftPanel = () => {
               </div>
             </Link>
             <Link className="text-decoration-none text-white" to="/admin/orders">
-              <div className="tab">
+              <div className={`tab ${activeTab.users}`}>
                 <div className="icon">
                   <img src={usersIcon} alt="icon" />
                 </div>
@@ -98,6 +106,10 @@ const StyledPanel = styled.div`
             flex-direction:column;
             justify-content:flex-start;
             padding-left: 2.5rem;
+            .active{
+              background: white;
+              color: black
+            }
             .tab{
                 margin: 2.5rem 0 0 0;
                 font-size: 1.3rem;
