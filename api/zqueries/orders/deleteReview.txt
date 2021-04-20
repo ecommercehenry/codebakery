@@ -1,0 +1,17 @@
+mutation deleteReview($id:Int!){
+  deleteReview(id: $id){
+      __typename
+     ... on booleanResponse {
+      boolean
+    }
+    __typename
+    ... on error {
+      name
+      detail
+    }
+  }
+}
+
+{
+  "id": 1
+}
