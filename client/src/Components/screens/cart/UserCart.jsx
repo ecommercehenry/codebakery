@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useQuery } from "@apollo/client";
-import PayButton from './PayButton'
-
 import styled from "styled-components";
 import ProductOnCart from "./ProductOnCart";
 import { useSelector } from "react-redux";
+import PayButton from './PayButton'
 
 
 const UserCart = () => {
@@ -32,7 +31,8 @@ const UserCart = () => {
             orderId={data.getOrdersByUserIdInCart.orders[0].id}
           />
         ))
-      ) : (
+      ) 
+      : (
         <p>vacio</p>
       )}
       <PayButton/>

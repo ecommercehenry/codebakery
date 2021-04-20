@@ -6,7 +6,12 @@ const { graphqlHTTP } = require("express-graphql");
 const cors = require('cors')
 const {errorType} = require("./graphql/roots/errorsHandlers/errors")
 require('./db.js');
+/// mercadopago
+const mercadopago = require("mercadopago"); //requerimos mercado pago
 
+const {ACCESS_TOKEN} = process.env
+mercadopago.configurations.setAccessToken(`${ACCESS_TOKEN}`); //access-key
+/// mercadopago
 const server = express();
 const {schema, root} = require("./graphql/schema")
 server.name = 'API';
@@ -28,6 +33,40 @@ const getErrorCode = errorName =>{
   console.log("owefjwoiefjweofjweoifjwoeifjAAAAAAAAAAAAAAAAAAAA"+errorName)
   return errorType[errorName]
 }
+///mercadopago
+server.post("/create_preference", (req, res) => {   //ruta para crear preferencia
+
+	let preference = {
+		items: [{                               
+			title: req.body.description,            // por body se envian descripcion - precio y cantidad
+			unit_price: Number(req.body.price),
+			quantity: Number(req.body.quantity),
+		}],
+		back_urls: {
+			"success": "http://localhost:3001/feedback",            //luego modificar si se quiere redigir en cada caso
+			"failure": "http://localhost:3001/feedback",
+			"pending": "http://localhost:3001/feedback"
+		},
+		auto_return: 'approved',
+	};
+
+	mercadopago.preferences.create(preference)
+		.then(function (response) {
+			res.json({id :response.body.id})      //responde con un id 
+		}).catch(function (error) {
+			console.log(error);
+		});
+});
+
+server.get('/feedback', function(request, response) {     //ruta que responde con el status del pago
+	 response.json({
+		Payment: request.query.payment_id,
+		Status: request.query.status,
+		MerchantOrder: request.query.merchant_order_id
+	})
+});
+
+///mercadopago
 
 server.use('/graphql', graphqlHTTP((req)=>{
   console.log("HEADER: "+req.headers.authtoken+' '+req.headers.authrole )
