@@ -19,7 +19,7 @@ async function getAllReviewsFromAProduct(productId) {
     });
     return reviewsProduct
   } catch (error) {
-    throw new Error(error);
+    return { __typename: "error", name: "desconocido", detail: `${error.message}` }
   }
 }
 
