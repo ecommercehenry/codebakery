@@ -5,12 +5,15 @@ import {
   FILTER_ORDER,
   CHANGE_STATUS,
   FILTER_USERS,
+  CLEAR_FILTER,
 } from "../actions/index";
 
 const initialState = {
   orders: [],
   filterOrders: [],
   search: false,
+  idError: 0,
+  status: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -37,11 +40,19 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (o) => o.id === Number(action.payload)
       );
+      console.log(searchOrder);
       if (searchOrder.length) {
         return {
           ...state,
           filterOrders: searchOrder,
           search: true,
+        };
+      } else {
+        return {
+          ...state,
+          filterOrders: [],
+          idError: action.payload,
+          status: true,
         };
       }
 
@@ -50,12 +61,18 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (u) => u.userId === Number(action.payload)
       );
-      console.log(searchUsers);
       if (searchUsers.length) {
         return {
           ...state,
           filterOrders: searchUsers,
           search: true,
+        };
+      } else {
+        return {
+          ...state,
+          filterOrders: [],
+          idError: action.payload,
+          status: true,
         };
       }
 
@@ -123,10 +140,12 @@ const reducer = (state = initialState, action) => {
         search: true,
       };
 
-    case CHANGE_STATUS:
+    case CLEAR_FILTER:
       return {
         ...state,
-        search: true,
+        filterOrders: [],
+        search: false,
+        status: false,
       };
 
     default:

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Orden from "./Orden";
 import styled from "styled-components";
 import { useQuery } from "@apollo/client";
 import getAllOrders from "../../../../Apollo/queries/getAllOrders";
-import getAllOrdersPrueba from "../../../../Apollo/queries/getAllOrdersPrueba";
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrders } from "../../../../actions";
-import SortByPrice from "./SortByPrice";
+import { toast } from "react-toastify";
+
+import ButtonClear from "./ButtonClear";
 
 // @-WenLi
 //traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
@@ -14,6 +15,7 @@ import SortByPrice from "./SortByPrice";
 //mostrarlas haciendo un mapeo sobre la data, renderizando cada vez un componente Orden
 
 export default function TablaOrdenes() {
+  const customId = "custom-id-yes";
   let { data } = useQuery(getAllOrders);
   let ordersQ = data?.getAllOrders.orders;
 
@@ -24,7 +26,7 @@ export default function TablaOrdenes() {
   }, [data]);
 
   //traigo info del reducer..
-  const { orders, search, filterOrders, sortbyPrice, sort } = useSelector(
+  const { orders, search, filterOrders, idError, status } = useSelector(
     (state) => state.ordersReducer
   );
   //let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
@@ -32,20 +34,29 @@ export default function TablaOrdenes() {
   //Debe renderizar todas las ordenes si no hay una busqueda
   //Si hay busqueda, renderiza el filtrado de la busqueda
   let dataRENDER;
-  if (search) {
-    console.log("MUESTRA DATA RENDER POR..SEARCH");
+  if (search && !filterOrders.length) {
+    //console.log("MUESTRA DATA RENDER POR..SEARCH");
+    toast(`El ID ${idError} no existe.`, {
+      toastId: customId,
+    });
+    return <ButtonClear name="Volver al principio" />;
+
+    //dataRENDER = orders;
+  } else if (search) {
     dataRENDER = filterOrders;
-  } else if (sort) {
-    console.log("MUESTRA DATA RENDER POR..SORT");
-    dataRENDER = filterOrders;
-    // console.log("SORT-BY-PRICE", sortbyPrice)
+  } else if (status) {
+    toast(`El ID ${idError} no existe.`, {
+      toastId: customId,
+    });
+    return <ButtonClear name="Volver al principio" />;
   } else {
-    console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
+    //console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
     dataRENDER = orders;
   }
 
   return (
     <StyledTablaOrdenes>
+      <ButtonClear name="Clear" />
       {dataRENDER ? (
         dataRENDER.map((ord) => {
           return <Orden id={ord.id} key={ord.id} orden={ord} />;
