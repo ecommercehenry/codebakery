@@ -3,7 +3,7 @@ import { fetchByName } from '../../../../actions';
 import { useDispatch} from "react-redux";
 import styled from 'styled-components';
 
-const SearchBar = ({setSearch}) => {
+const SearchBar = () => {
 
   const dispatch = useDispatch()
   const [input, setInput] = useState([])

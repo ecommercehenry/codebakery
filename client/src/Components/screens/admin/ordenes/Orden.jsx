@@ -1,21 +1,25 @@
 import React from "react";
 import styled from 'styled-components';
 import { Steps } from 'rsuite';
+import { useDispatch} from "react-redux";
+import { getAllOrders } from "../../../../actions/index"; 
+import { useSelector } from "react-redux";
+import  OrderDetail  from './OrdenDetail'; 
 import 'rsuite/lib/styles/index.less';
 import "./prueba.css"
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
-export default function Orden({ id, orden }) {
+export default function Orden({ id, orden, setDetail }) {
+  const dispatch = useDispatch()// prueba 
+  let { orders } = useSelector((state) => state.ordersReducer); // prueba
 
   console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
- 
-  
+  console.log(orders, 'prueba de estado'); 
+  console.log(id, "id")
   const instance = (
-    <Steps current={0}>
-     
+      <Steps current={0}>
       <Steps.Item onClick={()=> console.log("Me hiciste click")}  />
-     
       <Steps.Item  />
       <Steps.Item  />     
     </Steps>
@@ -57,7 +61,7 @@ export default function Orden({ id, orden }) {
               {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
             <div className="edit-button">
-              <button>Detail</button>
+              <button onClick={ () => setDetail(true)}>Detail</button>
             </div>
           </div>
         </div>
