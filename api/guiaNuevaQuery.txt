@@ -5,7 +5,7 @@
 
 - Importar la propiedad en el index y exportarla (en el index de quieriesRevolvers o mutationsResolvers).
 
-- Importar en el index de roots(general) y colocasla en el objeto root que ya está exportado en ese archivo.
+- Importar en el index de roots(general) y colocarsela en el objeto root que ya está exportado en ese archivo.
 
 - Crear la función en la carpeta services(esta será la función que se trae o modifica cosas den la DB) 
 en el archivo correspondiente.

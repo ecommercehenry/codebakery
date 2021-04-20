@@ -5,39 +5,43 @@ import { useForm } from "react-hook-form";
 
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { filterOrders } from "../../../actions";
+import { changedStatus, filterOrders, filterUsers } from "../../../actions";
 
 import getOrdersByUserIdInTicket from "../../../Apollo/queries/getOrdersByUserIdInTicket";
 
 const SearchBarAdmin = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  let [ordersUsers, { data }] = useLazyQuery(getOrdersByUserIdInTicket);
-
-  // console.log(data);
 
   const onSubmit = ({ id, type }) => {
     if (!id) return alert("Ingrese un ID");
     const idUser = Number(id);
-    type === "user"
-      ? ordersUsers({ variables: { idUser } })
-      : dispatch(filterOrders(id));
+    if (type === "user") {
+      dispatch(changedStatus());
+      dispatch(filterUsers(id));
+    }
+    if (type === "order") {
+      dispatch(filterOrders(id));
+    }
   };
 
   return (
     <StyledSearchBar>
+      <div style={{display: "flex", position: "relative", alignItems: "center"}}>
       <input
         {...register("id")}
         className="input-vertical-c"
         type="text"
         placeholder="Search"
+        style={{textAlign: "left"}}
       />
       <div className="vertical-line"></div>
-      <div className="custom-select">
+      <div className="custom-select" style={{position: "absolute", right: 0}}>
         <select {...register("type")}>
           <option value="user">Filter users by id</option>
           <option value="order">Filter orders by id</option>
         </select>
+      </div>
       </div>
       <ButtonSearch onClick={handleSubmit(onSubmit)}>Search</ButtonSearch>
     </StyledSearchBar>
@@ -46,14 +50,16 @@ const SearchBarAdmin = () => {
 
 const ButtonSearch = styled.button`
   background-color: #8a6db1;
+  height: 80%;
   border: none;
   color: #dce8f1;
-  padding: 10px 40px;
+  padding: 0px 10px;
+  margin-left: 2vw;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   text-transform: uppercase;
-  font-size: 25px;
+  font-size: 0.875rem;
   -webkit-border-radius: 5px 5px 5px 5px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -66,12 +72,10 @@ const ButtonSearch = styled.button`
 
 const StyledSearchBar = styled.div`
   background: #8a6db1;
-  position: absolute;
+  position: relative;
   z-index: 2;
-  transform: translateY(-50%);
-  margin: 50px auto;
-
-  width: 50%;
+  height: 5vh;
+  width: fit-content;
   padding: 0 0.5rem;
   display: flex;
   justify-content: center;
