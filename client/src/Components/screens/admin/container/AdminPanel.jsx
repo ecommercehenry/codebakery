@@ -56,7 +56,6 @@ const StyledAdminPanel = styled.div`
         flex-direction:column;
         .top{
             height:15vh;
-            margin-bottom: 50px;
         }
         .bottom{
             position: relative;
@@ -67,6 +66,7 @@ const StyledAdminPanel = styled.div`
             justify-content:center;
             align-items:center;
             z-index: 4;
+            margin-left: 4rem
         }
         .edit-grid{
             position: absolute;

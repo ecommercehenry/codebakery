@@ -56,7 +56,7 @@ async function loginUser(name,password){
     }
   })
   if(!user){
-    return {__typename:"error",name:"the user dont exists",detail:"the user dont exists"}
+    return {__typename:"error",name:"The user doesn't exists",detail:"The user doesn't exists"}
   }
   if(user){
     const hashed = Users.encryptPassword(password, user.salt())
@@ -79,4 +79,16 @@ async function loginUser(name,password){
   }
 }
 
-module.exports = { getAllUsers, createUser, modifyUser,loginUser, getUserByEmail}
+async function deleteUser(id) {
+  try {
+    
+    const userToDelete = await Users.findByPk(id)
+    await userToDelete.destroy()
+   
+    return {__typename: "booleanResponse", boolean: true}
+  } catch (error) {
+    return { __typename: "error", name: "error", detail: "User not found" }
+  }
+}
+
+module.exports = { getAllUsers, createUser, modifyUser,loginUser, getUserByEmail, deleteUser}
