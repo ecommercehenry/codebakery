@@ -18,7 +18,7 @@ const CreateUserAccount = () => {
     formState: { errors },
   } = useForm()
   const password = useRef({})
-  password.current = watch("password", "")
+  password.current = watch("password", "");
 
   const handleLogin = async (data) => {
     createUser({
@@ -29,16 +29,16 @@ const CreateUserAccount = () => {
         role: "user",
       },
     })
-    SetExit(true)
+    SetExit(true);
   }
 useEffect(() => {
   if (data?.createUser?.name === "error") {
-    SetExit("error")
+    SetExit("error");
   }
 }, [data])
   
   // SetExit(false);
-  // useEffect(()=>{
+  // useEffect(()=>{ 
   //   SetExit(false);
   // }, [exit])
 
