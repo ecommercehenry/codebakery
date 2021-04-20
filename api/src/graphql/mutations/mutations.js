@@ -15,7 +15,7 @@ type Mutation{
     addCategoryToProduct(idProduct: Int!,idCategory: Int!): resultProduct
     removeCategoryFromProduct(idProduct: Int!,idCategory: Int!): resultProduct
     addProduct(category: String!, name: String!, description: String!, price: Float!, stock: Int!, image: String!): resultProduct
-    createUser(name: String!, password: String!, email: String!, role: String!): resultUsers
+    createUser(name: String!, password: String!, email: String!, role: String!, google: Boolean): resultUsers
     modifyUser(id: Int!, name:String, password: String, email: String, role: String): resultUsers
     createOrder(idUser: Int!, dataProducts: [dataProductsOrderInput]) : resultOrder
     updateOrderPrices(orderId: Int!) : resultBoolean

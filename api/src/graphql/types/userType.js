@@ -7,7 +7,7 @@ module.exports = `
         products: [product],
         reviews: [review]
         token: String,
-        order: order, 
+        order: order,
     }
 
 `

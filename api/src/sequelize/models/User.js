@@ -62,6 +62,6 @@ module.exports = (sequelize) => {
     }
   }
 
-  Users.beforeCreate(setSaltAndPassword)
-  Users.beforeUpdate(setSaltAndPassword)
+  // Users.beforeCreate(setSaltAndPassword)
+  // Users.beforeUpdate(setSaltAndPassword)
 }

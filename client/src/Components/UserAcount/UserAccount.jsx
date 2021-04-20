@@ -12,7 +12,7 @@ import { Redirect } from "react-router-dom";
 import Login from "./Login";
 import Logout from "./Logout";
 import { useDispatch } from "react-redux";
-import validateUser from "../../Apollo/queries/validateUser"
+import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
 import '../../Assets/toast.css'; 
@@ -20,7 +20,8 @@ import '../../Assets/toast.css';
 toast.configure()
 
 const UserAcount = () => {
-  const [login, { loading, data }] = useLazyQuery(validateUser);
+  // valida que exista el usuario y lo devuelve con un token
+  const [login, { loading, data }] = useLazyQuery(validateUser); 
   // const validate = useLazyQuery(VALIDATE_CREDENTIALS);
   const validateCredentials = useLazyQuery(VALIDATE_CREDENTIALS);
   const loadingValidate = validateCredentials[1]?.loading?.validateCredentials, 
@@ -35,12 +36,12 @@ const UserAcount = () => {
  
   // console.log(dataValidate, 'yysayysyas')
   // Google login
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(()=>{
     if(localStorage.getItem('token')){
       functionValidate({ variables: { token: localStorage.getItem('token'), role: localStorage.getItem('role') } });
-   }
+    }
     if(!loading && data){
       if(data.validateUser.token){
         // alert("logueado")
@@ -73,8 +74,7 @@ const UserAcount = () => {
     // };
   }
   const handleLogin = async (form) => {
-    login({variables: {name:form.login,password:form.password}})    
-
+    login({variables: {name:form.login,password:form.password}});
   };
 
   return (

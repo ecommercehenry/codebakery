@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/client";
-import React from "react";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import React, { useEffect } from "react";
 import { useGoogleLogin } from "react-google-login";
-
+import validateUser from "../../Apollo/queries/validateUser"
 import { FcGoogle } from "react-icons/fc";
 import styled from "styled-components";
 import CREATE_USER from "../../Apollo/mutations/createUser";
@@ -9,33 +9,39 @@ import CREATE_USER from "../../Apollo/mutations/createUser";
 const clientId = "896421264771-puonusmobbd2vfeo6b03itcpknghfte7.apps.googleusercontent.com"; 
 
 function Login() {
-  const [createUser, { data }] = useMutation(CREATE_USER);
+  // necesitamos crear el usuario
+  const [createUser, { loading: loagingUser, data: dataUser }] = useMutation(CREATE_USER);
+  const [login, { loading, data }] = useLazyQuery(validateUser); 
+  // const [login, { loading, data }] = useLazyQuery(validateUser); 
+  // validar el usuario!!??
+  // 
   const onSuccess = (res) => {
     console.log(res);
     console.log("Login Success: currentUser:", res.profileObj);
-
-//     email: "francisco.ronaldo.tovar@gmail.com"
-// familyName: "Tovar"
-// givenName: "Francisco"
-// googleId: "110337830120924630738"
-// imageUrl: "https://lh3.googleusercontent.com/-ufTT2eBSRcs/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucla0seDdfRQSyLzCFVPlordhuGSEw/s96-c/photo.jpg"
-// name: "Francisco Tovar"
-    // createUser({
-    //   variables: {
-    //     name: res.profileObj.name,
-    //     password: res.profileObj,
-    //     email: res.profileObj.email,
-    //     role: "user",
-    //   },
-    // })
+    createUser({
+      variables: {
+        name: res.profileObj.name,
+        password: '12345',
+        email: res.profileObj.email,
+        role: "user",
+        google: true
+      },
+    });
     alert(
       `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
     );
     //refreshTokenSetup(res);
+    // console.log('usuario creado', dataUser)
   };
+  useEffect(()=>{
+    if(!loagingUser){
+      console.log('usuario creado', dataUser)
+    }
+  },[loagingUser, dataUser])
+  // console.log('despues de on success', dataUser)
 
   const onFailure = (res) => {
-    console.log("Login failed: res:", res);
+    console.log("Login failed: res:", dataUser);
     
   };
 
