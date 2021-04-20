@@ -43,15 +43,6 @@ export default function TablaOrdenes() {
     // console.log("SORT-BY-PRICE", sortbyPrice)
   } else if(detail){
     dataRENDER = ordersRender
-<<<<<<< HEAD
-  } else {
-    console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
-    dataRENDER = ordersRender;
-  }
-
-  return (
-    <StyledTablaOrdenes>
-=======
   }  
     return (
         <StyledTablaOrdenes>
@@ -67,19 +58,14 @@ export default function TablaOrdenes() {
             <p>loading...</p>
           )}
         </StyledTablaOrdenes>
-      
-    )
->>>>>>> ef58221bf508017580586363d59e724e74876494
-
-      {
-       detail === false ? (
-        dataRENDER && dataRENDER.map((ord) => {
-          return <Orden id={ord.id} key={ord.id} orden={ord} setDetail={setDetail} />;
-        })
-      ) : 
-        <OrderDetail/>
-      }
-    </StyledTablaOrdenes>
+      // {
+      //  detail === false ? (
+      //   dataRENDER && dataRENDER.map((ord) => {
+      //     return <Orden id={ord.id} key={ord.id} orden={ord} setDetail={setDetail} />;
+      //   })
+      // ) : 
+      //   <OrderDetail/>
+      // }
   );
 }
 
@@ -91,9 +77,6 @@ const StyledTablaOrdenes = styled.div`
   margin-top: 0.5rem;
   margin-left: 0;
   height: 100%;
-<<<<<<< HEAD
-`;
-=======
 `
 
 //Actualizar el estado de una query, unpaid, paid, sent, received
@@ -114,4 +97,3 @@ const StyledTablaOrdenes = styled.div`
 //   "orderId":1,
 //   "status": "paid"
 // }
->>>>>>> ef58221bf508017580586363d59e724e74876494
