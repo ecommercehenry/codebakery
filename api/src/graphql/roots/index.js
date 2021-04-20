@@ -19,7 +19,8 @@ const {
     incrementQuantity, 
     decrementQuantity, 
     deleteReview,
-    addReview
+    addReview,
+    modifyReview
 } = require("./mutationsResolver/")
 
 const {
@@ -63,6 +64,7 @@ const root = {
     decrementQuantity, 
     deleteReview,
     addReview,
+    modifyReview,
 
     //Queries    
     productById,

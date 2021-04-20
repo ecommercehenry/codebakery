@@ -28,4 +28,5 @@ type Mutation{
     decrementQuantity(orderId: Int!, productId: Int!, quantity: Int!): resultBoolean
     deleteReview(id: Int!): deletes
     addReview(productId: Int!, userId: Int!, dataReview: reviewInput!): reviewResult
+    modifyReview(reviewId: Int!, dataReview:reviewInput!): reviewResult
 }`

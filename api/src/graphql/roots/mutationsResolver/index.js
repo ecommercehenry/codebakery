@@ -19,6 +19,7 @@ const { incrementQuantity } = require("./incrementQuantity");
 const { decrementQuantity } = require("./decrementQuantity"); 
 const { deleteReview } = require("./deleteReview.js")
 const { addReview } = require("./addReview")
+const {modifyReview} = require("./modifyReview")
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -40,5 +41,6 @@ module.exports = {
   incrementQuantity, 
   decrementQuantity, 
   deleteReview,
-  addReview
+  addReview,
+  modifyReview
 }
