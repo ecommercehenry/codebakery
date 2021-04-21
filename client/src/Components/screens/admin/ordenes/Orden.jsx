@@ -43,7 +43,7 @@ export default function Orden({ id, orden }) {
             </div>
 
             <div className="text-container">
-              <span>Name</span>
+              <span>User Name</span>
               <p>{orden.name}</p>
             </div>
 
