@@ -60,6 +60,7 @@ function App() {
   } else {
     return (
       <>
+      <GlobalStyle/>
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route path="/catalogue" component={Catalogue} />

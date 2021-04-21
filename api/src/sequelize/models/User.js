@@ -38,10 +38,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     dni: {
-      type: DataTypes.FLOAT
+      type: DataTypes.STRING
     },
     phoneNumber: {
-      type: DataTypes.FLOAT
+      type: DataTypes.STRING
     },
     salt: {
       type: DataTypes.STRING,
