@@ -118,7 +118,7 @@ async function deleteUser(id) {
 module.exports = {
   getAllUsers,
   createUser,
-  modifyUser,
+  modifyUser,   //@ lau usare este para modificar el rol de usuario comun a admin
   loginUser,
   getUserByEmail,
   deleteUser,
