@@ -18,6 +18,8 @@ import { useLazyQuery, useQuery } from "@apollo/client"
 import VALIDATE_CREDENTIALS from "./Apollo/queries/validateCredentials"
 import AddProductForm from "./Components/AddProductForm"
 import Detail from "./Components/screens/detail/Detail"
+import ResetPassword from "./Components/ResetPassword/ResetPassword"
+
 import Hola from "./Components/Hola"
 
 let token = localStorage.getItem("token")
@@ -65,6 +67,7 @@ function App() {
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
+          <Route exact path="/reset-password" component={ResetPassword} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
