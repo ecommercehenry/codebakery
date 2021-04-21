@@ -8,7 +8,7 @@ module.exports = {
       const decoded = jwt.verify(authToken, "secret")
       let { authrole } = args.headers
       if (authrole === "user") {
-        return deleteReview(_.id)
+        return deleteReview(_.productId, _.userId)
       } else
         return { __typename: "error", name: "error", detail: "No authorized" }
     } catch (err) {

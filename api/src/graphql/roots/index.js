@@ -64,7 +64,6 @@ const root = {
     deleteReview,
 
     //Queries    
-    deleteUser,    
     productById,
     product,
     productCategory,

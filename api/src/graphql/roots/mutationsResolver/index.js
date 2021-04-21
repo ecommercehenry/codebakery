@@ -41,6 +41,7 @@ module.exports = {
   incrementQuantity, 
   decrementQuantity, 
   deleteReview,
+  decrementQuantity,
   deleteUser,
 
 }
