@@ -53,7 +53,7 @@ server.post("/create_preference", (req, res) => {   //ruta para crear preferenci
 			"failure": "http://localhost:3001/feedback",
 			"pending": "http://localhost:3001/feedback"
 		},
-		auto_return: 'approved',
+    installments: 3, //cantidad maxima de cuotas  
 	};
 
 	mercadopago.preferences.create(preference)
@@ -65,7 +65,7 @@ server.post("/create_preference", (req, res) => {   //ruta para crear preferenci
 });
 
 server.get('/feedback', function(req, res) {     //ruta que responde con el status del pago
-  console.log('feedback',res)
+  console.log('request feedback',res,'response feedback',res)
 	 res.json({
 		Payment: req.query.payment_id,
 		Status: req.query.status,
