@@ -1,28 +1,24 @@
-import { useLazyQuery } from "@apollo/client";
 import React from "react";
-import { Children } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlineSearch } from "react-icons/hi";
 
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { changedStatus, filterOrders, filterUsers } from "../../../actions";
-
-import getOrdersByUserIdInTicket from "../../../Apollo/queries/getOrdersByUserIdInTicket";
+import { filterOrders, filterUsers } from "../../../actions";
 
 const SearchBarAdmin = () => {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = ({ id, type }) => {
     if (!id) return alert("Ingrese un ID");
-    const idUser = Number(id);
     if (type === "user") {
-      dispatch(changedStatus());
       dispatch(filterUsers(id));
+      reset();
     }
     if (type === "order") {
       dispatch(filterOrders(id));
+      reset();
     }
   };
 

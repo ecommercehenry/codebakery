@@ -25,9 +25,11 @@ let userId = parseInt(storage.id);
     });
   }
   if(data !== undefined){
-    data.getOrdersByUserIdInCart.orders[0].lineal_order.map((element) =>{
-      valor = valor + element.quantity
-    }); 
+    if (data.getOrdersByUserIdInCart.orders.length != 0 ){
+      data.getOrdersByUserIdInCart.orders[0].lineal_order.map((element) =>{
+        valor = valor + element.quantity
+      }); 
+    }
   } 
 
   return (

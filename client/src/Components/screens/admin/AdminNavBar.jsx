@@ -110,7 +110,6 @@ const StyledNavBar = styled.div`
     color: black;
     cursor: pointer;
   }
-
   .purple-btn {
     display: flex;
     height: 4.5vh;
