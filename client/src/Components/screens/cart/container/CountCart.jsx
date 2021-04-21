@@ -35,11 +35,6 @@ let userId = parseInt(storage.id);
   return (
     <StyledCount>
       <div>
-        {/* <img
-          src={cartIcon}
-          alt="cat icon"
-          style={{ height: "2.1rem", width: "2.1rem", padding: "2px" }}
-        /> */}
         <HiOutlineShoppingCart size="2.1rem" color={color} className="cart-icon"/>
         <span className="count" style={{color:color, fontWeight:"bold"}}>
         {
