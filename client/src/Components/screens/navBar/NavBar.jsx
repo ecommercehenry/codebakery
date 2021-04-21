@@ -32,6 +32,7 @@ const NavBar = ({ color }) => {
   };
 
   let storage = window.localStorage;
+  let role = window.localStorage.getItem("role");
   let logeed = storage.token ? true : false;
   return (
     <StyledNavBar className="navbar d-flex align-items-center mx-5">
@@ -41,11 +42,17 @@ const NavBar = ({ color }) => {
             Code {"\n"} Bakery
           </h5>
         </Link>
-        <Link id="Cart" to="/cart" className={tag2}>
-          <div>
-            <CountCart color={color}/>
-          </div>
-        </Link>
+        {role === "admin" ? (
+          <Link to="/admin/orders" className={tag2}>
+            <div>Admin Panel</div>
+          </Link>
+        ) : (
+          <Link id="Cart" to="/cart" className={tag2}>
+            <div>
+              <CountCart />
+            </div>
+          </Link>
+        )}
         <Link id="Catalogue" to="/catalogue" className={tag1}>
           Catalogue
         </Link>
