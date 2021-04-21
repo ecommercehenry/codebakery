@@ -7,9 +7,9 @@ import styled from "styled-components";
 import CREATE_USER from "../../Apollo/mutations/createUser";
 import { toast } from "react-toastify";
 import '../../Assets/toast.css';
+import VALIDATE_USER_WITH_GOOGLE from "../../Apollo/queries/validateUserWithGoogle";
 
-toast.configure()
-
+toast.configure();
 const clientId = "896421264771-puonusmobbd2vfeo6b03itcpknghfte7.apps.googleusercontent.com"; 
 
 function Login() {
@@ -18,6 +18,7 @@ function Login() {
   // validamos el usuario para generar el token, luego el componente 
   // UserAcount genera la validación automatica ya que hay token en 
   // el local storage(este componente se renderiza en UserAccount)
+  const [validate, {loading: loadingValidate, data: dataValidate}] = useLazyQuery(VALIDATE_USER_WITH_GOOGLE);
   const [login, { loading, data }] = useLazyQuery(VALID_USER);
 
   const onSuccess = (res) => {
@@ -40,14 +41,19 @@ function Login() {
     // con nombre de usuario eso se debe modificar, los demás cambios necesarios para vlidacion
     // están hechos)
     // const p = window.promt('Por favor elige tu contra: ')
-    
-    let passwordFromPrompt = window.prompt('Type here');
+    // tomamos los datos he intentamos validar, en caso de q ya esté registrado logeamos
+    // validate({
+    //   variables: {
+    //     email: res.profileObj.email
+    //   }
+    // })
+    // let passwordFromPrompt = window.prompt('Type here');
     // let bar = window.confirm('Confirm or deny');
-    // console.log(foo);
+    // console.log(res);
     createUser({
       variables: {
         name: res.profileObj.name,
-        password: passwordFromPrompt,
+        password: res.googleId,
         email: res.profileObj.email,
         role: "user",
         google: true
@@ -56,30 +62,33 @@ function Login() {
     //refreshTokenSetup(res);
     // console.log('usuario creado', dataUser)
   };
+  // vemos si la validacion trae el usuario
   // descomentar ambos useEffect para el logeo con creación de usuario
   useEffect(()=>{
     // console.log('logeado........')
-    if(!loading && data){
-      if(data.validateUser.token){
+    if(!loadingValidate && dataValidate){
+      console.log(dataValidate, 'attstatstatstas')
+      if(dataValidate.validateUserWithGoogle.token){
         alert("logueado")
-        localStorage.setItem('token', data.validateUser.token);
-        localStorage.setItem('name', data.validateUser.name);
-        localStorage.setItem('email', data.validateUser.email);
-        localStorage.setItem('role', data.validateUser.role);
-        localStorage.setItem('id', data.validateUser.id);
+        localStorage.setItem('token', dataValidate.validateUserWithGoogle.token);
+        localStorage.setItem('name', dataValidate.validateUserWithGoogle.name);
+        localStorage.setItem('email', dataValidate.validateUserWithGoogle.email);
+        localStorage.setItem('role', dataValidate.validateUserWithGoogle.role);
+        localStorage.setItem('id', dataValidate.validateUserWithGoogle.id);
         // es necesario el reloaded para luego poder redirigir
-        toast(`Bienvenido ${data.validateUser.name}`);
+        toast(`Bienvenido ${dataValidate.validateUserWithGoogle.name}`); 
         window.location.reload();
       }else{
         toast(data.validateUser.detail);
       }
     }
-  }, [loading, data]);
+  }, [loadingValidate, dataValidate]);
 
   useEffect(()=>{
     if(!loadingUser && dataUser){
-      console.log('usuario creado', dataUser);
-      login({variables: {name: dataUser.createUser.name, password:'12345'}});
+      // console.log('usuario creado', dataUser);
+      validate({variables: {email: dataUser.createUser.email}});
+      // console.log('despues......');
     }
   },[loadingUser, dataUser])
   // console.log('despues de on success', data)

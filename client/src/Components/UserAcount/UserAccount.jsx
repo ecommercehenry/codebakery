@@ -82,7 +82,7 @@ const UserAcount = () => {
   };
 
   return (
-    <div classname="page" style={{height: "100vh", display: "flex", alignItems: "center"}}>
+    <div className="page" style={{height: "100vh", display: "flex", alignItems: "center"}}>
     <div className="wrapper fadeInDown" style={{marginBottom: "10vh"}}>
       <div className="formContent">
         <Login />
