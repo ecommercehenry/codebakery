@@ -20,7 +20,8 @@ const {
     decrementQuantity, 
     deleteReview,
     addReview,
-    modifyReview
+    modifyReview,
+    deleteUser,
 } = require("./mutationsResolver/")
 
 const {
@@ -85,7 +86,9 @@ const root = {
     modifyOrderStatus,
     validateUser,
     getUserByEmail,
-    getAllReviewsFromAProduct 
+    getAllReviewsFromAProduct,    
+    // getAllUsers,
+    
 }
 
 module.exports = root

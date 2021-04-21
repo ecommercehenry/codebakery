@@ -49,10 +49,10 @@ async function modifyUser(id, name, password, email, role) {
   }
 }
 
-async function loginUser(name,password){
+async function loginUser(email,password){
   const user = await Users.findOne({
     where:{
-      name
+      email: email
     }
   })
   if(!user){
@@ -79,4 +79,16 @@ async function loginUser(name,password){
   }
 }
 
-module.exports = { getAllUsers, createUser, modifyUser,loginUser, getUserByEmail}
+async function deleteUser(id) {
+  try {
+    
+    const userToDelete = await Users.findByPk(id)
+    await userToDelete.destroy()
+   
+    return {__typename: "booleanResponse", boolean: true}
+  } catch (error) {
+    return { __typename: "error", name: "error", detail: "User not found" }
+  }
+}
+
+module.exports = { getAllUsers, createUser, modifyUser,loginUser, getUserByEmail, deleteUser}

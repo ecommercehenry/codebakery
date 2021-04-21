@@ -26,7 +26,10 @@ type Mutation{
     modifyOrderStatus(orderId: Int!, status: String!): resultBoolean
     incrementQuantity(orderId: Int!, productId: Int!, quantity: Int!): resultBoolean
     decrementQuantity(orderId: Int!, productId: Int!, quantity: Int!): resultBoolean
-    deleteReview(id: Int!): deletes
     addReview(productId: Int!, userId: Int!, dataReview: reviewInput!): reviewResult
     modifyReview(reviewId: Int!, dataReview:reviewInput!): reviewResult
+    deleteReview(productId: Int!, userId: Int!): deletes
+    deleteUser(userId: Int!) : resultBoolean
+
+   
 }`
