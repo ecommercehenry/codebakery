@@ -51,8 +51,7 @@ export default function TablaOrdenes() {
         dataRENDER && dataRENDER.map((ord) => {
           return <Orden id={ord.id} key={ord.id} orden={ord} setDetail={setDetail} />;
         })
-      ) : 
-      dataRENDER && dataRENDER.map((ord) => {
+      ) : dataRENDER && dataRENDER.map((ord) => {
         return <OrderDetail id={ord.id} key={ord.id} />;
       })
       }
