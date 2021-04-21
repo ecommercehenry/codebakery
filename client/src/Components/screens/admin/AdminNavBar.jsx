@@ -21,23 +21,21 @@ const AdminNavBar = ({ setAddProduct }) => {
     <StyledNavBar>
       <div className="onLeft">
         <Route path="/admin/products">
-          <>
-            <div className="optionTab">PRODUCTS</div>
-            <SearchBar />
-          </>
+          <div className="optionTab">PRODUCTS</div>
+          <SearchBar />
         </Route>
+
         <Route path="/admin/orders">
-          <>
-            <div className="optionTab">ORDERS</div>
-            <div>
-              <SortByPrice />
-            </div>
-            <div>
-              <SearchBarAdmin />
-            </div>
-          </>
+          <div className="optionTab">ORDERS</div>
+          <SearchBarAdmin />
         </Route>
       </div>
+
+      <Route path="/admin/orders">
+        <div className="onRight">
+          <SortByPrice />
+        </div>
+      </Route>
       <Route path="/admin/products">
         <>
           {add ? (
@@ -64,52 +62,72 @@ const AdminNavBar = ({ setAddProduct }) => {
 };
 
 const StyledNavBar = styled.div`
-    width: 77vw;
-    max-width: 100%;
-    height: 15vh;
-    display:flex;
-    align-items: center;
+  width: 77vw;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 6rem 0 4rem;
+  .onLeft {
+    .optionTab {
+      color: #513066;
+      height: 4.5vh;
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+    }
+    display: flex;
     justify-content: space-between;
-    margin: 0 6rem 0 4rem;
-    .onLeft{
-        .optionTab{
-            color:#513066;
-            height:4.5vh;
-            font-size: 2em;
-            display:flex;
-            align-items: center;
-        }
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .onRight{
-        display: flex;
-        width: 100%;
-        align-items: center;
-        margin-left: 5vw;
-        justify-content: space-between
-    }
-    .addProduct{
-        background:#5E3F71;
-        color:white;
-        display:flex;
-        align-items: center;
-        justify-content:center;
-    }
-    .purple-btn:hover{
-        background-color: #734191
-    }
-    .add-category{
-        background:#5E3F7100;
-        display:flex;
-        align-items: center;
-        justify-content:center;
-        color: rgba(0, 0, 0, 0.726)
-    }
-    .add-category:hover{
-        color: black;
-        cursor: pointer;
+    align-items: center;
+  }
+  .onRight {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-left: 5vw;
+    justify-content: flex-end;
+  }
+  .addProduct {
+    background: #5e3f71;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .purple-btn:hover {
+    background-color: #734191;
+  }
+  .add-category {
+    background: #5e3f7100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.726);
+  }
+  .add-category:hover {
+    color: black;
+    cursor: pointer;
+  }
+  .purple-btn {
+    display: flex;
+    height: 4.5vh;
+    width: fit-content !important;
+    border-radius: 40px;
+    border: none;
+    background-color: #5e3f71;
+    text-decoration: none !important;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    padding-bottom: 0.5%;
+    padding: 0 1.5vw 0 1.5vw;
+    transition: background-color 0.2s ease;
+  }
+
+  .purple-btn:hover {
+    background-color: #532c6b;
+  }
 `;
 
 export default AdminNavBar;

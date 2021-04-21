@@ -18,5 +18,6 @@ module.exports = `
         validateUser(email:String, password:String): resultValidate,
         getOrderById(id: Int!): orderResult,
         validateCredentials(token: String!, role: String!): Boolean
+        getAllReviewsFromAProduct(productId: Int!): [review]
     }
 `;
