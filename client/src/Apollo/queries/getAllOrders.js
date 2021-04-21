@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client"
 
-const getAllOrders = gql`
+const GET_All_ORDERS = gql`
 query getAllOrders{
   getAllOrders{
    	...on orders{
@@ -29,4 +29,4 @@ query getAllOrders{
 }
 `
 
-export default getAllOrders;
+export default GET_All_ORDERS;

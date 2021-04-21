@@ -46,26 +46,18 @@ export default function TablaOrdenes() {
   }  
     return (
         <StyledTablaOrdenes>
-             {dataRENDER ? (
-            dataRENDER.map((ord) => {
-              return <Orden
-                  id ={ord.id}
-                  key = {ord.id}
-                  orden = {ord}
-              />                    
-           })
-          ) : (
-            <p>loading...</p>
-          )}
+       {
+       detail === false ? (
+        dataRENDER && dataRENDER.map((ord) => {
+          return <Orden id={ord.id} key={ord.id} orden={ord} setDetail={setDetail} />;
+        })
+      ) : 
+      dataRENDER && dataRENDER.map((ord) => {
+        return <OrderDetail id={ord.id} key={ord.id} />;
+      })
+      }
         </StyledTablaOrdenes>
-      // {
-      //  detail === false ? (
-      //   dataRENDER && dataRENDER.map((ord) => {
-      //     return <Orden id={ord.id} key={ord.id} orden={ord} setDetail={setDetail} />;
-      //   })
-      // ) : 
-      //   <OrderDetail/>
-      // }
+
   );
 }
 
@@ -78,7 +70,17 @@ const StyledTablaOrdenes = styled.div`
   margin-left: 0;
   height: 100%;
 `
-
+             {/* {dataRENDER ? (
+            dataRENDER.map((ord) => {
+              return <Orden
+                  id ={ord.id}
+                  key = {ord.id}
+                  orden = {ord}
+              />                    
+           })
+          ) : (
+            <p>loading...</p>
+          )} */}
 //Actualizar el estado de una query, unpaid, paid, sent, received
 // mutation modifyStatusOrder($orderId:Int! , $status:String!){
 //   modifyStatusOrder(orderId:$orderId, status:$status)

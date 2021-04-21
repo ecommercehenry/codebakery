@@ -70,7 +70,7 @@ const reducer = (state = initialState, action) => {
       let filterlow;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
         //console.log('stateorder', state.orders)
-        filterlow = state.filterOrders.map((o) => {
+        filterlow = state?.filterOrders?.map((o) => {
           // console.log("oooooooooooooo", o)
           let filter = {
             id: o.id,

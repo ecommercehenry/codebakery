@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { Steps } from 'rsuite';
-import { useDispatch} from "react-redux";
-import { getAllOrders } from "../../../../actions/index"; 
-import { useSelector } from "react-redux";
-import  OrderDetail  from './OrdenDetail'; 
+import { Steps } from 'rsuite'; 
 import 'rsuite/lib/styles/index.less';
 import "./prueba.css"
 import { useQuery, useMutation } from "@apollo/client";
@@ -65,7 +61,7 @@ export default function Orden({ id, orden, setDetail }) {
               {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
             <div className="edit-button">
-              <button onClick={ () => setDetail(true)}>Detail</button>
+              <button onClick={() => setDetail(true)}>Detail</button>
             </div>
           </div>
         </div>
