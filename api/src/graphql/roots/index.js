@@ -39,7 +39,6 @@ const {
     getOrdersByUserIdInCart,
     getOrdersByUserIdInTicket,
     getUserByEmail,
-    validateCredentials,
     getAllReviewsFromAProduct,
     validateCredentials,
     validateUserWithGoogle,
