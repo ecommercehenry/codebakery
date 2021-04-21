@@ -31,102 +31,73 @@ const NavBar = ({ color }) => {
     localStorage.clear();
   };
 
-  let storage = window.localStorage; 
-  let role = window.localStorage.getItem('role')
-  let logeed = storage.token ? true : false; 
-  if(role === 'admin') {
-    return (
-      <nav className="navbar d-flex align-items-center mx-5">
-        <div className="left-tags d-flex justify-content-between align-items-center me-auto">
-          <Link to="/" className={brandTag}>
-            <h5 className="mb-0 text-center display-linebreak">
-              Code {"\n"} Bakery
-            </h5>
-          </Link>
+  let storage = window.localStorage;
+  let role = window.localStorage.getItem("role");
+  let logeed = storage.token ? true : false;
+  return (
+    <StyledNavBar className="navbar d-flex align-items-center mx-5">
+      <div className="left-tags d-flex justify-content-between align-items-center me-auto">
+        <Link to="/" className={brandTag}>
+          <h5 className="mb-0 text-center display-linebreak">
+            Code {"\n"} Bakery
+          </h5>
+        </Link>
+        {role === "admin" ? (
           <Link to="/admin/orders" className={tag2}>
-          <div>Admin Panel</div>
+            <div>Admin Panel</div>
           </Link>
-          <Link id="Catalogue" to="/catalogue" className={tag1}>
-            Catalogue
-          </Link>
-          <Link id="About us" to="/about-us" className={tag3}>
-            About us
-          </Link>
-        </div>
-        <div className="right-buttons d-flex align-items-center">
-          { logged? 
-          <>
-            <div className="usuario">Hi! {logeed ? localStorage.name : "Guess"}</div>
-          <Link
-            to="/"
-            className={`login-btn text-decoration-none ${textColor}`} onClick={logout}
-          >
-            Logout
-          </Link>
-          </> : <>
-          <Link
-            to="/log-in"
-            className={`login-btn text-decoration-none ${textColor}`}>
-            Login
-          </Link> 
-          <Link to="/sign-up" id="sign-up-link" className="text-decoration-none">
-          <div
-            className={`${btnColor}-btn d-flex justify-content-center align-items-center`}
-          >
-            <span>Sign Up</span>
-          </div>
-        </Link> </>}
-          
-        </div>
-      </nav>
-    );
-  } else {
-    return (
-      <nav className="navbar d-flex align-items-center mx-5">
-        <div className="left-tags d-flex justify-content-between align-items-center me-auto">
-          <Link to="/" className={brandTag}>
-            <h5 className="mb-0 text-center display-linebreak">
-              Code {"\n"} Bakery
-            </h5>
-          </Link>
+        ) : (
           <Link id="Cart" to="/cart" className={tag2}>
-          <div><CountCart /></div>
+            <div>
+              <CountCart />
+            </div>
           </Link>
-          <Link id="Catalogue" to="/catalogue" className={tag1}>
-            Catalogue
-          </Link>
-          <Link id="About us" to="/about-us" className={tag3}>
-            About us
-          </Link>
-        </div>
-        <div className="right-buttons d-flex align-items-center">
-          { logged? 
+        )}
+        <Link id="Catalogue" to="/catalogue" className={tag1}>
+          Catalogue
+        </Link>
+        <Link id="About us" to="/about-us" className={tag3}>
+          About us
+        </Link>
+      </div>
+      <div className="right-buttons d-flex align-items-center">
+        {logged ? (
           <>
-            <div className="usuario">Hi! {logeed ? localStorage.name : "Guess"}</div>
-          <Link
-            to="/"
-            className={`login-btn text-decoration-none ${textColor}`} onClick={logout}
-          >
-            Logout
-          </Link>
-          </> : <>
-          <Link
-            to="/log-in"
-            className={`login-btn text-decoration-none ${textColor}`}>
-            Login
-          </Link> 
-          <Link to="/sign-up" id="sign-up-link" className="text-decoration-none">
-          <div
-            className={`${btnColor}-btn d-flex justify-content-center align-items-center`}
-          >
-            <span>Sign Up</span>
-          </div>
-        </Link> </>}
-          
-        </div>
-      </nav>
-    );
-  }
+            <div className="usuario">
+              Hi! {logeed ? localStorage.name : "Guess"}
+            </div>
+            <Link
+              to="/"
+              className={`login-btn text-decoration-none ${textColor}`}
+              onClick={logout}
+            >
+              Logout
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/log-in"
+              className={`login-btn text-decoration-none ${textColor}`}
+            >
+              Login
+            </Link>
+            <Link
+              to="/sign-up"
+              id="sign-up-link"
+              className="text-decoration-none"
+            >
+              <div
+                className={`${btnColor}-btn d-flex justify-content-center align-items-center`}
+              >
+                <span>Sign Up</span>
+              </div>
+            </Link>{" "}
+          </>
+        )}
+      </div>
+    </StyledNavBar>
+  );
 };
 
 const StyledNavBar = styled.nav`
