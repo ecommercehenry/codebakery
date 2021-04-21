@@ -17,28 +17,25 @@ const AdminNavBar = ({ setAddProduct }) => {
 
   const [add, setAdd] = useState(false);
 
-
   return (
     <StyledNavBar>
       <div className="onLeft">
         <Route path="/admin/products">
-          <>
-            <div className="optionTab">PRODUCTS</div>
-            <SearchBar />
-          </>
+          <div className="optionTab">PRODUCTS</div>
+          <SearchBar />
         </Route>
+
         <Route path="/admin/orders">
-          <>
-            <div className="optionTab">ORDERS</div>
-            <div>
-              <SortByPrice />
-            </div>
-            <div>
-              <SearchBarAdmin />
-            </div>
-          </>
+          <div className="optionTab">ORDERS</div>
+          <SearchBarAdmin />
         </Route>
       </div>
+      
+      <Route path="/admin/orders">
+        <div className="onRight">
+          <SortByPrice />
+        </div>
+      </Route>
       <Route path="/admin/products">
         <>
           {add ? (
@@ -66,10 +63,9 @@ const AdminNavBar = ({ setAddProduct }) => {
 };
 
 const StyledNavBar = styled.div`
-
   width: 77vw;
   max-width: 100%;
-  height: 15vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -82,10 +78,16 @@ const StyledNavBar = styled.div`
       display: flex;
       align-items: center;
     }
-    width: 43%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .onRight {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-left: 5vw;
+    justify-content: flex-end;
   }
   .addProduct {
     background: #5e3f71;
@@ -107,6 +109,25 @@ const StyledNavBar = styled.div`
   .add-category:hover {
     color: black;
     cursor: pointer;
+  }
+  .purple-btn {
+    display: flex;
+    height: 4.5vh;
+    width: fit-content !important;
+    border-radius: 40px;
+    border: none;
+    background-color: #5e3f71;
+    text-decoration: none !important;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    padding-bottom: 0.5%;
+    padding: 0 1.5vw 0 1.5vw;
+    transition: background-color 0.2s ease;
+  }
+
+  .purple-btn:hover {
+    background-color: #532c6b;
   }
 `;
 
