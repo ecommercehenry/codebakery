@@ -4,9 +4,9 @@ import cartIcon from "../../../../../src/icons/cartNav.svg";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../src/Apollo/queries/getOrdersByUserIdInCart"; 
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
+import { HiOutlineShoppingCart } from "react-icons/hi";
 
-
-const Count = () => {
+const Count = ({color}) => {
 let storage = window.localStorage;
 let userId = parseInt(storage.id);
   const { data } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
@@ -35,12 +35,8 @@ let userId = parseInt(storage.id);
   return (
     <StyledCount>
       <div>
-        <img
-          src={cartIcon}
-          alt="cat icon"
-          style={{ height: "2.1rem", width: "2.1rem", padding: "2px" }}
-        />
-        <span className="count">
+        <HiOutlineShoppingCart size="2.1rem" color={color} className="cart-icon"/>
+        <span className="count" style={{color:color, fontWeight:"bold"}}>
         {
           logeed ? valor : sum
         }
@@ -60,7 +56,13 @@ const StyledCount = styled.div`
     justify-content: space-between;
     .count{
         background: #E44949;
+        padding: 2px;
         border-radius: 99px; 
         color: #F8F0F0 ; 
+    }
+    .cart-icon{
+      height: "2.1rem";
+      width: "2.1rem";
+      padding: "2px"
     }
     `; 

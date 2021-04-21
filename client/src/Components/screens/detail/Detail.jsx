@@ -21,12 +21,9 @@ const Detail = () => {
 
   const path = window.location.pathname;
   const id = parseInt(path.split("/").pop(), 10);
-  console.log(typeof id);
 
   const { data } = useQuery(getData, { variables: { id } }); // <------
   useEffect(() => {}, [data]);
-
-  console.log(idCart.id);
 
   return (
     <div className="detail-container">

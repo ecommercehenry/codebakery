@@ -4,31 +4,31 @@ import bigPhoto from './landing-big-photo.png';
 import styled from 'styled-components';
 import bread1 from './bread1.png';
 import bread2 from './bread2.png';
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 const Landing = () => {
     const [redirect, setRedirect] = useState(false)
 
     return (
         <>
-        <NavBar color='black'/>
-        <StyledLanding>
-            <div className="background-photo">
-            <img src={bread1} alt="" id="bread1"/>
-            <img src={bread2} alt="" id="bread2"/>
-            <div id="title-btn-wrapper">
-                <span className="landing-title">
-                    Find your
+            <NavBar color='black' />
+            <StyledLanding>
+                <div className="background-photo">
+                    <img src={bread1} alt="" id="bread1" />
+                    <img src={bread2} alt="" id="bread2" />
+                    <div id="title-btn-wrapper">
+                        <span className="landing-title">
+                            Find your
                     <br />
                     delight
                 </span>
-                <button className="go-shop-btn purple-btn" onClick={() => setRedirect(true)}>
-                    Start shopping
+                        <button className="go-shop-btn purple-btn" onClick={() => setRedirect(true)}>
+                            Start shopping
                 </button>
-                {redirect && <Redirect push to="/catalogue"/>}
-            </div>
-            </div>
-        </StyledLanding>
+                        {redirect && <Redirect push to="/catalogue" />}
+                    </div>
+                </div>
+            </StyledLanding>
         </>
     )
 }
@@ -92,4 +92,24 @@ top: 0;
     }
 
 }
+
+.purple-btn{
+    display: block;
+    height:  4.5vh;
+    width: fit-content!important;
+    border-radius: 40px;
+    border: none;
+    background-color: #5E3F71;
+    text-decoration: none !important;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    padding-bottom: 0.5%;
+    padding: 0 1.5vw 0 1.5vw;
+    transition: background-color 0.2s ease;
+  }
+  
+  .purple-btn:hover{
+    background-color: #532c6b
+  }
 `

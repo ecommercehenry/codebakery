@@ -17,7 +17,10 @@ const {
     updateOrderToTicket,
     modifyOrderStatus, 
     incrementQuantity, 
-    decrementQuantity,
+    decrementQuantity, 
+    deleteReview,
+    addReview,
+    modifyReview,
     deleteUser,
 } = require("./mutationsResolver/")
 
@@ -36,9 +39,8 @@ const {
     getOrdersByUserIdInCart,
     getOrdersByUserIdInTicket,
     getUserByEmail,
-    
-    // getAllUsers,
     validateCredentials,
+    getAllReviewsFromAProduct,
 } = require("./queriesResolvers/")
 
 // product
@@ -60,11 +62,12 @@ const root = {
     deleteOrder,
     updateOrderToTicket,
     incrementQuantity, 
-    decrementQuantity,
-    deleteUser,
-  
-    //Queries
-    
+    decrementQuantity, 
+    deleteReview,
+    addReview,
+    modifyReview,
+
+    //Queries    
     productById,
     product,
     productCategory,
@@ -82,8 +85,8 @@ const root = {
     deleteProductOrder,
     modifyOrderStatus,
     validateUser,
-    getUserByEmail
-    
+    getUserByEmail,
+    getAllReviewsFromAProduct,    
     // getAllUsers,
     
 }
