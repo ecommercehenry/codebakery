@@ -1,4 +1,4 @@
-const { loginUser } = require("../../../services/userService")
+const { loginUser } = require("../../../services/userService");
 
 // getAllProducts
 module.exports = {validateUser:async ({name,password}) =>  {
