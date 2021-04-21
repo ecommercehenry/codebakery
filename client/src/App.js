@@ -19,7 +19,6 @@ import VALIDATE_CREDENTIALS from "./Apollo/queries/validateCredentials"
 import AddProductForm from "./Components/AddProductForm"
 import Detail from "./Components/screens/detail/Detail"
 import Hola from "./Components/Hola"
-import PayButton from './Components/screens/cart/PayButton'
 
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
@@ -60,7 +59,6 @@ function App() {
     return (
       <>
         <Switch>
-      <Route path='/mp' component={PayButton}/>
           <Route exact path="/" component={Landing} />
           <Route path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />

@@ -35,13 +35,19 @@ const getErrorCode = errorName =>{
 }
 ///mercadopago
 server.post("/create_preference", (req, res) => {   //ruta para crear preferencia
-
-	let preference = {
-		items: [{                               
-			title: req.body.description,            // por body se envian descripcion - precio y cantidad
-			unit_price: Number(req.body.price),
-			quantity: Number(req.body.quantity),
-		}],
+  let {body} = req
+  let items =[]
+  body.map((item ) =>{
+    let newitem = {
+      title: item.name ,
+      unit_price: parseInt(item.price),
+      quantity: parseInt(item.quantity),
+    }
+    items.push(newitem)
+  }) 
+  let preference = {
+		items: items,
+    
 		back_urls: {
 			"success": "http://localhost:3001/feedback",            //luego modificar si se quiere redigir en cada caso
 			"failure": "http://localhost:3001/feedback",
@@ -58,11 +64,12 @@ server.post("/create_preference", (req, res) => {   //ruta para crear preferenci
 		});
 });
 
-server.get('/feedback', function(request, response) {     //ruta que responde con el status del pago
-	 response.json({
-		Payment: request.query.payment_id,
-		Status: request.query.status,
-		MerchantOrder: request.query.merchant_order_id
+server.get('/feedback', function(req, res) {     //ruta que responde con el status del pago
+  console.log('feedback',res)
+	 res.json({
+		Payment: req.query.payment_id,
+		Status: req.query.status,
+		MerchantOrder: req.query.merchant_order_id
 	})
 });
 

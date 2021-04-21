@@ -12,12 +12,8 @@ const UserCart = () => {
     variables: { idUser: userId },
     fetchPolicy: "no-cache",
   });
-  let total =0
-  
-  if(!loading && data){
-    data.getOrdersByUserIdInCart.orders[0].lineal_order.map((order) =>{
-      total = total + (order.price * order.quantity)})
-  }
+
+
   return (
     <StyledCart>
       {data?.getOrdersByUserIdInCart.orders[0] ? (
@@ -29,15 +25,15 @@ const UserCart = () => {
             stock={order.stock}
             image={order.image}
             quantity={order.quantity}
-            orderId={data.getOrdersByUserIdInCart.orders[0].id}
+            orderId={data.getOrdersByUserIdInCart.orders[0].id
+            }
           />
         ))
       ) : (
         <p>vacio</p>
       )}
       <div className="total-container">
-        <h1>el total es = {total}</h1>
-        <PayButton total={JSON.stringify(total)}/>
+        <PayButton productos={data?.getOrdersByUserIdInCart?.orders[0]?.lineal_order}/>
       </div>
     </StyledCart>
   );

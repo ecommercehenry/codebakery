@@ -3,16 +3,16 @@ import axios from 'axios'
 
 const FORM_ID = 'payment-form';
 
-export default function PayButton({total}){
+export default function PayButton({productos}){
 
     const [preferenceId, setPreferenceId] = useState(null);
+    
     useEffect(() => {
-      axios.post('http://localhost:3001/create_preference', { description: "item harcodeado", //se crea la preferencia 
-      price: total,
-      quantity: "1"  }).then((order) => {
+      axios.post('http://localhost:3001/create_preference',productos) //se crea la preferencia )
+      .then((order) => {
         setPreferenceId(order.data.id);    // se guarda la respuesta en el estado local (la respuesta de crear la preferencia es un id)
       });
-    }, [total]);
+    }, [productos]); 
   
     useEffect(() => {
       if (preferenceId) {
