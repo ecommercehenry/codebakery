@@ -1,4 +1,6 @@
-
+import React, { useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
+import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct";
 
 
 //necesito el id del usuario
