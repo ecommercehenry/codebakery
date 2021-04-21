@@ -9,13 +9,6 @@ async function getAllOrders() {
       },
     });
 
-    const coso = await order.map(async (e) => {
-      await Users.findByPk(e.userId);
-    });
-    console.log(coso);
-    const cosodos = await Promise.all(coso);
-    console.log(cosodos);
-
     const out = [];
 
     for (let i = 0; i < order.length; i++) {
@@ -111,6 +104,7 @@ async function createOrder(products, idUser) {
       name: "input error",
       detail: "object of array must contain a id of product",
     };
+    // Esto no
     throw new Error();
   } else if (!products[0].quantity) {
     return {

@@ -17,6 +17,8 @@ export default function TablaOrdenes() {
   let { data } = useQuery(getAllOrders);
   let ordersQ = data?.getAllOrders.orders;
 
+  console.log(data);
+
   //guarda las ordenes en el store redux...
   const dispatch = useDispatch();
   useEffect(() => {
