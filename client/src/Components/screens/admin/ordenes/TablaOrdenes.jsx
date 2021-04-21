@@ -32,14 +32,14 @@ export default function TablaOrdenes() {
 
   let dataRENDER;
   if (search && !filterOrders.length) {
-    toast(`El ID ${idError} no existe.`, {
+    toast(`Search Not Found: "${idError}".`, {
       toastId: customId,
     });
     return <ButtonClear name="Volver al principio" />;
   } else if (search) {
     dataRENDER = filterOrders;
   } else if (status) {
-    toast(`El ID ${idError} no existe.`, {
+    toast(`Search Not Found: "${idError}".`, {
       toastId: customId,
     });
     return <ButtonClear name="Volver al principio" />;

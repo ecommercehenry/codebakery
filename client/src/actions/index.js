@@ -55,6 +55,7 @@ export const filterOrders = (orderId) => {
 };
 
 export const filterName = (name) => {
+  console.log(`This is my name ${name}`);
   return {
     type: FILTER_NAME,
     payload: name,
