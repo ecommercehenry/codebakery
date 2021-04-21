@@ -177,8 +177,8 @@ mutation createUser($name: String!, $password: String!, $email: String!, $role: 
 }
 
 // PARA LA MODIFICACION DE UN USUARIO Actualizada con proteccion
-mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, $role:String){
-  modifyUser(id: $id ,name: $name, password: $password, email: $email, role:$role){
+mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, $role:String, $address: String, $dni: Int, $phoneNumber: Int){
+  modifyUser(id: $id ,name: $name, password: $password, email: $email, role:$role, address: $address, dni: $dni, phoneNumber: $phoneNumber){
     __typename
     ... on user{
       name

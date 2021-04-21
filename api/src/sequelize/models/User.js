@@ -34,6 +34,15 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    address: {
+      type: DataTypes.STRING,
+    },
+    dni: {
+      type: DataTypes.FLOAT
+    },
+    phoneNumber: {
+      type: DataTypes.FLOAT
+    },
     salt: {
       type: DataTypes.STRING,
       get() {
