@@ -64,7 +64,6 @@ const AdminNavBar = ({ setAddProduct }) => {
 };
 
 const StyledNavBar = styled.div`
-<<<<<<< HEAD
     width: 77vw;
     max-width: 100%;
     height: 15vh;
@@ -111,49 +110,6 @@ const StyledNavBar = styled.div`
     .add-category:hover{
         color: black;
         cursor: pointer;
-=======
-  width: 77vw;
-  max-width: 100%;
-  height: 15vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 6rem 0 4rem;
-  .onLeft {
-    .optionTab {
-      color: #513066;
-      height: 4.5vh;
-      font-size: 2em;
-      display: flex;
-      align-items: center;
->>>>>>> fix-search-bar
-    }
-    width: 43%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .addProduct {
-    background: #5e3f71;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .purple-btn:hover {
-    background-color: #734191;
-  }
-  .add-category {
-    background: #5e3f7100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(0, 0, 0, 0.726);
-  }
-  .add-category:hover {
-    color: black;
-    cursor: pointer;
-  }
 `;
 
 export default AdminNavBar;
