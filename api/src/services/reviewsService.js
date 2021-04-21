@@ -1,5 +1,4 @@
 const { Review , Product, Users} = require("../db.js")
-
 async function deleteReview(productId, userId) {
   try {
     const reviewToDelete = await Review.findOne({
@@ -36,7 +35,8 @@ async function addReview(productId, userId, dataReview){
   if(!dataReview.hasOwnProperty("title")) return { __typename: "error", name: "error entrada", detail: `No se envio un titulo para la review` }
   if(!dataReview.hasOwnProperty("description")) return { __typename: "error", name: "error entrada", detail: `No se envio una descripcion para la review` }
   if(!dataReview.hasOwnProperty("stars")) return { __typename: "error", name: "error entrada", detail: `No se envio la propiedad stars para la review` }
-  //Validate if the use already make a review of this product
+  
+  //Validate if the use already not make a review of this product
   const reviewRealized = await Review.findOne({
     where:{
       userId:userId,
@@ -52,7 +52,6 @@ async function addReview(productId, userId, dataReview){
     }
   })
   if(!product) return { __typename: "error", name: "error id producto", detail: `El id ${productId} no existe` } 
-
   //Validate de user id really exists
   const user = await Users.findOne({
     where:{
@@ -60,7 +59,11 @@ async function addReview(productId, userId, dataReview){
     }
   })
   if(!user) return { __typename: "error", name: "error id usuario", detail: `El id ${userId} no existe` } 
-
+  //Validate if the user already buy this product
+  const ordersOfProduct = await product.getOrders()
+  let ordersOfUser = ordersOfProduct.find(el=>el.userId === userId)
+  if(!ordersOfUser) return { __typename: "error", name: "No comprado", detail: `El usuario ${userId} no a comprado el producto ${productId}` }
+  
   //Create the review
   let review = null
   try{
@@ -86,7 +89,7 @@ async function modifyReview(reviewId, dataReview){
   if(!dataReview.hasOwnProperty("title") && !dataReview.hasOwnProperty("description") && !dataReview.hasOwnProperty("stars"))
      return { __typename: "error", name: "error entrada", detail: `No se envio ningun valor a modificar en dataReview` }
 
-  //Get the product
+  //Get the review
   const review = await Review.findOne({
     where:{
       id:reviewId
