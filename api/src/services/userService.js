@@ -66,18 +66,14 @@ async function modifyUser(
   }
 }
 
-async function loginUser(name, password) {
+async function loginUser(email,password){
   const user = await Users.findOne({
-    where: {
-      name,
-    },
-  });
-  if (!user) {
-    return {
-      __typename: "error",
-      name: "The user doesn't exists",
-      detail: "The user doesn't exists",
-    };
+    where:{
+      email: email
+    }
+  })
+  if(!user){
+    return {__typename:"error",name:"The user doesn't exists",detail:"The user doesn't exists"}
   }
   if (user) {
     const hashed = Users.encryptPassword(password, user.salt());
