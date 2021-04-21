@@ -15,9 +15,10 @@ const {
     addProductToOrder,
     deleteOrder,
     updateOrderToTicket,
-    modifyStatusOrder, 
+    modifyOrderStatus, 
     incrementQuantity, 
-    decrementQuantity, 
+    decrementQuantity,
+    deleteUser,
 } = require("./mutationsResolver/")
 
 const {
@@ -59,7 +60,8 @@ const root = {
     deleteOrder,
     updateOrderToTicket,
     incrementQuantity, 
-    decrementQuantity, 
+    decrementQuantity,
+    deleteUser,
   
     //Queries
     
@@ -78,9 +80,10 @@ const root = {
     getOrdersByUserIdInCart,
     getOrdersByUserIdInTicket,
     deleteProductOrder,
-    modifyStatusOrder,
+    modifyOrderStatus,
     validateUser,
     getUserByEmail
+    
     // getAllUsers,
     
 }

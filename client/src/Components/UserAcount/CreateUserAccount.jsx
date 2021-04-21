@@ -90,13 +90,14 @@ useEffect(() => {
             <div className="responsive">
               <div>
                 <input
+                  id="copy"
                   type="email"
                   name="email"
                   placeholder="Email"
                   className="placeholder"
                   aria-invalid={errors.name ? "true" : "false"}
                   {...register("email", {
-                    required: {value: true, message: 'This is requeired'},
+                    required: {value: true, message: 'This is required'},
                     minLength: {value: 5, message: 'min 5 characters '},
                     maxLength: {value: 30, message: 'max 30 characters '},
                     pattern: {
@@ -121,7 +122,7 @@ useEffect(() => {
                   className="placeholder"
                   //aria-invalid={errors.name ? "true" : "false"}
                   {...register("password", {
-                    required: {value: true, message: 'This is requeired'},
+                    required: {value: true, message: 'This is required'},
                     minLength: {value: 3, message: 'min 3 characters '},
                     maxLength: {value: 30, message: 'max 30 characters '},
                   })}
@@ -140,7 +141,7 @@ useEffect(() => {
                   className="placeholder"
                   aria-invalid={errors.name ? "true" : "false"}
                   {...register("password_repeat", {
-                    required: {value: true, message: 'This is requeired'},
+                    required: {value: true, message: 'This is required'},
                     minLength: {value: 3, message: 'min 3 characters '},
                     maxLength: {value: 30, message: 'max 30 characters '},
                     validate: (value) =>
@@ -166,7 +167,7 @@ useEffect(() => {
           </form>
           {exit === "error" ? (
             <span>"Email already exists, please try with another"</span>
-          ) : exit === true ? <span>"User created successfully"</span> : null}
+          ) : exit === true ? <><span>"User created successfully"</span>  <Redirect push to="/log-in"/></>: null}
         </div>
       </div>
     </div>

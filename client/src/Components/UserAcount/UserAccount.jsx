@@ -63,7 +63,7 @@ const UserAcount = () => {
     // la redireccion se debe cambiar seún el role del usuario
     if(role === 'admin' && dataValidate){
       console.log('yaysyyayysa', dataValidate)
-      return <Redirect to='/admin' />;
+      return <Redirect to='/admin/orders' />;
     }
     else if(role === 'user' && dataValidate) return <Redirect to='/catalogue' />;
     // else {
@@ -78,7 +78,8 @@ const UserAcount = () => {
   };
 
   return (
-    <div className="wrapper fadeInDown">
+    <div classname="page" style={{height: "100vh", display: "flex", alignItems: "center"}}>
+    <div className="wrapper fadeInDown" style={{marginBottom: "10vh"}}>
       <div className="formContent">
         <Login />
         <StyledAcheDos> OR </StyledAcheDos>
@@ -116,6 +117,7 @@ const UserAcount = () => {
           ¿No tienes cuenta? <Link to="/sign-up">Creala aqui</Link>
         </p>
       </div>
+    </div>
     </div>
   );
 };

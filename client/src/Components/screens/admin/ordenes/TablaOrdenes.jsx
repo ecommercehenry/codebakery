@@ -6,10 +6,8 @@ import getAllOrders from "../../../../Apollo/queries/getAllOrders";
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrders } from "../../../../actions";
 import { toast } from "react-toastify";
-
 import ButtonClear from "./ButtonClear";
 
-// @-WenLi
 //traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
 //guardo en el reducer ordersReducer las ordenes para aplicar busquedas y filtros uso dispatch
 //mostrarlas haciendo un mapeo sobre la data, renderizando cada vez un componente Orden
@@ -29,19 +27,15 @@ export default function TablaOrdenes() {
   const { orders, search, filterOrders, idError, status } = useSelector(
     (state) => state.ordersReducer
   );
-  //let { orders, search, ordersFilter } = useSelector((state) => state.reducer);
-
-  //Debe renderizar todas las ordenes si no hay una busqueda
-  //Si hay busqueda, renderiza el filtrado de la busqueda
+ 
   let dataRENDER;
   if (search && !filterOrders.length) {
-    //console.log("MUESTRA DATA RENDER POR..SEARCH");
+    
     toast(`El ID ${idError} no existe.`, {
       toastId: customId,
     });
     return <ButtonClear name="Volver al principio" />;
 
-    //dataRENDER = orders;
   } else if (search) {
     dataRENDER = filterOrders;
   } else if (status) {
@@ -53,6 +47,7 @@ export default function TablaOrdenes() {
     //console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
     dataRENDER = orders;
   }
+
 
   return (
     <StyledTablaOrdenes>
@@ -72,8 +67,10 @@ const StyledTablaOrdenes = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 80vw;
-  margin: 2rem;
+  width: 100%;
   margin-top: 0.5rem;
+  margin-left: 0;
   height: 100%;
+
 `;
+

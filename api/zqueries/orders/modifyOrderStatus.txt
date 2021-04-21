@@ -1,11 +1,11 @@
-mutation modifyStatusOrder($orderId:Int!, $status:String!){
-	  modifyStatusOrder(orderId:$orderId, status:$status)
+mutation modifyOrderStatus($orderId:Int!, $status:String!){
+	  modifyOrderStatus(orderId:$orderId, status:$status)
 	  {
 		... on booleanResponse{
 		  boolean
 		}
 		... on error{
-      name
+      	  name
 		  detail
 		}
 	}

@@ -17,6 +17,7 @@ const AdminNavBar = ({ setAddProduct }) => {
 
   const [add, setAdd] = useState(false);
 
+
   return (
     <StyledNavBar>
       <div className="onLeft">
@@ -65,6 +66,7 @@ const AdminNavBar = ({ setAddProduct }) => {
 };
 
 const StyledNavBar = styled.div`
+
   width: 77vw;
   max-width: 100%;
   height: 15vh;
