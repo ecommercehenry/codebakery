@@ -1,0 +1,12 @@
+query getAllReviewsFromAProduct($productId:Int!){
+        getAllReviewsFromAProduct(productId: $productId) {
+                id
+                title
+                description
+                stars
+        }
+}
+
+{
+  "productId": 1
+}

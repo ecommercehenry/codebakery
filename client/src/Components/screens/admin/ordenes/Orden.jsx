@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { Steps } from 'rsuite';
+import { Steps } from 'rsuite'; 
+import { Link } from "react-router-dom";
 import 'rsuite/lib/styles/index.less';
 import "./prueba.css"
-import { useQuery, useMutation } from "@apollo/client";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
-export default function Orden({ id, orden }) {
+export default function Orden({ id, orden, setDetail }) {
   const [orderStatus, setOrderStatus] = useState('unpaid')
 
-  console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
   let status;
   if(orden.status === "unpaid") status = 0
   if(orden.status === "paid") status = 1
@@ -60,8 +59,11 @@ export default function Orden({ id, orden }) {
               <p>{orden.price[0]} </p>
               {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
-            <div className="edit-button">
-              <button>Detail</button>
+            <div to="edit-button">
+            <Link to={`/admin/order/${id}`}
+            >
+              Detail
+              </Link>
             </div>
           </div>
         </div>
