@@ -12,4 +12,6 @@ html {
   --headline: 72px;
   --display: 96px;
   --jumbo: 144px;
+
+  font-family: 'Poppins', sans-serif;
 }
