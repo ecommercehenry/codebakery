@@ -50,7 +50,7 @@ const UserAcount = () => {
         localStorage.setItem('role', data.validateUser.role);
         localStorage.setItem('id', data.validateUser.id);
         // es necesario el reloaded para luego poder redirigir
-        toast(`Bienvenido ${data.validateUser.name}`);
+        toast(`Welcome ${data.validateUser.name}`);
         window.location.reload();
       }else{
         toast(data.validateUser.detail)
@@ -73,7 +73,7 @@ const UserAcount = () => {
     // };
   }
   const handleLogin = async (form) => {
-    login({variables: {name:form.login,password:form.password}})    
+    login({variables: {email:form.login,password:form.password}})    
 
   };
 
@@ -86,10 +86,10 @@ const UserAcount = () => {
         <hr />
         <form onSubmit={handleSubmit(handleLogin)}>
           <input
-            type="text"
+            type="email"
             className="fadeIn second"
             name="login"
-            placeholder="Entra tu email o usuario"
+            placeholder="Email"
             aria-invalid={errors.name ? "true" : "false"}
             {...register("login", { required: true })}
           />

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client"
 
 const VALID_USER = gql`
-query validateUser($name: String!, $password: String!){
-    validateUser(name:$name,password:$password){
+query validateUser($email: String!, $password: String!){
+    validateUser(email:$email,password:$password){
         __typename
          ... on user{
            name

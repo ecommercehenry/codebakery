@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { useMutation } from "@apollo/client"
 import CREATE_CATEGORY from "../../Apollo/mutations/createCategory"
 import styled from 'styled-components'
-import './style.css'
 
 function FormCreateCategory() {
   const [input, setInput] = useState({
@@ -73,13 +72,13 @@ function FormCreateCategory() {
 const CreateCategoryBtn = styled.form`
 margin-top: 0;
 .category-input{
-  width: 20vw;
+  width: 20rem;
   border-radius: 40px;
   border: 1.3px solid #949494;
-  height: 2rem;
-  text-indent: 2%;
+  height: 4.5vh;
   margin: 0;
   text-align: left;
+  padding-left: 2%;
 }
 
 .category-input:focus{
@@ -99,6 +98,7 @@ margin-top: 0;
   width: 40%;
   transform: none!important;
   margin: 0;
+  font-weight: bold;
 }
 
 .Success-btnn{

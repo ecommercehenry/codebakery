@@ -16,6 +16,7 @@ async function getAllProducts() {
     throw new Error(error);
   }
 }
+
 async function getProductById({ id }) {
   try {
     return await Product.findByPk(id);

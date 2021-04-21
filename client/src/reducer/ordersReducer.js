@@ -5,15 +5,15 @@ import {
   FILTER_ORDER,
   CHANGE_STATUS,
   FILTER_USERS,
+  CLEAR_FILTER,
 } from "../actions/index";
 
 const initialState = {
   orders: [],
-  ordersRender: [], //agrego estado para emparejar a el que recibo en filtro
   filterOrders: [],
   search: false,
-  sortbyPrice: [],
-  sort: false,
+  idError: 0,
+  status: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -23,8 +23,7 @@ const reducer = (state = initialState, action) => {
     case SAVE_ORDERS:
       return {
         ...state,
-        orders: action.payload,
-        ordersRender: action.payload?.map((o) => {
+        orders: action.payload?.map((o) => {
           let filter = {
             id: o.id,
             userId: o.userId,
@@ -37,21 +36,28 @@ const reducer = (state = initialState, action) => {
       };
 
     case FILTER_ORDER:
-      let searchOrder = state.ordersRender.filter(
+      let searchOrder = state.orders.filter(
         //tuve que cambiar para emparejar con filtros //@ Lau
         (o) => o.id === Number(action.payload)
       );
+      console.log(searchOrder);
       if (searchOrder.length) {
         return {
           ...state,
           filterOrders: searchOrder,
           search: true,
-          sort: false, // agregado@ Lau
+        };
+      } else {
+        return {
+          ...state,
+          filterOrders: [],
+          idError: action.payload,
+          status: true,
         };
       }
 
     case FILTER_USERS:
-      let searchUsers = state.ordersRender.filter(
+      let searchUsers = state.orders.filter(
         //tuve que cambiar para emparejar con filtros //@ Lau
         (u) => u.userId === Number(action.payload)
       );
@@ -60,7 +66,13 @@ const reducer = (state = initialState, action) => {
           ...state,
           filterOrders: searchUsers,
           search: true,
-          sort: false, // agregado@ Lau
+        };
+      } else {
+        return {
+          ...state,
+          filterOrders: [],
+          idError: action.payload,
+          status: true,
         };
       }
 
@@ -70,19 +82,7 @@ const reducer = (state = initialState, action) => {
       let filterlow;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
         //console.log('stateorder', state.orders)
-        filterlow = state?.filterOrders?.map((o) => {
-          // console.log("oooooooooooooo", o)
-          let filter = {
-            id: o.id,
-            userId: o.userId,
-            date: o.creation,
-            price: o.lineal_order.map((u) => u).map((g) => g.price),
-            cancelled: o.cancelled,
-          };
-          return filter;
-        });
-
-        filterlow = filterlow.sort(function (a, b) {
+        filterlow = state.filterOrders.sort(function (a, b) {
           if (a.price[0] > b.price[0]) {
             return 1;
           }
@@ -92,17 +92,7 @@ const reducer = (state = initialState, action) => {
           return 0;
         });
       } else {
-        filterlow = state.orders.map((o) => {
-          let filter = {
-            id: o.id,
-            userId: o.userId,
-            date: o.creation,
-            price: o.lineal_order.map((u) => u).map((g) => g.price),
-            cancelled: o.cancelled,
-          };
-          return filter;
-        });
-        filterlow = filterlow.sort(function (a, b) {
+        filterlow = state.orders.sort(function (a, b) {
           if (a.price[0] > b.price[0]) {
             return 1;
           }
@@ -115,27 +105,15 @@ const reducer = (state = initialState, action) => {
 
       return {
         ...state,
-        sortbyPrice: filterlow,
-        sort: true,
-        search: false, //@ Lau
+        filterOrders: filterlow,
+        search: true,
       };
 
     case PRICE_HIGH_TO_LOW:
       let filterhigh;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
         //console.log('stateorder', state.orders)
-        filterhigh = state.filterOrders.orders.map((o) => {
-          let filter = {
-            id: o.id,
-            userId: o.userId,
-            date: o.creation,
-            price: o.lineal_order.map((u) => u).map((g) => g.price),
-            cancelled: o.cancelled,
-          };
-          return filter;
-        });
-
-        filterhigh = filterhigh.sort(function (a, b) {
+        filterhigh = state.filterOrders.sort(function (a, b) {
           if (a.price[0] < b.price[0]) {
             return 1;
           }
@@ -145,17 +123,7 @@ const reducer = (state = initialState, action) => {
           return 0;
         });
       } else {
-        filterhigh = state.orders.map((o) => {
-          let filter = {
-            id: o.id,
-            userId: o.userId,
-            date: o.creation,
-            price: o.lineal_order.map((u) => u).map((g) => g.price),
-            cancelled: o.cancelled,
-          };
-          return filter;
-        });
-        filterhigh = filterhigh.sort(function (a, b) {
+        filterhigh = state.orders.sort(function (a, b) {
           if (a.price[0] < b.price[0]) {
             return 1;
           }
@@ -168,14 +136,16 @@ const reducer = (state = initialState, action) => {
 
       return {
         ...state,
-        sortbyPrice: filterhigh,
-        sort: true,
+        filterOrders: filterhigh,
+        search: true,
       };
 
-    case CHANGE_STATUS:
+    case CLEAR_FILTER:
       return {
         ...state,
+        filterOrders: [],
         search: false,
+        status: false,
       };
 
     default:
