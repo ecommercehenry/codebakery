@@ -9,7 +9,7 @@ module.exports = {
             // const authToken = args.headers.authtoken;
 			// const decoded = jwt.verify(authToken, "secret");
             // if(authrole === 'admin'){
-                let num = await modifyUser(id , name, password, email, role, address, dni, phoneNumber); 
+                let num = await modifyUser(id , name, password, newPassword, email, role, address, dni, phoneNumber); 
                 return {...num};
             // }
             // else return {__typename: 'error', name:"error", detail: 'No admin'};

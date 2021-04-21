@@ -41,6 +41,7 @@ async function modifyUser(
   id,
   name,
   password,
+  newPassword,
   email,
   role,
   address,
@@ -49,7 +50,24 @@ async function modifyUser(
 ) {
   let obj = {};
   if (name) obj.name = name;
-  if (password) obj.password = password;
+  if (password) {
+    const userPassword = await Users.findOne({
+      where: {
+        email: email,
+      },
+    });
+    if (!userPassword) {
+      return {
+        __typename: "error",
+        name: "The user doesn't exists",
+        detail: "The user doesn't exists",
+      };
+    }
+    if (userPassword) {
+      const hashed = Users.encryptPassword(password, user.salt());
+      if (hashed === userPassword.password()) obj.password = newPassword;
+    }
+  }
   if (email) obj.email = email;
   if (role) obj.role = role;
   if (address) obj.address = address;
@@ -66,14 +84,18 @@ async function modifyUser(
   }
 }
 
-async function loginUser(email,password){
+async function loginUser(email, password) {
   const user = await Users.findOne({
-    where:{
-      email: email
-    }
-  })
-  if(!user){
-    return {__typename:"error",name:"The user doesn't exists",detail:"The user doesn't exists"}
+    where: {
+      email: email,
+    },
+  });
+  if (!user) {
+    return {
+      __typename: "error",
+      name: "The user doesn't exists",
+      detail: "The user doesn't exists",
+    };
   }
   if (user) {
     const hashed = Users.encryptPassword(password, user.salt());
