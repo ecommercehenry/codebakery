@@ -9,6 +9,7 @@ export const SAVE_ORDERS = "SAVE_ORDERS";
 export const PRICE_LOW_TO_HIGH = "PRICE_LOW_TO_HIGH";
 export const PRICE_HIGH_TO_LOW = "PRICE_HIGH_TO_LOW";
 export const CHANGE_STATUS = "CHANGE_STATUS";
+export const CLEAR_FILTER = "CLEAR_FILTER";
 
 export const setSearch = () => {
   return {
@@ -56,6 +57,12 @@ export const filterUsers = (usersId) => {
   return {
     type: FILTER_USERS,
     payload: usersId,
+  };
+};
+
+export const clearFilter = () => {
+  return {
+    type: CLEAR_FILTER,
   };
 };
 

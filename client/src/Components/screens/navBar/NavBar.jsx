@@ -1,25 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { RoundButton } from "../../GlobalStyle";
-import CountCart from "../cart/container/CountCart"
-import "./NavBarStyle.css";
+import CountCart from "../cart/container/CountCart";
+import styled from "styled-components";
 
-
-const NavBar = ({ color}) => {
+const NavBar = ({ color }) => {
   const textColor = color === "white" ? "text-inactive" : "text-dark";
   const navTag = `text-decoration-none ${textColor}`;
   const btnColor = color === "white" ? "white" : "purple";
   const brand = color === "white" ? "text-white" : "text-dark";
   const brandTag = `text-decoration-none ${brand}`;
   const actualPath = window.location.pathname;
-  
 
-  
-    let isActive = {
+  let isActive = {
     catalogue: "inactive",
     cart: "inactive",
     about_us: "inactive",
-
   };
 
   if (actualPath.startsWith("/catalogue")) isActive["catalogue"] = "active";
@@ -30,15 +26,17 @@ const NavBar = ({ color}) => {
   const tag2 = `${navTag} ${isActive["cart"]}`;
   const tag3 = `${navTag} ${isActive["about-us"]}`;
   let logged = localStorage.token ? true : false;
-  
-  let logout = () =>{
+
+  let logout = () => {
     localStorage.clear();
-  }
+  };
 
   let storage = window.localStorage; 
   let role = window.localStorage.getItem('role')
   let logeed = storage.token ? true : false; 
   if(role === 'admin') {
+    console.log(role)
+
     return (
       <nav className="navbar d-flex align-items-center mx-5">
         <div className="left-tags d-flex justify-content-between align-items-center me-auto">
@@ -132,5 +130,93 @@ const NavBar = ({ color}) => {
     );
   }
 };
+
+const StyledNavBar = styled.nav`
+  height: 100px;
+  background-color: #ffffff00;
+  padding-right: 1%;
+  z-index: 2;
+
+  .left-tags {
+    width: 350px;
+    font-size: 0.9rem;
+  }
+
+  .right-buttons {
+    display: flex;
+    width: 17vw;
+    font-size: 0.9rem;
+    justify-content: flex-end;
+  }
+
+  .log-in-btn {
+    margin-right: 14px;
+  }
+
+  .white-btn {
+    display: block;
+    height: 4.5vh;
+    width: fit-content !important;
+    border-radius: 40px;
+    border: none;
+    background-color: white;
+    text-decoration: none !important;
+    color: black;
+    font-weight: bold;
+    font-size: 1em;
+    padding: 0 1.5vw 0 1.5vw;
+  }
+
+  .purple-btn {
+    display: block;
+    height: 4.5vh;
+    width: fit-content !important;
+    border-radius: 40px;
+    border: none;
+    background-color: #5e3f71;
+    text-decoration: none !important;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    padding-bottom: 0.5%;
+    padding: 0 1.5vw 0 1.5vw;
+    transition: background-color 0.2s ease;
+  }
+
+  .purple-btn:hover {
+    background-color: #532c6b;
+  }
+
+  .display-linebreak {
+    white-space: pre-line;
+  }
+
+  .text-inactive {
+    color: #cecece;
+  }
+
+  .text-inactive:hover {
+    color: white;
+  }
+
+  .active {
+    color: white;
+    font-weight: bold;
+  }
+
+  .active:hover {
+    cursor: default;
+  }
+
+  #sign-up-link {
+    width: 100%;
+    margin-left: 3vw;
+    display: flex;
+    width: fit-content;
+  }
+  .usuario {
+    padding: 11px;
+  }
+`;
 
 export default NavBar;
