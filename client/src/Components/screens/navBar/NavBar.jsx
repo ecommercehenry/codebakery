@@ -47,9 +47,9 @@ const NavBar = ({ color}) => {
               Code {"\n"} Bakery
             </h5>
           </Link>
-          {/* <Link id="Cart" to="/cart" className={tag2}>
-          <div><CountCart /></div>
-          </Link> */}
+          <Link to="/admin/orders" className={tag2}>
+          <div>Admin Panel</div>
+          </Link>
           <Link id="Catalogue" to="/catalogue" className={tag1}>
             Catalogue
           </Link>
