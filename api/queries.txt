@@ -177,9 +177,9 @@ mutation createUser($name: String!, $password: String!, $email: String!, $role: 
 }
 
 // PARA LA MODIFICACION DE UN USUARIO Actualizada con proteccion
-mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, $role:String, $address: String, $dni: Int, $phoneNumber: Int){
+mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, $role:String, $address: String, $dni: String, $phoneNumber: String){
   modifyUser(id: $id ,name: $name, password: $password, email: $email, role:$role, address: $address, dni: $dni, phoneNumber: $phoneNumber){
-    __typename
+      __typename
     ... on user{
       name
       id
@@ -193,6 +193,13 @@ mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, 
     }
   }
 }
+//variables
+{
+  "id": 1,
+  "name": "fran",
+  "password": "123"
+}
+
 // PARA OBTENER TODOS LOS PRODUCTOS DE UNA CATEGORIA (POR NOMBRE)
 query
   {
@@ -267,6 +274,7 @@ mutation modifyProduct ($id: Int!, $dataToModify: productInput!){
   modifyProduct(id: $id, dataToModify: $dataToModify){
     __typename
     ... on product {
+
       id
       name
       stock
