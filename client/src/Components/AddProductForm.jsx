@@ -110,7 +110,7 @@ const AddProductForm = ({setAddProduct}) => {
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.664)', zIndex: 5, position: 'fixed', height: '100vh', width: '100vw', top: '0', left: '0', paddingLeft: '10vw'}}>
         <StyledForm onSubmit={submitHandler}>
             {/* <div className="close" onClick={closeHandler}><img src={closeIcon} alt="closeIcon"/></div> */}
-            <Link to="/admin" className="close"><img src={closeIcon} alt="closeIcon"/></Link>
+            <Link to="/admin/products" className="close"><img src={closeIcon} alt="closeIcon"/></Link>
             <div className="imageLoaderr">
                 <div className="previeww">
                     {

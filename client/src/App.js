@@ -18,6 +18,7 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import VALIDATE_CREDENTIALS from "./Apollo/queries/validateCredentials";
 import AddProductForm from "./Components/AddProductForm";
 import Detail from "./Components/screens/detail/Detail";
+import OrderDetail from "./Components/screens/admin/ordenes/OrdenDetail";
 import Hola from "./Components/Hola";
 import BillCard from "./Components/BillCard/BillCard";
 
@@ -41,6 +42,8 @@ function App() {
         TAMBIÉN REVISAR EL TEMA DEL FORMCRUD DONDE RENDERIZA
         */}
           <Route exact path="/" component={Landing} />
+
+          <Route exact path="/admin/order/:id" component={OrderDetail} />
           <Route path="/admin" component={AdminPanel}></Route>
           <Route exact path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={GuestCart} />
@@ -59,6 +62,7 @@ function App() {
   } else {
     return (
       <>
+        <GlobalStyle />
         <Switch>
           <Route exact path="/pablo" component={BillCard} />
           <Route exact path="/" component={Landing} />

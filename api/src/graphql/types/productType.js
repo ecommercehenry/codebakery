@@ -8,6 +8,7 @@ module.exports = `
         image: String!,
         categories: [category],
         quantity: Int
+        reviews: [review]
     }
 
 `
