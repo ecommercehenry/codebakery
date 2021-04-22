@@ -17,7 +17,7 @@ import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
 import '../../Assets/toast.css'; 
 
-toast.configure()
+toast.configure() 
 
 const UserAcount = () => {
   // valida que exista el usuario y lo devuelve con un token
