@@ -99,7 +99,7 @@ useEffect(() => {
                   {...register("email", {
                     required: {value: true, message: 'This is required'},
                     minLength: {value: 5, message: 'min 5 characters '},
-                    maxLength: {value: 30, message: 'max 30 characters '},
+                    maxLength: {value: 60, message: 'max 30 characters '},
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                       message: "Enter a valid e-mail address",

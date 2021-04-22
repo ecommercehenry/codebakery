@@ -5,7 +5,7 @@ import VALID_USER from "../../Apollo/queries/validateUser"
 import { FcGoogle } from "react-icons/fc";
 import styled from "styled-components";
 import CREATE_USER from "../../Apollo/mutations/createUser";
-import { toast } from "react-toastify";
+import { toast } from "react-toastify"; 
 import '../../Assets/toast.css';
 import VALIDATE_USER_WITH_GOOGLE from "../../Apollo/queries/validateUserWithGoogle";
 
@@ -19,7 +19,7 @@ function Login() {
   // UserAcount genera la validación automatica ya que hay token en 
   // el local storage(este componente se renderiza en UserAccount)
   const [validate, {loading: loadingValidate, data: dataValidate}] = useLazyQuery(VALIDATE_USER_WITH_GOOGLE);
-  const [login, { loading, data }] = useLazyQuery(VALID_USER);
+  // const [login, { loading, data }] = useLazyQuery(VALID_USER);
 
   const onSuccess = (res) => {
     // console.log(res);
@@ -59,8 +59,6 @@ function Login() {
         google: true
       },
     });
-    //refreshTokenSetup(res);
-    // console.log('usuario creado', dataUser)
   };
   // vemos si la validacion trae el usuario
   // descomentar ambos useEffect para el logeo con creación de usuario
@@ -79,7 +77,7 @@ function Login() {
         toast(`Bienvenido ${dataValidate.validateUserWithGoogle.name}`); 
         window.location.reload();
       }else{
-        toast(data.validateUser.detail);
+        toast(dataValidate.validateUserWithGoogle.detail);
       }
     }
   }, [loadingValidate, dataValidate]);

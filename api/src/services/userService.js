@@ -22,13 +22,30 @@ async function getUserByEmail({ email }) {
 async function createUser(name, password, email, role, google) {
   try {
     if(!google){
-      let newUser = await Users.create({
-        name,
-        password,
-        email,
-        role
+      let [newUser, created] = await Users.findOrCreate({
+        where: { email },
+        defaults: {
+          name,
+          password,
+          email, 
+          role,
+          google
+        }
       });
+      if(!created){
+        if(newUser.dataValues.google){
+          newUser.update({password, google:false});
+        }
+      }
+      // console.log(newUser, 'atstatsttatstas')
       return {__typename: 'user', ...newUser.dataValues, detail: 'user created'};
+      // let newUser = await Users.create({
+      //   name,
+      //   password,
+      //   email,
+      //   role
+      // });
+      // return {__typename: 'user', ...newUser.dataValues, detail: 'user created'};
     }
     else {
       // console.log('creando con google')
