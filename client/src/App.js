@@ -53,6 +53,7 @@ function App() {
           <Route path="/admin/add-product" component={AddProductForm} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route exact path="/admin/algo" component={Hola} />
+          <Route exact path="/reset-password" component={ResetPassword} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
