@@ -18,6 +18,16 @@ async function getUserByEmail({ email }) {
     throw new Error(error);
   }
 }
+async function getUserById({ id }) {//@ Lau para usar en boton promote
+  try {
+     return await Users.findOne({ where: { id } });
+    
+    
+  } catch (error) {
+    
+    throw new Error(error);
+  }
+}
 
 async function createUser(name, password, email, role) {
   try {
@@ -56,6 +66,8 @@ async function modifyUser(
   if (dni) obj.dni = dni;
   if (phoneNumber) obj.phoneNumber = phoneNumber;
   try {
+    console.log("--------------------------------zzz"+obj)
+    console.log(obj)
     let user = await Users.findOne({ where: { id } });
     let newUser = await user.update(obj, {
       attributes: { exclude: ["password", "salt"] },
@@ -118,8 +130,9 @@ async function deleteUser(id) {
 module.exports = {
   getAllUsers,
   createUser,
-  modifyUser,   //@ lau usare este para modificar el rol de usuario comun a admin
+  modifyUser,   //@ lau usare este para modificar el role: de usuario comun a admin
   loginUser,
   getUserByEmail,
   deleteUser,
+  getUserById  //lo creo para traer datos de ese usuario a modificar -@Lau
 };

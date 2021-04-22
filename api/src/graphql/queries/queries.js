@@ -19,5 +19,6 @@ module.exports = `
         getOrderById(id: Int!): orderResult,
         validateCredentials(token: String!, role: String!): Boolean
         getAllReviewsFromAProduct(productId: Int!): [review]
+        getUserById(id: Int!) : user
     }
 `

@@ -30,7 +30,7 @@ type Mutation{
     deleteUser(userId: Int!) : resultBoolean
 
 
-    promote(userId: Int!) : resultBoolean
+
 
    
 }`

@@ -19,6 +19,7 @@ import VALIDATE_CREDENTIALS from "./Apollo/queries/validateCredentials"
 import AddProductForm from "./Components/AddProductForm"
 import Detail from "./Components/screens/detail/Detail"
 import Hola from "./Components/Hola"
+import Promote from "./Components/screens/admin/Promote"
 
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
@@ -51,6 +52,12 @@ function App() {
           <Route path="/admin/add-product" component={AddProductForm} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route exact path="/admin/algo" component={Hola} />
+          
+          
+          <Route exact path="/promote" component={Promote} />
+
+
+
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>

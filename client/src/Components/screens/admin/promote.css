@@ -1,0 +1,20 @@
+.button-promote {
+    background:#5E3F71;
+    color:white;
+    width: 23%;
+    height:3rem;
+    font-size:0.7rem;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    border-radius:20px;
+    padding: 0 2.3rem;
+    border:none;
+    cursor:pointer;
+ 
+ 
+    /* quitar al colocar en componente padre*/
+    position:absolute;
+    top: 100px;
+    left: 100px;
+}
