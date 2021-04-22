@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Steps } from "rsuite";
 import "rsuite/lib/styles/index.less";
-/* import "./prueba.css" */
+
+import "./prueba.css";
+
 import { useQuery, useMutation } from "@apollo/client";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
 
@@ -42,6 +44,12 @@ export default function Orden({ id, orden }) {
               <span>UserId</span>
               <p>{orden.userId}</p>
             </div>
+
+            <div className="text-container">
+              <span>User Name</span>
+              <p>{orden.name}</p>
+            </div>
+
             <div className="status-container">
               <div className="titulos">
                 <span>Paid</span>
@@ -98,7 +106,6 @@ const StyledOrden = styled.div`
     height: 80%;
     width: 90%;
     display: flex;
-    justify-content: space-between;
   }
 
   .element-container {
@@ -128,19 +135,24 @@ const StyledOrden = styled.div`
   }
 
   .edit-button {
+    width: 5rem;
+    height: 80px;
     padding: 0.5rem;
-    height: 100%;
-    justify-self: center;
-    align-self: center;
-    justify-content: flex-start;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+    margin-top: 20px;
+    margin-left: 20px;
   }
 
   .edit-button button {
-    margin-top: 0.5rem;
-    border: none;
-    background: transparent;
+    border-radius: 30px;
+    color: rgb(78, 160, 78);
+    padding: 4px;
+    background-color: rgba(117, 250, 161, 0.328);
+  }
+  .edit-button button:hover {
+   border-radius: 30px;
+    color: rgb(78, 160, 78);
+    padding: 6px;
+    color: rgb(232, 208, 243);
+    background-color: rgb(55, 10, 85);
   }
 `;
