@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Steps } from "rsuite";
 import "rsuite/lib/styles/index.less";
+
 import "./prueba.css";
+
 import { useQuery, useMutation } from "@apollo/client";
+import { HiOutlineDocumentSearch } from "react-icons/hi";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
@@ -71,7 +74,10 @@ export default function Orden({ id, orden }) {
               {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
             <div className="edit-button">
-              <button>Detail</button>
+              <span style={{color:"green"}}>Detail</span>
+              <button>
+              <HiOutlineDocumentSearch size="1.8rem" color="green"/>
+              </button>
             </div>
           </div>
         </div>
@@ -143,7 +149,7 @@ const StyledOrden = styled.div`
     background-color: rgba(117, 250, 161, 0.328);
   }
   .edit-button button:hover {
-    border-radius: 30px;
+   border-radius: 30px;
     color: rgb(78, 160, 78);
     padding: 6px;
     color: rgb(232, 208, 243);

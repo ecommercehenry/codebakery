@@ -38,10 +38,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     dni: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     phoneNumber: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
+    },
+    google: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     },
     salt: {
       type: DataTypes.STRING,
@@ -71,6 +75,6 @@ module.exports = (sequelize) => {
     }
   }
 
-  Users.beforeCreate(setSaltAndPassword)
-  Users.beforeUpdate(setSaltAndPassword)
+  Users.beforeCreate(setSaltAndPassword);
+  Users.beforeUpdate(setSaltAndPassword);
 }
