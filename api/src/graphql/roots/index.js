@@ -40,6 +40,7 @@ const {
     getOrdersByUserIdInTicket,
     getUserByEmail,
     getAllReviewsFromAProduct,
+    getUserById,
     validateCredentials,
     validateUserWithGoogle,
 } = require("./queriesResolvers/")
@@ -87,6 +88,8 @@ const root = {
     modifyOrderStatus,
     validateUser,
     getUserByEmail,
+    getAllReviewsFromAProduct,   
+    getUserById ,
     getAllReviewsFromAProduct,
     validateUserWithGoogle,
     // getAllUsers,
