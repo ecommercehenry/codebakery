@@ -38,16 +38,15 @@ const getErrorCode = errorName =>{
 server.post("/create_preference", (req, res) => {   //ruta para crear preferencia
   let {lineal_order} = req.body
   let items =[]
-  console.log(req.body)
   lineal_order.map((item ) =>{
     let newitem = {
       title: item.name ,
-      unit_price: parseInt(item.price),
+      unit_price: parseInt(item.price), 
       quantity: parseInt(item.quantity),
-      description: item.name,
-      picture_url: item.image,
-      id: item.id
-    }
+      description: item.name,     /// esto  
+      picture_url: item.image,    /// esto
+      id: item.id                 /// y esto se puede obtener haciendo un curl
+    }                             /// posiblemente necesario para ticket 
     items.push(newitem)
   }) 
   let preference = {
@@ -55,11 +54,11 @@ server.post("/create_preference", (req, res) => {   //ruta para crear preferenci
     external_reference: JSON.stringify(req.body.id),
     payment_methods: {
       excluded_payment_types: [],
-      installments: 3  //Cantidad maxima de cuotas
+      installments: 1  //Cantidad maxima de cuotas
     },
 		back_urls: {
 			"success": "http://localhost:3001/feedback",            //luego modificar si se quiere redigir en cada caso
-			"failure": "http://localhost:3001/feedback",
+			"failure": "http://localhost:3000/cart",
 			"pending": "http://localhost:3001/feedback"
 		},
      };
@@ -73,12 +72,16 @@ server.post("/create_preference", (req, res) => {   //ruta para crear preferenci
 });
 
 server.get('/feedback', async function(req, res) {     //ruta que responde con el status del pago
-
+  console.log('reqqqqqqq.qqqqqquery',req.query)
   let orden = await Order.findByPk(parseInt(req.query.external_reference))
 
   if (req.query.status === 'approved'){
       orden.placeStatus = 'ticket'
       orden.status = 'paid'
+      await orden.save()
+    }else if (req.query.status === 'pending'){
+      orden.placeStatus = 'ticket'
+      orden.status = 'unpaid'
       await orden.save()
     }
   
