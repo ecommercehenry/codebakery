@@ -19,8 +19,6 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   // let ordersModified = state.orders
-  console.log("MI ACTION PAYLOAD");
-  console.log(action.payload);
   switch (action.type) {
     case SAVE_ORDERS:
       return {

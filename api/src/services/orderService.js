@@ -188,7 +188,6 @@ async function _formatOrder(order) {
   const productsOrden = await order.getProducts();
   const userOrden = await order.getUser();
   const lineal_Order = productsOrden.map((p) => p.Lineal_Order);
-  console.log(userOrden);
   //Add every product in the order in a array to return after :)
   let productsOrdersSalida = [];
   for (let i in lineal_Order) {
