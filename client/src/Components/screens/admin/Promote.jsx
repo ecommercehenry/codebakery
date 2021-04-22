@@ -5,13 +5,6 @@ import { Redirect } from "react-router";
 import getUserById from "../../../Apollo/queries/getUserById";
 import "./promote.css"
 
-
-
-//necesito el id del usuario
-//necesito saber si el admin esta logueado
-//Ejecutar la query modifyUser
-//Cambiarle el rol
-
 //@ Lau
 //Promote recibira el id del componente padre, ese componente renderizara este boton y le pasara como propiedad el id del usuario actual.. Por ahora harcode violento
 export default function Promote (idUser){
