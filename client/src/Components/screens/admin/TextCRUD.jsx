@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import FormCRUD from "./FormCRUD";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { HiOutlinePencilAlt } from "react-icons/hi";
 
 function TextCRUD({ id }) {
   const product = useSelector((state) => state.productsReducer.products[id]);
@@ -52,7 +53,10 @@ function TextCRUD({ id }) {
                   <p>{product.price} </p>
                 </div>
                 <div className="edit-button">
-                  <button onClick={handlerOnClick}>Edit</button>
+                  <span style={{color:'green', marginTop:"0.1rem"}}>Edit</span>
+                  <button onClick={handlerOnClick}>
+                    <HiOutlinePencilAlt size="1.8rem" color="green"/>
+                  </button>
                 </div>
               </div>
             </div>
@@ -102,8 +106,8 @@ const StyledTextCRUD = styled.div`
     border-radius: 100%;
   }
   .name-container {
-    width: 250px;
-    height: 80px;
+    width: 15rem;
+    height: 100%;
     overflow: hidden;
   }
   .name-container p {
@@ -114,18 +118,20 @@ const StyledTextCRUD = styled.div`
 
   .stock-container {
     width: 5rem;
-    height: 80px;
+    height: 100%;
   }
   .stock-container p {
+    margin-top: 0.5rem;
     display: flex;
     justify-content: center;
     color: grey;
     font-weight: 500;
+    text-align: center;
   }
   .category-container {
-    margin-left: 50px;
+    margin-left: 2rem;
     width: 10rem;
-    height: 80px;
+    height: 100%;
     overflow: hidden;
   }
   .container-mapeo {
@@ -139,7 +145,7 @@ const StyledTextCRUD = styled.div`
   }
   .price-container {
     width: 7rem;
-    height: 80px;
+    height: 100%;
   }
   .price-container p {
     display: flex;
@@ -153,26 +159,21 @@ const StyledTextCRUD = styled.div`
     width: 90%;
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
   }
   .edit-button {
-    width: 5rem;
-    height: 80px;
-    padding: 0.5rem;
-    margin-top: 20px;
-    margin-left: 20px;
+    height: 100%;
+    justify-self: center;
+    align-self: center;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
   }
 
   .edit-button button {
-    border-radius: 30px;
-    color: rgb(78, 160, 78);
-    padding: 4px;
-    background-color: rgba(117, 250, 161, 0.328);
-  }
-  .edit-button button:hover {
-    border-radius: 30px;
-    color: rgb(78, 160, 78);
-    padding: 6px;
-    color: rgb(232, 208, 243);
-    background-color: rgb(55, 10, 85);
+    margin-top: 0.5rem;
+    border: none;
+    background: transparent
   }
 `;
