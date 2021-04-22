@@ -6,6 +6,7 @@ import {
   CHANGE_STATUS,
   FILTER_USERS,
   CLEAR_FILTER,
+  FILTER_NAME,
 } from "../actions/index";
 
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   // let ordersModified = state.orders
-
+  //console.log("MI ACTION PAYLOAD");
+  //console.log(action.payload);
   switch (action.type) {
     case SAVE_ORDERS:
       return {
@@ -26,6 +28,9 @@ const reducer = (state = initialState, action) => {
         orders: action.payload?.map((o) => {
           let filter = {
             id: o.id,
+            name: o.name,
+            email: o.email,
+            role: o.role,
             userId: o.userId,
             date: o.creation,
             price: o.lineal_order.map((u) => u).map((g) => g.price),
@@ -65,6 +70,26 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           filterOrders: searchUsers,
+          search: true,
+        };
+      } else {
+        return {
+          ...state,
+          filterOrders: [],
+          idError: action.payload,
+          status: true,
+        };
+      }
+
+    case FILTER_NAME:
+      let searchName = state.orders.filter(
+        //tuve que cambiar para emparejar con filtros //@ Lau
+        (u) => u.name === action.payload
+      );
+      if (searchName.length) {
+        return {
+          ...state,
+          filterOrders: searchName,
           search: true,
         };
       } else {
