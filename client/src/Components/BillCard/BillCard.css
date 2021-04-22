@@ -1,26 +1,23 @@
 .bill-conteiner {
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
   align-items: center;
-
   border-top-left-radius: 25px;
 }
 
 .info-details {
   display: flex;
-  width: inherit;
-  padding: 30px;
-  padding-bottom: 50px;
+  width: 85%;
+  padding-top: 2rem;
+  justify-content: space-between;
 }
 
 .info-total {
-  display: block;
-  padding: 20px;
-  /* width: 70%; */
-  position: relative;
-  left: 26%;
-  /* top: 15%; */
-  right: 0%;
-  width: 50%;
+  display: grid;
+  grid-template-columns: 10rem 10rem 15rem 10rem;
+  padding: 10px;
+  border: 0.1rem solid black;
+  margin-top: 2rem;
+  width: 80%;
+  margin-bottom: 2rem;
 }

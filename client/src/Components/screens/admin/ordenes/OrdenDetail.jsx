@@ -1,38 +1,36 @@
 import React from "react";
-import GET_All_ORDERS from "../../../../Apollo/queries/getAllOrders";
-import { useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 
 // Y realizar los Detalles de css
 const OrderDetail = (props) => {
   const { id, name, image, price, quantity } = props;
+  console.log(props);
   return (
     <StyledOrden>
       <div className="element-container-odtls" id={id}>
         <div className="info-container-odtls">
-          {/* <div className="text-container-odtls">
-              <span>Order: </span>
-              <p>{element.id}</p>
-            </div> */}
           <div className="text-container-odtls">
-            {/* <span>Name: </span> */}
+            <span>Order: </span>
+            <p>{id}</p>
+          </div>
+          <div className="text-container-odtls">
+            <span>Name: </span>
             <p>{name}</p>
           </div>
           <div className="text-container-odtls image">
-            {/* <span>Product: </span> */}
+            <span>Product: </span>
             <img className="image-odtls" src={image} alt={`img-${image}`} />
           </div>
           <div className="text-container-odtls">
-            {/* <span>Amount: </span> */}
+            <span>Amount: </span>
             <p>{quantity}</p>
           </div>
           <div className="text-container-odtls">
-            {/* <span>Price: </span> */}
+            <span>Price: </span>
             <p>{price}</p>
           </div>
           <div className="text-container-odtls">
-            {/* <span>Sub Total: </span> */}
+            <span>Sub Total: </span>
             <p>{price * quantity}</p>
           </div>
         </div>
@@ -81,6 +79,7 @@ const StyledOrden = styled.div`
   }
   .element-container-odtls span {
     font-weight: 700;
+    font-size: 1rem;
     color: rgb(123, 87, 156);
   }
 

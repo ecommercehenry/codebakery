@@ -1,26 +1,25 @@
 import React, { useState } from "react";
-import styled from 'styled-components';
-import { Steps } from 'rsuite'; 
+import styled from "styled-components";
+import { Steps } from "rsuite";
 import { Link } from "react-router-dom";
-import 'rsuite/lib/styles/index.less';
-import "./prueba.css"
+import "rsuite/lib/styles/index.less";
+import "./prueba.css";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden, setDetail }) {
-  const [orderStatus, setOrderStatus] = useState('unpaid')
+  const [orderStatus, setOrderStatus] = useState("unpaid");
 
   let status;
-  if(orden.status === "unpaid") status = 0
-  if(orden.status === "paid") status = 1
-  if(orden.status === "received") status = 2
-  
-  
+  if (orden.status === "unpaid") status = 0;
+  if (orden.status === "paid") status = 1;
+  if (orden.status === "received") status = 2;
+
   const instance = (
-    <Steps current={1}>     
-      <Steps.Item onClick={()=> console.log("cambiar status a paid")} />  
-      <Steps.Item onClick={()=> console.log("cambiar status a send")} />
-      <Steps.Item onClick={()=> console.log("cambiar status a recived")}/>     
+    <Steps current={1}>
+      <Steps.Item onClick={() => console.log("cambiar status a paid")} />
+      <Steps.Item onClick={() => console.log("cambiar status a send")} />
+      <Steps.Item onClick={() => console.log("cambiar status a recived")} />
     </Steps>
   );
 
@@ -51,8 +50,11 @@ export default function Orden({ id, orden, setDetail }) {
             </div>
             <div className="text-container">
               <span>Cancelled</span>
-              <p>{orden.cancelled === false ? <p>O</p>:<p className="order-cacelled">X</p>}</p>
-             
+              {orden.cancelled === false ? (
+                <p>O</p>
+              ) : (
+                <p className="order-cacelled">X</p>
+              )}
             </div>
             <div className="text-container">
               <span>Total</span>
@@ -60,10 +62,7 @@ export default function Orden({ id, orden, setDetail }) {
               {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
             <div to="edit-button">
-            <Link to={`/admin/order/${id}`}
-            >
-              Detail
-              </Link>
+              <Link to={`/admin/order/${id}`}>Detail</Link>
             </div>
           </div>
         </div>
@@ -75,79 +74,70 @@ export default function Orden({ id, orden, setDetail }) {
 }
 
 const StyledOrden = styled.div`
-display:flex;
-align-items:flex-start;
-justify-content:space-around;
-width:100%;
-margin-top: 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 2rem;
 
-.status-container{
-width:350px;
-height: 80px;
-padding:0.5rem;
-align-items:center; 
+  .status-container {
+    width: 350px;
+    height: 80px;
+    padding: 0.5rem;
+    align-items: center;
+  }
 
-}
+  .info-container {
+    height: 80%;
+    width: 90%;
+    display: flex;
+  }
 
+  .element-container {
+    width: 100%;
+    height: 16vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(236, 227, 250);
+    border-radius: 40px;
+  }
+  .element-container span {
+    font-weight: 700;
+    color: rgb(123, 87, 156);
+  }
 
-.info-container{
-height: 80%;
-width: 90%;
-display: flex;
+  .text-container {
+    width: 250px;
+    height: 80px;
+    padding: 0.5rem;
+    overflow: hidden;
+  }
+  .text-container p {
+    margin: 0;
+    color: grey;
+    font-weight: 700;
+  }
 
-}
+  .edit-button {
+    width: 5rem;
+    height: 80px;
+    padding: 0.5rem;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
 
-.element-container{   
-width: 100%;
-height: 16vh;
-display:flex;
-align-items: center;
-justify-content: center;
-background-color: rgb(236, 227, 250);
-border-radius: 40px;
-
-}
-.element-container span {
-font-weight: 700;
-color:rgb(123, 87, 156);
-}
-
-.text-container{
-width:250px;
-height: 80px;
-padding:0.5rem;
-overflow: hidden;   
-}
-.text-container p{
-margin:0;
-color:grey;
-font-weight: 700;
-}
-
-
-
-
-.edit-button{
-width:5rem;
-height: 80px;
-padding:0.5rem;
-margin-top: 20px;
-margin-left: 20px;    
-
-}
-
-.edit-button button{
-border-radius: 30px;
-color:rgb(78, 160, 78);
-padding: 4px;
-background-color: rgba(117, 250, 161, 0.328);
-}
-.edit-button button:hover{
-border-radius: 30px;
-color:rgb(78, 160, 78);
-padding: 6px;
-color:rgb(232, 208, 243);
-background-color: rgb(55, 10, 85);
-}
-   
+  .edit-button button {
+    border-radius: 30px;
+    color: rgb(78, 160, 78);
+    padding: 4px;
+    background-color: rgba(117, 250, 161, 0.328);
+  }
+  .edit-button button:hover {
+    border-radius: 30px;
+    color: rgb(78, 160, 78);
+    padding: 6px;
+    color: rgb(232, 208, 243);
+    background-color: rgb(55, 10, 85);
+  }
 `;
