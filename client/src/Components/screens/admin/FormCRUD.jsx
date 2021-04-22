@@ -4,7 +4,7 @@ import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct";
 // import './FormCRUD.css'
 import { useDispatch, useSelector } from "react-redux";
 import { modifyProduct } from "../../../actions/modifyProductAction";
-import { addCategoryToProductAction } from "../../../actions/addCategoryToProductAction";
+//import { addCategoryToProductAction } from "../../../actions/addCategoryToProductAction";
 import styled from "styled-components";
 
 function FormCRUD({ id, handlerOnClick }) {

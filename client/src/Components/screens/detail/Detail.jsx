@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import getData from "../../../Apollo/queries/productById";
 import { useQuery } from "@apollo/client";
 import ButtonAddCart from "../../screens/catalogue/products/grid/ButtonAddCart";
+import ProductReview from "../reviews/ProductReview";
 
 const Detail = () => {
   let idCart = useParams();
@@ -56,6 +57,7 @@ const Detail = () => {
                 </div>
               </>
             </div>
+            <ProductReview id={id}/>
           </>
         ) : (
           "loading..."
