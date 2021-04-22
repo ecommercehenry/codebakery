@@ -1,8 +1,22 @@
+import { useQuery } from "@apollo/client";
 import React from "react";
+import { useParams } from "react-router";
+import GET_All_ORDERS from "../../Apollo/queries/getAllOrders";
+import OrderDetail from "../screens/admin/ordenes/OrdenDetail";
 
 import "./BillCard.css";
 
 const BillCard = () => {
+  let { id } = useParams();
+
+  let { data } = useQuery(GET_All_ORDERS);
+  const result = data?.getAllOrders?.orders.filter(
+    (element) => element.id == id
+  );
+
+  console.log("LA ID: ", id);
+  console.log("LA data: ", result);
+
   return (
     <div className="container-two ">
       <div
@@ -46,9 +60,16 @@ const BillCard = () => {
         </div>
 
         <div className="">
-          {/**Aca deberia ir:
-           * Name Product Amount Price Subtotal
-           */}
+          {result[0]?.lineal_order?.map((res) => (
+            <OrderDetail
+              key={res.id}
+              id={res.id}
+              name={res.name}
+              image={res.image}
+              price={res.price}
+              quantity={res.quantity}
+            />
+          ))}
         </div>
 
         <div className="info info-total">
