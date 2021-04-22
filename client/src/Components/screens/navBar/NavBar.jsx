@@ -34,6 +34,9 @@ const NavBar = ({ color }) => {
   let storage = window.localStorage;
   let role = window.localStorage.getItem("role");
   let logeed = storage.token ? true : false;
+
+  const isCart = (window.location.pathname).includes('cart');
+
   return (
     <StyledNavBar className="navbar d-flex align-items-center mx-5">
       <div className="left-tags d-flex justify-content-between align-items-center me-auto">
@@ -63,7 +66,7 @@ const NavBar = ({ color }) => {
       <div className="right-buttons d-flex align-items-center">
         {logged ? (
           <>
-            <div className="usuario">
+            <div className={`usuario ${navTag}`}>
               Hi! {logeed ? localStorage.name : "Guess"}
             </div>
             <Link
@@ -101,10 +104,11 @@ const NavBar = ({ color }) => {
 };
 
 const StyledNavBar = styled.nav`
-  height: 100px;
+  height: 5rem;
   background-color: #ffffff00;
   padding-right: 1%;
   z-index: 2;
+  font-weight: bold;
 
   .left-tags {
     width: 21rem;

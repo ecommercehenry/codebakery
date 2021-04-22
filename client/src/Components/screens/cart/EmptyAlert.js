@@ -4,17 +4,17 @@ import styled from 'styled-components';
 
 const EmptyAlert = () => {
 
-    const [shame,setShame] = useState(false);
-    const shameHandler = () => {
-        setShame(true)
+    const [empty,setEmpty] = useState(false);
+    const emptyHandler = () => {
+        setEmpty(true)
     }
 
     return (
         <StyledLevelUp>
             <StyledAlert>
                 <span>Your cart is empty</span> 
-                <button onClick={shameHandler}>Go shopping!</button>
-                { shame ? <Redirect to='/catalogue'/> : ""}
+                <button className="purple-btn" onClick={emptyHandler}>Go shopping!</button>
+                { empty ? <Redirect to='/catalogue'/> : ""}
             </StyledAlert>
         </StyledLevelUp>
     )
@@ -22,7 +22,7 @@ const EmptyAlert = () => {
 
 const StyledAlert = styled.div`
     background:white;
-    border: 1px solid violet;
+    border: 5px solid #5e3f71;
     border-radius: 13px;
     padding: 4rem 8rem;
     text-align:center;
@@ -30,12 +30,27 @@ const StyledAlert = styled.div`
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    button{
-        margin-top:2rem;
-        border: 1px solid violet;
-        border-radius: 20px;
-        padding: 0.5rem 2rem;
-    }
+
+    .purple-btn {
+    display: block;
+    height: 4.5vh;
+    width: fit-content !important;
+    border-radius: 40px;
+    border: none;
+    background-color: #5e3f71;
+    text-decoration: none !important;
+    color: white;
+    font-weight: bold;
+    font-size: 1em;
+    padding-bottom: 0.5%;
+    padding: 0 1.5vw 0 1.5vw;
+    transition: background-color 0.2s ease;
+    margin-top: 2.5rem;
+  }
+
+  .purple-btn:hover {
+    background-color: #532c6b;
+  }
 `;
 
 const StyledLevelUp = styled.div`
