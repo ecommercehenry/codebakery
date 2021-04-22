@@ -53,6 +53,7 @@ const ProductOnCart = ({
           logged = {logged}
           orderId= {orderId}
           productId= {id}
+          refetch= {refetch}
         />
         <div className="stockk">{stock} disponibles</div>
       </div>

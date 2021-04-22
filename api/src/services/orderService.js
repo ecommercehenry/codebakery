@@ -246,10 +246,12 @@ async function deleteProductOrder(orderId, productId){
  * @param  {} productId
  * @param  {} quantity
  */
-async function addProductToOrder(orderId, productId, quantity){
+async function addProductToOrder(orderId, productId, quantity,userId){
     try {
-        const order = await Order.findOne({where: {id: orderId}})
-        if(!order) return { __typename: "error" , name:"not exist, see detail",detail:`The order with id ${orderId} dont exist`}
+        let order = await Order.findOne({where: {id: orderId, placeStatus: 'cart'}})
+        if(!order){
+        order = await Order.create({userId : userId})
+        } 
         if(order.placeStatus === 'cart'){
             const newProduct = await Product.findOne({
                 where:{

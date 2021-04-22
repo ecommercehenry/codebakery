@@ -31,29 +31,17 @@ const ButtonAddCart = ({ id }) => {
       toast('Producto añadido al carrito',{ autoClose: 1000 })
     } else {
       if (!loading) {
-        if (data.getOrdersByUserIdInCart.orders.length != 0) {
-          let orderId = data.getOrdersByUserIdInCart.orders[0].id;
-          addProductToOrder({
+          let orderId = data.getOrdersByUserIdInCart.orders[0]?.id;
+          let resultado = await addProductToOrder({
             variables: {
-              orderId: orderId,
+              orderId: orderId ?orderId : -1 ,
               productId: id,
               quantity: 1,
+              userId: userId,
+
             },
           })
           toast('Producto añadido al carrito',{ autoClose: 1000 });
-        } else {
-          createOrder({
-            variables: {
-              idUser: userId,
-              dataProducts: {
-                id: id,
-                quantity: 1,
-              },
-            },
-          });
-          await refetch()
-          toast('Producto añadido al carrito', { autoClose: 1000 })
-        }
       }
     }
   };
