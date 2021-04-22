@@ -19,6 +19,7 @@ const UserCart = () => {
       {data?.getOrdersByUserIdInCart.orders[0] ? (
         data.getOrdersByUserIdInCart.orders[0].lineal_order.map((order) => (
           <ProductOnCart
+          key={order.id}
             id={order.id}
             name={order.name}
             price={order.price}
@@ -33,7 +34,10 @@ const UserCart = () => {
         <p>vacio</p>
       )}
       <div className="total-container">
-        <PayButton productos={data?.getOrdersByUserIdInCart?.orders[0]?.lineal_order}/>
+        {
+          data?.getOrdersByUserIdInCart?.orders.length ? <PayButton productos={data.getOrdersByUserIdInCart.orders[0]}/> : <p>cargando</p> 
+        }
+        
       </div>
     </StyledCart>
   );
