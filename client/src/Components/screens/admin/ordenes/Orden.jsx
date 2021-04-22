@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Steps } from "rsuite";
+
 import { Link } from "react-router-dom";
 import "rsuite/lib/styles/index.less";
 import "./prueba.css";
@@ -8,8 +9,10 @@ import "./prueba.css";
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden, setDetail }) {
+
   const [orderStatus, setOrderStatus] = useState("unpaid");
 
+  console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden);
   let status;
   if (orden.status === "unpaid") status = 0;
   if (orden.status === "paid") status = 1;
@@ -50,19 +53,23 @@ export default function Orden({ id, orden, setDetail }) {
             </div>
             <div className="text-container">
               <span>Cancelled</span>
+      
               {orden.cancelled === false ? (
                 <p>O</p>
               ) : (
                 <p className="order-cacelled">X</p>
               )}
+
             </div>
             <div className="text-container">
               <span>Total</span>
               <p>{orden.price[0]} </p>
               {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
+
             <div to="edit-button">
               <Link to={`/admin/order/${id}`}>Detail</Link>
+
             </div>
           </div>
         </div>
@@ -119,7 +126,7 @@ const StyledOrden = styled.div`
     font-weight: 700;
   }
 
-  .edit-button {
+ .edit-button {
     width: 5rem;
     height: 80px;
     padding: 0.5rem;
