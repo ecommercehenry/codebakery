@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
@@ -8,11 +8,10 @@ import PayButton from "./PayButton";
 const UserCart = () => {
   let storage = window.localStorage;
   let userId = parseInt(storage.id);
-  const { data,loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+  const { data,loading, refetch } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
     fetchPolicy: "no-cache",
   });
-
 
   return (
     <StyledCart>
@@ -26,19 +25,19 @@ const UserCart = () => {
             stock={order.stock}
             image={order.image}
             quantity={order.quantity}
-            orderId={data.getOrdersByUserIdInCart.orders[0].id
-            }
+            orderId={data.getOrdersByUserIdInCart.orders[0].id}
+            refetch = {refetch}
           />
         ))
       ) : (
         <p>vacio</p>
       )}
-      <div className="total-container">
+      {/* <div className="total-container">
         {
           data?.getOrdersByUserIdInCart?.orders.length ? <PayButton productos={data.getOrdersByUserIdInCart.orders[0]}/> : <p>cargando</p> 
         }
         
-      </div>
+      </div> */}
     </StyledCart>
   );
 };

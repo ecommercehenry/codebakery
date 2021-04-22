@@ -28,8 +28,7 @@ const ButtonAddCart = ({ id }) => {
   const buttonHandler = async (id) => {
     if (!logged) {
       dispatch(addProductToCart(id));
-      toast('Producto añadido al carrito')
-
+      toast('Producto añadido al carrito',{ autoClose: 1000 })
     } else {
       if (!loading) {
         if (data.getOrdersByUserIdInCart.orders.length != 0) {
@@ -41,7 +40,7 @@ const ButtonAddCart = ({ id }) => {
               quantity: 1,
             },
           })
-          toast('Producto añadido al carrito en el if');
+          toast('Producto añadido al carrito',{ autoClose: 1000 });
         } else {
           createOrder({
             variables: {
@@ -53,7 +52,7 @@ const ButtonAddCart = ({ id }) => {
             },
           });
           await refetch()
-          toast('Producto añadido al carrito en el else')
+          toast('Producto añadido al carrito', { autoClose: 1000 })
         }
       }
     }
