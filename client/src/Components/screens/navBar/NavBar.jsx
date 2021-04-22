@@ -40,7 +40,7 @@ const NavBar = ({ color }) => {
   return (
     <StyledNavBar className="navbar d-flex align-items-center mx-5">
       <div className="left-tags d-flex justify-content-between align-items-center me-auto">
-        <Link to="/" className={brandTag}>
+        <Link to="/" className={brandTag} style={{fontWeight: "bold"}}>
           <h5 className="mb-0 text-center display-linebreak">
             Code {"\n"} Bakery
           </h5>
@@ -56,12 +56,16 @@ const NavBar = ({ color }) => {
             </div>
           </Link>
         )}
+        <div style={{padding: "0.2rem 0"}} className={isActive["catalogue"]}>
         <Link id="Catalogue" to="/catalogue" className={tag1}>
           Catalogue
         </Link>
+        </div>
+        <div style={{padding: "0.2rem 0"}} className={isActive["about-us"]}>
         <Link id="About us" to="/about-us" className={tag3}>
           About us
         </Link>
+        </div>
       </div>
       <div className="right-buttons d-flex align-items-center">
         {logged ? (
@@ -172,9 +176,17 @@ const StyledNavBar = styled.nav`
     color: white;
   }
 
+  .inactive{
+    border-bottom: 2px solid transparent;
+  }
   .active {
     color: white;
     font-weight: bold;
+    border-bottom: 2px solid white;
+
+    a{
+      border: none;
+    }
   }
 
   .active:hover {
@@ -189,6 +201,10 @@ const StyledNavBar = styled.nav`
   }
   .usuario {
     padding: 11px;
+  }
+
+  #Cart{
+    border: none!important;
   }
 `;
 

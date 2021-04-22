@@ -53,7 +53,6 @@ const StyledTotal = styled.div`
     //align-items: center;
     z-index:1;
     margin-top: 2rem;
-    margin-bottom:10rem;
     .buttonContainer{
         //background:violet;
         margin-top: 1rem;

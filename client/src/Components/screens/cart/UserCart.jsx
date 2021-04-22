@@ -6,6 +6,7 @@ import PayButton from './PayButton'
 import styled from "styled-components";
 import ProductOnCart from "./ProductOnCart";
 import { useSelector } from "react-redux";
+import TotalToOrder from "./TotalToOrder";
 
 
 const UserCart = () => {
@@ -35,7 +36,7 @@ const UserCart = () => {
       ) : (
         <p>vacio</p>
       )}
-      <PayButton/>
+      <TotalToOrder/>
     </StyledCart>
   );
 };
