@@ -13,10 +13,6 @@ import CREATE_ORDER from "../../../../../Apollo/mutations/createOrder";
 
 toast.configure()
 
-
-// import { useMutation, useQuery } from "@apollo/client";
-// import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../Apollo/queries/getOrdersByUserIdInCart";
-
 const ButtonAddCart = ({ id }) => {
   const [createOrder, createData] = useMutation(CREATE_ORDER);
 
@@ -24,27 +20,27 @@ const ButtonAddCart = ({ id }) => {
   let logged = localStorage.token ? true : false;
   let userId = logged ? parseInt(localStorage.id) : null;
 
-  const queryData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+  const {data, refetch, loading} = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
   });
   const dispatch = useDispatch();
 
-  const buttonHandler = (id) => {
+  const buttonHandler = async (id) => {
     if (!logged) {
       dispatch(addProductToCart(id));
-      toast('Producto añadido al carrito')
-
+      toast('Producto añadido al carrito',{ autoClose: 1000 })
     } else {
-      if (!queryData.loading) {
-        if (queryData.data.getOrdersByUserIdInCart.orders.length != 0) {
-          let orderId = queryData.data.getOrdersByUserIdInCart.orders[0].id;
+      if (!loading) {
+        if (data.getOrdersByUserIdInCart.orders.length != 0) {
+          let orderId = data.getOrdersByUserIdInCart.orders[0].id;
           addProductToOrder({
             variables: {
               orderId: orderId,
               productId: id,
               quantity: 1,
             },
-          });
+          })
+          toast('Producto añadido al carrito',{ autoClose: 1000 });
         } else {
           createOrder({
             variables: {
@@ -55,7 +51,8 @@ const ButtonAddCart = ({ id }) => {
               },
             },
           });
-          toast('Producto añadido al carrito')
+          await refetch()
+          toast('Producto añadido al carrito', { autoClose: 1000 })
         }
       }
     }
