@@ -32,7 +32,6 @@ const GET_All_ORDERS = gql`
       }
     }
   }
-}
 `;
 
 export default GET_All_ORDERS;

@@ -178,7 +178,7 @@ const StyledPanel = styled.div`
 			}
 		}
 	}
+  }`
 
-`;
 
 export default LeftPanel;
