@@ -7,7 +7,7 @@ import Catalogue from "./Components/screens/catalogue/container/Catalogue";
 import Cart from "./Components/screens/cart/container/Cart";
 import AboutUs from "./Components/screens/aboutUs/container/AboutUs";
 import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory";
-import FormCRUD from "./Components/screens/admin/FormCRUD";
+// import FormCRUD from "./Components/screens/admin/FormCRUD"
 import GlobalStyle from "./Components/GlobalStyle";
 import GuestCart from "./Components/screens/cart/GuestCart";
 import Login from "./Components/screens/login/login";
@@ -18,7 +18,9 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import VALIDATE_CREDENTIALS from "./Apollo/queries/validateCredentials";
 import AddProductForm from "./Components/AddProductForm";
 import Detail from "./Components/screens/detail/Detail";
+import OrderDetail from "./Components/screens/admin/ordenes/OrdenDetail";
 import Hola from "./Components/Hola";
+import Promote from "./Components/screens/admin/Promote";
 import BillCard from "./Components/BillCard/BillCard";
 
 let token = localStorage.getItem("token");
@@ -54,11 +56,15 @@ function App() {
           <Route path="/admin/add-product" component={AddProductForm} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route exact path="/admin/algo" component={Hola} />
+
+          <Route exact path="/promote" component={Promote} />
+
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
     );
   } else {
+    console.log(token, role, "tatsssssssssssaaaaaaaaaaaaaaa");
     return (
       <>
         <GlobalStyle />

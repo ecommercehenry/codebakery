@@ -10,6 +10,7 @@ import "./prueba.css";
 export default function Orden({ id, orden, setDetail }) {
   const [orderStatus, setOrderStatus] = useState("unpaid");
 
+  console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden);
   let status;
   if (orden.status === "unpaid") status = 0;
   if (orden.status === "paid") status = 1;
@@ -40,6 +41,12 @@ export default function Orden({ id, orden, setDetail }) {
               <span>UserId</span>
               <p>{orden.userId}</p>
             </div>
+
+            <div className="text-container">
+              <span>User Name</span>
+              <p>{orden.name}</p>
+            </div>
+
             <div className="status-container">
               <div className="titulos">
                 <span>Paid</span>
