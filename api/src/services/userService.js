@@ -47,7 +47,7 @@ async function createUser(name, password, email, role, google) {
           newUser.update({password, google:false});
         }
       }
-      // console.log(newUser, 'atstatsttatstas')
+      // 
       return {__typename: 'user', ...newUser.dataValues, detail: 'user created'};
       // let newUser = await Users.create({
       //   name,
@@ -58,7 +58,7 @@ async function createUser(name, password, email, role, google) {
       // return {__typename: 'user', ...newUser.dataValues, detail: 'user created'};
     }
     else {
-      // console.log('creando con google')
+      // 
       const [user, created] = await Users.findOrCreate({
         where: { email },
         defaults: {
@@ -72,7 +72,7 @@ async function createUser(name, password, email, role, google) {
       // created true es por que lo creó, no existia
       // siempre devuelve el usuario, pero el detalle va en función de
       // si existia o no
-      // console.log(user.dataValues, created);
+      // 
       if(created) return {__typename: 'user' , ...user.dataValues, detail: 'User created'};
       return {__typename: 'user', ...user.dataValues, detail: 'Email'};
     }
@@ -152,7 +152,7 @@ async function modifyUser(
 }
 
 async function loginUserWithGoogle(email, tokenId){
-  console.log(email);
+  
   const user = await Users.findOne({
     where:{
       email
@@ -178,7 +178,7 @@ async function loginUserWithGoogle(email, tokenId){
 }
 
 async function loginUser(email,password){
-  // console.log(name, password)
+  // 
   const user = await Users.findOne({
     where:{
       email: email

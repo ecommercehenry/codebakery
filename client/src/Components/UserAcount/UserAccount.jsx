@@ -32,15 +32,15 @@ const UserAcount = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // console.log(functionValidate, 'iiiiiiiiiiiiiiiiiiiiiiiiiii');
+  // 
  
-  // console.log(dataValidate, 'yysayysyas')
+  // 
   // Google login
   const dispatch = useDispatch();
 
   useEffect(()=>{
     if(localStorage.getItem('token')){
-      console.log('validando el usuario......')
+      
       functionValidate({ variables: { token: localStorage.getItem('token'), role: localStorage.getItem('role') } });
     }
     if(!loading && data){
@@ -57,22 +57,22 @@ const UserAcount = () => {
       }else{
         toast(data.validateUser.detail)
       }
-    console.log(data)
+    
   }},[loading, data, dataValidate])
   let role = localStorage.getItem('role');
   let token = localStorage.getItem('token');
   if(role  && token){
     // la redireccion se debe cambiar seún el role del usuario
     if(role === 'admin' && dataValidate?.validateCredentials){
-      // console.log('yaysyyayysa', dataValidate)
+      // 
       return <Redirect to='/admin/orders' />;
     }
     else if(role === 'user' && dataValidate?.validateCredentials) {
-      // console.log(dataValidate.validateCredentials, 'atstatstatstatstas')
+      // 
       return <Redirect to='/catalogue' />;
     }
     // else {
-    //   console.log('log-in')
+    //   
     //   // localStorage.clear();
     //   return <Redirect to='/log-in' />;
     // };

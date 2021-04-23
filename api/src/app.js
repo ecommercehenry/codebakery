@@ -31,7 +31,7 @@ server.use((req, res, next) => {
 
 
 const getErrorCode = errorName =>{
-  console.log("owefjwoiefjweofjweoifjwoeifjAAAAAAAAAAAAAAAAAAAA"+errorName)
+  
   return errorType[errorName]
 }
 ///mercadopago
@@ -67,12 +67,12 @@ server.post("/create_preference", (req, res) => {   //ruta para crear preferenci
 		.then(function (response) {
 			res.json({id :response.body.id})      //responde con un id 
 		}).catch(function (error) {
-			console.log(error);
+			
 		});
 });
 
 server.get('/feedback', async function(req, res) {     //ruta que responde con el status del pago
-  console.log('reqqqqqqq.qqqqqquery',req.query)
+  
   let orden = await Order.findByPk(parseInt(req.query.external_reference))
 
   if (req.query.status === 'approved'){
@@ -106,7 +106,7 @@ server.get('/feedback', async function(req, res) {     //ruta que responde con e
 ///mercadopago
 
 server.use('/graphql', graphqlHTTP((req)=>{
-  console.log("HEADER: "+req.headers.authtoken+' '+req.headers.authrole )
+  
   return ({
   schema: schema,
   extensions({
@@ -114,10 +114,10 @@ server.use('/graphql', graphqlHTTP((req)=>{
     variables,
     document
   }) {
-    console.log("VARIABLES")
-    console.log(variables);
-    console.log("RESULT")
-    console.log(result) 
+    
+    
+    
+    
   },
   rootValue: root,
   graphiql: true

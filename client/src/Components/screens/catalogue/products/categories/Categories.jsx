@@ -12,7 +12,7 @@ import styles from './Categories.module.css';
 const Categories = () => {
     //Iniciamos el estado en all para que se rendericen todos los productos
     const [name, setName] = React.useState('All');
-    // console.log(name, 'arsrrarsras')
+    // 
     //Obtenemos productos por nombre de categoria (apolo client)
     let  products = useQuery(productsByCategoryName, {
         variables: { name: name },
@@ -36,14 +36,14 @@ const Categories = () => {
     const categories = useQuery(getAllCategories);
 
     // useEffect(()=>{
-    //     console.log('u')
+    //     
     // },[])
 
     //Se envia la acción para actualizar los productos que se renderizan
     useEffect(() => {
-        // console.log('lo que sea');
+        // 
         dispatch(getAllProducts(products));
-        // console.log('otra vz');
+        // 
     }, [products]);
 
     //tenemos un query para pedir los productos por categorias
