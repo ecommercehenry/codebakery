@@ -1,5 +1,6 @@
 const { Product, Category, Users, conn } = require("../db");
 const { createOrder, getOrderById, updateOrderToTicket } = require("../services/orderService");
+const { addReview } = require("../services/reviewsService");
 const { createUser } = require("../services/userService");
 
 const MOCK_CATEOGRIES = require("./MOCK_CATEOGRIES.json");
@@ -41,6 +42,7 @@ async function dataPopulation() {
 
     await updateOrderToTicket(2)
     await updateOrderToTicket(4)
+    await addReview(1,1,{title:"hola",description:"hola",stars:"4"})
 
     await updateOrderToTicket(6)
     await updateOrderToTicket(7)

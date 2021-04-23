@@ -11,6 +11,8 @@ export const PRICE_HIGH_TO_LOW = "PRICE_HIGH_TO_LOW";
 export const CHANGE_STATUS = "CHANGE_STATUS";
 export const CLEAR_FILTER = "CLEAR_FILTER";
 export const CHANGE_PAGE = "CHANGE_PAGE";
+export const CHECKBOX_CHANGE = "CHECKBOX_CHANGE";
+export const CLEAR_CHECKBOXES = "CLEAR_CHECKBOXES";
 
 export const setSearch = () => {
   return {
@@ -98,3 +100,13 @@ export const changePage = (num) => {
     payload:num
   };
 };
+export const checkboxChange = (id) => {
+  return {
+    type: CHECKBOX_CHANGE,
+    payload: id
+  }
+}
+
+export const clearCheckboxes = () => {
+  return { type : CLEAR_CHECKBOXES }
+}

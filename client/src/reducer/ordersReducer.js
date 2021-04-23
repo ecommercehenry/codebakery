@@ -8,8 +8,9 @@ import {
   CLEAR_FILTER,
   CHANGE_PAGE,
   filterOrders,
+  CHECKBOX_CHANGE,
+  CLEAR_CHECKBOXES,
 } from "../actions/index";
-
 const initialState = {
   orders: [],
   filterOrders: [],
@@ -18,6 +19,13 @@ const initialState = {
   status: false,
   numPage: 0,
   renderPage:[],
+  filterStatus: [],
+  UNPAID: false,
+  PAID: false,
+  SENT: false,
+  RECEIVED: false,
+  CANCELLED: false,
+  ALL: false,
 };
 
 const pagination= (modifyState) => {
@@ -29,6 +37,18 @@ const pagination= (modifyState) => {
     return modifyState?.orders?.slice(modifyState.numPage, modifyState.numPage+10)
   }
 
+}
+
+// recibe el estado actual y el checkbox que recien se acaba de cambiar
+// debe devolver el arreglo q actualmente se está renderizando siltrado
+// según todos los checkboxes
+const filterByStatus = (currentState, actualCheck) =>{
+  // const
+  if(currentState.filterOrders.length > 0){
+    return currentState.filterStatus.length > 0 ? 
+    currentState.filterOrders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase()))):
+    currentState.filterOrders;
+  }
 }
 
 const reducer = (state = initialState, action) => {
@@ -95,29 +115,15 @@ const reducer = (state = initialState, action) => {
       }
 
     case PRICE_LOW_TO_HIGH:
-      //getAllOrders.orders.map(e => e).map(u=> u.lineal_order).map(g => g.map(h => h.price))
-      //console.log('stateorderSKLDMLSMD', state.orders)
       let filterlow;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
         //console.log('stateorder', state.orders)
         filterlow = state.filterOrders.sort(function (a, b) {
-          if (a.price[0] > b.price[0]) {
-            return 1;
-          }
-          if (a.price[0] < b.price[0]) {
-            return -1;
-          }
-          return 0;
+          return a.price[0] - b.price[0];
         });
       } else {
         filterlow = state.orders.sort(function (a, b) {
-          if (a.price[0] > b.price[0]) {
-            return 1;
-          }
-          if (a.price[0] < b.price[0]) {
-            return -1;
-          }
-          return 0;
+          return a.price[0] - b.price[0]; 
         });
       }
 
@@ -132,23 +138,11 @@ const reducer = (state = initialState, action) => {
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
         //console.log('stateorder', state.orders)
         filterhigh = state.filterOrders.sort(function (a, b) {
-          if (a.price[0] < b.price[0]) {
-            return 1;
-          }
-          if (a.price[0] > b.price[0]) {
-            return -1;
-          }
-          return 0;
+          return b.price[0] - a.price[0]; 
         });
       } else {
         filterhigh = state.orders.sort(function (a, b) {
-          if (a.price[0] < b.price[0]) {
-            return 1;
-          }
-          if (a.price[0] > b.price[0]) {
-            return -1;
-          }
-          return 0;
+          return b.price[0] - a.price[0];
         });
       }
 
@@ -176,6 +170,40 @@ const reducer = (state = initialState, action) => {
        
       };
 
+    case CHECKBOX_CHANGE:
+      // crear función q filtre por los check que están en true
+      // filterByStatus();
+      const modificateFilterState = state.filterStatus.includes(action.payload) ? 
+      state.filterStatus.filter(filter => filter !== action.payload):
+      [...state.filterStatus, action.payload];
+      const modificateState = {...state, 
+        [action.payload]: state[action.payload] ? false: true,
+        filterStatus: modificateFilterState,
+      }
+      // filterByStatus(modificateState)
+      return {
+        ...state,
+        filterOrders: filterByStatus(modificateState),
+        search: false,
+        status: false,
+        // switcheamos el valor de la propiedad del estado correspondiente
+        [action.payload]: state[action.payload] ? false: true,
+        filterStatus: modificateFilterState,
+      }
+    
+    case CLEAR_CHECKBOXES:
+      return {
+        ...state,
+        UNPAID: false,
+        PAID: false,
+        SENT: false,
+        RECEIVED: false,
+        CANCELLED: false,
+        ALL: true,
+        filterStatus: [],
+        // search: false,
+        // status: false,
+      }
     default:
       return state;
   }

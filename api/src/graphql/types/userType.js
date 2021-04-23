@@ -9,8 +9,8 @@ module.exports = `
         phoneNumber: Float!
         products: [product]
         reviews: [review]
-        token: String
-        order: order 
+        token: String,
+        order: order,
     }
 
 `;
