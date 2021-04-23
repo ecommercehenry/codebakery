@@ -16,7 +16,7 @@ const Login = ()=>{
             localStorage.setItem('token', token);
             dispatch(saveToken(user.data.validateUser))
         }
-        console.log(token)
+        
     },[user.data,token])
 
 

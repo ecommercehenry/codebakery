@@ -14,7 +14,7 @@ let userId = parseInt(storage.id);
     fetchPolicy: "no-cache",
   });
   let logeed = storage.token ? true : false; 
-  console.log(data, 'mis datos');
+  
   const itemsFromCart = useSelector((state) => state.cart.itemsToCart); 
   let valor = 0; 
   let sum = 0;

@@ -409,7 +409,7 @@ async function modifyOrderStatus(orderId, status) {
 }
 
 async function incrementQuantity(orderId, productId, quantity) {
-  console.log("aqui");
+  
   let obj = {};
   if (quantity) obj.quantity = quantity;
   try {
@@ -425,7 +425,7 @@ async function incrementQuantity(orderId, productId, quantity) {
 
 async function decrementQuantity(orderId, productId, quantity) {
   let obj = {};
-  console.log("aqui");
+  
   if (quantity) obj.quantity = quantity;
   try {
     let order = await Lineal_Order.findOne({
