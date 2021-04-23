@@ -4,7 +4,9 @@ import { Steps } from "rsuite";
 
 import { Link } from "react-router-dom";
 import "rsuite/lib/styles/index.less";
+
 import "./prueba.css";
+
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
@@ -43,6 +45,12 @@ export default function Orden({ id, orden, setDetail }) {
               <span>UserId</span>
               <p>{orden.userId}</p>
             </div>
+
+            <div className="text-container">
+              <span>User Name</span>
+              <p>{orden.name}</p>
+            </div>
+
             <div className="status-container">
               <div className="titulos">
                 <span>Paid</span>
@@ -126,7 +134,7 @@ const StyledOrden = styled.div`
     font-weight: 700;
   }
 
- .edit-button {
+  .edit-button {
     width: 5rem;
     height: 80px;
     padding: 0.5rem;
@@ -141,7 +149,7 @@ const StyledOrden = styled.div`
     background-color: rgba(117, 250, 161, 0.328);
   }
   .edit-button button:hover {
-    border-radius: 30px;
+   border-radius: 30px;
     color: rgb(78, 160, 78);
     padding: 6px;
     color: rgb(232, 208, 243);
