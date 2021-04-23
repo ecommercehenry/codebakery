@@ -20,6 +20,9 @@ import AddProductForm from "./Components/AddProductForm"
 import Detail from "./Components/screens/detail/Detail"
 import OrderDetail from "./Components/screens/admin/ordenes/OrdenDetail"
 import Hola from "./Components/Hola"
+import UserAdmin from "./Components/screens/admin/ordenes/UserAdmin"
+
+
 
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
@@ -53,6 +56,7 @@ function App() {
           <Route path="/admin/add-product" component={AddProductForm} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route exact path="/admin/algo" component={Hola} />
+          {/* <Route exact path="/admin/users" component={UserAdmin} /> */}
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>

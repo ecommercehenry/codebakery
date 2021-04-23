@@ -66,6 +66,7 @@ const root = {
     deleteReview,
     addReview,
     modifyReview,
+    deleteUser,
 
     //Queries    
     productById,

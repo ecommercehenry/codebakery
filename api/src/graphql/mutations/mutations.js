@@ -30,6 +30,4 @@ type Mutation{
     modifyReview(reviewId: Int!, dataReview:reviewInput!): reviewResult
     deleteReview(productId: Int!, userId: Int!): deletes
     deleteUser(userId: Int!) : resultBoolean
-
-   
 }`

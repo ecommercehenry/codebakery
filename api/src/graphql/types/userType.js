@@ -1,12 +1,12 @@
 module.exports = `
     type user {
         id : Int!
-        name : String!
+        name : String
         email: String!
         role: String!
-        address: String!
-        dni: Float!
-        phoneNumber: Float!
+        address: String
+        dni: Float
+        phoneNumber: Float
         products: [product]
         reviews: [review]
         token: String
