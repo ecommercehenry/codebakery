@@ -51,15 +51,13 @@ export default function TablaOrdenes() {
   return (
     <StyledTablaOrdenes>
       <ButtonClear name="Clear" />
-      { dataRENDER ? (
+      {dataRENDER ? (
         dataRENDER.map((ord) => {
           return <Orden id={ord.id} key={ord.id} orden={ord} />;
-        }) 
-      ) : 
-      (
+        })
+      ) : (
         <p>loading...</p>
-      )
-      }
+      )}
     </StyledTablaOrdenes>
   );
 }
