@@ -32,15 +32,15 @@ const ButtonAddCart = ({ id }) => {
     } else {
       if (!loading) {
           let orderId = data.getOrdersByUserIdInCart.orders[0]?.id;
-          let resultado = await addProductToOrder({
+          await addProductToOrder({
             variables: {
               orderId: orderId ?orderId : -1 ,
               productId: id,
               quantity: 1,
               userId: userId,
-
             },
           })
+          refetch()
           toast('Producto añadido al carrito',{ autoClose: 1000 });
       }
     }
