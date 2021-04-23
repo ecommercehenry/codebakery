@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import cartIcon from "../../../../../src/icons/cartNav.svg";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../src/Apollo/queries/getOrdersByUserIdInCart"; 
@@ -11,7 +11,7 @@ let storage = window.localStorage;
 let userId = parseInt(storage.id);
   const { data } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
-    fetchPolicy: "no-cache"
+    fetchPolicy: "no-cache",
   });
   let logeed = storage.token ? true : false; 
   console.log(data, 'mis datos');

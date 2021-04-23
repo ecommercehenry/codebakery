@@ -58,9 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   stepper: {
     padding: theme.spacing(3, 10, 3),
-    background:'#8a6db1',
-    color: '#f4f2f8',
-
+    background:'#8a6db1', //fondo de steps
   },
   buttons: {
     display: 'flex',
