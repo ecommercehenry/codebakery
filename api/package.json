@@ -29,7 +29,8 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "pg": "^8.3.0",
-    "sequelize": "^6.6.2"
+    "sequelize": "^6.6.2",
+    "stripe": "^8.145.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

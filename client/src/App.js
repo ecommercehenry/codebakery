@@ -22,6 +22,8 @@ import OrderDetail from "./Components/screens/admin/ordenes/OrdenDetail"
 import Hola from "./Components/Hola"
 import Promote from "./Components/screens/admin/Promote"
 import Checkout from './Components/screens/cart/Checkout/Checkout'
+import Options from "./Components/screens/checkoutt/Options"
+import Stripe from "./Components/screens/checkoutt/Stripe"
 
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
@@ -66,7 +68,7 @@ function App() {
       </>
     )
   } else {
-    console.log(token, role, 'tatsssssssssssaaaaaaaaaaaaaaa')
+    //console.log(token, role, 'tatsssssssssssaaaaaaaaaaaaaaa')
     return (
       <>
       <GlobalStyle/>
@@ -75,6 +77,8 @@ function App() {
           <Route exact path="/" component={Landing} />
           <Route path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/payment-method" component={Options} />
+          <Route exact path="/checkout" component={Stripe} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />

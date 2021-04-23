@@ -1,4 +1,5 @@
 const express = require('express');
+const Stripe = require('stripe')
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -6,11 +7,11 @@ const { graphqlHTTP } = require("express-graphql");
 const cors = require('cors')
 const {errorType} = require("./graphql/roots/errorsHandlers/errors")
 require('./db.js');
-
+const stripe = new Stripe(process.env.STRIPE_KEY)
 const server = express();
 const {schema, root} = require("./graphql/schema")
 server.name = 'API';
-
+server.use(express.json());
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
@@ -48,6 +49,23 @@ server.use('/graphql', graphqlHTTP((req)=>{
   
 })}))
 
+server.post('/stripe/checkout',async(req,res)=>{
+  console.log(req.body)
+  const {id,amount} = req.body
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount,
+      currency:'USD',
+      description: "",
+      payment_method:id,
+      confirm:true
+    })
+    res.send({message:'successful transaction'})
+  } catch (error) {
+    console.log(error)
+    res.send({message:error.raw.message})
+  }
+})
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
