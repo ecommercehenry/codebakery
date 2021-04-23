@@ -25,7 +25,6 @@ const Products = () => {
       <SearchBar />
       <Categories />
       <ProductBar/>
-      <ProductReview/>
       {/* <HomeButton /> */}
       {/* <SortButton /> */}
       <Grid/>

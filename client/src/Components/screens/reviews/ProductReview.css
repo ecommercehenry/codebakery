@@ -1,0 +1,6 @@
+#review{
+    overflow: scroll;
+    white-space: normal;
+    width: 40%;
+    overflow-x: overlay;
+}

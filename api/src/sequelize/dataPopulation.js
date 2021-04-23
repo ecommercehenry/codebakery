@@ -24,8 +24,10 @@ async function dataPopulation() {
 
     await updateOrderToTicket(2)
     await updateOrderToTicket(4)
-    await addReview(1,1,{title:"hola",description:"hola",stars:"4"})
+    await addReview(1,1,{title:"Exelente",description:"Ricas galletas de chocolate, las recomiendo al 100%",stars:"4"})
     await addReview(1,2,{title:"Bueno",description:"exelente",stars:"3"})
+    await addReview(1,3,{title:"Genial",description:"muy bueno",stars:"4"})
+    await addReview(1,4,{title:"Bueno",description:"buen producto",stars:"5"})
 
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,1)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,2)`)
