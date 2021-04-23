@@ -2,6 +2,7 @@ import React from 'react'
 import {useSelector} from 'react-redux'
 import { toast } from "react-toastify";
 import '../../../Assets/toast.css'; 
+import PayButton from "./PayButton";
 
 
 //styles
@@ -9,10 +10,9 @@ import styled from "styled-components";
 
 toast.configure()
 
-const TotalToOrder = () => {
+const TotalToOrder = ({productos}) => {
     const customId = "custom-id-yes";
     const itemsFromCart = useSelector(state=>state.cart.itemsToCart);
-    console.log(itemsFromCart)
     let total = 0;
     if(itemsFromCart!=undefined){itemsFromCart.map(elem => {total = total + (elem.price)*(elem.quantity)} )}
     
@@ -36,7 +36,8 @@ const TotalToOrder = () => {
                 </div>
             </div>
             <div className="buttonContainer">
-                <button className="payMee" onClick={clickHandler} onDoubleClick={doubleClickHandler}>Proceed to checkout</button>
+                {/* <button className="payMee" onClick={clickHandler} onDoubleClick={doubleClickHandler}>Proceed to checkout</button> */}
+                <PayButton className="payMee" productos={productos}/>
             </div>
             
         </StyledTotal>

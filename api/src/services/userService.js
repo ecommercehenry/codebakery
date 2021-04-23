@@ -132,13 +132,20 @@ async function modifyUser(
   if (phoneNumber) obj.phoneNumber = phoneNumber;
 
   try {
-    console.log("--------------------------------zzz"+obj)
-    console.log(obj)
-    let user = await Users.findOne({ where: { id } });
-    let newUser = await user.update(obj, {
-      attributes: { exclude: ["password", "salt"] },
-    });
-    return { __typename: "user", ...newUser.dataValues };
+    if (id) {
+      let user = await Users.findOne({ where: { id } });
+      let newUser = await user.update(obj, {
+        attributes: { exclude: ["password", "salt"] },
+      });
+      return { __typename: "user", ...newUser.dataValues };
+    }
+    if (email && !id) {
+      let user = await Users.findOne({ where: { email } });
+      let newUser = await user.update(obj, {
+        attributes: { exclude: ["password", "salt"] },
+      });
+      return { __typename: "user", ...newUser.dataValues };
+    }
   } catch {
     return { __typename: "error", name: "error", detail: "Invalid user" };
   }
@@ -178,7 +185,11 @@ async function loginUser(email,password){
     }
   })
   if(!user){
-    return {__typename:"error", name:"The user doesn't exists", detail:"The user doesn't exists"}
+    return {
+      __typename: "error",
+      name: "The user doesn't exists",
+      detail: "The user doesn't exists",
+    };
   }
   if (user) {
     const hashed = Users.encryptPassword(password, user.salt());
