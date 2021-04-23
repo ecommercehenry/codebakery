@@ -6,6 +6,8 @@ import {
   CHANGE_STATUS,
   FILTER_USERS,
   CLEAR_FILTER,
+  CHANGE_PAGE,
+  filterOrders,
 } from "../actions/index";
 
 const initialState = {
@@ -14,25 +16,41 @@ const initialState = {
   search: false,
   idError: 0,
   status: false,
+  numPage: 0,
+  renderPage:[],
 };
+
+const pagination= (modifyState) => {
+  //va a preguntar si hay algo en filter orders
+  //console.log ('modifystate', modifyState);
+  if (modifyState.filterOrders.length > 0) {
+    return modifyState?.filterOrders?.slice(modifyState.numPage, modifyState.numPage+10)
+  } else {
+    return modifyState?.orders?.slice(modifyState.numPage, modifyState.numPage+10)
+  }
+
+}
 
 const reducer = (state = initialState, action) => {
   // let ordersModified = state.orders
 
   switch (action.type) {
     case SAVE_ORDERS:
+      const data= action.payload?.map((o) => {
+        let filter = {
+          id: o.id,
+          userId: o.userId,
+          date: o.creation,
+          price: o.lineal_order.map((u) => u).map((g) => g.price),
+          cancelled: o.cancelled,
+        };
+        return filter;
+      })
+     // console.log('data', data);
       return {
         ...state,
-        orders: action.payload?.map((o) => {
-          let filter = {
-            id: o.id,
-            userId: o.userId,
-            date: o.creation,
-            price: o.lineal_order.map((u) => u).map((g) => g.price),
-            cancelled: o.cancelled,
-          };
-          return filter;
-        }),
+        orders: data,
+        renderPage: pagination({...state, orders:data}) 
       };
 
     case FILTER_ORDER:
@@ -40,7 +58,7 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (o) => o.id === Number(action.payload)
       );
-      console.log(searchOrder);
+     // console.log(searchOrder);
       if (searchOrder.length) {
         return {
           ...state,
@@ -146,6 +164,16 @@ const reducer = (state = initialState, action) => {
         filterOrders: [],
         search: false,
         status: false,
+      };
+
+    case CHANGE_PAGE:
+      const modifyState = {...state, numPage: action.payload}
+
+      return {
+        ...state,
+        renderPage: pagination(modifyState),
+        numPage: action.payload,
+       
       };
 
     default:

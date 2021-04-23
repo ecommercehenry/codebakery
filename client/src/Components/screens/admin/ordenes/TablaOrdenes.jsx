@@ -15,16 +15,19 @@ import ButtonClear from "./ButtonClear";
 export default function TablaOrdenes() {
   const customId = "custom-id-yes";
   let { data } = useQuery(getAllOrders);
-  let ordersQ = data?.getAllOrders.orders;
 
+  let ordersQ = data?.getAllOrders.orders;
+ 
+  
   //guarda las ordenes en el store redux...
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(saveOrders(ordersQ));
   }, [data]);
 
   //traigo info del reducer..
-  const { orders, search, filterOrders, idError, status } = useSelector(
+  const { orders, search, filterOrders, idError, status, renderPage } = useSelector(
     (state) => state.ordersReducer
   );
  
@@ -45,7 +48,7 @@ export default function TablaOrdenes() {
     return <ButtonClear name="Volver al principio" />;
   } else {
     //console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
-    dataRENDER = orders;
+    dataRENDER = renderPage;
   }
 
 

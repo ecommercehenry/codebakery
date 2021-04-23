@@ -10,7 +10,7 @@ import { useQuery, useMutation } from "@apollo/client";
 export default function Orden({ id, orden }) {
   const [orderStatus, setOrderStatus] = useState('unpaid')
 
-  console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
+ // console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden)
   let status;
   if(orden.status === "unpaid") status = 0
   if(orden.status === "paid") status = 1

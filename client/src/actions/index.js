@@ -10,6 +10,7 @@ export const PRICE_LOW_TO_HIGH = "PRICE_LOW_TO_HIGH";
 export const PRICE_HIGH_TO_LOW = "PRICE_HIGH_TO_LOW";
 export const CHANGE_STATUS = "CHANGE_STATUS";
 export const CLEAR_FILTER = "CLEAR_FILTER";
+export const CHANGE_PAGE = "CHANGE_PAGE";
 
 export const setSearch = () => {
   return {
@@ -88,5 +89,12 @@ export const pricetohigh = () => {
 export const changedStatus = () => {
   return {
     type: CHANGE_STATUS,
+  };
+};
+
+export const changePage = (num) => {
+  return {
+    type: CHANGE_PAGE,
+    payload:num
   };
 };
