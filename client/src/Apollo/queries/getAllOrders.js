@@ -37,6 +37,7 @@ query getAllOrders{
       }
     }
   }
+}
 `;
 
 export default GET_All_ORDERS;
