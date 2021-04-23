@@ -14,7 +14,7 @@ result = data?.getAllOrders?.orders.filter((element) => element.id == id)
     <div>
       {result[0]?.lineal_order?.map((element) => (
           <span>
-            <span className='order'>Order: {element.id}</span>
+            <span className='order'>Ordertttt: {element.id}</span>
             <h3 className='namee'>Name: {element.name}</h3>
             Product: <img className='image' src={element.image} alt=''/>
             <h3 className='cant'>Cant: {element.quantity}</h3>
