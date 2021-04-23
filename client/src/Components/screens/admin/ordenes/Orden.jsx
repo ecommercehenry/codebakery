@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Steps } from "rsuite";
+
 import { Link } from "react-router-dom";
 import "rsuite/lib/styles/index.less";
+
 import "./prueba.css";
 
 // @-WenLi
@@ -57,6 +59,7 @@ export default function Orden({ id, orden, setDetail }) {
             </div>
             <div className="text-container">
               <span>Cancelled</span>
+
               {orden.cancelled === false ? (
                 <p>O</p>
               ) : (
@@ -68,6 +71,7 @@ export default function Orden({ id, orden, setDetail }) {
               <p>{orden.price[0]} </p>
               {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
+
             <div to="edit-button">
               <Link to={`/admin/order/${id}`}>Detail</Link>
             </div>
