@@ -11,7 +11,6 @@ const reviewsReducer = (state = initialState, action) => {
         return {
           ...state,
           reviews: action.payload,
-       
         }
         case PRODUCT_REVIEW: 
           return {

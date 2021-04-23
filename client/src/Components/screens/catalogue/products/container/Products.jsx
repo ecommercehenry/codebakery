@@ -9,6 +9,7 @@ import Grid from "../grid/Grid";
 import "./Products.css";
 import ProductBar from './ProductBar';
 import Review from "../../../reviews/Review";
+import ProductReview from "../../../reviews/ProductReview";
 const Products = () => {
 //   const [search, setSearch] = useState(false);
 //   const { stateSearch } = useSelector((state) => state);
@@ -24,7 +25,7 @@ const Products = () => {
       <SearchBar />
       <Categories />
       <ProductBar/>
-      <Review/>
+      <ProductReview/>
       {/* <HomeButton /> */}
       {/* <SortButton /> */}
       <Grid/>
