@@ -10,7 +10,7 @@ module.exports = `
         getProductByCategoryName(name: String!): [product],
         getAllCategories:[category],
         getProductByName(name: String!): product, 
-        getAllUsers: [user],    
+        getAllUsers: [user],
         getProductByArray(array: [Int!]): [product],
         getAllOrders: ordersResult,
         getOrdersByUserIdInCart(userId: Int!): ordersResult,
@@ -22,4 +22,4 @@ module.exports = `
         validateCredentials(token: String!, role: String!): Boolean,
         validateUserWithGoogle(email: String!, tokenId: String): resultValidate
     }
-`
+`;

@@ -8,7 +8,7 @@ const MOCK_PRODUCTS = require("./MOCK_PRODUCTS.json");
 const MOCK_USER = require("./MOCK_USER.json");
 
 async function dataPopulation() {
-    console.log("dataPopulation ejecutado")
+    
     await Category.bulkCreate(MOCK_CATEOGRIES),
     await Product.bulkCreate(MOCK_PRODUCTS)
     await createUser("admin","12345","admin@admin.com","admin")

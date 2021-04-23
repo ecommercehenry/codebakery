@@ -11,7 +11,7 @@ async function getAllCategories() {
 async function addCategory(name){ 
   try { 
     let  category = await Category.create({ name });
-    // console.log(category, 'tatstats')
+    // 
     let obj = {__typename: 'category', ...category.dataValues};
     return obj;
   } catch (error) {

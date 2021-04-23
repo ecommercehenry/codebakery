@@ -5,8 +5,8 @@ module.exports = `
         email: String!
         role: String!
         address: String
-        dni: Float
-        phoneNumber: Float
+        dni: String
+        phoneNumber: String
         products: [product]
         reviews: [review]
         token: String,
