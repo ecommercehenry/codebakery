@@ -1,19 +1,21 @@
 import { gql } from "@apollo/client";
 
-const getAllOrders = gql`
+const GET_All_ORDERS = gql`
   query getAllOrders {
     getAllOrders {
       ... on orders {
         orders {
           id
           status
-          name
-          email
-          role
           userId
           creation
           lastModified
           cancelled
+          creation
+          lastModified
+          name
+          email
+          role
           lineal_order {
             id
             name
@@ -32,4 +34,4 @@ const getAllOrders = gql`
   }
 `;
 
-export default getAllOrders;
+export default GET_All_ORDERS;

@@ -20,8 +20,9 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       stars: {
-        type: DataTypes.STRING,
-        allowNull: true,
+        type: DataTypes.ENUM('1', '2', '3', '4','5'),
+        defaultValue: '1',
+        allowNull: false,
       },
     },
     { timestamps: true }

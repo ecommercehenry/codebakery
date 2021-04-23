@@ -1,5 +1,6 @@
 const { Product, Category, Users, conn } = require("../db");
 const { createOrder, getOrderById, updateOrderToTicket } = require("../services/orderService");
+const { addReview } = require("../services/reviewsService");
 const { createUser } = require("../services/userService");
 
 const MOCK_CATEOGRIES = require("./MOCK_CATEOGRIES.json");
@@ -11,8 +12,15 @@ async function dataPopulation() {
     await Category.bulkCreate(MOCK_CATEOGRIES),
     await Product.bulkCreate(MOCK_PRODUCTS)
     await createUser("admin","12345","admin@admin.com","admin")
-    await createUser("juan","12345","juan@gmail.com","user")
-    await createUser("pepe","12345","pepe@gmail.com","user")
+    await createUser("santi","12345","santi@gmail.com","user")
+    await createUser("ivan","12345","ivan@gmail.com","user")
+    await createUser("lucas","12345","lucas@admin.com","user")
+    await createUser("Joha","12345","joha@gmail.com","user")
+    await createUser("patsy","12345","patsy@gmail.com","user")
+    await createUser("lau","12345","lau@gmail.com","user")
+    await createUser("guille","12345","guille@gmail.com","user")
+    await createUser("pablo","12345","pablo@gmail.com","user")
+    await createUser("fran","12345","fran@gmail.com","user")
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
     await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)
@@ -23,6 +31,7 @@ async function dataPopulation() {
 
     await updateOrderToTicket(2)
     await updateOrderToTicket(4)
+    await addReview(1,1,{title:"hola",description:"hola",stars:"4"})
 
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,1)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,2)`)
