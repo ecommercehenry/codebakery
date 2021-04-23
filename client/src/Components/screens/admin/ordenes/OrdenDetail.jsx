@@ -74,7 +74,7 @@ const StyledOrden = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid #402e57;
     padding: 50px 0px 150px;
   }
   .element-container-odtls span {

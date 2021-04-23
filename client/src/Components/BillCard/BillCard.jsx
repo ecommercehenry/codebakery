@@ -2,8 +2,11 @@ import { useQuery } from "@apollo/client";
 import React from "react";
 import { useParams } from "react-router";
 import GET_All_ORDERS from "../../Apollo/queries/getAllOrders";
+import getUserById from "../../Apollo/queries/getUserById";
 import OrderDetail from "../screens/admin/ordenes/OrdenDetail";
+import UserDetails from "./UserDetails";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 import "./BillCard.css";
 
@@ -12,8 +15,26 @@ const BillCard = () => {
 
   let { data } = useQuery(GET_All_ORDERS);
   const result = data?.getAllOrders?.orders.filter(
-    (element) => element.id == id
+    (element) => element.id === Number(id)
   );
+
+  console.log(result[0]);
+
+  const date = result[0]?.creation;
+  const userId = result[0]?.userId;
+
+  const newDate = (d) => {
+    const fullDate = new Date(d);
+    let day = fullDate.getDate();
+    let mounth = fullDate.getMonth();
+    let year = fullDate.getFullYear();
+
+    return d ? `${day}/${mounth}/${year}` : "N/A";
+  };
+
+  let { data: $USER } = useQuery(getUserById, {
+    variables: { id: userId },
+  });
 
   const subTotal = result[0]?.lineal_order
     .map((r) => r.price)
@@ -22,10 +43,9 @@ const BillCard = () => {
   const porcTotal = (subTotal * 21) / 100;
 
   const trunc = (x, posiciones = 5) => {
-    var s = x.toString();
-    var l = s.length;
-    var decimalLength = s.indexOf(".") + 1;
-    var numStr = s.substr(0, decimalLength + posiciones);
+    let s = x.toString();
+    let decimalLength = s.indexOf(".") + 1;
+    let numStr = s.substr(0, decimalLength + posiciones);
     return Number(numStr);
   };
 
@@ -36,7 +56,12 @@ const BillCard = () => {
   const total = subTotal + subTotalPor + shipping;
 
   return (
-    <div className="container-two ">
+    <div
+      className="container-two"
+      style={{
+        height: "100%",
+      }}
+    >
       <div
         className="onboard-card"
         style={{
@@ -52,8 +77,15 @@ const BillCard = () => {
             }}
           >
             <h2 className="step-title">Order: </h2>
-            <p>N/A</p>
-            {/* <p>{order ? order : "N/A"}</p> */}
+
+            <p
+              style={{
+                fontSize: "1.5rem",
+                color: "#7d62a0",
+              }}
+            >
+              {id ? id : "N/A"}
+            </p>
           </div>
           <div
             style={{
@@ -62,76 +94,25 @@ const BillCard = () => {
             }}
           >
             <h2 className="step-title">Date: </h2>
-            <p>N/A</p>
-            {/* <p>{date ? date : "N/A"}</p> */}
+            <p
+              style={{
+                fontSize: "1.5rem",
+                color: "#7d62a0",
+              }}
+            >
+              {newDate(date)}
+            </p>
           </div>
         </div>
 
-        <div className="info info-details">
-          <div
-            style={{
-              flex: "50%",
-              padding: "1rem",
-            }}
-          >
-            <h3 className="parrafo" style={{ fontWeight: "600" }}>
-              Client:
-            </h3>
-            <p>N/A</p>
-            {/* <p>{client ? client : "N/A"}</p> */}
-          </div>
-
-          <div
-            style={{
-              flex: "50%",
-              padding: "1rem",
-            }}
-          >
-            <h3 className="parrafo" style={{ fontWeight: "600" }}>
-              Email:
-            </h3>
-            <p>N/A</p>
-            {/* <p>{email ? email : "N/A"}</p> */}
-          </div>
-
-          <div
-            style={{
-              flex: "50%",
-              padding: "1rem",
-            }}
-          >
-            <h3 className="parrafo" style={{ fontWeight: "600" }}>
-              DNI:
-            </h3>
-            <p>N/A</p>
-            {/* <p>{dni ? dni : "N/A"}</p> */}
-          </div>
-
-          <div
-            style={{
-              flex: "50%",
-              padding: "1rem",
-            }}
-          >
-            <h3 className="parrafo" style={{ fontWeight: "600" }}>
-              Address:
-            </h3>
-            <p>N/A</p>
-            {/* <p>{address ? address : "N/A"}</p> */}
-          </div>
-
-          <div
-            style={{
-              flex: "50%",
-              padding: "1rem",
-            }}
-          >
-            <h3 className="parrafo" style={{ fontWeight: "600" }}>
-              Phone:
-            </h3>
-            <p>N/A</p>
-            {/* <p>{phone ? phone : "N/A"}</p> */}
-          </div>
+        <div style={{ width: "80%" }}>
+          <UserDetails
+            name={$USER?.getUserById.name}
+            email={$USER?.getUserById.email}
+            dni={$USER?.getUserById.dni}
+            phoneNumber={$USER?.getUserById.phoneNumber}
+            address={$USER?.getUserById.address}
+          />
         </div>
 
         <div style={{ width: "80%" }}>
@@ -173,16 +154,39 @@ const BillCard = () => {
           </h3>
         </div>
 
-        <div className="">
+        <ButtonStyled className="submit-button">
           <button>SEND</button>
           <button>CANCELLED</button>
           <Link to="/admin/orders">
             <button>GO BACK</button>
           </Link>
-        </div>
+        </ButtonStyled>
       </div>
     </div>
   );
 };
+
+const ButtonStyled = styled.div`
+  color: #dce8f1;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-top-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 80%;
+
+  button {
+    margin: 1rem;
+    width: 12rem;
+    background: #402e57;
+    color: #f6f6f6;
+  }
+
+  button:hover {
+    background-color: #7d62a0;
+  }
+`;
 
 export default BillCard;
