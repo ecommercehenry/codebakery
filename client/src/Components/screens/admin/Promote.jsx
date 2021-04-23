@@ -2,7 +2,6 @@ import React from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import PROMOTE_USER from "../../../Apollo/mutations/promoteUser";
 import { Redirect } from "react-router";
-import getUserById from "../../../Apollo/queries/getUserById";
 import "./promote.css"
 
 
