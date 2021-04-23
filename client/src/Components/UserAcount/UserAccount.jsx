@@ -12,20 +12,21 @@ import { Redirect } from "react-router-dom";
 import Login from "./Login";
 import Logout from "./Logout";
 import { useDispatch } from "react-redux";
-import validateUser from "../../Apollo/queries/validateUser"
+import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
 import '../../Assets/toast.css'; 
 
-toast.configure()
+toast.configure() 
 
 const UserAcount = () => {
-  const [login, { loading, data }] = useLazyQuery(validateUser);
+  // valida que exista el usuario y lo devuelve con un token
+  const [login, { loading, data }] = useLazyQuery(validateUser); 
   // const validate = useLazyQuery(VALIDATE_CREDENTIALS);
-  const validateCredentials = useLazyQuery(VALIDATE_CREDENTIALS);
-  const loadingValidate = validateCredentials[1]?.loading?.validateCredentials, 
-  dataValidate = validateCredentials[1]?.data?.validateCredentials,
-  functionValidate = validateCredentials[0];
+  const [functionValidate, {loading: loadingValidate, data: dataValidate}] = useLazyQuery(VALIDATE_CREDENTIALS);
+  // const loadingValidate = validateCredentials[1]?.loading?.validateCredentials, 
+  // dataValidate = validateCredentials[1]?.data?.validateCredentials,
+  // functionValidate = validateCredentials[0];
   const {
     register,
     handleSubmit,
@@ -35,12 +36,13 @@ const UserAcount = () => {
  
   // console.log(dataValidate, 'yysayysyas')
   // Google login
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(()=>{
     if(localStorage.getItem('token')){
+      console.log('validando el usuario......')
       functionValidate({ variables: { token: localStorage.getItem('token'), role: localStorage.getItem('role') } });
-   }
+    }
     if(!loading && data){
       if(data.validateUser.token){
         // alert("logueado")
@@ -61,11 +63,14 @@ const UserAcount = () => {
   let token = localStorage.getItem('token');
   if(role  && token){
     // la redireccion se debe cambiar seún el role del usuario
-    if(role === 'admin' && dataValidate){
-      console.log('yaysyyayysa', dataValidate)
+    if(role === 'admin' && dataValidate?.validateCredentials){
+      // console.log('yaysyyayysa', dataValidate)
       return <Redirect to='/admin/orders' />;
     }
-    else if(role === 'user' && dataValidate) return <Redirect to='/catalogue' />;
+    else if(role === 'user' && dataValidate?.validateCredentials) {
+      // console.log(dataValidate.validateCredentials, 'atstatstatstatstas')
+      return <Redirect to='/catalogue' />;
+    }
     // else {
     //   console.log('log-in')
     //   // localStorage.clear();
@@ -73,12 +78,11 @@ const UserAcount = () => {
     // };
   }
   const handleLogin = async (form) => {
-    login({variables: {email:form.login,password:form.password}})    
-
+    login({variables: {email:form.login,password:form.password}});
   };
 
   return (
-    <div classname="page" style={{height: "100vh", display: "flex", alignItems: "center"}}>
+    <div className="page" style={{height: "100vh", display: "flex", alignItems: "center"}}>
     <div className="wrapper fadeInDown" style={{marginBottom: "10vh"}}>
       <div className="formContent">
         <Login />
@@ -115,6 +119,9 @@ const UserAcount = () => {
         </form>
         <p className="formFooter">
           ¿No tienes cuenta? <Link to="/sign-up">Creala aqui</Link>
+        </p>
+        <p className="formFooter">
+          <Link to="/reset-password">Reset password</Link>
         </p>
       </div>
     </div>
