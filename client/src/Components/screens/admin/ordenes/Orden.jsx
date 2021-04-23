@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Steps } from "rsuite";
-import { Link } from "react-router-dom";
 import "rsuite/lib/styles/index.less";
-import "./prueba.css";
+/* import "./prueba.css" */
+import { useQuery, useMutation } from "@apollo/client";
+import { HiOutlineDocumentSearch } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
-export default function Orden({ id, orden, setDetail }) {
+export default function Orden({ id, orden }) {
   const [orderStatus, setOrderStatus] = useState("unpaid");
 
   console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden);
@@ -46,7 +48,6 @@ export default function Orden({ id, orden, setDetail }) {
               <span>User Name</span>
               <p>{orden.name}</p>
             </div>
-
             <div className="status-container">
               <div className="titulos">
                 <span>Paid</span>
@@ -57,19 +58,26 @@ export default function Orden({ id, orden, setDetail }) {
             </div>
             <div className="text-container">
               <span>Cancelled</span>
-              {orden.cancelled === false ? (
-                <p>O</p>
-              ) : (
-                <p className="order-cacelled">X</p>
-              )}
+              <p>
+                {orden.cancelled === false ? (
+                  <p>O</p>
+                ) : (
+                  <p className="order-cacelled">X</p>
+                )}
+              </p>
             </div>
             <div className="text-container">
               <span>Total</span>
               <p>{orden.price[0]} </p>
               {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
-            <div to="edit-button">
-              <Link to={`/admin/order/${id}`}>Detail</Link>
+            <div className="edit-button">
+              <span style={{ color: "green" }}>Detail</span>
+              <button>
+                <Link to={`/admin/order/${id}`}>
+                  <HiOutlineDocumentSearch size="1.8rem" color="green" />
+                </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -86,20 +94,18 @@ const StyledOrden = styled.div`
   justify-content: space-around;
   width: 100%;
   margin-top: 2rem;
-
   .status-container {
     width: 350px;
     height: 80px;
     padding: 0.5rem;
     align-items: center;
   }
-
   .info-container {
     height: 80%;
     width: 90%;
     display: flex;
+    justify-content: space-between;
   }
-
   .element-container {
     width: 100%;
     height: 16vh;
@@ -113,7 +119,6 @@ const StyledOrden = styled.div`
     font-weight: 700;
     color: rgb(123, 87, 156);
   }
-
   .text-container {
     width: 250px;
     height: 80px;
@@ -125,26 +130,19 @@ const StyledOrden = styled.div`
     color: grey;
     font-weight: 700;
   }
-
   .edit-button {
-    width: 5rem;
-    height: 80px;
     padding: 0.5rem;
-    margin-top: 20px;
-    margin-left: 20px;
+    height: 100%;
+    justify-self: center;
+    align-self: center;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
   }
-
   .edit-button button {
-    border-radius: 30px;
-    color: rgb(78, 160, 78);
-    padding: 4px;
-    background-color: rgba(117, 250, 161, 0.328);
-  }
-  .edit-button button:hover {
-    border-radius: 30px;
-    color: rgb(78, 160, 78);
-    padding: 6px;
-    color: rgb(232, 208, 243);
-    background-color: rgb(55, 10, 85);
+    margin-top: 0.5rem;
+    border: none;
+    background: transparent;
   }
 `;

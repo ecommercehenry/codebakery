@@ -67,7 +67,7 @@ const GuestCart = () => {
   return (
     <StyledCart>
       
-        <button onClick={resetCartHandler}>vaciar carrito</button>
+        {/* <button onClick={resetCartHandler}>vaciar carrito</button> */}
         {data && itemsToCart.length !==0 ? (
           itemsToCart.map((elem) => (
             <ProductOnCart
@@ -89,7 +89,6 @@ const GuestCart = () => {
 };
 
 const StyledCart = styled.div`
-  margin-top:10rem;
   //background: red;
   height: fit-content;
   width: 100%;
