@@ -120,6 +120,9 @@ const UserAcount = () => {
         <p className="formFooter">
           ¿No tienes cuenta? <Link to="/sign-up">Creala aqui</Link>
         </p>
+        <p className="formFooter">
+          <Link to="/reset-password">Reset password</Link>
+        </p>
       </div>
     </div>
     </div>

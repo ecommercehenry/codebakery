@@ -22,6 +22,7 @@ import OrderDetail from "./Components/screens/admin/ordenes/OrdenDetail";
 import Hola from "./Components/Hola";
 import Promote from "./Components/screens/admin/Promote";
 import BillCard from "./Components/BillCard/BillCard";
+import ResetPassword from "./Components/ResetPassword/ResetPassword"
 
 let token = localStorage.getItem("token");
 let role = localStorage.getItem("role");
@@ -56,9 +57,8 @@ function App() {
           <Route path="/admin/add-product" component={AddProductForm} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route exact path="/admin/algo" component={Hola} />
-
+          <Route exact path="/reset-password" component={ResetPassword} />
           <Route exact path="/promote" component={Promote} />
-
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
@@ -75,6 +75,7 @@ function App() {
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
+          <Route exact path="/reset-password" component={ResetPassword} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
