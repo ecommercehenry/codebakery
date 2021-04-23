@@ -21,6 +21,7 @@ import Detail from "./Components/screens/detail/Detail"
 import OrderDetail from "./Components/screens/admin/ordenes/OrdenDetail"
 import Hola from "./Components/Hola"
 import Promote from "./Components/screens/admin/Promote"
+import Checkout from './Components/screens/cart/Checkout/Checkout'
 
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
@@ -70,6 +71,7 @@ function App() {
       <>
       <GlobalStyle/>
         <Switch>
+          <Route path='/checkout' component={Checkout}/>
           <Route exact path="/" component={Landing} />
           <Route path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />

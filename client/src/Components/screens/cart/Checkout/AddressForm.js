@@ -22,16 +22,6 @@ export default function AddressForm() {
             autoComplete="given-name"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="family-name"
-          />
-        </Grid>
         <Grid item xs={12}>
           <TextField
             required
