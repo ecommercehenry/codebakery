@@ -5,12 +5,12 @@ module.exports = `
         email: String!
         role: String!
         address: String
-        dni: String
-        phoneNumber: String
+        dni: Float
+        phoneNumber: Float
         products: [product]
         reviews: [review]
-        token: String
-        order: order 
+        token: String,
+        order: order,
     }
 
 `;

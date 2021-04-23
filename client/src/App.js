@@ -7,7 +7,7 @@ import Catalogue from "./Components/screens/catalogue/container/Catalogue"
 import Cart from "./Components/screens/cart/container/Cart"
 import AboutUs from "./Components/screens/aboutUs/container/AboutUs"
 import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory"
-import FormCRUD from "./Components/screens/admin/FormCRUD"
+// import FormCRUD from "./Components/screens/admin/FormCRUD"
 import GlobalStyle from "./Components/GlobalStyle"
 import GuestCart from "./Components/screens/cart/GuestCart"
 import Login from "./Components/screens/login/login"
@@ -22,6 +22,7 @@ import OrderDetail from "./Components/screens/admin/ordenes/OrdenDetail"
 import ResetPassword from "./Components/ResetPassword/ResetPassword"
 
 import Hola from "./Components/Hola"
+import Promote from "./Components/screens/admin/Promote"
 
 let token = localStorage.getItem("token")
 let role = localStorage.getItem("role")
@@ -55,12 +56,18 @@ function App() {
           <Route path="/admin/add-product" component={AddProductForm} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route exact path="/admin/algo" component={Hola} />
-          <Route exact path="/reset-password" component={ResetPassword} />
+          
+          
+          <Route exact path="/promote" component={Promote} />
+
+
+
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
     )
   } else {
+    console.log(token, role, 'tatsssssssssssaaaaaaaaaaaaaaa')
     return (
       <>
       <GlobalStyle/>
