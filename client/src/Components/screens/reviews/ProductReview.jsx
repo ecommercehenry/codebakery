@@ -7,31 +7,29 @@ import "./ProductReview.css"
 
 const ProductReview = ({ id }) => {
   const { data } = useQuery(GET_BY_REVIEW_PRODUCT, {
-    variables: { productId: 1 },
+    variables: { productId: id },
   });
   const [loanding, setLoanding] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setLoanding(false);
-    }, 5000);
+    }, 1000);
   }, []);
 
-  let valor = 0;
-  let result; 
-  let index; 
+  let suma = 0;
+  let result = 0; 
   if(data !== undefined){
     if (data.getAllReviewsFromAProduct.length !== 0 ){
-      data.getAllReviewsFromAProduct.map((element, i = 1) =>{
-        index = data.getAllReviewsFromAProduct.length
-        valor = valor + parseInt(element.stars)  
-        result = Math.ceil(valor/index)
+      data.getAllReviewsFromAProduct.map((element) =>{
+          suma = suma + parseInt(element.stars) 
+          result = Math.ceil(suma/data.getAllReviewsFromAProduct.length)
       }); 
     }
   }
   return (
     <div id="review">
-      <Rating name="read-only" value={result} readOnly />
+      <Rating name="read-only" value={result} readOnly/>
       {loanding
         ? <Skeleton width={400} height={300}/>
         : data?.getAllReviewsFromAProduct.map((e, i) => (

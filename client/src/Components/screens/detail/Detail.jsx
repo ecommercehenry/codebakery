@@ -57,7 +57,7 @@ const Detail = () => {
                 </div>
               </>
             </div>
-            <ProductReview id={id}/>
+            <ProductReview id={parseInt(idCart.id)}/>
           </>
         ) : (
           "loading..."
