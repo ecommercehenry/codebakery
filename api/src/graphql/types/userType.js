@@ -9,8 +9,8 @@ module.exports = `
         phoneNumber: String
         products: [product]
         reviews: [review]
-        token: String
-        order: order 
+        token: String,
+        order: order,
     }
 
 `;

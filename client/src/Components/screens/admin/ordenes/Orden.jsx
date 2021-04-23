@@ -5,6 +5,7 @@ import "rsuite/lib/styles/index.less";
 /* import "./prueba.css" */
 import { useQuery, useMutation } from "@apollo/client";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
@@ -42,6 +43,11 @@ export default function Orden({ id, orden }) {
               <span>UserId</span>
               <p>{orden.userId}</p>
             </div>
+
+            <div className="text-container">
+              <span>User Name</span>
+              <p>{orden.name}</p>
+            </div>
             <div className="status-container">
               <div className="titulos">
                 <span>Paid</span>
@@ -66,9 +72,11 @@ export default function Orden({ id, orden }) {
               {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
             <div className="edit-button">
-              <span style={{color:"green"}}>Detail</span>
+              <span style={{ color: "green" }}>Detail</span>
               <button>
-              <HiOutlineDocumentSearch size="1.8rem" color="green"/>
+                <Link to={`/admin/order/${id}`}>
+                  <HiOutlineDocumentSearch size="1.8rem" color="green" />
+                </Link>
               </button>
             </div>
           </div>
@@ -86,21 +94,18 @@ const StyledOrden = styled.div`
   justify-content: space-around;
   width: 100%;
   margin-top: 2rem;
-
   .status-container {
     width: 350px;
     height: 80px;
     padding: 0.5rem;
     align-items: center;
   }
-
   .info-container {
     height: 80%;
     width: 90%;
     display: flex;
     justify-content: space-between;
   }
-
   .element-container {
     width: 100%;
     height: 16vh;
@@ -114,7 +119,6 @@ const StyledOrden = styled.div`
     font-weight: 700;
     color: rgb(123, 87, 156);
   }
-
   .text-container {
     width: 250px;
     height: 80px;
@@ -126,7 +130,6 @@ const StyledOrden = styled.div`
     color: grey;
     font-weight: 700;
   }
-
   .edit-button {
     padding: 0.5rem;
     height: 100%;
@@ -137,7 +140,6 @@ const StyledOrden = styled.div`
     display: flex;
     flex-direction: column;
   }
-
   .edit-button button {
     margin-top: 0.5rem;
     border: none;
