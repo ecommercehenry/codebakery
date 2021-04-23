@@ -20,7 +20,7 @@ type Mutation{
     createOrder(idUser: Int!, dataProducts: [dataProductsOrderInput]) : resultOrder
     updateOrderPrices(orderId: Int!) : resultBoolean
     deleteProductOrder(orderId: Int!, productId: Int!): resultBoolean
-    addProductToOrder(orderId: Int!, productId: Int!, quantity: Int!): resultBoolean
+    addProductToOrder(orderId: Int!, productId: Int!, quantity: Int!, userId: Int): resultBoolean
     deleteOrder(orderId: Int!) : resultBoolean
     updateOrderToTicket(orderId: Int!): resultBoolean
     modifyOrderStatus(orderId: Int!, status: String!): resultBoolean

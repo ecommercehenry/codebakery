@@ -15,6 +15,7 @@ const ProductOnCart = ({
   stock,
   quantity,
   orderId,
+  refetch
 }) => {
   let logged = localStorage.token ? true : false;
   let [newQuantity, setNewQuantity] = useState(quantity);
@@ -34,7 +35,7 @@ const ProductOnCart = ({
           productId: id,
         },
       })
-      window.location.reload()
+      refetch()
     }
   };
   return (
@@ -52,6 +53,7 @@ const ProductOnCart = ({
           logged = {logged}
           orderId= {orderId}
           productId= {id}
+          refetch= {refetch}
         />
         <div className="stockk">{stock} disponibles</div>
       </div>
