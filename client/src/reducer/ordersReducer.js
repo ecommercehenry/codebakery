@@ -43,7 +43,7 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (o) => o.id === Number(action.payload)
       );
-      console.log(searchOrder);
+      
       if (searchOrder.length) {
         return {
           ...state,
@@ -101,10 +101,10 @@ const reducer = (state = initialState, action) => {
 
     case PRICE_LOW_TO_HIGH:
       //getAllOrders.orders.map(e => e).map(u=> u.lineal_order).map(g => g.map(h => h.price))
-      //console.log('stateorderSKLDMLSMD', state.orders)
+      //
       let filterlow;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
-        //console.log('stateorder', state.orders)
+        //
         filterlow = state.filterOrders.sort(function (a, b) {
           if (a.price[0] > b.price[0]) {
             return 1;
@@ -135,7 +135,7 @@ const reducer = (state = initialState, action) => {
     case PRICE_HIGH_TO_LOW:
       let filterhigh;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
-        //console.log('stateorder', state.orders)
+        //
         filterhigh = state.filterOrders.sort(function (a, b) {
           if (a.price[0] < b.price[0]) {
             return 1;

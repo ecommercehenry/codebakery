@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 export default function Orden({ id, orden }) {
   const [orderStatus, setOrderStatus] = useState("unpaid");
 
-  console.log("Esta es la orden QUE LLEGA A COMP ORDEN: ", orden);
+  
   let status;
   if (orden.status === "unpaid") status = 0;
   if (orden.status === "paid") status = 1;

@@ -64,7 +64,7 @@ function App() {
       </>
     );
   } else {
-    console.log(token, role, "tatsssssssssssaaaaaaaaaaaaaaa");
+    
     return (
       <>
         <GlobalStyle />
