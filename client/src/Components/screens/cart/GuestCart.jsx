@@ -83,7 +83,6 @@ const GuestCart = () => {
           <EmptyAlert/>
         )}
         <TotalToOrder/> 
-      {/* <TotalToOrder/> */}
     </StyledCart>
   );
 };

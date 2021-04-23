@@ -32,6 +32,7 @@ const UserCart = () => {
       ) : (
         <p></p>
       )}
+      <button className="payMee" >Checkout</button>
     </StyledCart>
   );
 };
@@ -43,6 +44,23 @@ const StyledCart = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  .buttonContainer{
+    //background:violet;
+    width:87%;
+    display:flex;
+    justify-content:flex-end;
+    .payMee{
+        z-index:1;
+        display:flex;
+        justify-content:center;
+        padding:1rem 5.5rem;
+        background:#755588;
+        color:white;
+        border:none;
+        border-radius: 20px;
+        font-size:1.2rem;
+    }
+}
 `;
 
 export default UserCart;
