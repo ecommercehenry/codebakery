@@ -3,7 +3,9 @@ import GET_ORDERS_BY_USER_ID_IN_CART from "../../../Apollo/queries/getOrdersByUs
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import ProductOnCart from "./ProductOnCart";
-import PayButton from "./PayButton";
+import { useSelector } from "react-redux";
+import TotalToOrder from "./TotalToOrder";
+
 
 const UserCart = () => {
   let storage = window.localStorage;

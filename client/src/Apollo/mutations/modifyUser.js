@@ -1,14 +1,37 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 const MODIFY_USER = gql`
-mutation modifyUser ($name: String!, $password: String!, $email: String!, $role: String!){
-    modifyUser (name: $name, password: $password, email: $email, role:$role){
+  mutation modifyUser(
+    $id: Int
+    $name: String
+    $password: String
+    $newPassword: String
+    $email: String
+    $role: String
+    $address: String
+    $dni: String
+    $phoneNumber: String
+  ) {
+    modifyUser(
+      id: $id
+      name: $name
+      password: $password
+      newPassword: $newPassword
+      email: $email
+      role: $role
+      address: $address
+      dni: $dni
+      phoneNumber: $phoneNumber
+    ) {
       __typename
-      ... on user{
-        name
+      ... on user {
         id
+        name
         email
         role
+        address
+        dni
+        phoneNumber
       }
       __typename
       ... on error {
@@ -18,5 +41,4 @@ mutation modifyUser ($name: String!, $password: String!, $email: String!, $role:
     }
   }
 `;
-export default MODIFY_USER
-// modifyUser(id: Int!, name:String, password: String, email: String, role: String, address: String, dni: String, phoneNumber: String): resultUsers
+export default MODIFY_USER;

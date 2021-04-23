@@ -322,11 +322,11 @@ async function deleteProductOrder(orderId, productId) {
       } else {
           return { __typename: "error" , name:"concept error, see detail",detail:"You cannot add a product in a ticket order"}
       }
-      
+
   } catch (err) {
       return { __typename: "error" , name:"unknow",detail:err.message}
   }
-  
+
 }
 
 /**
