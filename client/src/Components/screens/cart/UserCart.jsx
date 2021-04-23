@@ -30,14 +30,8 @@ const UserCart = () => {
           />
         ))
       ) : (
-        <p>vacio</p>
+        <p></p>
       )}
-      <div className="total-container">
-        {
-          data?.getOrdersByUserIdInCart?.orders.length ? <PayButton productos={data.getOrdersByUserIdInCart.orders[0]}/> : <p>cargando</p> 
-        }
-        
-      </div>
     </StyledCart>
   );
 };

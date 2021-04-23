@@ -18,8 +18,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="http://localhost:3000/">
+        Code Bakery
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -30,6 +30,8 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
+    background: '#402e57', // fondo de barra
+    color: '#f4f2f8'   // color de letra de barra
   },
   layout: {
     width: 'auto',
@@ -42,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   paper: {
+    color: '#402e57', //color de titulos
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
@@ -49,10 +52,15 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(6),
       padding: theme.spacing(3),
+    color: '#f4f2f8', 
+    background:'#8a6db1' //fondo del form 
     },
   },
   stepper: {
-    padding: theme.spacing(3, 0, 5),
+    padding: theme.spacing(3, 10, 3),
+    background:'#8a6db1',
+    color: '#f4f2f8',
+
   },
   buttons: {
     display: 'flex',
@@ -61,19 +69,21 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
+    color: '#f4f2f8',
+    background: '#402e57'
   },
 }));
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Address', 'Ticket', 'Payment'];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <AddressForm />;
     case 1:
-      return <PaymentForm />;
+      return <Review/>;
     case 2:
-      return <Review />;
+      return <PaymentForm />;
     default:
       throw new Error('Unknown step');
   }
@@ -97,7 +107,7 @@ export default function Checkout() {
       <AppBar position="absolute" color="default" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Company name
+            Code Bakery
           </Typography>
         </Toolbar>
       </AppBar>

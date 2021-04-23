@@ -1,9 +1,16 @@
 import React,{useState} from 'react'
 import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
-import ClientNavBar from './ClientNavBar';
+import { useQuery } from "@apollo/client";
+import PayButton from '../PayButton'
+import GET_ORDERS_BY_USER_ID_IN_CART from '../../../../Apollo/queries/getOrdersByUserIdInCart'
 
 const Options = () => {
+    let userId = parseInt(localStorage.id);
+    const { data,loading, refetch } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+        variables: { idUser: userId },
+        fetchPolicy: "no-cache",
+      });
     const [mp,setMp] = useState(false);
     const [stripe,setStripe] = useState(false);
 
@@ -18,7 +25,6 @@ const Options = () => {
 
     return (
         <StyledOptions>
-            <ClientNavBar/>
             <div className="options">
                 <div className="mp" onClick={mpHandler}>
                     <img src="https://res.cloudinary.com/ggonzalescbs/image/upload/v1618977878/code_bakery/mercadopago_krspnc.jpg" alt="mercadopago"/>
@@ -31,7 +37,7 @@ const Options = () => {
                 mp ? <Redirect to='/'/> : "" 
             }
             {
-                stripe ? <Redirect to='/checkout'/> : ""
+                stripe ? <Redirect to='/checkout-stripe'/> : ""
             }
         </StyledOptions>
     )
