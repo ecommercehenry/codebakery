@@ -11,9 +11,10 @@ import {
   CHECKBOX_CHANGE,
   CLEAR_CHECKBOXES,
 } from "../actions/index";
+
 const initialState = {
   orders: [],
-  filterOrders: [],
+  filterOrders: [], //tiene ordenes de busqueda dependiendo el filtro
   search: false,
   idError: 0,
   status: false,
@@ -31,7 +32,9 @@ const initialState = {
 const pagination= (modifyState) => {
   //va a preguntar si hay algo en filter orders
   //console.log ('modifystate', modifyState);
+  //console.log('uhiajssm',modifyState)
   if (modifyState.filterOrders.length > 0) {
+   // console.log('lo q sea');
     return modifyState?.filterOrders?.slice(modifyState.numPage, modifyState.numPage+10)
   } else {
     return modifyState?.orders?.slice(modifyState.numPage, modifyState.numPage+10)
@@ -84,11 +87,13 @@ const reducer = (state = initialState, action) => {
           ...state,
           filterOrders: searchOrder,
           search: true,
+          renderPage:searchOrder
         };
       } else {
         return {
           ...state,
           filterOrders: [],
+          renderPage:[],
           idError: action.payload,
           status: true,
         };
@@ -99,11 +104,14 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (u) => u.userId === Number(action.payload)
       );
+
       if (searchUsers.length) {
+
         return {
           ...state,
           filterOrders: searchUsers,
           search: true,
+          renderPage:pagination({...state, filterOrders:searchUsers})
         };
       } else {
         return {
@@ -130,6 +138,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filterOrders: filterlow,
+        renderPage:pagination({...state, filterOrders: filterlow }),
         search: true,
       };
 
@@ -149,6 +158,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filterOrders: filterhigh,
+        renderPage:pagination({...state, filterOrders: filterhigh }),
         search: true,
       };
 
@@ -156,6 +166,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filterOrders: [],
+        renderPage:pagination({...state, filterOrders:[]}),
         search: false,
         status: false,
       };

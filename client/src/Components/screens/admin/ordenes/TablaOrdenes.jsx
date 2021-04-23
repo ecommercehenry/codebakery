@@ -41,7 +41,7 @@ export default function TablaOrdenes() {
     return <ButtonClear name="Volver al principio" />;
 
   } else if (search) {
-    dataRENDER = filterOrders; 
+    dataRENDER = renderPage; 
   } else if (status) {
     toast(`El ID ${idError} no existe.`, {
       toastId: customId,

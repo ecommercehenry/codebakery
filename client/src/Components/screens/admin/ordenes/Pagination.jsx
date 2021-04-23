@@ -5,7 +5,24 @@ import { changePage } from "../../../../actions";
 
 export default function Pagination() {
 
-    let {orders}= useSelector(state => state.ordersReducer);
+    let {orders, filterOrders, search}= useSelector(state => state.ordersReducer);
+
+
+    let longitud;
+
+    if (search && filterOrders.length > 0) {
+        
+        //console.log('search', search);
+        //console.log('filterOrders', filterOrders);
+
+        longitud= filterOrders?.length;
+    
+      } else {
+
+        longitud= orders?.length
+   
+      };
+
 
     //console.log('estado redux', orders);
     const dispatch = useDispatch();
@@ -40,7 +57,7 @@ export default function Pagination() {
       return (
         <TablePagination
           component="div"
-          count={orders?.length}
+          count={longitud}
           page={page}
           onChangePage={handleChangePage}
           rowsPerPage={rowsPerPage}
