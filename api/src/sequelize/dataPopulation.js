@@ -12,7 +12,7 @@ async function dataPopulation() {
     await Category.bulkCreate(MOCK_CATEOGRIES),
     await Product.bulkCreate(MOCK_PRODUCTS)
     await createUser("admin","12345","admin@admin.com","admin")
-    await createUser("santi","12345","santi@gmail.com","user")
+    await createUser("santi","12345","santiagorincon2001@gmail.com","user")
     await createUser("ivan","12345","ivan@gmail.com","user")
     await createUser("lucas","12345","lucas@admin.com","user")
     await createUser("Joha","12345","joha@gmail.com","user")
