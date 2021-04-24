@@ -36,6 +36,8 @@ const AdminNavBar = ({ setAddProduct }) => {
           <SortByPrice />
         </div>
       </Route>
+
+      
       <Route path="/admin/products">
         <>
           {add ? (
