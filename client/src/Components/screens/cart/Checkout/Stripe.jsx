@@ -4,8 +4,10 @@ import axios from 'axios'
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements, CardElement,useStripe,useElements} from '@stripe/react-stripe-js';
 import styled from 'styled-components'
+import {toast} from 'react-toastify'
+import '../../../../Assets/toast.css'
 const stripePromise = loadStripe('pk_test_51IikJvLv5RMhUlp35i74LPIzdy7M5Ei6esRBW9vI01qzArgdAhhBT452AQzT2E0ePUfYEmW3cb6ddVcx7Uyx7rv800bCIJ2c3z')
-
+toast.configure()
 const StripeForm = () => {
     //const {loggedCart} = useSelector(state=>state.loggedCart)
     const stripe = useStripe();
@@ -31,7 +33,7 @@ const StripeForm = () => {
                 )
                 console.log(data)
                 elements.getElement(CardElement).clear()
-                if(data.message=="successful transaction"){alert('deja de gastar gil')}
+                if(data.message=="successful transaction"){toast('deja de gastar gil')}
             } catch (error) {
                 console.log(error)
             }
@@ -57,8 +59,8 @@ const Stripe = () => {
 
 const StyledStripe = styled.div`
     //background:blue;
-    width:100vw;
-    height:100vh;
+    width:80%;
+    height:100%;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -67,7 +69,7 @@ const StyledStripe = styled.div`
 const StyledStripeForm =styled.form`
     //background:red;
     margin:0;
-    width:30%;
+    width:80%;
     height:7vh;
     display:flex;
     justify-content:space-between;
@@ -75,7 +77,7 @@ const StyledStripeForm =styled.form`
     align-items:center;
     .card{
         width:100%;
-        background:none;
+       // background:none;
     }
     button{
         width: 20%;

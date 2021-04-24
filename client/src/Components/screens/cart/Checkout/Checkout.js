@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,6 +15,7 @@ import PaymentForm from './PaymentForm';
 import Review from './Review';
 
 function Copyright() {
+
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
@@ -98,7 +99,6 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
   return (
     <React.Fragment>
       <CssBaseline />
