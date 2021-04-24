@@ -16,7 +16,7 @@ const Options = () => {
   const [stripe, setStripe] = useState(false);
 
   const mpHandler = () => {
-    console.log("mp");
+    //console.log("mp");
     setMp(true);
   };
 
@@ -59,15 +59,15 @@ const Options = () => {
 
 const StyledOptions = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 55vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   //background:red;
   .options {
-    width: 70%;
-    height: 70vh;
-    padding: 8vh 0;
+    width: 55%;
+    height: 100%;
+    //padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -76,13 +76,15 @@ const StyledOptions = styled.div`
     .mp,
     .stripe {
       width: 100%;
+      height: 30vh;
+      padding: 1rem;
       border-radius: 7px;
       object-fit: contain;
       cursor: pointer;
       overflow: hidden;
       img {
         width: 100%;
-        height: 23vh;
+        height: 100%;
       }
     }
   }

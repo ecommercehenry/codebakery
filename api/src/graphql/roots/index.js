@@ -70,6 +70,7 @@ const root = {
     addReview,
     modifyReview,
     sendEmail,
+    deleteUser,
 
     //Queries    
     productById,

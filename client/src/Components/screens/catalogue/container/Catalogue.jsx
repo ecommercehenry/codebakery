@@ -26,7 +26,7 @@ const Catalogue = () => {
   const [createOrder, createData] = useMutation(CREATE_ORDER);
  
   useEffect(()=>{
-    console.log(queryData)
+    //console.log(queryData)
     // if(queryData.data.getOrdersByUserIdInCart?.orders[0]){
     //   dispatch(setQuantityOrdersCardBackend(queryData.data.getOrdersByUserIdInCart.orders[0].lineal_order.length))
     // }else{
@@ -36,12 +36,12 @@ const Catalogue = () => {
       if(logged){
         if(queryData.data.getOrdersByUserIdInCart.orders){
           if(queryData.data.getOrdersByUserIdInCart.orders[0]){
-            console.log("DESPACHANDO ALGO")
+            //console.log("DESPACHANDO ALGO")
             queryData.refetch().then(()=>{
               dispatch(setQuantityOrdersCardBackend(queryData.data.getOrdersByUserIdInCart.orders[0].lineal_order.length))
             })
           }else{
-            console.log("DESPACHANDO ALGO 0")
+            //console.log("DESPACHANDO ALGO 0")
             dispatch(setQuantityOrdersCardBackend(0))
           }
         }

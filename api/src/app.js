@@ -149,7 +149,9 @@ server.use('/graphql', graphqlHTTP((req)=>{
 })}))
 
 server.post('/stripe/checkout',async(req,res)=>{
-  console.log(req.body)
+  //console.log('here')
+  //console.log(req.body)
+  //console.log(req.body.products.id)
   const {id,amount} = req.body
   try {
     const payment = await stripe.paymentIntents.create({
@@ -159,9 +161,19 @@ server.post('/stripe/checkout',async(req,res)=>{
       payment_method:id,
       confirm:true
     })
-    res.send({message:'successful transaction'})
+    let order = await Order.findByPk(parseInt(req.body.products.id))
+    //console.log(payment.status)
+    //console.log(order)
+    if(payment.status === 'succeeded'){
+      order.status = 'paid'
+      order.placeStatus = 'ticket'
+      await order.save()
+      res.json({message:'successfull transaction'})
+    }
+    
+    
   } catch (error) {
-    console.log(error)
+    //console.log(error)
     res.send({message:error.raw.message})
   }
 })
