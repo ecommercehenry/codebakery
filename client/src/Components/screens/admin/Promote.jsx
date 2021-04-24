@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import PROMOTE_USER from "../../../Apollo/mutations/promoteUser";
-import { Redirect } from "react-router";
-// import "./promote.css"
 import Switch from 'react-input-switch'
 
 //@ Lau
@@ -11,7 +9,6 @@ export default function Promote (idUser, rol){
     idUser = 9;
     rol = "user"
     const [value, setValue] = useState(rol);
-
     const [promoteUser, { loading, error }] = useMutation(PROMOTE_USER);
 
     useEffect(() => {
@@ -22,8 +19,7 @@ export default function Promote (idUser, rol){
         },
       });
     }, [value]);          
-     
-           
+              
   
     return(
     <>
