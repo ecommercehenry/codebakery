@@ -21,10 +21,6 @@ async function dataPopulation() {
     await createUser("guille","12345","guille@gmail.com","user")
     await createUser("pablo","12345","pablo@gmail.com","user")
     await createUser("fran","12345","fran@gmail.com","user")
-<<<<<<< HEAD
-    await createUser("nico","12345","nico@gmail.com","user")
-=======
->>>>>>> main
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
     await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)
