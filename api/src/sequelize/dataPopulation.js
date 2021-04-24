@@ -25,6 +25,7 @@ async function dataPopulation() {
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
     await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)
     await createOrder([{id:4,quantity:1},{id:8,quantity:1}],1)
+    await createOrder([{id:5,quantity:2},{id:9,quantity:1}, {id: 1, quantity: 3}], 2)
     await createOrder([{id:5,quantity:2},{id:9,quantity:1}],2)
     
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
@@ -49,7 +50,8 @@ async function dataPopulation() {
 
     await updateOrderToTicket(2)
     await updateOrderToTicket(4)
-    await addReview(1,1,{title:"hola",description:"hola",stars:"4"})
+    await addReview(1,1,{title:"Exelente",description:"Ricas galletas de chocolate, las recomiendo 100%",stars:"4"})
+    await addReview(1,2,{title:"Muy Buenas",description:"Muy buen producto", stars:"4"})
 
     await updateOrderToTicket(6)
     await updateOrderToTicket(7)
