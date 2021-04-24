@@ -107,7 +107,7 @@ const StyledNavBar = styled.nav`
   z-index: 2;
 
   .left-tags {
-    width: 21rem;
+    width: 350px;
     font-size: 0.9rem;
   }
 

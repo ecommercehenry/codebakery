@@ -1,35 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'
+import React from "react"
 
-const FORM_ID = 'payment-form';
+const PayButton = () =>{
 
-export default function PayButton({productos}){
+    return <div>soy un boton </div>
+}
 
-    const [preferenceId, setPreferenceId] = useState(null);
-    
-    useEffect(() => {
-      axios.post('http://localhost:3001/create_preference',productos) //se crea la preferencia )
-      .then((order) => {
-        setPreferenceId(order.data.id);    // se guarda la respuesta en el estado local (la respuesta de crear la preferencia es un id)
-      });
-    }, [productos]); 
-  
-    useEffect(() => {
-      if (preferenceId) {
-        const script = document.createElement('script');          //el script crea el boton de pago en base al id recibido 
-        script.type = 'text/javascript';
-        script.src =
-          'https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js';
-        script.setAttribute('data-preference-id', preferenceId);
-        const form = document.getElementById(FORM_ID);
-        form.appendChild(script);
-      }
-    }, [preferenceId]);
-  
-    return (
-      <form id={FORM_ID} method="GET" />    //boton de compra se inserta dentro de este form 
-    );
-  }
-
-
+export default PayButton;
 
