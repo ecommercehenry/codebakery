@@ -15,12 +15,6 @@ mutation promoteUser ($id: Int!, $role: String!){
         detail
       }
     }
-<<<<<<< HEAD
-  }
-`;
-export default PROMOTE_USER;
-=======
-}
-`;
+}`
+
 export default PROMOTE_USER
->>>>>>> main

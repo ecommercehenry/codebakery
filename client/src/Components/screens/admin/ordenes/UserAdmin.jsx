@@ -3,6 +3,7 @@ import GET_ALL_USERS from "../../../../Apollo/queries/getAllUsers";
 import DELETE_USER from "../../../../Apollo/mutations/deleteUser";
 import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
 import { useEffect } from "react";
+import Promote from "../Promote";
 
 const UserAdmin = () => {
   /*
@@ -55,9 +56,21 @@ const UserAdmin = () => {
                 : "This user hasn't added phone number yet"}
             </span>{" "}
             <span>{element.role}</span>
-            <button name={element.id} onClick={(e) => handleClick(e)}>
-              DELETE
-            </button>
+            <div>
+            { element.email === "admin@admin.com" 
+            ? <button>THIS SUPER USER</button>
+            : <Promote idUser={element.id} rol={element.role} />
+            }
+            </div>
+            <div>
+              {element.role === "admin" ? (
+                <button>CANNOT DELETE ADMIN </button>
+              ) : (
+                <button name={element.id} onClick={(e) => handleClick(e)}>
+                  DELETE{" "}
+                </button>
+              )}
+            </div>
           </section>
         ))}
       </div>
