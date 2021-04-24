@@ -1,51 +1,50 @@
-import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-import AddressForm from './AddressForm';
-import PaymentForm from './PaymentForm';
-import Review from './Review';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Paper from "@material-ui/core/Paper";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import Button from "@material-ui/core/Button";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
+import AddressForm from "./AddressForm";
+import PaymentForm from "./PaymentForm";
+import Review from "./Review";
 
 function Copyright() {
-
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="http://localhost:3000/">
         Code Bakery
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    position: 'relative',
-    background: '#402e57', // fondo de barra
-    color: '#f4f2f8'   // color de letra de barra
+    position: "relative",
+    background: "#402e57", // fondo de barra
+    color: "#f4f2f8", // color de letra de barra
   },
   layout: {
-    width: 'auto',
+    width: "auto",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
       width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
+      marginLeft: "auto",
+      marginRight: "auto",
     },
   },
   paper: {
-    color: '#402e57', //color de titulos
+    color: "#402e57", //color de titulos
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
@@ -53,38 +52,38 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(6),
       padding: theme.spacing(3),
-    color: '#f4f2f8', 
-    background:'#8a6db1' //fondo del form 
+      color: "#f4f2f8",
+      background: "#8a6db1", //fondo del form
     },
   },
   stepper: {
     padding: theme.spacing(3, 10, 3),
-    background:'#8a6db1', //fondo de steps
+    background: "#8a6db1", //fondo de steps
   },
   buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: "flex",
+    justifyContent: "flex-end",
   },
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
-    color: '#f4f2f8',
-    background: '#402e57'
+    color: "#f4f2f8",
+    background: "#402e57",
   },
 }));
 
-const steps = ['Address', 'Ticket', 'Payment'];
+const steps = ["Address", "Ticket", "Payment"];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <AddressForm />;
     case 1:
-      return <Review/>;
+      return <Review />;
     case 2:
       return <PaymentForm />;
     default:
-      throw new Error('Unknown step');
+      throw new Error("Unknown step");
   }
 }
 
@@ -99,13 +98,21 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+  let nextButton = document.getElementById("nextButton");
+  if (nextButton) {
+    if (activeStep === steps.length - 1) {
+      nextButton.style = "display: none";
+    } else {
+      nextButton.style = "display: flex";
+    }
+  }
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar position="absolute" color="default" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            Code Bakery
+            Code Bakeryy
           </Typography>
         </Toolbar>
       </AppBar>
@@ -122,17 +129,7 @@ export default function Checkout() {
             ))}
           </Stepper>
           <React.Fragment>
-            {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has shipped.
-                </Typography>
-              </React.Fragment>
-            ) : (
+            {
               <React.Fragment>
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>
@@ -146,12 +143,13 @@ export default function Checkout() {
                     color="primary"
                     onClick={handleNext}
                     className={classes.button}
+                    id="nextButton"
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {"Next"}
                   </Button>
                 </div>
               </React.Fragment>
-            )}
+            }
           </React.Fragment>
         </Paper>
         <Copyright />

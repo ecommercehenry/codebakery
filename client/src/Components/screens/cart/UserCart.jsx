@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import TotalToOrder from "./TotalToOrder";
 import { Link } from "react-router-dom";
 
-
 const UserCart = () => {
   let storage = window.localStorage;
   let userId = parseInt(storage.id);
@@ -15,7 +14,7 @@ const UserCart = () => {
     variables: { idUser: userId },
     fetchPolicy: "no-cache",
   });
-
+  console.log(data);
   return (
     <StyledCart>
       {data?.getOrdersByUserIdInCart.orders[0] ? (
@@ -35,11 +34,11 @@ const UserCart = () => {
       ) : (
         <p></p>
       )}
-        <Link className='text-decoration-none' to='/checkout'>
-      <div className="buttonContainer">
-        <button className="payMee">Checkout</button>
-      </div>
-        </Link>
+      <Link className="text-decoration-none" to="/checkout">
+        <div className="buttonContainer">
+          <button className="payMee">Checkout</button>
+        </div>
+      </Link>
     </StyledCart>
   );
 };
