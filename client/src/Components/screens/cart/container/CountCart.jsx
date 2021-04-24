@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import cartIcon from "../../../../../src/icons/cartNav.svg";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../src/Apollo/queries/getOrdersByUserIdInCart"; 
@@ -9,14 +9,11 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 const Count = ({color}) => {
 let storage = window.localStorage;
 let userId = parseInt(storage.id);
-  const { data } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
-    variables: { idUser: userId },
-    fetchPolicy: "no-cache"
-  });
   let logeed = storage.token ? true : false; 
-  console.log(data, 'mis datos');
+  
   const itemsFromCart = useSelector((state) => state.cart.itemsToCart); 
-  let valor = 0; 
+  const itemsFromCartBackend = useSelector((state) => state.counterReducer.ordersInBacked); 
+  // let valor = 0; 
   let sum = 0;
 
   if (itemsFromCart !== undefined) {
@@ -24,13 +21,13 @@ let userId = parseInt(storage.id);
       sum = sum + elem.quantity;
     });
   }
-  if(data !== undefined){
-    if (data.getOrdersByUserIdInCart.orders.length != 0 ){
-      data.getOrdersByUserIdInCart.orders[0].lineal_order.map((element) =>{
-        valor = valor + element.quantity
-      }); 
-    }
-  } 
+  // if(data !== undefined){
+  //   if (data.getOrdersByUserIdInCart.orders.length != 0 ){
+  //     data.getOrdersByUserIdInCart.orders[0].lineal_order.map((element) =>{
+  //       valor = valor + element.quantity
+  //     }); 
+  //   }
+  // } 
 
   return (
     <StyledCount>
@@ -38,7 +35,7 @@ let userId = parseInt(storage.id);
         <HiOutlineShoppingCart size="2.1rem" color={color} className="cart-icon"/>
         <span className="count" style={{color:color, fontWeight:"bold"}}>
         {
-          logeed ? valor : sum
+          logeed ? itemsFromCartBackend : sum
         }
         </span>
       </div>

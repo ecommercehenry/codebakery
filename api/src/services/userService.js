@@ -18,6 +18,16 @@ async function getUserByEmail({ email }) {
     throw new Error(error);
   }
 }
+async function getUserById({ id }) {//@ Lau para usar en boton promote
+  try {
+     return await Users.findOne({ where: { id } });
+    
+    
+  } catch (error) {
+    
+    throw new Error(error);
+  }
+}
 
 async function createUser(name, password, email, role, google) {
   try {
@@ -37,7 +47,7 @@ async function createUser(name, password, email, role, google) {
           newUser.update({password, google:false});
         }
       }
-      // console.log(newUser, 'atstatsttatstas')
+      // 
       return {__typename: 'user', ...newUser.dataValues, detail: 'user created'};
       // let newUser = await Users.create({
       //   name,
@@ -48,7 +58,7 @@ async function createUser(name, password, email, role, google) {
       // return {__typename: 'user', ...newUser.dataValues, detail: 'user created'};
     }
     else {
-      // console.log('creando con google')
+      // 
       const [user, created] = await Users.findOrCreate({
         where: { email },
         defaults: {
@@ -62,7 +72,7 @@ async function createUser(name, password, email, role, google) {
       // created true es por que lo creó, no existia
       // siempre devuelve el usuario, pero el detalle va en función de
       // si existia o no
-      // console.log(user.dataValues, created);
+      // 
       if(created) return {__typename: 'user' , ...user.dataValues, detail: 'User created'};
       return {__typename: 'user', ...user.dataValues, detail: 'Email'};
     }
@@ -79,6 +89,7 @@ async function modifyUser(
   id,
   name,
   password,
+  newPassword,
   email,
   role,
   address,
@@ -86,26 +97,62 @@ async function modifyUser(
   phoneNumber
 ) {
   let obj = {};
+  if (password && newPassword) {
+    const userPassword = await Users.findOne({
+      where: {
+        email: email,
+      },
+    });
+    if (!userPassword) {
+      return {
+        __typename: "error",
+        name: "The user doesn't exists",
+        detail: "The user doesn't exists",
+      };
+    }
+    if (userPassword) {
+      const hashed = Users.encryptPassword(password, userPassword.salt());
+      if (hashed === userPassword.password()) {
+        obj.password = newPassword;
+      } else if (hashed !== userPassword.password()) {
+        return {
+          __typename: "error",
+          name: "error",
+          detail: "Invalid password",
+        };
+      }
+    }
+  }
+  if (!password && newPassword) obj.password = newPassword;
   if (name) obj.name = name;
-  if (password) obj.password = password;
   if (email) obj.email = email;
   if (role) obj.role = role;
   if (address) obj.address = address;
   if (dni) obj.dni = dni;
   if (phoneNumber) obj.phoneNumber = phoneNumber;
+
   try {
-    let user = await Users.findOne({ where: { id } });
-    let newUser = await user.update(obj, {
-      attributes: { exclude: ["password", "salt"] },
-    });
-    return { __typename: "user", ...newUser.dataValues };
+    if (id) {
+      let user = await Users.findOne({ where: { id } });
+      let newUser = await user.update(obj, {
+        attributes: { exclude: ["password", "salt"] },
+      });
+      return { __typename: "user", ...newUser.dataValues };
+    }
+    if (email && !id) {
+      let user = await Users.findOne({ where: { email } });
+      let newUser = await user.update(obj, {
+        attributes: { exclude: ["password", "salt"] },
+      });
+      return { __typename: "user", ...newUser.dataValues };
+    }
   } catch {
-    return { __typename: "user", name: "error", detail: "Invalid user" };
+    return { __typename: "error", name: "error", detail: "Invalid user" };
   }
 }
 
 async function loginUserWithGoogle(email, tokenId){
-  console.log(email);
+  
   const user = await Users.findOne({
     where:{
       email
@@ -131,14 +178,18 @@ async function loginUserWithGoogle(email, tokenId){
 }
 
 async function loginUser(email,password){
-  // console.log(name, password)
+  // 
   const user = await Users.findOne({
     where:{
       email: email
     }
   })
   if(!user){
-    return {__typename:"error", name:"The user doesn't exists", detail:"The user doesn't exists"}
+    return {
+      __typename: "error",
+      name: "The user doesn't exists",
+      detail: "The user doesn't exists",
+    };
   }
   if (user) {
     const hashed = Users.encryptPassword(password, user.salt());
@@ -179,9 +230,10 @@ async function deleteUser(id) {
 module.exports = {
   getAllUsers,
   createUser,
-  modifyUser,
+  modifyUser,   //@ lau usare este para modificar el role: de usuario comun a admin
   loginUser,
   getUserByEmail,
   deleteUser,
+  getUserById,  //lo creo para traer datos de ese usuario a modificar -@Lau
   loginUserWithGoogle,
 };

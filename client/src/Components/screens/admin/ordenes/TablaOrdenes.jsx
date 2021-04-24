@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveOrders } from "../../../../actions";
 import { toast } from "react-toastify";
 import ButtonClear from "./ButtonClear";
-import CheckFilters from "./CheckFilters";
+// import CheckFilters from "./CheckFilters";
 
 //traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
 //guardo en el reducer ordersReducer las ordenes para aplicar busquedas y filtros uso dispatch
@@ -31,19 +31,17 @@ export default function TablaOrdenes() {
   const { orders, search, filterOrders, idError, status, renderPage } = useSelector(
     (state) => state.ordersReducer
   );
- 
+
   let dataRENDER;
   if (search && !filterOrders.length) {
-    
-    toast(`El ID ${idError} no existe.`, {
+    toast(`Search Not Found: "${idError}".`, {
       toastId: customId,
     });
     return <ButtonClear name="Volver al principio" />;
-
   } else if (search) {
     dataRENDER = renderPage; 
   } else if (status) {
-    toast(`El ID ${idError} no existe.`, {
+    toast(`Search Not Found: "${idError}".`, {
       toastId: customId,
     });
     return <ButtonClear name="Volver al principio" />;
@@ -56,17 +54,15 @@ console.log('render', dataRENDER)
   return (
     <StyledTablaOrdenes>
       <ButtonClear name="Clear" />
-      <CheckFilters />
+      {/* <CheckFilters /> */}
       {/* Checkbox filters */}
       { dataRENDER ? (
         dataRENDER.map((ord) => {
           return <Orden id={ord.id} key={ord.id} orden={ord} />;
-        }) 
-      ) : 
-      (
+        })
+      ) : (
         <p>loading...</p>
-      )
-      }
+      )}
     </StyledTablaOrdenes>
   );
 }
@@ -79,6 +75,4 @@ const StyledTablaOrdenes = styled.div`
   margin-top: 0.5rem;
   margin-left: 0;
   height: 100%;
-
 `;
-

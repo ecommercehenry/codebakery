@@ -10,6 +10,7 @@ import {
   filterOrders,
   CHECKBOX_CHANGE,
   CLEAR_CHECKBOXES,
+  FILTER_NAME,
 } from "../actions/index";
 
 const initialState = {
@@ -61,7 +62,6 @@ const filterByStatus = (currentState) =>{
 
 const reducer = (state = initialState, action) => {
   // let ordersModified = state.orders
-
   switch (action.type) {
     case SAVE_ORDERS:
       const data= action.payload?.map((o) => {
@@ -72,6 +72,7 @@ const reducer = (state = initialState, action) => {
           status: o.status,
           price: o.lineal_order.map((u) => u).map((g) => g.price),
           cancelled: o.cancelled,
+          name: o.name
         };
         return filter;
       })
@@ -87,7 +88,7 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (o) => o.id === Number(action.payload)
       );
-     // console.log(searchOrder);
+      
       if (searchOrder.length) {
         return {
           ...state,
@@ -136,10 +137,30 @@ const reducer = (state = initialState, action) => {
         };
       }
 
+    case FILTER_NAME:
+      let searchName = state.orders.filter(
+        //tuve que cambiar para emparejar con filtros //@ Lau
+        (u) => u.name === action.payload
+      );
+      if (searchName.length) {
+        return {
+          ...state,
+          filterOrders: searchName,
+          search: true,
+        };
+      } else {
+        return {
+          ...state,
+          filterOrders: [],
+          idError: action.payload,
+          status: true,
+        };
+      }
+
     case PRICE_LOW_TO_HIGH:
       let filterlow;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
-        //console.log('stateorder', state.orders)
+        //
         filterlow = state.filterOrders.sort(function (a, b) {
           return a.price[0] - b.price[0];
         });
@@ -159,7 +180,7 @@ const reducer = (state = initialState, action) => {
     case PRICE_HIGH_TO_LOW:
       let filterhigh;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
-        //console.log('stateorder', state.orders)
+        //
         filterhigh = state.filterOrders.sort(function (a, b) {
           return b.price[0] - a.price[0]; 
         });

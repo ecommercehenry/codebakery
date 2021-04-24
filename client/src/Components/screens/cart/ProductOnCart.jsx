@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeProductFromCart } from "../../../actions/cartActions";
 import styled from "styled-components";
 import StockCounter from "./StockCounter";
 import deleteIcon from "../../../icons/delete.svg";
 import DELETE_PRODUCT_ORDER from "../../../Apollo/mutations/deleteProductOrder";
-import { useMutation } from "@apollo/client";
-
+import { useMutation, useQuery } from "@apollo/client";
 const ProductOnCart = ({
   id,
   image,
@@ -15,6 +14,7 @@ const ProductOnCart = ({
   stock,
   quantity,
   orderId,
+  refetch
 }) => {
   let logged = localStorage.token ? true : false;
   let [newQuantity, setNewQuantity] = useState(quantity);
@@ -23,7 +23,6 @@ const ProductOnCart = ({
   );
 
   const dispatch = useDispatch();
-
   const deleteHandler = (id) => {
     if (!logged) {
       dispatch(removeProductFromCart(id));
@@ -32,13 +31,16 @@ const ProductOnCart = ({
         variables: {
           orderId: orderId,
           productId: id,
-        },
+        }
       })
-      window.location.reload()
+
+    
+      refetch()
     }
   };
   return (
     <StyledProductOnCart>
+      <article className="item">
       <div className="imagee">
         <img src={image} alt={name} />
       </div>
@@ -52,6 +54,7 @@ const ProductOnCart = ({
           logged = {logged}
           orderId= {orderId}
           productId= {id}
+          refetch= {refetch}
         />
         <div className="stockk">{stock} disponibles</div>
       </div>
@@ -63,26 +66,31 @@ const ProductOnCart = ({
       <button className="deleteItemm" onClick={() => deleteHandler(id)}>
         <img src={deleteIcon} alt="" />
       </button>
+      </article>
     </StyledProductOnCart>
   );
 };
 
 const StyledProductOnCart = styled.div`
   //background:lightblue;
-  border-radius: 13px;
-  border: 1px solid #755588;
+  width: 80%;
+  padding-top: 2.4rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #e6e6e6;
+
+  .item{
+    border: none;
   display: flex;
-  width: 65%;
-  height: 17vh;
+  width: 100%;
+  height: 5rem;
   justify-content: space-between;
   align-items: center;
-  margin: 1.5rem 0;
-  padding: 1rem;
+  }
+  
   .imagee {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 100%;
     width: 6rem;
     //background:blue;
     height: 100%;
