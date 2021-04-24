@@ -15,6 +15,6 @@ mutation promoteUser ($id: Int!, $role: String!){
         detail
       }
     }
-}
-`;
+}`
+
 export default PROMOTE_USER

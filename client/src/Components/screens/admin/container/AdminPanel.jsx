@@ -11,7 +11,9 @@ import AdminNavBar from '../AdminNavBar'
 import ListCRUD from "../ListCRUD"
 import AddProductForm from '../../../AddProductForm';
 import TablaOrdenes from '../../admin/ordenes/TablaOrdenes';
+import UserAdmin from '../ordenes/UserAdmin';
 import Pagination from '../ordenes/Pagination';
+
 
 
 
@@ -38,8 +40,9 @@ const AdminPanel = () => {
         <div className="bottom">
         
            <Route path='/admin/products' component={ListCRUD}/>            
-           <Route path='/admin/orders' component={TablaOrdenes}/>  
-         
+           <Route path='/admin/orders' component={TablaOrdenes}/>    
+           <Route path="/admin/users" component={UserAdmin} />
+
         </div>
 
         
