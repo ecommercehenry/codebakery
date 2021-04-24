@@ -21,7 +21,7 @@ const { deleteReview } = require("./deleteReview.js")
 const { addReview } = require("./addReview")
 const {modifyReview} = require("./modifyReview")
 const {deleteUser} = require("./deleteUser");
-
+const {sendEmail} = require("./sendEmail")
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -47,5 +47,6 @@ module.exports = {
   modifyReview,
   decrementQuantity,
   deleteUser,
+  sendEmail
 
 }

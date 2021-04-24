@@ -12,7 +12,7 @@ const { addReview , modifyReview} = require("./src/services/reviewsService.js");
  // Syncing all the models at once.
  conn.sync({ force: true }).then(() => {
    dataPopulation().then(async ()=>{
-      // const a = await sendEmail(2,"Un asunto","el mensaje del correo")
-      // console.log(a)
+      const a = await sendEmail(2,"Un asunto","el mensaje del correo")
+      console.log(a)
    })
  });
