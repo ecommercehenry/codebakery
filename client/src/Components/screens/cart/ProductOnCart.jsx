@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeProductFromCart } from "../../../actions/cartActions";
 import styled from "styled-components";
 import StockCounter from "./StockCounter";
 import deleteIcon from "../../../icons/delete.svg";
 import DELETE_PRODUCT_ORDER from "../../../Apollo/mutations/deleteProductOrder";
-import { useMutation } from "@apollo/client";
-
+import { useMutation, useQuery } from "@apollo/client";
 const ProductOnCart = ({
   id,
   image,
@@ -24,7 +23,6 @@ const ProductOnCart = ({
   );
 
   const dispatch = useDispatch();
-
   const deleteHandler = (id) => {
     if (!logged) {
       dispatch(removeProductFromCart(id));
@@ -33,8 +31,10 @@ const ProductOnCart = ({
         variables: {
           orderId: orderId,
           productId: id,
-        },
+        }
       })
+
+    
       refetch()
     }
   };

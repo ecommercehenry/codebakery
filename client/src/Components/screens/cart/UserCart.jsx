@@ -1,26 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import ProductOnCart from "./ProductOnCart";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TotalToOrder from "./TotalToOrder";
+import { setQuantityOrdersCardBackend } from "../../../actions/setQuantityOrdersCardBackend";
 
 
-const UserCart = () => {
+const UserCart = (cant) => {
+  const dispatch = useDispatch()
   let storage = window.localStorage;
   let userId = parseInt(storage.id);
   const { data,loading, refetch } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
     fetchPolicy: "no-cache",
   });
+  useEffect(()=>{
+    if(data){
+      if(data.getOrdersByUserIdInCart.orders[0]){
+      dispatch(setQuantityOrdersCardBackend(data.getOrdersByUserIdInCart.orders[0].lineal_order.length))
+      }else{
+        dispatch(setQuantityOrdersCardBackend(0))
+      }
+    }
 
+  },[data])
   return (
     <StyledCart>
       {data?.getOrdersByUserIdInCart.orders[0] ? (
         data.getOrdersByUserIdInCart.orders[0].lineal_order.map((order) => (
           <ProductOnCart
-          key={order.id}
+            key={order.id}
             id={order.id}
             name={order.name}
             price={order.price}
