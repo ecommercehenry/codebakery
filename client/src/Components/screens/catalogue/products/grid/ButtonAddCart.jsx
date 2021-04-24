@@ -9,6 +9,7 @@ import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../Apollo/queries/getOrde
 import { toast } from "react-toastify";
 import '../../../../../Assets/toast.css'
 import CREATE_ORDER from "../../../../../Apollo/mutations/createOrder";
+import { setQuantityOrdersCardBackend } from '../../../../../actions/setQuantityOrdersCardBackend';
 
 
 toast.configure()
@@ -32,6 +33,8 @@ const ButtonAddCart = ({ id }) => {
     } else {
       if (!loading) {
           let orderId = data.getOrdersByUserIdInCart.orders[0]?.id;
+          console.log(orderId ?data.getOrdersByUserIdInCart.orders[0].lineal_order.length+1 : 1)
+          dispatch(setQuantityOrdersCardBackend(orderId ?data.getOrdersByUserIdInCart.orders[0].lineal_order.length+1 : 1))
           await addProductToOrder({
             variables: {
               orderId: orderId ?orderId : -1 ,

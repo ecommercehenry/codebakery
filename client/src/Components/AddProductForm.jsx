@@ -5,10 +5,14 @@ import getAllCategories from "../Apollo/queries/getAllCategories"
 import ADD_PRODUCT from "../Apollo/mutations/addProduct";
 import Creatable from 'react-select/creatable';
 import {Link, Redirect} from 'react-router-dom'
+import { toast } from "react-toastify";
+import '../Assets/toast.css'
 //styles
 import styled from 'styled-components';
 
 import closeIcon from '../icons/close2.svg'
+
+toast.configure()
 
 const AddProductForm = ({setAddProduct}) => {
 
@@ -67,7 +71,7 @@ const AddProductForm = ({setAddProduct}) => {
     const submitHandler = (e) => {
         
         e.preventDefault();
-        if(info.image == ''){alert('Please add an image')}else{
+        if(info.image == ''){toast('Please add an image')}else{
             info.category=selected;
             addProduct({variables:
                 {
@@ -87,7 +91,7 @@ const AddProductForm = ({setAddProduct}) => {
                 price:'',
                 image:''
             })
-            alert("Producto agregado!")
+            toast("Producto agregado!")
             
         }
         
