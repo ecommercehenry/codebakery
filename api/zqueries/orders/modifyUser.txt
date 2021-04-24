@@ -1,9 +1,9 @@
-mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, $role:String, $address: String, $dni: String, $phoneNumber: String){
-  modifyUser(id: $id ,name: $name, password: $password, email: $email, role:$role, address: $address, dni: $dni, phoneNumber: $phoneNumber){
+mutation modifyUser($id: Int, $name: String, $password:String, $newPassword:String, $email: String, $role:String, $address: String, $dni: String, $phoneNumber: String){
+  modifyUser(id: $id, name: $name, password: $password, newPassword:$newPassword, email: $email, role:$role, address: $address, dni: $dni, phoneNumber: $phoneNumber){
     __typename
     ... on user{
-      name
       id
+      name
       email
       role
       address
@@ -20,7 +20,9 @@ mutation modifyUser($id: Int!, $name: String, $password:String, $email: String, 
 
 {
     "id": 1,
-    "email": "admin1@gmail.com",
+    "email": "admin@admin.com",
+  	"password": "12345",
+  	"newPassword": "12345678",
     "address": "Nueva dir",
     "dni": "11111111",
     "phoneNumber": "123213213213212"

@@ -16,7 +16,9 @@ const LeftPanel = () => {
     users: path.includes("users") ? "active" : "inactive",
   };
 
-  /*   */
+  let logout = () => {
+    localStorage.clear();
+  };
 
   return (
     <StyledPanel>
@@ -47,6 +49,19 @@ const LeftPanel = () => {
               <HiOutlineUser size="1.3rem" className="icon" />
               <span className="tabName">Users</span>
             </div>
+          </Link>
+          <Link 
+            className="text-decoration-none text-white"
+            to="/"
+            onClick={logout}
+          >
+            Logout
+          </Link>
+          <Link 
+            className="text-decoration-none text-white"
+            to="/"
+          >
+            Home
           </Link>
         </div>
       </div>
@@ -163,7 +178,7 @@ const StyledPanel = styled.div`
 			}
 		}
 	}
+  }`
 
-`;
 
 export default LeftPanel;

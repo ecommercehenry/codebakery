@@ -8,7 +8,7 @@ const MOCK_PRODUCTS = require("./MOCK_PRODUCTS.json");
 const MOCK_USER = require("./MOCK_USER.json");
 
 async function dataPopulation() {
-    console.log("dataPopulation ejecutado")
+    
     await Category.bulkCreate(MOCK_CATEOGRIES),
     await Product.bulkCreate(MOCK_PRODUCTS)
     await createUser("admin","12345","admin@admin.com","admin")
@@ -21,21 +21,21 @@ async function dataPopulation() {
     await createUser("guille","12345","guille@gmail.com","user")
     await createUser("pablo","12345","pablo@gmail.com","user")
     await createUser("fran","12345","fran@gmail.com","user")
+<<<<<<< HEAD
     await createUser("nico","12345","nico@gmail.com","user")
+=======
+>>>>>>> main
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
     await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)
     await createOrder([{id:4,quantity:1},{id:8,quantity:1}],1)
-    await createOrder([{id:5,quantity:2},{id:9,quantity:1},{id:1, quantity:3}],2)
+    await createOrder([{id:5,quantity:2},{id:9,quantity:1}],2)
     await updateOrderToTicket(1)
     await updateOrderToTicket(5)
 
     await updateOrderToTicket(2)
     await updateOrderToTicket(4)
-    await addReview(1,1,{title:"Exelente",description:"Ricas galletas de chocolate, las recomiendo al 100%",stars:"4"})
-    await addReview(1,2,{title:"Bueno",description:"exelente",stars:"3"})
-    await addReview(1,3,{title:"Genial",description:"muy bueno",stars:"4"})
-    await addReview(1,4,{title:"Bueno",description:"buen producto",stars:"5"})
+    await addReview(1,1,{title:"hola",description:"hola",stars:"4"})
 
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,1)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,2)`)

@@ -8,11 +8,10 @@ import ProductCard from './ProductCard';
 const Grid = () => {
   
   let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state.reducer);
-  let arr = [];  
-
+  let arr = []
   if(search === true){
-     arr = allProduct.filter((element) => 
-      element.name.toLowerCase().includes(filterProduct.toLowerCase()))
+    arr = allProduct.filter((element) => 
+      element.name.toLowerCase().includes(filterProduct.toLowerCase())  )
        //con includes la busq ya no pide exactitud en el string. @Lizen
   }
   
@@ -26,7 +25,7 @@ const Grid = () => {
           ? stateproducts.map((element) => {
                 return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price}/>
             }) : "Cargando")
-            : (arr.length > 0 ? arr.map((element) => {
+            : (arr.length > 0 ? arr.map((element ) => {
                 return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price}/>
             }): "No se encontraron Productos" 
             )

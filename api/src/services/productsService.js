@@ -150,7 +150,7 @@ async function modifyProduct(id, dataToModify) {
     const validInputs = ["name", "description", "price", "stock", "image","categories"];
     for (element in data) {
       if (!validInputs.includes(element)) {
-        console.log("FALSOOOOOOO")
+        
         return false;
       }
     }

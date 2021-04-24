@@ -1,10 +1,10 @@
-import { gql } from "@apollo/client";
+import { gql } from "@apollo/client"
 
 const PROMOTE_USER = gql`
-  mutation promoteUser($id: Int, $role: String) {
-    modifyUser(id: $id, role: $role) {
+mutation promoteUser ($id: Int!, $role: String!){
+    modifyUser(id: $id, role:$role){
       __typename
-      ... on user {
+      ... on user{
         name
         id
         role
@@ -15,6 +15,12 @@ const PROMOTE_USER = gql`
         detail
       }
     }
+<<<<<<< HEAD
   }
 `;
 export default PROMOTE_USER;
+=======
+}
+`;
+export default PROMOTE_USER
+>>>>>>> main

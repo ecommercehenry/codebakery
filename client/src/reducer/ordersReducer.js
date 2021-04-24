@@ -6,6 +6,7 @@ import {
   CHANGE_STATUS,
   FILTER_USERS,
   CLEAR_FILTER,
+  FILTER_NAME,
 } from "../actions/index";
 
 const initialState = {
@@ -18,7 +19,6 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   // let ordersModified = state.orders
-
   switch (action.type) {
     case SAVE_ORDERS:
       return {
@@ -26,6 +26,9 @@ const reducer = (state = initialState, action) => {
         orders: action.payload?.map((o) => {
           let filter = {
             id: o.id,
+            name: o.name,
+            email: o.email,
+            role: o.role,
             userId: o.userId,
             date: o.creation,
             price: o.lineal_order.map((u) => u).map((g) => g.price),
@@ -40,7 +43,7 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (o) => o.id === Number(action.payload)
       );
-      console.log(searchOrder);
+      
       if (searchOrder.length) {
         return {
           ...state,
@@ -76,12 +79,32 @@ const reducer = (state = initialState, action) => {
         };
       }
 
+    case FILTER_NAME:
+      let searchName = state.orders.filter(
+        //tuve que cambiar para emparejar con filtros //@ Lau
+        (u) => u.name === action.payload
+      );
+      if (searchName.length) {
+        return {
+          ...state,
+          filterOrders: searchName,
+          search: true,
+        };
+      } else {
+        return {
+          ...state,
+          filterOrders: [],
+          idError: action.payload,
+          status: true,
+        };
+      }
+
     case PRICE_LOW_TO_HIGH:
       //getAllOrders.orders.map(e => e).map(u=> u.lineal_order).map(g => g.map(h => h.price))
-      //console.log('stateorderSKLDMLSMD', state.orders)
+      //
       let filterlow;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
-        //console.log('stateorder', state.orders)
+        //
         filterlow = state.filterOrders.sort(function (a, b) {
           if (a.price[0] > b.price[0]) {
             return 1;
@@ -112,7 +135,7 @@ const reducer = (state = initialState, action) => {
     case PRICE_HIGH_TO_LOW:
       let filterhigh;
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
-        //console.log('stateorder', state.orders)
+        //
         filterhigh = state.filterOrders.sort(function (a, b) {
           if (a.price[0] < b.price[0]) {
             return 1;
