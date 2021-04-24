@@ -1,19 +1,29 @@
-import React from 'react'
+import React,{useState} from 'react'
+import { Redirect } from 'react-router-dom'
 import {useSelector} from 'react-redux'
 import axios from 'axios'
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements, CardElement,useStripe,useElements} from '@stripe/react-stripe-js';
 import styled from 'styled-components'
+import { useQuery } from "@apollo/client";
+import PayButton from "../PayButton";
+import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 import {toast} from 'react-toastify'
 import '../../../../Assets/toast.css'
 const stripePromise = loadStripe('pk_test_51IikJvLv5RMhUlp35i74LPIzdy7M5Ei6esRBW9vI01qzArgdAhhBT452AQzT2E0ePUfYEmW3cb6ddVcx7Uyx7rv800bCIJ2c3z')
 toast.configure()
 const StripeForm = () => {
-    //const {loggedCart} = useSelector(state=>state.loggedCart)
+    let userId = parseInt(localStorage.id);
+    const res = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+        variables: { idUser: userId },
+        fetchPolicy: "no-cache",
+    });
+    const [success,setSuccess] = useState(false)
+    //console.log('ressssss',res.data)
     const stripe = useStripe();
     const elements = useElements();
     let total =90
-    //loggedCart.map(elem=>total=total+(elem.price*elem.quantity))
+    
     const submitHandler = async (e) => {
         e.preventDefault();
         const{error,paymentMethod} = await stripe.createPaymentMethod(
@@ -28,12 +38,19 @@ const StripeForm = () => {
                 const {data} = await axios.post('http://localhost:3001/stripe/checkout',
                 {
                     id,
-                    amount: total/0.9
+                    amount: total*100,
+                    products:res?.data?.getOrdersByUserIdInCart?.orders[0]
                 }
                 )
-                console.log(data)
+                //console.log(data)
                 elements.getElement(CardElement).clear()
-                if(data.message=="successful transaction"){toast('deja de gastar gil')}
+                if(data.message=="successfull transaction"){
+                    toast(data.message)
+                    setSuccess(true)
+                }else{
+                    toast(data.message)
+                }
+                
             } catch (error) {
                 console.log(error)
             }
@@ -42,7 +59,8 @@ const StripeForm = () => {
     return (
         <StyledStripeForm onSubmit={submitHandler}>
             <div className="card"><CardElement/></div>
-            <button disabled={!stripe ? true : false}>Pay</button>
+            <button disabled={!stripe ? true : false}>Buy those yummy products</button>
+            {success?<Redirect to="/catalogue/"/>:""}
         </StyledStripeForm>
     )
 }
@@ -52,15 +70,16 @@ const Stripe = () => {
             <Elements stripe={stripePromise}>
                 <StripeForm/>
             </Elements>
+            
         </StyledStripe>
         
     )
 }
 
 const StyledStripe = styled.div`
-    //background:blue;
-    width:80%;
-    height:100%;
+    //background:green;
+    width:100%;
+    height:17vh;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -69,21 +88,27 @@ const StyledStripe = styled.div`
 const StyledStripeForm =styled.form`
     //background:red;
     margin:0;
-    width:80%;
+    width:100%;
     height:7vh;
     display:flex;
     justify-content:space-between;
     flex-direction:column;
     align-items:center;
     .card{
-        width:100%;
-       // background:none;
+        width:90%;
     }
     button{
-        width: 20%;
+        width: fit-content;
         background:#755588;
         border:none;
         border-radius:7px;
+        display: flex;
+        align-items: center;
+        justify-content:center;
+        color:white;
+        text-align: center;
+        padding:0.5rem 1.5rem;
+        margin-top:1rem;
     }
 `;
 
