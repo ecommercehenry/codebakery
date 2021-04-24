@@ -15,8 +15,6 @@ const { getOrdersByUserIdInTicket } = require("./getOrdersByUserIdInTicket")
 const { getUserByEmail } = require("./getUserByEmail")
 const { validateCredentials } = require("./validateCredentials")
 const { getAllReviewsFromAProduct } = require("./getAllReviewsFromAProduct")
-const { getUserById} = require("./getUserById")
-const {validateUserWithGoogle} = require("./validateUserWithGoogle"); 
 
 
 module.exports = {
@@ -36,7 +34,5 @@ module.exports = {
   getOrdersByUserIdInCart,
   getOrdersByUserIdInTicket,
   getUserByEmail,
-  getAllReviewsFromAProduct,
-  getUserById,
-  validateUserWithGoogle,
+  getAllReviewsFromAProduct
 }

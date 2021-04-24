@@ -43,10 +43,6 @@ module.exports = (sequelize) => {
     phoneNumber: {
       type: DataTypes.STRING
     },
-    google: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true
-    },
     salt: {
       type: DataTypes.STRING,
       get() {
@@ -75,6 +71,6 @@ module.exports = (sequelize) => {
     }
   }
 
-  Users.beforeCreate(setSaltAndPassword);
-  Users.beforeUpdate(setSaltAndPassword);
+  Users.beforeCreate(setSaltAndPassword)
+  Users.beforeUpdate(setSaltAndPassword)
 }

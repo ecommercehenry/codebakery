@@ -17,8 +17,6 @@ export default function TablaOrdenes() {
   let { data } = useQuery(getAllOrders);
   let ordersQ = data?.getAllOrders.orders;
 
-  
-
   //guarda las ordenes en el store redux...
   const dispatch = useDispatch();
   useEffect(() => {
@@ -29,35 +27,40 @@ export default function TablaOrdenes() {
   const { orders, search, filterOrders, idError, status } = useSelector(
     (state) => state.ordersReducer
   );
-
+ 
   let dataRENDER;
   if (search && !filterOrders.length) {
-    toast(`Search Not Found: "${idError}".`, {
+    
+    toast(`El ID ${idError} no existe.`, {
       toastId: customId,
     });
     return <ButtonClear name="Volver al principio" />;
+
   } else if (search) {
     dataRENDER = filterOrders;
   } else if (status) {
-    toast(`Search Not Found: "${idError}".`, {
+    toast(`El ID ${idError} no existe.`, {
       toastId: customId,
     });
     return <ButtonClear name="Volver al principio" />;
   } else {
-    //
+    //console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
     dataRENDER = orders;
   }
+
 
   return (
     <StyledTablaOrdenes>
       <ButtonClear name="Clear" />
-      {dataRENDER ? (
+      { dataRENDER ? (
         dataRENDER.map((ord) => {
           return <Orden id={ord.id} key={ord.id} orden={ord} />;
-        })
-      ) : (
+        }) 
+      ) : 
+      (
         <p>loading...</p>
-      )}
+      )
+      }
     </StyledTablaOrdenes>
   );
 }
@@ -70,4 +73,6 @@ const StyledTablaOrdenes = styled.div`
   margin-top: 0.5rem;
   margin-left: 0;
   height: 100%;
+
 `;
+

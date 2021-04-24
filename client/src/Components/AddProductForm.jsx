@@ -104,7 +104,7 @@ const AddProductForm = ({setAddProduct}) => {
     }
 }, [])
 
-    
+    console.log(selected)
     return (
         
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.664)', zIndex: 5, position: 'fixed', height: '100vh', width: '100vw', top: '0', left: '0', paddingLeft: '10vw'}}>

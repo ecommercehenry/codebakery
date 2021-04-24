@@ -13,11 +13,11 @@ module.exports = (sequelize) => {
       },
       title: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       description: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       stars: {
         type: DataTypes.ENUM('1', '2', '3', '4','5'),

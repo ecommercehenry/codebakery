@@ -1,4 +1,4 @@
-/* 
+
 .status-container{
     width:600px !important;
     height: 80px !important; 
@@ -17,16 +17,16 @@
     
 }
 .rs-steps-item-status-process {    
-    width: 40px;
-    height: 30px;
+    /* width: 40px;
+    height: 30px;     */
     
 }
 
 span.rs-steps-item-icon.rs-steps-item-icon-process{
     padding: 5px;
-    width: 100px !important; 
+    /* width: 100px !important; */
     border-radius: 100%;
-    border: solid 1px rgba(71, 49, 49, 0.445); 
+    /* border: solid 1px rgba(71, 49, 49, 0.445); */
     
 }
 
@@ -47,7 +47,7 @@ p.order-cancelled {
 }
 
 .rs-steps-item-active{
-     border: solid 1px rgba(71, 49, 49, 0.445); 
+    /* border: solid 1px rgba(71, 49, 49, 0.445); */
     
 }
 .rs-steps-item-status-finish{
@@ -70,10 +70,10 @@ align-items: flex-end;
 
 }
 
- --------- 
+/* --------- */
 
-tuve que usar esta clase para separar las ordenes ..no se de donde salio
- <div class="sc-kDThTU eTohOH"><div class="element-container" id="1"><div class="info-container"><div  
+/*tuve que usar esta clase para separar las ordenes ..no se de donde salio*/
+/* <div class="sc-kDThTU eTohOH"><div class="element-container" id="1"><div class="info-container"><div  */
 .eTohOH {
     margin: 0 !important;
     height: 150px !important;
@@ -131,7 +131,7 @@ color:rgb(232, 208, 243);
 background-color: rgb(55, 10, 85);
 }
 
-   <div class="rs-steps rs-steps-horizontal">
+  /* <div class="rs-steps rs-steps-horizontal">
   <div class="rs-steps-item rs-steps-item-status-finish" style="flex-basis: 33.3333%;">
   <div class="rs-steps-item-tail"></div>
   
@@ -228,4 +228,4 @@ background-color: rgb(55, 10, 85);
     padding: 6px;
     color:rgb(232, 208, 243);
     background-color: rgb(55, 10, 85);
-} */
+}*/

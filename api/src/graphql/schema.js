@@ -6,7 +6,7 @@ const root = require("./roots")
 const types = require("./types")
 // párametros que reciben los modelos de las consultas
 const inputs = require('./inputs');
-// 
+// console.log(mutations, 'ppapspaps') 
 
 const schema = buildSchema(`
 #Queries ( to get data )
@@ -43,12 +43,12 @@ ${types}
 //             }
 //           });
 //           if(created){
-//               
+//               console.log('fue creada')
 //           }
-//           else 
+//           else console.log('ya estaba creado')
 //     }
 //     catch(e){
-//         
+//         console.log('eror', e)
 //     }
 // }
 // pushAItem();

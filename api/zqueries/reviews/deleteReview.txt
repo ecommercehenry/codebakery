@@ -1,5 +1,5 @@
-mutation deleteReview($id:Int!){
-	deleteReview(id: $id) {
+mutation deleteReview($productId:Int!, $userId: Int!){
+	deleteReview(productId: $productId, userId: $userId) {
         __typename
             ... on booleanResponse{
             boolean
@@ -12,4 +12,7 @@ mutation deleteReview($id:Int!){
         }
 }
 
-
+{
+  "productId": 1,
+  "userId": 2
+}

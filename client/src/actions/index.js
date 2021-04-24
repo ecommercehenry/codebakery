@@ -10,7 +10,6 @@ export const PRICE_LOW_TO_HIGH = "PRICE_LOW_TO_HIGH";
 export const PRICE_HIGH_TO_LOW = "PRICE_HIGH_TO_LOW";
 export const CHANGE_STATUS = "CHANGE_STATUS";
 export const CLEAR_FILTER = "CLEAR_FILTER";
-export const FILTER_NAME = "FILTER_NAME";
 
 export const setSearch = () => {
   return {
@@ -51,13 +50,6 @@ export const filterOrders = (orderId) => {
   return {
     type: FILTER_ORDER,
     payload: orderId,
-  };
-};
-
-export const filterName = (name) => {
-  return {
-    type: FILTER_NAME,
-    payload: name,
   };
 };
 

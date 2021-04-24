@@ -37,15 +37,15 @@ function FormCreateCategory() {
   }
 //   addCategory: {__typename: "error", name: "error", detail: "No admin"}
 // __proto__: Object
-  // 
+  // console.log(data)
   useEffect(()=>{
     if(!loading){
       if(data?.addCategory.__typename === 'error'){
-        
+        console.log('poner el boton el rojo')
         setAdded(false)
       }
       else if(data?.addCategory.__typename === 'category'){
-        
+        console.log('poner el bptn en verde');
         setAdded(true);
       }
     }

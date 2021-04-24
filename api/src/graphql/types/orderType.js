@@ -7,8 +7,5 @@ module.exports = `
         lastModified: String!,
         cancelled: Boolean!
         lineal_order: [lineal_order], 
-        name: String!,
-        email: String!,
-        role: String!
     }
-`;
+`

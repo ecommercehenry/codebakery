@@ -11,7 +11,6 @@ query validateUser($email: String!, $password: String!){
            token
            id
          }
-         __typename
          ... on error{
            detail
          }

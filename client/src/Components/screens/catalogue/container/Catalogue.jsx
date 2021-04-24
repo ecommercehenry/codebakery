@@ -30,7 +30,7 @@ const Catalogue = () => {
         if (queryData.data.getOrdersByUserIdInCart.orders.length != 0) {
           let orderId = queryData.data.getOrdersByUserIdInCart.orders[0].id;
           itemsToCart.map((elem) => {
-             
+             console.log(elem);
             addProductToOrder({
               variables:{
                 orderId: orderId,

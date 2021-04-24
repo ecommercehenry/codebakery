@@ -15,7 +15,7 @@ function ListCRUD(){
         dispatch(saveProducts(data.product))
       }
     },[data])
-    // 
+    // console.log("esto es lo que usa ListCRUD...",data)
     return (
         <StyledListCRUD >
           {data ? (
