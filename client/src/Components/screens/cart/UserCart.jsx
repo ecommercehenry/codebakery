@@ -49,7 +49,14 @@ const UserCart = (cant) => {
       )}
       <Link className="text-decoration-none" to="/checkout">
         <div className="buttonContainer">
-          <button className="payMee">Checkout</button>
+          {
+
+            data && data.getOrdersByUserIdInCart.orders[0].lineal_order.length ? 
+            <button className="payMee">Checkout</button> 
+            : ""
+            
+          }
+          
         </div>
       </Link>
     </StyledCart>

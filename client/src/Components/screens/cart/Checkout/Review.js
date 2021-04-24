@@ -37,7 +37,7 @@ export default function Review() {
     orderData.data.getOrdersByUserIdInCart.orders[0].lineal_order.map((elem) =>  total = total + (elem.price)*(elem.quantity))
     }
   }
-  console.log(userData.data)
+  //console.log(userData.data)
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
