@@ -4,6 +4,7 @@ import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct";
 // import './FormCRUD.css'
 import { useDispatch, useSelector } from "react-redux";
 import { modifyProduct } from "../../../actions/modifyProductAction";
+// import { addCategoryToProductAction } from "../../../actions/addCategoryToProductAction";
 import styled from "styled-components";
 import { HiOutlinePencil, HiOutlineSave, HiOutlineX } from "react-icons/hi";
 

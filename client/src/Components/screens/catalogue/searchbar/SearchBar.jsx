@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchByName, setSearch } from '../../../../actions';
+import { fetchByName } from '../../../../actions';
 import { useDispatch} from "react-redux";
 import styled from 'styled-components';
 import { HiSearch } from "react-icons/hi";
@@ -9,29 +9,26 @@ const SearchBar = () => {
 const dispatch = useDispatch()
 const [input, setInput] = useState([])
 
-
-const handleChange = (e) => {
-  setInput(e.target.value);
-  console.log(input); 
-}
-useEffect(() => {
-  dispatch(setSearch(true))
-  dispatch(fetchByName(input))
-  
-}, [input]) 
+const submitHandler = async (e) => {
+    e.preventDefault();
+    dispatch(fetchByName(input))
+    setInput('');
+  };
 
   return (
     <div style={{width:100+"vw", display:"flex", justifyContent:"center"}}>
     <StyledSearchBar>
       <HiSearch size="1.5em" color="gray" style={{position: "absolute", left: "15px"}}/>
-      <form >
+      <form onSubmit={submitHandler}>
         <input
           type="text"
           placeholder="Find your favorite dessert"
           value={input}
-          onChange={handleChange}
+          onChange={(e) => {
+            setInput(e.target.value);
+          }}
         />
-          <button id="search-btn" >Search</button> 
+          <button id="search-btn" type='submit'>Search</button> 
       </form>
     </StyledSearchBar>
     </div>

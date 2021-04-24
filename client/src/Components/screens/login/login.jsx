@@ -8,7 +8,7 @@ import loginReducer from "../../../reducer/loginReducer";
 const Login = ()=>{
    
     const dispatch = useDispatch()
-    let user = useQuery(validateUser,{variables: {name:"ivan", password:"helloworld"}},);
+    let user = useQuery(validateUser, {variables: {name: "ivan", password: "helloworld"}},);
     
     const token = useSelector(state=> state.loginReducer.token)
     useEffect(()=>{
@@ -16,7 +16,7 @@ const Login = ()=>{
             localStorage.setItem('token', token);
             dispatch(saveToken(user.data.validateUser))
         }
-        console.log(token)
+        
     },[user.data,token])
 
 
