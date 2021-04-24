@@ -75,6 +75,7 @@ async function modifyUser(
       }
     }
   }
+}
 
 async function loginUser(email,password){
   const user = await Users.findOne({
