@@ -50,13 +50,15 @@ const filterByStatus = (currentState) =>{
     // console.log('primero')
     return currentState.filterStatus.length > 0 ? 
     currentState.filterOrders.filter((order => 
-      currentState.filterStatus.includes(order.status.toUpperCase()) || order.cancelled)):
+      currentState.filterStatus.includes(order.status.toUpperCase()) || 
+      (currentState.filterStatus.includes('CANCELLED') && order.cancelled) )):
     currentState.filterOrders;
   } else{
     // console.log('seg', currentState.orders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase()))))
     return currentState.filterStatus.length > 0 ? 
     currentState.orders.filter((order => 
-      currentState.filterStatus.includes(order.status.toUpperCase())|| order.cancelled)):
+      currentState.filterStatus.includes(order.status.toUpperCase()) || 
+      (currentState.filterStatus.includes('CANCELLED') && order.cancelled) )):
     currentState.orders;
     // currentState.orders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase())));
   }
@@ -118,7 +120,6 @@ const reducer = (state = initialState, action) => {
       );
 
       if (searchUsers.length) {
-        console.log('ashahhshas', searchUsers.length)
         // debemos preguntar si hay algun filtro en filterStatus
         modifyFilterOrders = filterByStatus({...state, filterOrders: searchUsers});
         // actualizamos filterOerders con la busqueda completa, luego filtramos 
@@ -147,18 +148,24 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (u) => u.name === action.payload
       );
+      modifyFilterOrders = filterByStatus({...state, filterOrders: searchName});
       if (searchName.length) {
         return {
           ...state,
           filterOrders: searchName,
           search: true,
+          statusOrders: modifyFilterOrders,
+          renderPage: modifyFilterOrders.length === 0 ? [] : pagination({...state, filterOrders: modifyFilterOrders}),
         };
       } else {
         return {
           ...state,
           filterOrders: [],
+          statusOrders: [],
+          renderPage: pagination({...state, filterOrders: [], statusOrders: []}),
           idError: action.payload,
           status: true,
+          search: false,
         };
       }
 
@@ -215,8 +222,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case CHANGE_PAGE:
-      const modifyState = {...state, numPage: action.payload}
-
+      const modifyState = {...state, numPage: action.payload};
       return {
         ...state,
         renderPage: pagination(modifyState),
@@ -251,8 +257,6 @@ const reducer = (state = initialState, action) => {
         CANCELLED: false,
         ALL: true,
         filterStatus: [],
-        // search: false,
-        // status: false,
       }
     default:
       return state;
