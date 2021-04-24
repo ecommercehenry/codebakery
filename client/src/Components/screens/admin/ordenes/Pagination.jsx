@@ -5,23 +5,19 @@ import { changePage } from "../../../../actions";
 
 export default function Pagination() {
 
-    let {orders, filterOrders, search}= useSelector(state => state.ordersReducer);
+    let {orders, filterOrders, search, filterStatus, statusOrders}= useSelector(state => state.ordersReducer);
 
 
     let longitud;
 
     if (search && filterOrders.length > 0) {
-        
-        //console.log('search', search);
-        //console.log('filterOrders', filterOrders);
-
-        longitud= filterOrders?.length;
-    
-      } else {
-
-        longitud= orders?.length
+      // console.log(filterStatus.length, 'aysyayysays', statusOrders.length)
+      longitud= filterStatus.length > 0 ? statusOrders.length : filterOrders?.length;
+    } else {
+      console.log('no search')
+      longitud= filterStatus.length > 0 ? statusOrders.length : orders?.length;
    
-      };
+    };
 
 
     //console.log('estado redux', orders);
