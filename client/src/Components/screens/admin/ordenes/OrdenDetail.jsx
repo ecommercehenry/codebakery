@@ -3,22 +3,18 @@ import styled from "styled-components";
 
 // Y realizar los Detalles de css
 const OrderDetail = (props) => {
-  const { id, name, image, price, quantity } = props;
+  const { name, image, price, quantity } = props;
   console.log(props);
   return (
     <StyledOrden>
-      <div className="element-container-odtls" id={id}>
+      <div className="element-container-odtls">
         <div className="info-container-odtls">
-          <div className="text-container-odtls">
-            <span>Order: </span>
-            <p>{id}</p>
-          </div>
           <div className="text-container-odtls">
             <span>Name: </span>
             <p>{name}</p>
           </div>
           <div className="text-container-odtls image">
-            <span>Product: </span>
+            <span style={{ marginLeft: "1rem" }}>Product: </span>
             <img className="image-odtls" src={image} alt={`img-${image}`} />
           </div>
           <div className="text-container-odtls">
@@ -48,8 +44,8 @@ const StyledOrden = styled.div`
 
   .image-odtls {
     display: block;
-    height: 5vh;
-    width: 5vw;
+    height: 8vh;
+    width: 8vw;
     block-size: auto;
     position: absolute;
   }
@@ -70,7 +66,7 @@ const StyledOrden = styled.div`
 
   .element-container-odtls {
     width: 100%;
-    height: 16vh;
+    height: 26vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,10 +80,11 @@ const StyledOrden = styled.div`
   }
 
   .text-container-odtls {
-    width: 250px;
-    height: 80px;
+    width: 10rem;
+    height: 50vh;
     padding: 0.5rem;
     overflow: hidden;
+    /* display: flow-root; */
   }
   .text-container-odtls p {
     margin: 0;

@@ -17,8 +17,13 @@ const BillCard = () => {
   const result = data?.getAllOrders?.orders.filter(
     (element) => element.id === Number(id)
   );
-
-  console.log(result[0]);
+  /* const finallyResult = result?.lineal_order.filter(
+    (element) => element.id === Number(id)
+  ); */
+  const { lineal_order } = result[0];
+  const finalResult = lineal_order?.filter(
+    (element) => element.id === Number(id)
+  );
 
   const date = result[0]?.creation;
   const userId = result[0]?.userId;
@@ -36,9 +41,7 @@ const BillCard = () => {
     variables: { id: userId },
   });
 
-  const subTotal = result[0]?.lineal_order
-    .map((r) => r.price)
-    .reduce((a, b) => a + b, 0);
+  const subTotal = finalResult.map((r) => r.price * r.quantity);
 
   const porcTotal = (subTotal * 21) / 100;
 
@@ -53,7 +56,7 @@ const BillCard = () => {
 
   const shipping = 0;
 
-  const total = subTotal + subTotalPor + shipping;
+  const total = +subTotal + +subTotalPor + +shipping;
 
   return (
     <div
@@ -116,10 +119,9 @@ const BillCard = () => {
         </div>
 
         <div style={{ width: "80%" }}>
-          {result[0]?.lineal_order?.map((res) => (
+          {finalResult.map((res) => (
             <OrderDetail
               key={res.id}
-              id={res.id}
               name={res.name}
               image={res.image}
               price={res.price}
@@ -158,7 +160,7 @@ const BillCard = () => {
           <button>SEND</button>
           <button>CANCELLED</button>
           <Link to="/admin/orders">
-            <button>GO BACK</button>
+            <button className="sub-btn">GO BACK</button>
           </Link>
         </ButtonStyled>
       </div>
@@ -186,6 +188,13 @@ const ButtonStyled = styled.div`
 
   button:hover {
     background-color: #7d62a0;
+    color: #f6f6f6;
+  }
+
+  .sub-btn {
+    background: white;
+    color: #402e57;
+    font-weight: 900;
   }
 `;
 
