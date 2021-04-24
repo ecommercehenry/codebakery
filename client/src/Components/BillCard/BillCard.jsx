@@ -18,10 +18,12 @@ const BillCard = () => {
     (element) => element.id === Number(id)
   );
 
+  /* console.log(result);
+
   const { lineal_order } = result[0];
-  const finalResult = lineal_order?.filter(
+  const finalResult = result[0]?.lineal_order?.filter(
     (element) => element.id === Number(id)
-  );
+  ); */
 
   const date = result[0]?.creation;
   const userId = result[0]?.userId;
@@ -39,7 +41,12 @@ const BillCard = () => {
     variables: { id: userId },
   });
 
-  const subTotal = finalResult.map((r) => r.price * r.quantity);
+  const subTotal = result[0]?.lineal_order
+    ?.map((r) => r.price * r.quantity)
+    .reduce((a, b) => a + b, 0)
+    .toFixed(2);
+
+  console.log("SubTotal: ", subTotal);
 
   const subTotalPor = ((subTotal * 21) / 100).toFixed(2);
 
@@ -108,7 +115,7 @@ const BillCard = () => {
         </div>
 
         <div style={{ width: "80%" }}>
-          {finalResult.map((res) => (
+          {result[0]?.lineal_order?.map((res) => (
             <OrderDetail
               key={res.id}
               name={res.name}

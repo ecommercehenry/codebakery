@@ -66,7 +66,7 @@ const StyledOrden = styled.div`
 
   .element-container-odtls {
     width: 100%;
-    height: 26vh;
+    height: 30vh;
     display: flex;
     align-items: center;
     justify-content: center;
