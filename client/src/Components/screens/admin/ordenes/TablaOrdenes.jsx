@@ -42,7 +42,7 @@ export default function TablaOrdenes() {
     });
     return <ButtonClear name="Volver al principio" />;
   } else {
-    //console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
+    //
     dataRENDER = orders;
   }
 
