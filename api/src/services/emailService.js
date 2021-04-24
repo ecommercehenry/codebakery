@@ -31,7 +31,7 @@ async function sendEmail(idUser, affair, message) {
     const mailOptions = {
         to: user.email,
         subject: affair,
-        text: message
+        html: message
       };
     //Send the email
     return transporter.sendMail(mailOptions)

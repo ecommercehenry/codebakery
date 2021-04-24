@@ -79,14 +79,30 @@ server.get('/feedback', async function(req, res) {     //ruta que responde con e
   
   let orden = await Order.findByPk(parseInt(req.query.external_reference))
   let ordenCompleta = await getOrderById(orden.id)
-  console.log("ORDEN QUE LLEGA")
-  console.log(orden)
+  let salidaProducts = ``
+  ordenCompleta.lineal_order.forEach(pro=>{
+    salidaProducts += `<li>${pro.name} (${pro.quantity})</li>` 
+  })
   if (req.query.status === 'approved'){
+       let message = `<html><span>Hi santi</span> <br>
+      <span>You order is created and your payment is processed </span> <br>
+      <span>Your products:</span>
+      <ul>
+      ${salidaProducts}
+      </ul>
+      </html>`
       orden.placeStatus = 'ticket'
       orden.status = 'paid'
       await orden.save()
-      await sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved`, `Hi!, ${ordenCompleta.name} you order has been procesed!`)
+      await sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved`, message)
     }else if (req.query.status === 'pending'){
+      let message = `<html><span>Hi santi</span> <br>
+      <span>You order is created and we are waiting the payment</span> <br>
+      <span>Your products:</span>
+      <ul>
+      ${salidaProducts}
+      </ul>
+      </html>`
       orden.placeStatus = 'ticket'
       orden.status = 'unpaid'
       await orden.save()
