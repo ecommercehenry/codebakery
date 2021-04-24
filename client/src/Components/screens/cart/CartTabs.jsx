@@ -34,7 +34,7 @@ let userId = parseInt(storage.id);
         <StyledTabs>
             <ul role="tablist" >
                 <li className="selected"><Link to="/cart" className="text-decoration-none text-dark tabLink">Cart ({logged ? valor : sum})</Link></li>
-                <li><Link className="text-decoration-none text-muted tabLink">Wishlist (0)</Link></li>
+                <li><Link to="#" className="text-decoration-none text-muted tabLink">Wishlist (0)</Link></li>
             </ul>
         </StyledTabs>
     )
