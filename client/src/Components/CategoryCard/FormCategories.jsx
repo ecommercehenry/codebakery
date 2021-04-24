@@ -12,7 +12,7 @@ const FormCategories = () => {
       <form
         className="form-container"
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          
         })}
       >
         <div className="input-container">

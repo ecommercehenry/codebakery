@@ -13,6 +13,7 @@ export const CLEAR_FILTER = "CLEAR_FILTER";
 export const CHANGE_PAGE = "CHANGE_PAGE";
 export const CHECKBOX_CHANGE = "CHECKBOX_CHANGE";
 export const CLEAR_CHECKBOXES = "CLEAR_CHECKBOXES";
+export const FILTER_NAME = "FILTER_NAME";
 
 export const setSearch = () => {
   return {
@@ -53,6 +54,13 @@ export const filterOrders = (orderId) => {
   return {
     type: FILTER_ORDER,
     payload: orderId,
+  };
+};
+
+export const filterName = (name) => {
+  return {
+    type: FILTER_NAME,
+    payload: name,
   };
 };
 

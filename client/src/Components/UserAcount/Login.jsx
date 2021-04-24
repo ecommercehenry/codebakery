@@ -22,7 +22,7 @@ function Login() {
   // const [login, { loading, data }] = useLazyQuery(VALID_USER);
 
   const onSuccess = (res) => {
-    // console.log(res);
+    // 
     // forma con parámetro de dominio alojado (Nota: debe ir comentada si se desea usar la manera de 
     // logueo con creación de usuario)
     // localStorage.setItem('token', res.tokenId);
@@ -49,7 +49,7 @@ function Login() {
     // })
     // let passwordFromPrompt = window.prompt('Type here');
     // let bar = window.confirm('Confirm or deny');
-    // console.log(res);
+    // 
     createUser({
       variables: {
         name: res.profileObj.name,
@@ -63,9 +63,9 @@ function Login() {
   // vemos si la validacion trae el usuario
   // descomentar ambos useEffect para el logeo con creación de usuario
   useEffect(()=>{
-    // console.log('logeado........')
+    // 
     if(!loadingValidate && dataValidate){
-      console.log(dataValidate, 'attstatstatstas')
+      
       if(dataValidate.validateUserWithGoogle.token){
         alert("logueado")
         localStorage.setItem('token', dataValidate.validateUserWithGoogle.token);
@@ -84,15 +84,15 @@ function Login() {
 
   useEffect(()=>{
     if(!loadingUser && dataUser){
-      // console.log('usuario creado', dataUser);
+      // 
       validate({variables: {email: dataUser.createUser.email}});
-      // console.log('despues......');
+      // 
     }
   },[loadingUser, dataUser])
-  // console.log('despues de on success', data)
+  // 
 
   // const onFailure = (res) => {
-  //   // console.log("Login failed: res:", dataUser);
+  //   // 
     
   // };
 

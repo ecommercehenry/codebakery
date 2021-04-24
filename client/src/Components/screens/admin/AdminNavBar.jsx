@@ -30,7 +30,7 @@ const AdminNavBar = ({ setAddProduct }) => {
           <SearchBarAdmin />
         </Route>
       </div>
-      
+
       <Route path="/admin/orders">
         <div className="onRight">
           <SortByPrice />
@@ -46,7 +46,6 @@ const AdminNavBar = ({ setAddProduct }) => {
             </div>
           ) : (
             <div className="add-category">
-              {" "}
               <FormCreateCategory setAdd={setAdd} />
             </div>
           )}
