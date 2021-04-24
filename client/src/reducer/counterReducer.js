@@ -7,7 +7,7 @@ const initialState = {
 const reducer = (state=initialState, action)=>{
     switch(action.type){
         case SET_QUANTITY_ORDERS_CARD_BACKEND:
-            console.log("iofjweofjweoij")
+            //console.log("iofjweofjweoij")
             return {...state, ordersInBacked:action.payload}
         default:
             return {...state}
