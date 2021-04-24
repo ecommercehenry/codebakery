@@ -4,7 +4,7 @@ import styled from "styled-components";
 // Y realizar los Detalles de css
 const OrderDetail = (props) => {
   const { name, image, price, quantity } = props;
-  console.log(props);
+
   return (
     <StyledOrden>
       <div className="element-container-odtls">
