@@ -12,6 +12,8 @@ import ListCRUD from "../ListCRUD"
 import AddProductForm from '../../../AddProductForm';
 import TablaOrdenes from '../../admin/ordenes/TablaOrdenes';
 import UserAdmin from '../ordenes/UserAdmin';
+import Pagination from '../ordenes/Pagination';
+
 
 
 
@@ -24,15 +26,26 @@ const AdminPanel = () => {
         <LeftPanel />
       </div>
       <div className="right">
+
         <div className="top">
           <AdminNavBar setAddProduct={setAddProduct} />
+          <div>
+          <Pagination/>
         </div>
+        </div>
+
+       
+       
+
         <div className="bottom">
+        
            <Route path='/admin/products' component={ListCRUD}/>            
            <Route path='/admin/orders' component={TablaOrdenes}/>    
            <Route path="/admin/users" component={UserAdmin} />
+
         </div>
-       
+
+        
         <Route path="/admin/add-product">
           <AddProductForm />
         </Route>

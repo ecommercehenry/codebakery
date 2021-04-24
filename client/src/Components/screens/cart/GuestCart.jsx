@@ -62,12 +62,8 @@ const GuestCart = () => {
     });
     localStorage.setItem(`cart`, JSON.stringify(itemsToCart));
   }
-  //let cart = localStorage.getItem("cart");
-  // storage.clear() // para vaciar el storage
   return (
     <StyledCart>
-      
-        {/* <button onClick={resetCartHandler}>vaciar carrito</button> */}
         {data && itemsToCart.length !==0 ? (
           itemsToCart.map((elem) => (
             <ProductOnCart
@@ -83,7 +79,6 @@ const GuestCart = () => {
           <EmptyAlert/>
         )}
         <TotalToOrder/> 
-      {/* <TotalToOrder/> */}
     </StyledCart>
   );
 };

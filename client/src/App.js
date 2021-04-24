@@ -6,6 +6,10 @@ import AdminPanel from "./Components/screens/admin/container/AdminPanel";
 import Catalogue from "./Components/screens/catalogue/container/Catalogue";
 import Cart from "./Components/screens/cart/container/Cart";
 import AboutUs from "./Components/screens/aboutUs/container/AboutUs";
+import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory";
+// import FormCRUD from "./Components/screens/admin/FormCRUD"
+import Checkout from './Components/screens/cart/Checkout/Checkout'
+import Stripe from "./Components/screens/cart/Checkout/Stripe"
 import GlobalStyle from "./Components/GlobalStyle";
 import GuestCart from "./Components/screens/cart/GuestCart";
 import UserAccount from "./Components/UserAcount/UserAccount";
@@ -63,9 +67,11 @@ function App() {
       <>
         <GlobalStyle />
         <Switch>
+          <Route path='/checkout' component={Checkout}/>
           <Route exact path="/" component={Landing} />
           <Route path="/catalogue" component={Catalogue} />
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/checkout-stripe" component={Stripe} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />

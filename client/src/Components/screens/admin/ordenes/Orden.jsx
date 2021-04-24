@@ -52,7 +52,7 @@ export default function Orden({ id, orden }) {
               <div className="titulos">
                 <span>Paid</span>
                 <span>Sent</span>
-                <span>Recived</span>
+                <span>Received</span>
               </div>
               {instance}
             </div>
