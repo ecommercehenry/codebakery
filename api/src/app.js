@@ -162,19 +162,32 @@ server.post('/stripe/checkout',async(req,res)=>{
       confirm:true
     })
     let order = await Order.findByPk(parseInt(req.body.products.id))
+    let ordenCompleta = await getOrderById(order.id)
+    let salidaProducts = ``
+    ordenCompleta.lineal_order.forEach(pro=>{
+      salidaProducts += `<li>${pro.name} (${pro.quantity})</li>` 
+    })
     //console.log(payment.status)
     //console.log(order)
     if(payment.status === 'succeeded'){
       order.status = 'paid'
       order.placeStatus = 'ticket'
       await order.save()
+      let message = `<html><span>Hi santi</span> <br>
+      <span>You order is created and the payment is processed</span> <br>
+      <span>Your products:</span>
+      <ul>
+      ${salidaProducts}
+      </ul>
+      </html>`
+      await sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved!`, message)
       res.json({message:'successfull transaction'})
     }
     
     
   } catch (error) {
-    //console.log(error)
-    res.send({message:error.raw.message})
+    console.log(error)
+    res.send({message:error.message})
   }
 })
 
