@@ -15,6 +15,7 @@ const StockCounter = ({
   logged,
   orderId,
   productId,
+  refetch
 }) => {
   const [decrementQuantity, decrementData] = useMutation(DECREMENT_QUANTITY);
   const [incrementQuantity, incrementData] = useMutation(INCREMENT_QUANTITY);
@@ -32,6 +33,7 @@ const StockCounter = ({
                         quantity:1
                     }
                 })
+                refetch()
             } 
     }
   };
@@ -48,6 +50,7 @@ const StockCounter = ({
                 quantity:1
             }
         })
+        refetch()
     } 
     }
   };

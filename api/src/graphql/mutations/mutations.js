@@ -15,12 +15,12 @@ type Mutation{
     addCategoryToProduct(idProduct: Int!,idCategory: Int!): resultProduct
     removeCategoryFromProduct(idProduct: Int!,idCategory: Int!): resultProduct
     addProduct(category: String!, name: String!, description: String!, price: Float!, stock: Int!, image: String!): resultProduct
-    createUser(name: String!, password: String!, email: String!, role: String!): resultUsers
-    modifyUser(id: Int!, name:String, password: String, email: String, role: String, address: String, dni: String, phoneNumber: String): resultUsers
+    createUser(name: String!, password: String!, email: String!, role: String!, google: Boolean): resultUsers
+    modifyUser(id: Int, name:String, password: String, newPassword: String, email: String, role: String, address: String, dni: String, phoneNumber: String): resultUsers
     createOrder(idUser: Int!, dataProducts: [dataProductsOrderInput]) : resultOrder
     updateOrderPrices(orderId: Int!) : resultBoolean
     deleteProductOrder(orderId: Int!, productId: Int!): resultBoolean
-    addProductToOrder(orderId: Int!, productId: Int!, quantity: Int!): resultBoolean
+    addProductToOrder(orderId: Int!, productId: Int!, quantity: Int!, userId: Int): resultBoolean
     deleteOrder(orderId: Int!) : resultBoolean
     updateOrderToTicket(orderId: Int!): resultBoolean
     modifyOrderStatus(orderId: Int!, status: String!): resultBoolean
@@ -30,6 +30,9 @@ type Mutation{
     modifyReview(reviewId: Int!, dataReview:reviewInput!): reviewResult
     deleteReview(productId: Int!, userId: Int!): deletes
     deleteUser(userId: Int!) : resultBoolean
+
+
+
 
    
 }`

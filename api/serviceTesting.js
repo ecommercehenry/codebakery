@@ -13,7 +13,7 @@ const { addReview , modifyReview} = require("./src/services/reviewsService.js");
    dataPopulation().then(async ()=>{
      const s = await addReview(1,1,{title:"hola",description:"hola",stars:"46"})
     //  const s = await modifyReview(1,{title:"Cambiadoooo",description:"hooe", stars:"3"})
-     console.log(s)
+     
    })
    
  });

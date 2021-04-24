@@ -2,6 +2,7 @@ import React from 'react'
 import {useSelector} from 'react-redux'
 import { toast } from "react-toastify";
 import '../../../Assets/toast.css'; 
+import PayButton from "./PayButton";
 
 
 //styles
@@ -9,10 +10,9 @@ import styled from "styled-components";
 
 toast.configure()
 
-const TotalToOrder = () => {
+const TotalToOrder = ({productos}) => {
     const customId = "custom-id-yes";
     const itemsFromCart = useSelector(state=>state.cart.itemsToCart);
-    console.log(itemsFromCart)
     let total = 0;
     if(itemsFromCart!=undefined){itemsFromCart.map(elem => {total = total + (elem.price)*(elem.quantity)} )}
     
@@ -36,7 +36,8 @@ const TotalToOrder = () => {
                 </div>
             </div>
             <div className="buttonContainer">
-                <button className="payMee" onClick={clickHandler} onDoubleClick={doubleClickHandler}>Comprar</button>
+                {/* <button className="payMee" onClick={clickHandler} onDoubleClick={doubleClickHandler}>Proceed to checkout</button> */}
+                <PayButton className="payMee" productos={productos}/>
             </div>
             
         </StyledTotal>
@@ -46,16 +47,16 @@ const TotalToOrder = () => {
 const StyledTotal = styled.div`
     //background: black;
     height: 12vh;
-    width: 65%;
+    width: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: flex-end;
     //align-items: center;
     z-index:1;
-    margin-top:5rem;
-    margin-bottom:10rem;
+    margin-top: 2rem;
     .buttonContainer{
         //background:violet;
+        margin-top: 1rem;
         width:87%;
         display:flex;
         justify-content:flex-end;
@@ -63,12 +64,13 @@ const StyledTotal = styled.div`
             z-index:1;
             display:flex;
             justify-content:center;
-            padding:1rem 5.5rem;
+            padding:1rem 3rem;
             background:#755588;
             color:white;
             border:none;
             border-radius: 20px;
             font-size:1.2rem;
+            font-weight: bold;
         }
     }
     //background:green;
@@ -92,8 +94,7 @@ const StyledTotal = styled.div`
         //background:blue;
         width:auto;
         margin-left:1rem;
-        padding-right:13%;
-        
+        margin-right: 0.1rem;
     }
   }
   
