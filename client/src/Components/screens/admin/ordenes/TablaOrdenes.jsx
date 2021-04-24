@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveOrders } from "../../../../actions";
 import { toast } from "react-toastify";
 import ButtonClear from "./ButtonClear";
-// import CheckFilters from "./CheckFilters";
+import CheckFilters from "./CheckFilters";
 
 //traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
 //guardo en el reducer ordersReducer las ordenes para aplicar busquedas y filtros uso dispatch
@@ -54,14 +54,14 @@ console.log('render', dataRENDER)
   return (
     <StyledTablaOrdenes>
       <ButtonClear name="Clear" />
-      {/* <CheckFilters /> */}
+      <CheckFilters />
       {/* Checkbox filters */}
-      { dataRENDER ? (
+      { dataRENDER?.length > 0 ? (
         dataRENDER.map((ord) => {
           return <Orden id={ord.id} key={ord.id} orden={ord} />;
         })
-      ) : (
-        <p>loading...</p>
+      ) : dataRENDER?.length === 0 ? (<p>There are no matches for your search</p>):(
+        <p>Loading...</p>
       )}
     </StyledTablaOrdenes>
   );

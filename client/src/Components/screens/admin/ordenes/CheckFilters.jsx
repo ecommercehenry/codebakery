@@ -5,7 +5,7 @@ import { checkboxChange, clearCheckboxes, clearFilter } from "../../../../action
 function CheckFilters(){
     const dispatch = useDispatch();
     const handleChange = (e) => {
-        console.log(e.target)
+        // console.log(e.target)
         dispatch(checkboxChange(e.target.id))
         // despachar una accion de tipo cambio de checkbox
     }

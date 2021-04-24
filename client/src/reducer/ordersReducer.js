@@ -49,12 +49,14 @@ const filterByStatus = (currentState) =>{
   if(currentState.filterOrders.length > 0){
     // console.log('primero')
     return currentState.filterStatus.length > 0 ? 
-    currentState.filterOrders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase()))):
+    currentState.filterOrders.filter((order => 
+      currentState.filterStatus.includes(order.status.toUpperCase()) || order.cancelled)):
     currentState.filterOrders;
   } else{
     // console.log('seg', currentState.orders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase()))))
     return currentState.filterStatus.length > 0 ? 
-    currentState.orders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase()))):
+    currentState.orders.filter((order => 
+      currentState.filterStatus.includes(order.status.toUpperCase())|| order.cancelled)):
     currentState.orders;
     // currentState.orders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase())));
   }
@@ -62,6 +64,7 @@ const filterByStatus = (currentState) =>{
 
 const reducer = (state = initialState, action) => {
   // let ordersModified = state.orders
+  let modifyFilterOrders;
   switch (action.type) {
     case SAVE_ORDERS:
       const data= action.payload?.map((o) => {
@@ -88,13 +91,15 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (o) => o.id === Number(action.payload)
       );
-      
+      modifyFilterOrders = filterByStatus({...state, filterOrders: searchOrder});
       if (searchOrder.length) {
         return {
           ...state,
           filterOrders: searchOrder,
           search: true,
-          renderPage:searchOrder
+          // renderPage:searchOrder
+          statusOrders: modifyFilterOrders,
+          renderPage: modifyFilterOrders.length === 0 ? [] : pagination({...state, filterOrders: modifyFilterOrders})
         };
       } else {
         return {
@@ -115,7 +120,7 @@ const reducer = (state = initialState, action) => {
       if (searchUsers.length) {
         console.log('ashahhshas', searchUsers.length)
         // debemos preguntar si hay algun filtro en filterStatus
-        const modifyFilterOrders = filterByStatus({...state, filterOrders: searchUsers});
+        modifyFilterOrders = filterByStatus({...state, filterOrders: searchUsers});
         // actualizamos filterOerders con la busqueda completa, luego filtramos 
         // por status y se lo pasamos a renderPage
         return {
@@ -123,7 +128,7 @@ const reducer = (state = initialState, action) => {
           filterOrders: searchUsers,
           search: true,
           statusOrders: modifyFilterOrders,
-          renderPage: pagination({...state, filterOrders: modifyFilterOrders})
+          renderPage: modifyFilterOrders.length === 0 ? [] : pagination({...state, filterOrders: modifyFilterOrders})
         };
       } else {
         return {
@@ -169,11 +174,12 @@ const reducer = (state = initialState, action) => {
           return a.price[0] - b.price[0]; 
         });
       }
-
+      modifyFilterOrders = filterByStatus({...state, filterOrders: filterlow});
       return {
         ...state,
         filterOrders: filterlow,
-        renderPage: pagination({...state, filterOrders: filterlow }),
+        statusOrders: modifyFilterOrders,
+        renderPage: pagination({ ...state, filterOrders: modifyFilterOrders }),
         search: true,
       };
 
@@ -189,11 +195,12 @@ const reducer = (state = initialState, action) => {
           return b.price[0] - a.price[0];
         });
       }
-
+      modifyFilterOrders = filterByStatus({...state, filterOrders: filterhigh});
       return {
         ...state,
         filterOrders: filterhigh,
-        renderPage: pagination({...state, filterOrders: filterhigh }),
+        statusOrders: modifyFilterOrders,
+        renderPage: pagination({...state, filterOrders: modifyFilterOrders }),
         search: true,
       };
 
@@ -201,6 +208,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filterOrders: [],
+        filterStatus: [],
         renderPage: pagination({...state, filterOrders:[]}),
         search: false,
         status: false,
@@ -230,7 +238,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         statusOrders: filterByStatus({...state, filterStatus: modificateFilterStatus}),
-        renderPage: pagination(modificateState),
+        renderPage: modificateState.filterOrders.length > 0? pagination(modificateState): [],
         filterStatus: modificateFilterStatus,
       }
     
