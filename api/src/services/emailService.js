@@ -37,7 +37,6 @@ async function sendEmail(idUser, affair, message) {
     return transporter.sendMail(mailOptions)
     .then(info=>{
         console.log("Email send!")
-        console.log(info)
         return {__typename:"email", email:info.accepted[0], messageId:info.messageId}
     })
     .catch(err=>{
@@ -47,7 +46,44 @@ async function sendEmail(idUser, affair, message) {
     
 }
 
+function getFormatedMessage(name, status, products){
+    let salidaProducts = ""
+    products.forEach(pro=>{
+        salidaProducts += `<li>${pro.name} (${pro.quantity})</li>` 
+    })
+
+    if(status === "approved"){
+        let message = `<html><span>Hi ${name}</span> <br>
+        <span>You order is created and your payment is processed </span> <br>
+        <span>Your products:</span>
+        <ul>
+        ${salidaProducts}
+        </ul>
+        <span>Thanks for buy with us, have a good day!</span>
+        </html>`
+        return message
+    }else if(status === "pending"){
+        let message = `<html><span>Hi ${name}</span> <br>
+        <span>You order is created and your payment is processed </span> <br>
+        <span>Your products:</span>
+        <ul>
+        ${salidaProducts}
+        </ul>
+        <span>Thanks for buy with us, have a good day!</span>
+        </html>`
+        return message
+    }else{
+        let message = `<html><span>Hi ${name}</span> <br>
+        <span>You order is created but is in state ${status} </span> <br>
+        <br>please contact with support, this not is normal</br>
+        <span>Error code: the order have status ${status}
+        <span>Thanks for buy with us, have a good day!</span>
+        </html>`
+        return message
+    }
+}
 
 module.exports = {
 	sendEmail,
+    getFormatedMessage
 };

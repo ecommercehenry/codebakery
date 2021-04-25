@@ -17,7 +17,7 @@ mercadopago.configurations.setAccessToken(`${ACCESS_TOKEN}`); //access-key
 /// mercadopago
 const server = express();
 const {schema, root} = require("./graphql/schema");
-const { sendEmail } = require('./services/emailService');
+const { sendEmail, getFormatedMessage } = require('./services/emailService');
 const { getOrderById } = require('./services/orderService');
 server.name = 'API';
 server.use(express.json());
@@ -79,34 +79,17 @@ server.get('/feedback', async function(req, res) {     //ruta que responde con e
   
   let orden = await Order.findByPk(parseInt(req.query.external_reference))
   let ordenCompleta = await getOrderById(orden.id)
-  let salidaProducts = ``
-  ordenCompleta.lineal_order.forEach(pro=>{
-    salidaProducts += `<li>${pro.name} (${pro.quantity})</li>` 
-  })
+
   if (req.query.status === 'approved'){
-       let message = `<html><span>Hi santi</span> <br>
-      <span>You order is created and your payment is processed </span> <br>
-      <span>Your products:</span>
-      <ul>
-      ${salidaProducts}
-      </ul>
-      </html>`
       orden.placeStatus = 'ticket'
       orden.status = 'paid'
       await orden.save()
-      await sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved`, message)
+      await sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
     }else if (req.query.status === 'pending'){
-      let message = `<html><span>Hi santi</span> <br>
-      <span>You order is created and we are waiting the payment</span> <br>
-      <span>Your products:</span>
-      <ul>
-      ${salidaProducts}
-      </ul>
-      </html>`
       orden.placeStatus = 'ticket'
       orden.status = 'unpaid'
       await orden.save()
-      await sendEmail(orden.userId, `Order #${orden.id} pending`, `Hi!, ${orden.name} you order is created and we are waiting the payment`)
+      await sendEmail(orden.userId, `Order #${orden.id} pending`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
     }
   
 
@@ -163,24 +146,13 @@ server.post('/stripe/checkout',async(req,res)=>{
     })
     let order = await Order.findByPk(parseInt(req.body.products.id))
     let ordenCompleta = await getOrderById(order.id)
-    let salidaProducts = ``
-    ordenCompleta.lineal_order.forEach(pro=>{
-      salidaProducts += `<li>${pro.name} (${pro.quantity})</li>` 
-    })
     //console.log(payment.status)
     //console.log(order)
     if(payment.status === 'succeeded'){
       order.status = 'paid'
       order.placeStatus = 'ticket'
       await order.save()
-      let message = `<html><span>Hi santi</span> <br>
-      <span>You order is created and the payment is processed</span> <br>
-      <span>Your products:</span>
-      <ul>
-      ${salidaProducts}
-      </ul>
-      </html>`
-      await sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved!`, message)
+      sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved!`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
       res.json({message:'successfull transaction'})
     }
     
