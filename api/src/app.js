@@ -1,4 +1,5 @@
 const express = require('express');
+const Stripe = require('stripe')
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -6,6 +7,7 @@ const { graphqlHTTP } = require("express-graphql");
 const cors = require('cors')
 const {errorType} = require("./graphql/roots/errorsHandlers/errors")
 require('./db.js');
+const stripe = new Stripe(process.env.STRIPE_KEY)
 const {Order} = require('./db')
 /// mercadopago
 const mercadopago = require("mercadopago"); //requerimos mercado pago
@@ -14,9 +16,11 @@ const {ACCESS_TOKEN} = process.env
 mercadopago.configurations.setAccessToken(`${ACCESS_TOKEN}`); //access-key
 /// mercadopago
 const server = express();
-const {schema, root} = require("./graphql/schema")
+const {schema, root} = require("./graphql/schema");
+const { sendEmail, getFormatedMessage } = require('./services/emailService');
+const { getOrderById } = require('./services/orderService');
 server.name = 'API';
-
+server.use(express.json());
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
@@ -74,15 +78,18 @@ server.post("/create_preference", (req, res) => {   //ruta para crear preferenci
 server.get('/feedback', async function(req, res) {     //ruta que responde con el status del pago
   
   let orden = await Order.findByPk(parseInt(req.query.external_reference))
+  let ordenCompleta = await getOrderById(orden.id)
 
   if (req.query.status === 'approved'){
       orden.placeStatus = 'ticket'
       orden.status = 'paid'
       await orden.save()
+      await sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
     }else if (req.query.status === 'pending'){
       orden.placeStatus = 'ticket'
       orden.status = 'unpaid'
       await orden.save()
+      await sendEmail(orden.userId, `Order #${orden.id} pending`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
     }
   
 
@@ -124,6 +131,37 @@ server.use('/graphql', graphqlHTTP((req)=>{
   
 })}))
 
+server.post('/stripe/checkout',async(req,res)=>{
+  //console.log('here')
+  //console.log(req.body)
+  //console.log(req.body.products.id)
+  const {id,amount} = req.body
+  try {
+    const payment = await stripe.paymentIntents.create({
+      amount,
+      currency:'USD',
+      description: "",
+      payment_method:id,
+      confirm:true
+    })
+    let order = await Order.findByPk(parseInt(req.body.products.id))
+    let ordenCompleta = await getOrderById(order.id)
+    //console.log(payment.status)
+    //console.log(order)
+    if(payment.status === 'succeeded'){
+      order.status = 'paid'
+      order.placeStatus = 'ticket'
+      await order.save()
+      sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved!`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
+      res.json({message:'successfull transaction'})
+    }
+    
+    
+  } catch (error) {
+    console.log(error)
+    res.send({message:error.message})
+  }
+})
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars

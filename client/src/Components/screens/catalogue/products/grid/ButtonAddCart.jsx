@@ -33,7 +33,7 @@ const ButtonAddCart = ({ id }) => {
     } else {
       if (!loading) {
           let orderId = data.getOrdersByUserIdInCart.orders[0]?.id;
-          console.log(orderId ?data.getOrdersByUserIdInCart.orders[0].lineal_order.length+1 : 1)
+          //console.log(orderId ?data.getOrdersByUserIdInCart.orders[0].lineal_order.length+1 : 1)
           dispatch(setQuantityOrdersCardBackend(orderId ?data.getOrdersByUserIdInCart.orders[0].lineal_order.length+1 : 1))
           await addProductToOrder({
             variables: {

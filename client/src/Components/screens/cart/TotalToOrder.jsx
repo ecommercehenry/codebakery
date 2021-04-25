@@ -36,10 +36,9 @@ const TotalToOrder = ({productos}) => {
                 </div>
             </div>
             <div className="buttonContainer">
-                {/* <button className="payMee" onClick={clickHandler} onDoubleClick={doubleClickHandler}>Proceed to checkout</button> */}
-                <PayButton className="payMee" productos={productos}/>
+                <button className="payMee" onClick={clickHandler} onDoubleClick={doubleClickHandler}>Proceed to checkout</button>
             </div>
-            
+
         </StyledTotal>
     )
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Orden from "./Orden";
 import styled from "styled-components";
 import { useQuery } from "@apollo/client";
-import getAllOrders from "../../../../Apollo/queries/getAllOrders";
+import GET_All_ORDERS from "../../../../Apollo/queries/getAllOrders";
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrders } from "../../../../actions";
 import { toast } from "react-toastify";
@@ -15,11 +15,11 @@ import CheckFilters from "./CheckFilters";
 
 export default function TablaOrdenes() {
   const customId = "custom-id-yes";
-  let { data } = useQuery(getAllOrders);
 
+  let { data } = useQuery(GET_All_ORDERS);
   let ordersQ = data?.getAllOrders.orders;
- 
-  
+
+
   //guarda las ordenes en el store redux...
   const dispatch = useDispatch();
 

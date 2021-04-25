@@ -9,6 +9,12 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 const Count = ({color}) => {
 let storage = window.localStorage;
 let userId = parseInt(storage.id);
+
+  const { data } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+    variables: { idUser: userId },
+    fetchPolicy: "no-cache",
+  });
+
   let logeed = storage.token ? true : false; 
   
   const itemsFromCart = useSelector((state) => state.cart.itemsToCart); 
@@ -20,14 +26,7 @@ let userId = parseInt(storage.id);
     itemsFromCart.map((elem) => {
       sum = sum + elem.quantity;
     });
-  }
-  // if(data !== undefined){
-  //   if (data.getOrdersByUserIdInCart.orders.length != 0 ){
-  //     data.getOrdersByUserIdInCart.orders[0].lineal_order.map((element) =>{
-  //       valor = valor + element.quantity
-  //     }); 
-  //   }
-  // } 
+  } 
 
   return (
     <StyledCount>
