@@ -66,6 +66,11 @@ const NavBar = ({ color }) => {
           About us
         </Link>
         </div>
+        <div style={{padding: "0.2rem 0"}} className={`text-decoration-none ${textColor}` }>
+        <Link id="Sucursales" to="/sucursales" className={`text-decoration-none ${textColor}`}>
+          Sucursales
+        </Link>
+        </div>
       </div>
       <div className="right-buttons d-flex align-items-center">
         {logged ? (

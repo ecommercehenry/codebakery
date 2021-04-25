@@ -5,21 +5,23 @@ const mapStyles = {
   width: "50%",
   height: "50%",
 };
-const { REACT_APP_GOOGLE_API} = process.env
+const { REACT_APP_GOOGLE_API } = process.env;
 
 const Maps = (props) => {
   const [state, setState] = useState({
-    showingInfoWindow: false, // muestra InfoWindow
+    showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
   });
-  const onMarkerClick = (props, marker, e) =>
-  setState({
+
+  const onMarkerClick = (props, marker, e) => {
+    setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     });
-   const onClose = (props) => {
+  };
+  const onClose = (props) => {
     if (state.showingInfoWindow) {
       setState({
         showingInfoWindow: false,
@@ -27,21 +29,32 @@ const Maps = (props) => {
       });
     }
   };
+  console.log(state);
   return (
-    <Map
+    <div>
+      <Map
         google={props.google}
         zoom={14}
         style={mapStyles}
-        initialCenter={
-          {
-            lat: -34.508754829751126,
-            lng: -58.52727261548651
-          }
-        }
+        initialCenter={{
+          lat: -34.508754829751126,
+          lng: -58.52727261548651,
+        }}
       >
         <Marker
           onClick={onMarkerClick}
-          name={'Code Bakery Sucursal 1'}
+          name={"Code Bakery Sucursal Unicenter"}
+          position={{ lat: -34.508754829751126, lng: -58.52727261548651 }}
+        />
+        <Marker
+          onClick={onMarkerClick}
+          name={"Code Bakery Sucursal Norcenter"}
+          position={{ lat: -34.5144336270837, lng: -58.52265434383605 }}
+        />
+        <Marker
+          onClick={onMarkerClick}
+          name={"Code Bakery Sucursal Hipolito Yrigoyen"}
+          position={{ lat: -34.50485009641575, lng: -58.5338863866175 }}
         />
         <InfoWindow
           marker={state.activeMarker}
@@ -49,11 +62,11 @@ const Maps = (props) => {
           onClose={onClose}
         >
           <div>
-            <h4>{state.selectedPlace.name}</h4>
+            <h4>{state?.selectedPlace?.name}</h4>
           </div>
         </InfoWindow>
       </Map>
-
+    </div>
   );
 };
 

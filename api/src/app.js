@@ -79,9 +79,7 @@ server.post("/create_preference", (req, res) => {
 
 server.get("/feedback", async function (req, res) {
   //ruta que responde con el status del pago
-
   let orden = await Order.findByPk(parseInt(req.query.external_reference));
-
   if (req.query.status === "approved") {
     orden.placeStatus = "ticket";
     orden.status = "paid";
@@ -91,7 +89,6 @@ server.get("/feedback", async function (req, res) {
     orden.status = "unpaid";
     await orden.save();
   }
-
   res.redirect("http://localhost:3000/catalogue");
 });
 
