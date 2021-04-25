@@ -43,6 +43,7 @@ const {
     getUserById,
     validateCredentials,
     validateUserWithGoogle,
+    getReviewByUserId, 
 } = require("./queriesResolvers/")
 
 // product
@@ -93,6 +94,7 @@ const root = {
     getUserById ,
     getAllReviewsFromAProduct,
     validateUserWithGoogle,
+    getReviewByUserId,
     // getAllUsers,
 }
 

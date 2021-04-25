@@ -122,4 +122,26 @@ async function modifyReview(reviewId, dataReview){
   return {__typename:"review",id:review.id, title:review.title, description:review.description, stars:review.stars}
 }
 
-module.exports = { deleteReview, getAllReviewsFromAProduct, addReview, modifyReview }
+async function getReviewByUserId(userId) {
+  try {
+    const reviewsUser = await Review.findAll({
+      where: {
+        userId: userId
+      },
+    });
+    return reviewsProduct.map((review) => {
+    return { __typename: "review", 
+     id: review.id , 
+     title: review.title,
+     description: review.description,  
+     stars: review.stars, 
+     createdAt: review.createdAt.toUTCString()
+    }
+    })
+  } catch (error) {
+    return { __typename: "error", name: "desconocido", detail: `${error.message}` }
+  }
+}
+
+
+module.exports = { deleteReview, getAllReviewsFromAProduct, addReview, modifyReview, getReviewByUserId}

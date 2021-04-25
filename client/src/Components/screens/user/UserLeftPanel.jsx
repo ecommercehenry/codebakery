@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
+import UserReview from "./UserReview"; 
+import {Route} from 'react-router-dom'; 
 import styled from 'styled-components'
 
 const UserLeftPanel = () => {
@@ -15,7 +17,7 @@ const UserLeftPanel = () => {
 
     let storage = window.localStorage;
     let id = window.localStorage.getItem("id");
-
+    let user = localStorage.name
     let logout = () => {
         localStorage.clear();
     };
@@ -25,7 +27,7 @@ const UserLeftPanel = () => {
             <div className="content">
                 <div className="userInfo">
                     <div className="userAvatar"></div>
-                    <div className="userName">User Name</div>
+                    <div className="userName">User {user}</div>
                 </div>
                 <div className="tabs">
                     <Link
@@ -49,10 +51,11 @@ const UserLeftPanel = () => {
                         </div>
                     </Link>
                     <Link className="text-decoration-none text-white" 
-                    to={`/user/${id}/reviews`}>
+                    to={`/user/review`}>
                         <div className={`tab ${activeTab.reviews}`}>
                         <HiOutlineClipboardList size="1.3rem" className="icon" />
-                        <span className="tabName">
+                        <span className="tabName"
+                        >
                             Reviews
                         </span>
                         </div>
@@ -71,6 +74,7 @@ const UserLeftPanel = () => {
                         Home
                     </Link>
                 </div>
+
             </div>
         </StyledUserLeftPanel>
     )

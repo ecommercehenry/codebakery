@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react'; 
+import UserReview from "./UserReview"
 
 const UserProfile = () => {
     return (
         <div>
-            
         </div>
     )
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import UserLeftPanel from './UserLeftPanel';
+import UserReview from "./UserReview"; 
 
 const UserPanel = () => {
     let {status} = useSelector((state)=>state.theme);
