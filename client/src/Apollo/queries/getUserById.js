@@ -1,16 +1,16 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 const getUserById = gql`
-    query getUserById ($id: Int!) {
-      getUserById(id: $id){
-        name,       
-        email,
-        role,
-        address,
-        dni,
-        phoneNumber
+  query getUserById($id: Int!) {
+    getUserById(id: $id) {
+      name
+      email
+      role
+      address
+      dni
+      phoneNumber
     }
-}
-`
+  }
+`;
 
 export default getUserById;

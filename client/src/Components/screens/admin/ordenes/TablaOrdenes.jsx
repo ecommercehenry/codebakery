@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import Orden from "./Orden";
 import styled from "styled-components";
 import { useQuery } from "@apollo/client";
-import getAllOrders from "../../../../Apollo/queries/getAllOrders";
+import GET_All_ORDERS from "../../../../Apollo/queries/getAllOrders";
 import { useDispatch, useSelector } from "react-redux";
 import { saveOrders } from "../../../../actions";
 import { toast } from "react-toastify";
 import ButtonClear from "./ButtonClear";
+// import CheckFilters from "./CheckFilters";
 
 //traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
 //guardo en el reducer ordersReducer las ordenes para aplicar busquedas y filtros uso dispatch
@@ -14,19 +15,20 @@ import ButtonClear from "./ButtonClear";
 
 export default function TablaOrdenes() {
   const customId = "custom-id-yes";
-  let { data } = useQuery(getAllOrders);
+
+  let { data } = useQuery(GET_All_ORDERS);
   let ordersQ = data?.getAllOrders.orders;
 
-  
 
   //guarda las ordenes en el store redux...
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(saveOrders(ordersQ));
   }, [data]);
 
   //traigo info del reducer..
-  const { orders, search, filterOrders, idError, status } = useSelector(
+  const { orders, search, filterOrders, idError, status, renderPage } = useSelector(
     (state) => state.ordersReducer
   );
 
@@ -37,21 +39,23 @@ export default function TablaOrdenes() {
     });
     return <ButtonClear name="Volver al principio" />;
   } else if (search) {
-    dataRENDER = filterOrders;
+    dataRENDER = renderPage; 
   } else if (status) {
     toast(`Search Not Found: "${idError}".`, {
       toastId: customId,
     });
     return <ButtonClear name="Volver al principio" />;
   } else {
-    //
-    dataRENDER = orders;
+    //console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
+    dataRENDER = renderPage;
   }
 
   return (
     <StyledTablaOrdenes>
       <ButtonClear name="Clear" />
-      {dataRENDER ? (
+      {/* <CheckFilters /> */}
+      {/* Checkbox filters */}
+      { dataRENDER ? (
         dataRENDER.map((ord) => {
           return <Orden id={ord.id} key={ord.id} orden={ord} />;
         })
@@ -70,4 +74,5 @@ const StyledTablaOrdenes = styled.div`
   margin-top: 0.5rem;
   margin-left: 0;
   height: 100%;
+  //background:red;
 `;

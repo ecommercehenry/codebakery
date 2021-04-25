@@ -7,6 +7,12 @@ import { modifyProduct } from "../../../actions/modifyProductAction";
 // import { addCategoryToProductAction } from "../../../actions/addCategoryToProductAction";
 import styled from "styled-components";
 import { HiOutlinePencil, HiOutlineSave, HiOutlineX } from "react-icons/hi";
+import { toast } from "react-toastify";
+
+import '../../../Assets/toast.css'
+
+
+toast.configure()
 
 function FormCRUD({ id, handlerOnClick }) {
   const product = useSelector((state) => state.productsReducer.products[id]);
@@ -56,7 +62,7 @@ function FormCRUD({ id, handlerOnClick }) {
         },
       },
     });
-    alert("producto modificado!");
+    toast("producto modificado!");
     handlerOnClick();
   }
 

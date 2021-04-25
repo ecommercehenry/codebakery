@@ -1,26 +1,23 @@
-import React from 'react'
-import styled from 'styled-components';
-import cartIcon from '../../../../../icons/cart.svg';
-import {addProductToCart} from '../../../../../actions/cartActions';
-import {useDispatch} from 'react-redux';
-import ADD_PRODUCT_TO_ORDER from '../../../../../Apollo/mutations/addProductToOrder'
+import React from "react";
+import styled from "styled-components";
+import cartIcon from "../../../../../icons/cart.svg";
+import { addProductToCart } from "../../../../../actions/cartActions";
+import { useDispatch } from "react-redux";
+import ADD_PRODUCT_TO_ORDER from "../../../../../Apollo/mutations/addProductToOrder";
 import { useMutation, useQuery } from "@apollo/client";
-import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../Apollo/queries/getOrdersByUserIdInCart"
+import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../Apollo/queries/getOrdersByUserIdInCart";
 import { toast } from "react-toastify";
-import '../../../../../Assets/toast.css'
-import CREATE_ORDER from "../../../../../Apollo/mutations/createOrder";
+import "../../../../../Assets/toast.css";
+import { setQuantityOrdersCardBackend } from "../../../../../actions/setQuantityOrdersCardBackend";
 
-
-toast.configure()
+toast.configure();
 
 const ButtonAddCart = ({ id }) => {
-  const [createOrder, createData] = useMutation(CREATE_ORDER);
-
-  const [addProductToOrder, addData] = useMutation(ADD_PRODUCT_TO_ORDER);
+  const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
   let logged = localStorage.token ? true : false;
   let userId = logged ? parseInt(localStorage.id) : null;
 
-  const {data, refetch, loading} = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+  const { data, refetch, loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
   });
   const dispatch = useDispatch();
@@ -28,20 +25,27 @@ const ButtonAddCart = ({ id }) => {
   const buttonHandler = async (id) => {
     if (!logged) {
       dispatch(addProductToCart(id));
-      toast('Producto añadido al carrito',{ autoClose: 1000 })
+      toast("Producto añadido al carrito", { autoClose: 1000 });
     } else {
       if (!loading) {
-          let orderId = data.getOrdersByUserIdInCart.orders[0]?.id;
-          await addProductToOrder({
-            variables: {
-              orderId: orderId ?orderId : -1 ,
-              productId: id,
-              quantity: 1,
-              userId: userId,
-            },
-          })
-          refetch()
-          toast('Producto añadido al carrito',{ autoClose: 1000 });
+        let orderId = data.getOrdersByUserIdInCart.orders[0]?.id;
+        dispatch(
+          setQuantityOrdersCardBackend(
+            orderId
+              ? data.getOrdersByUserIdInCart.orders[0].lineal_order.length + 1
+              : 1
+          )
+        );
+        await addProductToOrder({
+          variables: {
+            orderId: orderId ? orderId : -1,
+            productId: id,
+            quantity: 1,
+            userId: userId,
+          },
+        });
+        refetch();
+        toast("Producto añadido al carrito", { autoClose: 1000 });
       }
     }
   };

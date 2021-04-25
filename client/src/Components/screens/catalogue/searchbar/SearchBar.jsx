@@ -12,6 +12,9 @@ const [input, setInput] = useState([])
 const handlerChange = (e) => {
   setInput(e.target.value); 
 }
+const submitHandler = (event) => {
+  event.preventDefault();
+} 
 useEffect(() => {
   dispatch(setSearch(true))
   dispatch(fetchByName(input))
@@ -29,7 +32,7 @@ useEffect(() => {
           value={input}
           onChange={handlerChange}
         />
-          <button id="search-btn" type='submit'>Search</button> 
+          <button id="search-btn" onClick={submitHandler}>Search</button> 
       </form>
     </StyledSearchBar>
     </div>

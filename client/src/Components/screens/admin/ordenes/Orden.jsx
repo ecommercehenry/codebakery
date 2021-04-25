@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Steps } from "rsuite";
+
 import "rsuite/lib/styles/index.less";
 /* import "./prueba.css" */
 import { useQuery, useMutation } from "@apollo/client";
@@ -52,25 +53,28 @@ export default function Orden({ id, orden }) {
               <div className="titulos">
                 <span>Paid</span>
                 <span>Sent</span>
-                <span>Recived</span>
+                <span>Received</span>
               </div>
               {instance}
             </div>
             <div className="text-container">
               <span>Cancelled</span>
-              <p>
-                {orden.cancelled === false ? (
-                  <p>O</p>
-                ) : (
-                  <p className="order-cacelled">X</p>
-                )}
-              </p>
+
+
+              {orden.cancelled === false ? (
+                <p>O</p>
+              ) : (
+                <p className="order-cacelled">X</p>
+              )}
+
+  
             </div>
             <div className="text-container">
               <span>Total</span>
               <p>{orden.price[0]} </p>
               {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
             </div>
+
             <div className="edit-button">
               <span style={{ color: "green" }}>Detail</span>
               <button>
@@ -94,6 +98,7 @@ const StyledOrden = styled.div`
   justify-content: space-around;
   width: 100%;
   margin-top: 2rem;
+  //background:red;
   .status-container {
     width: 350px;
     height: 80px;

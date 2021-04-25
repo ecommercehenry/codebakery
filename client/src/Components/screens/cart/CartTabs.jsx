@@ -13,8 +13,9 @@ let userId = parseInt(storage.id);
     fetchPolicy: "no-cache"
   });
   let logged = storage.token ? true : false; 
-  
+  let {ordersInBacked} = useSelector((state) => state.counterReducer); 
   const itemsFromCart = useSelector((state) => state.cart.itemsToCart); 
+  let {status} = useSelector((state)=>state.theme);
   let valor = 0; 
   let sum = 0;
 
@@ -31,37 +32,48 @@ let userId = parseInt(storage.id);
     }
   } 
     return (
-        <StyledTabs>
+        <StyledTabs light={status}>
             <ul role="tablist" >
-                <li className="selected"><Link to="/cart" className="text-decoration-none text-dark tabLink">Cart ({logged ? valor : sum})</Link></li>
-                <li><Link className="text-decoration-none text-muted tabLink">Wishlist (0)</Link></li>
+                <li className="selected"><Link to="/cart" className="text-decoration-none linked tabLink">Cart ({logged ? ordersInBacked : sum})</Link></li>
+                <li><Link to="#" className="text-decoration-none text-muted tabLink">Wishlist (0)</Link></li>
             </ul>
         </StyledTabs>
     )
 }
 
 const StyledTabs = styled.div`
-width: 80%;
-height: fit-content;
-border-bottom: 1px solid #e6e6e6;
+  background:${({light})=>light 
+  ? 'white' 
+  : '#222222'};
+  color:${({light})=>light 
+  ? 'black' 
+  : 'white'};
+  width: 80%;
+  height: fit-content;
+  border-bottom: 1px solid #e6e6e6;
 
-ul{
-display: flex;
-padding: 0;
-margin: 0;
-    li{
+  ul{
+  display: flex;
+  padding: 0;
+  margin: 0;
+      li{
         list-style: none;
         padding: 0 4rem 1rem;
 
         .tabLink{
             font-weight: bold;
         }
-    }
-    .selected{
-            border-bottom: 2px solid #333;
-    }
-}
-
+      }
+      .selected{
+              
+              border-bottom: 2px solid #333;
+              .linked{
+                color:${({light})=>light 
+                ? 'black' 
+                : 'white'};
+              }
+      }
+  }
 `
 
 
