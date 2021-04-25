@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
+import {useDispatch} from 'react-redux';
 import { RoundButton } from "../../GlobalStyle";
 import CountCart from "../cart/container/CountCart";
 import styled from "styled-components";
-
+import ThemeSwitch from './ThemeSwitch'
 const NavBar = ({ color }) => {
   const textColor = color === "white" ? "text-inactive" : "text-dark";
   const navTag = `text-decoration-none ${textColor}`;
@@ -66,6 +67,9 @@ const NavBar = ({ color }) => {
           About us
         </Link>
         </div>
+        
+          <ThemeSwitch/>
+        
       </div>
       <div className="right-buttons d-flex align-items-center">
         {logged ? (
@@ -115,7 +119,7 @@ const StyledNavBar = styled.nav`
   font-weight: bold;
 
   .left-tags {
-    width: 21rem;
+    width: 26rem;
     font-size: 0.9rem;
   }
 

@@ -98,6 +98,7 @@ const StyledOrden = styled.div`
   justify-content: space-around;
   width: 100%;
   margin-top: 2rem;
+  //background:red;
   .status-container {
     width: 350px;
     height: 80px;

@@ -10,6 +10,7 @@ import ADD_PRODUCT_TO_ORDER from "../../../../Apollo/mutations/addProductToOrder
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useDispatch, useSelector } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../../actions/setQuantityOrdersCardBackend";
+import styled from 'styled-components'
 
 const Catalogue = () => {
   let storage = window.localStorage;
@@ -74,14 +75,21 @@ const Catalogue = () => {
     }
   }, [queryData, itemsToCart]);
   return (
-    <>
+    <StyledCatalogue>
       <NavBar color="white" />
       <Hero />
       <Products />
       <Route path="/catalogue/detail/:id">
         <Detail></Detail>
       </Route>
-    </>
+    </StyledCatalogue>
   );
 };
+
+const StyledCatalogue = styled.div`
+  width:100vw;
+  box-sizing: border-box;
+  overflow-x:hidden;
+`;
+
 export default Catalogue;

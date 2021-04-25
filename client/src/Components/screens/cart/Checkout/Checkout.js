@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from 'react-redux';
+import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -15,22 +17,28 @@ import PaymentForm from "./PaymentForm";
 import Review from "./Review";
 
 function Copyright() {
+  let {status} = useSelector((state)=>state.theme);
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="http://localhost:3000/">
-        Code Bakery
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <StyledFooter light={status}>
+      <Typography variant="body2" align="center">
+        {"Copyright © "}
+        <Link color="inherit" href="http://localhost:3000/">
+          Code Bakery
+        </Link>{" "}
+        {new Date().getFullYear()}
+        {"."}
+      </Typography>
+    </StyledFooter>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
+    height: "5rem",
+    display:"flex",
+    justifyContent:"center",
     position: "relative",
-    background: "#402e57", // fondo de barra
+    background: "#5E3F71", // fondo de barra
     color: "#f4f2f8", // color de letra de barra
   },
   layout: {
@@ -90,7 +98,7 @@ function getStepContent(step) {
 export default function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-
+  let {status} = useSelector((state)=>state.theme);
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -107,53 +115,67 @@ export default function Checkout() {
     }
   }
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Code Bakeryy
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
-            Checkout
-          </Typography>
-          <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          <React.Fragment>
-            {
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Back
+    <StyledCheckout light={status}>
+      <React.Fragment>
+        <CssBaseline />
+        <AppBar position="absolute" color="default" className={classes.appBar}>
+          <Toolbar>
+            <Typography variant="h6" color="inherit" noWrap>
+              Code Bakery
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <main className={classes.layout}>
+          <Paper className={classes.paper}>
+            <Typography component="h1" variant="h4" align="center">
+              Checkout
+            </Typography>
+            <Stepper activeStep={activeStep} className={classes.stepper}>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            <React.Fragment>
+              {
+                <React.Fragment>
+                  {getStepContent(activeStep)}
+                  <div className={classes.buttons}>
+                    {activeStep !== 0 && (
+                      <Button onClick={handleBack} className={classes.button}>
+                        Back
+                      </Button>
+                    )}
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.button}
+                      id="nextButton"
+                    >
+                      {"Next"}
                     </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                    id="nextButton"
-                  >
-                    {"Next"}
-                  </Button>
-                </div>
-              </React.Fragment>
-            }
-          </React.Fragment>
-        </Paper>
-        <Copyright />
-      </main>
-    </React.Fragment>
+                  </div>
+                </React.Fragment>
+              }
+            </React.Fragment>
+          </Paper>
+          <Copyright />
+        </main>
+      </React.Fragment>
+    </StyledCheckout>
   );
 }
+
+const StyledCheckout = styled.div`
+  background:${({light})=>light 
+  ? 'white' 
+  : '#222222'};
+`;
+
+const StyledFooter = styled.div`
+  color:${({light})=>light 
+  ? 'inherit' 
+  : 'white'};
+`;

@@ -6,7 +6,7 @@ import ProductCard from './ProductCard';
 
 
 const Grid = () => {
-  
+  let {status} = useSelector((state)=>state.theme);
   let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state.reducer);
   let arr = []
   if(search === true){
@@ -17,7 +17,7 @@ const Grid = () => {
   
   return (
 
-    <StyledGrid>
+    <StyledGrid light={status}>
       <>
         {
           search === false ?  
@@ -42,7 +42,8 @@ const media = {
 }
 
 const StyledGrid = styled.div`
-  //background:red;
+  background:${({light})=>light ? 'transparent' : '#222222'};
+  color:${({light})=>light ? 'inherit' : 'white'};
   display:grid;
   grid-template-columns:repeat(1,1fr);
   grid-auto-rows:37vh;
@@ -57,7 +58,7 @@ const StyledGrid = styled.div`
   ${media.laptop}{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    grid-auto-rows:45vh;
+    grid-auto-rows:55vh;
     gap:4rem;
   }
 `;

@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TablePagination from '@material-ui/core/TablePagination';
 import { useSelector, useDispatch } from "react-redux";
 import { changePage } from "../../../../actions";
+import styled from "styled-components";
 
 export default function Pagination() {
 
     let {orders, filterOrders, search}= useSelector(state => state.ordersReducer);
-
+    let {status} = useSelector((state)=>state.theme);
 
     let longitud;
 
@@ -55,14 +56,20 @@ export default function Pagination() {
      // console.log('numero de paginas', cont);
 
       return (
-        <TablePagination
-          component="div"
-          count={longitud}
-          page={page}
-          onChangePage={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        <StyledPagination light={status}>
+          <TablePagination
+            component="div"
+            count={longitud}
+            page={page}
+            onChangePage={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </StyledPagination>
       );
 
 }
+
+const StyledPagination =  styled.div`
+  color:${({light})=>light ? 'inherit' : 'white'};
+`;
