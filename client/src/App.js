@@ -22,6 +22,7 @@ import Detail from "./Components/screens/detail/Detail";
 import Promote from "./Components/screens/admin/Promote";
 import BillCard from "./Components/BillCard/BillCard";
 import ResetPassword from "./Components/ResetPassword/ResetPassword"
+import Sucursales from './Components/Maps/Sucursales'
 
 let token = localStorage.getItem("token");
 let role = localStorage.getItem("role");
@@ -67,6 +68,7 @@ function App() {
       <>
         <GlobalStyle />
         <Switch>
+        <Route path='/sucursales' component={Sucursales}/>
           <Route path='/checkout' component={Checkout}/>
           <Route exact path="/" component={Landing} />
           <Route path="/catalogue" component={Catalogue} />
