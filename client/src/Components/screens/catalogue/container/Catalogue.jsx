@@ -89,7 +89,6 @@ const Catalogue = () => {
 const StyledCatalogue = styled.div`
   width:100vw;
   box-sizing: border-box;
-  overflow-x:hidden;
 `;
 
 export default Catalogue;
