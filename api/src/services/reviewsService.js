@@ -21,7 +21,6 @@ async function getAllReviewsFromAProduct(productId) {
         productId: productId
       },
     });
-    console.log(reviewsProduct)
     return reviewsProduct.map((review) => {
     return { __typename: "review", 
      id: review.id , 
@@ -83,7 +82,8 @@ async function addReview(productId, userId, dataReview){
         stars:dataReview.stars,
         userId:user.id
       }) //Pudo ser mas sencillo colocar el id que viene por parametro, pero que tal si es un id falso?, rompe, mejor verificar
-  }catch(err){
+  console.log(review, 'reviewww')
+    }catch(err){
     return { __typename: "error", name: "probablemente stars fuera del valor 1-5", detail: `${err.message}` } 
 
   }

@@ -2,7 +2,6 @@ import React, { useState} from "react";
 import styled from 'styled-components'; 
 import { useMutation } from "@apollo/client";
 import  ADD_REVIEW  from "../../../Apollo/mutations/addReview"; 
-//import {  useSelector } from "react-redux";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -10,10 +9,11 @@ import Box from "@material-ui/core/Box";
 const FormReview = () => {
 
   const [value, setValue] = React.useState(1);
-  const [addReview, { data, loading, error }] = useMutation(ADD_REVIEW);
-  //let { reviews } = useSelector((state) => state.reviewsReducer);
-
-  const [input, setInput] = useState({
+  const [addReview, { data, loading, error }] = useMutation(ADD_REVIEW, {
+    errorPolicy: 'all'
+  });
+ 
+   const [input, setInput] = useState({
     title: '',
     description: '',
     stars: ''
@@ -21,30 +21,23 @@ const FormReview = () => {
  let  userId = localStorage.id
 
   const inputHandler = (e) => {
-    console.log(e, 'mis otros datos')
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
   };
-  const submitHandler = (e) => {
-    console.log(e, 'mis datos')
+  const submitHandler = async (e) => {
     e.preventDefault();
-     addReview({
+    let result = await addReview({
       variables: {
-        productId: 4, 
-        userId: 3,
-        datareview:{
+        productId: 3, 
+        userId: userId,
+        dataReview:{
         title: input.title, 
         description: input.description, 
-        stars: value
+        stars: value.toString(), 
         }
       }
-    })
-    setInput({
-      title: '', 
-      description: '', 
-      stars: ''
     })
     alert('add Review')
   };

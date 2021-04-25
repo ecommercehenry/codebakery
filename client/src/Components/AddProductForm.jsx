@@ -34,6 +34,7 @@ const AddProductForm = ({setAddProduct}) => {
     }
 
     const inputHandler = (e) => {
+        console.log(e, 'mis dats')
         return setInfo({...info,[e.target.name]:e.target.value})
     }
 
