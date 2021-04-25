@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import NavBar from "../../navBar/NavBar";
 import GuestCart from "../GuestCart";
 import UserCart from "../UserCart";

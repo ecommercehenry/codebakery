@@ -6,11 +6,8 @@ import MODIFY_USER from "../../../../Apollo/mutations/modifyUser";
 import { useMutation } from "@apollo/client";
 import { toast } from "react-toastify";
 import "../../../../Assets/toast.css";
-import { makeStyles } from '@material-ui/core/styles';
-
 
 toast.configure();
-
 
 export default function AddressForm() {
   const [modifyUser] = useMutation(MODIFY_USER);
@@ -34,19 +31,19 @@ export default function AddressForm() {
     });
     let save = document.getElementsByClassName("save");
     save[0].style = "display: none";
-    let address= document.getElementById('address')
-    let dni= document.getElementById('dni')
-    let phoneNumber= document.getElementById('phoneNumber')
-    address.disabled = true
-    dni.disabled = true
-    phoneNumber.disabled = true
+    let address = document.getElementById("address");
+    let dni = document.getElementById("dni");
+    let phoneNumber = document.getElementById("phoneNumber");
+    address.disabled = true;
+    dni.disabled = true;
+    phoneNumber.disabled = true;
     toast("Datos guardados");
   };
-  let dni= document.getElementById('dni')
-  let phoneNumber= document.getElementById('phoneNumber')
-  if(dni){
-    dni.maxLength = "8"
-    phoneNumber.maxLength = "11"
+  let dni = document.getElementById("dni");
+  let phoneNumber = document.getElementById("phoneNumber");
+  if (dni) {
+    dni.maxLength = "8";
+    phoneNumber.maxLength = "11";
   }
   return (
     <React.Fragment>
