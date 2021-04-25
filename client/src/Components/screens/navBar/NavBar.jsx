@@ -34,6 +34,7 @@ const NavBar = ({ color }) => {
 
   let storage = window.localStorage;
   let role = window.localStorage.getItem("role");
+  let id = window.localStorage.getItem("id");
   let logeed = storage.token ? true : false;
 
   const isCart = (window.location.pathname).includes('cart');
@@ -67,16 +68,19 @@ const NavBar = ({ color }) => {
           About us
         </Link>
         </div>
-        
-          <ThemeSwitch/>
-        
+        <ThemeSwitch/>
       </div>
       <div className="right-buttons d-flex align-items-center">
         {logged ? (
           <>
-            <div className={`usuario ${navTag}`}>
-              Hi! {logeed ? localStorage.name : "Guess"}
-            </div>
+            <Link
+            to={`/user/${id}/profile`}
+            className={`login-btn text-decoration-none ${textColor}`}
+            >
+              <div className={`usuario ${navTag}`}>
+                Hi! {logeed ? localStorage.name : ""}
+              </div>
+            </Link>
             <Link
               to="/"
               className={`login-btn text-decoration-none ${textColor}`}

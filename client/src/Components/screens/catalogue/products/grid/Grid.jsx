@@ -42,8 +42,12 @@ const media = {
 }
 
 const StyledGrid = styled.div`
-  background:${({light})=>light ? 'transparent' : '#222222'};
-  color:${({light})=>light ? 'inherit' : 'white'};
+  background:${({light})=>light 
+  ? 'transparent' 
+  : '#222222'};
+  color:${({light})=>light 
+  ? 'inherit' 
+  : 'white'};
   display:grid;
   grid-template-columns:repeat(1,1fr);
   grid-auto-rows:37vh;

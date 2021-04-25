@@ -13,6 +13,7 @@ import Stripe from "./Components/screens/cart/Checkout/Stripe"
 import GlobalStyle from "./Components/GlobalStyle";
 import GuestCart from "./Components/screens/cart/GuestCart";
 import UserAccount from "./Components/UserAcount/UserAccount";
+import UserPanel from "./Components/screens/user/UserPanel"
 import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
 import TablaOrdenes from "./Components/screens/admin/ordenes/TablaOrdenes";
 import { useLazyQuery } from "@apollo/client";
@@ -73,6 +74,7 @@ function App() {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/checkout-stripe" component={Stripe} />
           <Route exact path="/about-us" component={AboutUs} />
+          <Route exact path="/user/:id/profile" component={UserPanel} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
           <Route exact path="/reset-password" component={ResetPassword} />
