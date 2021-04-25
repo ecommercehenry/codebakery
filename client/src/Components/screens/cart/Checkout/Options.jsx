@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { useQuery } from "@apollo/client";
 import PayButton from "../PayButton";
@@ -16,7 +15,6 @@ const Options = () => {
   const [stripe, setStripe] = useState(false);
 
   const mpHandler = () => {
-    //console.log("mp");
     setMp(true);
   };
 

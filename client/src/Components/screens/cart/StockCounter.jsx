@@ -17,8 +17,8 @@ const StockCounter = ({
   productId,
   refetch
 }) => {
-  const [decrementQuantity, decrementData] = useMutation(DECREMENT_QUANTITY);
-  const [incrementQuantity, incrementData] = useMutation(INCREMENT_QUANTITY);
+  const [decrementQuantity] = useMutation(DECREMENT_QUANTITY);
+  const [incrementQuantity] = useMutation(INCREMENT_QUANTITY);
   const dispatch = useDispatch();
 
   const removeHandler = () => {
