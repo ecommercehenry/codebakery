@@ -1,12 +1,10 @@
 import React,{useState} from 'react'
 import { Redirect } from 'react-router-dom'
-import {useSelector} from 'react-redux'
 import axios from 'axios'
 import {loadStripe} from '@stripe/stripe-js'
 import {Elements, CardElement,useStripe,useElements} from '@stripe/react-stripe-js';
 import styled from 'styled-components'
 import { useQuery } from "@apollo/client";
-import PayButton from "../PayButton";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 import {toast} from 'react-toastify'
 import '../../../../Assets/toast.css'
@@ -19,7 +17,6 @@ const StripeForm = () => {
         fetchPolicy: "no-cache",
     });
     const [success,setSuccess] = useState(false)
-    //console.log('ressssss',res.data)
     const stripe = useStripe();
     const elements = useElements();
     let total =90
@@ -42,7 +39,6 @@ const StripeForm = () => {
                     products:res?.data?.getOrdersByUserIdInCart?.orders[0]
                 }
                 )
-                //console.log(data)
                 elements.getElement(CardElement).clear()
                 if(data.message=="successfull transaction"){
                     toast(data.message)

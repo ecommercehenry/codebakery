@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeProductFromCart } from "../../../actions/cartActions";
 import styled from "styled-components";
 import StockCounter from "./StockCounter";
 import deleteIcon from "../../../icons/delete.svg";
 import DELETE_PRODUCT_ORDER from "../../../Apollo/mutations/deleteProductOrder";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 const ProductOnCart = ({
   id,
   image,
@@ -18,7 +18,7 @@ const ProductOnCart = ({
 }) => {
   let logged = localStorage.token ? true : false;
   let [newQuantity, setNewQuantity] = useState(quantity);
-  const [deleteProductOrder, { data, loading }] = useMutation(
+  const [deleteProductOrder] = useMutation(
     DELETE_PRODUCT_ORDER
   );
 
