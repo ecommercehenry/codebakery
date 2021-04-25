@@ -50,14 +50,14 @@ const filterByStatus = (currentState) =>{
     // console.log('primero')
     return currentState.filterStatus.length > 0 ? 
     currentState.filterOrders.filter((order => 
-      currentState.filterStatus.includes(order.status.toUpperCase()) || 
+      (currentState.filterStatus.includes(order.status.toUpperCase()) && !order.cancelled) || 
       (currentState.filterStatus.includes('CANCELLED') && order.cancelled) )):
     currentState.filterOrders;
   } else{
     // console.log('seg', currentState.orders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase()))))
     return currentState.filterStatus.length > 0 ? 
     currentState.orders.filter((order => 
-      currentState.filterStatus.includes(order.status.toUpperCase()) || 
+      (currentState.filterStatus.includes(order.status.toUpperCase()) && !order.cancelled) || 
       (currentState.filterStatus.includes('CANCELLED') && order.cancelled) )):
     currentState.orders;
     // currentState.orders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase())));

@@ -407,6 +407,31 @@ async function modifyOrderStatus(orderId, status) {
   }
 }
 
+// esta función fue implementada colo para el uso esclusivo en data population
+// de ser usada para conectar con el front debe modificarse a conveniencia,
+// en principio recibe solo el id y un booleano con el cual cambiar el la propiedad
+// cancelled(se deja abierto en el caso de equivocación)
+async function modifyOrderCancelled(orderId, cancelled) {
+  try {
+    const order = await Order.findOne({
+      where: { id: orderId },
+    });
+    if (order.placeStatus === "ticket") {
+      order.cancelled = cancelled;
+      await order.save();
+      return { __typename: "booleanResponse", boolean: true };
+    } else {
+      return {
+        __typename: "error",
+        name: "concept error, see detail",
+        detail: "You cannot edit the status of an order in cart status",
+      };
+    }
+  } catch (err) {
+    return { __typename: "error", name: "unknow", detail: err.message };
+  }
+}
+
 async function incrementQuantity(orderId, productId, quantity) {
   
   let obj = {};
@@ -451,4 +476,5 @@ module.exports = {
   updateOrderPrices,
   incrementQuantity,
   decrementQuantity,
+  modifyOrderCancelled,
 };

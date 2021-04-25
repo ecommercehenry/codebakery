@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TablePagination from '@material-ui/core/TablePagination';
 import { useSelector, useDispatch } from "react-redux";
 import { changePage } from "../../../../actions";
+import styled from "styled-components";
 
 export default function Pagination() {
 
@@ -51,14 +52,29 @@ export default function Pagination() {
      // console.log('numero de paginas', cont);
 
       return (
-        <TablePagination
-          component="div"
-          count={longitud}
-          page={page}
-          onChangePage={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        <StyledPagination>
+          <div>
+            <TablePagination
+              component="div"
+              count={longitud}
+              page={page}
+              onChangePage={handleChangePage}
+              rowsPerPage={rowsPerPage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </div>
+        </StyledPagination>
       );
 
 }
+
+const StyledPagination = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  float: right;
+  margin-right: 20px;
+  width: 60%;
+  margin-top: 0.5rem;
+  margin-left: 0;
+  height: 100%;
+`;

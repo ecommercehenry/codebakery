@@ -53,7 +53,7 @@ export default function TablaOrdenes() {
 console.log('render', dataRENDER)
   return (
     <StyledTablaOrdenes>
-      {<ButtonClear name="Cleareeeee" />}
+      {<ButtonClear name="Clear" />}
       <CheckFilters />
       {/* Checkbox filters */}
       { dataRENDER?.length > 0 ? (

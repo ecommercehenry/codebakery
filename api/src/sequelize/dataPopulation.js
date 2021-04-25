@@ -1,5 +1,5 @@
 const { Product, Category, Users, conn } = require("../db");
-const { createOrder, getOrderById, updateOrderToTicket, modifyOrderStatus } = require("../services/orderService");
+const { createOrder, getOrderById, updateOrderToTicket, modifyOrderStatus, modifyOrderCancelled } = require("../services/orderService");
 const { addReview } = require("../services/reviewsService");
 const { createUser } = require("../services/userService");
 
@@ -73,6 +73,8 @@ async function dataPopulation() {
     await modifyOrderStatus(12, 'received');
     await modifyOrderStatus(13, 'received');
     await modifyOrderStatus(14, 'received');
+    await modifyOrderCancelled(15, true);
+    await modifyOrderCancelled(1, true);
 
 
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,1)`)
