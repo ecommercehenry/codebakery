@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
 
 const mapStyles = {
-  width: "50%",
-  height: "50%",
+  width: "63%",
+  height: "64%",
+  margin: '10px'
 };
 const { REACT_APP_GOOGLE_API } = process.env;
 
@@ -29,7 +30,6 @@ const Maps = (props) => {
       });
     }
   };
-  console.log(state);
   return (
     <div>
       <Map
