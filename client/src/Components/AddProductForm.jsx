@@ -65,7 +65,6 @@ const AddProductForm = ({setAddProduct}) => {
     categories['data'] && categories['data']['getAllCategories'].map(elem=> options.push({label:elem.name,value:elem.name}))                 
 
     const submitHandler = (e) => {
-        
         e.preventDefault();
         if(info.image == ''){alert('Please add an image')}else{
             info.category=selected;

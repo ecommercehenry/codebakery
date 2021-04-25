@@ -7,6 +7,7 @@ query getAllReviewsFromAProduct($productId:Int!){
           title
           description
           stars
+          createdAt
   }
 }
 

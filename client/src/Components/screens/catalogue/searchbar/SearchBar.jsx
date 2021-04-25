@@ -11,7 +11,6 @@ const [input, setInput] = useState([])
 
 const handlerChange = (e) => {
   setInput(e.target.value); 
-  console.log(input); 
 }
 useEffect(() => {
   dispatch(setSearch(true))

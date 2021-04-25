@@ -21,7 +21,16 @@ async function getAllReviewsFromAProduct(productId) {
         productId: productId
       },
     });
-    return reviewsProduct
+    console.log(reviewsProduct)
+    return reviewsProduct.map((review) => {
+    return { __typename: "review", 
+     id: review.id , 
+     title: review.title,
+     description: review.description,  
+     stars: review.stars, 
+     createdAt: review.createdAt.toUTCString()
+    }
+    })
   } catch (error) {
     return { __typename: "error", name: "desconocido", detail: `${error.message}` }
   }
