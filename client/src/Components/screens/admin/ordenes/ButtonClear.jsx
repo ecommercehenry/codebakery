@@ -7,6 +7,7 @@ const ButtonClear = ({ name }) => {
   const dispatch = useDispatch();
 
   const handlerClear = () => {
+    // console.log('clear');
     dispatch(clearFilter());
   };
   return (
