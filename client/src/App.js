@@ -5,7 +5,7 @@ import Landing from "./Components/screens/landing/Landing";
 import AdminPanel from "./Components/screens/admin/container/AdminPanel";
 import Catalogue from "./Components/screens/catalogue/container/Catalogue";
 import Cart from "./Components/screens/cart/container/Cart";
-import AboutUs from "./Components/screens/aboutUs/container/AboutUs";
+import AboutUs from "./Components/screens/aboutUs/container/AboutUsGrid";
 import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory";
 import FormCRUD from "./Components/screens/admin/FormCRUD";
 import GlobalStyle from "./Components/GlobalStyle";

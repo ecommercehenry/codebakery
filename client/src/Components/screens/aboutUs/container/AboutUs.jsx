@@ -1,29 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 
-import Profile from "./img/pablo.jpg";
-
 import Git from "./img/github.png";
 import Linke from "./img/linkedin.png";
+import profile from "./img/profile.png";
 
-const AboutUs = () => {
+const AboutUs = ({ name, title, img, git, linkedin }) => {
+  const IMG = img ? img : profile;
   return (
     <AboutUsConteiner>
       <div className="main center">
         <div className="card">
-          <div className="content center">
-            <div className="img">
-              <img src={Profile} alt="profile" />
-            </div>
-            <h2>Pablo Garay</h2>
-            <p>Full Stack Developer</p>
+          <div
+            className="content center"
+            style={{
+              background: `url(${IMG})`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          >
+            <h2>{name}</h2>
+            <p>{title}</p>
           </div>
           <div className="icons center">
-            <a href="https://github.com/814942">
+            <a target="_blank" href={git}>
               <img className="icon-git" src={Git} alt="GitHub" />
             </a>
 
-            <a href="https://www.linkedin.com/in/pablo-garay-dev/">
+            <a target="_blank" href={linkedin}>
               <img className="icon-linke" src={Linke} alt="Likedin" />
             </a>
           </div>
@@ -37,6 +41,7 @@ const AboutUsConteiner = styled.div`
   * {
     margin: 0;
     padding: 0;
+    border-radius: 9999px;
   }
 
   .center {
@@ -50,10 +55,10 @@ const AboutUsConteiner = styled.div`
     margin-top: 80px;
   }
   .card {
-    width: 450px;
-    height: 500px;
+    width: 23rem;
+    height: 23rem;
     position: relative;
-    box-shadow: 2px 2px 10px rgb(216, 26, 26);
+    box-shadow: 4px 2px 10px rgb(96, 18, 160);
     overflow: hidden;
     border-radius: 9999px;
   }
@@ -63,15 +68,22 @@ const AboutUsConteiner = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background: linear-gradient(#c6ffdd, #fbd786, #f7797d);
-    color: aliceblue;
+    color: #d0293e;
   }
   .content h2 {
-    margin: 10px 0px;
+    margin-top: 12rem;
+    background: aliceblue;
+    opacity: 0.7;
+    padding: 0.3rem;
   }
+
   .content p {
-    margin: 10px 30px;
+    margin-top: 0.3rem;
+    background: aliceblue;
+    opacity: 0.8;
+    padding: 0.3rem;
   }
+
   .icons {
     width: 100%;
     height: 100%;
@@ -81,7 +93,7 @@ const AboutUsConteiner = styled.div`
     top: 0;
     color: aliceblue;
     transform: translate(-95%);
-    transition: all 0.4s;
+    transition: all 0.8s;
     cursor: pointer;
   }
 
@@ -94,8 +106,8 @@ const AboutUsConteiner = styled.div`
   }
 
   .img img {
-    width: 150px;
-    border-radius: 9999px;
+    width: 7rem;
+    border-radius: 2rem;
   }
 
   .icon-git,
