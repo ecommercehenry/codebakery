@@ -7,7 +7,7 @@ const { graphqlHTTP } = require("express-graphql");
 const cors = require('cors')
 const {errorType} = require("./graphql/roots/errorsHandlers/errors")
 require('./db.js');
-const stripe = new Stripe(process.env.STRIPE_KEY)
+const stripe = new Stripe(process.env.STRIPE_KEY);
 const {Order} = require('./db')
 /// mercadopago
 const mercadopago = require("mercadopago"); //requerimos mercado pago
