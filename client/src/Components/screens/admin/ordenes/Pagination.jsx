@@ -56,7 +56,7 @@ export default function Pagination() {
 
      const StyledTablePagination = withStyles((theme) => ({
       root: {
-        height: 100,
+        height: 60,
         },
     }))(TablePagination);
 
@@ -84,7 +84,8 @@ const StyledPagination = styled.div`
   justify-content: center;
   /* float: right; */
   width: 100%;
-  height: 25em;
   color:${({light})=>light ? 'black' : 'white'};
   background: white;
+  z-index: 3;
+  bottom: 0;
 `;

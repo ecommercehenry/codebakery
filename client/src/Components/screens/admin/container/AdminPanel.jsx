@@ -43,11 +43,12 @@ const AdminPanel = () => {
            <Route path='/admin/products' component={ListCRUD}/>            
            <Route path='/admin/orders' component={TablaOrdenes}/>    
            <Route path="/admin/users" component={UserAdmin} />
-           <Route path="/admin/orders">
-              <Pagination/>
-          </Route>
+           
         </div>
 
+        <Route path="/admin/orders">
+              <Pagination/>
+          </Route>
         
         <Route path="/admin/add-product">
           <AddProductForm />
