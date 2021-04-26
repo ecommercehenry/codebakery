@@ -113,7 +113,7 @@ const StyledOrden = styled.div`
   }
   .element-container {
     width: 100%;
-    height: 16vh;
+    height: 8em;
     display: flex;
     align-items: center;
     justify-content: center;

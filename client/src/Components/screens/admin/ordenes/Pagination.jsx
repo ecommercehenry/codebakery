@@ -83,9 +83,10 @@ const StyledPagination = styled.div`
   position: fixed;
   justify-content: center;
   /* float: right; */
-  width: 100%;
+  width: 77vw;
   color:${({light})=>light ? 'black' : 'white'};
   background: white;
   z-index: 3;
   bottom: 0;
+  margin-left: 4rem;
 `;
