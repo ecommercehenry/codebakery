@@ -75,6 +75,7 @@ const StyledAdminPanel = styled.div`
         width:87%;
         display:flex;
         flex-direction:column;
+        height: fit-content;
         .top{
             position: fixed;
             height:12vh;
@@ -86,7 +87,7 @@ const StyledAdminPanel = styled.div`
             margin-top: 15vh;
             position: relative;
             //background: black;
-            height:100vh;
+            height:fit-content;
             width: 77vw;
             display:flex;
             justify-content:center;
