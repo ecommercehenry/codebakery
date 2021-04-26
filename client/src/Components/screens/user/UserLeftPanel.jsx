@@ -42,7 +42,7 @@ const UserLeftPanel = () => {
                         </div>
                     </Link>
                     <Link className="text-decoration-none text-white" 
-                    to={`/user/${id}/orders`}>
+                    to={`/user/orders`}>
                         <div className={`tab ${activeTab.orders}`}>
                             <HiOutlineShoppingBag size="1.3rem" className="icon" />
                             <span className="tabName">

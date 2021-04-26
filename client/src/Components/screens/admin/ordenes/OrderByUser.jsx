@@ -1,40 +1,47 @@
 import React from "react";
-import { Rating } from "@material-ui/lab";
+import FormReview from "../../reviews/FormReview"; 
+import { Link } from "react-router-dom";
 import styled from 'styled-components'; 
 
-const ReviewByUser = ({ id, title, description, stars }) => {
+
+const OrderByUser = ({ id, name, price, quantity }) => {
 
     return (
 
-        <StyledRev>
+        <StyledOrd>
             <div key={id} className="element-container">
                 <div className="info-container">
                     <div className="text-container">
-                        <span>Title</span>
-                        <p>{title}</p>
+                        <span>Product</span>
+                        <p>{name}</p>
                     </div>
                     <div className="text-container">
-                        <span>Comentary </span>
-                        <p>{description}</p>
+                        <span>Price </span>
+                        <p> ${price}</p>
+                    </div>
+                    <div className="text-container">
+                        <span>Quantity </span>
+                        <p> {quantity}</p>
                     </div>
                     <div >
-                        <span>Rating <div className="text-container">
-                        <Rating name="read-only" value={stars} readOnly/>
-                        </div></span>
                     </div>
-
                     <div className="edit-button">
-                        <span style={{ color: '#28004d' }}>Change my Comment</span>
+
+                        <button>
+                <Link to={`/user/addReview`} >
+                <span style={{ color: '#28004d' }} >Add Comment</span>
+                </Link>
+              </button>
                     </div>
                 </div>
             </div>
-        </StyledRev>
+        </StyledOrd>
     )
 }
 
-export default ReviewByUser;
+export default OrderByUser;
 
-const StyledRev = styled.div`
+const StyledOrd = styled.div`
 display: flex;
 align-items: flex-start;
 justify-content: center;
@@ -43,19 +50,19 @@ margin-top: 2rem;
 //background:red;
 .status-container {
   width: 350px;
-  height: 80px;
+  height: 100px;
   padding: 0.5rem;
   align-items: center;
 }
 .info-container {
-  height: 80%;
+  height: 100%;
   width: 90%;
   display: flex;
   justify-content: space-between;
 }
 .element-container {
   width: 100%;
-  height: 16vh;
+  height: 25vh;
   display: flex;
   align-items: center;
   justify-content: center;
