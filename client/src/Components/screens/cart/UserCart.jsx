@@ -3,30 +3,31 @@ import GET_ORDERS_BY_USER_ID_IN_CART from "../../../Apollo/queries/getOrdersByUs
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import ProductOnCart from "./ProductOnCart";
-import { useDispatch, useSelector } from "react-redux";
-import TotalToOrder from "./TotalToOrder";
+import { useDispatch } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../actions/setQuantityOrdersCardBackend";
 import { Link } from "react-router-dom";
 
-
-const UserCart = (cant) => {
-  const dispatch = useDispatch()
+const UserCart = () => {
+  const dispatch = useDispatch();
   let storage = window.localStorage;
   let userId = parseInt(storage.id);
-  const { data, loading, refetch } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+  const { data, refetch } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
     fetchPolicy: "no-cache",
   });
-  useEffect(()=>{
-    if(data){
-      if(data.getOrdersByUserIdInCart.orders[0]){
-      dispatch(setQuantityOrdersCardBackend(data.getOrdersByUserIdInCart.orders[0].lineal_order.length))
-      }else{
-        dispatch(setQuantityOrdersCardBackend(0))
+  useEffect(() => {
+    if (data) {
+      if (data.getOrdersByUserIdInCart.orders[0]) {
+        dispatch(
+          setQuantityOrdersCardBackend(
+            data.getOrdersByUserIdInCart.orders[0].lineal_order.length
+          )
+        );
+      } else {
+        dispatch(setQuantityOrdersCardBackend(0));
       }
     }
-
-  },[data])
+  }, [data]);
 
   return (
     <StyledCart>
@@ -47,18 +48,17 @@ const UserCart = (cant) => {
       ) : (
         <p></p>
       )}
+      <div className="buttonContainer">
       <Link className="text-decoration-none" to="/checkout">
-        <div className="buttonContainer">
-          {
-
-            data && data.getOrdersByUserIdInCart.orders[0].lineal_order.length ? 
-            <button className="payMee">Checkout</button> 
-            : ""
-            
-          }
-          
-        </div>
+        
+          {data &&
+          data?.getOrdersByUserIdInCart?.orders[0]?.lineal_order.length ? (
+            <button className="payMee">Checkout</button>
+          ) : (
+            ""
+          )}
       </Link>
+      </div>
     </StyledCart>
   );
 };
@@ -72,8 +72,8 @@ const StyledCart = styled.div`
   align-items: center;
   .buttonContainer {
     //background:violet;
-    margin-top: 1rem;
-    width: 87%;
+    margin-top: 2rem;
+    width: 80%;
     display: flex;
     justify-content: flex-end;
     .payMee {

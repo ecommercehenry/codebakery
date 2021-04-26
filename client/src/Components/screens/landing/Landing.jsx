@@ -79,8 +79,8 @@ top: 0;
 }
 #title-btn-wrapper{
     position: absolute;
-    top: 9em;
-    left: 14em;
+    top: 25vh;
+    left: 15vw;
     display: flex;
     flex-direction: column;
     align-items: flex-end;

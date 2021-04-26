@@ -75,4 +75,5 @@ const StyledTablaOrdenes = styled.div`
   margin-top: 0.5rem;
   margin-left: 0;
   height: 100%;
+  //background:red;
 `;

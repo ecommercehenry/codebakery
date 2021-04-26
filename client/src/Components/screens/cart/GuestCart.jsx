@@ -1,8 +1,8 @@
-import React,{useEffect} from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useQuery, gql } from "@apollo/client";
-import {useDispatch} from 'react-redux';
-import {removeAll} from '../../../actions/cartActions';
+// import {useDispatch} from 'react-redux';
+// import {removeAll} from '../../../actions/cartActions';
 //styles
 import styled from "styled-components";
 //components
@@ -11,15 +11,14 @@ import EmptyAlert from "./EmptyAlert"
 import TotalToOrder from "./TotalToOrder"
 
 const GuestCart = () => {
-  const dispatch = useDispatch()
-  let storage = window.localStorage;
+  // const dispatch = useDispatch()
   let { itemsToCart } = useSelector((state) => state.cart);
   let productsArray = itemsToCart.map((elem) => elem.id);
   productsArray = JSON.stringify(productsArray);
 
-  const resetCartHandler = () => {
-    dispatch(removeAll())
-  }
+  // const resetCartHandler = () => {
+  //   dispatch(removeAll())
+  // }
 
   const getProductByArray = gql`
     {
@@ -33,22 +32,7 @@ const GuestCart = () => {
     }
     `;
   let { data } = useQuery(getProductByArray);
-  //falta boton comprar y que redirija a login si usuario es invitado
-  //cuando usario tenga id (este logueado o registrado) guardar datos en tabla order
-  //??????? existe tabla order??? => SI EXISTE
-  ///si existe tabla order -> faltaria mutation --->> condicional para saber si esta logueado o not//
-  //si esta logueado se dispara mutation que guarda los productos en tabla order con status: carrito
-  //meter info cartItems a local storage
-  //cliente no logueado => entra a este carrito y puede ver productos
-  //img | nombre | cant | precio
-  //(si catidad >stock =?se muestra una alerta de falta de stock)
-  //la info de produc esta en local storage!
-  //si usuario se loguea => local storage pasa a tabla orden con status = carrito
-
-  //modelo de carrito guest price INT! quantity INT! en cuanto se loguea y se convierte en orden
-  //se lo relaciona con una orden y con los productos
-
-  
+ 
   if (data !== undefined) {
     itemsToCart.forEach((item) => {
       data["getProductByArray"].forEach((elem) => {

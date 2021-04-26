@@ -2,10 +2,12 @@ import React from 'react'
 import styled from 'styled-components';
 import HomeButton from "../home&sort/homeButton/HomeButton";
 import SortButton from "../home&sort/sortButton/SortButton";
+import { useSelector } from "react-redux";
 
 const ProductBar = () => {
+    let {status} = useSelector((state)=>state.theme);
     return (
-        <StyledProductBar>
+        <StyledProductBar light={status}>
             <HomeButton />
             <SortButton/>
         </StyledProductBar>
@@ -13,6 +15,8 @@ const ProductBar = () => {
 }
 
 const StyledProductBar = styled.div`
+    background:${({light})=>light ? 'transparent' : '#222222'};
+    //color:${({light})=>light ? 'inherit' : 'white'};
     width:100%;
     height: fit-content;
     //background:blue;
