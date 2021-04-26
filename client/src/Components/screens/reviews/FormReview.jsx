@@ -9,15 +9,14 @@ import  { useParams } from "react-router-dom";
 
 const FormReview = () => {
 
-  let {id} = useParams(); 
- // parseInt(id); 
-  
- 
+  let index = useParams(); 
+   parseInt(index);
+
   const [value, setValue] = React.useState(1);
   const [addReview, { data, error }] = useMutation(ADD_REVIEW, {
     errorPolicy: 'all'
   });
- console.log(data, error)
+
    const [input, setInput] = useState({
     title: '',
     description: '',
@@ -35,8 +34,8 @@ const FormReview = () => {
     e.preventDefault();
     let result = await addReview({
       variables: {
-        productId: 4, 
-        userId: 2,
+        productId: parseInt(index.id), 
+        userId: parseInt(userId),
         dataReview:{
         title: input.title, 
         description: input.description, 
