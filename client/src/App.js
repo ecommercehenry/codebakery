@@ -78,9 +78,9 @@ function App() {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/checkout-stripe" component={Stripe} />
           <Route exact path="/about-us" component={AboutUs} />
-          <Route exact path="/user/review" component={UserReview} />
-          <Route exact path="/user/addReview" component={FormReview} />
-          <Route exact path="/user/orders" component={UserOrders} /> 
+          <Route exact path="/user/review/:id" component={UserReview} />
+          <Route exact path="/user/addReview/:id" component={FormReview} />
+          <Route exact path="/user/orders/:id" component={UserOrders} /> 
           <Route exact path="/user/:id/profile" component={UserPanel} /> 
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />

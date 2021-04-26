@@ -1,11 +1,13 @@
 import React from 'react'
 import TablaReview from '../reviews/TablaReview'; 
+import  { useParams } from "react-router-dom";
 
 
 const UserReview  = () => {
+    let { id } = useParams(); 
     return (
         <div>
-            <TablaReview />
+            <TablaReview  id={parseInt(id)}/>
         </div>
     )
 }

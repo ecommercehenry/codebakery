@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GET_REVIEW_BY_USER from "../../../Apollo/queries/getReviewByUserId";
 import { useQuery } from "@apollo/client";
 import styled from 'styled-components';
 import ReviewByUser from "./ReviewsByUser";
 
-const TablaReview = () => {
-    let id = window.localStorage.getItem("id");
+
+const TablaReview = ({id}) => {
+
+
     const { data } = useQuery(GET_REVIEW_BY_USER, {
-        variables: { userId: 2 },
+        variables: { userId: id },
     });
-    console.log(data, "mis datos")
 
     return (
 
@@ -23,6 +24,7 @@ const TablaReview = () => {
                             title={e.title}
                             description={e.description}
                             stars={e.stars}
+                        
                         />
                     ))
             }

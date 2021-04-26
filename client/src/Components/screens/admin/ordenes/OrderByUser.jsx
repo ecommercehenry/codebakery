@@ -1,11 +1,11 @@
 import React from "react";
 import FormReview from "../../reviews/FormReview"; 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from 'styled-components'; 
 
 
 const OrderByUser = ({ id, name, price, quantity }) => {
-
+let idd = useParams(); 
     return (
 
         <StyledOrd>
@@ -28,7 +28,7 @@ const OrderByUser = ({ id, name, price, quantity }) => {
                     <div className="edit-button">
 
                         <button>
-                <Link to={`/user/addReview`} >
+                <Link to={`/user/addReview/${id}`} >
                 <span style={{ color: '#28004d' }} >Add Comment</span>
                 </Link>
               </button>

@@ -5,14 +5,19 @@ import  ADD_REVIEW  from "../../../Apollo/mutations/addReview";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import  { useParams } from "react-router-dom";
 
 const FormReview = () => {
 
+  let {id} = useParams(); 
+ // parseInt(id); 
+  
+ 
   const [value, setValue] = React.useState(1);
-  const [addReview, { data, loading, error }] = useMutation(ADD_REVIEW, {
+  const [addReview, { data, error }] = useMutation(ADD_REVIEW, {
     errorPolicy: 'all'
   });
- 
+ console.log(data, error)
    const [input, setInput] = useState({
     title: '',
     description: '',
@@ -30,8 +35,8 @@ const FormReview = () => {
     e.preventDefault();
     let result = await addReview({
       variables: {
-        productId: 3, 
-        userId: userId,
+        productId: 4, 
+        userId: 2,
         dataReview:{
         title: input.title, 
         description: input.description, 
@@ -39,6 +44,7 @@ const FormReview = () => {
         }
       }
     })
+    console.log(result)
     alert('add Review')
   };
 

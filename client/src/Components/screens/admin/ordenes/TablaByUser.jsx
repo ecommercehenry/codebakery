@@ -4,13 +4,12 @@ import { useQuery } from "@apollo/client";
 import styled from 'styled-components';
 import OrderByUser from "./OrderByUser";
 
-const TablaByUser = () => {
-    let id = window.localStorage.getItem("id");
+const TablaByUser = ({id}) => {
+ 
     const { data } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
-        variables: { idUser: 2 },
+        variables: { idUser: id },
     });
-    console.log(data, "mis datos, 2")
-
+    
     return (
 
         <StyledTabla>

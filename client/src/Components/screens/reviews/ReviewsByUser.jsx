@@ -2,8 +2,9 @@ import React from "react";
 import { Rating } from "@material-ui/lab";
 import styled from 'styled-components'; 
 
-const ReviewByUser = ({ id, title, description, stars }) => {
 
+const ReviewByUser = ({ idd, id, title, description, stars }) => {
+console.log(idd, 'idd'); 
     return (
 
         <StyledRev>

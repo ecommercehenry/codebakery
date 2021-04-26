@@ -1,12 +1,13 @@
 import React from 'react'
-import OrdeByUser from '../admin/ordenes/OrderByUser'; 
 import TablaByUser from '../admin/ordenes/TablaByUser';
+import  { useParams } from "react-router-dom";
 
 
 const UserOrders  = () => {
+    let { id } = useParams(); 
     return (
         <div>
-            <TablaByUser />
+            <TablaByUser id={parseInt(id)}/>
         </div>
     )
 }
