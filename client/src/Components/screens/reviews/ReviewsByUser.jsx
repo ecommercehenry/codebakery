@@ -3,10 +3,9 @@ import { Rating } from "@material-ui/lab";
 import styled from 'styled-components'; 
 
 
-const ReviewByUser = ({ idd, id, title, description, stars }) => {
-console.log(idd, 'idd'); 
+const ReviewByUser = ({ id, title, description, stars }) => {
     return (
-
+      
         <StyledRev>
             <div key={id} className="element-container">
                 <div className="info-container">

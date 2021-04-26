@@ -8,7 +8,7 @@ import ReviewByUser from "./ReviewsByUser";
 const TablaReview = ({id}) => {
 
 
-    const { data } = useQuery(GET_REVIEW_BY_USER, {
+    const { data,  refetch } = useQuery(GET_REVIEW_BY_USER, {
         variables: { userId: id },
     });
 
@@ -24,6 +24,7 @@ const TablaReview = ({id}) => {
                             title={e.title}
                             description={e.description}
                             stars={e.stars}
+                            refetch={refetch}
                         
                         />
                     ))
