@@ -16,6 +16,10 @@ let idd = useParams();
                         <p>{name}</p>
                     </div>
                     <div className="text-container">
+                        <span>Id </span>
+                        <p> {id}</p>
+                    </div>
+                    <div className="text-container">
                         <span>Price </span>
                         <p> ${price}</p>
                     </div>

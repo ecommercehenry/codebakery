@@ -1,30 +1,34 @@
 import React from "react";
-import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
+import getOrdersByUserIdInTicket from "../../../../Apollo/queries/getOrdersByUserIdInTicket"; 
 import { useQuery } from "@apollo/client";
 import styled from 'styled-components';
 import OrderByUser from "./OrderByUser";
 
 const TablaByUser = ({id}) => {
  
-    const { data } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+    const { data } = useQuery(getOrdersByUserIdInTicket, {
         variables: { idUser: id },
     });
+    console.log(data)
     
     return (
 
         <StyledTabla>
-            {data?.getOrdersByUserIdInCart.orders[0] ? (
-        data.getOrdersByUserIdInCart.orders[0].lineal_order.map((order) => (
-          <OrderByUser
+            {data?.getOrdersByUserIdInTicket.orders ? (
+        data.getOrdersByUserIdInTicket.orders.map((order) => (
+          order.lineal_order.map((order) => (
+                 <OrderByUser
             key={order.id}
             id={order.id}
             name={order.name}
             price={order.price}
             image={order.image}
             quantity={order.quantity}
-            orderId={data.getOrdersByUserIdInCart.orders[0].id}
+            orderId={data.getOrdersByUserIdInTicket.orders.id}
+           
            
           />
+          ))
         ))
       ) : (
         <p></p>
@@ -34,6 +38,7 @@ const TablaByUser = ({id}) => {
 
 }
 export default TablaByUser;
+//orderId={data.getOrdersByUserIdInCart.orders[0].id}
 
 const StyledTabla = styled.div`
 

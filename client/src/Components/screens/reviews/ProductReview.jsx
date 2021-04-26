@@ -11,7 +11,7 @@ const ProductReview = ({ id }) => {
   });
 
 const [loanding, setLoanding] = useState(true);
-console.log(data, 'mi datos')
+
   useEffect(() => {
     setTimeout(() => {
       setLoanding(false);

@@ -5,6 +5,7 @@ import  ADD_REVIEW  from "../../../Apollo/mutations/addReview";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { toast } from "react-toastify";
 import  { useParams } from "react-router-dom";
 
 const FormReview = () => {
@@ -21,8 +22,15 @@ const FormReview = () => {
     title: '',
     description: '',
     stars: ''
-  });
+  }); 
  let  userId = localStorage.id
+ let response;
+ 
+if(!data?.addReview?.name){
+  response = "You added your comment successfully"
+}else {
+  response = data?.addReview?.name
+}
 
   const inputHandler = (e) => {
     setInput({
@@ -44,7 +52,7 @@ const FormReview = () => {
       }
     })
     console.log(result)
-    alert('add Review')
+    toast(response)
   };
 
   return (

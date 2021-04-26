@@ -7,6 +7,7 @@ query getReviewByUserId($userId:Int!){
           title
           description
           stars
+          productId
   }
 }
 

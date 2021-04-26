@@ -5,6 +5,7 @@ module.exports = `
         description: String!
         stars: String!
         createdAt: String!
+        productId: Int!
         
     }
     

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GET_REVIEW_BY_USER from "../../../Apollo/queries/getReviewByUserId";
 import { useQuery } from "@apollo/client";
 import styled from 'styled-components';
@@ -24,6 +24,7 @@ const TablaReview = ({id}) => {
                             title={e.title}
                             description={e.description}
                             stars={e.stars}
+                            productId={e.productId}
                             refetch={refetch}
                         
                         />
