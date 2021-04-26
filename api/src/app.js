@@ -97,7 +97,7 @@ server.get('/feedback', async function(req, res) {     //ruta que responde con e
       await sendEmail(orden.userId, `Order #${orden.id} pending`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
     }
   
-
+})
 ///mercadopago
 
 server.use(
