@@ -80,6 +80,7 @@ server.post("/create_preference", (req, res) => {
     });
 });
 
+
 server.get('/feedback', async function(req, res) {     //ruta que responde con el status del pago
   
   let orden = await Order.findByPk(parseInt(req.query.external_reference))
