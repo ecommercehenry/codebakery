@@ -1,8 +1,8 @@
-const {getReviewByUserId } = require("../../../services/orderService")
+const {getReviewByUserId } = require("../../../services/reviewsService")
 
 module.exports = {
-    getReviewByUserId: (_, args) => {
+    getReviewByUserId: (args) => {
         console.log('entre a las review')
-    return getReviewByUserId(_.userId)
+    return getReviewByUserId(args)
   },
 }

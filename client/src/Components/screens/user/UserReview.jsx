@@ -1,11 +1,11 @@
 import React from 'react'
-import FormReview from '../reviews/FormReview'; 
+import TablaReview from '../reviews/TablaReview'; 
 
 
 const UserReview  = () => {
     return (
         <div>
-            <FormReview/>
+            <TablaReview />
         </div>
     )
 }

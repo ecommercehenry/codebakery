@@ -82,7 +82,7 @@ async function addReview(productId, userId, dataReview){
         stars:dataReview.stars,
         userId:user.id
       }) //Pudo ser mas sencillo colocar el id que viene por parametro, pero que tal si es un id falso?, rompe, mejor verificar
-  console.log(review, 'reviewww')
+
     }catch(err){
     return { __typename: "error", name: "probablemente stars fuera del valor 1-5", detail: `${err.message}` } 
 
@@ -122,26 +122,19 @@ async function modifyReview(reviewId, dataReview){
   return {__typename:"review",id:review.id, title:review.title, description:review.description, stars:review.stars}
 }
 
-async function getReviewByUserId(userId) {
-  try {
-    const reviewsUser = await Review.findAll({
-      where: {
-        userId: userId
-      },
-    });
-    return reviewsProduct.map((review) => {
-    return { __typename: "review", 
-     id: review.id , 
-     title: review.title,
-     description: review.description,  
-     stars: review.stars, 
-     createdAt: review.createdAt.toUTCString()
+
+  async function getReviewByUserId({userId}) {
+    try {
+      const reviewsUser = await Review.findAll({
+        where: {
+          userId: userId
+        },
+      });
+      return reviewsUser
+    } catch (error) {
+      return { __typename: "error", name: "desconocido", detail: `${error.message}` }
     }
-    })
-  } catch (error) {
-    return { __typename: "error", name: "desconocido", detail: `${error.message}` }
   }
-}
 
 
 module.exports = { deleteReview, getAllReviewsFromAProduct, addReview, modifyReview, getReviewByUserId}
