@@ -8,6 +8,7 @@ import { HiOutlineClipboardList } from "react-icons/hi";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FlexboxGrid } from "rsuite";
+import ThemeSwitch from "../navBar/ThemeSwitch";
 
 const LeftPanel = () => {
   const path = window.location.pathname;
@@ -57,6 +58,8 @@ const LeftPanel = () => {
 
         <section style={{display:"flex", flexDirection: "column", width: "100%"}}>
         
+        {/* <ThemeSwitch /> */}
+
         <Link 
             className="text-decoration-none text-white"
             to="/"

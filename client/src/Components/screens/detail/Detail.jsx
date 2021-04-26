@@ -53,7 +53,7 @@ const Detail = () => {
                 </span>
                 <div className="bottom-btns d-flex justify-content-center">
                   <ButtonAddCart id={parseInt(idCart.id)} />
-                  <Link to="/cart" className="purple-btn">
+                  <Link to="/cart" className="text-decoration-none" style={{height: "100%"}}>
                     <button className="purple-btn">Buy now</button>
                   </Link>
                 </div>
@@ -209,6 +209,7 @@ const StyledDetail = styled.div`
     transition: background-color 0.2s ease;
     width: fit-content;
     align-items: center;
+    height: 100%;
   }
 
   .purple-btn:hover {
