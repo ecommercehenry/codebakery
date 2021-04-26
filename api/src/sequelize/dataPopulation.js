@@ -1,5 +1,5 @@
 const { Product, Category, Users, conn } = require("../db");
-const { createOrder, getOrderById, updateOrderToTicket } = require("../services/orderService");
+const { createOrder, getOrderById, updateOrderToTicket, modifyOrderStatus, modifyOrderCancelled } = require("../services/orderService");
 const { addReview } = require("../services/reviewsService");
 const { createUser } = require("../services/userService");
 
@@ -12,14 +12,14 @@ async function dataPopulation() {
     await Category.bulkCreate(MOCK_CATEOGRIES),
     await Product.bulkCreate(MOCK_PRODUCTS)
     await createUser("admin","12345","admin@admin.com","admin")
-    await createUser("santi","12345","santi@gmail.com","user")
+    await createUser("santi","12345","santiagorincon2001@gmail.com","user")
     await createUser("ivan","12345","ivan@gmail.com","user")
-    await createUser("lucas","12345","lucas@admin.com","user")
-    await createUser("Joha","12345","joha@gmail.com","user")
-    await createUser("patsy","12345","patsy@gmail.com","user")
+    await createUser("lucas","12345","lucasuracosta@gmail.com","user")
+    await createUser("Joha","12345","johanarezabala1211@gmail.com","user")
+    await createUser("patsy","12345","patsy.guerrero95@gmail.com","user")
     await createUser("lau","12345","lau@gmail.com","user")
     await createUser("guille","12345","guille@gmail.com","user")
-    await createUser("pablo","12345","pablo@gmail.com","user")
+    await createUser("pablo","12345","elxebec@gmail.com","user")
     await createUser("fran","12345","fran@gmail.com","user")
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
@@ -65,6 +65,19 @@ async function dataPopulation() {
     await updateOrderToTicket(15)
     await updateOrderToTicket(16)
     await updateOrderToTicket(17)
+
+    await modifyOrderStatus(6, 'paid');
+    await modifyOrderStatus(7, 'paid');
+    await modifyOrderStatus(8, 'paid');
+    await modifyOrderStatus(9, 'sent');
+    await modifyOrderStatus(10, 'sent');
+    await modifyOrderStatus(11, 'sent');
+    await modifyOrderStatus(12, 'received');
+    await modifyOrderStatus(13, 'received');
+    await modifyOrderStatus(14, 'received');
+    await modifyOrderCancelled(15, true);
+    await modifyOrderCancelled(1, true);
+
 
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,1)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,2)`)

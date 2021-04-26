@@ -7,6 +7,7 @@ import getAllCategories from '../../../../../Apollo/queries/getAllCategories';
 import allProducts from '../../../../../Apollo/queries/allProducts';
 import { getAllProducts, setSearch } from '../../../../../actions';
 import styles from './Categories.module.css';
+import styled from 'styled-components'
 
 
 const Categories = () => {
@@ -38,7 +39,7 @@ const Categories = () => {
     // useEffect(()=>{
     //     
     // },[])
-
+    let {status} = useSelector((state)=>state.theme);
     //Se envia la acción para actualizar los productos que se renderizan
     useEffect(() => {
         // 
@@ -58,7 +59,7 @@ const Categories = () => {
 
     return (
 
-        <div className={styles.categories}>
+        <StyledCategories className={styles.categories} light={status}>
            
             <div><button  name = 'All' onClick={handleClick} className={styles.btn}>All</button></div>
 
@@ -77,8 +78,17 @@ const Categories = () => {
                ) ): 'No hay productos'
            }  */}
            
-        </div>
+        </StyledCategories>
     )
 }
+
+const StyledCategories = styled.div`
+    background:${({light})=>light ? '#DCD7DD' : '#555555'};
+    //color:${({light})=>light ? 'inherit' : 'white'};
+    button{
+        background:${({light})=>light ? '#DCD7DD' : '#555555'};
+        color:${({light})=>light ? '#755588' : '#c66ef8'};
+    }
+`;
 
 export default Categories

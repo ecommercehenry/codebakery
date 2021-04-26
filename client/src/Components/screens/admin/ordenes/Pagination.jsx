@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TablePagination from '@material-ui/core/TablePagination';
 import { useSelector, useDispatch } from "react-redux";
 import { changePage } from "../../../../actions";
+import styled from "styled-components";
 
 export default function Pagination() {
 
-    let {orders, filterOrders, search}= useSelector(state => state.ordersReducer);
 
+    let {orders, filterOrders, search, filterStatus, statusOrders}= useSelector(state => state.ordersReducer);
+
+    let {status} = useSelector((state)=>state.theme);
 
     let longitud;
 
     if (search && filterOrders.length > 0) {
-        
-        //console.log('search', search);
-        //console.log('filterOrders', filterOrders);
-
-        longitud= filterOrders?.length;
-    
-      } else {
-
-        longitud= orders?.length
+      // console.log(filterStatus.length, 'aysyayysays', statusOrders.length)
+      longitud= filterStatus.length > 0 ? statusOrders.length : filterOrders?.length;
+    } else {
+      console.log('no search')
+      longitud= filterStatus.length > 0 ? statusOrders.length : orders?.length;
    
-      };
+    };
 
 
     //console.log('estado redux', orders);
@@ -55,14 +54,31 @@ export default function Pagination() {
      // console.log('numero de paginas', cont);
 
       return (
-        <TablePagination
-          component="div"
-          count={longitud}
-          page={page}
-          onChangePage={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+
+        <StyledPagination light={status}>
+          <TablePagination
+            component="div"
+            count={longitud}
+            page={page}
+            onChangePage={handleChangePage}
+            rowsPerPage={rowsPerPage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+
+        </StyledPagination>
       );
 
 }
+
+
+const StyledPagination = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  float: right;
+  margin-right: 20px;
+  width: 60%;
+  margin-top: 0.5rem;
+  margin-left: 0;
+  height: 100%;
+  color:${({light})=>light ? 'inherit' : 'white'};
+`;

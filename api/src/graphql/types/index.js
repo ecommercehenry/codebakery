@@ -7,6 +7,7 @@ const orderType = require("./orderType")
 const linealOrderType = require("./linealOrderType")
 const booleanType = require("./booleanType")
 const ordersType = require("./ordersType")
+const emailType = require("./emailType")
 // aqui exportas tu type
 module.exports = `
     ${categoryType}
@@ -18,4 +19,5 @@ module.exports = `
     ${linealOrderType}
     ${booleanType}
     ${ordersType}
+    ${emailType}
 `

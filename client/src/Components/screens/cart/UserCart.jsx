@@ -48,16 +48,17 @@ const UserCart = () => {
       ) : (
         <p></p>
       )}
+      <div className="buttonContainer">
       <Link className="text-decoration-none" to="/checkout">
-        <div className="buttonContainer">
+        
           {data &&
           data?.getOrdersByUserIdInCart?.orders[0]?.lineal_order.length ? (
             <button className="payMee">Checkout</button>
           ) : (
             ""
           )}
-        </div>
       </Link>
+      </div>
     </StyledCart>
   );
 };
@@ -71,8 +72,8 @@ const StyledCart = styled.div`
   align-items: center;
   .buttonContainer {
     //background:violet;
-    margin-top: 1rem;
-    width: 87%;
+    margin-top: 2rem;
+    width: 80%;
     display: flex;
     justify-content: flex-end;
     .payMee {

@@ -16,8 +16,11 @@ const { ACCESS_TOKEN } = process.env;
 mercadopago.configurations.setAccessToken(`${ACCESS_TOKEN}`); //access-key
 /// mercadopago
 const server = express();
-const { schema, root } = require("./graphql/schema");
-server.name = "API";
+const {schema, root} = require("./graphql/schema");
+const { sendEmail, getFormatedMessage } = require('./services/emailService');
+const { getOrderById } = require('./services/orderService');
+server.name = 'API';
+
 server.use(express.json());
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
@@ -77,21 +80,25 @@ server.post("/create_preference", (req, res) => {
     });
 });
 
-server.get("/feedback", async function (req, res) {
-  //ruta que responde con el status del pago
-  let orden = await Order.findByPk(parseInt(req.query.external_reference));
-  if (req.query.status === "approved") {
-    orden.placeStatus = "ticket";
-    orden.status = "paid";
-    await orden.save();
-  } else if (req.query.status === "pending") {
-    orden.placeStatus = "ticket";
-    orden.status = "unpaid";
-    await orden.save();
-  }
-  res.redirect("http://localhost:3000/catalogue");
-});
 
+server.get('/feedback', async function(req, res) {     //ruta que responde con el status del pago
+  
+  let orden = await Order.findByPk(parseInt(req.query.external_reference))
+  let ordenCompleta = await getOrderById(orden.id)
+
+  if (req.query.status === 'approved'){
+      orden.placeStatus = 'ticket'
+      orden.status = 'paid'
+      await orden.save()
+      await sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
+    }else if (req.query.status === 'pending'){
+      orden.placeStatus = 'ticket'
+      orden.status = 'unpaid'
+      await orden.save()
+      await sendEmail(orden.userId, `Order #${orden.id} pending`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
+    }
+  
+})
 ///mercadopago
 
 server.use(
@@ -113,18 +120,24 @@ server.post("/stripe/checkout", async (req, res) => {
       amount,
       currency: "USD",
       description: "",
-      payment_method: id,
-      confirm: true,
-    });
-    let order = await Order.findByPk(parseInt(req.body.products.id));
-    if (payment.status === "succeeded") {
-      order.status = "paid";
-      order.placeStatus = "ticket";
-      await order.save();
-      res.json({ message: "successfull transaction" });
+      payment_method:id,
+      confirm:true
+    })
+    let order = await Order.findByPk(parseInt(req.body.products.id))
+    let ordenCompleta = await getOrderById(order.id)
+    //console.log(payment.status)
+    //console.log(order)
+    if(payment.status === 'succeeded'){
+      order.status = 'paid'
+      order.placeStatus = 'ticket'
+      await order.save()
+      sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved!`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
+      res.json({message:'successfull transaction'})
     }
   } catch (error) {
-    res.send({ message: error.raw.message });
+    console.log(error)
+    res.send({message:error.message})
+
   }
 });
 

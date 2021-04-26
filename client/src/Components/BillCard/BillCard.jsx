@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
+import { useSelector } from 'react-redux';
 import { useParams } from "react-router";
 import GET_All_ORDERS from "../../Apollo/queries/getAllOrders";
 import getUserById from "../../Apollo/queries/getUserById";
@@ -12,7 +13,6 @@ import "./BillCard.css";
 
 const BillCard = () => {
   let { id } = useParams();
-
   let { data } = useQuery(GET_All_ORDERS);
   const result = data?.getAllOrders?.orders.filter(
     (element) => element.id === Number(id)
@@ -24,7 +24,7 @@ const BillCard = () => {
   const finalResult = result[0]?.lineal_order?.filter(
     (element) => element.id === Number(id)
   ); */
-
+  let {status} = useSelector((state)=>state.theme);
   const date = result[0]?.creation;
   const userId = result[0]?.userId;
 
@@ -61,12 +61,13 @@ const BillCard = () => {
         height: "100%",
       }}
     >
-      <div
+      <StyledCard
         className="onboard-card"
         style={{
           flexDirection: "column",
           alignItems: "center",
         }}
+        light={status}
       >
         <div className="info info-details">
           <div
@@ -159,7 +160,7 @@ const BillCard = () => {
             <button className="sub-btn">GO BACK</button>
           </Link>
         </ButtonStyled>
-      </div>
+      </StyledCard>
     </div>
   );
 };
@@ -174,7 +175,6 @@ const ButtonStyled = styled.div`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   width: 80%;
-
   button {
     margin: 1rem;
     width: 12rem;
@@ -192,6 +192,15 @@ const ButtonStyled = styled.div`
     color: #402e57;
     font-weight: 900;
   }
+`;
+
+const StyledCard = styled.div`
+  background:${({light})=>light 
+  ? 'white' 
+  : '#222222'};
+  color:${({light})=>light 
+  ? 'inherit' 
+  : 'white'};
 `;
 
 export default BillCard;
