@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { clearFilter } from "../../../../actions";
+import { clearCheckboxes, clearFilter } from "../../../../actions";
 
 const ButtonClear = ({ name }) => {
   
@@ -11,10 +11,20 @@ const ButtonClear = ({ name }) => {
     // console.log('clear');
     dispatch(clearFilter());
   };
+
+  const handleAll = (e) => {
+    document.getElementById("UNPAID").checked = false;
+    document.getElementById("PAID").checked = false;
+    document.getElementById("SENT").checked = false;
+    document.getElementById("RECEIVED").checked = false;
+    document.getElementById("CANCELLED").checked = false;
+    dispatch(clearCheckboxes());
+    // despachamos la accion para quitar los filtras de los checkbox
+  };
   return (
     <>
       <div>
-        <StyledButton onClick={handlerClear}>{name}</StyledButton>
+        <StyledButton onClick={handlerClear && handleAll}>{name}</StyledButton>
       </div>
     </>
   );
