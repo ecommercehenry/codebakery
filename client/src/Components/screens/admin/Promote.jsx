@@ -1,46 +1,55 @@
-import React from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import React, { useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
 import PROMOTE_USER from "../../../Apollo/mutations/promoteUser";
-import { Redirect } from "react-router";
-import getUserById from "../../../Apollo/queries/getUserById";
-import "./promote.css"
+import Switch from 'react-input-switch'
+import GET_ALL_USERS from "../../../Apollo/queries/getAllUsers";
 
 //@ Lau
 //Promote recibira el id del componente padre, ese componente renderizara este boton y le pasara como propiedad el id del usuario actual.. Por ahora harcode violento
-export default function Promote (idUser){
-    idUser = 2;       
+export default function Promote ({idUser, rol}){
+    // idUser = 9;
+    // rol = "user"
+    const [value, setValue] = useState(rol);
+    const [promoteUser, { loading, error }] = useMutation(PROMOTE_USER, {
+      // refetchQueries: [{ query: GET_ALL_USERS }],
+    });
 
-    const [promoteUser, { loading, error }] = useMutation(PROMOTE_USER);
+    useEffect(() => {
+      promoteUser({
+        variables: {
+          id: idUser,
+          role: value,
+        },
+      });
+    }, [value]);          
+              
   
-  let role = localStorage.getItem('role');
-  let token = localStorage.getItem('token'); 
-    
-    function clickOnPromote (e){       
-        e.preventDefault()
-        if(role  && token){
-            // el boton solo se podra usar si el rol guardado en local storage y el token corresponde a un admin
-            if(role === 'admin'){         
-             
-              promoteUser({
-                variables: {
-                    id: idUser,                 
-                    role: "admin"                            
-                },
-              });
-                alert(`user ${idUser} promote!!!`);
-            
-            }
-            else if(role === 'user') return <Redirect to='/catalogue' />;
-        }        
-      
-    }
     return(
-        <>
-        <button 
-            onClick={clickOnPromote}
-            className="button-promote"
-            style={{height: "4.5vh"}}            
-        >Convertir en Admin</button>
-        </>
+    <>
+   <p>{value}  </p>  
+<Switch
+    on="admin" off="user"
+    onChange={setValue} 
+    value={value}
+    styles={
+        {
+      track: {
+      backgroundColor: 'red'
+    },
+    trackChecked: {
+      backgroundColor: 'green'
+    },
+    button: {
+      backgroundColor: 'white'
+    },
+    buttonChecked: {
+      backgroundColor: 'white'
+    }
+  }}
+/>
+    
+  
+</>
+       
     )
 }

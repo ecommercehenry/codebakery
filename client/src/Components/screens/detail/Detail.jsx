@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import "./DetailStyles.css";
+import { useSelector } from 'react-redux';
 import { Link, useParams } from "react-router-dom";
 import getData from "../../../Apollo/queries/productById";
 import { useQuery } from "@apollo/client";
 import ButtonAddCart from "../../screens/catalogue/products/grid/ButtonAddCart";
+import ProductReview from "../reviews/ProductReview"
+import styled from 'styled-components'
 
 const Detail = () => {
   let idCart = useParams();
@@ -21,16 +24,16 @@ const Detail = () => {
 
   const path = window.location.pathname;
   const id = parseInt(path.split("/").pop(), 10);
-
+  let {status} = useSelector((state)=>state.theme);
   const { data } = useQuery(getData, { variables: { id } }); // <------
   useEffect(() => {}, [data]);
 
   return (
-    <div className="detail-container">
+    <div className="detail-container" >
       <Link to="/catalogue" className="close-btn">
         X
       </Link>
-      <div className="detailCard">
+      <StyledDetail className="detailCard" light={status}>
         {data?.productById ? (
           <>
             <div className="imageSide">
@@ -56,13 +59,23 @@ const Detail = () => {
                 </div>
               </>
             </div>
+            <ProductReview id={parseInt(idCart.id)} />
           </>
         ) : (
           "loading..."
         )}
-      </div>
+      </StyledDetail>
     </div>
   );
 };
+
+const StyledDetail = styled.div`
+  background:${({light})=>light 
+  ? 'white' 
+  : '#222222'};
+  color:${({light})=>light 
+  ? 'inherit' 
+  : 'white'};
+`;
 
 export default Detail;

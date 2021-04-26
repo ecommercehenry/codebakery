@@ -1,14 +1,19 @@
 import React from 'react'
+import { useSelector } from "react-redux";
 import styled from 'styled-components';
+
 const SortButton = () => {
+    let {status} = useSelector((state)=>state.theme);
     return (
-        <StyledSortButton>
+        <StyledSortButton light={status}>
             <span>Order by: Price</span>
         </StyledSortButton>
     )
 }
 
 const StyledSortButton = styled.button`
+    background:${({light})=>light ? 'transparent' : '#222222'};
+    color:${({light})=>light ? 'inherit' : 'white'};
     display:flex;
     justify-content:center;
     align-items:center;
