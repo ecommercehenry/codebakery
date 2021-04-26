@@ -1,6 +1,7 @@
 import React, {  useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeProductFromCart } from "../../../actions/cartActions";
+import { removeItem } from "../../../actions//setQuantityOrdersCardBackend";
 import styled from "styled-components";
 import StockCounter from "./StockCounter";
 import deleteIcon from "../../../icons/delete.svg";
@@ -27,6 +28,7 @@ const ProductOnCart = ({
     if (!logged) {
       dispatch(removeProductFromCart(id));
     } else {
+      dispatch(removeItem());
       deleteProductOrder({
         variables: {
           orderId: orderId,

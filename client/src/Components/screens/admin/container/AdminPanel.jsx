@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useSelector } from 'react-redux';
 import {Route} from 'react-router-dom'
 
 //styles
@@ -19,9 +20,9 @@ import Pagination from '../ordenes/Pagination';
 
 const AdminPanel = () => {
   const [addProduct, setAddProduct] = useState(false);
-
+  let {status} = useSelector((state)=>state.theme);
   return (
-    <StyledAdminPanel>
+    <StyledAdminPanel light={status}>
       <div className="left">
         <LeftPanel />
       </div>
@@ -30,8 +31,8 @@ const AdminPanel = () => {
         <div className="top">
           <AdminNavBar setAddProduct={setAddProduct} />
           <div>
-          <Pagination/>
-        </div>
+            <Pagination/>
+          </div>
         </div>
 
        
@@ -60,6 +61,12 @@ const StyledAdminPanel = styled.div`
     display:flex;
     flex-direction:row;
     justify-content:space-between;
+    background:${({light})=>light 
+    ? 'white' 
+    : '#222222'};
+    color:${({light})=>light 
+    ? 'inherit' 
+    : 'white'};
     .left{
         width:13%;
         z-index: 10;
@@ -72,7 +79,8 @@ const StyledAdminPanel = styled.div`
             position: fixed;
             height:12vh;
             z-index: 2;
-            background: #ffffff;
+            //background: #ffffff;
+            
         }
         .bottom{
             margin-top: 15vh;
