@@ -23,6 +23,7 @@ import Detail from "./Components/screens/detail/Detail";
 import Promote from "./Components/screens/admin/Promote";
 import BillCard from "./Components/BillCard/BillCard";
 import ResetPassword from "./Components/ResetPassword/ResetPassword"
+import Sucursales from './Components/Maps/Sucursales'
 
 let token = localStorage.getItem("token");
 let role = localStorage.getItem("role");
@@ -44,11 +45,11 @@ function App() {
         TAMBIÉN REVISAR EL TEMA DEL FORMCRUD DONDE RENDERIZA
         */}
           <Route exact path="/" component={Landing} />
-
+          <Route path='/stores' component={Sucursales}/>
           <Route exact path="/admin/order/:id" component={BillCard} />
           <Route path="/admin" component={AdminPanel}></Route>
-          <Route exact path="/catalogue" component={Catalogue} />
-          <Route exact path="/cart" component={GuestCart} />
+          <Route path="/catalogue" component={Catalogue} />
+          <Route exact path="/cart" component={Cart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
@@ -68,6 +69,7 @@ function App() {
       <>
         <GlobalStyle />
         <Switch>
+          <Route path='/stores' component={Sucursales}/>
           <Route path='/checkout' component={Checkout}/>
           <Route exact path="/" component={Landing} />
           <Route path="/catalogue" component={Catalogue} />
