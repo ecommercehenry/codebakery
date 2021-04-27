@@ -49,7 +49,7 @@ function App() {
           <Route exact path="/admin/order/:id" component={BillCard} />
           <Route path="/admin" component={AdminPanel}></Route>
           <Route path="/catalogue" component={Catalogue} />
-          <Route exact path="/cart" component={GuestCart} />
+          <Route exact path="/cart" component={Cart} />
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
