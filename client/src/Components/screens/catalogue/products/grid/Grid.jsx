@@ -9,6 +9,7 @@ const Grid = () => {
   let {status} = useSelector((state)=>state.theme);
   let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state.reducer);
   let arr = []
+  console.log(stateproducts)
   if(search === true){
     arr = allProduct.filter((element) => 
       element.name.toLowerCase().includes(filterProduct.toLowerCase())  )
