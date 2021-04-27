@@ -8,7 +8,6 @@ const UserOrders  = () => {
     return (
         <div>
             <TablaByUser id={parseInt(id)}/>
-            
         </div>
     )
 }

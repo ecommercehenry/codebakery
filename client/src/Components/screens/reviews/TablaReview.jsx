@@ -7,16 +7,14 @@ import ReviewByUser from "./ReviewsByUser";
 
 const TablaReview = ({id}) => {
 
-
     const { data,  refetch } = useQuery(GET_REVIEW_BY_USER, {
         variables: { userId: id },
     });
 
     return (
 
-        <StyledTabla>
+        <StyledRevv>
             {
-              
                     data?.getReviewByUserId?.map((e) => (
                         <ReviewByUser
                             key={e.id}
@@ -30,13 +28,18 @@ const TablaReview = ({id}) => {
                         />
                     ))
             }
-        </StyledTabla>
+        </StyledRevv>
     )
 
 }
 export default TablaReview;
 
-const StyledTabla = styled.div`
+const StyledRevv = styled.div`
+display: flex;
+justify-content: center;
+width: 90%;
+flex-direction: column;
+align-items: flex-end;
 
 
 `;

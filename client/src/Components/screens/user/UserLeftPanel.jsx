@@ -2,14 +2,10 @@ import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
-import UserReview from "./UserReview"; 
-import {Route} from 'react-router-dom'; 
 import styled from 'styled-components'
-import { Button } from '@material-ui/core';
 
 const UserLeftPanel = ({click, setClick}) => {
-    console.log(click, setClick,  'userLef')
-  //  const [click, setClick] = useState(false); 
+
 
     const path = window.location.pathname;
     const activeTab = {

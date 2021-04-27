@@ -22,7 +22,7 @@ const ReviewByUser = ({ productId, id, title, description, stars }) => {
                         <p>{description}</p>
                     </div>
                     <div >
-                        <span>Rating <div className="text-container">
+                        <span>Rating <div >
                         <Rating name="read-only" value={stars} readOnly/>
                         </div></span>
                     </div>

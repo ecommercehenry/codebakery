@@ -9,7 +9,6 @@ const TablaByUser = ({id}) => {
     const { data } = useQuery(getOrdersByUserIdInTicket, {
         variables: { idUser: id },
     });
-    console.log(data)
     
     return (
 
