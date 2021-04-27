@@ -7,8 +7,6 @@ import { HiOutlineClipboardList } from "react-icons/hi";
 //styles
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { FlexboxGrid } from "rsuite";
-import ThemeSwitch from "../navBar/ThemeSwitch";
 
 const LeftPanel = () => {
   const path = window.location.pathname;
