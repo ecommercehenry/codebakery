@@ -23,7 +23,7 @@ const ReviewByUser = ({ productId, id, title, description, stars }) => {
                     </div>
                     <div >
                         <span>Rating <div >
-                        <Rating name="read-only" value={stars} readOnly/>
+                        <Rating className="starsss" name="read-only" value={stars} readOnly/>
                         </div></span>
                     </div>
 
@@ -68,7 +68,6 @@ margin-top: 2rem;
 }
 .element-container span {
   font-weight: 700;
-  color: rgb(123, 87, 156);
 }
 .text-container {
   width: 250px;

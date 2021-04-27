@@ -3,7 +3,7 @@ import {
 } from '../actions/themeActions'
 
 const initialState = {
-    status:false,
+    status:true,
 };
 
 const reducer = (state = initialState, action) => {

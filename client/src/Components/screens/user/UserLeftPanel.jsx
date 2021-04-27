@@ -52,7 +52,7 @@ const UserLeftPanel = ({click, setClick}) => {
                     </div>
                     <div className="text-decoration-none text-white" 
                     to={`/user/review/${id}`}>
-                        <div className={`tab ${activeTab.reviews}`}>
+                        <div className={`tab  ${activeTab.reviews}`}>
                         <HiOutlineClipboardList size="1.3rem" className="icon" />
                         <button className="tabName"
                         onClick={() => setClick(true)}
@@ -146,6 +146,10 @@ const StyledUserLeftPanel = styled.div`
                 .tabName {
                     margin-left: 0.5rem;
                     font-size: inherit;
+                    background: transparent; 
+                    border: none; 
+                    color:  white; 
+
                 }
             }
             .active {

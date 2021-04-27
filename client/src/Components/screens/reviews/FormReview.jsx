@@ -74,8 +74,9 @@ if(!data?.addReview?.name){
         paddingLeft: "10vw",
       }}
     >
-     <Link to={`/user/${userId}/profile`}  className="closeee"><img src={closeIcon} width="35px" display="flex" alt="closeIcon"/></Link>
+     
       <StyledForm  onSubmit={submitHandler}>
+      <Link to={`/user/${userId}/profile`}  className="closeee"><img src={closeIcon} width="30px" display="flex" alt="closeIcon"/></Link>
         <div className="infoProductt">
           <div className="namee">
             <label>Title</label>
@@ -130,6 +131,12 @@ border-radius:65px;
 padding: 3rem 4rem;
 border:1px solid #f3dff3;
 position: relative;
+
+.closeee{
+  display: flex;
+  justify-content: flex-end;
+
+}
 
 .infoProductt{
     //background:blue;

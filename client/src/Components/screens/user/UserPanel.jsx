@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 import UserLeftPanel from './UserLeftPanel';
@@ -9,6 +9,9 @@ import UserReview from "./UserReview";
 const UserPanel = () => {
     let {status} = useSelector((state)=>state.theme)
     const [click, setClick] = useState(false)
+    useEffect(() => {
+        
+    }, [click])
     return (
         <StyledUserPanel light={status}>
             <UserLeftPanel click={click} setClick={setClick}/>
