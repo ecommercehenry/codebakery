@@ -45,7 +45,7 @@ function App() {
         TAMBIÉN REVISAR EL TEMA DEL FORMCRUD DONDE RENDERIZA
         */}
           <Route exact path="/" component={Landing} />
-
+          <Route path='/stores' component={Sucursales}/>
           <Route exact path="/admin/order/:id" component={BillCard} />
           <Route path="/admin" component={AdminPanel}></Route>
           <Route path="/catalogue" component={Catalogue} />
@@ -69,7 +69,7 @@ function App() {
       <>
         <GlobalStyle />
         <Switch>
-        <Route path='/stores' component={Sucursales}/>
+          <Route path='/stores' component={Sucursales}/>
           <Route path='/checkout' component={Checkout}/>
           <Route exact path="/" component={Landing} />
           <Route path="/catalogue" component={Catalogue} />
