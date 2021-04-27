@@ -1,5 +1,5 @@
 import { GET_ALL_USERS_WITH_DETAILS } from "../actions/index";
-import { ORDER_ASC_BY_NAME,  ORDER_DESC_BY_NAME, SEARCH_BY_NAME } from "../actions/index"
+import { ORDER_ASC_BY_NAME,  ORDER_DESC_BY_NAME, SEARCH_BY_NAME, DELETE_USER_BY_ID } from "../actions/index"
 
 const initialState = {
   dataUserAdmin: [],
@@ -61,6 +61,13 @@ const reducer = (state = initialState, action) => {
                 dataToRender: state.dataUserAdmin.filter(obj => obj.name.includes(action.payload))
             }
         }
+    case DELETE_USER_BY_ID:
+      console.log(action.payload)
+      return {
+        ...state,
+        dataUserAdmin: state.dataUserAdmin.filter(obj => obj.id !== action.payload),
+        dataToRender: state.dataUserAdmin.filter(obj => obj.id !== action.payload),
+      } 
     default:
       return state;
   }

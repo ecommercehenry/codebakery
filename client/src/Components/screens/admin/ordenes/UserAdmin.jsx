@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GET_ALL_USERS from "../../../../Apollo/queries/getAllUsers";
 import DELETE_USER from "../../../../Apollo/mutations/deleteUser";
-import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import Promote from "../Promote";
 import {
   getAllUsersWithDetails,
   orderAscByName,
   orderDescByName,
   searchByName,
+  deleteUserById,
 } from "../../../../actions/index";
 
 const UserAdmin = () => {
@@ -33,6 +34,7 @@ const UserAdmin = () => {
         userId: parseInt(e.target.name),
       },
     });
+    dispatch(deleteUserById(parseInt(e.target.name)))
   }
 
   useEffect(() => {
