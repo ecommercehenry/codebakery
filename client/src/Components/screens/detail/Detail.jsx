@@ -7,7 +7,6 @@ import { useQuery } from "@apollo/client";
 import ButtonAddCart from "../../screens/catalogue/products/grid/ButtonAddCart";
 import ProductReview from "../reviews/ProductReview";
 import styled from "styled-components";
-import { FlexboxGrid } from "rsuite";
 
 const Detail = () => {
   let idCart = useParams();

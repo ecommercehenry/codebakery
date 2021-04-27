@@ -18,7 +18,7 @@ export default function Pagination() {
       // console.log(filterStatus.length, 'aysyayysays', statusOrders.length)
       longitud= filterStatus.length > 0 ? statusOrders.length : filterOrders?.length;
     } else {
-      console.log('no search')
+      /* console.log('no search') */
       longitud= filterStatus.length > 0 ? statusOrders.length : orders?.length;
    
     };

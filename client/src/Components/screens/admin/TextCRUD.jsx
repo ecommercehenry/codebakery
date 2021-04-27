@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import allProducts from "../../../Apollo/queries/allProducts"
 // import './TextCRUD.css'
 // import UPDATE_CATEGORY from "../Apollo/mutations/updateCategory"

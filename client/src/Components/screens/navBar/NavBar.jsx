@@ -90,7 +90,8 @@ const NavBar = ({ color }) => {
         {logged ? (
           <>
             <Link
-              to={`/user/${id}/profile`}
+              to={""}
+              /* to={`/user/${id}/profile`} */
               className={`login-btn text-decoration-none ${textColor}`}
             >
               <div className={`usuario ${navTag}`}>
