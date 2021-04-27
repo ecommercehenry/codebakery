@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity } from "../../../actions/cartActions";
 import { useMutation } from "@apollo/client";
 import DECREMENT_QUANTITY from '../../../Apollo/mutations/decrementQuantity'
@@ -15,10 +15,12 @@ const StockCounter = ({
   logged,
   orderId,
   productId,
+  refetch
 }) => {
-  const [decrementQuantity, decrementData] = useMutation(DECREMENT_QUANTITY);
-  const [incrementQuantity, incrementData] = useMutation(INCREMENT_QUANTITY);
+  const [decrementQuantity] = useMutation(DECREMENT_QUANTITY);
+  const [incrementQuantity] = useMutation(INCREMENT_QUANTITY);
   const dispatch = useDispatch();
+  let {status} = useSelector((state)=>state.theme);
 
   const removeHandler = () => {
     if (newQuantity > 1) {
@@ -32,6 +34,7 @@ const StockCounter = ({
                         quantity:1
                     }
                 })
+                refetch()
             } 
     }
   };
@@ -48,12 +51,13 @@ const StockCounter = ({
                 quantity:1
             }
         })
+        refetch()
     } 
     }
   };
 
   return (
-    <StyledCounter>
+    <StyledCounter light={status}>
       <button className="leftB" onClick={removeHandler}>
         -
       </button>
@@ -66,17 +70,19 @@ const StockCounter = ({
 };
 
 const StyledCounter = styled.div`
+  
   display: flex;
   box-sizing: border-box;
   button,
   .state {
     width: 2rem;
     height: 3rem;
-    border: 1px solid #6b6b6b;
+    border: 1px solid #e6e6e6;
     background: none;
     align-items: center;
     display: flex;
     justify-content: center;
+    color:${({light})=>light ? 'black' : 'white'};
   }
   .leftB {
     border-right: none;

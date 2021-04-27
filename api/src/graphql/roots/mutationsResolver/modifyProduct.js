@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 
 module.exports = {
   modifyProduct: (_, args) => {
-    console.log("resolver:", _, args)
+    
     try {
       const authToken = args.headers.authtoken
       let { authrole } = args.headers

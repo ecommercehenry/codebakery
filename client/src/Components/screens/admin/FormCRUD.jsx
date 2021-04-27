@@ -4,8 +4,15 @@ import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct";
 // import './FormCRUD.css'
 import { useDispatch, useSelector } from "react-redux";
 import { modifyProduct } from "../../../actions/modifyProductAction";
-import { addCategoryToProductAction } from "../../../actions/addCategoryToProductAction";
+// import { addCategoryToProductAction } from "../../../actions/addCategoryToProductAction";
 import styled from "styled-components";
+import { HiOutlinePencil, HiOutlineSave, HiOutlineX } from "react-icons/hi";
+import { toast } from "react-toastify";
+
+import '../../../Assets/toast.css'
+
+
+toast.configure()
 
 function FormCRUD({ id, handlerOnClick }) {
   const product = useSelector((state) => state.productsReducer.products[id]);
@@ -55,23 +62,23 @@ function FormCRUD({ id, handlerOnClick }) {
         },
       },
     });
-    alert("producto modificado!");
+    toast("producto modificado!");
     handlerOnClick();
   }
 
   if (inputs) {
     return (
       <StyledFormCRUD onSubmit={submitHandler}>
-        <div className="info-container">
+        <div className="F-element-container" id={id}>
+        <div className="F-info-container">
           <div className="F-image-container">
             <label>Product</label>
             <img src={product.image} alt="imagen" />
-            <button type="file">Edit Photo</button>
           </div>
 
           <div className="F-name-container">
             <label>Name</label>
-            <input value={inputs.name} name="name" onChange={inputHandler} />
+            <textarea value={inputs.name} name="name" onChange={inputHandler} />
           </div>
           <div className="F-stock-container">
             <label>Stock</label>
@@ -108,7 +115,7 @@ function FormCRUD({ id, handlerOnClick }) {
               ))}
               {newCategory ? (
                 <div className="newCategory">
-                  <label>New category</label>
+                  {/* <label>New category</label> */}
                   <input
                     value={valueNewCategory}
                     name="newCategory"
@@ -146,11 +153,21 @@ function FormCRUD({ id, handlerOnClick }) {
           </div>
 
           <div className="F-button">
-            <button type="submit">Save</button>
-            <button className="cancel" onClick={handlerOnClick}>
-              Cancel
-            </button>
+            <div id="save-side">
+              <span style={{color:"green"}}>Save</span>
+              <button type="submit" id="save" > 
+                <HiOutlineSave  size="1.8rem" color="green" />
+              </button>
+            </div>
+
+            <div id="close-side">
+              <span style={{color:"red"}}>Close</span>
+              <button className="cancel" onClick={handlerOnClick} id="close">
+                <HiOutlineX size="1.8rem" color="red" />
+              </button>
+            </div>
           </div>
+        </div>
         </div>
       </StyledFormCRUD>
     );
@@ -162,6 +179,30 @@ function FormCRUD({ id, handlerOnClick }) {
 export default FormCRUD;
 
 const StyledFormCRUD = styled.form`
+
+  margin: 0;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(236, 227, 250);
+  border-radius: 40px;
+  margin-top: 1.5rem;
+
+  .F-element-container {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(236, 227, 250);
+    border-radius: 40px;
+  }
+  .F-element-container span {
+    font-weight: 700;
+    color: #5f3f71;
+  }
   .image-container {
     display: flex;
     flex-direction: column;
@@ -174,21 +215,13 @@ const StyledFormCRUD = styled.form`
     border-radius: 100%;
   }
 
-  .info-container {
+  .F-info-container {
     height: 80%;
     width: 90%;
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
   }
-
-  width: 100%;
-  height: 25vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(236, 227, 250);
-  border-radius: 40px;
-
   label {
     font-weight: 700;
     color: rgb(123, 87, 156);
@@ -199,12 +232,11 @@ const StyledFormCRUD = styled.form`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 10rem;
+    margin-right: 2rem;
   }
   .F-image-container button {
     border-radius: 18px;
     border: none;
-    padding: 6px;
     background-color: rgb(87, 46, 126);
     color: rgb(226, 213, 238);
   }
@@ -213,59 +245,64 @@ const StyledFormCRUD = styled.form`
   }
 
   .F-name-container {
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+    height: 100%;
   }
-  .F-name-container input {
-    margin-top: 1rem;
+  .F-name-container textarea {
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
     border-radius: 1.5rem;
     border: 1.5px solid;
     border-color: grey;
     width: 18vw;
-    height: 4rem;
-    padding: 1rem;
+    height: 80%;
     text-overflow: ellipsis;
     background-color: rgb(236, 227, 250);
   }
   .F-stock-container {
-    padding: 0.5rem;
     display: flex;
     flex-direction: column;
+    width: 5rem;
+    height: 100%;
   }
   .F-stock-container input {
-    margin-top: 1rem;
-    width: 5vw;
+    margin-top: 0.5rem;
+    width: 80%;
     height: 4rem;
-    padding: 10px;
     border: 1.5px solid;
     border-color: grey;
     border-radius: 1.5rem;
     background-color: rgb(236, 227, 250);
+    text-align: center;
   }
   .F-category-container {
-    padding: 0.5rem;
+    width: 10rem;
   }
   .F-categories {
-    margin-top: 10px;
-    border: 1.5px solid grey;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
     border-radius: 35px;
-    width: 18vw;
+    width: 100%;
     height: 5rem;
-    padding: 0.5rem;
     display: flex;
     flex-wrap: wrap;
   }
   .F-categories p {
     background-color: rgb(87, 46, 126);
-    color: rgb(203, 181, 224);
+    color: white;
     font-size: 0.7rem;
+    font-weight: bolder;
     width: fit-content;
+    padding-left: 1em;
     margin: 0;
     margin-top: 3px;
     margin-right: 3px;
     border-radius: 15px;
     display: flex;
     justify-content: center;
-    padding: 3px;
     align-items: center;
   }
   .F-categories p button {
@@ -282,30 +319,38 @@ const StyledFormCRUD = styled.form`
     border: none;
     padding: 6px;
   }
+  .newCategory{
+    background:rgb(236,227,250);
+    height: 100%;
+  }
   .newCategory input {
     border: 1.5px solid;
     border-color: grey;
     border-radius: 1.5rem;
     background-color: rgb(203, 181, 224);
+    width: 100%;
   }
   .newCategory button {
     border: 1.5px solid;
     border-color: grey;
     border-radius: 1.5rem;
     background-color: rgb(40, 19, 59);
-    color: rgb(199, 177, 219);
+    color: white;
     padding: 6px;
+    margin: 0;
     margin-top: 2px;
+    font-weight: bold;
+    width: 100%;
   }
 
   .F-price-container {
-    padding: 0.5rem;
     display: flex;
     flex-direction: column;
+    width: 5rem;
   }
   .F-price-container input {
-    margin-top: 1rem;
-    width: 5vw;
+    margin-top: 0.5rem;
+    width: 100%;
     height: 4rem;
     padding: 10px;
     border: 1.5px solid;
@@ -314,20 +359,43 @@ const StyledFormCRUD = styled.form`
     background-color: rgb(236, 227, 250);
   }
   .F-button {
-    margin: auto;
-  }
-  .F-button button {
-    margin: 0.5rem;
-    border-radius: 30px;
-    color: rgb(78, 160, 78);
-    padding: 4px;
-    background-color: rgba(117, 250, 161, 0.328);
-  }
-  button.cancel {
-    background-color: rgb(250, 121, 121);
-    margin: 0.5rem;
-    border-radius: 30px;
-    color: rgb(39, 39, 36);
-    padding: 4px;
+    height: 100%;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+
+    #save-side{
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 1rem;
+
+      #save{
+        margin: auto;
+        box-shadow: none;
+        transform: none;
+        padding-bottom: 0.2rem;
+      }
+    }
+
+    #close-side{
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      #close{
+        margin: auto;
+      }
+    }
+
+    button{
+      width: fit-content;
+      padding: 0;
+      background: transparent;
+      border: none;
+      margin: 0;
+    }
   }
 `;

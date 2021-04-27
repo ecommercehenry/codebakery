@@ -10,6 +10,10 @@ export const PRICE_LOW_TO_HIGH = "PRICE_LOW_TO_HIGH";
 export const PRICE_HIGH_TO_LOW = "PRICE_HIGH_TO_LOW";
 export const CHANGE_STATUS = "CHANGE_STATUS";
 export const CLEAR_FILTER = "CLEAR_FILTER";
+export const CHANGE_PAGE = "CHANGE_PAGE";
+export const CHECKBOX_CHANGE = "CHECKBOX_CHANGE";
+export const CLEAR_CHECKBOXES = "CLEAR_CHECKBOXES";
+export const FILTER_NAME = "FILTER_NAME";
 
 export const setSearch = () => {
   return {
@@ -53,6 +57,13 @@ export const filterOrders = (orderId) => {
   };
 };
 
+export const filterName = (name) => {
+  return {
+    type: FILTER_NAME,
+    payload: name,
+  };
+};
+
 export const filterUsers = (usersId) => {
   return {
     type: FILTER_USERS,
@@ -90,3 +101,20 @@ export const changedStatus = () => {
     type: CHANGE_STATUS,
   };
 };
+
+export const changePage = (num) => {
+  return {
+    type: CHANGE_PAGE,
+    payload:num
+  };
+};
+export const checkboxChange = (id) => {
+  return {
+    type: CHECKBOX_CHANGE,
+    payload: id
+  }
+}
+
+export const clearCheckboxes = () => {
+  return { type : CLEAR_CHECKBOXES }
+}

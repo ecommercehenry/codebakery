@@ -1,0 +1,35 @@
+mutation modifyReview($reviewId:Int!, $dataReview:reviewInput!){
+  modifyReview(reviewId:$reviewId,dataReview:$dataReview){
+    __typename
+    ... on review{
+      id
+      stars
+      description
+      title
+    }
+    __typename
+    ...on error{
+      name
+      detail
+    }
+  }
+}
+
+//Variables, no es necesario que anden todos los parametos
+//Si solo se quiere modificar stars se coloca stars y listo, asi:
+{
+  "reviewId": 1,
+  "dataReview": {
+    "stars": "3"
+  }
+}
+
+//Si se quiere modificar todo seria algo asi
+{
+  "reviewId": 1,
+  "dataReview": {
+    "title": "Moficado",
+    "description": "Hola2",
+    "stars": "2"
+  }
+}

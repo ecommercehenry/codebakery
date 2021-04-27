@@ -1,14 +1,19 @@
 import React,{ useState,useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Select from 'react-select';
 import { useMutation, useQuery } from '@apollo/client';
 import getAllCategories from "../Apollo/queries/getAllCategories"
 import ADD_PRODUCT from "../Apollo/mutations/addProduct";
 import Creatable from 'react-select/creatable';
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import { toast } from "react-toastify";
+import '../Assets/toast.css'
 //styles
 import styled from 'styled-components';
 
 import closeIcon from '../icons/close2.svg'
+
+toast.configure()
 
 const AddProductForm = ({setAddProduct}) => {
 
@@ -17,6 +22,7 @@ const AddProductForm = ({setAddProduct}) => {
     useEffect(() => {
     },[data]);
 
+    let {status} = useSelector((state)=>state.theme);
     const [category,setCategory] = useState('');
     let [selected,setSelected] = useState('');
     const [preview,setPreview] = useState('');
@@ -67,7 +73,7 @@ const AddProductForm = ({setAddProduct}) => {
     const submitHandler = (e) => {
         
         e.preventDefault();
-        if(info.image == ''){alert('Please add an image')}else{
+        if(info.image == ''){toast('Please add an image')}else{
             info.category=selected;
             addProduct({variables:
                 {
@@ -87,7 +93,7 @@ const AddProductForm = ({setAddProduct}) => {
                 price:'',
                 image:''
             })
-            alert("Producto agregado!")
+            toast("Producto agregado!")
             
         }
         
@@ -104,11 +110,11 @@ const AddProductForm = ({setAddProduct}) => {
     }
 }, [])
 
-    console.log(selected)
+    
     return (
         
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.664)', zIndex: 5, position: 'fixed', height: '100vh', width: '100vw', top: '0', left: '0', paddingLeft: '10vw'}}>
-        <StyledForm onSubmit={submitHandler}>
+        <StyledForm onSubmit={submitHandler} light={status}>
             {/* <div className="close" onClick={closeHandler}><img src={closeIcon} alt="closeIcon"/></div> */}
             <Link to="/admin/products" className="close"><img src={closeIcon} alt="closeIcon"/></Link>
             <div className="imageLoaderr">
@@ -190,9 +196,11 @@ const AddProductForm = ({setAddProduct}) => {
 }
 
 const StyledForm = styled.form`
+    background:${({light})=>light 
+    ? 'white' 
+    : '#222222'};
     width:35%;
     height: 80vh;
-    background: white;
     border-radius:65px;
     padding: 3rem 4rem;
     border:1px solid #f3dff3;
@@ -315,7 +323,9 @@ const StyledForm = styled.form`
             background:#E3DDE7;
         }
         label{
-            color:#6A4D7B;
+            color:${({light})=>light 
+            ? '#6A4D7B' 
+            : '#ab8abe'};
             width:100%;
         }
         }

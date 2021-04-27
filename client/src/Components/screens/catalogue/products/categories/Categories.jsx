@@ -7,12 +7,13 @@ import getAllCategories from '../../../../../Apollo/queries/getAllCategories';
 import allProducts from '../../../../../Apollo/queries/allProducts';
 import { getAllProducts, setSearch } from '../../../../../actions';
 import styles from './Categories.module.css';
+import styled from 'styled-components'
 
 
 const Categories = () => {
     //Iniciamos el estado en all para que se rendericen todos los productos
     const [name, setName] = React.useState('All');
-    // console.log(name, 'arsrrarsras')
+    // 
     //Obtenemos productos por nombre de categoria (apolo client)
     let  products = useQuery(productsByCategoryName, {
         variables: { name: name },
@@ -36,14 +37,14 @@ const Categories = () => {
     const categories = useQuery(getAllCategories);
 
     // useEffect(()=>{
-    //     console.log('u')
+    //     
     // },[])
-
+    let {status} = useSelector((state)=>state.theme);
     //Se envia la acción para actualizar los productos que se renderizan
     useEffect(() => {
-        // console.log('lo que sea');
+        // 
         dispatch(getAllProducts(products));
-        // console.log('otra vz');
+        // 
     }, [products]);
 
     //tenemos un query para pedir los productos por categorias
@@ -58,7 +59,7 @@ const Categories = () => {
 
     return (
 
-        <div className={styles.categories}>
+        <StyledCategories className={styles.categories} light={status}>
            
             <div><button  name = 'All' onClick={handleClick} className={styles.btn}>All</button></div>
 
@@ -77,8 +78,17 @@ const Categories = () => {
                ) ): 'No hay productos'
            }  */}
            
-        </div>
+        </StyledCategories>
     )
 }
+
+const StyledCategories = styled.div`
+    background:${({light})=>light ? '#DCD7DD' : '#555555'};
+    //color:${({light})=>light ? 'inherit' : 'white'};
+    button{
+        background:${({light})=>light ? '#DCD7DD' : '#555555'};
+        color:${({light})=>light ? '#755588' : '#c66ef8'};
+    }
+`;
 
 export default Categories
