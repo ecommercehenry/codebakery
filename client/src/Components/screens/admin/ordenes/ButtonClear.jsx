@@ -11,7 +11,10 @@ const ButtonClear = ({ name }) => {
     // console.log('clear');
     dispatch(clearFilter());
   };
-
+  const handleClick = () => {
+    handlerClear()
+    handleAll()
+  }
   const handleAll = (e) => {
     document.getElementById("UNPAID").checked = false;
     document.getElementById("PAID").checked = false;
@@ -24,7 +27,7 @@ const ButtonClear = ({ name }) => {
   return (
     <>
       <div>
-        <StyledButton onClick={handlerClear && handleAll}>{name}</StyledButton>
+        <StyledButton onClick={handleClick}>{name}</StyledButton>
       </div>
     </>
   );
