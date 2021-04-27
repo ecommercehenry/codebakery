@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import styled from 'styled-components'
 
-const UserLeftPanel = () => {
+const UserLeftPanel = ({click, setClick}) => {
+
 
     const path = window.location.pathname;
     const activeTab = {
@@ -15,7 +16,7 @@ const UserLeftPanel = () => {
 
     let storage = window.localStorage;
     let id = window.localStorage.getItem("id");
-
+    let user = localStorage.name
     let logout = () => {
         localStorage.clear();
     };
@@ -25,7 +26,7 @@ const UserLeftPanel = () => {
             <div className="content">
                 <div className="userInfo">
                     <div className="userAvatar"></div>
-                    <div className="userName">User Name</div>
+                    <div className="userName">User {user}</div>
                 </div>
                 <div className="tabs">
                     <Link
@@ -39,24 +40,27 @@ const UserLeftPanel = () => {
                             </span>
                         </div>
                     </Link>
-                    <Link className="text-decoration-none text-white" 
-                    to={`/user/${id}/orders`}>
+                    <div className="text-decoration-none text-white" 
+                    to={`/user/orders/${id}`}>
                         <div className={`tab ${activeTab.orders}`}>
                             <HiOutlineShoppingBag size="1.3rem" className="icon" />
-                            <span className="tabName">
+                            <button className="tabName"
+                            onClick={() => setClick(false)}>
                                 Orders
-                            </span>
+                            </button>
                         </div>
-                    </Link>
-                    <Link className="text-decoration-none text-white" 
-                    to={`/user/${id}/reviews`}>
-                        <div className={`tab ${activeTab.reviews}`}>
+                    </div>
+                    <div className="text-decoration-none text-white" 
+                    to={`/user/review/${id}`}>
+                        <div className={`tab  ${activeTab.reviews}`}>
                         <HiOutlineClipboardList size="1.3rem" className="icon" />
-                        <span className="tabName">
+                        <button className="tabName"
+                        onClick={() => setClick(true)}
+                       >
                             Reviews
-                        </span>
+                        </button>
                         </div>
-                    </Link>
+                    </div>
                     <Link 
                     className="text-decoration-none text-white"
                     to="/"
@@ -71,6 +75,7 @@ const UserLeftPanel = () => {
                         Home
                     </Link>
                 </div>
+
             </div>
         </StyledUserLeftPanel>
     )
@@ -141,6 +146,10 @@ const StyledUserLeftPanel = styled.div`
                 .tabName {
                     margin-left: 0.5rem;
                     font-size: inherit;
+                    background: transparent; 
+                    border: none; 
+                    color:  white; 
+
                 }
             }
             .active {

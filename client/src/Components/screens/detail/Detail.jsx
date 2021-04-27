@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./DetailStyles.css";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import getData from "../../../Apollo/queries/productById";
@@ -14,6 +13,7 @@ const Detail = () => {
 
     document.body.style.overflow = "visible"
 
+    
     return () => {
       document.body.style.overflow = "visible";
     };
@@ -70,7 +70,7 @@ const Detail = () => {
 
 const StyledDetailModal = styled.div`
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.445);
+    background-color: rgba(0, 0, 0, 0.705);
     top: 0;
     right: 0;
     bottom: 0;
@@ -100,7 +100,7 @@ const StyledDetail = styled.div`
     align-items: center;
     width: 80vw;
     height: 80vh;
-    background-color: white; 
+    /* background-color: white;  */
     margin: auto;
     border-radius: 40px;
     transform: translate(-50%, -50%);

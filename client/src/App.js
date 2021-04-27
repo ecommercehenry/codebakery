@@ -5,7 +5,7 @@ import Landing from "./Components/screens/landing/Landing";
 import AdminPanel from "./Components/screens/admin/container/AdminPanel";
 import Catalogue from "./Components/screens/catalogue/container/Catalogue";
 import Cart from "./Components/screens/cart/container/Cart";
-import AboutUs from "./Components/screens/aboutUs/container/AboutUs";
+import AboutUs from "./Components/screens/aboutUs/container/AboutUsGrid";
 import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory";
 // import FormCRUD from "./Components/screens/admin/FormCRUD"
 import Checkout from './Components/screens/cart/Checkout/Checkout'
@@ -22,8 +22,13 @@ import AddProductForm from "./Components/AddProductForm";
 import Detail from "./Components/screens/detail/Detail";
 import Promote from "./Components/screens/admin/Promote";
 import BillCard from "./Components/BillCard/BillCard";
-import ResetPassword from "./Components/ResetPassword/ResetPassword"
+import ResetPassword from "./Components/ResetPassword/ResetPassword";
+import UserReview from "./Components/screens/user/UserReview";  
+import UserOrders from "./Components/screens/user/UserOrders";
+import FormReview from "./Components/screens/reviews/FormReview";
+
 import Sucursales from './Components/Maps/Sucursales'
+
 
 let token = localStorage.getItem("token");
 let role = localStorage.getItem("role");
@@ -76,11 +81,15 @@ function App() {
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/checkout-stripe" component={Stripe} />
           <Route exact path="/about-us" component={AboutUs} />
-          <Route exact path="/user/:id/profile" component={UserPanel} />
+          <Route exact path="/user/review/:id" component={UserReview} />
+          <Route exact path="/user/addReview/:id" component={FormReview} />
+          <Route exact path="/user/orders/:id" component={UserOrders} /> 
+          <Route exact path="/user/:id/profile" component={UserPanel} /> 
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
           <Route exact path="/reset-password" component={ResetPassword} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
+
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
