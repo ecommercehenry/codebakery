@@ -2,6 +2,7 @@ import Pablo from "./img/pablo.jpg";
 import Patsy from "./img/patsy.jpg";
 import Lucas from "./img/lucas.jpeg";
 import Santi from "./img/santi.jpg";
+import Jhoa from "./img/jhoa.jpeg";
 
 export const Us = [
   {
@@ -50,7 +51,7 @@ export const Us = [
   {
     name: "Johana Rezabala",
     title: "Full Stack Developer",
-    img: null,
+    img: Jhoa,
     git: "https://github.com/johana1211",
     lin: "https://www.linkedin.com/in/derly-johana-rezabala/",
   },
