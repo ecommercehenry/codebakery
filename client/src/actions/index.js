@@ -18,7 +18,7 @@ export const GET_ALL_USERS_WITH_DETAILS = "GET_ALL_USERS_WITH_DETAILS"
 export const ORDER_ASC_BY_NAME = "ORDER_ASC_BY_NAME"
 export const ORDER_DESC_BY_NAME = "ORDER_DESC_BY_NAME"
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME"
-export const DELETE_USER_BY_ID = "DELETE_USER_BY_ID"
+
 
 export const setSearch = () => {
   return {
@@ -149,13 +149,5 @@ export const searchByName = (payload) => {
     payload,
   }
 }
-
-export const deleteUserById = (payload) => {
-  return { 
-    type : DELETE_USER_BY_ID,
-    payload,
-  }
-}
-
 
 

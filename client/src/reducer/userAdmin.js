@@ -1,5 +1,5 @@
 import { GET_ALL_USERS_WITH_DETAILS } from "../actions/index";
-import { ORDER_ASC_BY_NAME,  ORDER_DESC_BY_NAME, SEARCH_BY_NAME, DELETE_USER_BY_ID } from "../actions/index"
+import { ORDER_ASC_BY_NAME,  ORDER_DESC_BY_NAME, SEARCH_BY_NAME } from "../actions/index"
 
 const initialState = {
   dataUserAdmin: [],
@@ -9,10 +9,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_USERS_WITH_DETAILS: 
-        // console.log(action.payload) 
       if (Array.isArray(action.payload)) {
         var data = [...action.payload]
-        // console.log(data)
         return {
             ...state,
             dataUserAdmin: data.sort((a, b) => {
@@ -30,9 +28,6 @@ const reducer = (state = initialState, action) => {
           }
       }
     case ORDER_ASC_BY_NAME:
-        // var data = state.dataUserAdmin.sort((a, b) => {
-        //     return  a.name - b.name})
-        // console.log("data reducer", data)
         return {
             ...state,
             dataToRender: state.dataUserAdmin.sort(function(a, b) {
@@ -40,9 +35,6 @@ const reducer = (state = initialState, action) => {
         })
     }
     case ORDER_DESC_BY_NAME:
-        // var data = state.dataUserAdmin.sort((a, b) => {
-        //     return  a.name - b.name})
-        // console.log("data reducer", data)
         return {
             ...state,
             dataToRender: state.dataUserAdmin.sort(function(a, b) {
@@ -58,16 +50,9 @@ const reducer = (state = initialState, action) => {
         } else {
             return {
                 ...state,
-                dataToRender: state.dataUserAdmin.filter(obj => obj.name.includes(action.payload))
+                dataToRender: state.dataUserAdmin.filter(obj => obj.name.toLowerCase().includes(action.payload.toLowerCase()))
             }
         }
-    case DELETE_USER_BY_ID:
-      console.log(action.payload)
-      return {
-        ...state,
-        dataUserAdmin: state.dataUserAdmin.filter(obj => obj.id !== action.payload),
-        dataToRender: state.dataUserAdmin.filter(obj => obj.id !== action.payload),
-      } 
     default:
       return state;
   }

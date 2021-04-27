@@ -9,7 +9,6 @@ import {
   orderAscByName,
   orderDescByName,
   searchByName,
-  deleteUserById,
 } from "../../../../actions/index";
 
 const UserAdmin = () => {
@@ -28,13 +27,12 @@ const UserAdmin = () => {
   let [getAllUsers, { data, loading }] = useLazyQuery(GET_ALL_USERS);
 
   function handleClick(e) {
-    // e.preventDefault()
+    e.preventDefault()
     deleteUser({
       variables: {
         userId: parseInt(e.target.name),
       },
     });
-    dispatch(deleteUserById(parseInt(e.target.name)))
   }
 
   useEffect(() => {
@@ -43,7 +41,7 @@ const UserAdmin = () => {
     } else if (data && data.getAllUsers) {
       dispatch(getAllUsersWithDetails(data?.getAllUsers));
     }
-  }, [loading]);
+  }, [data, loading]);
 
   function handleClickAsc() {
     dispatch(orderAscByName());
