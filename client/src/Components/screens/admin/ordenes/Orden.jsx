@@ -8,13 +8,13 @@ import { useQuery, useMutation } from "@apollo/client";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
+
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
   const [orderStatus, setOrderStatus] = useState("unpaid");
-
   
-  let status;
+  /* let status;
   if (orden.status === "unpaid") status = 0;
   if (orden.status === "paid") status = 1;
   if (orden.status === "received") status = 2;
@@ -25,7 +25,7 @@ export default function Orden({ id, orden }) {
       <Steps.Item onClick={() => console.log("cambiar status a send")} />
       <Steps.Item onClick={() => console.log("cambiar status a recived")} />
     </Steps>
-  );
+  ); */
 
   function capitalizeFirstLetter(string) 
   {
@@ -111,6 +111,8 @@ const StyledOrden = styled.div`
     height: 80px;
     padding: 0.5rem;
     align-items: center;
+    color: grey;
+    font-weight: bold;
   }
   .info-container {
     height: 80%;
