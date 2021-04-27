@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import UserReview from "./UserReview"; 
 import {Route} from 'react-router-dom'; 
 import styled from 'styled-components'
+import { Button } from '@material-ui/core';
 
-const UserLeftPanel = () => {
+const UserLeftPanel = ({click, setClick}) => {
+    console.log(click, setClick,  'userLef')
+  //  const [click, setClick] = useState(false); 
 
     const path = window.location.pathname;
     const activeTab = {
@@ -41,25 +44,27 @@ const UserLeftPanel = () => {
                             </span>
                         </div>
                     </Link>
-                    <Link className="text-decoration-none text-white" 
+                    <div className="text-decoration-none text-white" 
                     to={`/user/orders/${id}`}>
                         <div className={`tab ${activeTab.orders}`}>
                             <HiOutlineShoppingBag size="1.3rem" className="icon" />
-                            <span className="tabName">
+                            <button className="tabName"
+                            onClick={() => setClick(false)}>
                                 Orders
-                            </span>
+                            </button>
                         </div>
-                    </Link>
-                    <Link className="text-decoration-none text-white" 
+                    </div>
+                    <div className="text-decoration-none text-white" 
                     to={`/user/review/${id}`}>
                         <div className={`tab ${activeTab.reviews}`}>
                         <HiOutlineClipboardList size="1.3rem" className="icon" />
-                        <span className="tabName"
+                        <button className="tabName"
+                        onClick={() => setClick(true)}
                        >
                             Reviews
-                        </span>
+                        </button>
                         </div>
-                    </Link>
+                    </div>
                     <Link 
                     className="text-decoration-none text-white"
                     to="/"

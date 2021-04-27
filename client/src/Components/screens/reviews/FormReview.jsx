@@ -1,12 +1,15 @@
 import React, { useState} from "react";
 import styled from 'styled-components'; 
 import { useMutation } from "@apollo/client";
+import {Link} from 'react-router-dom'
 import  ADD_REVIEW  from "../../../Apollo/mutations/addReview"; 
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { toast } from "react-toastify";
 import  { useParams } from "react-router-dom";
+import closeIcon from "../../../icons/close2.svg"; 
+
 
 const FormReview = () => {
 
@@ -71,7 +74,7 @@ if(!data?.addReview?.name){
         paddingLeft: "10vw",
       }}
     >
-     
+     <Link to={`/user/${userId}/profile`} className="close">X</Link>
       <StyledForm  onSubmit={submitHandler}>
         <div className="infoProductt">
           <div className="namee">
@@ -127,6 +130,7 @@ border-radius:65px;
 padding: 3rem 4rem;
 border:1px solid #f3dff3;
 position: relative;
+
 
 .infoProductt{
     //background:blue;

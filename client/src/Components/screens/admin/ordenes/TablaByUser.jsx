@@ -13,7 +13,7 @@ const TablaByUser = ({id}) => {
     
     return (
 
-        <StyledTabla>
+        <StyledTablaa>
             {data?.getOrdersByUserIdInTicket.orders ? (
         data.getOrdersByUserIdInTicket.orders.map((order) => (
           order.lineal_order.map((order) => (
@@ -33,14 +33,21 @@ const TablaByUser = ({id}) => {
       ) : (
         <p></p>
       )}
-        </StyledTabla>
+        </StyledTablaa>
     )
 
 }
 export default TablaByUser;
 //orderId={data.getOrdersByUserIdInCart.orders[0].id}
 
-const StyledTabla = styled.div`
+const StyledTablaa = styled.div`
+
+display: flex;
+justify-content: center;
+width: 90%;
+flex-direction: column;
+align-items: flex-end;
+
 
 
 `;
