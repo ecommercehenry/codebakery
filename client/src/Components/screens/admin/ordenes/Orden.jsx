@@ -27,6 +27,11 @@ export default function Orden({ id, orden }) {
     </Steps>
   );
 
+  function capitalizeFirstLetter(string) 
+  {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   if (orden) {
     return (
       <StyledOrden>
@@ -51,11 +56,13 @@ export default function Orden({ id, orden }) {
             </div>
             <div className="status-container">
               <div className="titulos">
-                <span>Paid</span>
+                <span>Status</span>
+                {/* <span>Paid</span>
                 <span>Sent</span>
-                <span>Received</span>
+                <span>Received</span> */}
               </div>
-              {instance}
+              {/* {instance} */}
+              {capitalizeFirstLetter(orden.status)}
             </div>
             <div className="text-container">
               <span>Cancelled</span>
