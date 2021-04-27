@@ -17,6 +17,7 @@ const Detail = () => {
       document.body.style.overflow = "hidden";
     }, 1000);
 
+    
     return () => {
       document.body.style.overflow = "visible";
     };
