@@ -14,6 +14,7 @@ import AddProductForm from '../../../AddProductForm';
 import TablaOrdenes from '../../admin/ordenes/TablaOrdenes';
 import UserAdmin from '../ordenes/UserAdmin';
 import Pagination from '../ordenes/Pagination';
+import CheckFilters from '../ordenes/CheckFilters';
 
 
 
@@ -30,9 +31,7 @@ const AdminPanel = () => {
 
         <div className="top">
           <AdminNavBar setAddProduct={setAddProduct} />
-          <div>
-            <Pagination/>
-          </div>
+          <Route path="/admin/orders" component={CheckFilters}/>
         </div>
 
        
@@ -40,12 +39,16 @@ const AdminPanel = () => {
 
         <div className="bottom">
         
+            
            <Route path='/admin/products' component={ListCRUD}/>            
            <Route path='/admin/orders' component={TablaOrdenes}/>    
            <Route path="/admin/users" component={UserAdmin} />
-
+           
         </div>
 
+        <Route path="/admin/orders">
+              <Pagination/>
+          </Route>
         
         <Route path="/admin/add-product">
           <AddProductForm />
@@ -75,20 +78,21 @@ const StyledAdminPanel = styled.div`
         width:87%;
         display:flex;
         flex-direction:column;
+        height: fit-content;
         .top{
             position: fixed;
-            height:12vh;
             z-index: 2;
             //background: #ffffff;
             
         }
         .bottom{
-            margin-top: 15vh;
+            margin-top: 5em;
             position: relative;
             //background: black;
-            height:100vh;
+            height:fit-content;
             width: 77vw;
             display:flex;
+            flex-direction: column;
             justify-content:center;
             align-items:center;
             z-index: 1;

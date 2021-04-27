@@ -3,26 +3,25 @@ import TablePagination from '@material-ui/core/TablePagination';
 import { useSelector, useDispatch } from "react-redux";
 import { changePage } from "../../../../actions";
 import styled from "styled-components";
+import { withStyles } from "@material-ui/core";
 
 export default function Pagination() {
 
-    let {orders, filterOrders, search}= useSelector(state => state.ordersReducer);
+
+    let {orders, filterOrders, search, filterStatus, statusOrders}= useSelector(state => state.ordersReducer);
+
     let {status} = useSelector((state)=>state.theme);
 
     let longitud;
 
     if (search && filterOrders.length > 0) {
-        
-        //console.log('search', search);
-        //console.log('filterOrders', filterOrders);
-
-        longitud= filterOrders?.length;
-    
-      } else {
-
-        longitud= orders?.length
+      // console.log(filterStatus.length, 'aysyayysays', statusOrders.length)
+      longitud= filterStatus.length > 0 ? statusOrders.length : filterOrders?.length;
+    } else {
+      /* console.log('no search') */
+      longitud= filterStatus.length > 0 ? statusOrders.length : orders?.length;
    
-      };
+    };
 
 
     //console.log('estado redux', orders);
@@ -55,9 +54,16 @@ export default function Pagination() {
 
      // console.log('numero de paginas', cont);
 
+     const StyledTablePagination = withStyles((theme) => ({
+      root: {
+        height: 60,
+        },
+    }))(TablePagination);
+
       return (
+
         <StyledPagination light={status}>
-          <TablePagination
+          <StyledTablePagination
             component="div"
             count={longitud}
             page={page}
@@ -65,11 +71,22 @@ export default function Pagination() {
             rowsPerPage={rowsPerPage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
           />
+
         </StyledPagination>
       );
 
 }
 
-const StyledPagination =  styled.div`
-  color:${({light})=>light ? 'inherit' : 'white'};
+
+const StyledPagination = styled.div`
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  /* float: right; */
+  width: 77vw;
+  color:${({light})=>light ? 'black' : 'white'};
+  background: white;
+  z-index: 3;
+  bottom: 0;
+  margin-left: 4rem;
 `;

@@ -25,7 +25,7 @@ useEffect(() => {
     <div style={{width:100+"vw", display:"flex", justifyContent:"center"}}>
     <StyledSearchBar>
       <HiSearch size="1.5em" color="gray" style={{position: "absolute", left: "15px"}}/>
-      <form>
+      <form id="search-form">
         <input
           type="text"
           placeholder="Find your favorite dessert"
@@ -61,16 +61,6 @@ const StyledSearchBar = styled.div`
       border:none;
       background: none;
   }
-  input{
-      width:70%;
-      height:2rem;
-      border:none;
-      font-size:1.3rem;
-      background: none;
-      position: absolute;
-      transform: translateY(-120%);
-      text-align: left;
-  }
   select{
       width:fit-content;
       height:2rem;
@@ -80,18 +70,33 @@ const StyledSearchBar = styled.div`
       background:#cfcfcf;
       border:none;
   }
+  #search-form{
+    margin-top: 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    input{
+      width:70%;
+      height:2rem;
+      border:none;
+      font-size:1.3rem;
+      background: none;
+      text-align: left;
+  }
+
   #search-btn{
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     right: 0;
-    transform: translateY(-120%);
     color: black;
     width: 10%;
     padding: 10px 40px;
     border: solid 1px #CECECE;
     border-radius: 40px;
+  }
   }
 `;
 

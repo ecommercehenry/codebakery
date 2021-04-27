@@ -16,16 +16,13 @@ import {
 const initialState = {
   orders: [],
   filterOrders: [], //tiene ordenes de busqueda dependiendo el filtro
+  statusOrders: [],
   search: false,
   idError: 0,
   status: false,
   numPage: 0,
   renderPage:[],
   filterStatus: [],
-  UNPAID: false,
-  PAID: false,
-  SENT: false,
-  RECEIVED: false,
   CANCELLED: false,
   ALL: false,
 };
@@ -46,17 +43,30 @@ const pagination= (modifyState) => {
 // recibe el estado actual y el checkbox que recien se acaba de cambiar
 // debe devolver el arreglo q actualmente se está renderizando siltrado
 // según todos los checkboxes
-const filterByStatus = (currentState, actualCheck) =>{
+const filterByStatus = (currentState) =>{
   // const
+  // console.log(currentState, 'aysyayyays')
   if(currentState.filterOrders.length > 0){
+    // console.log('primero')
     return currentState.filterStatus.length > 0 ? 
-    currentState.filterOrders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase()))):
+    currentState.filterOrders.filter((order => 
+      (currentState.filterStatus.includes(order.status.toUpperCase()) && !order.cancelled) || 
+      (currentState.filterStatus.includes('CANCELLED') && order.cancelled) )):
     currentState.filterOrders;
+  } else{
+    // console.log('seg', currentState.orders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase()))))
+    return currentState.filterStatus.length > 0 ? 
+    currentState.orders.filter((order => 
+      (currentState.filterStatus.includes(order.status.toUpperCase()) && !order.cancelled) || 
+      (currentState.filterStatus.includes('CANCELLED') && order.cancelled) )):
+    currentState.orders;
+    // currentState.orders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase())));
   }
 }
 
 const reducer = (state = initialState, action) => {
   // let ordersModified = state.orders
+  let modifyFilterOrders;
   switch (action.type) {
     case SAVE_ORDERS:
       const data= action.payload?.map((o) => {
@@ -64,6 +74,7 @@ const reducer = (state = initialState, action) => {
           id: o.id,
           userId: o.userId,
           date: o.creation,
+          status: o.status,
           price: o.lineal_order.map((u) => u).map((g) => g.price),
           cancelled: o.cancelled,
           name: o.name
@@ -82,13 +93,15 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (o) => o.id === Number(action.payload)
       );
-      
+      modifyFilterOrders = filterByStatus({...state, filterOrders: searchOrder});
       if (searchOrder.length) {
         return {
           ...state,
           filterOrders: searchOrder,
           search: true,
-          renderPage:searchOrder
+          // renderPage:searchOrder
+          statusOrders: modifyFilterOrders,
+          renderPage: modifyFilterOrders.length === 0 ? [] : pagination({...state, filterOrders: modifyFilterOrders})
         };
       } else {
         return {
@@ -107,18 +120,25 @@ const reducer = (state = initialState, action) => {
       );
 
       if (searchUsers.length) {
-
+        // debemos preguntar si hay algun filtro en filterStatus
+        modifyFilterOrders = filterByStatus({...state, filterOrders: searchUsers});
+        // actualizamos filterOerders con la busqueda completa, luego filtramos 
+        // por status y se lo pasamos a renderPage
         return {
           ...state,
           filterOrders: searchUsers,
           search: true,
-          renderPage:pagination({...state, filterOrders:searchUsers})
+          statusOrders: modifyFilterOrders,
+          renderPage: modifyFilterOrders.length === 0 ? [] : pagination({...state, filterOrders: modifyFilterOrders})
         };
       } else {
         return {
           ...state,
           filterOrders: [],
+          statusOrders: [],
+          renderPage: pagination({...state, filterOrders: [], statusOrders: []}),
           idError: action.payload,
+          search: false,
           status: true,
         };
       }
@@ -128,18 +148,24 @@ const reducer = (state = initialState, action) => {
         //tuve que cambiar para emparejar con filtros //@ Lau
         (u) => u.name === action.payload
       );
+      modifyFilterOrders = filterByStatus({...state, filterOrders: searchName});
       if (searchName.length) {
         return {
           ...state,
           filterOrders: searchName,
           search: true,
+          statusOrders: modifyFilterOrders,
+          renderPage: modifyFilterOrders.length === 0 ? [] : pagination({...state, filterOrders: modifyFilterOrders}),
         };
       } else {
         return {
           ...state,
           filterOrders: [],
+          statusOrders: [],
+          renderPage: pagination({...state, filterOrders: [], statusOrders: []}),
           idError: action.payload,
           status: true,
+          search: false,
         };
       }
 
@@ -155,11 +181,12 @@ const reducer = (state = initialState, action) => {
           return a.price[0] - b.price[0]; 
         });
       }
-
+      modifyFilterOrders = filterByStatus({...state, filterOrders: filterlow});
       return {
         ...state,
         filterOrders: filterlow,
-        renderPage:pagination({...state, filterOrders: filterlow }),
+        statusOrders: modifyFilterOrders,
+        renderPage: pagination({ ...state, filterOrders: modifyFilterOrders }),
         search: true,
       };
 
@@ -175,11 +202,12 @@ const reducer = (state = initialState, action) => {
           return b.price[0] - a.price[0];
         });
       }
-
+      modifyFilterOrders = filterByStatus({...state, filterOrders: filterhigh});
       return {
         ...state,
         filterOrders: filterhigh,
-        renderPage:pagination({...state, filterOrders: filterhigh }),
+        statusOrders: modifyFilterOrders,
+        renderPage: pagination({...state, filterOrders: modifyFilterOrders }),
         search: true,
       };
 
@@ -187,14 +215,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filterOrders: [],
-        renderPage:pagination({...state, filterOrders:[]}),
+        filterStatus: [],
+        renderPage: pagination({...state, filterOrders:[]}),
         search: false,
         status: false,
       };
 
     case CHANGE_PAGE:
-      const modifyState = {...state, numPage: action.payload}
-
+      const modifyState = {...state, numPage: action.payload};
       return {
         ...state,
         renderPage: pagination(modifyState),
@@ -205,36 +233,30 @@ const reducer = (state = initialState, action) => {
     case CHECKBOX_CHANGE:
       // crear función q filtre por los check que están en true
       // filterByStatus();
-      const modificateFilterState = state.filterStatus.includes(action.payload) ? 
+      const modificateFilterStatus = state.filterStatus.includes(action.payload) ? 
       state.filterStatus.filter(filter => filter !== action.payload):
       [...state.filterStatus, action.payload];
-      const modificateState = {...state, 
-        [action.payload]: state[action.payload] ? false: true,
-        filterStatus: modificateFilterState,
-      }
-      // filterByStatus(modificateState)
+      const modificateState = {...state,
+        filterStatus: modificateFilterStatus,
+        filterOrders: filterByStatus({...state, filterStatus: modificateFilterStatus})
+      };
+      // console.log(modificateState)
       return {
         ...state,
-        filterOrders: filterByStatus(modificateState),
-        search: false,
-        status: false,
-        // switcheamos el valor de la propiedad del estado correspondiente
-        [action.payload]: state[action.payload] ? false: true,
-        filterStatus: modificateFilterState,
+        statusOrders: filterByStatus({...state, filterStatus: modificateFilterStatus}),
+        renderPage: modificateState.filterOrders.length > 0? pagination(modificateState): [],
+        filterStatus: modificateFilterStatus,
       }
     
     case CLEAR_CHECKBOXES:
+
       return {
         ...state,
-        UNPAID: false,
-        PAID: false,
-        SENT: false,
-        RECEIVED: false,
+        statusOrders: [],
+        renderPage: pagination({...state}),
         CANCELLED: false,
         ALL: true,
         filterStatus: [],
-        // search: false,
-        // status: false,
       }
     default:
       return state;
