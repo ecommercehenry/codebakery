@@ -36,6 +36,12 @@ const AboutUsGrid = () => {
   );
 };
 
+const media = {
+  tablet: "@media(min-width:768px)",
+  laptop: "@media(min-width:992px)",
+  desktop: "@media(min-width:1200px)",
+};
+
 const AboutUsInfo = styled.div`
   display: flex;
   align-items: center;
@@ -65,13 +71,18 @@ const AboutUsInfo = styled.div`
 
 const AboutUsConteinerGrid = styled.div`
   display: grid;
-  grid-template-columns: 2fr 2fr 2fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
 
-  @media (max-width: 1400px) {
+  ${media.tablet} {
     display: grid;
-
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+  }
+  ${media.laptop} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
   }
 `;
 

@@ -95,6 +95,7 @@ const AboutUsConteiner = styled.div`
     transform: translate(-95%);
     transition: all 0.8s;
     cursor: pointer;
+    opacity: 0.9;
   }
 
   .icons i {
