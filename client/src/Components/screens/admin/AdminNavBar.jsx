@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, Route } from "react-router-dom";
 
 //styles
@@ -16,9 +17,10 @@ const AdminNavBar = ({ setAddProduct }) => {
   };
 
   const [add, setAdd] = useState(false);
+  let {status} = useSelector((state)=>state.theme);
 
   return (
-    <StyledNavBar>
+    <StyledNavBar light={status}>
       <div className="onLeft">
         <Route path="/admin/products">
           <div className="optionTab">PRODUCTS</div>
@@ -29,6 +31,10 @@ const AdminNavBar = ({ setAddProduct }) => {
           <div className="optionTab">ORDERS</div>
           <SearchBarAdmin />
         </Route>
+
+        <Route path="/admin/users">
+          <div className="optionTab">USERS</div>
+        </Route>
       </div>
 
       <Route path="/admin/orders">
@@ -36,6 +42,7 @@ const AdminNavBar = ({ setAddProduct }) => {
           <SortByPrice />
         </div>
       </Route>
+
 
       
       <Route path="/admin/products">
@@ -66,11 +73,14 @@ const AdminNavBar = ({ setAddProduct }) => {
 const StyledNavBar = styled.div`
   width: 77vw;
   max-width: 100%;
-  height: 100%;
+  height: 6em;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0 6rem 0 4rem;
+  background: ${({light})=>light 
+    ? 'white' 
+    : '#222222'};
   .onLeft {
     .optionTab {
       color: #513066;

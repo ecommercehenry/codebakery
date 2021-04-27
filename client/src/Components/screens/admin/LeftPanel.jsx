@@ -1,12 +1,14 @@
 import React from "react";
 
 //icons
-import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
+import { HiOutlineExternalLink, HiOutlineLogout, HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 
 //styles
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { FlexboxGrid } from "rsuite";
+import ThemeSwitch from "../navBar/ThemeSwitch";
 
 const LeftPanel = () => {
   const path = window.location.pathname;
@@ -23,6 +25,7 @@ const LeftPanel = () => {
   return (
     <StyledPanel>
       <div className="content">
+        <section style={{width: "100%"}}>
         <div className="userInfo">
           <div className="userAvatar"></div>
           <div className="userName">User Name</div>
@@ -50,20 +53,35 @@ const LeftPanel = () => {
               <span className="tabName">Users</span>
             </div>
           </Link>
-          <Link 
+        </div>
+        </section>
+
+        <section style={{display:"flex", flexDirection: "column", width: "100%"}}>
+        
+        {/* <ThemeSwitch /> */}
+
+        <Link 
+            className="text-decoration-none text-white"
+            to="/"
+          >
+            <div className="bottom-tabs">
+            <HiOutlineExternalLink size="1rem" className="icon"/>
+            <span>Home</span>
+            
+            </div>
+          </Link>
+        <Link 
             className="text-decoration-none text-white"
             to="/"
             onClick={logout}
           >
-            Logout
+            <div className="bottom-tabs">
+            <HiOutlineLogout size="1rem" className="icon"/>
+            <span>Logout</span>
+            
+            </div>
           </Link>
-          <Link 
-            className="text-decoration-none text-white"
-            to="/"
-          >
-            Home
-          </Link>
-        </div>
+        </section>
       </div>
     </StyledPanel>
   );
@@ -83,13 +101,29 @@ const StyledPanel = styled.div`
   justify-content: center;
   padding-top: 5vh;
   color: white;
+
+  .bottom-tabs{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1.6em;
+    margin-top: .5em;
+
+    span{
+      font-size: 1rem;
+      margin-left: 0.5rem;
+    }
+  }
+
   .content {
     width: 100%;
-    height: 45vh;
+    height: 95%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
+    font-size: 1.3rem;
     .userInfo {
       width: 100%;
       height: 19vh;
@@ -123,6 +157,7 @@ const StyledPanel = styled.div`
       flex-direction: column;
       justify-content: flex-start;
       margin-top: 4rem;
+      font-weight: bold;
       .tab {
         margin-top: 0.5rem;
         font-size: 1.3rem;

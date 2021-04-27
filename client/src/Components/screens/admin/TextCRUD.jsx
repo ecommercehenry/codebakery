@@ -99,10 +99,11 @@ const StyledTextCRUD = styled.div`
     flex-direction: column;
     align-items: center;
     margin-right: 30px;
+    height: 100%
   }
   img {
-    width: 70px;
-    height: 70px;
+    width: 4.5rem;
+    height: 100%;
     border-radius: 100%;
   }
   .name-container {

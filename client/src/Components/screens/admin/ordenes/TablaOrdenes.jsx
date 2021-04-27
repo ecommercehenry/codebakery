@@ -53,8 +53,7 @@ export default function TablaOrdenes() {
 console.log('render', dataRENDER)
   return (
     <StyledTablaOrdenes>
-      {<ButtonClear name="Clear" />}
-      <CheckFilters />
+      {/* <CheckFilters /> */}
       {/* Checkbox filters */}
       { dataRENDER?.length > 0 ? (
         dataRENDER.map((ord) => {
@@ -72,7 +71,7 @@ const StyledTablaOrdenes = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  margin-top: 0.5rem;
+  margin-top: 4em;
   margin-left: 0;
   height: 100%;
   //background:red;
