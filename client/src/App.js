@@ -69,7 +69,7 @@ function App() {
       <>
         <GlobalStyle />
         <Switch>
-        <Route path='/sucursales' component={Sucursales}/>
+        <Route path='/stores' component={Sucursales}/>
           <Route path='/checkout' component={Checkout}/>
           <Route exact path="/" component={Landing} />
           <Route path="/catalogue" component={Catalogue} />
