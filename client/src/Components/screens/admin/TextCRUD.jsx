@@ -92,7 +92,7 @@ const StyledTextCRUD = styled.div`
   }
   .element-container span {
     font-weight: 700;
-    color: rgb(123, 87, 156);
+    color: #5f3f71;
   }
   .image-container {
     display: flex;
@@ -113,19 +113,20 @@ const StyledTextCRUD = styled.div`
   }
   .name-container p {
     margin: 0;
-    color: grey;
+    color: #3b3b3b;
     font-weight: 500;
   }
 
   .stock-container {
     width: 5rem;
     height: 100%;
+    color: #3b3b3b;
   }
   .stock-container p {
-    margin-top: 0.5rem;
+    width: 60%;
     display: flex;
     justify-content: center;
-    color: grey;
+    color: #3b3b3b;
     font-weight: 500;
     text-align: center;
   }
@@ -143,6 +144,7 @@ const StyledTextCRUD = styled.div`
   }
   .container-mapeo p {
     margin-bottom: 0;
+    color: #3b3b3b;
   }
   .price-container {
     width: 7rem;
@@ -151,7 +153,7 @@ const StyledTextCRUD = styled.div`
   .price-container p {
     display: flex;
     justify-content: flex-start;
-    color: grey;
+    color: #3b3b3b;
     font-weight: 500;
   }
 

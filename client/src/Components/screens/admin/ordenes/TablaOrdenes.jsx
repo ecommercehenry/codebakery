@@ -49,7 +49,7 @@ export default function TablaOrdenes() {
     dataRENDER = renderPage;
   }
 
-console.log('render', dataRENDER)
+/* console.log('render', dataRENDER) */
   return (
     <StyledTablaOrdenes>
       {/* <CheckFilters /> */}
