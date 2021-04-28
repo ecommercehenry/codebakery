@@ -25,7 +25,7 @@ const { dataPopulation } = require("./src/sequelize/dataPopulation");
 conn.sync({ force: true }).then(() => {
   dataPopulation();
 
-  server.listen(3001, () => {
+  server.listen(process.env.PORT || 3001, () => {
     console.log("Iniciado!")
   });
 });
