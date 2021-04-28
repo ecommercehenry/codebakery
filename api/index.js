@@ -26,6 +26,6 @@ conn.sync({ force: true }).then(() => {
   dataPopulation();
 
   server.listen(3001, () => {
-    
+    console.log("Iniciado!")
   });
 });
