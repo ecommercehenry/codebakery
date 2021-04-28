@@ -105,9 +105,10 @@ export const changedStatus = () => {
 export const changePage = (num) => {
   return {
     type: CHANGE_PAGE,
-    payload:num
+    payload: num
   };
 };
+
 export const checkboxChange = (id) => {
   return {
     type: CHECKBOX_CHANGE,
@@ -117,4 +118,12 @@ export const checkboxChange = (id) => {
 
 export const clearCheckboxes = () => {
   return { type : CLEAR_CHECKBOXES }
+}
+
+export const productToHigh = () => {
+  return { type: PRICE_LOW_TO_HIGH }
+}
+
+export const productToLow = () => {
+  return { type: PRICE_HIGH_TO_LOW }
 }

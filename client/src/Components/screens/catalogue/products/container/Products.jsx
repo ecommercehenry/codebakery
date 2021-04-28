@@ -10,6 +10,7 @@ import { guardarProductos } from "../../../../../actions/index";
 import Grid from "../grid/Grid";
 import "./Products.css";
 import ProductBar from './ProductBar';
+
 const Products = () => {
 //   const [search, setSearch] = useState(false);
 //   const { stateSearch } = useSelector((state) => state);
@@ -17,7 +18,7 @@ const Products = () => {
 
   let { data } = useQuery(allProducts);
   useEffect(() => {
-    dispatch(guardarProductos(data));
+    dispatch(guardarProductos(data)); 
   }, []);
 
   return (

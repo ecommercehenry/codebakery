@@ -8,8 +8,7 @@ import ProductCard from './ProductCard';
 const Grid = () => {
   let {status} = useSelector((state)=>state.theme);
   let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state.reducer);
-  let arr = []
-  console.log(stateproducts)
+  let arr = [];
   if(search === true){
     arr = allProduct.filter((element) => 
       element.name.toLowerCase().includes(filterProduct.toLowerCase())  )

@@ -2,6 +2,8 @@ import {
   GET_ALL_PRODUCTS,
   GET_PRODUCT_BY_NAME,
   GUARDAR_PRODUCTOS,
+  PRICE_HIGH_TO_LOW,
+  PRICE_LOW_TO_HIGH,
   SET_SEARCH
 } from "../actions";
 //import allProducts from "../Apollo/queries/allProducts";
@@ -9,7 +11,7 @@ import {
 const initialState = {
   stateproducts: {},
   stateSearch: {},
-  filterProduct: "",
+  filterProduct: "", 
   allProduct: [],
   search: false,
 };
@@ -46,6 +48,22 @@ const reducer = (state = initialState, action) => {
         ...state,
         stateSearch: action.payload,
       };
+    
+    case PRICE_HIGH_TO_LOW:
+      return {
+        ...state,
+        allProduct: [...state.allProduct].sort((a,b) => {
+            return b.price - a.price
+          }),
+      }
+
+    case PRICE_LOW_TO_HIGH:
+      return {
+        ...state,
+        allProduct: [...state.allProduct].sort((a,b) => {
+          return a.price - b.price;
+        }),
+      }
 
     default:
       return state;
