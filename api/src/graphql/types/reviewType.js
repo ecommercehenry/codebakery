@@ -4,6 +4,9 @@ module.exports = `
         title : String!
         description: String!
         stars: String!
+        createdAt: String!
+        productId: Int!
+        
     }
     
 `

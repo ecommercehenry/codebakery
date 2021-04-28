@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlineSearch } from "react-icons/hi";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { filterName, filterOrders, filterUsers } from "../../../actions";
 import { toast } from "react-toastify";
 
 const SearchBarAdmin = () => {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
+  const stateSearch = useSelector(state=>state.ordersReducer.search)
+  useEffect(()=>{
+    if(stateSearch === false){
+      setValue("id","")
+    }
+  },[stateSearch])
 
   const onSubmit = ({ id, type }) => {
+
     if (!id) return toast("Ingrese un ID");
 
     if (type === "user") {
@@ -25,8 +32,8 @@ const SearchBarAdmin = () => {
     if (type === "name") {
       dispatch(filterName(id));
     }
+    
   };
-
   return (
     <StyledSearchBar>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -40,6 +47,7 @@ const SearchBarAdmin = () => {
           className="input-vertical-c"
           type="text"
           placeholder="Search"
+          // value={input}
           style={{ textAlign: "left" }}
         />
         <div className="vertical-line">‎‎‎‏‏‎ ‎</div>

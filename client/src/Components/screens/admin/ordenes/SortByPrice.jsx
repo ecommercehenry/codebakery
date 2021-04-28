@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Slider from "@material-ui/core/Slider";
 import { withStyles } from "@material-ui/core/styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import Button from "@material-ui/core/Button";
-import styled from "styled-components";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -13,7 +10,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 // import DraftsIcon from '@material-ui/icons/Drafts';
 // import SendIcon from '@material-ui/icons/Send';
 
-import styles from "./SortByPrice.module.css";
 import { pricetolow, pricetohigh } from "../../../../actions";
 
 const useStyles = makeStyles({

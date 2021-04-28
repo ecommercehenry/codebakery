@@ -115,7 +115,7 @@ function FormCRUD({ id, handlerOnClick }) {
               ))}
               {newCategory ? (
                 <div className="newCategory">
-                  <label>New category</label>
+                  {/* <label>New category</label> */}
                   <input
                     value={valueNewCategory}
                     name="newCategory"
@@ -201,7 +201,7 @@ const StyledFormCRUD = styled.form`
   }
   .F-element-container span {
     font-weight: 700;
-    color: rgb(123, 87, 156);
+    color: #5f3f71;
   }
   .image-container {
     display: flex;
@@ -282,10 +282,8 @@ const StyledFormCRUD = styled.form`
     width: 10rem;
   }
   .F-categories {
-    padding-left: 0.5rem;
     padding-top: 0.5rem;
     margin-top: 0.5rem;
-    border: 1.5px solid grey;
     border-radius: 35px;
     width: 100%;
     height: 5rem;
@@ -294,16 +292,17 @@ const StyledFormCRUD = styled.form`
   }
   .F-categories p {
     background-color: rgb(87, 46, 126);
-    color: rgb(203, 181, 224);
+    color: white;
     font-size: 0.7rem;
+    font-weight: bolder;
     width: fit-content;
+    padding-left: 1em;
     margin: 0;
     margin-top: 3px;
     margin-right: 3px;
     border-radius: 15px;
     display: flex;
     justify-content: center;
-    padding: 3px;
     align-items: center;
   }
   .F-categories p button {
@@ -320,20 +319,28 @@ const StyledFormCRUD = styled.form`
     border: none;
     padding: 6px;
   }
+  .newCategory{
+    background:rgb(236,227,250);
+    height: 100%;
+  }
   .newCategory input {
     border: 1.5px solid;
     border-color: grey;
     border-radius: 1.5rem;
     background-color: rgb(203, 181, 224);
+    width: 100%;
   }
   .newCategory button {
     border: 1.5px solid;
     border-color: grey;
     border-radius: 1.5rem;
     background-color: rgb(40, 19, 59);
-    color: rgb(199, 177, 219);
+    color: white;
     padding: 6px;
+    margin: 0;
     margin-top: 2px;
+    font-weight: bold;
+    width: 100%;
   }
 
   .F-price-container {

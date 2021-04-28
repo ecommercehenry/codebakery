@@ -46,7 +46,7 @@ const BillCard = () => {
     .reduce((a, b) => a + b, 0)
     .toFixed(2);
 
-  console.log("SubTotal: ", subTotal);
+  /* console.log("SubTotal: ", subTotal); */
 
   const subTotalPor = ((subTotal * 21) / 100).toFixed(2);
 

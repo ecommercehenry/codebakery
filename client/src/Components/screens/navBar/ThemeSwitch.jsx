@@ -22,7 +22,7 @@ const ThemeSwitch = () => {
         }
     },[])
     
-    console.log(location,home)
+    /* console.log(location,home) */
     return (
         <StyledContainer home={home}>
             <span>

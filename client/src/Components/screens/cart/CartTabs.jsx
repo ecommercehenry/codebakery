@@ -65,8 +65,10 @@ const StyledTabs = styled.div`
         }
       }
       .selected{
-              
-              border-bottom: 2px solid #333;
+        
+              border-bottom: 2px solid ${({light})=>light 
+                ? '#333'
+                : 'white'};
               .linked{
                 color:${({light})=>light 
                 ? 'black' 

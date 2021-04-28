@@ -7,7 +7,7 @@ import styled from 'styled-components';
 //Components
 import ButtonAddCart from './ButtonAddCart';
 
-const ProductCard = ({id,name,image}) => {
+const ProductCard = ({id,name,image, price}) => {
     return (
         <StyledCard>
             <Link to={`/catalogue/detail/${id}`} className='link'>
@@ -15,6 +15,7 @@ const ProductCard = ({id,name,image}) => {
                     <img src={image} alt={name}/>
                 </div>
                 <div className="name"><span>{name}</span></div>
+                <div className="price"><span>$ {price}</span></div>
             </Link>
             <div className="btn"><ButtonAddCart id={id}/></div>
         </StyledCard>

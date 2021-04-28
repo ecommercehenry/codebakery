@@ -9,8 +9,8 @@ const Hero = () => {
     <>
       <StyledHero className="hero d-flex justify-content-center align-items-center">
             <span id="hero-title">Sale!</span>
-            <img id="vertical" src={vertical} />
-            <img id="horizontal" src={horizontal} />
+            <img id="vertical" src={vertical} alt=""/>
+            <img id="horizontal" src={horizontal} alt=""/>
       </StyledHero>
     </>
   );

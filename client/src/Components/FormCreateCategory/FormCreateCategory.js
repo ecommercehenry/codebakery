@@ -99,6 +99,7 @@ margin-top: 0;
   transform: none!important;
   margin: 0;
   font-weight: bold;
+  box-shadow: none;
 }
 
 .Success-btnn{
