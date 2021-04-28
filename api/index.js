@@ -20,7 +20,6 @@
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const { dataPopulation } = require("./src/sequelize/dataPopulation");
-
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   dataPopulation();
