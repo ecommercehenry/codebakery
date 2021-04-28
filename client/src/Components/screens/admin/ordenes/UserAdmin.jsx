@@ -43,11 +43,13 @@ const UserAdmin = () => {
     }
   }, [data, loading]);
 
-  function handleClickAsc() {
+  function handleClickAsc(e) {
+    e.preventDefault()
     dispatch(orderAscByName());
   }
 
-  function handleClickDesc() {
+  function handleClickDesc(e) {
+    e.preventDefault()
     dispatch(orderDescByName());
   }
 
@@ -66,7 +68,7 @@ const UserAdmin = () => {
     dispatch(searchByName(input));
     setInput("");
   }
-
+  
   if (!dataToRender) {
     return <div>Loading...</div>;
   } else {
@@ -82,11 +84,11 @@ const UserAdmin = () => {
           />
           <input type="submit" value="SEARCH" />
         </form>
-        <button onClick={handleClickAsc}>ORDEN NAME ASC</button>
-        <button onClick={handleClickDesc}>ORDEN NAME DESC</button>
+        {/* <button onClick={(e) => handleClickAsc(e)}>ORDEN NAME ASC</button>
+        <button onClick={(e) => handleClickDesc(e)}>ORDEN NAME DESC</button> */}
         <div>
           {dataToRender?.map((element) => (
-            <section>
+            <section key={element.id}>
               <div>
                 <span>ID</span> <span>NAME</span> <span>DNI</span>{" "}
                 <span>EMAIL</span> <span>PHONE NUMBER</span> <span>ROLE</span>
@@ -108,7 +110,7 @@ const UserAdmin = () => {
                 {element.email === "admin@admin.com" ? (
                   <button>THIS SUPER USER</button>
                 ) : (
-                  <Promote idUser={element.id} rol={element.role} />
+                  <Promote name={element.name} idUser={element.id} rol={element.role} />
                 )}
               </div>
               <div>

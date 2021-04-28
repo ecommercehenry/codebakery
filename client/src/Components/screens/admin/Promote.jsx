@@ -9,7 +9,7 @@ import GET_ALL_USERS from "../../../Apollo/queries/getAllUsers";
 export default function Promote({ idUser, rol }) {
   const [value, setValue] = useState(rol);
   const [promoteUser, { loading, error }] = useMutation(PROMOTE_USER, {
-    refetchQueries: [{ query: GET_ALL_USERS }],
+    // refetchQueries: [{ query: GET_ALL_USERS }],
   });
 
   useEffect(() => {
