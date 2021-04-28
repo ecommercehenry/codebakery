@@ -11,7 +11,7 @@ const Grid = () => {
   let arr = [];
   if(search === true){
     arr = allProduct.filter((element) => 
-      element.name.toLowerCase().includes(filterProduct.toLowerCase())  )
+      element.name.toLowerCase().includes(filterProduct.toLowerCase()))
        //con includes la busq ya no pide exactitud en el string. @Lizen
   }
   
