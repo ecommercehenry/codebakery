@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { RoundButton } from "../../GlobalStyle";
 import CountCart from "../cart/container/CountCart";
 import styled from "styled-components";
 import ThemeSwitch from "./ThemeSwitch";
@@ -40,8 +38,6 @@ const NavBar = ({ color }) => {
   let role = window.localStorage.getItem("role");
   let id = window.localStorage.getItem("id");
   let logeed = storage.token ? true : false;
-
-  const isCart = window.location.pathname.includes("cart");
 
   return (
     <StyledNavBar className="navbar d-flex align-items-center mx-5">

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import {Route} from 'react-router-dom'
 
@@ -20,7 +20,6 @@ import CheckFilters from '../ordenes/CheckFilters';
 
 
 const AdminPanel = () => {
-  const [addProduct, setAddProduct] = useState(false);
   let {status} = useSelector((state)=>state.theme);
   return (
     <StyledAdminPanel light={status}>
@@ -30,7 +29,7 @@ const AdminPanel = () => {
       <div className="right">
 
         <div className="top">
-          <AdminNavBar setAddProduct={setAddProduct} />
+          <AdminNavBar />
           <Route path="/admin/orders" component={CheckFilters}/>
         </div>
 

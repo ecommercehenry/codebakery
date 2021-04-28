@@ -20,13 +20,13 @@ let userId = parseInt(storage.id);
   let sum = 0;
 
   if (itemsFromCart !== undefined) {
-    itemsFromCart.map((elem) => {
+    itemsFromCart.forEach((elem) => {
       sum = sum + elem.quantity;
     });
   }
   if(data !== undefined){
-    if (data.getOrdersByUserIdInCart.orders.length != 0 ){
-      data.getOrdersByUserIdInCart.orders[0].lineal_order.map((element) =>{
+    if (data.getOrdersByUserIdInCart.orders.length !== 0 ){
+      data.getOrdersByUserIdInCart.orders[0].lineal_order.forEach((element) =>{
         valor = valor + element.quantity
       }); 
     }

@@ -40,7 +40,7 @@ const StripeForm = () => {
                 }
                 )
                 elements.getElement(CardElement).clear()
-                if(data.message=="successfull transaction"){
+                if(data.message==="successfull transaction"){
                     toast(data.message)
                     setSuccess(true)
                 }else{

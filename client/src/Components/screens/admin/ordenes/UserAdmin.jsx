@@ -1,7 +1,7 @@
 import React from "react";
 import GET_ALL_USERS from "../../../../Apollo/queries/getAllUsers";
 import DELETE_USER from "../../../../Apollo/mutations/deleteUser";
-import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { useEffect } from "react";
 import Promote from "../Promote";
 
@@ -11,13 +11,10 @@ const UserAdmin = () => {
     add promete (role)
     sort data by id
     */
-  const [
-    deleteUser,
-    { data: dataDeleteUser, loading: loadingMutation },
-  ] = useMutation(DELETE_USER, {
+  const [deleteUser] = useMutation(DELETE_USER, {
     refetchQueries: [{ query: GET_ALL_USERS }],
   });
-  let [getAllUsers, { data, loading }] = useLazyQuery(GET_ALL_USERS);
+  let [getAllUsers, { data }] = useLazyQuery(GET_ALL_USERS);
 
   function handleClick(e) {
     // e.preventDefault()

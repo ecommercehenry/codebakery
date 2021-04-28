@@ -12,7 +12,7 @@ const AboutUsGrid = () => {
         <p>
           Nosotros somos el equipo detras de <span>Code Bakery</span>. El
           e-commerce forma parte de un proyecto final del bootcamp intensivo de
-          <a target="_blank" href="https://www.soyhenry.com/">
+          <a target="_blank" rel="noopener noreferrer" href="https://www.soyhenry.com/">
             "Henry".
           </a>{" "}
           Conocenos más a fondo en nuestras redes sociales.

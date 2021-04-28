@@ -6,12 +6,10 @@ import AdminPanel from "./Components/screens/admin/container/AdminPanel";
 import Catalogue from "./Components/screens/catalogue/container/Catalogue";
 import Cart from "./Components/screens/cart/container/Cart";
 import AboutUs from "./Components/screens/aboutUs/container/AboutUsGrid";
-import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory";
 // import FormCRUD from "./Components/screens/admin/FormCRUD"
 import Checkout from './Components/screens/cart/Checkout/Checkout'
 import Stripe from "./Components/screens/cart/Checkout/Stripe"
 import GlobalStyle from "./Components/GlobalStyle";
-import GuestCart from "./Components/screens/cart/GuestCart";
 import UserAccount from "./Components/UserAcount/UserAccount";
 import UserPanel from "./Components/screens/user/UserPanel"
 import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
@@ -34,7 +32,7 @@ let token = localStorage.getItem("token");
 let role = localStorage.getItem("role");
 
 function App() {
-  const [validateUser, { data, loading }] = useLazyQuery(VALIDATE_CREDENTIALS);
+  const [validateUser, { data }] = useLazyQuery(VALIDATE_CREDENTIALS);
   useEffect(() => {
     validateUser({ variables: { token: token, role: role } });
   }, [data]);

@@ -1,11 +1,9 @@
 import React from "react";
-import FormReview from "../../reviews/FormReview"; 
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from 'styled-components'; 
 
 
 const OrderByUser = ({ id, name, price, quantity }) => {
-let idd = useParams(); 
     return (
 
         <StyledOrd>

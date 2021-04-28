@@ -1,6 +1,5 @@
 import React,{ useState,useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Select from 'react-select';
 import { useMutation, useQuery } from '@apollo/client';
 import getAllCategories from "../Apollo/queries/getAllCategories"
 import ADD_PRODUCT from "../Apollo/mutations/addProduct";
@@ -35,10 +34,6 @@ const AddProductForm = ({setAddProduct}) => {
         image:''
     })
 
-    const closeHandler = () => {
-        setAddProduct(false)
-    }
-
     const inputHandler = (e) => {
         console.log(e, 'mis dats')
         return setInfo({...info,[e.target.name]:e.target.value})
@@ -62,6 +57,9 @@ const AddProductForm = ({setAddProduct}) => {
         switch (option) {
             case 'options':
                 setCategory(value)
+                break
+            default:
+                setCategory(null)
         }
         setSelected([...value])
     }
@@ -73,7 +71,7 @@ const AddProductForm = ({setAddProduct}) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        if(info.image == ''){toast('Please add an image')}else{
+        if(info.image === ''){toast('Please add an image')}else{
             info.category=selected;
             addProduct({variables:
                 {
@@ -120,7 +118,7 @@ const AddProductForm = ({setAddProduct}) => {
             <div className="imageLoaderr">
                 <div className="previeww">
                     {
-                        preview && <img src={preview} alt="image-preview"/>
+                        preview && <img src={preview} alt="preview"/>
                     }
                 </div>
                 <div className="fakeButtonn">

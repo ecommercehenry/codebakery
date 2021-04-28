@@ -23,11 +23,11 @@ const AboutUs = ({ name, title, img, git, linkedin }) => {
             <p>{title}</p>
           </div>
           <div className="icons center">
-            <a target="_blank" href={git}>
+            <a target="_blank" rel="noopener noreferrer" href={git}>
               <img className="icon-git" src={Git} alt="GitHub" />
             </a>
 
-            <a target="_blank" href={linkedin}>
+            <a target="_blank" rel="noopener noreferrer" href={linkedin}>
               <img className="icon-linke" src={Linke} alt="Likedin" />
             </a>
           </div>

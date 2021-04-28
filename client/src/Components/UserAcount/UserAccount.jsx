@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import "./UserAccount.css";
 import styled from "styled-components";
-import CREATE_USER from "../../Apollo/mutations/createUser";
 
 import { Redirect } from "react-router-dom";
 
 // Login/ out
 import Login from "./Login";
-import Logout from "./Logout";
-import { useDispatch } from "react-redux";
 import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
@@ -22,21 +19,12 @@ toast.configure()
 const UserAcount = () => {
   // valida que exista el usuario y lo devuelve con un token
   const [login, { loading, data }] = useLazyQuery(validateUser); 
-  // const validate = useLazyQuery(VALIDATE_CREDENTIALS);
-  const [functionValidate, {loading: loadingValidate, data: dataValidate}] = useLazyQuery(VALIDATE_CREDENTIALS);
-  // const loadingValidate = validateCredentials[1]?.loading?.validateCredentials, 
-  // dataValidate = validateCredentials[1]?.data?.validateCredentials,
-  // functionValidate = validateCredentials[0];
+  const [functionValidate, { data: dataValidate}] = useLazyQuery(VALIDATE_CREDENTIALS);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // 
- 
-  // 
-  // Google login
-  const dispatch = useDispatch();
 
   useEffect(()=>{
     if(localStorage.getItem('token')){
@@ -139,37 +127,6 @@ const StyledAcheDos = styled.h2`
   display: inline-block;
   margin: 40px 8px 10px 8px;
   color: #cccccc;
-`;
-
-const StyledUserPanel = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  min-height: 100%;
-  padding: 20px;
-  .formContent {
-    -webkit-border-radius: 10px 10px 10px 10px;
-    border-radius: 10px 10px 10px 10px;
-    background: #fff;
-    padding: 30px;
-    width: 90%;
-    max-width: 450px;
-    position: relative;
-    padding: 0px;
-    -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-    text-align: center;
-    .formFooter {
-      background-color: #f6f6f6;
-      border-top: 1px solid #dce8f1;
-      padding: 25px;
-      text-align: center;
-      -webkit-border-radius: 0 0 10px 10px;
-      border-radius: 0 0 10px 10px;
-    }
-  }
 `;
 
 export default UserAcount;

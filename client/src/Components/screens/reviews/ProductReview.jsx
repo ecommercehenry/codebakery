@@ -23,7 +23,7 @@ const ProductReview = ({ id }) => {
   let result = 0;
   if (data !== undefined) {
     if (data.getAllReviewsFromAProduct.length !== 0) {
-      data.getAllReviewsFromAProduct.map((element) => {
+      data.getAllReviewsFromAProduct.forEach((element) => {
         suma = suma + parseInt(element.stars);
         result = Math.ceil(suma / data.getAllReviewsFromAProduct.length);
       });

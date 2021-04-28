@@ -47,9 +47,9 @@ const Catalogue = () => {
 
     if (logged && itemsToCart.length) {
       if (!queryData.loading) {
-        if (queryData.data.getOrdersByUserIdInCart.orders.length != 0) {
+        if (queryData.data.getOrdersByUserIdInCart.orders.length !== 0) {
           let orderId = queryData.data.getOrdersByUserIdInCart.orders[0].id;
-          itemsToCart.map((elem) => {
+          itemsToCart.forEach((elem) => {
             addProductToOrder({
               variables: {
                 orderId: orderId,

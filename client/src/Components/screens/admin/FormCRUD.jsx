@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { modifyProduct } from "../../../actions/modifyProductAction";
 // import { addCategoryToProductAction } from "../../../actions/addCategoryToProductAction";
 import styled from "styled-components";
-import { HiOutlinePencil, HiOutlineSave, HiOutlineX } from "react-icons/hi";
+import { HiOutlineSave, HiOutlineX } from "react-icons/hi";
 import { toast } from "react-toastify";
 
 import '../../../Assets/toast.css'
@@ -20,9 +20,6 @@ function FormCRUD({ id, handlerOnClick }) {
   const [valueNewCategory, setValueNewCategory] = useState("");
   function onChangeNewCategory(e) {
     setValueNewCategory(e.target.value);
-  }
-  function submitNewCategory() {
-    setInputs(...inputs);
   }
   const [inputs, setInputs] = useState({
     name: product.name,
@@ -39,7 +36,7 @@ function FormCRUD({ id, handlerOnClick }) {
       [e.target.name]: e.target.value,
     });
   }
-  const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT);
+  const [modificar, { data, loading }] = useMutation(MODIFY_PRODUCT);
   useEffect(() => {
     if (data && !loading) {
       dispatch(modifyProduct(id, data.modifyProduct));

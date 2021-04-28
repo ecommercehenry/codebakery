@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Steps } from "rsuite";
-
 import "rsuite/lib/styles/index.less";
-/* import "./prueba.css" */
-import { useQuery, useMutation } from "@apollo/client";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
@@ -12,20 +8,6 @@ import { Link } from "react-router-dom";
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
-  const [orderStatus, setOrderStatus] = useState("unpaid");
-  
-  /* let status;
-  if (orden.status === "unpaid") status = 0;
-  if (orden.status === "paid") status = 1;
-  if (orden.status === "received") status = 2;
-
-  const instance = (
-    <Steps current={1}>
-      <Steps.Item onClick={() => console.log("cambiar status a paid")} />
-      <Steps.Item onClick={() => console.log("cambiar status a send")} />
-      <Steps.Item onClick={() => console.log("cambiar status a recived")} />
-    </Steps>
-  ); */
 
   function capitalizeFirstLetter(string) 
   {

@@ -1,28 +1,11 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
 import { useDispatch} from "react-redux";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
-// import DraftsIcon from '@material-ui/icons/Drafts';
-// import SendIcon from '@material-ui/icons/Send';
-
 import { pricetolow, pricetohigh } from "../../../../actions";
-
-const useStyles = makeStyles({
-  root: {
-    padding: 15,
-    width: 300,
-    height: 80,
-  },
-});
-
-function valuetext(value) {
-  return `${value}°C`;
-}
 
 const StyledMenu = withStyles({
   paper: {
@@ -56,15 +39,8 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 export default function SortByPrice() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState([20, 37]);
-  //estado local del rango
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -119,25 +95,4 @@ export default function SortByPrice() {
       </StyledMenu>
     </div>
   );
-}
-
-{
-  /* <StyledMenuItem>
-                    
-                          <div className={classes.root}>
-                              <div id="range-slider">
-                                  Price
-                              </div>
-                  
-                              <Slider
-                                  value={value}
-                                  onChange={handleChange}
-                                  valueLabelDisplay="auto"
-                                  aria-labelledby="range-slider"
-                                  getAriaValueText={valuetext}
-                                  
-                              />
-                          </div>
-
-                    </StyledMenuItem> */
 }

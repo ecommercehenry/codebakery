@@ -27,7 +27,7 @@ export default function TablaOrdenes() {
   }, [data]);
 
   //traigo info del reducer..
-  const { orders, search, filterOrders, idError, status, renderPage } = useSelector(
+  const { search, filterOrders, idError, status, renderPage } = useSelector(
     (state) => state.ordersReducer
   );
 

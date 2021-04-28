@@ -1,4 +1,4 @@
-import React, {useEffect, useState}  from 'react';
+import React, {useEffect}  from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import { useQuery } from "@apollo/client";
 import productsByCategoryName from '../../../../../Apollo/queries/productsByCategoryName';
@@ -19,10 +19,6 @@ const Categories = () => {
         variables: { name: name },
     });
     products = products?.data?.getProductByCategoryName ? products.data.getProductByCategoryName :products.data;
-    
-    //Obtenemos el estado global de los productos de redux (ESTA ES TU DATA JOHANNA)
-    const {stateproducts}= useSelector(state =>  state);
-
 
     const dispatch= useDispatch();
     //Obtenemos todos los productos de apolo client 

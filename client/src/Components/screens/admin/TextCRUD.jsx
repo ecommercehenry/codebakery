@@ -14,13 +14,6 @@ function TextCRUD({ id }) {
     setShow(!show);
   }
 
-  {
-    /* <div className="product-container-edit" onDoubleClick={handlerOnClick}>
-      {show ? (
-        <div className="element-container" id={id}>
-           */
-  }
-
   if (product) {
     return (
       <>
