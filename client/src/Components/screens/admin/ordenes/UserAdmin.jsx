@@ -27,7 +27,7 @@ const UserAdmin = () => {
 
   useEffect(() => {
     getAllUsers();
-  }, [data]);
+  }, [data, getAllUsers]);
 
   if (!data) {
     return <div>Loading...</div>;

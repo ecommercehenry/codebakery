@@ -54,12 +54,10 @@ function Login() {
   }, [loadingValidate, dataValidate]);
 
   useEffect(()=>{
-    if(!loadingUser && dataUser){
-      // 
+    if(!loadingUser && dataUser){ 
       validate({variables: {email: dataUser.createUser.email}});
-      // 
     }
-  },[loadingUser, dataUser])
+  },[loadingUser, dataUser, validate])
   // 
 
   // const onFailure = (res) => {

@@ -75,7 +75,7 @@ function ResetPassword() {
         window.location.reload();
       }
     }
-  }, [data]);
+  }, [data, input.newPassword, input.newPasswordRepeat, loading]);
 
   if (redirect) {
     localStorage.setItem("redirect", false);

@@ -41,7 +41,7 @@ const Categories = () => {
         // 
         dispatch(getAllProducts(products));
         // 
-    }, [products]);
+    }, [products, dispatch]);
 
     //tenemos un query para pedir los productos por categorias
     //cada categoria sera renderizada como un boton que al hacer clic llama a la query

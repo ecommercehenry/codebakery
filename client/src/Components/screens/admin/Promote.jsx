@@ -17,7 +17,7 @@ export default function Promote ({idUser, rol}){
           role: value,
         },
       });
-    }, [value]);          
+    }, [value, idUser, promoteUser]);          
               
   
     return(

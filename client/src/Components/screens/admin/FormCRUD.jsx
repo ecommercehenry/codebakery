@@ -41,7 +41,7 @@ function FormCRUD({ id, handlerOnClick }) {
     if (data && !loading) {
       dispatch(modifyProduct(id, data.modifyProduct));
     }
-  }, [data]);
+  }, [data,dispatch, id, loading]);
   /**
    * When edit button is clicked
    */

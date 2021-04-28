@@ -24,7 +24,7 @@ export default function TablaOrdenes() {
 
   useEffect(() => {
     dispatch(saveOrders(ordersQ));
-  }, [data]);
+  }, [data, dispatch, ordersQ]);
 
   //traigo info del reducer..
   const { search, filterOrders, idError, status, renderPage } = useSelector(

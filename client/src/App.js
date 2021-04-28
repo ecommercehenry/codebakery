@@ -35,7 +35,7 @@ function App() {
   const [validateUser, { data }] = useLazyQuery(VALIDATE_CREDENTIALS);
   useEffect(() => {
     validateUser({ variables: { token: token, role: role } });
-  }, [data]);
+  }, [data, validateUser]);
   const isAuthenticated = data?.validateCredentials;
 
   if (isAuthenticated && role === "admin") {

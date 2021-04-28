@@ -73,7 +73,7 @@ const Catalogue = () => {
         }
       }
     }
-  }, [queryData, itemsToCart]);
+  }, [queryData, itemsToCart, addProductToOrder, createOrder, dispatch, logged, userId]);
   return (
     <StyledCatalogue>
       <NavBar color="white" />

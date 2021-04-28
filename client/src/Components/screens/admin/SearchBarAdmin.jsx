@@ -15,7 +15,7 @@ const SearchBarAdmin = () => {
     if(stateSearch === false){
       setValue("id","")
     }
-  },[stateSearch])
+  },[stateSearch, setValue])
 
   const onSubmit = ({ id, type }) => {
 

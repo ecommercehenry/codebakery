@@ -14,7 +14,7 @@ function ListCRUD(){
       if(!loading){
         dispatch(saveProducts(data.product))
       }
-    },[data])
+    },[data, dispatch, loading])
     // 
     return (
         <StyledListCRUD >
