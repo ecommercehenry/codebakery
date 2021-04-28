@@ -52,9 +52,9 @@ server.post("/create_preference", (req, res) => {
       installments: 1, //Cantidad maxima de cuotas
     },
     back_urls: {
-      success: "http://localhost:3001/feedback", //luego modificar si se quiere redigir en cada caso
-      failure: "http://localhost:3000/cart",
-      pending: "http://localhost:3001/feedback",
+      success: process.env.NODE_ENV === "production"? "https://apicodebakery.herokuapp.com/feedback": "http://localhost:3001/feedback", //luego modificar si se quiere redigir en cada caso
+      failure: process.env.NODE_ENV === "production"? "https://apicodebakery.herokuapp.com/cart":"http://localhost:3000/cart",
+      pending: process.env.NODE_ENV === "production"? "https://apicodebakery.herokuapp.com/feedback":"http://localhost:3001/feedback",
     },
   };
 
@@ -85,7 +85,11 @@ server.get('/feedback', async function(req, res) {     //ruta que responde con e
       await orden.save()
       await sendEmail(orden.userId, `Order #${orden.id} pending`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
     }
-    res.redirect("http://localhost:3000/catalogue");
+    if(process.env.NODE_ENV === "production"){
+      return res.redirect("https://apicodebakery.herokuapp.com/catalogue");
+    }
+    return res.redirect("http://localhost:3000/catalogue");
+    
   
 })
 ///mercadopago
