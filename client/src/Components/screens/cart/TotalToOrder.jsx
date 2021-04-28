@@ -6,6 +6,7 @@ import '../../../Assets/toast.css';
 
 //styles
 import styled from "styled-components";
+import { getCurrentDomain } from '../../../config/currentDomain';
 
 toast.configure()
 
@@ -21,7 +22,7 @@ const TotalToOrder = () => {
       }) 
     }
     const doubleClickHandler = () => {
-        window.location.href = "http://localhost:3000/log-in"; 
+        window.location.href = `${getCurrentDomain()}/log-in`; 
      }
 
     return (

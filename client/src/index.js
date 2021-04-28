@@ -8,12 +8,13 @@ import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client'
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import {store,persistor} from "./store/index"
+import { getCurrentDomain } from "./config/currentDomain"
 
 // cliente apollo
 const token = localStorage.getItem('token');
 const role = localStorage.getItem('role');
 const client = new ApolloClient({
-  uri: process.env.NODE_ENV === "production"? "https://apicodebakery.herokuapp.com/graphql" : 'http://localhost:3001/graphql',
+  uri: `${getCurrentDomain()}/graphql`,
   cache: new InMemoryCache(),
   headers: {authtoken:token, authrole: role}
 })

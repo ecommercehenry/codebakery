@@ -27,12 +27,10 @@ import FormReview from "./Components/screens/reviews/FormReview";
 
 import Sucursales from './Components/Maps/Sucursales'
 
-
 let token = localStorage.getItem("token");
 let role = localStorage.getItem("role");
 
 function App() {
-  console.log(process.env.NODE_ENV)
   const [validateUser, { data }] = useLazyQuery(VALIDATE_CREDENTIALS);
   useEffect(() => {
     validateUser({ variables: { token: token, role: role } });
