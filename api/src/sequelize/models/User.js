@@ -53,6 +53,9 @@ module.exports = (sequelize) => {
         return () => this.getDataValue("salt")
       },
     },
+    newsletter: {
+      type: DataTypes.BOOLEAN
+    },
   }, { timestamps: true })
   
 
