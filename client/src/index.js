@@ -13,7 +13,7 @@ import {store,persistor} from "./store/index"
 const token = localStorage.getItem('token');
 const role = localStorage.getItem('role');
 const client = new ApolloClient({
-  uri: 'http://localhost:3001/graphql',
+  uri: process.env.NODE_ENV === "production"? "https://apicodebakery.herokuapp.com/graphql" : 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
   headers: {authtoken:token, authrole: role}
 })
