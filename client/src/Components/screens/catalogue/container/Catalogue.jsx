@@ -11,6 +11,7 @@ import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersB
 import { useDispatch, useSelector } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../../actions/setQuantityOrdersCardBackend";
 import styled from 'styled-components'
+import Footer from "../../footer/Footer";
 
 const Catalogue = () => {
   let storage = window.localStorage;
@@ -82,6 +83,7 @@ const Catalogue = () => {
       <Route path="/catalogue/detail/:id">
         <Detail></Detail>
       </Route>
+      <Footer></Footer>
     </StyledCatalogue>
   );
 };
