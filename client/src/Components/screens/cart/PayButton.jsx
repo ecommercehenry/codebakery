@@ -5,7 +5,9 @@ import { getCurrentDomain } from '../../../config/currentDomain';
 const FORM_ID = 'payment-form';
 
 export default function PayButton({productos}){
-
+    console.log("Pay button")
+    console.log(process.env.NODE_ENV)
+    console.log(`${getCurrentDomain()}/create_preference`)
     const [preferenceId, setPreferenceId] = useState(null);
     
     useEffect(() => {
