@@ -6,7 +6,7 @@ import '../../../Assets/toast.css';
 
 //styles
 import styled from "styled-components";
-import { getCurrentDomainApi } from '../../../config/currentDomain';
+import { getCurrentDomainFront } from '../../../config/currentDomain';
 
 toast.configure()
 
