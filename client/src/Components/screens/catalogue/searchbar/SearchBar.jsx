@@ -16,7 +16,7 @@ const submitHandler = (event) => {
   event.preventDefault();
 } 
 useEffect(() => {
-  dispatch(setSearch(true));
+  // dispatch(setSearch(true));
   dispatch(fetchByName(input));
 }, [input])
 

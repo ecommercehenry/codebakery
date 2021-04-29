@@ -108,7 +108,7 @@ const UserAdmin = () => {
                 {element.email === "admin@admin.com" ? (
                   <button>THIS SUPER USER</button>
                 ) : (
-                  <Promote idUser={element.id} rol={element.role} />
+                  <Promote idUser={element.id} rol={element.role} name= {element.name} />
                 )}
               </div>
               <div>
