@@ -6,7 +6,7 @@ import '../../../Assets/toast.css';
 
 //styles
 import styled from "styled-components";
-import { getCurrentDomain } from '../../../config/currentDomain';
+import { getCurrentDomainApi } from '../../../config/currentDomain';
 
 toast.configure()
 
@@ -22,7 +22,7 @@ const TotalToOrder = () => {
       }) 
     }
     const doubleClickHandler = () => {
-        window.location.href = `${getCurrentDomain()}/log-in`; 
+        window.location.href = `${getCurrentDomainApi()}/log-in`; 
      }
 
     return (

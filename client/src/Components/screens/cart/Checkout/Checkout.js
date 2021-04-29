@@ -15,14 +15,14 @@ import Typography from "@material-ui/core/Typography";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
-import {getCurrentDomain} from "../../../../config/currentDomain"
+import {getCurrentDomainFront} from "../../../../config/currentDomain"
 function Copyright() {
   let {status} = useSelector((state)=>state.theme);
   return (
     <StyledFooter light={status}>
       <Typography variant="body2" align="center">
         {"Copyright © "}
-        <Link color="inherit" href={getCurrentDomain()}>
+        <Link color="inherit" href={getCurrentDomainFront()}>
           Code Bakery
         </Link>{" "}
         {new Date().getFullYear()}
