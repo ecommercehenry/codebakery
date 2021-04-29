@@ -19,7 +19,7 @@ const server = express();
 const {schema, root} = require("./graphql/schema");
 const { sendEmail, getFormatedMessage } = require('./services/emailService');
 const { getOrderById } = require('./services/orderService');
-const { getCurrentDomain, getCurrentDomainApi, getCurrentDomainFront } = require("./config/currentDomain");
+const { getCurrentDomainApi, getCurrentDomainFront } = require("./config/currentDomain");
 server.name = 'API';
 
 server.use(express.json());
@@ -30,7 +30,7 @@ server.use(morgan("dev"));
 server.use(cors());
 
 ///mercadopago
-server.post("/create_preference", (req, res) => {
+server.use("/create_preference", (req, res) => {
   //ruta para crear preferencia
   let { lineal_order } = req.body;
   let items = [];
@@ -45,6 +45,7 @@ server.post("/create_preference", (req, res) => {
     }; /// posiblemente necesario para ticket
     items.push(newitem);
   });
+  console.log(`${getCurrentDomainApi()}/feedback`)
   let preference = {
     items: items,
     external_reference: JSON.stringify(req.body.id),
@@ -53,9 +54,9 @@ server.post("/create_preference", (req, res) => {
       installments: 1, //Cantidad maxima de cuotas
     },
     back_urls: {
-      success: `${getCurrentDomainApi}/feedback`, //luego modificar si se quiere redigir en cada caso
-      failure: `${getCurrentDomainApi}/cart`,
-      pending: `${getCurrentDomainApi}/feedback`
+      success: `${getCurrentDomainApi()}/feedback`, //luego modificar si se quiere redigir en cada caso
+      failure: `${getCurrentDomainApi()}/cart`,
+      pending: `${getCurrentDomainApi()}/feedback`
     },
   };
 
@@ -70,7 +71,7 @@ server.post("/create_preference", (req, res) => {
 });
 
 
-server.get('/feedback', async function(req, res) {     //ruta que responde con el status del pago
+server.use('/feedback', async function(req, res) {     //ruta que responde con el status del pago
   
   let orden = await Order.findByPk(parseInt(req.query.external_reference))
   let ordenCompleta = await getOrderById(orden.id)
@@ -106,7 +107,7 @@ server.use(
   })
 );
 
-server.post("/stripe/checkout", async (req, res) => {
+server.use("/stripe/checkout", async (req, res) => {
   const { id, amount } = req.body;
   try {
     const payment = await stripe.paymentIntents.create({
