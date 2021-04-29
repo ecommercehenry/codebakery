@@ -17,10 +17,19 @@ export default function Footer (){
     )
 }
 
-const StyledFooter = styled.div`
+const StyledFooter = styled.footer`
 
-    height: 12rem;
+  
+background-color: #533f66;
+   
+   padding: 50px 20px;
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   position: relative;
+
+    /* height: 12rem;
     width: 100%;
-    background-color: #533f66;
+    background-color: #533f66; */
 
 `;

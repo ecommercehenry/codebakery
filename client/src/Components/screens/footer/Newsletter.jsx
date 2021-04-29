@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styled from 'styled-components';
+import footerImage from "./footer.jpg"
 
 
 export default function Newsletter (){
@@ -10,8 +11,6 @@ export default function Newsletter (){
     function handleSubmit(){
         
     }
-
-
     return(
         <>
         <StyledNewsletter>
@@ -21,27 +20,107 @@ export default function Newsletter (){
                 type="text"
                 placeholder="Let us your email"
                 value={input}
-                onChange={handlerChange}
-            />
-            <button 
-                onClick={handleSubmit}
-                className="purple-btn2"
-            > Send </button>
-
-        </StyledNewsletter>
-       
+                onChange={handlerChange}/>            
+            <button id="search-btn">Submit</button> 
+        </StyledNewsletter>       
         </>
     )
 }
 
-const StyledNewsletter = styled.form`
+const StyledNewsletter = styled.form`   
+       
+    background-image: url(${footerImage});
+    border-radius: 10px;
+    padding: 50px 20px;
+    
+    text-align: center;
+    position: relative;
 
-    height: 6rem;
+    input{
+      width:30%;
+      height:3rem;
+      font-size:1.3rem;     
+      text-align: left;
+      border-radius: 2rem;
+
+  }
+  .purple-btn2 {   
+    border-radius: 40px;
+    border: none;
+    background-color: #5e3f71;   
+    color: white;
+    font-weight: bold;
+    font-size: 1em;    
+    padding: 1em;     
+    align-items: center;
+  }
+  background: #e9e8e8;
+  display: flex;
+  align-items: center;
+  position:relative;
+  z-index:2;
+  transform:translateY(-50%);
+  margin:auto;
+  height: 3rem;
+  width: 50%;
+  padding: 0 0.5rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border: 1.3px solid #949494;
+  border-radius:20px;
+  button{
+      width:10%;
+      height:2rem;
+      border:none;
+      background: none;
+  }
+  select{
+      width:fit-content;
+      height:2rem;
+      font-size:1.1rem;
+      border-radius:13px;
+      padding: 0 0.5rem;
+      background:#cfcfcf;
+      border:none;
+  }
+  #search-form{
+    margin-top: 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    input{
+      width:70%;
+      height:2rem;
+      border:none;
+      font-size:1.3rem;
+      background: none;
+      text-align: left;
+  }
+
+  #search-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    color: black;
+    width: 10%;
+    padding: 10px 40px;
+    border: solid 1px #CECECE;
+    border-radius: 40px;
+  }
+  }
+
+    /* height: 6rem;
     width: 60%;
-    margin: auto;
+    
     background-color: #b69ad1;
     border-radius: 2rem;
-    align-items: center;
+    margin-top:1rem;
+    padding: 3rem;
+    
 
     input{
       width:30%;
@@ -60,8 +139,7 @@ const StyledNewsletter = styled.form`
     font-size: 1em;    
     padding: 1em;     
     align-items: center;
-  }
-   
+  }  */
 
 
 `;
