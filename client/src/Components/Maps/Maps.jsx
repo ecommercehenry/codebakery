@@ -15,14 +15,14 @@ const Maps = (props) => {
     selectedPlace: {},
   });
 
-  const onMarkerClick = (props, marker, e) => {
+  const onMarkerClick = (props, marker) => {
     setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     });
   };
-  const onClose = (props) => {
+  const onClose = () => {
     if (state.showingInfoWindow) {
       setState({
         showingInfoWindow: false,
