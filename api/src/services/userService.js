@@ -30,6 +30,7 @@ async function getUserById({ id }) {//@ Lau para usar en boton promote
 }
 
 async function createUser(name, password, email, role, google) {
+  console.log("ENTRANDO A CREATE USER")
   try {
     if(!google){
       let [newUser, created] = await Users.findOrCreate({

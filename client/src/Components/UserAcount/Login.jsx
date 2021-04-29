@@ -35,8 +35,9 @@ function Login() {
   // descomentar ambos useEffect para el logeo con creación de usuario
   useEffect(()=>{
     // 
+    console.log("Antes del if")
     if(!loadingValidate && dataValidate){
-      
+      console.log("validar if")
       if(dataValidate.validateUserWithGoogle.token){
         alert("logueado")
         localStorage.setItem('token', dataValidate.validateUserWithGoogle.token);
