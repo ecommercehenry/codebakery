@@ -33,7 +33,7 @@ const StripeForm = () => {
         if(!error){
             const {id} = paymentMethod;
             try {
-                const {data} = await axios.post(`${getCurrentDomainApi}/stripe/checkout`,
+                const {data} = await axios.post(`${getCurrentDomainApi()}/stripe/checkout`,
                 {
                     id,
                     amount: total*100,

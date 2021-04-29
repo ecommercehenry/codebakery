@@ -88,7 +88,7 @@ server.use('/feedback', async function(req, res) {     //ruta que responde con e
       await sendEmail(orden.userId, `Order #${orden.id} pending`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
     }
     if(process.env.NODE_ENV === "production"){
-      return res.redirect(`${getCurrentDomainFront}/catalogue`);
+      return res.redirect(`${getCurrentDomainFront()}/catalogue`);
     }
     
   
