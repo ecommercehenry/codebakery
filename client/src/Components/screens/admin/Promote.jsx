@@ -23,7 +23,7 @@ export default function Promote({ idUser, rol }) {
 
   return (
     <>
-      <p>{value} </p>
+      <p>Promote</p>
       <Switch
         on="admin"
         off="user"
