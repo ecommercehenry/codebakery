@@ -45,7 +45,6 @@ server.use("/create_preference", (req, res) => {
     }; /// posiblemente necesario para ticket
     items.push(newitem);
   });
-  console.log(`${getCurrentDomainApi()}/feedback`)
   let preference = {
     items: items,
     external_reference: JSON.stringify(req.body.id),
