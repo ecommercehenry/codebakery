@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import MODIFY_USER from "../../Apollo/mutations/modifyUser";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../Assets/toast.css";
 import styled from "styled-components";
+import GET_ALL_USERS from "../../Apollo/queries/getAllUsers";
+import RESET_PASSWORD from "../../Apollo/mutations/resetPassword";
 
 toast.configure();
-
 function ResetPassword() {
+  
   /* 
     Le pido la contraseña actual y el email al usuario.
     Si la contraseña y el email coinciden lo dejo actualizar
     con la otra contraseña que envié
   */
   const [modifyUser, { data, loading }] = useMutation(MODIFY_USER);
+  const {data:dataUsers} = useQuery(GET_ALL_USERS)
+  const [resetPassword, {data:dataReset}] = useMutation(RESET_PASSWORD)
+
   let redirect = localStorage.getItem("redirect");
   const [input, setInput] = useState({
     email: "",
@@ -22,6 +27,9 @@ function ResetPassword() {
     newPassword: "",
     newnewPasswordRepeat: "",
   });
+
+  const search = useLocation().search;
+  const resetToken = new URLSearchParams(search).get('resetToken');
 
   function handleInputChange(e) {
     setInput({
@@ -32,19 +40,35 @@ function ResetPassword() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    modifyUser({
-      variables: {
-        id: null,
-        name: null,
-        password: input.oldPassword,
-        newPassword: input.newPassword,
-        email: input.email,
-        role: null,
-        address: null,
-        dni: null,
-        phoneNumber: null,
-      },
-    });
+
+    if(resetToken){
+      modifyUser({
+        variables: {
+          id: null,
+          name: null,
+          password: input.oldPassword,
+          newPassword: input.newPassword,
+          email: input.email,
+          role: null,
+          address: null,
+          dni: null,
+          phoneNumber: null,
+        },
+      });
+    }else{
+      toast("Se ha enviado un mensaje a tu correo", {
+        toastId: customId
+      });
+      if(dataUsers?.getAllUsers){
+        let usuario = dataUsers.getAllUsers.filter(el=>el.email === input.email)[0]  
+        resetPassword({variables:{userId:usuario.id}})
+      }
+      localStorage.setItem("redirect", false);
+      window.location.reload();
+    }
+    
+    
+    
   };
 
   const customId = 1;
@@ -75,61 +99,72 @@ function ResetPassword() {
         window.location.reload();
       }
     }
-  }, [data]);
+  }, [data, dataUsers]);
 
   if (redirect) {
     localStorage.setItem("redirect", false);
-    return <Redirect to="/log-in" />;
+    return <Redirect to="/" />;
   }
 
-  return (
-    <div
-      classname="page"
-      style={{ height: "100vh", display: "flex", alignItems: "center" }}
-    >
-      <div className="wrapper fadeInDown" style={{ marginBottom: "10vh" }}>
-        <div className="formContent">
-          <StyledAcheDos></StyledAcheDos>
-          <hr />
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <input
-              type="email"
-              name="email"
-              onChange={handleInputChange}
-              value={input.email}
-              placeholder="Email"
-              required
-            />
-            <input
-              type="password"
-              name="oldPassword"
-              onChange={handleInputChange}
-              value={input.oldPassword}
-              placeholder="Current password"
-              required
-            />
-            <input
-              type="password"
-              name="newPassword"
-              onChange={handleInputChange}
-              value={input.newPassword}
-              placeholder="New password"
-              required
-            />
-            <input
-              type="password"
-              name="newPasswordRepeat"
-              onChange={handleInputChange}
-              value={input.newPasswordRepeat}
-              placeholder="Confirm new password"
-              required
-            />
-            <input type="submit" value="SUBMIT" />
-          </form>
+  if(resetToken){
+    return (
+      <div
+        classname="page"
+        style={{ height: "100vh", display: "flex", alignItems: "center" }}
+      >
+        <div className="wrapper fadeInDown" style={{ marginBottom: "10vh" }}>
+          <div className="formContent">
+            <StyledAcheDos></StyledAcheDos>
+            <hr />
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <input
+                type="password"
+                name="newPassword"
+                onChange={handleInputChange}
+                value={input.newPassword}
+                placeholder="New password"
+                required
+              />
+              <input
+                type="password"
+                name="newPasswordRepeat"
+                onChange={handleInputChange}
+                value={input.newPasswordRepeat}
+                placeholder="Confirm new password"
+                required
+              />
+              <input type="submit" value="SUBMIT" />
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }else{
+    return (
+      <div
+        classname="page"
+        style={{ height: "100vh", display: "flex", alignItems: "center" }}
+      >
+        <div className="wrapper fadeInDown" style={{ marginBottom: "10vh" }}>
+          <div className="formContent">
+            <StyledAcheDos></StyledAcheDos>
+            <hr />
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <input
+                type="email"
+                name="email"
+                onChange={handleInputChange}
+                value={input.email}
+                placeholder="Email"
+                required
+              />
+              <input type="submit" value="SUBMIT" />
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 const StyledAcheDos = styled.h2`
