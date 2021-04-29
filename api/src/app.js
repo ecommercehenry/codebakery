@@ -19,7 +19,7 @@ const server = express();
 const {schema, root} = require("./graphql/schema");
 const { sendEmail, getFormatedMessage } = require('./services/emailService');
 const { getOrderById } = require('./services/orderService');
-const { getCurrentDomain } = require("./config/currentDomain");
+const { getCurrentDomain, getCurrentDomainApi, getCurrentDomainFront } = require("./config/currentDomain");
 server.name = 'API';
 
 server.use(express.json());
@@ -53,9 +53,9 @@ server.post("/create_preference", (req, res) => {
       installments: 1, //Cantidad maxima de cuotas
     },
     back_urls: {
-      success: `${getCurrentDomain}/feedback`, //luego modificar si se quiere redigir en cada caso
-      failure: `${getCurrentDomain}/cart`,
-      pending: `${getCurrentDomain}/feedback`
+      success: `${getCurrentDomainApi}/feedback`, //luego modificar si se quiere redigir en cada caso
+      failure: `${getCurrentDomainApi}/cart`,
+      pending: `${getCurrentDomainApi}/feedback`
     },
   };
 
@@ -87,7 +87,7 @@ server.get('/feedback', async function(req, res) {     //ruta que responde con e
       await sendEmail(orden.userId, `Order #${orden.id} pending`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
     }
     if(process.env.NODE_ENV === "production"){
-      return res.redirect(`${getCurrentDomain}/catalogue`);
+      return res.redirect(`${getCurrentDomainFront}/catalogue`);
     }
     
   
