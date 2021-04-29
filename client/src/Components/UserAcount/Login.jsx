@@ -9,7 +9,7 @@ import '../../Assets/toast.css';
 import VALIDATE_USER_WITH_GOOGLE from "../../Apollo/queries/validateUserWithGoogle";
 
 toast.configure();
-const clientId = "896421264771-puonusmobbd2vfeo6b03itcpknghfte7.apps.googleusercontent.com"; 
+const clientId = "665438682738-h07vsict9p633du2obn2b9rga62lptbe.apps.googleusercontent.com"; 
 
 function Login() {
   // necesitamos crear el usuario
