@@ -6,7 +6,7 @@ function getCurrentDomainApi(){
 }
 function getCurrentDomainFront(){
     if(process.env.NODE_ENV === "production"){
-        return "https://codebakery.vercel.app/"
+        return "https://www.codebakery.store/"
     }
     return `http://localhost:3000`
 }
