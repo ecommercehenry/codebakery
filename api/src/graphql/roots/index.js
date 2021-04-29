@@ -22,7 +22,8 @@ const {
     addReview,
     modifyReview,
     deleteUser,
-    sendEmail
+    sendEmail,
+    addStore
 } = require("./mutationsResolver/")
 
 const {
@@ -73,6 +74,7 @@ const root = {
     modifyReview,
     sendEmail,
     deleteUser,
+    addStore,
 
     //Queries    
     productById,

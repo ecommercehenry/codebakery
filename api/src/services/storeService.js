@@ -10,5 +10,13 @@ async function getAllStores(){
     }
 }
 
+async function addStore({name, lat, long, address, phoneNumber}){
+    try {
+        let newStore = await Store.create({name, lat,long,address,phoneNumber})
+        return newStore
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 
-module.exports = { getAllStores}
+module.exports = { getAllStores, addStore}
