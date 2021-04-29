@@ -21,6 +21,13 @@ function Login() {
   // const [login, { loading, data }] = useLazyQuery(VALID_USER);
 
   const onSuccess = (res) => {
+    console.log({variables: {
+      name: res.profileObj.name,
+      password: res.googleId,
+      email: res.profileObj.email,
+      role: "user",
+      google: true
+    }})
     createUser({
       variables: {
         name: res.profileObj.name,
