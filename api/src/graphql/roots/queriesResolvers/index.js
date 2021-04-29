@@ -17,7 +17,8 @@ const { validateCredentials } = require("./validateCredentials")
 const { getAllReviewsFromAProduct } = require("./getAllReviewsFromAProduct")
 const { getUserById} = require("./getUserById")
 const {validateUserWithGoogle} = require("./validateUserWithGoogle");
-const { getReviewByUserId } = require("./getReviewByUserId")
+const { getReviewByUserId } = require("./getReviewByUserId");
+const {getAllStores} = require("./getAllStores")
 
 
 
@@ -41,5 +42,6 @@ module.exports = {
   getAllReviewsFromAProduct,
   getUserById,
   validateUserWithGoogle,
-  getReviewByUserId
+  getReviewByUserId,
+  getAllStores
 }

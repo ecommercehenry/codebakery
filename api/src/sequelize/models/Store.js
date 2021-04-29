@@ -10,11 +10,11 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       lat: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.FLOAT,
         allowNull: false,
       },
       long: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.FLOAT,
         allowNull: false,
       },
       address: {
@@ -26,6 +26,6 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
     },
-    { timestamps: true }
+    { timestamps: false }
   );
 };
