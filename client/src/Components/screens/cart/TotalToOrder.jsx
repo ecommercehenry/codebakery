@@ -22,7 +22,7 @@ const TotalToOrder = () => {
       }) 
     }
     const doubleClickHandler = () => {
-        window.location.href = `${getCurrentDomainApi()}/log-in`; 
+        window.location.href = `${getCurrentDomainFront()}/log-in`; 
      }
 
     return (
