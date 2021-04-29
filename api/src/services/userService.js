@@ -1,5 +1,6 @@
 const { Users, Product, Review } = require("../db");
 const jwt = require("jsonwebtoken");
+const { sendEmail } = require("./emailService");
 
 async function getAllUsers() {
   try {
@@ -176,7 +177,22 @@ async function loginUserWithGoogle(email, tokenId){
     }
   }
 }
-
+async function resetPassword(id){
+  const user = await Users.findOne({
+    where:{
+      id:id
+    }
+  });
+  const token = jwt.sign({
+    id:user.id,
+    email: user.email
+  }, "resetPassword", { expiresIn: 60 * 60 }) //60*60 = 3600 seg = 1 hour
+  sendEmail(user.id, `Reset password user ${user.name}`, `http://localhost:3000/reset-password?resetToken=${token}`)
+  return {
+    __typename:"booleanResponse",
+    boolean: true
+  }
+}
 async function loginUser(email,password){
   // 
   const user = await Users.findOne({
@@ -236,4 +252,5 @@ module.exports = {
   deleteUser,
   getUserById,  //lo creo para traer datos de ese usuario a modificar -@Lau
   loginUserWithGoogle,
+  resetPassword
 };
