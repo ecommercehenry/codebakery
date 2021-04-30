@@ -22,7 +22,8 @@ const {
     addReview,
     modifyReview,
     deleteUser,
-    sendEmail
+    sendEmail,
+    generateTokenOTP
 } = require("./mutationsResolver/")
 
 const {
@@ -45,6 +46,7 @@ const {
     validateCredentials,
     validateUserWithGoogle,
     getReviewByUserId, 
+    validateTOTP
 } = require("./queriesResolvers/")
 
 // product
@@ -72,6 +74,7 @@ const root = {
     modifyReview,
     sendEmail,
     deleteUser,
+    generateTokenOTP,
 
     //Queries    
     productById,
@@ -97,6 +100,7 @@ const root = {
     getAllReviewsFromAProduct,
     validateUserWithGoogle,
     getReviewByUserId,
+    validateTOTP
     // getAllUsers,
 }
 

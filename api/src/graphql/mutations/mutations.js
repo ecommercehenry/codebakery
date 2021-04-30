@@ -7,6 +7,7 @@ union resultBoolean  = booleanResponse | error
 union resultOrder = order | error
 union reviewResult = review | error
 union emailResponse = email | error
+union otpTokenResponse = otpToken | error
 type Mutation{
     modifyProduct(id: Int!, dataToModify: productInput!): resultProduct
     updateCategory(id : Int!, input: categoryInput): resultCategory
@@ -32,5 +33,6 @@ type Mutation{
     deleteReview(productId: Int!, userId: Int!): deletes
     deleteUser(userId: Int!) : resultBoolean
     sendEmail(userId: Int!, affair: String!, message: String!): emailResponse
+    generateTokenOTP(userId: Int!): otpTokenResponse
 
 }`

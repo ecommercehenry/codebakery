@@ -18,7 +18,7 @@ const { getAllReviewsFromAProduct } = require("./getAllReviewsFromAProduct")
 const { getUserById} = require("./getUserById")
 const {validateUserWithGoogle} = require("./validateUserWithGoogle");
 const { getReviewByUserId } = require("./getReviewByUserId")
-
+const {validateTOTP} = require("./validateTOTP")
 
 
 module.exports = {
@@ -41,5 +41,6 @@ module.exports = {
   getAllReviewsFromAProduct,
   getUserById,
   validateUserWithGoogle,
-  getReviewByUserId
+  getReviewByUserId,
+  validateTOTP
 }

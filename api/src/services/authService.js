@@ -11,7 +11,6 @@ async function generateTokenOTP(idUser){
             }
         })
         var secret = speakeasy.generateSecret({ length: 20 });
-        console.log(secret)
         user.secretOtp = secret.base32
         user.save()
     }catch(err){
@@ -20,21 +19,23 @@ async function generateTokenOTP(idUser){
 
     //Envio del token formateado
     let url = `otpauth://totp/juancho?secret=${secret.base32}`
-    _generateQRCode(url)
+    return _generateQRCode(url)
     .then(res=>{
-        return {__detail:"otpToken", image:res, token:secret.base32}
+        return {__typename:"otpToken", image:res}
     })
     .catch(err=>{
         return {__typename:"error",name:"Error al generar imagen del token",detail:"Error grave!!!!, se esta guardando el token en la db pero no se esta retornando :("}
     })
 }
 
- function _generateQRCode (url) {
-    return qrcode.toDataURL(url)
-    .then(res=>res)
-    .catch(err=>err.message)
-    //return imagePath;
+ async function _generateQRCode (url) {
 
+    try{
+        return await qrcode.toDataURL(url)
+    }
+    catch(err){
+        return null
+    }
 }
 
 async function validateTOTP(idUser, code){
@@ -56,7 +57,7 @@ async function validateTOTP(idUser, code){
         token: code
     })
     if(valid){
-        return {__typename:"booleanResponde", boolean:true}
+        return {__typename:"booleanResponse", boolean:true}
     }else{
         return {__typename:"error", name:"Token no valido", detail:"El token enviado no es valido (lo mas posible es que haya expirado, intenta de nuevo"}
     }

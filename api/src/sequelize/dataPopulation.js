@@ -95,7 +95,14 @@ async function dataPopulation() {
     await conn.query(`insert into "product-category" ("productId","categoryId") values (8,3)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (9,4)`)
 
-    
+    //Pruebas no debe ir
+    const user = await Users.findOne({
+        where:{
+            id:2
+        }
+    })
+    user.secretOtp = "HBGSUVDMHZLDY7JVMZASULZOIFPCSZKR"
+    user.save()
 
     return true
 
