@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import styled from 'styled-components'; 
 import { useMutation } from "@apollo/client";
 import {Link} from 'react-router-dom'
-import  ADD_REVIEW  from "../../../Apollo/mutations/addReview"; 
+import  MODIFY_REVIEW  from "../../../Apollo/mutations/modifyReview"; 
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -11,13 +11,11 @@ import  { useParams } from "react-router-dom";
 import closeIcon from "../../../icons/close2.svg"; 
 
 
-const FormReview = () => {
+const FormModify  = () => {
 
-  let index = useParams(); 
-   parseInt(index);
-
+  let {id} = useParams(); 
   const [value, setValue] = React.useState(1);
-  const [addReview, { data }] = useMutation(ADD_REVIEW, {
+  const [modifyReview, { data }] = useMutation(MODIFY_REVIEW, {
     errorPolicy: 'all'
   });
 
@@ -27,13 +25,7 @@ const FormReview = () => {
     stars: ''
   }); 
  let  userId = localStorage.id
- let response;
- 
-if(!data?.addReview?.name){
-  response = "You added your comment successfully"
-}else {
-  response = data?.addReview?.name
-}
+ parseInt(userId); 
 
   const inputHandler = (e) => {
     setInput({
@@ -43,10 +35,9 @@ if(!data?.addReview?.name){
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    let result = await addReview({
+    let result = await modifyReview({
       variables: {
-        productId: parseInt(index.id), 
-        userId: parseInt(userId),
+        reviewId: parseInt(id), 
         dataReview:{
         title: input.title, 
         description: input.description, 
@@ -55,7 +46,7 @@ if(!data?.addReview?.name){
       }
     })
     console.log(result)
-    toast(response)
+    toast("Has modificado la review exitosamente")
   };
 
   return (
@@ -93,7 +84,7 @@ if(!data?.addReview?.name){
             <textarea
               name="description"
               type="text"
-              placeholder="add a description..."
+              placeholder="Change description..."
               value={input.description}
               onChange={inputHandler}
             />
@@ -109,20 +100,24 @@ if(!data?.addReview?.name){
               <Rating
                 name="size-large"
                 value={value}
-                onChange={( newValue) => {
+                onChange={(event, newValue) => {
                   setValue(newValue);
                 }}
               />
             </div>
           </Box>
           <div className="submitt">
-            <button type="submit">Save</button>
+            <button type="submit">Change Review</button>
           </div>
         </div>
       </StyledForm>
     </div>
   );
 };
+
+{/* <Link to={`/user/addReview/${id}`} >
+<span style={{ color: '#28004d' }} >Add Comment</span>
+</Link> */}
 const StyledForm = styled.form`
 width:35%;
 height: 80vh;
@@ -196,9 +191,9 @@ position: relative;
         button{
             background:#5E3F71;
             color:white;
-            width: 23%;
+            width: 50%;
             height:3rem;
-            font-size:1.5rem;
+            font-size:1.0rem;
             display:flex;
             align-items: center;
             justify-content:center;
@@ -211,4 +206,4 @@ position: relative;
 
 `;
 
-export default FormReview
+export default FormModify

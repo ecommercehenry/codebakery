@@ -10,6 +10,7 @@ const TablaReview = ({id}) => {
     const { data,  refetch } = useQuery(GET_REVIEW_BY_USER, {
         variables: { userId: id },
     });
+    console.log(data, 'data tabla')
 
 
     return (
