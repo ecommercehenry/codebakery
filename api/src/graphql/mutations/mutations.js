@@ -32,5 +32,6 @@ type Mutation{
     deleteReview(productId: Int!, userId: Int!): deletes
     deleteUser(userId: Int!) : resultBoolean
     sendEmail(userId: Int!, affair: String!, message: String!): emailResponse
-    addStore(name: String!, lat: Float!, long: Float!, address: String!, phoneNumber: String): store
+    addStore(name: String!, lat: Float!, long: Float!, address: String!, phoneNumber: String): store,
+    modifyStore(id: Int!, name: String!, lat: Float!, long: Float!, address: String!, phoneNumber: String): store
 }`;
