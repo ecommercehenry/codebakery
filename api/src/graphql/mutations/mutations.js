@@ -33,4 +33,7 @@ type Mutation{
     deleteUser(userId: Int!) : resultBoolean
     sendEmail(userId: Int!, affair: String!, message: String!): emailResponse
 
+    suscribeToNewsletter(userId: Int!) : resultBoolean
+    sendNewsletter()
+
 }`

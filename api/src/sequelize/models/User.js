@@ -54,7 +54,8 @@ module.exports = (sequelize) => {
       },
     },
     newsletter: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
   }, { timestamps: true })
   

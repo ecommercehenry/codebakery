@@ -227,6 +227,19 @@ async function deleteUser(id) {
   }
 }
 
+async function suscribeToNewsletter(userId){
+  try {
+    const userToSuscribe = await Users.findByPk(userId);
+    userToSuscribe.newsletter = true; //se asigna true a la propiedad newsletter del usuario
+    await userToSuscribe.save(); //guarda en bd el cambio
+
+
+    return { __typename: "booleanResponse", boolean: true };
+  } catch (error) {
+    return { __typename: "error", name: "error", detail: "User not found" };
+  }
+}
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -236,4 +249,6 @@ module.exports = {
   deleteUser,
   getUserById,  //lo creo para traer datos de ese usuario a modificar -@Lau
   loginUserWithGoogle,
+
+  suscribeToNewsletter, //@ lau.. un usuario se suscribe al newsletter
 };
