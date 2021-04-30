@@ -1,35 +1,27 @@
-import React from "react"
+import React from "react";
 import Newsletter from "./Newsletter";
-import styled from 'styled-components';
+import styled from "styled-components";
+import footer from "./footer.jpg";
 
-
-export default function Footer (){
-
-
-
-    return(
-        <>
-        <StyledFooter>
-            <Newsletter/>
-        </StyledFooter>
-       
-        </>
-    )
+export default function Footer() {
+  return (
+    <>
+      <StyledFooter>
+        <Newsletter />
+        <p>Todos los derechos y los izquierdos bien puestos</p>
+      </StyledFooter>
+    </>
+  );
 }
 
 const StyledFooter = styled.footer`
-
-  
-background-color: #533f66;
-   
-   padding: 50px 20px;
-   display: flex;
-   flex-direction: column;
-   text-align: center;
-   position: relative;
-
-    /* height: 12rem;
-    width: 100%;
-    background-color: #533f66; */
-
+  background: url(${footer});
+  height: 10rem;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px inset #694e7a;
+  box-shadow: 10px 10x 15px black;
 `;
