@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import MODIFY_STORE from "../../../../Apollo/mutations/modifyStore";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -7,8 +7,13 @@ import Grid from "@material-ui/core/Grid";
 import { toast } from "react-toastify";
 import "../../../../Assets/toast.css";
 import { makeStyles } from "@material-ui/core/styles";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import GET_ALL_STORES from "../../../../Apollo/queries/getAllStores";
 
 toast.configure();
+
 const useStyles = makeStyles((theme) => ({
   formContainer: {
     width: "70%",
@@ -19,12 +24,22 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
   },
+  formControl: {
+    backgroundColor: "#ffffff",
+    display: "flex",
+    flexDirection: "row",
+    left: "1rem",
+  },
 }));
 
 const ModifyStore = () => {
   const classes = useStyles();
-  const [modifyStore] = useMutation(MODIFY_STORE)
+  const [modifyStore] = useMutation(MODIFY_STORE);
+  const { data } = useQuery(GET_ALL_STORES, {
+    fetchPolicy: "no-cache",
+  });
 
+  console.log(data);
   const [form, setForm] = useState({
     id: "",
     name: "",
@@ -50,6 +65,7 @@ const ModifyStore = () => {
       }
     }
   };
+  console.log(form);
   const submitHandler = async (e) => {
     e.preventDefault();
     await modifyStore({
@@ -69,7 +85,6 @@ const ModifyStore = () => {
     phoneNumber.maxLength = "11";
     phoneNumber.minLength = "10";
   }
-
   return (
     <React.Fragment>
       <div className={classes.formContainer}>
@@ -78,17 +93,27 @@ const ModifyStore = () => {
             Modify an existing store
           </Typography>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <TextField
-                variant="filled"
-                required
-                id="id"
-                name="id"
-                label="Store ID"
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="age-native-simple">Store</InputLabel>
+              <Select
                 fullWidth
+                native
                 onChange={handleAddress}
-              />
-            </Grid>
+                inputProps={{
+                  name: "id",
+                  id: "id",
+                }}
+              >
+                <option disabled selected aria-label="None" value="" />
+                {data?.getAllStores?.map((store) => (
+                  <>
+                    <option value={store.id}>
+                      {store.id}|{store.name}
+                    </option>
+                  </>
+                ))}
+              </Select>
+            </FormControl>
             <Grid item xs={12}>
               <TextField
                 variant="filled"
