@@ -1,10 +1,7 @@
-import React from "react";
-import { useSelector } from 'react-redux';
+import React, {useState} from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -16,8 +13,10 @@ import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
 import {getCurrentDomainFront} from "../../../../config/currentDomain"
+import NavBar from "../../navBar/NavBar";
+
 function Copyright() {
-  let {status} = useSelector((state)=>state.theme);
+  let { status } = useSelector((state) => state.theme);
   return (
     <StyledFooter light={status}>
       <Typography variant="body2" align="center">
@@ -31,15 +30,9 @@ function Copyright() {
     </StyledFooter>
   );
 }
-
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    height: "5rem",
-    display:"flex",
-    justifyContent:"center",
-    position: "relative",
-    background: "#5E3F71", // fondo de barra
-    color: "#f4f2f8", // color de letra de barra
+  navbar:{
+    background: "#5E3F71",
   },
   layout: {
     width: "auto",
@@ -81,11 +74,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const steps = ["Address", "Ticket", "Payment"];
-
-function getStepContent(step) {
+function getStepContent(step, userdata, setUserdata) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <AddressForm setUserdata={setUserdata}/>;
     case 1:
       return <Review />;
     case 2:
@@ -97,8 +89,9 @@ function getStepContent(step) {
 
 export default function Checkout() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  let {status} = useSelector((state)=>state.theme);
+  const [activeStep, setActiveStep] = useState(0);
+  const [userdata, setUserdata] = useState(true)
+  let { status } = useSelector((state) => state.theme);
   const handleNext = () => {
     setActiveStep(activeStep + 1);
   };
@@ -108,7 +101,7 @@ export default function Checkout() {
   };
   let nextButton = document.getElementById("nextButton");
   if (nextButton) {
-    if (activeStep === steps.length - 1) {
+    if (activeStep === steps.length - 1 || !userdata) {
       nextButton.style = "display: none";
     } else {
       nextButton.style = "display: flex";
@@ -117,14 +110,9 @@ export default function Checkout() {
   return (
     <StyledCheckout light={status}>
       <React.Fragment>
-        <CssBaseline />
-        <AppBar position="absolute" color="default" className={classes.appBar}>
-          <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Code Bakery
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <div className={classes.navbar}>
+          <NavBar color="white"/>
+        </div>
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
@@ -140,7 +128,7 @@ export default function Checkout() {
             <React.Fragment>
               {
                 <React.Fragment>
-                  {getStepContent(activeStep)}
+                  {getStepContent(activeStep, userdata, setUserdata)}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
                       <Button onClick={handleBack} className={classes.button}>
@@ -169,13 +157,9 @@ export default function Checkout() {
 }
 
 const StyledCheckout = styled.div`
-  background:${({light})=>light 
-  ? 'white' 
-  : '#222222'};
+  background: ${({ light }) => (light ? "white" : "#222222")};
 `;
 
 const StyledFooter = styled.div`
-  color:${({light})=>light 
-  ? 'inherit' 
-  : 'white'};
+  color: ${({ light }) => (light ? "inherit" : "white")};
 `;
