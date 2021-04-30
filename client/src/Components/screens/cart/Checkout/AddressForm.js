@@ -28,7 +28,7 @@ export default function AddressForm({setUserdata}) {
 
       }
     }    
-  },[loading, data])
+  },[loading, data, setUserdata])
   const [form, setForm] = useState({
     address: "",
     dni: "",
