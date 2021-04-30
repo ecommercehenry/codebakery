@@ -26,19 +26,45 @@ function ListCRUD() {
   const totalPages = data?.product.length
   const handlePageChange = async (event, newPage) => {
     if(newPage === 0){
-      await setRows([0, rowsPerPage - 1])
+      await setRows([0, rowsPerPage])
     } else {
       let newFinalRow = newPage * rowsPerPage
-      await setRows([newFinalRow, newFinalRow + (rowsPerPage -1)])
+      await setRows([newFinalRow, newFinalRow + (rowsPerPage)])
     }
   
     await setPage(newPage)
-    console.log('after change',rows, page)
   }
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+
+  const handleChangeRowsPerPage = async (event) => {
+    console.log(event.target.value)
+    await setRowsPerPage(parseInt(event.target.value, 10));
   };
+
+  useEffect(() => {
+    (async() => await setRows([0, rowsPerPage - 1]))()
+    setPage(0)
+    console.log('after change',rows, page)
+  }, [rowsPerPage])
+
+  function isScrollable(element) {
+    /* console.log(element.attributes) */
+    const childNodes = element
+    /* let heightSum = 0;
+    for (let key in childNodes) {
+      if(typeof childNodes[key]?.offsetHeight !== "undefined")
+          heightSum += parseInt(childNodes[key]?.offsetHeight, 10)
+      } */
+    
+    /* return element.scrollHeight > heightSum; */
+    return childNodes
+  };
+
+
+  if(document.getElementById('table-body')){
+    var myParent = document.getElementById('table-body').attributes
+   /*  document.getElementById('table-body').style.display =  */ 
+    console.log(isScrollable(myParent))
+  }
 
   //
   return (
@@ -62,7 +88,7 @@ function ListCRUD() {
             <th width="10%">Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="table-body">
           {data ? (
             data.product.slice(rows[0], rows[1]).map((item) => {
               return <TextCRUD id={item.id} key={item.id} />;
@@ -138,7 +164,7 @@ const StyledListCRUD = styled.div`
 
     tbody {
       display:block;
-      overflow-y:scroll;
+      overflow-y:auto;
       width: 100%;
       height: 66vh;
 
