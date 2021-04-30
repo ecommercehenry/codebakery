@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import styled from 'styled-components';
+// import { sendNewsletter } from "../../../../../api/src/services/newsletterService";
 import footerImage from "./footer.jpg"
 
 
@@ -13,7 +14,8 @@ export default function Newsletter (){
     }
     return(
         <>
-        <StyledNewsletter>
+        <StyledNewsletter
+        onSubmit={"sendNewsletter"}>
             <h2> suscribite a nuestro Newsletter</h2>
             <p>participa de sorteos, enterarte de descuentos exclusivos</p>
             <input 
@@ -21,7 +23,9 @@ export default function Newsletter (){
                 placeholder="Let us your email"
                 value={input}
                 onChange={handlerChange}/>            
-            <button id="search-btn">Submit</button> 
+            <button 
+            type="submit"
+            id="search-btn">Submit</button> 
         </StyledNewsletter>       
         </>
     )

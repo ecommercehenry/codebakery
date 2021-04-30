@@ -15,6 +15,7 @@ import TablaOrdenes from '../../admin/ordenes/TablaOrdenes';
 import UserAdmin from '../ordenes/UserAdmin';
 import Pagination from '../ordenes/Pagination';
 import CheckFilters from '../ordenes/CheckFilters';
+import NewsletterAdmin from '../newsletter/NewsletterAdmin';
 
 
 
@@ -43,6 +44,9 @@ const AdminPanel = () => {
            <Route path='/admin/products' component={ListCRUD}/>            
            <Route path='/admin/orders' component={TablaOrdenes}/>    
            <Route path="/admin/users" component={UserAdmin} />
+          
+           <Route path="/admin/newsletter" component={NewsletterAdmin} />
+
            
         </div>
 
