@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import ADD_STORE from "../../../../Apollo/mutations/addStore";
+import MODIFY_STORE from "../../../../Apollo/mutations/modifyStore";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ModifyStore = () => {
   const classes = useStyles();
+  const [modifyStore] = useMutation(MODIFY_STORE)
 
   const [form, setForm] = useState({
     id: "",
@@ -37,8 +38,8 @@ const ModifyStore = () => {
   const handleAddress = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const regex = new RegExp(/^-?\d*\.{0,15}\d+$/);
 
+  const regex = new RegExp(/^-?\d*\.{0,15}\d+$/);
   const handleChange = (e) => {
     if (e.target.value.length >= 2) {
       if (regex.test(e.target.value)) {
@@ -51,8 +52,17 @@ const ModifyStore = () => {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(form);
-    toast("Store created");
+    await modifyStore({
+      variables: {
+        id: parseInt(form.id),
+        name: form.name,
+        address: form.address,
+        phoneNumber: form.phoneNumber,
+        lat: parseFloat(form.lat),
+        long: parseFloat(form.long),
+      },
+    });
+    toast("Store Modified");
   };
   let phoneNumber = document.getElementById("phoneNumber");
   if (phoneNumber) {
