@@ -24,10 +24,10 @@ const Grid = () => {
           search === false ?  
         (stateproducts && stateproducts?.length > 0
           ? stateproducts.map((element) => {
-                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price}/>
+                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price} stock={element.stock}/>
             }) : "Cargando")
             : (arr.length > 0 ? arr.map((element ) => {
-                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price}/>
+                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price} stock={element.stock}/>
             }): "No se encontraron Productos" 
             )
           }

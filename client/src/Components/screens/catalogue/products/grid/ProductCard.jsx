@@ -1,5 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'; 
+
 
 //styles
 import styled from 'styled-components';
@@ -7,7 +8,8 @@ import styled from 'styled-components';
 //Components
 import ButtonAddCart from './ButtonAddCart';
 
-const ProductCard = ({id,name,image, price}) => {
+const ProductCard = ({id,name,image, price, stock}) => {
+ 
     return (
         <StyledCard>
             <Link to={`/catalogue/detail/${id}`} className='link'>
@@ -17,7 +19,11 @@ const ProductCard = ({id,name,image, price}) => {
                 <div className="name"><span>{name}</span></div>
                 <div className="price"><span>$ {price}</span></div>
             </Link>
-            <div className="btn"><ButtonAddCart id={id}/></div>
+            <div className="btn">
+                {
+                    <ButtonAddCart id={id}/>
+                    
+                }</div>
         </StyledCard>
             
         
