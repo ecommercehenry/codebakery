@@ -51,6 +51,12 @@ const LeftPanel = () => {
               <span className="tabName">Users</span>
             </div>
           </Link>
+          <Link className="text-decoration-none text-white" to="/admin/stores">
+            <div className={`tab ${activeTab.users}`}>
+              <HiOutlineUser size="1.3rem" className="icon" />
+              <span className="tabName">Stores</span>
+            </div>
+          </Link>
         </div>
         </section>
 

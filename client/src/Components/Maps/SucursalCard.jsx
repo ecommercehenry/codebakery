@@ -3,10 +3,8 @@ import { CardContent } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import GET_ALL_STORES from "../../Apollo/queries/getAllStores"
-import {useQuery} from "@apollo/client"
-
-
+import GET_ALL_STORES from "../../Apollo/queries/getAllStores";
+import { useQuery } from "@apollo/client";
 
 const useStyles = makeStyles({
   root: {
@@ -23,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 const SucursalCard = () => {
-  const {data, loading} = useQuery(GET_ALL_STORES)
+  const { data } = useQuery(GET_ALL_STORES);
   const classes = useStyles();
   return (
     <div>

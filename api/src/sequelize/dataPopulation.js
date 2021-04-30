@@ -22,7 +22,7 @@ async function dataPopulation() {
     await createUser("guille","12345","guille@gmail.com","user")
     await createUser("pablo","12345","elxebec@gmail.com","user")
     await createUser("fran","12345","fran@gmail.com","user")
-    await createUser("Nicolas Lohuandus","12345","Nlohuandus@gmail.com","user")
+    await createUser("Nicolas Lohuandus","12345","nlohuandus@gmail.com","user")
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
     await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)

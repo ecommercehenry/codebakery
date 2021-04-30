@@ -15,11 +15,15 @@ import TablaOrdenes from "../../admin/ordenes/TablaOrdenes";
 import UserAdmin from "../ordenes/UserAdmin";
 import Pagination from "../ordenes/Pagination";
 import CheckFilters from "../ordenes/CheckFilters";
-import ManageStores from "../ManageStores";
+import ManageStores from "../stores/ManageStores";
+import StoreOptions from "../stores/StoreOptions";
+import StorePanel from "../stores/StoresPanel";
+import ModifyStore from "../stores/ModifyStore";
 
 const AdminPanel = () => {
   const [addProduct, setAddProduct] = useState(false);
   let { status } = useSelector((state) => state.theme);
+  const [stores, setStores] = useState("seeStores");
   return (
     <StyledAdminPanel light={status}>
       <div className="left">
@@ -28,13 +32,25 @@ const AdminPanel = () => {
       <div className="right">
         <div className="top">
           <AdminNavBar setAddProduct={setAddProduct} />
+          <Route
+            path="/admin/stores"
+            component={() => StoreOptions({ setStores })}
+          />
           <Route path="/admin/orders" component={CheckFilters} />
         </div>
         <div className="bottom">
           <Route path="/admin/products" component={ListCRUD} />
           <Route path="/admin/orders" component={TablaOrdenes} />
           <Route path="/admin/users" component={UserAdmin} />
-          <Route path="/admin/stores" component={ManageStores} />
+          {stores === "seeStores" ? (
+            <Route path="/admin/stores" component={StorePanel} />
+          ) : stores === "modifyStore" ? (
+            <Route path="/admin/stores" component={ModifyStore} />
+          ) : stores === "addStore" ? (
+            <Route path="/admin/stores" component={ManageStores} />
+          ) : (
+            <p></p>
+          )}
         </div>
         <Route path="/admin/orders">
           <Pagination />

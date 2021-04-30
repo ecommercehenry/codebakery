@@ -10,40 +10,43 @@ import getUserById from "../../../../Apollo/queries/getUserById";
 
 toast.configure();
 
-export default function AddressForm({setUserdata}) {
+export default function AddressForm({ setUserdata }) {
   const [modifyUser] = useMutation(MODIFY_USER);
-  const { data, refetch,loading } = useQuery(getUserById, {
+  const { data, refetch, loading } = useQuery(getUserById, {
     variables: { id: parseInt(localStorage.id) },
     fetchPolicy: "no-cache",
   });
-  const customId='error toast' 
-  useEffect(()=>{
-    if(data){
-      if(data.getUserById){
-        if(data.getUserById.address === null || data.getUserById.phoneNumber === null || data.getUserById.dni === null ){
-          setUserdata(false)
-        }else{
-          setUserdata(true)
+  const customId = "error toast";
+  useEffect(() => {
+    if (data) {
+      if (data.getUserById) {
+        if (
+          data.getUserById.address === null ||
+          data.getUserById.phoneNumber === null ||
+          data.getUserById.dni === null
+        ) {
+          setUserdata(false);
+        } else {
+          setUserdata(true);
         }
-
       }
-    }    
-  },[loading, data])
+    }
+  }, [loading, data]);
   const [form, setForm] = useState({
     address: "",
     dni: "",
     phoneNumber: "",
   });
-  const regex =new RegExp("^[0-9]*$") 
+  const regex = new RegExp("^[0-9]*$");
   const handleAddress = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-  }
+  };
   const handleChange = (e) => {
-    if(regex.test(e.target.value)){
+    if (regex.test(e.target.value)) {
       setForm({ ...form, [e.target.name]: e.target.value });
-    }else{
-      e.target.value = ""
-      toast("Numbers Only", {toastId: customId});
+    } else {
+      e.target.value = "";
+      toast("Numbers Only", { toastId: customId });
     }
   };
   const submitHandler = async (e) => {
@@ -70,8 +73,6 @@ export default function AddressForm({setUserdata}) {
   let dni = document.getElementById("dni");
   let phoneNumber = document.getElementById("phoneNumber");
   if (dni) {
-    dni.style = "background : #ffffff";
-    phoneNumber.style = "background : #ffffff";
     dni.maxLength = "8";
     dni.minLength = "7";
     phoneNumber.maxLength = "11";
@@ -120,10 +121,7 @@ export default function AddressForm({setUserdata}) {
               onChange={handleChange}
             />
           </Grid>
-          <button
-            type="submit"
-            className='save'
-          >
+          <button type="submit" className="save">
             Guardar los datos
           </button>
         </Grid>
