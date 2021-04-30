@@ -11,6 +11,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import GET_ALL_STORES from "../../../../Apollo/queries/getAllStores";
+import { Button } from "@material-ui/core";
+import DELETE_STORE from "../../../../Apollo/mutations/deleteStore";
 
 toast.configure();
 
@@ -26,16 +28,18 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     backgroundColor: "#ffffff",
-    display: "flex",
-    flexDirection: "row",
-    left: "1rem",
+  },
+  deletebutton: {
+    backgroundColor: "#ffffff",
+    left: "5rem",
   },
 }));
 
 const ModifyStore = () => {
   const classes = useStyles();
   const [modifyStore] = useMutation(MODIFY_STORE);
-  const { data } = useQuery(GET_ALL_STORES, {
+  const [deleteStore] = useMutation(DELETE_STORE);
+  const { data, refetch } = useQuery(GET_ALL_STORES, {
     fetchPolicy: "no-cache",
   });
 
@@ -65,7 +69,15 @@ const ModifyStore = () => {
       }
     }
   };
-  console.log(form);
+  const deleteHandler = async (e) => {
+    e.preventDefault();
+    await deleteStore({
+      variables: {
+        id: parseInt(form.id),
+      },
+    });
+    refetch();
+  };
   const submitHandler = async (e) => {
     e.preventDefault();
     await modifyStore({
@@ -93,27 +105,32 @@ const ModifyStore = () => {
             Modify an existing store
           </Typography>
           <Grid container spacing={3}>
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Store</InputLabel>
-              <Select
-                fullWidth
-                native
-                onChange={handleAddress}
-                inputProps={{
-                  name: "id",
-                  id: "id",
-                }}
-              >
-                <option disabled selected aria-label="None" value="" />
-                {data?.getAllStores?.map((store) => (
-                  <>
-                    <option value={store.id}>
-                      {store.id}|{store.name}
-                    </option>
-                  </>
-                ))}
-              </Select>
-            </FormControl>
+            <Grid item xs={12}>
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="age-native-simple">Store</InputLabel>
+                <Select
+                  fullWidth
+                  native
+                  onChange={handleAddress}
+                  inputProps={{
+                    name: "id",
+                    id: "id",
+                  }}
+                >
+                  <option disabled selected aria-label="None" value="" />
+                  {data?.getAllStores?.map((store) => (
+                    <>
+                      <option value={store.id}>
+                        {store.id}|{store.name}
+                      </option>
+                    </>
+                  ))}
+                </Select>
+              </FormControl>
+              <Button className={classes.deletebutton} onClick={deleteHandler}>
+                Delete this store
+              </Button>
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="filled"

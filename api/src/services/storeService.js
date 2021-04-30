@@ -39,4 +39,16 @@ async function modifyStore(args) {
   }
 }
 
-module.exports = { getAllStores, addStore, modifyStore };
+async function deleteStore(args){
+  try {
+    Store.destroy({
+      where:{
+        id: args.id
+      }
+    })
+    } catch (error) {
+    console.log(error.message)
+  }
+}
+
+module.exports = { getAllStores, addStore, modifyStore, deleteStore };
