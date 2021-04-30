@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import ButtonAddCart from './ButtonAddCart';
 
 const ProductCard = ({id,name,image, price, stock}) => {
- 
+ console.log(stock, 'stock')
     return (
         <StyledCard>
             <Link to={`/catalogue/detail/${id}`} className='link'>
@@ -21,8 +21,9 @@ const ProductCard = ({id,name,image, price, stock}) => {
             </Link>
             <div className="btn">
                 {
-                    <ButtonAddCart id={id}/>
-                    
+                     stock > 0 ? 
+                     <ButtonAddCart id={id}/>
+                      : alert('No hay en stock')                      
                 }</div>
         </StyledCard>
             
