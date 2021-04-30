@@ -8,7 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { toast } from "react-toastify";
 import  { useParams } from "react-router-dom";
-import closeIcon from "../../../icons/close2.svg"; 
+import closeIcon from "../../../icons/close2.svg";
+//freenom.com/es/index.html 
 
 
 const FormModify  = () => {
