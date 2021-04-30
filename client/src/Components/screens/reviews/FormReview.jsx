@@ -109,7 +109,7 @@ if(!data?.addReview?.name){
               <Rating
                 name="size-large"
                 value={value}
-                onChange={( newValue) => {
+                onChange={(event, newValue) => {
                   setValue(newValue);
                 }}
               />
