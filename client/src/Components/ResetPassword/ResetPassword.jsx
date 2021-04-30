@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import MODIFY_USER from "../../Apollo/mutations/modifyUser";
-import { Redirect, useParams, useLocation } from "react-router-dom";
+import { Redirect, useParams, useLocation, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../Assets/toast.css";
 import styled from "styled-components";
@@ -9,27 +9,32 @@ import GET_ALL_USERS from "../../Apollo/queries/getAllUsers";
 import RESET_PASSWORD from "../../Apollo/mutations/resetPassword";
 
 toast.configure();
+
 function ResetPassword() {
-  
   /* 
     Le pido la contraseña actual y el email al usuario.
     Si la contraseña y el email coinciden lo dejo actualizar
     con la otra contraseña que envié
   */
-  const [modifyUser, { data, loading }] = useMutation(MODIFY_USER);
-  const {data:dataUsers} = useQuery(GET_ALL_USERS)
-  const [resetPassword, {data:dataReset}] = useMutation(RESET_PASSWORD)
+  const customId = 1;
 
-  let redirect = localStorage.getItem("redirect");
+  const [modifyUser, { data, loading }] = useMutation(MODIFY_USER);
+  const { data: dataUsers } = useQuery(GET_ALL_USERS);
+  const [resetPassword, { data: dataReset }] = useMutation(RESET_PASSWORD);
+
+  // let redirect = localStorage.getItem("redirect");
   const [input, setInput] = useState({
-    email: "",
-    oldPassword: "",
+    // email: "",
+    // oldPassword: "",
     newPassword: "",
     newnewPasswordRepeat: "",
   });
 
   const search = useLocation().search;
-  const resetToken = new URLSearchParams(search).get('resetToken');
+  const resetToken = new URLSearchParams(search).get("resetToken");
+  const email = new URLSearchParams(search).get("email");
+  const newPassword = new URLSearchParams(search).get("newPassword");
+  const newPasswordRepeat = new URLSearchParams(search).get("newPasswordRepeat");
 
   function handleInputChange(e) {
     setInput({
@@ -38,40 +43,68 @@ function ResetPassword() {
     });
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // function handleInputChangeTwo(e) {
+  //   setInput({
+  //     ...input,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // }
 
-    if(resetToken){
+  const handleSubmitOne = (e) => {
+    console.log(resetToken && email);
+    if (resetToken && email) {
       modifyUser({
         variables: {
           id: null,
           name: null,
-          password: input.oldPassword,
+          password: null,
           newPassword: input.newPassword,
-          email: input.email,
+          email: email,
           role: null,
           address: null,
           dni: null,
           phoneNumber: null,
         },
       });
-    }else{
-      toast("Se ha enviado un mensaje a tu correo", {
-        toastId: customId
-      });
-      if(dataUsers?.getAllUsers){
-        let usuario = dataUsers.getAllUsers.filter(el=>el.email === input.email)[0]  
-        resetPassword({variables:{userId:usuario.id}})
-      }
-      localStorage.setItem("redirect", false);
-      window.location.reload();
     }
-    
-    
-    
   };
 
-  const customId = 1;
+  const handleSubmitTwo = (e) => {
+    e.preventDefault();
+
+    // if (resetToken && email) {
+    //   modifyUser({
+    //     variables: {
+    //       id: null,
+    //       name: null,
+    //       password: null,
+    //       newPassword: input.newPassword,
+    //       email: email,
+    //       role: null,
+    //       address: null,
+    //       dni: null,
+    //       phoneNumber: null,
+    //     },
+    //   });
+    // }
+    if (dataUsers?.getAllUsers) {
+      let user = dataUsers.getAllUsers.filter(
+        (el) => el.email === input.email
+      )[0];
+      if (user) {
+        resetPassword({ variables: { userId: user.id } });
+        toast("Check your email and reset your password", {
+          toastId: customId,
+        });
+      } else {
+        toast("User Not Found", {
+          toastId: customId,
+        });
+      }
+    }
+    // localStorage.setItem("redirect", false);
+    // window.location.reload();
+  };
 
   useEffect(() => {
     if (
@@ -80,33 +113,33 @@ function ResetPassword() {
       input.newPassword !== input.newPasswordRepeat
     ) {
       toast("New passwords should match", {
-        toastId: customId
+        toastId: customId,
       });
     } else if (!loading) {
       if (data?.modifyUser.__typename === "error") {
         toast(data?.modifyUser.detail, {
-          toastId: customId
+          toastId: customId,
         });
       } else if (data?.modifyUser.__typename === "user") {
         toast("Your password has successfully changed");
-        localStorage.setItem("redirect", true);
+        // localStorage.setItem("redirect", true);
         setInput({
-          email: "",
-          oldPassword: "",
+          // email: "",
+          // oldPassword: "",
           newPassword: "",
           newPasswordRepeat: "",
         });
-        window.location.reload();
+        // window.location.reload();
       }
     }
   }, [data, dataUsers]);
 
-  if (redirect) {
-    localStorage.setItem("redirect", false);
-    return <Redirect to="/" />;
-  }
+  // if (redirect) {
+  //   localStorage.setItem("redirect", false);
+  //   return <Redirect to="/" />;
+  // }
 
-  if(resetToken){
+  if (resetToken && email) {
     return (
       <div
         classname="page"
@@ -116,7 +149,7 @@ function ResetPassword() {
           <div className="formContent">
             <StyledAcheDos></StyledAcheDos>
             <hr />
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmitOne(e)}>
               <input
                 type="password"
                 name="newPassword"
@@ -134,12 +167,17 @@ function ResetPassword() {
                 required
               />
               <input type="submit" value="SUBMIT" />
+              <div className="formFooter">
+                <Link to="/log-in">Login</Link>
+              </div>
             </form>
           </div>
         </div>
       </div>
     );
-  }else{
+  } else if (newPassword && newPasswordRepeat)
+    return <Redirect to="/" />;
+  else {
     return (
       <div
         classname="page"
@@ -149,7 +187,7 @@ function ResetPassword() {
           <div className="formContent">
             <StyledAcheDos></StyledAcheDos>
             <hr />
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmitTwo(e)}>
               <input
                 type="email"
                 name="email"
@@ -159,6 +197,9 @@ function ResetPassword() {
                 required
               />
               <input type="submit" value="SUBMIT" />
+              <div className="formFooter">
+                <Link to="/catalogue">Go home</Link>
+              </div>
             </form>
           </div>
         </div>

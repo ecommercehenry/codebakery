@@ -187,7 +187,7 @@ async function resetPassword(id){
     id:user.id,
     email: user.email
   }, "resetPassword", { expiresIn: 60 * 60 }) //60*60 = 3600 seg = 1 hour
-  sendEmail(user.id, `Reset password user ${user.name}`, `http://localhost:3000/reset-password?resetToken=${token}`)
+  sendEmail(user.id, `Reset password user ${user.name}`, `http://localhost:3000/reset-password?resetToken=${token}&email=${user.email}`)
   return {
     __typename:"booleanResponse",
     boolean: true
