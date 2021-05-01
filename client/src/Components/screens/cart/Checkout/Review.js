@@ -22,7 +22,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Review() {
+  //variables 
+  let total = 0;
+  let shipping = document.getElementById("shipping")
+  //styles
   const classes = useStyles();
+
+  //queries
   const orderData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: parseInt(localStorage.id) },
     fetchPolicy: "no-cache",
@@ -31,7 +37,16 @@ export default function Review() {
     variables: { id: parseInt(localStorage.id) },
     fetchPolicy: "no-cache",
   });
-  let total = 0;
+  console.log(orderData)
+  if(shipping && orderData.data){
+    if(orderData.data.getOrdersByUserIdInCart != undefined){
+      if(orderData.data.getOrdersByUserIdInCart.orders[0].storeId === null){
+        console.log("es null")
+      }else{
+        shipping.style = "display: none"
+      }
+    }
+  }
   if (!orderData.loading) {
     if (orderData.data.getOrdersByUserIdInCart.orders.length != 0) {
       orderData.data.getOrdersByUserIdInCart.orders[0].lineal_order.map(
@@ -79,6 +94,19 @@ export default function Review() {
           </Typography>
           <Typography gutterBottom>
             Telephone: {userData?.data?.getUserById?.phoneNumber}
+          </Typography>
+        </Grid>
+        <Grid item container direction="column" xs={12} sm={6}>
+          {/* en caso de incluirse descuentos deberian ponerse aca */}
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} id="pickup">
+        <Grid item xs={12} sm={6}>
+          <Typography variant="h6" gutterBottom className={classes.title}>
+            Store pickup
+          </Typography>
+          <Typography gutterBottom>
+            User: {userData?.data?.getUserById?.name}
           </Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>

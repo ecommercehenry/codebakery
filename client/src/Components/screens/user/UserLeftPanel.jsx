@@ -5,7 +5,6 @@ import { HiOutlineClipboardList } from "react-icons/hi";
 import styled from "styled-components";
 import { Route } from "react-router-dom";
 
-
 const UserLeftPanel = ({ click, setClick }) => {
   const path = window.location.pathname;
   const activeTab = {
@@ -30,11 +29,13 @@ const UserLeftPanel = ({ click, setClick }) => {
         <div className="tabs">
           <Link
             className="text-decoration-none text-white"
-            to={`/user/${id}/profile` }
+            to={`/user/${id}/profile`}
           >
             <div className={`tab ${activeTab.profile}`}>
               <HiOutlineUser size="1.3rem" className="icon" />
-              <button onClick={() => setClick(3)} className="tabName">Profile</button>
+              <button onClick={() => setClick(3)} className="tabName">
+                Profile
+              </button>
             </div>
           </Link>
           <div
