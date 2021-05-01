@@ -1,16 +1,17 @@
-import { SEND_TOKEN } from "../actions/index";
+import { SAVE_TOKEN } from "../actions/saveToken";
 
 const initialState = {
   token: "",
+  emailReducer: ""
 };
 
 const reducerToken = (state = initialState, action) => {
   switch (action.type) {
-    case SEND_TOKEN:
-      console.log("state.token:", state.token, "action.payload reducer:", action.payload)
+    case SAVE_TOKEN:
       return {
         ...state,
-        token: action.payload !== undefined ? action.payload : state.token 
+        token: action.payload.token !== undefined ? action.payload.token : state.token ,
+        emailReducer: action.payload.email !== undefined ? action.payload.email : state.emailReducer
       };
     default:
       return state;

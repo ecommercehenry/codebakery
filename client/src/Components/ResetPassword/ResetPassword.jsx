@@ -8,7 +8,8 @@ import "../../Assets/toast.css";
 import styled from "styled-components";
 import GET_ALL_USERS from "../../Apollo/queries/getAllUsers";
 import RESET_PASSWORD from "../../Apollo/mutations/resetPassword";
-import { sendToken } from "../../actions";
+import { saveToken } from "../../actions/saveToken";
+
 
 toast.configure();
 
@@ -28,7 +29,7 @@ function ResetPassword() {
     { data: dataReset, loading: loadingReset },
   ] = useMutation(RESET_PASSWORD);
 
-  const { token } = useSelector((state) => state.reducerToken);
+  const { token, emailReducer } = useSelector((state) => state.reducerToken);
 
   const [input, setInput] = useState({
     email: "",
@@ -63,7 +64,7 @@ function ResetPassword() {
         toastId: customId,
       });
     }
-    if (token === resetToken) {
+    else if ((token === resetToken) && (emailReducer === email)) {
       if (resetToken && email) {
         modifyUser({
           variables: {
@@ -83,7 +84,7 @@ function ResetPassword() {
         toastId: customId,
       });
       setFlagSubmit(true);
-      dispatch(sendToken(""));
+      dispatch(saveToken("", ""));
     } else {
       toast("Try resetting your password again", {
         toastId: customId,
@@ -112,7 +113,7 @@ function ResetPassword() {
 
   useEffect(() => {
     if (dataReset?.resetPassword) {
-      dispatch(sendToken(dataReset?.resetPassword.token));
+      dispatch(saveToken(dataReset?.resetPassword.token, dataReset?.resetPassword.email));
     }
   }, [dataReset, loadingReset]);
 

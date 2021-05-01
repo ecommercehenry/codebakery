@@ -14,7 +14,7 @@ export const CHANGE_PAGE = "CHANGE_PAGE";
 export const CHECKBOX_CHANGE = "CHECKBOX_CHANGE";
 export const CLEAR_CHECKBOXES = "CLEAR_CHECKBOXES";
 export const FILTER_NAME = "FILTER_NAME";
-export const SEND_TOKEN = "SEND_TOKEN"
+
 
 export const setSearch = () => {
   return {
@@ -118,11 +118,4 @@ export const checkboxChange = (id) => {
 
 export const clearCheckboxes = () => {
   return { type : CLEAR_CHECKBOXES }
-}
-
-export const sendToken = (data) => {
-  return {
-    type: SEND_TOKEN,
-    payload: data
-  }
 }
