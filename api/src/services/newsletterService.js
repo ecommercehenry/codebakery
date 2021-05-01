@@ -2,7 +2,7 @@ var nodemailer = require('nodemailer');
 const { Users } = require("../db");
 
 
-async function sendNewsletter(){
+async function sendNewsletter(mensajeDelAdmin){
     try{
         users = await Users.findAll({ where: { newsletter:true } });
         console.log(" ---------------> " + users)
@@ -22,10 +22,10 @@ var transporter = nodemailer.createTransport({
 });
 
 var mailOptions = {
-  from: 'youremail@gmail.com',
-  to: 'myfriend@yahoo.com',
+  from: '@gmail.com',
+  to: 'lizen777@gmail.com',
   subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
+  html: 'Hellow everybodyyy !!!!!!!!!!'
 };
 
 transporter.sendMail(mailOptions, function(error, info){

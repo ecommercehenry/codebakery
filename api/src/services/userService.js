@@ -84,7 +84,7 @@ async function createUser(name, password, email, role, google) {
     };
   }
 }
-
+//---- MODIFY USER ----
 async function modifyUser(
   id,
   name,
@@ -130,6 +130,7 @@ async function modifyUser(
   if (address) obj.address = address;
   if (dni) obj.dni = dni;
   if (phoneNumber) obj.phoneNumber = phoneNumber;
+  if (newsletter) obj.newsletter = newsletter;
 
   try {
     if (id) {
@@ -151,6 +152,7 @@ async function modifyUser(
   }
 }
 
+//---- LOGIN WHIT GOOGLE  ----
 async function loginUserWithGoogle(email, tokenId){
   
   const user = await Users.findOne({

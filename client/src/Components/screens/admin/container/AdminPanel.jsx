@@ -33,20 +33,15 @@ const AdminPanel = () => {
         <div className="top">
           <AdminNavBar setAddProduct={setAddProduct} />
           <Route path="/admin/orders" component={CheckFilters}/>
-        </div>
-
-       
-       
+        </div>         
 
         <div className="bottom">
-        
-            
+                   
            <Route path='/admin/products' component={ListCRUD}/>            
            <Route path='/admin/orders' component={TablaOrdenes}/>    
            <Route path="/admin/users" component={UserAdmin} />
           
            <Route path="/admin/newsletter" component={NewsletterAdmin} />
-
            
         </div>
 
