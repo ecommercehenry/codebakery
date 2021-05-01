@@ -4,6 +4,7 @@ const UserProfile = () => {
  
     return (
         <div>
+            hola soy un user profile
         </div>
     )
 }

@@ -12,6 +12,8 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import GET_ALL_STORES from "../../../../Apollo/queries/getAllStores";
 import { Button } from "@material-ui/core";
+import MODIFY_ORDER_STORE from "../../../../Apollo/mutations/modifyOrderStore"
+import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 
 toast.configure();
 
@@ -35,9 +37,14 @@ export default function AddressForm({ setUserdata }) {
     fetchPolicy: "no-cache",
   });
   const stores = useQuery(GET_ALL_STORES);
+  const order = useQuery(GET_ORDERS_BY_USER_ID_IN_CART,{
+    variables:{
+      idUser: parseInt(localStorage.id)
+    }
+  })
   //mutations
   const [modifyUser] = useMutation(MODIFY_USER);
-
+  const [modifyOrderStore] = useMutation(MODIFY_ORDER_STORE)
   //useEffects
   useEffect(() => {
     let formContainer = document.getElementById("formContainer");
@@ -81,6 +88,16 @@ export default function AddressForm({ setUserdata }) {
   };
   const submitStore = (e) => {
     e.preventDefault();
+    if(order && order.data){
+      let idOrder = order.data.getOrdersByUserIdInCart.orders[0].id
+      modifyOrderStore({
+        variables:{
+          idStore: parseInt(selected),
+          idOrder: parseInt(idOrder)
+        }
+      })
+
+    }
     setUserdata(true);
     toast("Store saved");
   };
@@ -127,7 +144,6 @@ export default function AddressForm({ setUserdata }) {
     phoneNumber.maxLength = "11";
     phoneNumber.minLength = "10";
   }
-  console.log(selected);
   return (
     <React.Fragment>
       <div>
@@ -190,7 +206,7 @@ export default function AddressForm({ setUserdata }) {
             />
           </Grid>
           <button type="submit" className="save">
-            Guardar los datos
+            Save data
           </button>
         </Grid>
         <Grid container spacing={2}>
@@ -199,14 +215,14 @@ export default function AddressForm({ setUserdata }) {
               Your currend data:
             </Typography>
             <Typography gutterBottom>
-              Comprador: {data?.getUserById?.name}
+              User: {data?.getUserById?.name}
             </Typography>
             <Typography gutterBottom>DNI: {data?.getUserById?.dni}</Typography>
             <Typography gutterBottom>
-              Direccion : {data?.getUserById?.address}
+              Address : {data?.getUserById?.address}
             </Typography>
             <Typography gutterBottom>
-              Tel: {data?.getUserById?.phoneNumber}
+              Telephone: {data?.getUserById?.phoneNumber}
             </Typography>
           </Grid>
         </Grid>
@@ -232,7 +248,7 @@ export default function AddressForm({ setUserdata }) {
               ))}
             </Select>
           </FormControl>
-          <Button type="submit"> Confirm store</Button>
+          <Button type="submit">Confirm store</Button>
         </form>
       </div>
     </React.Fragment>

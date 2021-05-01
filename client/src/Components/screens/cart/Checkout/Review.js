@@ -63,22 +63,22 @@ export default function Review() {
           </Typography>
         </ListItem>
       </List>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} id="shipping">
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             Shipping
           </Typography>
           <Typography gutterBottom>
-            Comprador: {userData?.data?.getUserById?.name}
+            User: {userData?.data?.getUserById?.name}
           </Typography>
           <Typography gutterBottom>
             DNI: {userData?.data?.getUserById?.dni}
           </Typography>
           <Typography gutterBottom>
-            Direccion : {userData?.data?.getUserById?.address}
+            Address : {userData?.data?.getUserById?.address}
           </Typography>
           <Typography gutterBottom>
-            Tel: {userData?.data?.getUserById?.phoneNumber}
+            Telephone: {userData?.data?.getUserById?.phoneNumber}
           </Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
