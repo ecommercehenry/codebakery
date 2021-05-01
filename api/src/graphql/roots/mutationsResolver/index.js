@@ -8,20 +8,23 @@ const { deleteById } = require("./deleteById");
 const { addProduct } = require("./addProduct");
 const { createUser } = require("./createUser");
 const { modifyUser } = require("./modifyUser");
-const {createOrder } = require("./createOrder");
-const {updateOrderPrices} = require("./updateOrderPrices");
+const { createOrder } = require("./createOrder");
+const { updateOrderPrices } = require("./updateOrderPrices");
 const { deleteProductOrder } = require("./deleteProductOrder");
-const {addProductToOrder} = require("./addProductToOrder")
-const {deleteOrder} = require("./deleteOrder")
-const {updateOrderToTicket} = require("./updateOrderToTicket")
-const {modifyOrderStatus} = require("./modifyOrderStatus")
-const { incrementQuantity } = require("./incrementQuantity"); 
-const { decrementQuantity } = require("./decrementQuantity"); 
-const { deleteReview } = require("./deleteReview.js")
-const { addReview } = require("./addReview")
-const {modifyReview} = require("./modifyReview")
-const {deleteUser} = require("./deleteUser");
-const {sendEmail} = require("./sendEmail")
+const { addProductToOrder } = require("./addProductToOrder");
+const { deleteOrder } = require("./deleteOrder");
+const { updateOrderToTicket } = require("./updateOrderToTicket");
+const { modifyOrderStatus } = require("./modifyOrderStatus");
+const { incrementQuantity } = require("./incrementQuantity");
+const { decrementQuantity } = require("./decrementQuantity");
+const { deleteReview } = require("./deleteReview.js");
+const { addReview } = require("./addReview");
+const { modifyReview } = require("./modifyReview");
+const { deleteUser } = require("./deleteUser");
+const { sendEmail } = require("./sendEmail");
+const { saveImageSlider } = require("./saveImageSlider");
+const { deleteImageById } = require("./deleteImageById");
+
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -40,13 +43,14 @@ module.exports = {
   deleteOrder,
   updateOrderToTicket,
   modifyOrderStatus,
-  incrementQuantity, 
-  decrementQuantity, 
+  incrementQuantity,
+  decrementQuantity,
   deleteReview,
   addReview,
   modifyReview,
   decrementQuantity,
   deleteUser,
-  sendEmail
-
-}
+  sendEmail,
+  saveImageSlider,
+  deleteImageById,
+};

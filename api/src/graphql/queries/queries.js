@@ -22,5 +22,6 @@ module.exports = `
         validateCredentials(token: String!, role: String!): Boolean,
         validateUserWithGoogle(email: String!, tokenId: String): resultValidate
         getReviewByUserId(userId: Int!) : [review]
+        getImageSlider: [image]
     }
 `;

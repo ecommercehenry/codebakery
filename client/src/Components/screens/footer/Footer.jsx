@@ -23,5 +23,4 @@ const StyledFooter = styled.footer`
   justify-content: center;
   align-items: center;
   border-top: 1px inset #694e7a;
-  box-shadow: 10px 10x 15px black;
 `;

@@ -1,63 +1,124 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 
-import { FaCloudUploadAlt } from "react-icons/fa";
+// Spinner
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
+import { useMutation } from "@apollo/client";
+import SAVE_IMAGE from "../../../../Apollo/mutations/saveImageSlider";
 
+const axios = require("axios");
 const Upload = () => {
-  const [file, setFile] = useState(null);
-  return (
-    <InputFile>
-      <button className="file-upload-button">
-        <FaCloudUploadAlt style={{ content: "Select some files" }} />
-      </button>
-      <input className="file-upload" type="file" multiple />
-    </InputFile>
+  const [saveImageSlider, { loading }] = useMutation(SAVE_IMAGE);
+  const onDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach(async (files) => {
+      console.log("FILES: ", files);
+      /* const formData = new FormData();
+      formData.append("file", files); */
+      const newImage = new FileReader();
+      newImage.readAsDataURL(files);
+      newImage.onloadend = () => {
+        saveImageSlider({
+          variables: {
+            image: newImage.result,
+          },
+        });
+      };
+    });
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: "image/*",
+    multiple: false,
+  });
+
+  return loading ? (
+    <Uploading>
+      <p className="waiting">Image upload. Please wait...</p>
+      <Loader type="BallTriangle" color="#755588" height={80} width={80} />
+    </Uploading>
+  ) : (
+    <DropZone>
+      <div
+        {...getRootProps()}
+        className={`dropzone ${isDragActive ? "active" : null} `}
+      >
+        <input {...getInputProps()} placeholder="Drag and Drop here" />
+        <p style={{ margin: "0", color: "#755588" }}>
+          Drag 'n' drop some files here, or click to select files
+        </p>
+      </div>
+    </DropZone>
   );
 };
 
-const InputFile = styled.div`
-  margin-top: 2rem;
-  height: 4rem;
-  overflow: hidden;
-  position: relative;
+const Uploading = styled.div`
+  display: flex;
+  align-items: center;
 
-  .file-upload-button {
-    display: inline-block;
-    width: 200px;
-    height: 40px;
-  }
-
-  .file-upload {
-    font-size: 200px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    opacity: 0;
-  }
-
-  ::-webkit-file-upload-button {
-    visibility: hidden;
-  }
-  ::before {
-    /* display: inline-block;
-    background: linear-gradient(top, #f9f9f9, #e3e3e3);
-    border: 1px solid #999;
-    border-radius: 3px;
-    padding: 5px 8px;
-    outline: none;
-    white-space: nowrap;
-    -webkit-user-select: none;
-    cursor: pointer;
-    text-shadow: 1px 1px #fff;
-    font-weight: 700;
-    font-size: 10pt; */
-  }
-  :hover::before {
-    border-color: black;
-  }
-  :active::before {
-    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+  .waiting {
+    margin: 0;
+    padding: 0;
+    padding-right: 2rem;
   }
 `;
+
+const DropZone = styled.form`
+  width: 100%;
+
+  input {
+    border: none;
+    text-align: center;
+    font-size: 2rem;
+  }
+  input:focus {
+    outline: none;
+  }
+
+  .dropzone {
+    margin-top: 3rem;
+    height: 8rem;
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px dashed #755588;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .active {
+    border: 2px solid rebeccapurple;
+  }
+`;
+
+/**
+ * Esto es lo que devuelve Cloudinary: 
+access_mode: "public"
+asset_id: "fe9305ea578fbb32589bc1171a71e405"
+bytes: 3504774
+created_at: "2021-04-30T17:31:26Z"
+etag: "6b4ab1272a66c328ce0cdefcba7e83cf"
+existing: false
+format: "jpg"
+height: 2160
+original_filename: "ACOdyssey_AlexiosEpicBattle"
+placeholder: false
+public_id: "sliderimages/ACOdyssey_AlexiosEpicBattle_ajzgpl"
+resource_type: "image"
+secure_url: "https://res.cloudinary.com/studio-ghibli/image/upload/v1619803886/sliderimages/ACOdyssey_AlexiosEpicBattle_ajzgpl.jpg"
+signature: "15be32d0a244ccb2c9e07f17d082d1fb3bdd5611"
+tags: []
+type: "upload"
+url: "http://res.cloudinary.com/studio-ghibli/image/upload/v1619803886/sliderimages/ACOdyssey_AlexiosEpicBattle_ajzgpl.jpg"
+version: 1619803886
+version_id: "6c7a8c011a40e8a38a77dae2f972a097"
+width: 3840
+ */
 
 export default Upload;

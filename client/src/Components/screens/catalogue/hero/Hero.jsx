@@ -10,7 +10,6 @@ const Hero = () => {
     </>
   );
 };
-
 //<Cardhero />
 
 export default Hero;

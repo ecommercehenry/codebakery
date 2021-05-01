@@ -32,5 +32,6 @@ type Mutation{
     deleteReview(productId: Int!, userId: Int!): deletes
     deleteUser(userId: Int!) : resultBoolean
     sendEmail(userId: Int!, affair: String!, message: String!): emailResponse
-
-}`
+    saveImageSlider(image: String!): resultBoolean
+    deleteImageById(imageId: Int!) : resultBoolean
+}`;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -9,8 +9,16 @@ import ImgComp from "./ImgComp";
 import i1 from "./i1.jpg";
 import i2 from "./i2.jpg";
 import i3 from "./i3.jpg";
+import { useQuery } from "@apollo/client";
 
+import GET_ALL_IMAGES from "../../../../Apollo/queries/getImageSlider";
+
+const axios = require("axios");
 const Slider = () => {
+  let { data } = useQuery(GET_ALL_IMAGES);
+
+  console.log("DATA: ", data);
+  // Revisar esto
   let sliderArr = [
     <ImgComp src={i1} />,
     <ImgComp src={i2} />,
@@ -27,6 +35,10 @@ const Slider = () => {
     x === -100 * (sliderArr.length - 1) ? setX(0) : setX(x - 100);
   };
 
+  setTimeout(() => {
+    x === -100 * (sliderArr.length - 1) ? setX(0) : setX(x - 100);
+  }, 5000);
+
   return (
     <SliderAtr>
       {sliderArr.map((item, indx) => {
@@ -40,63 +52,43 @@ const Slider = () => {
           </div>
         );
       })}
-      <GoLeft onClick={goLeft}>
+      <ButtonSlider style={{ left: "0" }} onClick={goLeft}>
         <IoIosArrowBack />
-      </GoLeft>
-      <GoRight onClick={goRight}>
+      </ButtonSlider>
+      <ButtonSlider style={{ right: "0" }} onClick={goRight}>
         <IoIosArrowForward />
-      </GoRight>
+      </ButtonSlider>
     </SliderAtr>
   );
 };
 
-//IoIosArrowBack
-//IoIosArrowForward
-
-const GoLeft = styled.button`
+const ButtonSlider = styled.button`
   position: absolute;
   top: 10rem;
-  left: 0;
   transform: translateY(-50%);
   width: 8%;
   height: 20rem;
   background: none;
   border: none;
-  background-color: hsla(0, 0%, 0%, 0.999);
-  opacity: 0.4;
+  background-color: hsla(0, 0%, 0%, 0.446);
   transition: 0.5s;
+  font-size: 3rem;
+  color: hsl(0, 100%, 100%);
 
   :hover {
-    font-size: 3rem;
-    color: hsl(0, 100%, 100%);
-    background-color: hsla(0, 0%, 50.19607843137255%, 0.446);
+    font-size: 4rem;
+    color: hsl(0, 0%, 80%);
+    background-color: hsla(0, 0%, 50.19607843137255%, 0.226);
   }
-`;
-
-const GoRight = styled.button`
-  position: absolute;
-  top: 10rem;
-  right: 0;
-  transform: translateY(-50%);
-  width: 8%;
-  height: 20rem;
-  background: none;
-  border: none;
-  background-color: hsla(0, 0%, 0%, 0.999);
-  opacity: 0.4;
-  transition: 0.5s;
-
-  :hover {
-    font-size: 3rem;
+  :active {
+    background-color: hsl(0, 0%, 80%);
     color: hsl(0, 100%, 100%);
-    background-color: hsla(0, 0%, 50.19607843137255%, 0.446);
   }
 `;
 
 const SliderAtr = styled.div`
   position: relative;
   background-color: #755588;
-  /*  border-radius: 0px 0px 50px 50px; */
   z-index: 1;
   height: 20rem;
   width: 100%;
@@ -108,6 +100,9 @@ const SliderAtr = styled.div`
     min-width: 100%;
     height: 20rem;
     transition: 0.5s;
+  }
+  :hover {
+    transform: translateX(0%);
   }
 `;
 
