@@ -26,6 +26,7 @@ const {addStore} = require("./addStore")
 const {modifyStore} = require("./modifyStore")
 const {deleteStore} = require("./deleteStore")
 const {modifyOrderStore} = require("./modifyOrderStore")
+const {addPromo} = require("./addPromo")
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -55,5 +56,6 @@ module.exports = {
   addStore,
   modifyStore,
   deleteStore, 
-  modifyOrderStore
+  modifyOrderStore, 
+  addPromo
 }

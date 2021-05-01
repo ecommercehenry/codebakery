@@ -26,7 +26,8 @@ const {
     addStore,
     modifyStore,
     deleteStore, 
-    modifyOrderStore
+    modifyOrderStore, 
+    addPromo,
     
 } = require("./mutationsResolver/")
 
@@ -81,7 +82,8 @@ const root = {
     addStore,
     modifyStore,
     deleteStore,
-    modifyOrderStore, 
+    modifyOrderStore,
+    addPromo,  
 
     //Queries    
     productById,
