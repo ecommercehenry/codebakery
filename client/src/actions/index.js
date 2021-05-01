@@ -96,10 +96,9 @@ export const pricetohigh = () => {
   };
 };
 
-export const changeStatus = (id, status) => {
+export const changedStatus = () => {
   return {
     type: CHANGE_STATUS,
-    payload: {id, status}
   };
 };
 

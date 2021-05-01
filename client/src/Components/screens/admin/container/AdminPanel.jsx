@@ -33,7 +33,10 @@ const AdminPanel = () => {
           <AdminNavBar setAddProduct={setAddProduct} />
           <Route path="/admin/orders" component={CheckFilters}/>
         </div>
+
        
+       
+
         <div className="bottom">
         
             
@@ -56,14 +59,13 @@ const AdminPanel = () => {
 };
 
 const StyledAdminPanel = styled.div`
-  min-height: 100vh;
     height: fit-content;
     width: 100%;
     display:flex;
     flex-direction:row;
     justify-content:space-between;
     background:${({light})=>light 
-    ? '#F1F1F1' 
+    ? 'white' 
     : '#222222'};
     color:${({light})=>light 
     ? 'inherit' 
@@ -78,26 +80,23 @@ const StyledAdminPanel = styled.div`
         flex-direction:column;
         height: fit-content;
         .top{
-            position: sticky;
+            position: fixed;
             z-index: 2;
-            width: 100%;
-            top: 0;
-            padding-left: 4rem;
-            padding-right: 4rem;
-            background: #f1f1f1
+            //background: #ffffff;
             
         }
         .bottom{
+            margin-top: 5em;
             position: relative;
             //background: black;
             height:fit-content;
-            width: 100%;
+            width: 77vw;
             display:flex;
             flex-direction: column;
             justify-content:center;
             align-items:center;
             z-index: 1;
-            padding: 0 4rem;
+            margin-left: 4rem
         }
         .edit-grid{
             position: absolute;
