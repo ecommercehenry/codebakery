@@ -28,7 +28,7 @@ import UserOrders from "./Components/screens/user/UserOrders";
 import FormReview from "./Components/screens/reviews/FormReview";
 
 import Sucursales from './Components/Maps/Sucursales'
-
+import TwoFA from "./Components/UserAcount/TwoFA";
 
 let token = localStorage.getItem("token");
 let role = localStorage.getItem("role");
@@ -89,7 +89,7 @@ function App() {
           <Route exact path="/sign-up" component={CreateUserAccount} />
           <Route exact path="/reset-password" component={ResetPassword} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
-
+          <Route exact path="/TFA" component={TwoFA} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>

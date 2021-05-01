@@ -124,7 +124,7 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default reducer; 
 
 // return state.map((todo) =>
 // todo.id === action.payload ? {...todo, status:"InProgress"} : todo

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import "./UserAccount.css";
@@ -8,7 +8,6 @@ import CREATE_USER from "../../Apollo/mutations/createUser";
 
 import { Redirect } from "react-router-dom";
 
-// Login/ out
 import Login from "./Login";
 import Logout from "./Logout";
 import { useDispatch } from "react-redux";
@@ -16,6 +15,7 @@ import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
 import '../../Assets/toast.css'; 
+import TwoFA from "./TwoFA";
 
 toast.configure() 
 
@@ -65,11 +65,13 @@ const UserAcount = () => {
     // la redireccion se debe cambiar seún el role del usuario
     if(role === 'admin' && dataValidate?.validateCredentials){
       // 
-      return <Redirect to='/admin/orders' />;
+      return <Redirect to='/TFA' />
+      // return <Redirect to='/admin/orders' />;
     }
     else if(role === 'user' && dataValidate?.validateCredentials) {
       // 
-      return <Redirect to='/catalogue' />;
+      return <Redirect to='/TFA' />
+      // return <Redirect to='/catalogue' />;
     }
     // else {
     //   
