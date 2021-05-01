@@ -1,0 +1,8 @@
+Banner 1 : 
+Link: https://res.cloudinary.com/ggonzalescbs/image/upload/v1619884340/code_bakery/banner1_jqn5m1.png
+
+Banner 2:
+Link: https://res.cloudinary.com/ggonzalescbs/image/upload/v1619891377/code_bakery/banner2_glihmk.png
+
+Banner 3: 
+Link: https://res.cloudinary.com/ggonzalescbs/image/upload/v1619894535/code_bakery/banner3_xmbx3e.png
