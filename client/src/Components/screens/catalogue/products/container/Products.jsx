@@ -9,13 +9,12 @@ import { useQuery } from "@apollo/client";
 import { guardarProductos } from "../../../../../actions/index";
 import Grid from "../grid/Grid";
 import "./Products.css";
-import ProductBar from './ProductBar';
+import ProductBar from "./ProductBar";
 const Products = () => {
-//   const [search, setSearch] = useState(false);
-//   const { stateSearch } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  let { data } = useQuery(allProducts);
+  let { data } = useQuery(allProducts, { fetchPolicy: "no-cache" });
+
   useEffect(() => {
     dispatch(guardarProductos(data));
   }, [data]);
@@ -24,10 +23,8 @@ const Products = () => {
     <div className="cardProduct">
       <SearchBar />
       <Categories />
-      <ProductBar/>
-      {/* <HomeButton /> */}
-      {/* <SortButton /> */}
-      <Grid/>
+      <ProductBar />
+      <Grid />
     </div>
   );
 };

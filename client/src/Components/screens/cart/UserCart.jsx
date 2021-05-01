@@ -28,7 +28,7 @@ const UserCart = () => {
       }
     }
   }, [data]);
-
+  console.log(data)
   return (
     <StyledCart>
       {data?.getOrdersByUserIdInCart.orders[0] ? (

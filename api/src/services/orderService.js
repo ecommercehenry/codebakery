@@ -201,6 +201,7 @@ async function _formatOrder(order) {
     });
   }
   const out = {
+    storeId: order.storeId,  
     id: order.id,
     status: order.status,
     name: userOrden.name,

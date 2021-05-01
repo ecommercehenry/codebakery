@@ -11,8 +11,6 @@ const TablaReview = ({id}) => {
         variables: { userId: id },
         fetchPolicy : "no-cache"
     });
-
-
     return (
 
         <StyledRevv>

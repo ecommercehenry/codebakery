@@ -1,7 +1,7 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeProductFromCart } from "../../../actions/cartActions";
-import { removeItem } from "../../../actions//setQuantityOrdersCardBackend";
+import { removeItem } from "../../../actions/setQuantityOrdersCardBackend";
 import styled from "styled-components";
 import StockCounter from "./StockCounter";
 import deleteIcon from "../../../icons/delete.svg";
@@ -15,13 +15,11 @@ const ProductOnCart = ({
   stock,
   quantity,
   orderId,
-  refetch
+  refetch,
 }) => {
   let logged = localStorage.token ? true : false;
   let [newQuantity, setNewQuantity] = useState(quantity);
-  const [deleteProductOrder] = useMutation(
-    DELETE_PRODUCT_ORDER
-  );
+  const [deleteProductOrder] = useMutation(DELETE_PRODUCT_ORDER);
 
   const dispatch = useDispatch();
   const deleteHandler = (id) => {
@@ -33,41 +31,39 @@ const ProductOnCart = ({
         variables: {
           orderId: orderId,
           productId: id,
-        }
-      })
-
-    
-      refetch()
+        },
+      });
+      refetch();
     }
   };
   return (
     <StyledProductOnCart>
       <article className="item">
-      <div className="imagee">
-        <img src={image} alt={name} />
-      </div>
-      <div className="namee">{name}</div>
-      <div className="quantityy">
-        <StockCounter
-          id={id}
-          newQuantity={newQuantity}
-          setNewQuantity={setNewQuantity}
-          stock={stock}
-          logged = {logged}
-          orderId= {orderId}
-          productId= {id}
-          refetch= {refetch}
-        />
-        <div className="stockk">{stock} disponibles</div>
-      </div>
-      <div className="pricee">
-        <div className="subtotal">${newQuantity * price}</div>
-        <div className="unitaryy">Precio: ${price}</div>
-      </div>
+        <div className="imagee">
+          <img src={image} alt={name} />
+        </div>
+        <div className="namee">{name}</div>
+        <div className="quantityy">
+          <StockCounter
+            id={id}
+            newQuantity={newQuantity}
+            setNewQuantity={setNewQuantity}
+            stock={stock}
+            logged={logged}
+            orderId={orderId}
+            productId={id}
+            refetch={refetch}
+          />
+          <div className="stockk">{stock} disponibles</div>
+        </div>
+        <div className="pricee">
+          <div className="subtotal">${newQuantity * price}</div>
+          <div className="unitaryy">Precio: ${price}</div>
+        </div>
 
-      <button className="deleteItemm" onClick={() => deleteHandler(id)}>
-        <img src={deleteIcon} alt="" />
-      </button>
+        <button className="deleteItemm" onClick={() => deleteHandler(id)}>
+          <img src={deleteIcon} alt="" />
+        </button>
       </article>
     </StyledProductOnCart>
   );
@@ -80,15 +76,15 @@ const StyledProductOnCart = styled.div`
   padding-bottom: 2.5rem;
   border-bottom: 1px solid #e6e6e6;
 
-  .item{
+  .item {
     border: none;
-  display: flex;
-  width: 100%;
-  height: 5rem;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    width: 100%;
+    height: 5rem;
+    justify-content: space-between;
+    align-items: center;
   }
-  
+
   .imagee {
     display: flex;
     justify-content: center;
