@@ -10,8 +10,8 @@ import ADD_PRODUCT_TO_ORDER from "../../../../Apollo/mutations/addProductToOrder
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useDispatch, useSelector } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../../actions/setQuantityOrdersCardBackend";
-import styled from 'styled-components'
-
+import styled from "styled-components";
+import { removeAll } from "../../../../actions/cartActions";
 const Catalogue = () => {
   let storage = window.localStorage;
   let logged = storage.token ? true : false;
@@ -20,6 +20,7 @@ const Catalogue = () => {
 
   const queryData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
+    fetchPolicy: "no-cache",
   });
   const dispatch = useDispatch();
   const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
@@ -44,10 +45,10 @@ const Catalogue = () => {
         }
       }
     }
-
     if (logged && itemsToCart.length) {
       if (!queryData.loading) {
         if (queryData.data.getOrdersByUserIdInCart.orders.length != 0) {
+          console.log("orders es distinto de 0");
           let orderId = queryData.data.getOrdersByUserIdInCart.orders[0].id;
           itemsToCart.map((elem) => {
             addProductToOrder({
@@ -58,7 +59,10 @@ const Catalogue = () => {
               },
             });
           });
+          dispatch(removeAll())
+          localStorage.removeItem("cart")
         } else {
+          console.log("orders no es distinto de 0");
           createOrder({
             variables: {
               idUser: userId,
@@ -70,6 +74,8 @@ const Catalogue = () => {
               }),
             },
           });
+          dispatch(removeAll())
+          localStorage.removeItem("cart")
         }
       }
     }
@@ -87,7 +93,7 @@ const Catalogue = () => {
 };
 
 const StyledCatalogue = styled.div`
-  width:100vw;
+  width: 100vw;
   box-sizing: border-box;
 `;
 

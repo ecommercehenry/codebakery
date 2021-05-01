@@ -7,31 +7,42 @@ import { useMutation, useQuery } from "@apollo/client";
 import { toast } from "react-toastify";
 import "../../../../Assets/toast.css";
 import getUserById from "../../../../Apollo/queries/getUserById";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
 
 toast.configure();
 
 export default function AddressForm({ setUserdata }) {
+  const [shipping, setShipping] = useState("none");
   const [modifyUser] = useMutation(MODIFY_USER);
   const { data, refetch, loading } = useQuery(getUserById, {
     variables: { id: parseInt(localStorage.id) },
     fetchPolicy: "no-cache",
   });
   const customId = "error toast";
+
   useEffect(() => {
-    if (data) {
-      if (data.getUserById) {
-        if (
-          data.getUserById.address === null ||
-          data.getUserById.phoneNumber === null ||
-          data.getUserById.dni === null
-        ) {
-          setUserdata(false);
-        } else {
-          setUserdata(true);
+    if (shipping === "delivery") {
+      if (data) {
+        if (data.getUserById) {
+          if (
+            data.getUserById.address === null ||
+            data.getUserById.phoneNumber === null ||
+            data.getUserById.dni === null
+          ) {
+            setUserdata(false);
+          } else {
+            setUserdata(true);
+          }
         }
       }
+    } else if (shipping === "none") {
+      setUserdata(false);
+    } else if (shipping === "store") {
+      setUserdata(true);
     }
-  }, [loading, data]);
+  }, [loading, data, shipping]);
   const [form, setForm] = useState({
     address: "",
     dni: "",
@@ -48,6 +59,10 @@ export default function AddressForm({ setUserdata }) {
       e.target.value = "";
       toast("Numbers Only", { toastId: customId });
     }
+  };
+  const handleShipping = (e) => {
+    e.preventDefault();
+    setShipping(e.target.value);
   };
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -72,15 +87,50 @@ export default function AddressForm({ setUserdata }) {
   };
   let dni = document.getElementById("dni");
   let phoneNumber = document.getElementById("phoneNumber");
+  useEffect(() => {
+    let formContainer = document.getElementById("formContainer");
+    let store = document.getElementById("store");
+    if (formContainer) {
+      if (shipping === "none") {
+        formContainer.style = "display:none";
+        store.style = "display: none";
+      } else if (shipping === "delivery") {
+        formContainer.style = "display: ''";
+        store.style = "display: none";
+      } else if (shipping === "store") {
+        formContainer.style = "display:none";
+        store.style = "display: flex";
+      }
+    }
+  }, [shipping]);
   if (dni) {
     dni.maxLength = "8";
     dni.minLength = "7";
     phoneNumber.maxLength = "11";
     phoneNumber.minLength = "10";
   }
+  console.log(shipping);
   return (
     <React.Fragment>
-      <form onSubmit={submitHandler}>
+      <div>
+        <FormControl>
+          <InputLabel htmlFor="age-native-simple">Shipping method</InputLabel>
+          <Select
+            fullWidth
+            native
+            onChange={handleShipping}
+            inputProps={{
+              name: "shipping",
+              id: "shipping",
+            }}
+          >
+            <option disabled selected aria-label="None" value="none" />
+            <option value="delivery">Home delivery</option>
+            <option value="store">Store pickup</option>
+          </Select>
+        </FormControl>
+      </div>
+      <form onSubmit={submitHandler} id="formContainer">
         <Typography variant="h6" gutterBottom>
           Shipping
         </Typography>
@@ -143,12 +193,7 @@ export default function AddressForm({ setUserdata }) {
           </Grid>
         </Grid>
       </form>
+      <div id="store">Select store</div>
     </React.Fragment>
   );
 }
-
-// const StyledContainer = styled.div`
-//   background:red;
-//   width:100vw;
-//   height:fit-content;
-// `;

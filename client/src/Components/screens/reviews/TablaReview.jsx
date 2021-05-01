@@ -10,8 +10,6 @@ const TablaReview = ({id}) => {
     const { data,  refetch } = useQuery(GET_REVIEW_BY_USER, {
         variables: { userId: id },
     });
-
-
     return (
 
         <StyledRevv>

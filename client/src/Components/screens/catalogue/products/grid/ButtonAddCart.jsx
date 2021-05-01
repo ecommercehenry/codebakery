@@ -19,6 +19,7 @@ const ButtonAddCart = ({ id }) => {
 
   const { data, refetch, loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
+    fetchPolicy: "no-cache"
   });
   const dispatch = useDispatch();
 
@@ -28,7 +29,7 @@ const ButtonAddCart = ({ id }) => {
       toast("Producto añadido al carrito", { autoClose: 1000 });
     } else {
       if (!loading) {
-        let orderId = data.getOrdersByUserIdInCart.orders[0]?.id;
+        let orderId = data?.getOrdersByUserIdInCart?.orders[0]?.id;
         dispatch(
           setQuantityOrdersCardBackend(
             orderId

@@ -15,7 +15,7 @@ const Grid = () => {
       element.name.toLowerCase().includes(filterProduct.toLowerCase())  )
        //con includes la busq ya no pide exactitud en el string. @Lizen
   }
-  
+    
   return (
 
     <StyledGrid light={status}>
