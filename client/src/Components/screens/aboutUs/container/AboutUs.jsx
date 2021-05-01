@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-
 import Git from "./img/github.png";
 import Linke from "./img/linkedin.png";
 import profile from "./img/profile.png";
+
 
 const AboutUs = ({ name, title, img, git, linkedin }) => {
   const IMG = img ? img : profile;
   return (
     <AboutUsConteiner>
+     
       <div className="main center">
         <div className="card">
           <div
@@ -34,6 +35,7 @@ const AboutUs = ({ name, title, img, git, linkedin }) => {
         </div>
       </div>
     </AboutUsConteiner>
+   
   );
 };
 

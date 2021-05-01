@@ -34,7 +34,7 @@ const AdminPanel = () => {
           <Route path="/admin/orders" component={CheckFilters}/>
         </div>
 
-       
+       9
        
 
         <div className="bottom">

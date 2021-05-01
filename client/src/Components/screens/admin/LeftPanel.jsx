@@ -3,6 +3,8 @@ import React from "react";
 //icons
 import { HiOutlineExternalLink, HiOutlineLogout, HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
+import { AiOutlineShop } from "react-icons/ai";
+
 
 //styles
 import styled from "styled-components";
@@ -14,6 +16,7 @@ const LeftPanel = () => {
     products: path.includes("products") ? "active" : "inactive",
     orders: path.includes("orders") ? "active" : "inactive",
     users: path.includes("users") ? "active" : "inactive",
+    store: path.includes("store") ? "active" : "inactive",
   };
 
   let logout = () => {
@@ -51,6 +54,18 @@ const LeftPanel = () => {
               <span className="tabName">Users</span>
             </div>
           </Link>
+          
+              <div className={`tab ${activeTab.discounts} link`}>
+              <ul>
+                <li> <AiOutlineShop size="1.3rem" className="icon" />  Discounts
+                  <ul >
+                    <li><a href="#">Slider</a></li>
+                    <li><a href="#">Email</a></li>
+                  </ul>
+                </li>
+              </ul>
+              </div> 
+          
         </div>
         </section>
 
@@ -100,6 +115,45 @@ const StyledPanel = styled.div`
   padding-top: 5vh;
   color: white;
 
+  li{
+    transition: 1s all;
+    padding: 15px;
+    margin-left: -40px;
+    margin-top: 0px;
+    color: #fff;
+    list-style: none;
+    display: block;
+    border-top-right-radius: 10px 10px;
+    border-bottom-right-radius: 10px 10px;
+    
+  }
+
+  li:hover{
+    transition: 1s all;
+    background-color: #00000040;
+    color: #FFF;
+    border-top-right-radius: 10px 10px;
+    border-bottom-right-radius: 10px 10px;
+    cursor: pointer;
+  }
+
+ 
+
+  li ul{
+    background: #5e3f71;
+    margin-left: 140px;
+    margin-top: -38px;
+    display: none;
+    position: absolute;
+    border-top-right-radius: 15px 15px;
+    border-bottom-right-radius: 15px 15px;
+  }
+
+  li:hover > ul{
+    display: block;
+    cursor: pointer;
+  }
+
   .bottom-tabs{
     width: 100%;
     display: flex;
@@ -121,7 +175,7 @@ const StyledPanel = styled.div`
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     .userInfo {
       width: 100%;
       height: 19vh;
@@ -158,7 +212,7 @@ const StyledPanel = styled.div`
       font-weight: bold;
       .tab {
         margin-top: 0.5rem;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         display: flex;
         justify-content: flex-start;
         flex-direction: row;

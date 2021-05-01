@@ -1,12 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-
+import NavBar from "../../navBar/NavBar";
 import AboutUs from "./AboutUs";
 import { Us } from "./Us";
 
 const AboutUsGrid = () => {
   return (
     <>
+      <div style={{backgroundColor: '#5e3f71'}} >
+        <div id="navBackground">
+          <NavBar color="white" />
+        </div>
+      </div>
       <AboutUsInfo>
         <h1>SOBRE NOSOTROS</h1>
         <p>
