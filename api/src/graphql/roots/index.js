@@ -26,7 +26,8 @@ const {
     addStore,
     modifyStore,
     deleteStore, 
-    modifyOrderStore
+    modifyOrderStore, 
+    addPromo,
     
 } = require("./mutationsResolver/")
 
@@ -51,6 +52,7 @@ const {
     validateUserWithGoogle,
     getReviewByUserId,
     getAllStores,
+    getByStore,
 } = require("./queriesResolvers/")
 
 // product
@@ -81,7 +83,8 @@ const root = {
     addStore,
     modifyStore,
     deleteStore,
-    modifyOrderStore, 
+    modifyOrderStore,
+    addPromo,  
 
     //Queries    
     productById,
@@ -108,6 +111,7 @@ const root = {
     validateUserWithGoogle,
     getReviewByUserId,
     getAllStores,
+    getByStore
 }
 
 module.exports = root

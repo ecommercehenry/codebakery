@@ -19,6 +19,8 @@ const { getUserById} = require("./getUserById")
 const {validateUserWithGoogle} = require("./validateUserWithGoogle");
 const { getReviewByUserId } = require("./getReviewByUserId");
 const {getAllStores} = require("./getAllStores")
+const {getByStore} = require("./getByStore")
+
 
 
 
@@ -43,5 +45,6 @@ module.exports = {
   getUserById,
   validateUserWithGoogle,
   getReviewByUserId,
-  getAllStores
+  getAllStores, 
+  getByStore
 }
