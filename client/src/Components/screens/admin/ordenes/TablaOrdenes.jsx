@@ -70,6 +70,7 @@ const StyledTablaOrdenes = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  margin-top: 4em;
   margin-bottom: 5em;
   margin-left: 0;
   height: 100%;

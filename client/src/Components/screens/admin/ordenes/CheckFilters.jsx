@@ -104,14 +104,15 @@ const StyledCheckFilters = styled.div`
   align-items: center;
 	position:sticky ;
 	top: 0;
-  width: 100%;
+  margin: 0 6rem 0 4rem;
+  width: 77vw;
   height: 100%;
   border-bottom: 2px solid #5f3f71;
   justify-content: space-between;
   align-items: center;
 	padding: 0.75em 0;
 	background:${({light})=>light 
-    ? '#F1F1F1' 
+    ? 'white' 
     : '#222222'};
 
   #left-side {

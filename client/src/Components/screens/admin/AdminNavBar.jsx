@@ -71,16 +71,15 @@ const AdminNavBar = ({ setAddProduct }) => {
 };
 
 const StyledNavBar = styled.div`
-  width: 100%;
+  width: 77vw;
   max-width: 100%;
   height: 6em;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f1f1f1;
-
+  margin: 0 6rem 0 4rem;
   background: ${({light})=>light 
-    ? '#f1f1f1' 
+    ? 'white' 
     : '#222222'};
   .onLeft {
     .optionTab {
