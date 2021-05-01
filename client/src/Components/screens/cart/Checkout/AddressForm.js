@@ -10,18 +10,51 @@ import getUserById from "../../../../Apollo/queries/getUserById";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
+import GET_ALL_STORES from "../../../../Apollo/queries/getAllStores";
+import { Button } from "@material-ui/core";
 
 toast.configure();
 
 export default function AddressForm({ setUserdata }) {
+  //variables
+  const regex = new RegExp("^[0-9]*$");
+  const customId = "error toast";
+  let dni = document.getElementById("dni");
+  let phoneNumber = document.getElementById("phoneNumber");
+  //states
   const [shipping, setShipping] = useState("none");
-  const [modifyUser] = useMutation(MODIFY_USER);
+  const [form, setForm] = useState({
+    address: "",
+    dni: "",
+    phoneNumber: "",
+  });
+  const [selected, setSelected] = useState("none");
+  //queries
   const { data, refetch, loading } = useQuery(getUserById, {
     variables: { id: parseInt(localStorage.id) },
     fetchPolicy: "no-cache",
   });
-  const customId = "error toast";
+  const stores = useQuery(GET_ALL_STORES);
+  //mutations
+  const [modifyUser] = useMutation(MODIFY_USER);
 
+  //useEffects
+  useEffect(() => {
+    let formContainer = document.getElementById("formContainer");
+    let store = document.getElementById("store");
+    if (formContainer) {
+      if (shipping === "none") {
+        formContainer.style = "display:none";
+        store.style = "display: none";
+      } else if (shipping === "delivery") {
+        formContainer.style = "display: ''";
+        store.style = "display: none";
+      } else if (shipping === "store") {
+        formContainer.style = "display:none";
+        store.style = "display: flex";
+      }
+    }
+  }, [shipping]);
   useEffect(() => {
     if (shipping === "delivery") {
       if (data) {
@@ -39,16 +72,18 @@ export default function AddressForm({ setUserdata }) {
       }
     } else if (shipping === "none") {
       setUserdata(false);
-    } else if (shipping === "store") {
-      setUserdata(true);
     }
-  }, [loading, data, shipping]);
-  const [form, setForm] = useState({
-    address: "",
-    dni: "",
-    phoneNumber: "",
-  });
-  const regex = new RegExp("^[0-9]*$");
+  }, [loading, data, shipping, selected]);
+  //event Handlers
+  const handleStore = (e) => {
+    e.preventDefault();
+    setSelected(e.target.value);
+  };
+  const submitStore = (e) => {
+    e.preventDefault();
+    setUserdata(true);
+    toast("Store saved");
+  };
   const handleAddress = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -85,31 +120,14 @@ export default function AddressForm({ setUserdata }) {
     refetch();
     toast("Datos guardados");
   };
-  let dni = document.getElementById("dni");
-  let phoneNumber = document.getElementById("phoneNumber");
-  useEffect(() => {
-    let formContainer = document.getElementById("formContainer");
-    let store = document.getElementById("store");
-    if (formContainer) {
-      if (shipping === "none") {
-        formContainer.style = "display:none";
-        store.style = "display: none";
-      } else if (shipping === "delivery") {
-        formContainer.style = "display: ''";
-        store.style = "display: none";
-      } else if (shipping === "store") {
-        formContainer.style = "display:none";
-        store.style = "display: flex";
-      }
-    }
-  }, [shipping]);
+  // form format/ DOM manipulation
   if (dni) {
     dni.maxLength = "8";
     dni.minLength = "7";
     phoneNumber.maxLength = "11";
     phoneNumber.minLength = "10";
   }
-  console.log(shipping);
+  console.log(selected);
   return (
     <React.Fragment>
       <div>
@@ -193,7 +211,30 @@ export default function AddressForm({ setUserdata }) {
           </Grid>
         </Grid>
       </form>
-      <div id="store">Select store</div>
+      <div id="store">
+        <form onSubmit={submitStore}>
+          <FormControl>
+            <InputLabel htmlFor="age-native-simple">Shipping method</InputLabel>
+            <Select
+              fullWidth
+              native
+              onChange={handleStore}
+              inputProps={{
+                name: "stores",
+                id: "stores",
+              }}
+            >
+              <option disabled selected aria-label="None" value="none" />
+              {stores?.data?.getAllStores?.map((element) => (
+                <option value={element.id} key={element.id}>
+                  {element.id}|{element.name}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+          <Button type="submit"> Confirm store</Button>
+        </form>
+      </div>
     </React.Fragment>
   );
 }
