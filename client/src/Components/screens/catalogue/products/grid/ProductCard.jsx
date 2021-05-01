@@ -1,5 +1,7 @@
-import React from 'react';
-import {Link} from 'react-router-dom'; 
+import React, { useEffect }  from 'react';
+import {Link} from 'react-router-dom';
+import { useQuery } from "@apollo/client";
+import GET_BY_PRODUCT from "../../../../../Apollo/queries/getByProduct"; 
 
 
 //styles
@@ -9,7 +11,20 @@ import styled from 'styled-components';
 import ButtonAddCart from './ButtonAddCart';
 
 const ProductCard = ({id,name,image, price, stock}) => {
- console.log(stock, 'stock')
+        const { data } = useQuery(GET_BY_PRODUCT, {
+            variables: { id: id },
+          })
+     
+           if(data){
+              if(data.product){
+                data.product.map((e) => {
+                    if(e.stock < 0){
+                        document.getElementById(id).setAttribute("disabled","disabled");
+                    }
+                })
+              }
+        
+          }
     return (
         <StyledCard>
             <Link to={`/catalogue/detail/${id}`} className='link'>
@@ -20,12 +35,9 @@ const ProductCard = ({id,name,image, price, stock}) => {
                 <div className="price"><span>$ {price}</span></div>
             </Link>
             <div className="btn">
-                {
-                     stock > 0 ? 
-                     <ButtonAddCart id={id}/>
-                      : alert('No hay en stock')                      
-                }</div>
-        </StyledCard>
+                        <ButtonAddCart id={id}/>)
+                       </div> 
+            </StyledCard>
             
         
     )

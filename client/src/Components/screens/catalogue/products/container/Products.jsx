@@ -18,7 +18,7 @@ const Products = () => {
   let { data } = useQuery(allProducts);
   useEffect(() => {
     dispatch(guardarProductos(data));
-  }, []);
+  }, [data]);
 
   return (
     <div className="cardProduct">

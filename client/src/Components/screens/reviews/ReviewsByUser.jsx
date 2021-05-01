@@ -5,7 +5,9 @@ import styled from "styled-components";
 import SettingsIcon from "@material-ui/icons/Settings";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-const ReviewByUser = ({ productId, id, title, description, stars }) => {
+
+const ReviewByUser = ({ productId, id, title, description, stars}) => {
+
   return (
     <StyledRev>
       <div key={id} className="element-container">
