@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
+//import { useQuery } from "@apollo/client";
+//import GET_BY_PRODUCT from "../../../../../Apollo/queries/getByProduct"; 
+ 
 //Components
 import ProductCard from './ProductCard';
 
@@ -9,7 +12,8 @@ const Grid = () => {
   let {status} = useSelector((state)=>state.theme);
   let { stateproducts, filterProduct, allProduct, search } = useSelector((state) => state.reducer);
   let arr = []
-  console.log(stateproducts)
+   
+
   if(search === true){
     arr = allProduct.filter((element) => 
       element.name.toLowerCase().includes(filterProduct.toLowerCase())  )
@@ -24,10 +28,10 @@ const Grid = () => {
           search === false ?  
         (stateproducts && stateproducts?.length > 0
           ? stateproducts.map((element) => {
-                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price}/>
+                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price} stock={element.stock}/>
             }) : "Cargando")
             : (arr.length > 0 ? arr.map((element ) => {
-                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price}/>
+                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price} stock={element.stock}/>
             }): "No se encontraron Productos" 
             )
           }

@@ -1,5 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect }  from 'react';
+import {Link} from 'react-router-dom';
+import { useQuery } from "@apollo/client";
+import GET_BY_PRODUCT from "../../../../../Apollo/queries/getByProduct"; 
+
 
 //styles
 import styled from "styled-components";
@@ -7,27 +10,38 @@ import styled from "styled-components";
 //Components
 import ButtonAddCart from "./ButtonAddCart";
 
-const ProductCard = ({ id, name, image, price }) => {
-    
-  return (
-    <StyledCard>
-      <Link to={`/catalogue/detail/${id}`} className="link">
-        <div className="image">
-          <img src={image} alt={name} />
-        </div>
-        <div className="name">
-          <span>{name}</span>
-        </div>
-        <div className="price">
-          <span>$ {price}</span>
-        </div>
-      </Link>
-      <div className="btn">
-        <ButtonAddCart id={id} />
-      </div>
-    </StyledCard>
-  );
-};
+const ProductCard = ({id,name,image, price, stock}) => {
+        const { data } = useQuery(GET_BY_PRODUCT, {
+            variables: { id: id },
+          })
+     
+           if(data){
+              if(data.product){
+                data.product.map((e) => {
+                    if(e.stock < 0){
+                        document.getElementById(id).setAttribute("disabled","disabled");
+                    }
+                })
+              }
+        
+          }
+    return (
+        <StyledCard>
+            <Link to={`/catalogue/detail/${id}`} className='link'>
+                <div className="image">
+                    <img src={image} alt={name}/>
+                </div>
+                <div className="name"><span>{name}</span></div>
+                <div className="price"><span>$ {price}</span></div>
+            </Link>
+            <div className="btn">
+                        <ButtonAddCart id={id}/>)
+                       </div> 
+            </StyledCard>
+            
+        
+    )
+}
 
 const media = {
   tablet: "@media(min-width:768px)",
