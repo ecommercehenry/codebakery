@@ -4,14 +4,11 @@ import NavBar from "../../navBar/NavBar";
 import Hero from "../hero/Hero";
 import Products from "../products/container/Products";
 import Detail from "../../detail/Detail.jsx";
-import { useMutation, useQuery } from "@apollo/client";
-import CREATE_ORDER from "../../../../Apollo/mutations/createOrder";
-import ADD_PRODUCT_TO_ORDER from "../../../../Apollo/mutations/addProductToOrder";
+import { useQuery } from "@apollo/client";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useDispatch, useSelector } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../../actions/setQuantityOrdersCardBackend";
 import styled from "styled-components";
-import { removeAll } from "../../../../actions/cartActions";
 const Catalogue = () => {
   let storage = window.localStorage;
   let logged = storage.token ? true : false;
@@ -23,9 +20,10 @@ const Catalogue = () => {
     fetchPolicy: "no-cache",
   });
   const dispatch = useDispatch();
-  const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
-  const [createOrder] = useMutation(CREATE_ORDER);
-
+  let orderId = queryData?.data?.getOrdersByUserIdInCart?.orders[0]?.id;
+  useEffect(() => {
+    orderId = queryData?.data?.getOrdersByUserIdInCart?.orders[0]?.id;
+  }, [queryData]);
   useEffect(() => {
     if (queryData?.data && !queryData.loading) {
       if (logged) {
@@ -45,46 +43,12 @@ const Catalogue = () => {
         }
       }
     }
-    if (logged && itemsToCart.length) {
-      if (!queryData.loading) {
-        if (queryData.data.getOrdersByUserIdInCart.orders.length != 0) {
-          console.log("orders es distinto de 0");
-          let orderId = queryData.data.getOrdersByUserIdInCart.orders[0].id;
-          itemsToCart.map((elem) => {
-            addProductToOrder({
-              variables: {
-                orderId: orderId,
-                productId: elem.id,
-                quantity: elem.quantity,
-              },
-            });
-          });
-          dispatch(removeAll())
-          localStorage.removeItem("cart")
-        } else {
-          console.log("orders no es distinto de 0");
-          createOrder({
-            variables: {
-              idUser: userId,
-              dataProducts: itemsToCart.map((elem) => {
-                return {
-                  id: elem.id,
-                  quantity: elem.quantity,
-                };
-              }),
-            },
-          });
-          dispatch(removeAll())
-          localStorage.removeItem("cart")
-        }
-      }
-    }
   }, [queryData, itemsToCart]);
   return (
     <StyledCatalogue>
       <NavBar color="white" />
       <Hero />
-      <Products />
+      <Products orderId={orderId} refetchCatalogue={queryData.refetch} />
       <Route path="/catalogue/detail/:id">
         <Detail></Detail>
       </Route>

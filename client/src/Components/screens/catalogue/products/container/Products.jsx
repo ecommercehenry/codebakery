@@ -10,7 +10,7 @@ import { guardarProductos } from "../../../../../actions/index";
 import Grid from "../grid/Grid";
 import "./Products.css";
 import ProductBar from "./ProductBar";
-const Products = () => {
+const Products = ({ orderId, refetchCatalogue }) => {
   const dispatch = useDispatch();
 
   let { data } = useQuery(allProducts, { fetchPolicy: "no-cache" });
@@ -24,7 +24,7 @@ const Products = () => {
       <SearchBar />
       <Categories />
       <ProductBar />
-      <Grid />
+      <Grid orderId={orderId} refetchCatalogue={refetchCatalogue} />
     </div>
   );
 };
