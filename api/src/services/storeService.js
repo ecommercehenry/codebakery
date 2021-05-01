@@ -8,8 +8,24 @@ async function getAllStores() {
   }
 }
 
+ async function getByStore(args) {
+  let { id } = args
+  try{
+    let store = await Store.findOne({
+      where: { id: id },
+    });
+    return store; 
+  }catch(err){
+    return {
+      __typename: "error",
+      name: "db error", 
+      detail: 
+      "Error in vinculation current order " + err.messag
+    }
+  }
+ }
+
 async function modifyOrderStore(args) {
-console.log(args, 'mi id ')
 let { idStore, idOrder } = args
 
   try{
@@ -70,4 +86,4 @@ async function deleteStore(args){
   }
 }
 
-module.exports = { getAllStores, addStore, modifyStore, deleteStore, modifyOrderStore };
+module.exports = { getAllStores, addStore, modifyStore, deleteStore, modifyOrderStore, getByStore };

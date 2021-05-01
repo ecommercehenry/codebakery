@@ -1,7 +1,6 @@
 const { Promo } = require("../db.js");
 
 async function addPromo({ name, discount, day, category }) {
-  console.log('mi promo')
     try {
       let newPromo = await Promo.create({
         name,

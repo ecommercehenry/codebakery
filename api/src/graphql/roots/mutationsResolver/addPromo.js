@@ -1,6 +1,6 @@
 const {addPromo} = require("../../../services/promoService")
 
-// getAllProducts
+//addPromo
 module.exports = {
 	addPromo: (args) => {
 		return addPromo(args)
