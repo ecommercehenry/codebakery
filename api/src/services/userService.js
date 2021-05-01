@@ -19,37 +19,39 @@ async function getUserByEmail({ email }) {
     throw new Error(error);
   }
 }
-async function getUserById({ id }) {//@ Lau para usar en boton promote
+async function getUserById({ id }) {
+  //@ Lau para usar en boton promote
   try {
-     return await Users.findOne({ where: { id } });
-    
-    
+    return await Users.findOne({ where: { id } });
   } catch (error) {
-    
     throw new Error(error);
   }
 }
 
 async function createUser(name, password, email, role, google) {
   try {
-    if(!google){
+    if (!google) {
       let [newUser, created] = await Users.findOrCreate({
         where: { email },
         defaults: {
           name,
           password,
-          email, 
+          email,
           role,
-          google
-        }
+          google,
+        },
       });
-      if(!created){
-        if(newUser.dataValues.google){
-          newUser.update({password, google:false});
+      if (!created) {
+        if (newUser.dataValues.google) {
+          newUser.update({ password, google: false });
         }
       }
-      // 
-      return {__typename: 'user', ...newUser.dataValues, detail: 'user created'};
+      //
+      return {
+        __typename: "user",
+        ...newUser.dataValues,
+        detail: "user created",
+      };
       // let newUser = await Users.create({
       //   name,
       //   password,
@@ -57,25 +59,29 @@ async function createUser(name, password, email, role, google) {
       //   role
       // });
       // return {__typename: 'user', ...newUser.dataValues, detail: 'user created'};
-    }
-    else {
-      // 
+    } else {
+      //
       const [user, created] = await Users.findOrCreate({
         where: { email },
         defaults: {
           name,
           password,
-          email, 
+          email,
           role,
-          google
-        }
+          google,
+        },
       });
       // created true es por que lo creó, no existia
       // siempre devuelve el usuario, pero el detalle va en función de
       // si existia o no
-      // 
-      if(created) return {__typename: 'user' , ...user.dataValues, detail: 'User created'};
-      return {__typename: 'user', ...user.dataValues, detail: 'Email'};
+      //
+      if (created)
+        return {
+          __typename: "user",
+          ...user.dataValues,
+          detail: "User created",
+        };
+      return { __typename: "user", ...user.dataValues, detail: "Email" };
     }
   } catch (error) {
     return {
@@ -152,55 +158,84 @@ async function modifyUser(
   }
 }
 
-async function loginUserWithGoogle(email, tokenId){
-  
+async function loginUserWithGoogle(email, tokenId) {
   const user = await Users.findOne({
-    where:{
-      email
-    }
+    where: {
+      email,
+    },
   });
-  if(!user){
-    return {__typename:"error", name:"The user doesn't exists", detail:"The user doesn't exists"}
-  }
-  if(user){
-    const token = jwt.sign({
-      id:user.id,
-      email
-    }, "secret", { expiresIn: 60 * 60 }) //60*60 = 3600 seg = 1 hour
+  if (!user) {
     return {
-      __typename:"user",
+      __typename: "error",
+      name: "The user doesn't exists",
+      detail: "The user doesn't exists",
+    };
+  }
+  if (user) {
+    const token = jwt.sign(
+      {
+        id: user.id,
+        email,
+      },
+      "secret",
+      { expiresIn: 60 * 60 }
+    ); //60*60 = 3600 seg = 1 hour
+    return {
+      __typename: "user",
       id: user.id,
       name: user.name,
       email: user.email,
-      token:token,
+      token: token,
       role: user.role,
-    }
+    };
   }
 }
-async function resetPassword(id){
+
+async function resetPassword(id) {
+  try {
+    const user = await Users.findOne({
+      where: {
+        id: id,
+      },
+    });
+    const token = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+      },
+      "resetPassword",
+      { expiresIn: 60 * 60 }
+    ); //60*60 = 3600 seg = 1 hour
+    sendEmail(
+      user.id,
+      `Reset password user ${user.name}`,
+      `http://localhost:3000/reset-password?resetToken=${token}&email=${user.email}`
+    );
+    return {
+      __typename: "user",
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      token: token,
+    };
+  } catch {
+    return {
+      __typename: "error",
+      name: "Not Found",
+      detail: "Not Found",
+    };
+  }
+}
+
+async function loginUser(email, password) {
+  //
   const user = await Users.findOne({
-    where:{
-      id:id
-    }
+    where: {
+      email: email,
+    },
   });
-  const token = jwt.sign({
-    id:user.id,
-    email: user.email
-  }, "resetPassword", { expiresIn: 60 * 60 }) //60*60 = 3600 seg = 1 hour
-  sendEmail(user.id, `Reset password user ${user.name}`, `http://localhost:3000/reset-password?resetToken=${token}&email=${user.email}`)
-  return {
-    __typename:"booleanResponse",
-    boolean: true
-  }
-}
-async function loginUser(email,password){
-  // 
-  const user = await Users.findOne({
-    where:{
-      email: email
-    }
-  })
-  if(!user){
+  if (!user) {
     return {
       __typename: "error",
       name: "The user doesn't exists",
@@ -225,9 +260,13 @@ async function loginUser(email,password){
         email: user.email,
         token: token,
         role: user.role,
-      }
-    }else{
-      return {__typename:"error", name:"invalid password", detail:"invalid password"};
+      };
+    } else {
+      return {
+        __typename: "error",
+        name: "invalid password",
+        detail: "invalid password",
+      };
     }
   }
 }
@@ -246,11 +285,11 @@ async function deleteUser(id) {
 module.exports = {
   getAllUsers,
   createUser,
-  modifyUser,   //@ lau usare este para modificar el role: de usuario comun a admin
+  modifyUser, //@ lau usare este para modificar el role: de usuario comun a admin
   loginUser,
   getUserByEmail,
   deleteUser,
-  getUserById,  //lo creo para traer datos de ese usuario a modificar -@Lau
+  getUserById, //lo creo para traer datos de ese usuario a modificar -@Lau
   loginUserWithGoogle,
-  resetPassword
+  resetPassword,
 };

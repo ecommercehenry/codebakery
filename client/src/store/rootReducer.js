@@ -7,19 +7,23 @@ import cartReducer from "../reducer/cartReducer";
 import themeReducer from "../reducer/themeReducer";
 import loginReducer from "../reducer/loginReducer";
 import ordersReducer from "../reducer/ordersReducer";
-import counterReducer from "../reducer/counterReducer"
+import counterReducer from "../reducer/counterReducer";
+import reducerToken from "../reducer/resetPassword";
+
+
 const persistConfig = {
-    key:'root',
-    storage,
-    whitelist: ['cart','theme']
-}
+  key: "root",
+  storage,
+  whitelist: ["cart", "theme", "reducerToken"],
+};
 const rootReducer = combineReducers({
-    productsReducer: productsReducer,
-    reducer: reducer,
-    cart:cartReducer,
-    theme:themeReducer,
-    loginReducer:loginReducer,
-    ordersReducer:ordersReducer,
-    counterReducer:counterReducer,
-  })
-export default persistReducer(persistConfig,rootReducer);
+  productsReducer: productsReducer,
+  reducer: reducer,
+  cart: cartReducer,
+  theme: themeReducer,
+  loginReducer: loginReducer,
+  ordersReducer: ordersReducer,
+  counterReducer: counterReducer,
+  reducerToken: reducerToken,
+});
+export default persistReducer(persistConfig, rootReducer);
