@@ -12,17 +12,20 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import GET_ALL_STORES from "../../../../Apollo/queries/getAllStores";
 import { Button } from "@material-ui/core";
-import MODIFY_ORDER_STORE from "../../../../Apollo/mutations/modifyOrderStore"
+import MODIFY_ORDER_STORE from "../../../../Apollo/mutations/modifyOrderStore";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 
 toast.configure();
 
-export default function AddressForm({ setUserdata }) {
+export default function AddressForm({ setUserdata, setShippingtype, setStoreId }) {
   //variables
   const regex = new RegExp("^[0-9]*$");
   const customId = "error toast";
   let dni = document.getElementById("dni");
   let phoneNumber = document.getElementById("phoneNumber");
+  let selector = document.getElementById("selector");
+  let selector2 = document.getElementById("selector2");
+
   //states
   const [shipping, setShipping] = useState("none");
   const [form, setForm] = useState({
@@ -37,14 +40,14 @@ export default function AddressForm({ setUserdata }) {
     fetchPolicy: "no-cache",
   });
   const stores = useQuery(GET_ALL_STORES);
-  const order = useQuery(GET_ORDERS_BY_USER_ID_IN_CART,{
-    variables:{
-      idUser: parseInt(localStorage.id)
-    }
-  })
+  const order = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+    variables: {
+      idUser: parseInt(localStorage.id),
+    },
+  });
   //mutations
   const [modifyUser] = useMutation(MODIFY_USER);
-  const [modifyOrderStore] = useMutation(MODIFY_ORDER_STORE)
+  const [modifyOrderStore] = useMutation(MODIFY_ORDER_STORE);
   //useEffects
   useEffect(() => {
     let formContainer = document.getElementById("formContainer");
@@ -85,19 +88,20 @@ export default function AddressForm({ setUserdata }) {
   const handleStore = (e) => {
     e.preventDefault();
     setSelected(e.target.value);
+    setStoreId(e.target.value)
   };
   const submitStore = (e) => {
     e.preventDefault();
-    if(order && order.data){
-      let idOrder = order.data.getOrdersByUserIdInCart.orders[0].id
+    if (order && order.data) {
+      let idOrder = order.data.getOrdersByUserIdInCart.orders[0].id;
       modifyOrderStore({
-        variables:{
+        variables: {
           idStore: parseInt(selected),
-          idOrder: parseInt(idOrder)
-        }
-      })
-
+          idOrder: parseInt(idOrder),
+        },
+      });
     }
+    document.getElementById("confirm-store").style = "display: none";
     setUserdata(true);
     toast("Store saved");
   };
@@ -115,6 +119,7 @@ export default function AddressForm({ setUserdata }) {
   const handleShipping = (e) => {
     e.preventDefault();
     setShipping(e.target.value);
+    setShippingtype(e.target.value);
   };
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -143,6 +148,9 @@ export default function AddressForm({ setUserdata }) {
     dni.minLength = "7";
     phoneNumber.maxLength = "11";
     phoneNumber.minLength = "10";
+    selector.style = "background: #ffffff"
+    selector2.style = "background: #ffffff"
+
   }
   return (
     <React.Fragment>
@@ -155,7 +163,7 @@ export default function AddressForm({ setUserdata }) {
             onChange={handleShipping}
             inputProps={{
               name: "shipping",
-              id: "shipping",
+              id: "selector",
             }}
           >
             <option disabled selected aria-label="None" value="none" />
@@ -230,14 +238,14 @@ export default function AddressForm({ setUserdata }) {
       <div id="store">
         <form onSubmit={submitStore}>
           <FormControl>
-            <InputLabel htmlFor="age-native-simple">Shipping method</InputLabel>
+            <InputLabel htmlFor="age-native-simple">Select store</InputLabel>
             <Select
               fullWidth
               native
               onChange={handleStore}
               inputProps={{
                 name: "stores",
-                id: "stores",
+                id: "selector2",
               }}
             >
               <option disabled selected aria-label="None" value="none" />
@@ -248,7 +256,9 @@ export default function AddressForm({ setUserdata }) {
               ))}
             </Select>
           </FormControl>
-          <Button type="submit">Confirm store</Button>
+          <Button type="submit" id="confirm-store">
+            Confirm store
+          </Button>
         </form>
       </div>
     </React.Fragment>

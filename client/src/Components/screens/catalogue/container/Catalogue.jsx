@@ -4,11 +4,13 @@ import NavBar from "../../navBar/NavBar";
 import Hero from "../hero/Hero";
 import Products from "../products/container/Products";
 import Detail from "../../detail/Detail.jsx";
-import { useQuery } from "@apollo/client";
+import { useMutation,useQuery } from "@apollo/client";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useDispatch, useSelector } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../../actions/setQuantityOrdersCardBackend";
 import styled from "styled-components";
+import CREATE_ORDER from "../../../../Apollo/mutations/createOrder";
+import ADD_PRODUCT_TO_ORDER from "../../../../Apollo/mutations/addProductToOrder";
 const Catalogue = () => {
   let storage = window.localStorage;
   let logged = storage.token ? true : false;
@@ -19,6 +21,8 @@ const Catalogue = () => {
     variables: { idUser: userId },
     fetchPolicy: "no-cache",
   });
+  const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
+  const [createOrder] = useMutation(CREATE_ORDER);
   const dispatch = useDispatch();
   let orderId = queryData?.data?.getOrdersByUserIdInCart?.orders[0]?.id;
   useEffect(() => {
@@ -40,6 +44,33 @@ const Catalogue = () => {
           } else {
             dispatch(setQuantityOrdersCardBackend(0));
           }
+        }
+      }
+    }
+    if (logged && itemsToCart.length) {
+      if (!queryData.loading) {
+        if (queryData.data.getOrdersByUserIdInCart.orders.length != 0) {
+          itemsToCart.map((elem) => {
+            addProductToOrder({
+              variables: {
+                orderId: orderId,
+                productId: elem.id,
+                quantity: elem.quantity,
+              },
+            });
+          });
+        } else {
+          createOrder({
+            variables: {
+              idUser: userId,
+              dataProducts: itemsToCart.map((elem) => {
+                return {
+                  id: elem.id,
+                  quantity: elem.quantity,
+                };
+              }),
+            },
+          });
         }
       }
     }

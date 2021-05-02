@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import { useQuery } from "@apollo/client";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 import getUserById from "../../../../Apollo/queries/getUserById";
+import GET_STORE_BY_ID from "../../../../Apollo/queries/getStoreById";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -21,10 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
-  //variables 
+export default function Review({ shippingtype, storeId }) {
+  //variables
   let total = 0;
-  let shipping = document.getElementById("shipping")
+  let shipping = document.getElementById("shipping");
+  let store = document.getElementById("pickup");
   //styles
   const classes = useStyles();
 
@@ -37,16 +39,22 @@ export default function Review() {
     variables: { id: parseInt(localStorage.id) },
     fetchPolicy: "no-cache",
   });
-  console.log(orderData)
-  if(shipping && orderData.data){
-    if(orderData.data.getOrdersByUserIdInCart != undefined){
-      if(orderData.data.getOrdersByUserIdInCart.orders[0].storeId === null){
-        console.log("es null")
-      }else{
-        shipping.style = "display: none"
-      }
+
+  if (shipping && orderData.data) {
+    if (shippingtype === "store") {
+      shipping.style = "display: none";
+      store.style = "display: flex";
+    } else if (shippingtype === "delivery") {
+      shipping.style = "display: flex";
+      store.style = "display: none";
     }
   }
+  
+   let pickup = useQuery(GET_STORE_BY_ID,{
+    variables:{
+      id: parseInt(storeId)
+    }
+  })
   if (!orderData.loading) {
     if (orderData.data.getOrdersByUserIdInCart.orders.length != 0) {
       orderData.data.getOrdersByUserIdInCart.orders[0].lineal_order.map(
@@ -106,7 +114,16 @@ export default function Review() {
             Store pickup
           </Typography>
           <Typography gutterBottom>
-            User: {userData?.data?.getUserById?.name}
+            User name: {userData?.data?.getUserById?.name}
+          </Typography>
+          <Typography gutterBottom>
+            Store name: {pickup?.data?.getByStore?.name}
+          </Typography>
+          <Typography gutterBottom>
+            Store Telephone: {pickup?.data?.getByStore?.phoneNumber}
+          </Typography>
+          <Typography gutterBottom>
+            Store Address: {pickup?.data?.getByStore?.address}
           </Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
