@@ -47,7 +47,7 @@ const FormModify  = () => {
       }
     })
     console.log(result)
-    toast("Has modificado la review exitosamente")
+    toast("You have successfully modified the review")
   };
 
   return (
