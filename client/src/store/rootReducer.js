@@ -8,6 +8,8 @@ import themeReducer from "../reducer/themeReducer";
 import loginReducer from "../reducer/loginReducer";
 import ordersReducer from "../reducer/ordersReducer";
 import counterReducer from "../reducer/counterReducer"
+import userAdmin from "../reducer/userAdmin"
+
 const persistConfig = {
     key:'root',
     storage,
@@ -21,5 +23,6 @@ const rootReducer = combineReducers({
     loginReducer:loginReducer,
     ordersReducer:ordersReducer,
     counterReducer:counterReducer,
+    userAdmin: userAdmin,
   })
 export default persistReducer(persistConfig,rootReducer);
