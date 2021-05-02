@@ -2,39 +2,42 @@ var nodemailer = require('nodemailer');
 const { Users } = require("../db");
 
 
-async function sendNewsletter(mensajeDelAdmin){
+async function sendNewsletter(messaje){
+  let emails;
     try{
         users = await Users.findAll({ where: { newsletter:true } });
-        console.log(" ---------------> " + users)
+        // console.log(users)
         //hacer un string con todos los mails de los users
-     
-
+        emails = users.map(elem => elem.email)
     }catch(err){
         return {__typename:"error",name:"Unknow", detail:`Unknow error ocurred: ${err.message}`}
     }
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
-  auth: {
-    user: 'youremail@gmail.com',
-    pass: 'yourpassword'
-  }
-});
+      auth: {
+          user: 'codebakeryhenry@gmail.com',
+          pass: 'ucobxdgpbyzqlchi' 
+      }
+})
 
 var mailOptions = {
-  from: '@gmail.com',
-  to: 'lizen777@gmail.com',
+  from: 'codebakeryhenry@gmail.com',
+  bcc: emails,
   subject: 'Sending Email using Node.js',
-  html: 'Hellow everybodyyy !!!!!!!!!!'
+  html: messaje
 };
 
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+return transporter.sendMail(mailOptions)
+    .then(info=>{
+        console.log("Email send!")
+        return {__typename:"email", email:info.accepted[0], messageId:info.messageId}
+    })
+    .catch(err=>{
+        console.log(err)
+        return {__typename:"error",name:"Error sending email", detail:err.toString()}
+    })
+    
 
 }
 module.exports = {

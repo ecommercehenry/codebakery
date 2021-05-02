@@ -8,15 +8,13 @@
 const { sendEmail, getFormatedMessage } = require("./src/services/emailService.js");
  const {getAllOrders,getOrderById, updateOrderToTicket} = require("./src/services/orderService");
 const { addReview , modifyReview} = require("./src/services/reviewsService.js");
- 
+ const {sendNewsletter} = require ("./src/services/newsletterService")
  // Syncing all the models at once.
  conn.sync({ force: true }).then(() => {
    dataPopulation().then(async ()=>{
-     const s = await getReviewByUserId(1)
-     //addReview(1,1,{title:"hola",description:"hola",stars:"46"})
-    //  const s = await modifyReview(1,{title:"Cambiadoooo",description:"hooe", stars:"3"})
-      const order = await getOrderById(1)
-      const a = await getFormatedMessage(order)
+     
+    //aca se coloca para probar
+     
 
    })
  });

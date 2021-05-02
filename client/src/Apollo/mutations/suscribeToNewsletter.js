@@ -1,10 +1,11 @@
 import { gql } from "@apollo/client"
 
-const SUBSCRIBE_USER = gql`
+const SUBSCRIBE_USER= gql`
 mutation suscribeToNewsletter ($id: Int!, $newsletter: Boolean!){
-    modifyUser(id: $id, newsletter:$newsletter){
+    modifyUser(id: $id, newsletter: $newsletter){
       __typename
       ... on user{
+        email
         name  
         id
         newsletter
@@ -17,5 +18,4 @@ mutation suscribeToNewsletter ($id: Int!, $newsletter: Boolean!){
     }
 }`
 
-
-export default SUBSCRIBE_USER
+export default SUBSCRIBE_USER;

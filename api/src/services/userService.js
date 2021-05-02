@@ -94,7 +94,8 @@ async function modifyUser(
   role,
   address,
   dni,
-  phoneNumber
+  phoneNumber,
+  newsletter,//******** */
 ) {
   let obj = {};
   if (password && newPassword) {
@@ -130,7 +131,7 @@ async function modifyUser(
   if (address) obj.address = address;
   if (dni) obj.dni = dni;
   if (phoneNumber) obj.phoneNumber = phoneNumber;
-  if (newsletter) obj.newsletter = newsletter;
+  if (newsletter) obj.newsletter = newsletter;//**********/
 
   try {
     if (id) {
@@ -178,9 +179,9 @@ async function loginUserWithGoogle(email, tokenId){
     }
   }
 }
-
+//---- LOGIN USER --------------
 async function loginUser(email,password){
-  // 
+  
   const user = await Users.findOne({
     where:{
       email: email
@@ -217,7 +218,7 @@ async function loginUser(email,password){
     }
   }
 }
-
+//------ DELETE USER ---------
 async function deleteUser(id) {
   try {
     const userToDelete = await Users.findByPk(id);
@@ -229,28 +230,14 @@ async function deleteUser(id) {
   }
 }
 
-async function suscribeToNewsletter(userId){
-  try {
-    const userToSuscribe = await Users.findByPk(userId);
-    userToSuscribe.newsletter = true; //se asigna true a la propiedad newsletter del usuario
-    await userToSuscribe.save(); //guarda en bd el cambio
-
-
-    return { __typename: "booleanResponse", boolean: true };
-  } catch (error) {
-    return { __typename: "error", name: "error", detail: "User not found" };
-  }
-}
-
 module.exports = {
   getAllUsers,
   createUser,
-  modifyUser,   //@ lau usare este para modificar el role: de usuario comun a admin
+  modifyUser,   
   loginUser,
   getUserByEmail,
   deleteUser,
-  getUserById,  //lo creo para traer datos de ese usuario a modificar -@Lau
+  getUserById,  
   loginUserWithGoogle,
-
-  suscribeToNewsletter, //@ lau.. un usuario se suscribe al newsletter
+  
 };

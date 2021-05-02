@@ -11,6 +11,9 @@ const MODIFY_USER = gql`
     $address: String
     $dni: String
     $phoneNumber: String
+
+    $newsletter: Boolean
+
   ) {
     modifyUser(
       id: $id
@@ -22,6 +25,8 @@ const MODIFY_USER = gql`
       address: $address
       dni: $dni
       phoneNumber: $phoneNumber
+
+      newsletter: $newsletter
     ) {
       __typename
       ... on user {
@@ -32,6 +37,8 @@ const MODIFY_USER = gql`
         address
         dni
         phoneNumber
+        
+        newsletter
       }
       __typename
       ... on error {

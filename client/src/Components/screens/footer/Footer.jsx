@@ -11,6 +11,19 @@ export default function Footer (){
         <>
         <StyledFooter>
             <Newsletter/>
+            <div className="adicionales">
+
+            <div className="redes">
+                redes sociales
+            </div>
+            <div className="legales">
+                <p>Aviso Legal</p>
+                <p>Politica de Privacidad</p>
+                <p>Politica de Cockies</p>
+            </div>
+            </div>
+            <p>Copyright © </p>
+            <p className="linea-final">Desarrollado por alumnos de Henry</p>
         </StyledFooter>
        
         </>
@@ -22,12 +35,34 @@ const StyledFooter = styled.footer`
   
 background-color: #533f66;
    
-   padding: 50px 20px;
+   padding: 20px 20px;
    display: flex;
    flex-direction: column;
    text-align: center;
-   position: relative;
+  
 
+   .legales{
+       padding:1rem;
+   }
+  p{
+      color:gray;
+      margin:0;
+    }
+    .adicionales {
+        margin: 1rem;
+        display: flex;
+        justify-content: space-around;
+    }
+    .linea-final {
+        background-color: black;
+        color: #bca1f5;
+        position: relative;   
+       
+        bottom: -20px;
+        left: -10px;
+        width:100%;       
+        padding: 1rem;
+    }
     /* height: 12rem;
     width: 100%;
     background-color: #533f66; */
