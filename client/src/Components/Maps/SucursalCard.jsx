@@ -3,24 +3,9 @@ import { CardContent } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import GET_ALL_STORES from "../../Apollo/queries/getAllStores";
+import { useQuery } from "@apollo/client";
 
-const sucursales = [
-  {
-    name: "Code Bakery Sucursal Unicenter",
-    direccion: "Unicenter planta baja",
-    telefono: "4721-6058",
-  },
-  {
-    name: "Code Bakery Sucursal Norcenter",
-    direccion: "Norcenter primer piso",
-    telefono: "4721-3094",
-  },
-  {
-    name: "Code Bakery Sucursal Hypolito Yrigoyen",
-    direccion: "Hypolito yrigoyen 5555",
-    telefono: "4723-6582",
-  },
-];
 const useStyles = makeStyles({
   root: {
     margin: "10px",
@@ -36,20 +21,21 @@ const useStyles = makeStyles({
 });
 
 const SucursalCard = () => {
+  const { data } = useQuery(GET_ALL_STORES);
   const classes = useStyles();
   return (
     <div>
-      {sucursales.map((elemento) => (
-        <Card className={classes.root}>
+      {data?.getAllStores?.map((elemento) => (
+        <Card className={classes.root} key={elemento.id}>
           <CardContent>
             <Typography variant="h5" component="h2">
               {elemento.name}
             </Typography>
             <Typography className={classes.title}>
-              {elemento.direccion}
+              {elemento.address}
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-              {elemento.telefono}
+              {elemento.phoneNumber}
             </Typography>
           </CardContent>
         </Card>
