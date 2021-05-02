@@ -7,7 +7,9 @@ const UserByDetail = ({name, id, address, email, phoneNumber}) => {
     return (
             <StyledUser>
               <div key={id} className="element-container">
-                <div className="info-container">
+
+                Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                {/* <div className="info-container">
                   <div className="text-container">
                     <span>Name</span>
                     <p>{name}</p>
@@ -24,7 +26,7 @@ const UserByDetail = ({name, id, address, email, phoneNumber}) => {
                     <span>PhoneNumber </span>
                     <p>{phoneNumber}</p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </StyledUser>
           
