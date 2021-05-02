@@ -10,6 +10,6 @@ const Hero = () => {
     </>
   );
 };
-//<Cardhero />
+// Hero --> Slider ? SliderAtr : CardHero
 
 export default Hero;

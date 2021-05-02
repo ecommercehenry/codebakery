@@ -15,7 +15,7 @@ import TablaOrdenes from "../../admin/ordenes/TablaOrdenes";
 import UserAdmin from "../ordenes/UserAdmin";
 import Pagination from "../ordenes/Pagination";
 import CheckFilters from "../ordenes/CheckFilters";
-import Upload from "../upload/Upload";
+import SliderCard from "../slider/SliderCard";
 
 const AdminPanel = () => {
   const [addProduct, setAddProduct] = useState(false);
@@ -36,7 +36,7 @@ const AdminPanel = () => {
           <Route path="/admin/orders" component={TablaOrdenes} />
           <Route path="/admin/users" component={UserAdmin} />
           {/*Borrar la linea de abajo */}
-          <Route path="/admin/upload" component={Upload} />
+          <Route path="/admin/slider" component={SliderCard} />
         </div>
 
         <Route path="/admin/orders">

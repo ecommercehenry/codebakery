@@ -7,8 +7,10 @@ async function saveImageSlider(image) {
       upload_preset: "images_slider",
     });
 
+    const name = uploadedResponse.url.split("/").pop();
+
     await ImageSlider.create({
-      name: uploadedResponse.url,
+      name,
     });
 
     return { __typename: "booleanResponse", boolean: true };

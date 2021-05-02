@@ -122,9 +122,7 @@ server.use(
   graphqlHTTP((req) => {
     return {
       schema: schema,
-      extensions({ result, variables, document }) {
-        console.log(result), console.log(variables);
-      },
+      extensions({ result, variables, document }) {},
       rootValue: root,
       graphiql: true,
     };

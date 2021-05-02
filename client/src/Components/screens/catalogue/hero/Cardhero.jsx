@@ -24,15 +24,16 @@ const StyledHero = styled.div`
   background-color: #755588;
   /*  border-radius: 0px 0px 50px 50px; */
   z-index: 1;
-  background-size: 50rem;
-  background-position: 80% -5%;
+  background-size: 30rem;
+  background-position: 80% 10%;
   background-repeat: no-repeat;
   /* El hero ocupa todo el viewport */
   height: 20rem;
 
   #hero-title {
     position: absolute;
-    left: 10%;
+    left: 5%;
+
     color: white;
     font-size: 7rem;
     font-weight: bold;
@@ -41,13 +42,14 @@ const StyledHero = styled.div`
 
   #vertical {
     position: absolute;
-    right: 5rem;
+    right: 10rem;
     bottom: 2rem;
   }
 
   #horizontal {
     position: absolute;
-    left: 40%;
+    left: 55%;
+    top: 60%;
   }
 `;
 

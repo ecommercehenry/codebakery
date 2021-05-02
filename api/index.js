@@ -25,7 +25,5 @@ const { dataPopulation } = require("./src/sequelize/dataPopulation");
 conn.sync({ force: true }).then(() => {
   dataPopulation();
 
-  server.listen(3001, () => {
-    
-  });
+  server.listen(3001, () => {});
 });

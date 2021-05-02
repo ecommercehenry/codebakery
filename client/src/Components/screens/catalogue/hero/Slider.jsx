@@ -5,49 +5,56 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 // Componente img
 import ImgComp from "./ImgComp";
+import banner3Low from "./banner3Low.png";
 
-import i1 from "./i1.jpg";
-import i2 from "./i2.jpg";
-import i3 from "./i3.jpg";
 import { useQuery } from "@apollo/client";
 
 import GET_ALL_IMAGES from "../../../../Apollo/queries/getImageSlider";
+import Cardhero from "./Cardhero";
 
-const axios = require("axios");
 const Slider = () => {
+  // Revisar esto
+  // Data deberia traer un array de objetos con los siguientes campos:
+  // __typename, id, name, date
   let { data } = useQuery(GET_ALL_IMAGES);
 
-  console.log("DATA: ", data);
-  // Revisar esto
-  let sliderArr = [
-    <ImgComp src={i1} />,
-    <ImgComp src={i2} />,
-    <ImgComp src={i3} />,
-  ];
+  console.log("D: ", data);
+
+  let imageSlider = [<ImgComp src={banner3Low} />];
+  /* if (data) {
+    imageSlider = data?.splice(data.length - 3).map((img) => {
+      //return <ImgComp src={img} />;
+    });
+  } */
 
   const [x, setX] = useState(0);
 
   const goLeft = () => {
-    x === 0 ? setX(-100 * (sliderArr.length - 1)) : setX(x + 100);
+    x === 0 ? setX(-100 * (imageSlider.length - 1)) : setX(x + 100);
   };
 
   const goRight = () => {
-    x === -100 * (sliderArr.length - 1) ? setX(0) : setX(x - 100);
+    x === -100 * (imageSlider.length - 1) ? setX(0) : setX(x - 100);
   };
 
-  setTimeout(() => {
-    x === -100 * (sliderArr.length - 1) ? setX(0) : setX(x - 100);
-  }, 5000);
+  if (imageSlider) {
+    setTimeout(() => {
+      x === -100 * (imageSlider.length - 1) ? setX(0) : setX(x - 100);
+    }, 5000);
+  }
 
-  return (
+  return !imageSlider ? (
+    <Cardhero />
+  ) : (
     <SliderAtr>
-      {sliderArr.map((item, indx) => {
+      {imageSlider.map((item, indx) => {
         return (
           <div
             className="slide"
             key={indx}
             style={{ transform: `translateX(${x}%)` }}
           >
+            {/**Revisar que es item. Deberia ser item.name */}
             {item}
           </div>
         );
@@ -55,18 +62,22 @@ const Slider = () => {
       <ButtonSlider style={{ left: "0" }} onClick={goLeft}>
         <IoIosArrowBack />
       </ButtonSlider>
-      <ButtonSlider style={{ right: "0" }} onClick={goRight}>
+      <ButtonSlider style={{ right: "20px" }} onClick={goRight}>
         <IoIosArrowForward />
       </ButtonSlider>
     </SliderAtr>
   );
 };
 
+/**
+ *
+ */
+
 const ButtonSlider = styled.button`
   position: absolute;
   top: 10rem;
   transform: translateY(-50%);
-  width: 8%;
+  width: 5%;
   height: 20rem;
   background: none;
   border: none;
@@ -74,6 +85,7 @@ const ButtonSlider = styled.button`
   transition: 0.5s;
   font-size: 3rem;
   color: hsl(0, 100%, 100%);
+  z-index: 9999;
 
   :hover {
     font-size: 4rem;

@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useCallback } from "react";
+
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 
@@ -9,14 +9,10 @@ import Loader from "react-loader-spinner";
 import { useMutation } from "@apollo/client";
 import SAVE_IMAGE from "../../../../Apollo/mutations/saveImageSlider";
 
-const axios = require("axios");
 const Upload = () => {
   const [saveImageSlider, { loading }] = useMutation(SAVE_IMAGE);
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach(async (files) => {
-      console.log("FILES: ", files);
-      /* const formData = new FormData();
-      formData.append("file", files); */
       const newImage = new FileReader();
       newImage.readAsDataURL(files);
       newImage.onloadend = () => {
@@ -80,8 +76,8 @@ const DropZone = styled.form`
 
   .dropzone {
     margin-top: 3rem;
+    margin-bottom: 3rem;
     height: 8rem;
-    margin: 1rem;
     padding: 1rem;
     border: 2px dashed #755588;
     display: flex;

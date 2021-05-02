@@ -59,14 +59,14 @@ const LeftPanel = () => {
                 <span className="tabName">Users</span>
               </div>
             </Link>
-            {/*Borrar la linea de abajo */}
+            {/*Reemplazar la linea de abajo */}
             <Link
               className="text-decoration-none text-white"
-              to="/admin/upload"
+              to="/admin/slider"
             >
               <div className={`tab ${activeTab.users}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
-                <span className="tabName">Upload</span>
+                <span className="tabName">Slider</span>
               </div>
             </Link>
           </div>
