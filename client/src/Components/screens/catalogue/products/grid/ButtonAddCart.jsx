@@ -17,25 +17,29 @@ const ButtonAddCart = ({ id, orderId, refetchCatalogue }) => {
   let logged = localStorage.token ? true : false;
   let userId = logged ? parseInt(localStorage.id) : null;
 
-  const { data,refetch, loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+  const { data, refetch, loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
     fetchPolicy: "no-cache",
   });
   const dispatch = useDispatch();
-  const buttonHandler = async (id) => {
-    if (!logged) {
+  const buttonHandler = async (id, e) => {
+    console.log(e.target.innerHTML);
+    if (e.target.innerHTML === "Sin Stock") {
+      toast("No stock sorry");
+    } else if (!logged) {
       dispatch(addProductToCart(id));
-      toast("Producto añadido al carrito", { autoClose: 1000 });
+      toast("Product added to cart", { autoClose: 1000 });
     } else {
       if (!loading) {
         dispatch(
           setQuantityOrdersCardBackend(
             orderId
-              ? data?.getOrdersByUserIdInCart?.orders[0]?.lineal_order?.length + 1
+              ? data?.getOrdersByUserIdInCart?.orders[0]?.lineal_order?.length +
+                  1
               : 1
           )
         );
-        if(orderId != undefined){
+        if (orderId != undefined) {
           await addProductToOrder({
             variables: {
               orderId: orderId,
@@ -45,9 +49,9 @@ const ButtonAddCart = ({ id, orderId, refetchCatalogue }) => {
             },
           });
           await refetch();
-          await refetchCatalogue()
-          toast("Producto añadido al carrito", { autoClose: 1000 });
-        }else{
+          await refetchCatalogue();
+          toast("Product added to cart", { autoClose: 1000 });
+        } else {
           await addProductToOrder({
             variables: {
               orderId: -1,
@@ -57,15 +61,15 @@ const ButtonAddCart = ({ id, orderId, refetchCatalogue }) => {
             },
           });
           await refetch();
-          await refetchCatalogue()
-          toast("Producto añadido al carrito", { autoClose: 1000 });
+          await refetchCatalogue();
+          toast("Product added to cart", { autoClose: 1000 });
         }
-        }
+      }
     }
   };
 
   return (
-    <StyledButton onClick={() => buttonHandler(id)}>
+    <StyledButton className={id} id={id} onClick={(e) => buttonHandler(id, e)}>
       <img
         src={cartIcon}
         alt="cat icon"

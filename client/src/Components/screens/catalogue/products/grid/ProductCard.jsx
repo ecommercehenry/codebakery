@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import GET_BY_PRODUCT from "../../../../../Apollo/queries/getByProduct";
 
 //styles
 import styled from "styled-components";
@@ -9,29 +7,7 @@ import styled from "styled-components";
 //Components
 import ButtonAddCart from "./ButtonAddCart";
 
-const ProductCard = ({
-  id,
-  name,
-  image,
-  price,
-  stock,
-  orderId,
-  refetchCatalogue,
-}) => {
-  const { data } = useQuery(GET_BY_PRODUCT, {
-    variables: { id: id },
-  });
-
-  if (data) {
-    if (data.product) {
-      data.product.map((e) => {
-        if (e.stock < 0) {
-          document.getElementById(id).setAttribute("disabled", "disabled");
-        }
-      });
-    }
-  }
-
+const ProductCard = ({ id, name, image, price, orderId, refetchCatalogue}) => {
   return (
     <StyledCard>
       <Link to={`/catalogue/detail/${id}`} className="link">
@@ -50,8 +26,8 @@ const ProductCard = ({
           refetchCatalogue={refetchCatalogue}
           orderId={orderId}
           id={id}
+          className={id}
         />
-        )
       </div>
     </StyledCard>
   );
@@ -64,7 +40,7 @@ const media = {
 };
 
 const StyledCard = styled.div`
-  //background:green;
+  //background: green;
   //width:23vw;
   height: 20rem;
   margin: 2rem 3rem;

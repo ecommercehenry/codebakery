@@ -50,7 +50,7 @@ const Catalogue = () => {
       <Hero />
       <Products orderId={orderId} refetchCatalogue={queryData.refetch} />
       <Route path="/catalogue/detail/:id">
-        <Detail></Detail>
+        <Detail refetchCatalogue={queryData.refetch}></Detail>
       </Route>
     </StyledCatalogue>
   );
