@@ -17,7 +17,7 @@ const Catalogue = () => {
   let storage = window.localStorage;
   let logged = storage.token ? true : false;
   let userId = logged ? parseInt(storage.id) : null;
-  let { itemsToCart } = useSelector((state) => state.cart);
+  let { itemsToCart } = useSelector((state) => state.cart); 
 
   const queryData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },

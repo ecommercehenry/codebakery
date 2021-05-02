@@ -24,6 +24,10 @@ const {deleteUser} = require("./deleteUser");
 const {sendEmail} = require("./sendEmail")
 const {sendNewsletter} = require("./sendNewsletter")
 // const {suscribeToNewsletter} = require("./suscribeToNewsletter")
+const {addStore} = require("./addStore")
+const {modifyStore} = require("./modifyStore")
+const {deleteStore} = require("./deleteStore")
+
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -55,4 +59,7 @@ module.exports = {
 
   // suscribeToNewsletter,
 
+  addStore,
+  modifyStore,
+  deleteStore
 }
