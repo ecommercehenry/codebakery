@@ -1,12 +1,8 @@
-import React from "react"
+import React from "react";
 import Newsletter from "./Newsletter";
 import styled from 'styled-components';
 
-
 export default function Footer (){
-
-
-
     return(
         <>
         <StyledFooter>
@@ -24,22 +20,18 @@ export default function Footer (){
             </div>
             <p>Copyright © </p>
             <p className="linea-final">Desarrollado por alumnos de Henry</p>
-        </StyledFooter>
-       
+        </StyledFooter>       
         </>
     )
 }
 
 const StyledFooter = styled.footer`
-
   
-background-color: #533f66;
-   
+background-color: #533f66;   
    padding: 20px 20px;
    display: flex;
    flex-direction: column;
-   text-align: center;
-  
+   text-align: center; 
 
    .legales{
        padding:1rem;
@@ -65,6 +57,17 @@ background-color: #533f66;
     }
     /* height: 12rem;
     width: 100%;
-    background-color: #533f66; */
+    background-color: #533f66; 
+    
+    Pablo-----*/
+   background: url(${footer});
+  height: 10rem;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px inset #694e7a;
+
 
 `;

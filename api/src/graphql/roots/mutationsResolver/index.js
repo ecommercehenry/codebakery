@@ -8,9 +8,10 @@ const { deleteById } = require("./deleteById");
 const { addProduct } = require("./addProduct");
 const { createUser } = require("./createUser");
 const { modifyUser } = require("./modifyUser");
-const {createOrder } = require("./createOrder");
-const {updateOrderPrices} = require("./updateOrderPrices");
+const { createOrder } = require("./createOrder");
+const { updateOrderPrices } = require("./updateOrderPrices");
 const { deleteProductOrder } = require("./deleteProductOrder");
+
 const {addProductToOrder} = require("./addProductToOrder")
 const {deleteOrder} = require("./deleteOrder")
 const {updateOrderToTicket} = require("./updateOrderToTicket")
@@ -27,6 +28,10 @@ const {sendNewsletter} = require("./sendNewsletter")
 const {addStore} = require("./addStore")
 const {modifyStore} = require("./modifyStore")
 const {deleteStore} = require("./deleteStore")
+
+const { saveImageSlider } = require("./saveImageSlider");
+const { deleteImageById } = require("./deleteImageById");
+
 
 module.exports = {
   modifyProduct,
@@ -46,8 +51,8 @@ module.exports = {
   deleteOrder,
   updateOrderToTicket,
   modifyOrderStatus,
-  incrementQuantity, 
-  decrementQuantity, 
+  incrementQuantity,
+  decrementQuantity,
   deleteReview,
   addReview,
   modifyReview,
@@ -61,5 +66,9 @@ module.exports = {
 
   addStore,
   modifyStore,
-  deleteStore
+  deleteStore,
+
+  saveImageSlider,
+  deleteImageById,
 }
+ origin/carousel

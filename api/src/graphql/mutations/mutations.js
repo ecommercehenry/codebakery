@@ -39,9 +39,10 @@ type Mutation{
 
     sendNewsletter(message: String!) : emailResponse 
     
-
-
     addStore(name: String!, lat: Float!, long: Float!, address: String!, phoneNumber: String): store,
     modifyStore(id: Int!, name: String!, lat: Float!, long: Float!, address: String!, phoneNumber: String): store,
     deleteStore(id:Int):resultBoolean
+    
+    saveImageSlider(image: String!): resultBoolean
+    deleteImageById(imageId: Int!) : resultBoolean
 }`;

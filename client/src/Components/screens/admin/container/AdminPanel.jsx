@@ -21,6 +21,7 @@ import ModifyStore from "../stores/ModifyStore";
 
 import NewsletterAdmin from '../newsletter/NewsletterAdmin';
 
+import SliderCard from "../slider/SliderCard";
 
 const AdminPanel = () => {
   const [addProduct, setAddProduct] = useState(false);
@@ -34,18 +35,21 @@ const AdminPanel = () => {
       <div className="right">
         <div className="top">
           <AdminNavBar setAddProduct={setAddProduct} />
-
           <Route
             path="/admin/stores"
             component={() => StoreOptions({ setStores })}
           />
           <Route path="/admin/orders" component={CheckFilters} />
         </div>
+       
         <div className="bottom">
           <Route path="/admin/products" component={ListCRUD} />
           <Route path="/admin/orders" component={TablaOrdenes} />
           <Route path="/admin/users" component={UserAdmin} />
           <Route path="/admin/newsletter" component={NewsletterAdmin} />
+           {/*Borrar la linea de abajo */}
+           <Route path="/admin/slider" component={SliderCard} />
+
           {stores === "seeStores" ? (
             <Route path="/admin/stores" component={StorePanel} />
           ) : stores === "modifyStore" ? (

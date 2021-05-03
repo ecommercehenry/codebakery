@@ -1,3 +1,4 @@
+
 const categoryType = require("./categoryType")
 const productType = require("./productType")
 const userType = require("./userType")
@@ -9,6 +10,9 @@ const booleanType = require("./booleanType")
 const ordersType = require("./ordersType")
 const emailType = require("./emailType")
 const storeType = require("./storeType")
+
+const image = require("./imageType");
+
 // aqui exportas tu type
 module.exports = `
     ${categoryType}
@@ -21,5 +25,8 @@ module.exports = `
     ${booleanType}
     ${ordersType}
     ${emailType}
+
     ${storeType}
+    ${image}
 `
+

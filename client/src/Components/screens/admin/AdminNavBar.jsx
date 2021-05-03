@@ -17,7 +17,7 @@ const AdminNavBar = ({ setAddProduct }) => {
   };
 
   const [add, setAdd] = useState(false);
-  let {status} = useSelector((state)=>state.theme);
+  let { status } = useSelector((state) => state.theme);
 
   return (
     <StyledNavBar light={status}>
@@ -42,8 +42,6 @@ const AdminNavBar = ({ setAddProduct }) => {
           <SortByPrice />
         </div>
       </Route>
-  
-     
       <Route path="/admin/products">
         <>
           {add ? (
@@ -77,9 +75,7 @@ const StyledNavBar = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 0 6rem 0 4rem;
-  background: ${({light})=>light 
-    ? 'white' 
-    : '#222222'};
+  background: ${({ light }) => (light ? "white" : "#222222")};
   .onLeft {
     .optionTab {
       color: #513066;

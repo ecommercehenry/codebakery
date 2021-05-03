@@ -1,4 +1,5 @@
 const {
+
     updateCategory, 
     modifyProduct, 
     addCategory, 
@@ -28,7 +29,9 @@ const {
 
     addStore,
     modifyStore,
-    deleteStore
+    deleteStore,
+    saveImageSlider,
+    deleteImageById,
 } = require("./mutationsResolver/")
 
 const {
@@ -52,6 +55,8 @@ const {
     validateUserWithGoogle,
     getReviewByUserId,
     getAllStores,
+    
+    getImageSlider,
 } = require("./queriesResolvers/")
 
 // product
@@ -85,6 +90,9 @@ const root = {
 
     sendNewsletter,
 
+    saveImageSlider,
+    deleteImageById,
+
     //Queries    
     productById,
     product,
@@ -110,6 +118,9 @@ const root = {
     validateUserWithGoogle,
     getReviewByUserId,
     getAllStores,
+  
+    getImageSlider,
 }
 
-module.exports = root
+
+module.exports = root;
