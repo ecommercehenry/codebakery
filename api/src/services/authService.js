@@ -49,9 +49,9 @@ async function validateTOTP(idUser, code){
         })
 
     }catch(err){
-        return {__typename:"error",name:"Error al obtener un usuario",detail:`El usuario ${idUser} no existe`}
+        return {__typename:"error", name:"Error al obtener un usuario", detail:`El usuario ${idUser} no existe`}
     }
-    console.log(code, 'aaaaaaaaaaaaaa', user.secretOtp)
+    console.log(code, 'aaaaaaaaaaaaaa', user)
     let valid = speakeasy.totp.verify({
         secret:user.secretOtp,
         encoding:"base32",

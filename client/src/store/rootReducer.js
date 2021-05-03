@@ -9,11 +9,12 @@ import loginReducer from "../reducer/loginReducer";
 import ordersReducer from "../reducer/ordersReducer";
 import counterReducer from "../reducer/counterReducer"
 import userAdmin from "../reducer/userAdmin"
+import dataProfileReducer from "../reducer/dataProfileReducer";
 
 const persistConfig = {
     key:'root',
     storage,
-    whitelist: ['cart','theme']
+    whitelist: ['cart','theme', 'dataProfileReducer']
 }
 const rootReducer = combineReducers({
     productsReducer: productsReducer,
@@ -24,5 +25,6 @@ const rootReducer = combineReducers({
     ordersReducer:ordersReducer,
     counterReducer:counterReducer,
     userAdmin: userAdmin,
+    dataProfileReducer: dataProfileReducer
   })
 export default persistReducer(persistConfig,rootReducer);

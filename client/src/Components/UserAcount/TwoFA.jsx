@@ -12,7 +12,7 @@ import { Redirect } from "react-router-dom";
 // Login/ out
 import Login from "./Login";
 import Logout from "./Logout";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
@@ -21,37 +21,61 @@ toast.configure();
 
 function TwoFA(){
 
-    const [generateOTP, {data: dataGenerate, loading: loadingGenerate}] = useMutation(GENERATE_OTP);
+  console.log('atstatstattas')
+    // const [generateOTP, {data: dataGenerate, loading: loadingGenerate}] = useMutation(GENERATE_OTP);
     const [validateTotp, {data: dataValidate, loading: loadingValidate}] = useLazyQuery(VALIDATE_TOTP);
+    const {id, token, name, email, role} = useSelector(state => state.dataProfileReducer);
+    const dispatch = useDispatch();
     // generateOTP({ variables: { userId: parseInt(localStorage.getItem('id'))} });
-    useEffect(() => {
-        if(!dataGenerate && !loadingGenerate) generateOTP({ variables: { userId: parseInt(localStorage.getItem('id'))} })
-        console.log(dataGenerate?.generateTokenOTP, loadingGenerate)
-    }, [dataGenerate, loadingGenerate])
+    // useEffect(() => {
+    //     if(!dataGenerate && !loadingGenerate) generateOTP({ variables: 
+    //       { userId: parseInt(localStorage.getItem('id')) || id } 
+    //     })
+    //     console.log(dataGenerate?.generateTokenOTP, loadingGenerate)
+    // }, [dataGenerate, loadingGenerate])
+
     const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm();
+
+    useEffect(() => {
+      // colocar info del user en el LS y enviar accion de borrar el stados redux
+      // validateTOTP: {__typename: "booleanResponse", boolean: true}
+      if(dataValidate?.validateTOTP.boolean){
+        localStorage.setItem('token', token);
+        localStorage.setItem('name', name);
+        localStorage.setItem('email', email);
+        localStorage.setItem('role', role);
+        localStorage.setItem('id', id);
+        // dispatch(clearDataUserProfile())
+        toast(`Welcome ${localStorage.getItem(name)}`);
+        // window.location.reload();
+      }
+      
+    }, [dataValidate])
     const handleValidate = async (form) => {
-        console.log(form.code, 'atstats', form.password);
+        // console.log(form.code, 'atstats', form.password);
         validateTotp({
             variables: {
-                userId: parseInt(localStorage.getItem('id'))
+                userId: parseInt(id)
                 , code: parseInt(form.password)
             }
         });
         // login({variables: {email:form.login,password:form.password}});
     }
-    console.log(dataValidate)
+    console.log(dataValidate, 'aaaaaaaaaaaaaaaaaaa')
     return (
+      // <div>Ghola</div>
         <div className="page" style={{ height: "100vh", display: "flex", alignItems: "center" }}>
             <div className="wrapper fadeInDown" style={{ marginBottom: "10vh" }}>
                 <div className="formContent">
                     {/* <Login /> */}
                     <StyledAcheDos> QR </StyledAcheDos>
                     <hr />
-                    <img src={dataGenerate?.generateTokenOTP.image}></img>
+                    {/* <img src={dataGenerate?.generateTokenOTP.image}></img> */}
+                    {/* <img>ffff</img> */}
                     <form onSubmit={handleSubmit(handleValidate)}>
                         <input
                             type="password"
