@@ -25,42 +25,26 @@ function TextCRUD({ id }) {
     return (
       <>
         {show ? (
-          <StyledTextCRUD onDoubleClick={handlerOnClick}>
-            <div className="element-container" id={id}>
-              <div className="info-container">
-                <div className="image-container">
-                  <span>Product</span>
-                  <img src={product.image} alt="" />
-                </div>
-                <div className="name-container">
-                  <span>Name</span>
-                  <p>{product.name}</p>
-                </div>
-                <div className="stock-container">
-                  <span>Stock</span>
-                  <p>{product.stock}</p>
-                </div>
-                <div className="category-container">
-                  <span>Categories</span>
-                  <div className="container-mapeo">
-                    {product.categories.map((element) => (
-                      <p key={element.id}>{element.name}</p>
-                    ))}
-                  </div>
-                </div>
-                <div className="price-container">
-                  <span>Price</span>
-                  <p>{product.price} </p>
-                </div>
-                <div className="edit-button">
-                  <span style={{color:'green', marginTop:"0.1rem"}}>Edit</span>
-                  <button onClick={handlerOnClick}>
-                    <HiOutlinePencilAlt size="1.8rem" color="green"/>
-                  </button>
-                </div>
+          <StyledTableRow onDoubleClick={handlerOnClick}>
+            <td width="10%">
+              <img src={product.image} alt="" style={{ width: "4rem", marginLeft:"0.3rem" }} />
+            </td>
+            <td width="31.5%">{product.name}</td>
+            <td width="30%">
+              {product.categories.map((element, idx, arr) => 
+                  element.name
+              ).join(', ')}
+            </td>
+            <td width="10%">{product.stock}</td>
+            <td width="10%">{product.price}</td>
+            <td width="10%" id="edit-btn">
+              <div>
+              <button  onClick={handlerOnClick}>
+                <HiOutlinePencilAlt size="1.5rem" color="green" />
+              </button>
               </div>
-            </div>
-          </StyledTextCRUD>
+            </td>
+          </StyledTableRow>
         ) : (
           <FormCRUD id={id} key={id} handlerOnClick={handlerOnClick} />
         )}
@@ -73,6 +57,26 @@ function TextCRUD({ id }) {
 
 export default TextCRUD;
 
+const StyledTableRow = styled.tr`
+#edit-btn{
+  padding: auto;
+
+
+  div{
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    button{
+    background: none;
+    border: none;
+  }
+  }
+  
+  
+}
+`
+
 const StyledTextCRUD = styled.div`
   display: flex;
   align-items: flex-start;
@@ -80,103 +84,4 @@ const StyledTextCRUD = styled.div`
   width: 100%;
   margin-top: 1.5rem;
   height: 100%;
-
-  .element-container {
-    width: 100%;
-    height: 15vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(236, 227, 250);
-    border-radius: 40px;
-  }
-  .element-container span {
-    font-weight: 700;
-    color: #5f3f71;
-  }
-  .image-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 30px;
-    height: 100%
-  }
-  img {
-    width: 4.5rem;
-    height: 100%;
-    border-radius: 100%;
-  }
-  .name-container {
-    width: 15rem;
-    height: 100%;
-    overflow: hidden;
-  }
-  .name-container p {
-    margin: 0;
-    color: #3b3b3b;
-    font-weight: 500;
-  }
-
-  .stock-container {
-    width: 5rem;
-    height: 100%;
-    color: #3b3b3b;
-  }
-  .stock-container p {
-    width: 60%;
-    display: flex;
-    justify-content: center;
-    color: #3b3b3b;
-    font-weight: 500;
-    text-align: center;
-  }
-  .category-container {
-    margin-left: 2rem;
-    width: 10rem;
-    height: 100%;
-    overflow: hidden;
-  }
-  .container-mapeo {
-    display: flex;
-    flex-direction: column;
-    color: grey;
-    font-weight: 500;
-  }
-  .container-mapeo p {
-    margin-bottom: 0;
-    color: #3b3b3b;
-  }
-  .price-container {
-    width: 7rem;
-    height: 100%;
-  }
-  .price-container p {
-    display: flex;
-    justify-content: flex-start;
-    color: #3b3b3b;
-    font-weight: 500;
-  }
-
-  .info-container {
-    height: 80%;
-    width: 90%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-  .edit-button {
-    height: 100%;
-    justify-self: center;
-    align-self: center;
-    justify-content: flex-start;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .edit-button button {
-    margin-top: 0.5rem;
-    border: none;
-    background: transparent
-  }
 `;

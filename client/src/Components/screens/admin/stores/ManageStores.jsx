@@ -11,14 +11,14 @@ import { makeStyles } from "@material-ui/core/styles";
 toast.configure();
 const useStyles = makeStyles((theme) => ({
   formContainer: {
-    width:"70%",
+    width: "70%",
     borderRadius: "1rem",
     backgroundColor: "#5E3F71",
     color: "#ffffff", //color de titulos
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
-  }
+  },
 }));
 
 const ManageStores = () => {

@@ -39,8 +39,8 @@ const useStyles = makeStyles({
 
 const StoresPanel = () => {
   const classes = useStyles();
-  const { data } = useQuery(GET_ALL_STORES,{
-    fetchPolicy:"no-cache"
+  const { data } = useQuery(GET_ALL_STORES, {
+    fetchPolicy: "no-cache",
   });
   return (
     <TableContainer component={Paper} className={classes.container}>

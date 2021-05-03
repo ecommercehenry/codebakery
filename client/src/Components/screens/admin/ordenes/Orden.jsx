@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Steps } from "rsuite";
+import BootBox from 'react-bootbox';
 
 import "rsuite/lib/styles/index.less";
 /* import "./prueba.css" */
 import { useQuery, useMutation } from "@apollo/client";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
 import { Link } from "react-router-dom";
-
+import MODIFY_ORDER_STATUS from "../../../../Apollo/mutations/modifyOrderStatus";
+import { useDispatch } from "react-redux";
+import { changeStatus } from "../../../../actions";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
-  const [orderStatus, setOrderStatus] = useState("unpaid");
-  
+  const [orderStatus, setOrderStatus] = useState(orden.status);
+  const [selectedStatus, setSelectedStatus] = useState();
+  const [show, setShow] = useState(false);
+
   /* let status;
   if (orden.status === "unpaid") status = 0;
   if (orden.status === "paid") status = 1;
@@ -27,71 +31,120 @@ export default function Orden({ id, orden }) {
     </Steps>
   ); */
 
-  function capitalizeFirstLetter(string) 
-  {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  let active;
+
+  useEffect(() => {
+    setOrderStatus(orden.status);
+
+    document.getElementById(
+      `status-select-${orden.id}`
+    ).value = orderStatus;
+
+    active = {
+      unpaid: orderStatus === "unpaid" ? "selected" : "⠀",
+      paid: orderStatus === "paid" ? "selected" : "⠀",
+      sent: orderStatus === "sent" ? "selected" : "⠀",
+      received: orderStatus === "received" ? "selected" : "⠀",
+    };
+
+    /* console.log(document.getElementById(`status-select-${orden.id}`).outerHTML) */
+  }, []);
+
+  let handleSubmit = (e) => {
+    if (window.confirm("You want to change this order status?")) {
+      e.preventDefault();
+      /* var el = document.getElementById(`status-select-${orden.id}`);
+      var value= el.selectElement.options[e.selectedIndex].value;// get selected option value */
+      console.log(selectedStatus);
+    } else {
+      e.preventDefault();
+    }
+  };
+
+  const [modifyOrderStatus, { data, loading }] = useMutation(
+    MODIFY_ORDER_STATUS
+  );
+
+  const handleCancel  = () => {
+    document.getElementById(
+      `status-select-${orden.id}`
+    ).value = orderStatus;
+    
+    setShow(false)
   }
+
+  let dispatch = useDispatch()
+
+  const handleConfirm = () => {
+    modifyOrderStatus({
+      variables: { orderId: orden.id, status: selectedStatus },
+    });
+
+    dispatch(changeStatus(orden.id, selectedStatus))
+    setOrderStatus(selectedStatus)
+    setShow(false)
+  }
+
+  let handleOption = async (e) => {
+   setSelectedStatus(e.target.value);
+   setShow(true)
+  };
 
   if (orden) {
     return (
       <StyledOrden>
-        <div className="element-container" id={id}>
-          <div className="info-container">
-            <div className="text-container">
-              <span>Date</span>
-              <p>{orden.date}</p>
-            </div>
-            <div className="text-container">
-              <span>Order</span>
-              <p>{id}</p>
-            </div>
-            <div className="text-container">
-              <span>UserId</span>
-              <p>{orden.userId}</p>
-            </div>
-
-            <div className="text-container">
-              <span>User Name</span>
-              <p>{orden.name}</p>
-            </div>
+        <BootBox 
+          message="Do you want to Continue?"
+          show={show} 
+          onYesClick = {handleConfirm}
+          onNoClick = {handleCancel}
+          onClose = {handleCancel}/>
+            <td width="10%">
+              {orden.date}
+            </td>
+            <td width="10%">{id}</td>
+            <td width="10%">{orden.userId}</td>
+            <td width="10%">{orden.name}</td>
+            <td width="10%">
             <div className="status-container">
-              <div className="titulos">
-                <span>Status</span>
-                {/* <span>Paid</span>
-                <span>Sent</span>
-                <span>Received</span> */}
-              </div>
-              {/* {instance} */}
-              {capitalizeFirstLetter(orden.status)}
+              <select
+                name="status"
+                id={`status-select-${orden.id}`}
+                onChange={handleOption}
+              >
+                <option value="unpaid" id={`unpaid-${orden.id}`}>
+                  Unpaid
+                </option>
+                <option value="paid" id={`paid-${orden.id}`}>
+                  Paid
+                </option>
+                <option value="sent" id={`sent-${orden.id}`}>
+                  Sent
+                </option>
+                <option value="received" id={`received-${orden.id}`}>
+                  Received
+                </option>
+              </select>
             </div>
-            <div className="text-container">
-              <span>Cancelled</span>
-
-
+            </td>
+            <td width="10%">
               {orden.cancelled === false ? (
                 <p>O</p>
               ) : (
                 <p className="order-cacelled">X</p>
               )}
-
-  
-            </div>
-            <div className="text-container">
-              <span>Total</span>
-              <p>{orden.price[0]} </p>
-              {/* <p>{orden.price.reduce((total, price) => total + price)} </p> */}
-            </div>
-
-            <div className="edit-button">
-              <span style={{ color: "green" }}>Detail</span>
+            </td>
+            <td width="10%">{orden.price[0]} </td>
+            
+            <td width="10%">
+              <div className="edit-button">
               <button>
                 <Link to={`/admin/order/${id}`}>
                   <HiOutlineDocumentSearch size="1.8rem" color="green" />
                 </Link>
               </button>
-            </div>
-          </div>
-        </div>
+              </div>
+            </td>
       </StyledOrden>
     );
   } else {
@@ -99,51 +152,8 @@ export default function Orden({ id, orden }) {
   }
 }
 
-const StyledOrden = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 2rem;
-  //background:red;
-  .status-container {
-    width: 350px;
-    height: 80px;
-    padding: 0.5rem;
-    align-items: center;
-    color: grey;
-    font-weight: bold;
-  }
-  .info-container {
-    height: 80%;
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-  }
-  .element-container {
-    width: 100%;
-    height: 8em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(236, 227, 250);
-    border-radius: 40px;
-  }
-  .element-container span {
-    font-weight: 700;
-    color: rgb(123, 87, 156);
-  }
-  .text-container {
-    width: 250px;
-    height: 80px;
-    padding: 0.5rem;
-    overflow: hidden;
-  }
-  .text-container p {
-    margin: 0;
-    color: grey;
-    font-weight: 700;
-  }
+const StyledOrden = styled.tr`
+  
   .edit-button {
     padding: 0.5rem;
     height: 100%;
@@ -152,7 +162,6 @@ const StyledOrden = styled.div`
     justify-content: flex-start;
     align-items: center;
     display: flex;
-    flex-direction: column;
   }
   .edit-button button {
     margin-top: 0.5rem;
