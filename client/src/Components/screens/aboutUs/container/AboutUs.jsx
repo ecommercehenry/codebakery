@@ -12,27 +12,28 @@ const AboutUs = ({ name, title, img, git, linkedin }) => {
      
       <div className="main center">
         <div className="card">
-          <div
-            className="content center"
-            style={{
-              background: `url(${IMG})`,
-              backgroundPosition: "center",
-              backgroundSize: "cover",
-            }}
-          >
-            <h2>{name}</h2>
-            <p>{title}</p>
-          </div>
-          <div className="icons center">
-            <a target="_blank" href={git}>
-              <img className="icon-git" src={Git} alt="GitHub" />
-            </a>
-
-            <a target="_blank" href={linkedin}>
-              <img className="icon-linke" src={Linke} alt="Likedin" />
-            </a>
-          </div>
+              <div
+                className="content center"
+                style={{
+                  background: `url(${IMG})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                }}
+              > </div>
         </div>
+        <div className="text">
+              <h2>{name}</h2>
+              <p>{title}</p>
+              <div className="icons">
+                <a target="_blank" href={git}>
+                  <img className="icon-git" src={Git} alt="GitHub" />
+                </a>
+
+                <a target="_blank" href={linkedin}>
+                  <img className="icon-linke" src={Linke} alt="Likedin" />
+                </a>
+          </div>
+          </div>
       </div>
     </AboutUsConteiner>
    
@@ -52,15 +53,21 @@ const AboutUsConteiner = styled.div`
     align-items: center;
     flex-direction: column;
   }
+
   .main {
     width: 100%;
-    margin-top: 80px;
+    margin-top: 40px;
+  }
+  .text {
+    width:fit-content;
+    height: auto;
+    padding:1rem;
   }
   .card {
-    width: 23rem;
-    height: 23rem;
+    width: 15rem;
+    height: 15rem;
     position: relative;
-    box-shadow: 4px 2px 10px rgb(96, 18, 160);
+   
     overflow: hidden;
     border-radius: 9999px;
   }
@@ -71,54 +78,49 @@ const AboutUsConteiner = styled.div`
     top: 0;
     left: 0;
     color: #d0293e;
+
   }
-  .content h2 {
-    margin-top: 12rem;
-    background: aliceblue;
+  h2 {
+    font-weight: 800;
+    font-size: 20px;
+    margin: 0px 0px 0px 0px;
+    line-height: 120%;
+    sans-serif;
     opacity: 0.7;
-    padding: 0.3rem;
+    text-align: center;
+    
   }
 
-  .content p {
+  p {
     margin-top: 0.3rem;
-    background: aliceblue;
-    opacity: 0.8;
-    padding: 0.3rem;
+    padding: 0.2rem;
   }
 
-  .icons {
-    width: 100%;
-    height: 100%;
-    background: #8a6db1;
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: aliceblue;
-    transform: translate(-95%);
-    transition: all 0.8s;
-    cursor: pointer;
-    opacity: 0.9;
-  }
-
-  .icons i {
-    margin: 10px 0px;
-  }
+  
 
   .card:hover > .icons {
     transform: translate(0);
   }
 
-  .img img {
-    width: 7rem;
-    border-radius: 2rem;
+ 
+
+  .icons {
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
   }
 
+  .icons i {
+    margin: 10px 0px;
+  }
   .icon-git,
   .icon-linke,
   .icon-insta {
-    width: 100px;
+    width: 50px;
     padding: 10px;
   }
+
   .icon-git:hover,
   .icon-linke:hover,
   .icon-insta:hover {

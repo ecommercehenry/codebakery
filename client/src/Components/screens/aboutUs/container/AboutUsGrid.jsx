@@ -13,14 +13,11 @@ const AboutUsGrid = () => {
         </div>
       </div>
       <AboutUsInfo>
-        <h1>SOBRE NOSOTROS</h1>
+        <h1>Meet Our team</h1>
         <p>
-          Nosotros somos el equipo detras de <span>Code Bakery</span>. El
-          e-commerce forma parte de un proyecto final del bootcamp intensivo de
-          <a target="_blank" href="https://www.soyhenry.com/">
-            "Henry".
-          </a>{" "}
-          Conocenos más a fondo en nuestras redes sociales.
+        We are students from <a target="_blank" href="https://www.soyhenry.com/"> 
+            Henry's bootcamp
+          </a> {" "}  where <span>Code Bakery</span> is our final project. 
         </p>
       </AboutUsInfo>
       <AboutUsConteinerGrid>
@@ -31,7 +28,7 @@ const AboutUsGrid = () => {
               name={u.name}
               title={u.title}
               img={u.img}
-              git={u.git}
+              git={u.git} 
               linkedin={u.lin}
             />
           );
@@ -48,24 +45,35 @@ const media = {
 };
 
 const AboutUsInfo = styled.div`
-  display: flex;
+  
   align-items: center;
-  padding: 1rem;
+  justify-content: center;
+  padding: 3rem;
   background: #f4f2f8;
   color: #402e57;
-  font-family: "RocknRoll One", sansrif;
-  font-size: large;
-  line-height: 2;
-  box-shadow: 4px 2px 10px rgb(96, 18, 160);
-  border-bottom: 0.3rem solid #f4f2f8;
+  font-weight: 500;
+  line-height: 1;
+
 
   h1 {
-    padding: 3rem;
+    display: block;
+    text-align: center;
+    font-weight: 800;
+    font-size: 28px;
   }
 
   span {
     font-weight: 900;
     color: #8a6db1;
+  }
+
+  p {
+    color: #777777;
+    font-size: 16px; 
+    line-height: 26px; 
+    text-indent: 30px; 
+    margin: 0;
+    text-align: center;
   }
 
   a {
@@ -76,7 +84,7 @@ const AboutUsInfo = styled.div`
 
 const AboutUsConteinerGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
 
   ${media.tablet} {
@@ -86,7 +94,7 @@ const AboutUsConteinerGrid = styled.div`
   }
   ${media.laptop} {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 1rem;
   }
 `;

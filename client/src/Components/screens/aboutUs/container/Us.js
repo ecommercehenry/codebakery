@@ -63,14 +63,14 @@ export const Us = [
     lin: "https://www.linkedin.com/in/nlohuandus/",
   },
   {
-    name: "Laura",
+    name: "Laura WenLi Chu",
     title: "Full Stack Developer",
     img: "https://avatars.githubusercontent.com/u/73196552?v=4",
     git: "https://github.com/Laura87-web",
     lin: "https://www.linkedin.com/in/laura-wenli-chu/",
   },
   {
-    name: "Guillermo",
+    name: "Guillermo Gonzales",
     title: "Full Stack Developer",
     img: "https://avatars.githubusercontent.com/u/74840893?v=4",
     git: "https://github.com/ggonzalescbs",
