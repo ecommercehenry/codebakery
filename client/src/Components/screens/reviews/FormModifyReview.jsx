@@ -108,7 +108,7 @@ const FormModify  = () => {
             </div>
           </Box>
           <div className="submitt">
-            <button type="submit">Change Review</button>
+            <button type="submit">Update Review</button>
           </div>
         </div>
       </StyledForm>
