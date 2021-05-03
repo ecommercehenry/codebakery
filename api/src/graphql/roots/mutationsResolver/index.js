@@ -22,6 +22,11 @@ const { addReview } = require("./addReview")
 const {modifyReview} = require("./modifyReview")
 const {deleteUser} = require("./deleteUser");
 const {sendEmail} = require("./sendEmail")
+const {addStore} = require("./addStore")
+const {modifyStore} = require("./modifyStore")
+const {deleteStore} = require("./deleteStore")
+const {modifyOrderStore} = require("./modifyOrderStore")
+const {addPromo} = require("./addPromo")
 const {generateTokenOTP} = require("./generateTokenOTP")
 module.exports = {
   modifyProduct,
@@ -49,6 +54,10 @@ module.exports = {
   decrementQuantity,
   deleteUser,
   sendEmail,
+  addStore,
+  modifyStore,
+  deleteStore, 
+  modifyOrderStore, 
+  addPromo,
   generateTokenOTP
-
 }

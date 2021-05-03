@@ -13,12 +13,14 @@ import { setQuantityOrdersCardBackend } from "../../../../../actions/setQuantity
 toast.configure();
 
 const ButtonAddCart = ({ id }) => {
+  console.log(id, 'mi id en button')
   const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
   let logged = localStorage.token ? true : false;
   let userId = logged ? parseInt(localStorage.id) : null;
 
   const { data, refetch, loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
+    fetchPolicy: "no-cache"
   });
   const dispatch = useDispatch();
 
@@ -28,7 +30,7 @@ const ButtonAddCart = ({ id }) => {
       toast("Producto añadido al carrito", { autoClose: 1000 });
     } else {
       if (!loading) {
-        let orderId = data.getOrdersByUserIdInCart.orders[0]?.id;
+        let orderId = data?.getOrdersByUserIdInCart?.orders[0]?.id;
         dispatch(
           setQuantityOrdersCardBackend(
             orderId
@@ -51,7 +53,7 @@ const ButtonAddCart = ({ id }) => {
   };
 
   return (
-    <StyledButton onClick={() => buttonHandler(id)}>
+    <StyledButton id={id} onClick={() => buttonHandler(id)}>
       <img
         src={cartIcon}
         alt="cat icon"

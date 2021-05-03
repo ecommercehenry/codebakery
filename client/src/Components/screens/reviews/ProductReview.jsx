@@ -10,7 +10,6 @@ const ProductReview = ({ id }) => {
     variables: { productId: id },
   });
 
-  console.log(data, 'misdatos detail')
   const [loanding, setLoanding] = useState(true);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ const ProductReview = ({ id }) => {
   }
   return (
     <StyledReviewProduct>
-      {result > 0 ? <Rating name="read-only" value={result} readOnly /> : ""}
+      
 
       {loanding ? (
         <Skeleton width={400} height={300} />
@@ -42,6 +41,7 @@ const ProductReview = ({ id }) => {
               <Typography component="legend" key={i}>
                 {e.title}
               </Typography>
+              {e.stars > 0 ? <Rating name="read-only" value={e.stars} readOnly /> : ""}
               <h5>{e.description}</h5>
               <h5>{e.createdAt.slice(0, 25)}</h5>
             </Box>

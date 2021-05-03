@@ -23,7 +23,13 @@ const {
     modifyReview,
     deleteUser,
     sendEmail,
-    generateTokenOTP
+    addStore,
+    modifyStore,
+    deleteStore, 
+    modifyOrderStore, 
+    addPromo,
+    generateTokenOTP,
+    
 } = require("./mutationsResolver/")
 
 const {
@@ -45,8 +51,11 @@ const {
     getUserById,
     validateCredentials,
     validateUserWithGoogle,
+    getReviewByUserId,
+    getAllStores,
+    getByStore,
     getReviewByUserId, 
-    validateTOTP
+    validateTOTP,
 } = require("./queriesResolvers/")
 
 // product
@@ -74,6 +83,11 @@ const root = {
     modifyReview,
     sendEmail,
     deleteUser,
+    addStore,
+    modifyStore,
+    deleteStore,
+    modifyOrderStore,
+    addPromo, 
     generateTokenOTP,
 
     //Queries    
@@ -100,8 +114,9 @@ const root = {
     getAllReviewsFromAProduct,
     validateUserWithGoogle,
     getReviewByUserId,
+    getAllStores,
+    getByStore,
     validateTOTP
-    // getAllUsers,
 }
 
 module.exports = root
