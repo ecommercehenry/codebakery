@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 //styles
 import styled from "styled-components";
@@ -19,30 +19,49 @@ import ManageStores from "../stores/ManageStores";
 import StoreOptions from "../stores/StoreOptions";
 import StorePanel from "../stores/StoresPanel";
 import ModifyStore from "../stores/ModifyStore";
+import Promos from '../promos/Promos';
+
 
 const AdminPanel = () => {
   const [addProduct, setAddProduct] = useState(false);
   let { status } = useSelector((state) => state.theme);
   const [stores, setStores] = useState("seeStores");
+  const [promo,setPromo ] = useState(false);
+
   return (
     <StyledAdminPanel light={status}>
       <div className="left">
         <LeftPanel />
       </div>
       <div className="right">
-        <div className="top">
-          <AdminNavBar setAddProduct={setAddProduct} />
-          <Route
-            path="/admin/stores"
-            component={() => StoreOptions({ setStores })}
-          />
-          <Route path="/admin/orders" component={CheckFilters} />
-        </div>
+
+      {   
+        !promo ? 
+          <div className="top">
+            <AdminNavBar setAddProduct={setAddProduct} promo={promo} setPromo={setPromo}/>
+            <Route path="/admin/orders" component={CheckFilters}/>
+          </div>
+        : ""
+        }
+
+       
        
         <div className="bottom">
-          <Route path="/admin/products" component={ListCRUD} />
-          <Route path="/admin/orders" component={TablaOrdenes} />
-          <Route path="/admin/users" component={UserAdmin} />
+        
+          <Switch>
+            <Route path='/admin/products'>
+              <ListCRUD setPromo={setPromo}/>
+            </Route>
+            <Route path='/admin/orders'>
+              <TablaOrdenes setPromo={setPromo}/>
+            </Route>
+            <Route path='/admin/users'>
+              <UserAdmin setPromo={setPromo}/>
+            </Route>
+            <Route path='/admin/promos'>
+              <Promos promo={promo} setPromo={setPromo}/>
+            </Route>      
+          </Switch>
           {stores === "seeStores" ? (
             <Route path="/admin/stores" component={StorePanel} />
           ) : stores === "modifyStore" ? (

@@ -29,6 +29,9 @@ const {
     deleteStore, 
     modifyOrderStore, 
     addPromo,
+    applyDiscount,
+    resetDiscount,
+    deletePromo
     
 } = require("./mutationsResolver/")
 
@@ -54,6 +57,7 @@ const {
     getReviewByUserId,
     getAllStores,
     getByStore,
+    getPromos
 } = require("./queriesResolvers/")
 
 // product
@@ -86,7 +90,10 @@ const root = {
     modifyStore,
     deleteStore,
     modifyOrderStore,
-    addPromo,  
+    addPromo,
+    applyDiscount,
+    resetDiscount,
+    deletePromo,  
 
     //Queries    
     productById,
@@ -112,6 +119,7 @@ const root = {
     getAllReviewsFromAProduct,
     validateUserWithGoogle,
     getReviewByUserId,
+    getPromos,
     getAllStores,
     getByStore
 }

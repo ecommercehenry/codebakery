@@ -1,27 +1,26 @@
-const { DataTypes } = require("sequelize");
-
+const { DataTypes } = require("sequelize")
 module.exports = (sequelize) => {
+  // defino el modelo
   sequelize.define(
     "promo",
     {
       name: {
         type: DataTypes.STRING,
-        unique: true,
         allowNull: false,
       },
       discount: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       day: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.STRING,
         allowNull: false,
       },
-      category : {
+      category: {
         type: DataTypes.STRING,
         allowNull: false,
       },
     },
     { timestamps: false }
-  );
-};
+  )
+}

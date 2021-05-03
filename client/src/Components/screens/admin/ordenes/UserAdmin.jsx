@@ -11,7 +11,7 @@ import {
   searchByName,
 } from "../../../../actions/index";
 
-const UserAdmin = () => {
+const UserAdmin = ({setPromo}) => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -36,6 +36,7 @@ const UserAdmin = () => {
   }
 
   useEffect(() => {
+    setPromo(false)
     if (!data) {
       getAllUsers();
     } else if (data && data.getAllUsers) {

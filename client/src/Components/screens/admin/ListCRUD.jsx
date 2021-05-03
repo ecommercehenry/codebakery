@@ -10,10 +10,11 @@ import TablePagination from '@material-ui/core/TablePagination';
 import { withStyles } from "@material-ui/core";
 
 
-function ListCRUD() {
+function ListCRUD({setPromo}) {
   const { data, loading } = useQuery(allProducts);
   const dispatch = useDispatch();
   useEffect(() => {
+    setPromo(false)
     if (!loading) {
       dispatch(saveProducts(data.product));
     }
