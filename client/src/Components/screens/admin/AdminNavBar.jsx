@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, Route } from "react-router-dom";
+import SearchBarUserAdmin from "./ordenes/SearchBarUserAdmin";
 import $ from 'jquery'
 
 //styles
@@ -22,7 +23,7 @@ const AdminNavBar = ({ setAddProduct, promo, setPromo, displayFilter, setDisplay
   };
 
   const [add, setAdd] = useState(false);
-  let {status} = useSelector((state)=>state.theme);
+  let { status } = useSelector((state) => state.theme);
 
   useEffect(() => {
     if(displayFilter){
@@ -48,6 +49,7 @@ const AdminNavBar = ({ setAddProduct, promo, setPromo, displayFilter, setDisplay
 
         <Route path="/admin/users">
           <div className="optionTab">USERS</div>
+          <SearchBarUserAdmin />
         </Route>
         
         <Route path="/admin/promos">
@@ -117,7 +119,7 @@ const StyledNavBar = styled.div`
       height: 4.5vh;
       font-size: 2em;
       display: flex;
-      align-items: center;
+      align-items: center
     }
     display: flex;
     justify-content: space-between;
