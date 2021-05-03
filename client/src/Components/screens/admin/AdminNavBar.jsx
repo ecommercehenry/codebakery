@@ -1,11 +1,14 @@
-import React, { useState,useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, Route } from "react-router-dom";
+import $ from 'jquery'
 
 //styles
 import styled from "styled-components";
 import FormCreateCategory from "../../FormCreateCategory/FormCreateCategory";
+import CheckFilters from "./ordenes/CheckFilters";
 import SortByPrice from "./ordenes/SortByPrice";
+import { HiOutlineFilter } from "react-icons/hi";
 import PromoNavBar from "./promos/PromoNavBar"
 import AddPromoButton from "./promos/AddPromoButton"
 
@@ -13,7 +16,7 @@ import AddPromoButton from "./promos/AddPromoButton"
 import SearchBar from "./SearchBar";
 import SearchBarAdmin from "./SearchBarAdmin";
 
-const AdminNavBar = ({ setAddProduct, promo, setPromo }) => {
+const AdminNavBar = ({ setAddProduct, promo, setPromo, displayFilter, setDisplayFilter  }) => {
   const buttonHandler = () => {
     setAddProduct(true);
   };
@@ -21,8 +24,17 @@ const AdminNavBar = ({ setAddProduct, promo, setPromo }) => {
   const [add, setAdd] = useState(false);
   let {status} = useSelector((state)=>state.theme);
 
+  useEffect(() => {
+    if(displayFilter){
+      $("#filter-btn").addClass('displayFilter')
+    } else {
+      $("#filter-btn").removeClass('displayFilter')
+    }
+    
+  }, [displayFilter])
+
   return (
-    <StyledNavBar light={status}>
+    <StyledNavBar light={status} displayFilter={displayFilter}>
       <div className="onLeft">
         <Route path="/admin/products">
           <div className="optionTab">PRODUCTS</div>
@@ -48,6 +60,11 @@ const AdminNavBar = ({ setAddProduct, promo, setPromo }) => {
       <Route path="/admin/orders">
         <div className="onRight">
           <SortByPrice />
+          <button id="filter-btn" onClick={() => setDisplayFilter(!displayFilter)}>
+            <HiOutlineFilter id="filter-logo"/>
+            Filters
+          </button>
+          <CheckFilters id="check-filters" displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
         </div>
       </Route>
 
@@ -91,8 +108,6 @@ const StyledNavBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f1f1f1;
-
   background: ${({light})=>light 
     ? '#f1f1f1' 
     : '#222222'};
@@ -114,6 +129,43 @@ const StyledNavBar = styled.div`
     align-items: center;
     margin-left: 5vw;
     justify-content: flex-end;
+    position: relative;
+
+    #filter-btn{
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      margin-left: 1rem;
+      padding: 0 1rem;
+      border-radius: 10px;
+      background: ${({light})=>light 
+      ? '#D5D5D5' 
+      : '#222222'};
+      border: none;
+      height: 4.5vh;
+      border: 1px solid transparent;
+      z-index: 2;
+      font-size: 1em;
+      font-weight: bold;
+
+      #filter-logo{
+        margin-right: .5em;
+      }
+
+      &:hover{
+      background: ${({light})=>light 
+      ? 'white' 
+      : '#222222'};
+      border: 1px solid #D9D9D9;
+      }
+    }
+
+    .displayFilter{
+      background: ${({light})=>light 
+      ? 'white !important' 
+      : '#222222 !important'};
+      border: 1px solid #D9D9D9 !important;
+      }
   }
   .addProduct {
     background: #5e3f71;

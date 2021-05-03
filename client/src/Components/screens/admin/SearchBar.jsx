@@ -57,15 +57,15 @@ const StyledSearchBar = styled.div`
         font-size:1.1rem;
         border-radius:40px;
         padding: 0 0.5rem;
-        background: #c4c4c485;
+        background: white;
         border: none;
         font-weight: bold;
+
+        &:hover{
+            cursor: pointer;
+        }
     }
     select:focus {
-        outline: none;
-      }
-      select:before {
-        color: red;
         outline: none;
       }
 `;

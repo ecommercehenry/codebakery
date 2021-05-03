@@ -24,6 +24,7 @@ import Promos from '../promos/Promos';
 
 const AdminPanel = () => {
   const [addProduct, setAddProduct] = useState(false);
+  const [displayFilter, setDisplayFilter] = useState(false)
   let { status } = useSelector((state) => state.theme);
   const [stores, setStores] = useState("seeStores");
   const [promo,setPromo ] = useState(false);
@@ -38,13 +39,12 @@ const AdminPanel = () => {
       {   
         !promo ? 
           <div className="top">
-            <AdminNavBar setAddProduct={setAddProduct} promo={promo} setPromo={setPromo}/>
+            <AdminNavBar setAddProduct={setAddProduct} promo={promo} setPromo={setPromo} displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
             <Route path="/admin/orders" component={CheckFilters}/>
           </div>
         : ""
         }
 
-       
        
         <div className="bottom">
         

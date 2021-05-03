@@ -137,7 +137,7 @@ const StyledListCRUD = styled.div`
   background: white;
   height: 83vh;
   margin-bottom: 2rem;
-  box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 30%);
   clear: both;
   overflow: hidden;
   
