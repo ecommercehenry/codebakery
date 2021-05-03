@@ -3,7 +3,9 @@ import React, { useEffect, useRef, useState } from "react"
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form"
 import styled from "styled-components";
-import CREATE_USER from "../../Apollo/mutations/createUser"
+import CREATE_USER from "../../Apollo/mutations/createUser";
+import background1 from "./image.png";
+import colorfulImage from "./4391857.jpg"
 
 const CreateUserAccount = () => {
   const [createUser, { data }] = useMutation(CREATE_USER)
@@ -402,7 +404,7 @@ input[type="password"]:placeholder {
 .container-two {
   width: 100vw;
   height: 100vh;
-  background: url("./image.png");
+  background: url(${background1});
 }
 
 .onboard-card {
@@ -420,7 +422,7 @@ input[type="password"]:placeholder {
 }
 
 .container-two .onboard-card .onboard-img {
-  background: url("./4391857.jpg");
+  background: url(${colorfulImage});
   display: block;
   flex-basis: 40%;
   background-repeat: no-repeat;
