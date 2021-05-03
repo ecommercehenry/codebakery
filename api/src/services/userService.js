@@ -101,7 +101,8 @@ async function modifyUser(
   role,
   address,
   dni,
-  phoneNumber
+  phoneNumber,
+  twoFA
 ) {
   let obj = {};
   if (password && newPassword) {
@@ -137,6 +138,7 @@ async function modifyUser(
   if (address) obj.address = address;
   if (dni) obj.dni = dni;
   if (phoneNumber) obj.phoneNumber = phoneNumber;
+  if (twoFA) obj.twoFA = twoFA;
 
   try {
     if (id) {
@@ -187,6 +189,7 @@ async function loginUserWithGoogle(email, tokenId) {
       email: user.email,
       token: token,
       role: user.role,
+      twoFA: user.twoFA
     };
   }
 }
@@ -260,6 +263,7 @@ async function loginUser(email, password) {
         email: user.email,
         token: token,
         role: user.role,
+        twoFA: user.twoFA
       };
     } else {
       return {

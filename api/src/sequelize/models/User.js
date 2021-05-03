@@ -53,6 +53,9 @@ module.exports = (sequelize) => {
         return () => this.getDataValue("salt")
       },
     },
+    twoFA: {
+      type: DataTypes.BOOLEAN
+    }
   }, { timestamps: true })
   
 
