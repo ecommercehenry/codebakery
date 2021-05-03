@@ -9,7 +9,7 @@ import loginReducer from "../reducer/loginReducer";
 import ordersReducer from "../reducer/ordersReducer";
 import counterReducer from "../reducer/counterReducer";
 import reducerToken from "../reducer/resetPassword";
-
+import userAdmin from "../reducer/userAdmin"
 
 const persistConfig = {
   key: "root",
@@ -25,5 +25,6 @@ const rootReducer = combineReducers({
   ordersReducer: ordersReducer,
   counterReducer: counterReducer,
   reducerToken: reducerToken,
+  userAdmin: userAdmin,
 });
 export default persistReducer(persistConfig, rootReducer);

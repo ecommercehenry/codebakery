@@ -18,7 +18,7 @@ const SearchBar = () => {
 }
 
 const StyledSearchBar = styled.div`
-    background: #e9e8e8;
+    background: white;
     height: 4.6vh;
     width: fit-content;
     padding: 0 0.5rem;
@@ -65,7 +65,7 @@ const StyledSearchBar = styled.div`
         outline: none;
       }
       select:before {
-        color: red
+        color: red;
         outline: none;
       }
 `;

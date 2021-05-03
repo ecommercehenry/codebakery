@@ -26,6 +26,7 @@ import ResetPassword from "./Components/ResetPassword/ResetPassword";
 import UserReview from "./Components/screens/user/UserReview";  
 import UserOrders from "./Components/screens/user/UserOrders";
 import FormReview from "./Components/screens/reviews/FormReview";
+import FormModify from "./Components/screens/reviews/FormModifyReview"
 
 import Sucursales from './Components/Maps/Sucursales'
 
@@ -83,6 +84,7 @@ function App() {
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/user/review/:id" component={UserReview} />
           <Route exact path="/user/addReview/:id" component={FormReview} />
+          <Route exact path="/user/modify/review/:id" component={FormModify} />
           <Route exact path="/user/orders/:id" component={UserOrders} /> 
           <Route exact path="/user/:id/profile" component={UserPanel} /> 
           <Route exact path="/log-in" component={UserAccount} />

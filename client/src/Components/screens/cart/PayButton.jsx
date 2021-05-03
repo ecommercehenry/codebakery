@@ -25,7 +25,6 @@ export default function PayButton({productos}){
         form.appendChild(script);
       }
     }, [preferenceId]);
-  
     return (
       <form id={FORM_ID} method="GET" />    //boton de compra se inserta dentro de este form 
     );
