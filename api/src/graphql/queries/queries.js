@@ -23,5 +23,6 @@ module.exports = `
         validateUserWithGoogle(email: String!, tokenId: String): resultValidate
         getReviewByUserId(userId: Int!) : [review],
         getAllStores: [store]
+        getByStore(id: Int!) : store
     }
 `;

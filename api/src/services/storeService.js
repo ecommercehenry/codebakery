@@ -1,10 +1,45 @@
-const { Store } = require("../db.js");
+const { Store, Order } = require("../db.js");
 
 async function getAllStores() {
   try {
     return await Store.findAll();
   } catch (error) {
     console.log(error.message);
+  }
+}
+
+ async function getByStore(args) {
+  let { id } = args
+  try{
+    let store = await Store.findOne({
+      where: { id: id },
+    });
+    return store; 
+  }catch(err){
+    return {
+      __typename: "error",
+      name: "db error", 
+      detail: 
+      "Error in vinculation current order " + err.messag
+    }
+  }
+ }
+
+async function modifyOrderStore(args) {
+let { idStore, idOrder } = args
+
+  try{
+  let store = await Store.findByPk(idStore);
+  let order = await Order.findByPk (idOrder)
+    let result = await store.addOrder(order)
+    return {__typename: "booleanResponse" , boolean: true}
+  }catch (err){
+    return {
+      __typename: "error", 
+      name: "db error", 
+      detail: 
+      "Error in vinculation current order " + err.messag
+    }
   }
 }
 
@@ -51,4 +86,4 @@ async function deleteStore(args){
   }
 }
 
-module.exports = { getAllStores, addStore, modifyStore, deleteStore };
+module.exports = { getAllStores, addStore, modifyStore, deleteStore, modifyOrderStore, getByStore };
