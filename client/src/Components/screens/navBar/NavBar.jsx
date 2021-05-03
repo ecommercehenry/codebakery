@@ -94,7 +94,7 @@ const NavBar = ({ color }) => {
               className={`login-btn text-decoration-none ${textColor}`}
             >
               <div className={`usuario ${navTag}`}>
-              {localStorage.name === "admin" ? "" : <div> Hi! {logeed ? localStorage.name : ""}</div>
+              {localStorage.role === "admin" ? "" : <div> Hi! {logeed ? localStorage.name : ""}</div>
               
               }
               </div>
