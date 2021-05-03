@@ -20,7 +20,7 @@ const Slider = () => {
 
   console.log("D: ", data);
 
-  let imageSlider = [<ImgComp src={banner3Low} />];
+  let imageSlider;
   /* if (data) {
     imageSlider = data?.splice(data.length - 3).map((img) => {
       //return <ImgComp src={img} />;

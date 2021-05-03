@@ -71,4 +71,4 @@ module.exports = {
   saveImageSlider,
   deleteImageById,
 }
- origin/carousel
+

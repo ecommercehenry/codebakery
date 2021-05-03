@@ -60,7 +60,7 @@ background-color: #533f66;
     background-color: #533f66; 
     
     Pablo-----*/
-   background: url(${footer});
+  
   height: 10rem;
   margin-top: 3rem;
   display: flex;

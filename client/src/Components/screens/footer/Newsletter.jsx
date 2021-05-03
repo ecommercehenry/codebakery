@@ -6,14 +6,12 @@ import SUBSCRIBE_USER from "../../../Apollo/mutations/suscribeToNewsletter";
 // import { sendNewsletter } from "../../../../../api/src/services/newsletterService";
 import footerImage from "./footer.jpg"
 
-
-export default function Newsletter() {
-  const [input, setInput] = useState();
-  function handlerChange() {}
-  function handleSubmit() {}
-
-export default function Newsletter (){
+  
+  export default function Newsletter (){
     const [suscrito, setSuscrito] = useState(false)
+    
+    const [input, setInput] = useState();
+    function handlerChange() {}
     
     const [suscribe, { loading, error }] = useMutation(SUBSCRIBE_USER, {});
     // const userId = 5;
@@ -65,7 +63,7 @@ export default function Newsletter (){
                      
         </>
     )
-}}
+}
 
 const StyledNewsletter = styled.form`   
        
