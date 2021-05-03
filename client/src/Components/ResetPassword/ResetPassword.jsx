@@ -1,35 +1,50 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import MODIFY_USER from "../../Apollo/mutations/modifyUser";
-import { Redirect, useParams, useLocation } from "react-router-dom";
+import { Redirect, useParams, useLocation, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../Assets/toast.css";
 import styled from "styled-components";
 import GET_ALL_USERS from "../../Apollo/queries/getAllUsers";
 import RESET_PASSWORD from "../../Apollo/mutations/resetPassword";
+import { saveToken } from "../../actions/saveToken";
+
 
 toast.configure();
+
 function ResetPassword() {
-  
   /* 
     Le pido la contraseña actual y el email al usuario.
     Si la contraseña y el email coinciden lo dejo actualizar
     con la otra contraseña que envié
   */
-  const [modifyUser, { data, loading }] = useMutation(MODIFY_USER);
-  const {data:dataUsers} = useQuery(GET_ALL_USERS)
-  const [resetPassword, {data:dataReset}] = useMutation(RESET_PASSWORD)
+  const customId = 1;
+  const dispatch = useDispatch();
 
-  let redirect = localStorage.getItem("redirect");
+  const [modifyUser, { data, loading }] = useMutation(MODIFY_USER);
+  const { data: dataUsers } = useQuery(GET_ALL_USERS);
+  const [
+    resetPassword,
+    { data: dataReset, loading: loadingReset },
+  ] = useMutation(RESET_PASSWORD);
+
+  const { token, emailReducer } = useSelector((state) => state.reducerToken);
+
   const [input, setInput] = useState({
     email: "",
-    oldPassword: "",
+    // oldPassword: "",
     newPassword: "",
     newnewPasswordRepeat: "",
   });
 
+  const [flagSubmit, setFlagSubmit] = useState(false);
+
   const search = useLocation().search;
-  const resetToken = new URLSearchParams(search).get('resetToken');
+  const resetToken = new URLSearchParams(search).get("resetToken");
+  const email = new URLSearchParams(search).get("email");
+  // const newPassword = new URLSearchParams(search).get("newPassword");
+  // const newPasswordRepeat = new URLSearchParams(search).get("newPasswordRepeat");
 
   function handleInputChange(e) {
     setInput({
@@ -38,85 +53,83 @@ function ResetPassword() {
     });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmitOne = (e) => {
     e.preventDefault();
-
-    if(resetToken){
-      modifyUser({
-        variables: {
-          id: null,
-          name: null,
-          password: input.oldPassword,
-          newPassword: input.newPassword,
-          email: input.email,
-          role: null,
-          address: null,
-          dni: null,
-          phoneNumber: null,
-        },
-      });
-    }else{
-      toast("Se ha enviado un mensaje a tu correo", {
-        toastId: customId
-      });
-      if(dataUsers?.getAllUsers){
-        let usuario = dataUsers.getAllUsers.filter(el=>el.email === input.email)[0]  
-        resetPassword({variables:{userId:usuario.id}})
-      }
-      localStorage.setItem("redirect", false);
-      window.location.reload();
-    }
-    
-    
-    
-  };
-
-  const customId = 1;
-
-  useEffect(() => {
     if (
       input.newPassword !== "" &&
       input.newPasswordRepeat !== "" &&
       input.newPassword !== input.newPasswordRepeat
     ) {
       toast("New passwords should match", {
-        toastId: customId
+        toastId: customId,
       });
-    } else if (!loading) {
-      if (data?.modifyUser.__typename === "error") {
-        toast(data?.modifyUser.detail, {
-          toastId: customId
+    }
+    else if ((token === resetToken) && (emailReducer === email)) {
+      if (resetToken && email) {
+        modifyUser({
+          variables: {
+            id: null,
+            name: null,
+            password: null,
+            newPassword: input.newPassword,
+            email: email,
+            role: null,
+            address: null,
+            dni: null,
+            phoneNumber: null,
+          },
         });
-      } else if (data?.modifyUser.__typename === "user") {
-        toast("Your password has successfully changed");
-        localStorage.setItem("redirect", true);
-        setInput({
-          email: "",
-          oldPassword: "",
-          newPassword: "",
-          newPasswordRepeat: "",
+      }
+      toast("You have changed password successfully", {
+        toastId: customId,
+      });
+      setFlagSubmit(true);
+      dispatch(saveToken("", ""));
+    } else {
+      toast("Try resetting your password again", {
+        toastId: customId,
+      });
+    }
+  };
+
+  const handleSubmitTwo = (e) => {
+    e.preventDefault();
+    if (dataUsers?.getAllUsers) {
+      let user = dataUsers.getAllUsers.filter(
+        (el) => el.email === input.email
+      )[0];
+      if (user) {
+        resetPassword({ variables: { userId: user.id } });
+        toast("Check your email and reset your password", {
+          toastId: customId,
         });
-        window.location.reload();
+      } else {
+        toast("User Not Found", {
+          toastId: customId,
+        });
       }
     }
-  }, [data, dataUsers]);
+  };
 
-  if (redirect) {
-    localStorage.setItem("redirect", false);
+  useEffect(() => {
+    if (dataReset?.resetPassword) {
+      dispatch(saveToken(dataReset?.resetPassword.token, dataReset?.resetPassword.email));
+    }
+  }, [dataReset, loadingReset]);
+
+  if (flagSubmit) {
     return <Redirect to="/" />;
-  }
-
-  if(resetToken){
+  } else if (resetToken && email) {
     return (
       <div
-        classname="page"
+        className="page"
         style={{ height: "100vh", display: "flex", alignItems: "center" }}
       >
         <div className="wrapper fadeInDown" style={{ marginBottom: "10vh" }}>
           <div className="formContent">
             <StyledAcheDos></StyledAcheDos>
             <hr />
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmitOne(e)}>
               <input
                 type="password"
                 name="newPassword"
@@ -134,22 +147,25 @@ function ResetPassword() {
                 required
               />
               <input type="submit" value="SUBMIT" />
+              <div className="formFooter">
+                <Link to="/log-in">Login</Link>
+              </div>
             </form>
           </div>
         </div>
       </div>
     );
-  }else{
+  } else {
     return (
       <div
-        classname="page"
+        className="page"
         style={{ height: "100vh", display: "flex", alignItems: "center" }}
       >
         <div className="wrapper fadeInDown" style={{ marginBottom: "10vh" }}>
           <div className="formContent">
             <StyledAcheDos></StyledAcheDos>
             <hr />
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmitTwo(e)}>
               <input
                 type="email"
                 name="email"
@@ -159,6 +175,9 @@ function ResetPassword() {
                 required
               />
               <input type="submit" value="SUBMIT" />
+              <div className="formFooter">
+                <Link to="/catalogue">Go home</Link>
+              </div>
             </form>
           </div>
         </div>

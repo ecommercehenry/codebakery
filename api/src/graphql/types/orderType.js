@@ -9,6 +9,7 @@ module.exports = `
         lineal_order: [lineal_order], 
         name: String!,
         email: String!,
-        role: String!
+        role: String!,
+        storeId: Int
     }
 `;

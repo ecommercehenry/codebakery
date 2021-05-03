@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import cartIcon from "../../../../../icons/cart.svg";
 import { addProductToCart } from "../../../../../actions/cartActions";
@@ -12,46 +12,64 @@ import { setQuantityOrdersCardBackend } from "../../../../../actions/setQuantity
 
 toast.configure();
 
-const ButtonAddCart = ({ id }) => {
+const ButtonAddCart = ({ id, orderId, refetchCatalogue }) => {
   const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
   let logged = localStorage.token ? true : false;
   let userId = logged ? parseInt(localStorage.id) : null;
 
   const { data, refetch, loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
+    fetchPolicy: "no-cache",
   });
   const dispatch = useDispatch();
-
-  const buttonHandler = async (id) => {
-    if (!logged) {
+  const buttonHandler = async (id, e) => {
+    console.log(e.target.innerHTML);
+    if (e.target.innerHTML === "Sin Stock") {
+      toast("No stock sorry");
+    } else if (!logged) {
       dispatch(addProductToCart(id));
-      toast("Producto añadido al carrito", { autoClose: 1000 });
+      toast("Product added to cart", { autoClose: 1000 });
     } else {
       if (!loading) {
-        let orderId = data.getOrdersByUserIdInCart.orders[0]?.id;
         dispatch(
           setQuantityOrdersCardBackend(
             orderId
-              ? data.getOrdersByUserIdInCart.orders[0].lineal_order.length + 1
+              ? data?.getOrdersByUserIdInCart?.orders[0]?.lineal_order?.length +
+                  1
               : 1
           )
         );
-        await addProductToOrder({
-          variables: {
-            orderId: orderId ? orderId : -1,
-            productId: id,
-            quantity: 1,
-            userId: userId,
-          },
-        });
-        refetch();
-        toast("Producto añadido al carrito", { autoClose: 1000 });
+        if (orderId != undefined) {
+          await addProductToOrder({
+            variables: {
+              orderId: orderId,
+              productId: id,
+              quantity: 1,
+              userId: userId,
+            },
+          });
+          await refetch();
+          await refetchCatalogue();
+          toast("Product added to cart", { autoClose: 1000 });
+        } else {
+          await addProductToOrder({
+            variables: {
+              orderId: -1,
+              productId: id,
+              quantity: 1,
+              userId: userId,
+            },
+          });
+          await refetch();
+          await refetchCatalogue();
+          toast("Product added to cart", { autoClose: 1000 });
+        }
       }
     }
   };
 
   return (
-    <StyledButton onClick={() => buttonHandler(id)}>
+    <StyledButton className={id} id={id} onClick={(e) => buttonHandler(id, e)}>
       <img
         src={cartIcon}
         alt="cat icon"

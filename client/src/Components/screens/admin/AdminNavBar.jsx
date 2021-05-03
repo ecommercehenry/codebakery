@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, Route } from "react-router-dom";
 import SearchBarUserAdmin from "./ordenes/SearchBarUserAdmin";
@@ -7,12 +7,14 @@ import SearchBarUserAdmin from "./ordenes/SearchBarUserAdmin";
 import styled from "styled-components";
 import FormCreateCategory from "../../FormCreateCategory/FormCreateCategory";
 import SortByPrice from "./ordenes/SortByPrice";
+import PromoNavBar from "./promos/PromoNavBar"
+import AddPromoButton from "./promos/AddPromoButton"
 
 //components
 import SearchBar from "./SearchBar";
 import SearchBarAdmin from "./SearchBarAdmin";
 
-const AdminNavBar = ({ setAddProduct }) => {
+const AdminNavBar = ({ setAddProduct, promo, setPromo }) => {
   const buttonHandler = () => {
     setAddProduct(true);
   };
@@ -37,6 +39,12 @@ const AdminNavBar = ({ setAddProduct }) => {
           <div className="optionTab">USERS</div>
           <SearchBarUserAdmin />
         </Route>
+        
+        <Route path="/admin/promos">
+          <div className="optionTab">PROMOS</div>
+          <PromoNavBar/>
+        </Route>
+        
       </div>
 
       <Route path="/admin/orders">
@@ -45,6 +53,14 @@ const AdminNavBar = ({ setAddProduct }) => {
         </div>
       </Route>
 
+      <Route path="/admin/promos">
+        <div className="onRight">
+          <AddPromoButton setPromo={setPromo}/>
+        </div>
+      </Route>
+
+
+      
       <Route path="/admin/products">
         <>
           {add ? (
