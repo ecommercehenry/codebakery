@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-
 // Componente img
 import ImgComp from "./ImgComp";
 import banner3Low from "./banner3Low.png";
-
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 
 import GET_ALL_IMAGES from "../../../../Apollo/queries/getImageSlider";
 import Cardhero from "./Cardhero";
@@ -16,17 +13,22 @@ const Slider = () => {
   // Revisar esto
   // Data deberia traer un array de objetos con los siguientes campos:
   // __typename, id, name, date
-  let { data } = useQuery(GET_ALL_IMAGES);
+  const[ getImage, { data }] = useLazyQuery(GET_ALL_IMAGES);
+ 
+  useEffect(()=>{
+    getImage()   
+  },[data])
 
-  console.log("D: ", data);
+  console.log("DR: ", data?.getImageSlider);
 
   let imageSlider;
-  /* if (data) {
-    imageSlider = data?.splice(data.length - 3).map((img) => {
-      //return <ImgComp src={img} />;
+  if (data?.getImageSlider) {
+    //splice(data.length - 3)
+    imageSlider = data?.getImageSlider.map((img) => {
+      return <ImgComp src={img.name} />;
     });
-  } */
-
+  } 
+  console.log(imageSlider)
   const [x, setX] = useState(0);
 
   const goLeft = () => {
@@ -37,17 +39,18 @@ const Slider = () => {
     x === -100 * (imageSlider.length - 1) ? setX(0) : setX(x - 100);
   };
 
-  if (imageSlider) {
+  if (imageSlider?.length) {
+    console.log("entro al setTimeOut")
     setTimeout(() => {
       x === -100 * (imageSlider.length - 1) ? setX(0) : setX(x - 100);
     }, 5000);
   }
 
-  return !imageSlider ? (
+  return !imageSlider?.length ? (
     <Cardhero />
   ) : (
     <SliderAtr>
-      {imageSlider.map((item, indx) => {
+      {imageSlider?.map((item, indx) => {
         return (
           <div
             className="slide"
@@ -62,7 +65,7 @@ const Slider = () => {
       <ButtonSlider style={{ left: "0" }} onClick={goLeft}>
         <IoIosArrowBack />
       </ButtonSlider>
-      <ButtonSlider style={{ right: "20px" }} onClick={goRight}>
+      <ButtonSlider style={{ right: "10px" }} onClick={goRight}>
         <IoIosArrowForward />
       </ButtonSlider>
     </SliderAtr>

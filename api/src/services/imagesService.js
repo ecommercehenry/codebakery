@@ -1,5 +1,6 @@
 const { ImageSlider } = require("../db");
 const { cloudinary } = require("../../utils/cloudinary");
+const { response } = require("../app");
 
 async function saveImageSlider(image) {
   try {
@@ -7,10 +8,9 @@ async function saveImageSlider(image) {
       upload_preset: "images_slider",
     });
 
-    const name = uploadedResponse.url.split("/").pop();
 
     await ImageSlider.create({
-      name,
+      name: uploadedResponse.url,
     });
 
     return { __typename: "booleanResponse", boolean: true };
