@@ -20,6 +20,7 @@ export const ORDER_DESC_BY_NAME = "ORDER_DESC_BY_NAME"
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME"
 
 
+
 export const setSearch = () => {
   return {
     type: SET_SEARCH,
@@ -101,18 +102,20 @@ export const pricetohigh = () => {
   };
 };
 
-export const changedStatus = () => {
+export const changeStatus = (id, status) => {
   return {
     type: CHANGE_STATUS,
+    payload: {id, status}
   };
 };
 
 export const changePage = (num) => {
   return {
     type: CHANGE_PAGE,
-    payload:num
+    payload: num
   };
 };
+
 export const checkboxChange = (id) => {
   return {
     type: CHECKBOX_CHANGE,
@@ -124,6 +127,13 @@ export const clearCheckboxes = () => {
   return { type : CLEAR_CHECKBOXES }
 }
 
+export const productToHigh = () => {
+  return { type: PRICE_LOW_TO_HIGH }
+}
+
+export const productToLow = () => {
+  return { type: PRICE_HIGH_TO_LOW }
+}
 export const getAllUsersWithDetails = (data) => {
   return { 
     type : GET_ALL_USERS_WITH_DETAILS,

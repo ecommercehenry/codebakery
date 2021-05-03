@@ -9,25 +9,22 @@ import { useQuery } from "@apollo/client";
 import { guardarProductos } from "../../../../../actions/index";
 import Grid from "../grid/Grid";
 import "./Products.css";
-import ProductBar from './ProductBar';
-const Products = () => {
-//   const [search, setSearch] = useState(false);
-//   const { stateSearch } = useSelector((state) => state);
+import ProductBar from "./ProductBar";
+const Products = ({ orderId, refetchCatalogue }) => {
   const dispatch = useDispatch();
 
-  let { data } = useQuery(allProducts);
+  let { data } = useQuery(allProducts, { fetchPolicy: "no-cache" });
+
   useEffect(() => {
     dispatch(guardarProductos(data));
-  }, []);
+  }, [data]);
 
   return (
     <div className="cardProduct">
       <SearchBar />
       <Categories />
-      <ProductBar/>
-      {/* <HomeButton /> */}
-      {/* <SortButton /> */}
-      <Grid/>
+      <ProductBar />
+      <Grid orderId={orderId} refetchCatalogue={refetchCatalogue} />
     </div>
   );
 };

@@ -1,33 +1,41 @@
-const { Product, Category, Users, conn } = require("../db");
+const { Product, Category, Users, conn, Promo } = require("../db");
 const { createOrder, getOrderById, updateOrderToTicket, modifyOrderStatus, modifyOrderCancelled } = require("../services/orderService");
 const { addReview } = require("../services/reviewsService");
 const { createUser } = require("../services/userService");
+const {addStore} = require("../services/storeService")
 
 const MOCK_CATEOGRIES = require("./MOCK_CATEOGRIES.json");
 const MOCK_PRODUCTS = require("./MOCK_PRODUCTS.json");
 const MOCK_USER = require("./MOCK_USER.json");
+const MOCK_PROMOS = require("./MOCK_PROMOS.json");
 
 async function dataPopulation() {
     
     await Category.bulkCreate(MOCK_CATEOGRIES),
     await Product.bulkCreate(MOCK_PRODUCTS)
+    await Promo.bulkCreate(MOCK_PROMOS)
     await createUser("admin","12345","admin@admin.com","admin")
     await createUser("santi","12345","santiagorincon2001@gmail.com","user")
-    await createUser("ivan","12345","ivan@gmail.com","user")
+    await createUser("ivan","12345","ivanebo7@gmail.com","user")
     await createUser("lucas","12345","lucasuracosta@gmail.com","user")
     await createUser("Joha","12345","johanarezabala1211@gmail.com","user")
     await createUser("patsy","12345","patsy.guerrero95@gmail.com","user")
     await createUser("lau","12345","lau@gmail.com","user")
     await createUser("guille","12345","guille@gmail.com","user")
     await createUser("pablo","12345","elxebec@gmail.com","user")
-    await createUser("fran","12345","fran@gmail.com","user")
+    await createUser("Nicolas Lohuandus","12345","nlohuandus@gmail.com","user")
+    await createUser("fran","12345","frank.ronaldo_17@hotmail.com","user")
+
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
     await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)
     await createOrder([{id:4,quantity:1},{id:8,quantity:1}],1)
     await createOrder([{id:5,quantity:2},{id:9,quantity:1}, {id: 1, quantity: 3}], 2)
     await createOrder([{id:5,quantity:2},{id:9,quantity:1}],2)
-    
+    await addStore({name:"Sucursal Unicenter", lat:-34.508754829751126, long:-58.52727261548651, address:"Unicenter local 301", phoneNumber: "4721-3025"})
+    await addStore({name:"Sucursal Norcenter", lat:-34.5144336270837, long:-58.52265434383605, address:"Norcenter local 75", phoneNumber: "4721-3098"})
+    await addStore({name:"Sucursal Dot Baires", lat:-34.546122437324364, long:-58.48822786995776, address:"Dot Baires local 5", phoneNumber: "4720-6363"})
+    await addStore({name:"Sucursal TOM", lat:-34.45294070645469, long:-58.728203622761974, address:"TOM local 46", phoneNumber: "4734-6574"})
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
     await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)

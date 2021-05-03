@@ -23,6 +23,14 @@ const {modifyReview} = require("./modifyReview")
 const {deleteUser} = require("./deleteUser");
 const {sendEmail} = require("./sendEmail")
 const {resetPassword} = require("./resetPassword")
+const {addStore} = require("./addStore")
+const {modifyStore} = require("./modifyStore")
+const {deleteStore} = require("./deleteStore")
+const {modifyOrderStore} = require("./modifyOrderStore")
+const {addPromo} = require("./addPromo")
+const {applyDiscount} = require("./applyDiscount");
+const {resetDiscount} = require("./resetDiscount");
+const {deletePromo} = require("./deletePromo");
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -49,6 +57,13 @@ module.exports = {
   decrementQuantity,
   deleteUser,
   sendEmail,
-  resetPassword
-
+  resetPassword,
+  addStore,
+  modifyStore,
+  deleteStore, 
+  modifyOrderStore, 
+  addPromo,
+  applyDiscount,
+  resetDiscount,
+  deletePromo
 }

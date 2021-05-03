@@ -1,6 +1,5 @@
 import React,{ useState,useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Select from 'react-select';
 import { useMutation, useQuery } from '@apollo/client';
 import getAllCategories from "../Apollo/queries/getAllCategories"
 import ADD_PRODUCT from "../Apollo/mutations/addProduct";
@@ -113,7 +112,7 @@ const AddProductForm = ({setAddProduct}) => {
     
     return (
         
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.664)', zIndex: 5, position: 'fixed', height: '100vh', width: '100vw', top: '0', left: '0', paddingLeft: '10vw'}}>
+        <StyledUpper >
         <StyledForm onSubmit={submitHandler} light={status}>
             {/* <div className="close" onClick={closeHandler}><img src={closeIcon} alt="closeIcon"/></div> */}
             <Link to="/admin/products" className="close"><img src={closeIcon} alt="closeIcon"/></Link>
@@ -191,7 +190,7 @@ const AddProductForm = ({setAddProduct}) => {
                 <button type="submit">SAVE CHANGES</button>
             </div>
         </StyledForm>
-        </div>
+        </StyledUpper>
     )
 }
 
@@ -350,6 +349,20 @@ const StyledForm = styled.form`
             cursor:pointer;
         }
     }
+`;
+
+const StyledUpper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:rgba(0, 0, 0, 0.664);
+    z-index: 15;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0; 
+    left: 0;
+    padding-left: 10vw;
 `;
 
 export default AddProductForm;

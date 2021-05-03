@@ -16,7 +16,7 @@ import SearchBarUserAdmin from "./SearchBarUserAdmin";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IconContext } from "react-icons";
 
-const UserAdmin = () => {
+const UserAdmin = ({setPromo}) => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -42,6 +42,7 @@ const UserAdmin = () => {
   }
 
   useEffect(() => {
+    setPromo(false)
     if (!data) {
       getAllUsers();
     } else if (data && data.getAllUsers) {

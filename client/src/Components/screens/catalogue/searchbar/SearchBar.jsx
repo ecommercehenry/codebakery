@@ -7,7 +7,7 @@ import { HiSearch } from "react-icons/hi";
 const SearchBar = () => {
 
 const dispatch = useDispatch()
-const [input, setInput] = useState([])
+const [input, setInput] = useState([]) 
 
 const handlerChange = (e) => {
   setInput(e.target.value); 
@@ -16,8 +16,8 @@ const submitHandler = (event) => {
   event.preventDefault();
 } 
 useEffect(() => {
-  dispatch(setSearch(true))
-  dispatch(fetchByName(input))
+  // dispatch(setSearch(true));
+  dispatch(fetchByName(input));
 }, [input])
 
 

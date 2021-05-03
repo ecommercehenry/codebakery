@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,7 +30,7 @@ function Copyright() {
   );
 }
 const useStyles = makeStyles((theme) => ({
-  navbar:{
+  navbar: {
     background: "#5E3F71",
   },
   layout: {
@@ -73,12 +73,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const steps = ["Address", "Ticket", "Payment"];
-function getStepContent(step, userdata, setUserdata) {
+function getStepContent(step, setUserdata, setShippingtype, shippingtype, setStoreId,storeId) {
   switch (step) {
     case 0:
-      return <AddressForm setUserdata={setUserdata}/>;
+      return (
+        <AddressForm
+          setUserdata={setUserdata}
+          setShippingtype={setShippingtype}
+          setStoreId={setStoreId}
+        />
+      );
     case 1:
-      return <Review />;
+      return <Review shippingtype={shippingtype} storeId={storeId} />;
     case 2:
       return <PaymentForm />;
     default:
@@ -89,7 +95,9 @@ function getStepContent(step, userdata, setUserdata) {
 export default function Checkout() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
-  const [userdata, setUserdata] = useState(true)
+  const [userdata, setUserdata] = useState(true);
+  const [shippingtype, setShippingtype] = useState("store");
+  const [storeId, setStoreId] = useState(null)
   let { status } = useSelector((state) => state.theme);
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -110,7 +118,7 @@ export default function Checkout() {
     <StyledCheckout light={status}>
       <React.Fragment>
         <div className={classes.navbar}>
-          <NavBar color="white"/>
+          <NavBar color="white" />
         </div>
         <main className={classes.layout}>
           <Paper className={classes.paper}>
@@ -127,7 +135,14 @@ export default function Checkout() {
             <React.Fragment>
               {
                 <React.Fragment>
-                  {getStepContent(activeStep, userdata, setUserdata)}
+                  {getStepContent(
+                    activeStep,
+                    setUserdata,
+                    setShippingtype,
+                    shippingtype,
+                    setStoreId,
+                    storeId
+                  )}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
                       <Button onClick={handleBack} className={classes.button}>

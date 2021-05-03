@@ -12,7 +12,7 @@ import ButtonClear from "./ButtonClear";
 //guardo en el reducer ordersReducer las ordenes para aplicar busquedas y filtros uso dispatch
 //mostrarlas haciendo un mapeo sobre la data, renderizando cada vez un componente Orden
 
-export default function TablaOrdenes() {
+export default function TablaOrdenes({setPromo}) {
   const customId = "custom-id-yes";
 
   let { data } = useQuery(GET_All_ORDERS);
@@ -23,6 +23,7 @@ export default function TablaOrdenes() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setPromo(false)
     dispatch(saveOrders(ordersQ));
   }, [data]);
 

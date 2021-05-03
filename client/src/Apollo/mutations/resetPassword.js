@@ -1,17 +1,21 @@
-import { gql } from "@apollo/client"
+import { gql } from "@apollo/client";
 
 const RESET_PASSWORD = gql`
-mutation resetPassword($userId:Int!){
-    resetPassword(userId:$userId){
-      ... on booleanResponse{
-        boolean
+  mutation resetPassword($userId: Int!) {
+    resetPassword(userId: $userId) {
+      ... on user {
+        id
+        name
+        email
+        role
+        token
       }
-      ... on error{
+      ... on error {
         name
         detail
       }
     }
   }
-`
+`;
 
-export default RESET_PASSWORD
+export default RESET_PASSWORD;
