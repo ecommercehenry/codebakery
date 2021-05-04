@@ -15,7 +15,7 @@ const Products = ({ orderId, refetchCatalogue }) => {
 
   useEffect(() => {
     dispatch(guardarProductos(data));
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <div className="cardProduct">
