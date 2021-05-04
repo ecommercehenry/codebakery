@@ -41,6 +41,7 @@ var mailOptions = {
   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8"></HEAD>
   <BODY>
   <img src=${imageUrl} />
+  <a href="https://www.codebakery.store/"><button>Ir a la tienda</button></a>
   </BODY>
   </HTML>
   `

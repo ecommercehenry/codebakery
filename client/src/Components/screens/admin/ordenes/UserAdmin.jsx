@@ -27,7 +27,7 @@ const UserAdmin = ({setPromo}) => {
   let [getAllUsers, { data, loading }] = useLazyQuery(GET_ALL_USERS);
 
   useEffect(() => {
-    setPromo(false)
+    //setPromo(false)
     if (!data) {
       getAllUsers();
     } else if (data && data.getAllUsers) {
