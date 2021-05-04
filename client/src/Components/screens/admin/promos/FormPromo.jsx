@@ -1,4 +1,4 @@
-import React ,{ useState,useEffect } from 'react'
+import React ,{ useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 import ADD_PROMO from "../../../../Apollo/mutations/addPromo";
 import getAllCategories from "../../../../Apollo/queries/getAllCategories"
@@ -8,7 +8,7 @@ import closeIcon from "../../../../icons/close2.svg"
 
 const FormPromo = ({ promo, setPromo }) => {
 
-    const [addPromo, { data }] = useMutation(ADD_PROMO)
+    const [addPromo] = useMutation(ADD_PROMO)
     const [category,setCategory] = useState('');
     const [day,setDay] = useState('');
     const [info, setInfo] = useState({

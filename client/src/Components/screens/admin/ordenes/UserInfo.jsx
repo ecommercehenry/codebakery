@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import GET_ALL_USERS from "../../../../Apollo/queries/getAllUsers";
 import DELETE_USER from "../../../../Apollo/mutations/deleteUser";
 import styled from "styled-components";

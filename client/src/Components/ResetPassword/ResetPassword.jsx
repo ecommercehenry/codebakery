@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import MODIFY_USER from "../../Apollo/mutations/modifyUser";
-import { Redirect, useParams, useLocation, Link } from "react-router-dom";
+import { Redirect, useLocation, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../Assets/toast.css";
 import styled from "styled-components";

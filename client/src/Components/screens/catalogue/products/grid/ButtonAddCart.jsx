@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import cartIcon from "../../../../../icons/cart.svg";
 import { addProductToCart } from "../../../../../actions/cartActions";

@@ -2,10 +2,9 @@ import React, {useEffect}  from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import { useQuery } from "@apollo/client";
 import productsByCategoryName from '../../../../../Apollo/queries/productsByCategoryName';
-// import getData from '../../../../../Apollo/queries/productById';
 import getAllCategories from '../../../../../Apollo/queries/getAllCategories';
 import allProducts from '../../../../../Apollo/queries/allProducts';
-import { getAllProducts, setSearch } from '../../../../../actions';
+import { getAllProducts } from '../../../../../actions';
 import styles from './Categories.module.css';
 import styled from 'styled-components'
 
