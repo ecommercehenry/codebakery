@@ -15,7 +15,7 @@ const AboutUsGrid = () => {
       <AboutUsInfo>
         <h1>Meet Our team</h1>
         <p>
-        We are students from <a target="_blank" href="https://www.soyhenry.com/"> 
+        We are students from <a target="_blank" without rel="noopener noreferrer" href="https://www.soyhenry.com/"> 
             Henry's bootcamp
           </a> {" "}  where <span>Code Bakery</span> is our final project. 
         </p>
