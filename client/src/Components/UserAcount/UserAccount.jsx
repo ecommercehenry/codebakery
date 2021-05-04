@@ -14,16 +14,19 @@ import { useDispatch } from "react-redux";
 import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
-import '../../Assets/toast.css'; 
+import "../../Assets/toast.css";
 
-toast.configure() 
+toast.configure();
 
 const UserAcount = () => {
   // valida que exista el usuario y lo devuelve con un token
-  const [login, { loading, data }] = useLazyQuery(validateUser); 
+  const [login, { loading, data }] = useLazyQuery(validateUser);
   // const validate = useLazyQuery(VALIDATE_CREDENTIALS);
-  const [functionValidate, {loading: loadingValidate, data: dataValidate}] = useLazyQuery(VALIDATE_CREDENTIALS);
-  // const loadingValidate = validateCredentials[1]?.loading?.validateCredentials, 
+  const [
+    functionValidate,
+    { loading: loadingValidate, data: dataValidate },
+  ] = useLazyQuery(VALIDATE_CREDENTIALS);
+  // const loadingValidate = validateCredentials[1]?.loading?.validateCredentials,
   // dataValidate = validateCredentials[1]?.data?.validateCredentials,
   // functionValidate = validateCredentials[0];
   const {
@@ -31,53 +34,56 @@ const UserAcount = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // 
- 
-  // 
+  //
+
+  //
   // Google login
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    if(localStorage.getItem('token')){
-      
-      functionValidate({ variables: { token: localStorage.getItem('token'), role: localStorage.getItem('role') } });
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      functionValidate({
+        variables: {
+          token: localStorage.getItem("token"),
+          role: localStorage.getItem("role"),
+        },
+      });
     }
-    if(!loading && data){
-      if(data.validateUser.token){
+    if (!loading && data) {
+      if (data.validateUser.token) {
         // alert("logueado")
-        localStorage.setItem('token', data.validateUser.token);
-        localStorage.setItem('name', data.validateUser.name);
-        localStorage.setItem('email', data.validateUser.email);
-        localStorage.setItem('role', data.validateUser.role);
-        localStorage.setItem('id', data.validateUser.id);
+        localStorage.setItem("token", data.validateUser.token);
+        localStorage.setItem("name", data.validateUser.name);
+        localStorage.setItem("email", data.validateUser.email);
+        localStorage.setItem("role", data.validateUser.role);
+        localStorage.setItem("id", data.validateUser.id);
         // es necesario el reloaded para luego poder redirigir
         toast(`Welcome ${data.validateUser.name}`);
         window.location.reload();
-      }else{
-        toast(data.validateUser.detail)
+      } else {
+        toast(data.validateUser.detail);
       }
-    
-  }},[loading, data, dataValidate])
-  let role = localStorage.getItem('role');
-  let token = localStorage.getItem('token');
-  if(role  && token){
-    // la redireccion se debe cambiar seún el role del usuario
-    if(role === 'admin' && dataValidate?.validateCredentials){
-      // 
-      return <Redirect to='/admin/orders' />;
     }
-    else if(role === 'user' && dataValidate?.validateCredentials) {
-      // 
-      return <Redirect to='/catalogue' />;
+  }, [loading, data, dataValidate]);
+  let role = localStorage.getItem("role");
+  let token = localStorage.getItem("token");
+  if (role && token) {
+    // la redireccion se debe cambiar seún el role del usuario
+    if (role === "admin" && dataValidate?.validateCredentials) {
+      //
+      return <Redirect to="/admin/orders" />;
+    } else if (role === "user" && dataValidate?.validateCredentials) {
+      //
+      return <Redirect to="/catalogue" />;
     }
     // else {
-    //   
+    //
     //   // localStorage.clear();
     //   return <Redirect to='/log-in' />;
     // };
   }
   const handleLogin = async (form) => {
-    login({variables: {email:form.login,password:form.password}});
+    login({ variables: { email: form.login, password: form.password } });
   };
 
   return (
@@ -127,8 +133,6 @@ const UserAcount = () => {
     </StyledUserPanel>
   );
 };
-
-
 
 const StyledAcheDos = styled.h2`
   text-align: center;
