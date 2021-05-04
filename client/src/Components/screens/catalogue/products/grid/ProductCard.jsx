@@ -7,8 +7,7 @@ import styled from "styled-components";
 //Components
 import ButtonAddCart from "./ButtonAddCart";
 
-const ProductCard = ({ id, name, image, price, discount, orderId, refetchCatalogue}) => {
-  console.log("price", price,"discount", discount)
+const ProductCard = ({ id, name, image, price, discount, stock, orderId, refetchCatalogue}) => {
   return (
     <StyledCard>
       <Link to={`/catalogue/detail/${id}`} className="link">
@@ -19,19 +18,28 @@ const ProductCard = ({ id, name, image, price, discount, orderId, refetchCatalog
           <span>{name}</span>
         </div>
         <div className="price">
-            
           {
-            discount != 0 ? (
-              <>
-                <del>
-                  <span className="small">${price}</span>
-                </del>
-                
-                <span className="big">${(price-(price*discount/100)).toFixed(2)}</span>
-                
-              </>
-            ) : <span className="big">${price}</span>
+            stock == 0 ?
+            (
+              <span className="big">NOT AVAILABLE :( </span>
+            )
+            :
+            (
+              
+                discount != 0 ? (
+                  <>
+                    <del>
+                      <span className="small">${price}</span>
+                    </del>
+                    
+                    <span className="big">${(price-(price*discount/100)).toFixed(2)}</span>
+                    
+                  </>
+                ) : <span className="big">${price}</span>
+              
+            )
           }
+          
           
         </div>
       </Link>

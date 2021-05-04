@@ -44,7 +44,7 @@ const StripeForm = () => {
                 const {data} = await axios.post('http://localhost:3001/stripe/checkout',
                 {
                     id,
-                    amount: total*100,
+                    amount: Math.round(total)*100,
                     products:res?.data?.getOrdersByUserIdInCart?.orders[0]
                 }
                 )

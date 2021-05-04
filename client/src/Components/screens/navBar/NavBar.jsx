@@ -74,21 +74,22 @@ const NavBar = ({ color }) => {
       if(promos['data']['getPromos'].length == 0){
       }else{
         promos['data']['getPromos'].map(elem=>{
-          if(elem.day==today){
+          if(elem.day===today){
             applyDiscount({variables:
               {
                 discount:elem.discount,
                 category:elem.category,
               }
             });
-          }else{
-            applyDiscount({variables:
-              {
-                discount:0,
-                category:elem.category,
-              }
-            });
           }
+          // else{
+          //   applyDiscount({variables:
+          //     {
+          //       discount:0,
+          //       category:elem.category,
+          //     }
+          //   });
+          // }
         })
       }
     }
