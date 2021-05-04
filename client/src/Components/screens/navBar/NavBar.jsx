@@ -1,11 +1,9 @@
 import React,{useEffect} from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useMutation, useQuery } from '@apollo/client';
 import APPLY_DISCOUNT from "../../../Apollo/mutations/applyDiscount";
 import RESET_DISCOUNT from "../../../Apollo/mutations/resetDiscount";
 import getPromos from '../../../Apollo/queries/getPromos';
-import { RoundButton } from "../../GlobalStyle";
 import CountCart from "../cart/container/CountCart";
 import styled from "styled-components";
 import ThemeSwitch from "./ThemeSwitch";
