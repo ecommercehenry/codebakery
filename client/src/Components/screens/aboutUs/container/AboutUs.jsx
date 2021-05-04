@@ -85,7 +85,6 @@ const AboutUsConteiner = styled.div`
     font-size: 20px;
     margin: 0px 0px 0px 0px;
     line-height: 120%;
-    sans-serif;
     opacity: 0.7;
     text-align: center;
     

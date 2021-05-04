@@ -38,6 +38,7 @@ const FormPromo = ({ promo, setPromo }) => {
         switch (option) {
             case 'options':
                 setCategory(value)
+                break;
             default:
                 console.log("Un error que no deberia salir, FormPromo.jsx 42")
         }
@@ -47,6 +48,9 @@ const FormPromo = ({ promo, setPromo }) => {
         switch (option) {
             case 'options':
                 setDay(value)
+                break;
+            default:
+                console.log("ESTE ERROR NO DEBERIA SALIR FormPromo.jsx 52")
         }
     }
 

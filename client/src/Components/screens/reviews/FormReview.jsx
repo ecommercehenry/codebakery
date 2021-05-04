@@ -20,8 +20,6 @@ const FormReview = () => {
   const [addReview, { data }] = useMutation(ADD_REVIEW, {
     errorPolicy: 'all'
   });
-  const [result, setResult] = useState()
-
    const [input, setInput] = useState({
     title: '',
     description: '',
@@ -33,10 +31,6 @@ const FormReview = () => {
 if(data){
   if(data.addReview){
     response = data.addReview.name;
-  }if(response === undefined){
-    setResult("You added your comment successfully")
-  }else{
-    setResult(data.addReview.name) 
   }
 }
 
@@ -213,7 +207,7 @@ position: relative;
             cursor:pointer;
         }
     }
-
+}
 `;
 
 export default FormReview

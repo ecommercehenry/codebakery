@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Landing from "./Components/screens/landing/Landing";
 import AdminPanel from "./Components/screens/admin/container/AdminPanel";
 import Catalogue from "./Components/screens/catalogue/container/Catalogue";
 import Cart from "./Components/screens/cart/container/Cart";
 import AboutUs from "./Components/screens/aboutUs/container/AboutUsGrid";
-// import FormCRUD from "./Components/screens/admin/FormCRUD"
 import Checkout from './Components/screens/cart/Checkout/Checkout'
 import Stripe from "./Components/screens/cart/Checkout/Stripe"
 import GlobalStyle from "./Components/GlobalStyle";

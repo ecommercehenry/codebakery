@@ -17,21 +17,6 @@ export default function Orden({ id, orden }) {
   const [selectedStatus, setSelectedStatus] = useState();
   const [show, setShow] = useState(false);
 
-  /* let status;
-  if (orden.status === "unpaid") status = 0;
-  if (orden.status === "paid") status = 1;
-  if (orden.status === "received") status = 2;
-
-  const instance = (
-    <Steps current={1}>
-      <Steps.Item onClick={() => console.log("cambiar status a paid")} />
-      <Steps.Item onClick={() => console.log("cambiar status a send")} />
-      <Steps.Item onClick={() => console.log("cambiar status a recived")} />
-    </Steps>
-  ); */
-
-  let active;
-
   useEffect(() => {
     setOrderStatus(orden.status);
 
@@ -39,26 +24,7 @@ export default function Orden({ id, orden }) {
       `status-select-${orden.id}`
     ).value = orderStatus;
 
-    active = {
-      unpaid: orderStatus === "unpaid" ? "selected" : "⠀",
-      paid: orderStatus === "paid" ? "selected" : "⠀",
-      sent: orderStatus === "sent" ? "selected" : "⠀",
-      received: orderStatus === "received" ? "selected" : "⠀",
-    };
-
-    /* console.log(document.getElementById(`status-select-${orden.id}`).outerHTML) */
-  }, []);
-
-  let handleSubmit = (e) => {
-    if (window.confirm("You want to change this order status?")) {
-      e.preventDefault();
-      /* var el = document.getElementById(`status-select-${orden.id}`);
-      var value= el.selectElement.options[e.selectedIndex].value;// get selected option value */
-      console.log(selectedStatus);
-    } else {
-      e.preventDefault();
-    }
-  };
+  }, [orden.id, orden.status, orderStatus]);
 
   const [modifyOrderStatus] = useMutation(
     MODIFY_ORDER_STATUS

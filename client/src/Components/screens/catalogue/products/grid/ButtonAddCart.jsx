@@ -39,7 +39,7 @@ const ButtonAddCart = ({ id, orderId, refetchCatalogue }) => {
               : 1
           )
         );
-        if (orderId != undefined) {
+        if (orderId !== undefined) {
           await addProductToOrder({
             variables: {
               orderId: orderId,
