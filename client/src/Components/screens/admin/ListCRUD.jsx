@@ -20,7 +20,7 @@ function ListCRUD({setPromo}) {
     if (!loading) {
       dispatch(saveProducts(data.product));
     }
-  }, [data]);
+  }, [data, dispatch, setPromo, loading]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

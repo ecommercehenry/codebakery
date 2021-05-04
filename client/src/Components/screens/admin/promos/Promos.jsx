@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 const Promos = ({promo,setPromo}) => {
 
-    useEffect(() => {},[FormPromo])
+    useEffect(() => {},[])
     
     return (
         <StyledPromos>

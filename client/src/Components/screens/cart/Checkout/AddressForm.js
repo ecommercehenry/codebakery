@@ -83,7 +83,7 @@ export default function AddressForm({ setUserdata, setShippingtype, setStoreId }
     } else if (shipping === "none") {
       setUserdata(false);
     }
-  }, [loading, data, shipping, selected]);
+  }, [loading, data, shipping, selected, setUserdata]);
   //event Handlers
   const handleStore = (e) => {
     e.preventDefault();

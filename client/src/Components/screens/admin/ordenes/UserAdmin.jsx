@@ -23,7 +23,7 @@ const UserAdmin = ({setPromo}) => {
     } else if (data && data.getAllUsers) {
       dispatch(getAllUsersWithDetails(data?.getAllUsers));
     }
-  }, [data, loading]);
+  }, [data, loading, dispatch, getAllUsers, setPromo]);
 
   if (!dataToRender) {
     return <div>Loading...</div>;

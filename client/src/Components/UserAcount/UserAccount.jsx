@@ -56,7 +56,7 @@ const UserAcount = () => {
         toast(data.validateUser.detail);
       }
     }
-  }, [loading, data, dataValidate]);
+  }, [loading, data, dataValidate, functionValidate]);
   let role = localStorage.getItem("role");
   let token = localStorage.getItem("token");
   if (role && token) {

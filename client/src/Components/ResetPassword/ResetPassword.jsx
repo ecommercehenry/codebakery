@@ -115,7 +115,7 @@ function ResetPassword() {
     if (dataReset?.resetPassword) {
       dispatch(saveToken(dataReset?.resetPassword.token, dataReset?.resetPassword.email));
     }
-  }, [dataReset, loadingReset]);
+  }, [dataReset, loadingReset, dispatch]);
 
   if (flagSubmit) {
     return <Redirect to="/" />;

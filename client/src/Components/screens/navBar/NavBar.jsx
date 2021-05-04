@@ -85,7 +85,7 @@ const NavBar = ({ color }) => {
         })
       }
     }
-  },[promos])
+  },[promos, applyDiscount, resetDiscount, today])
 
   return (
     <StyledNavBar className="navbar d-flex align-items-center mx-5">

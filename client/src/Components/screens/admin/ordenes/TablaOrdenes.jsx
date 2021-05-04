@@ -26,7 +26,7 @@ export default function TablaOrdenes({setPromo}) {
   useEffect(() => {
     setPromo(false)
     dispatch(saveOrders(ordersQ));
-  }, [data, dispatch, ordersQ]);
+  }, [data, dispatch, ordersQ, setPromo]);
 
   //traigo info del reducer..
   const { search, filterOrders, idError, status, renderPage } = useSelector(
