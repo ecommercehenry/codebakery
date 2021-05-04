@@ -10,7 +10,6 @@ import { HiOutlineSave, HiOutlineX } from "react-icons/hi";
 import { toast } from "react-toastify";
 
 import '../../../Assets/toast.css'
-import { NonceProvider } from "react-select";
 
 
 toast.configure()
@@ -286,7 +285,3 @@ input{
   }
 }
 `;
-
-      {/* <StyledFormCRUD onSubmit={submitHandler}> */}
-
-                {/* <div key={i}> */}
