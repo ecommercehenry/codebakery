@@ -74,18 +74,15 @@ const ButtonSearch = styled.button`
   display: inline-block;
   text-transform: uppercase;
   font-size: 0.875rem;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
+  border-radius: 5px 5px 5px 5px;
+  transition: all 0.3s ease-in-out;
   :hover {
     opacity: 0.7;
   }
 `;
 
 const StyledSearchBar = styled.div`
-  background: #e9e8e8;
+  background: white;
   height: 4.6vh;
   width: 30rem;
   padding: 0 0.5rem;
@@ -125,16 +122,19 @@ const StyledSearchBar = styled.div`
     font-size: 1.1rem;
     border-radius: 40px;
     padding: 0 0.5rem;
-    background: #c4c4c485;
+    background: #ffffff;
     border: none;
+    padding-right: 0;
+    transition: transform 0.2s ease-in-out;
     font-weight: bold;
-  }
-  select:focus {
-    outline: none;
-  }
-  select:before {
-    color: red
-    outline: none;
+
+    &:focus{
+      outline: none;
+    }
+
+    &:hover{
+      cursor: pointer;
+    }
   }
   .vertical-line{
     border-left: 1px solid grey;

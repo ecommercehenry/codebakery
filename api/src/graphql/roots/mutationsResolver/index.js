@@ -31,6 +31,12 @@ const {deleteStore} = require("./deleteStore")
 
 const { saveImageSlider } = require("./saveImageSlider");
 const { deleteImageById } = require("./deleteImageById");
+const {resetPassword} = require("./resetPassword");
+const {modifyOrderStore} = require("./modifyOrderStore");
+const {addPromo} = require("./addPromo")
+const {applyDiscount} = require("./applyDiscount");
+const {resetDiscount} = require("./resetDiscount");
+const {deletePromo} = require("./deletePromo");
 
 
 module.exports = {
@@ -67,8 +73,13 @@ module.exports = {
   addStore,
   modifyStore,
   deleteStore,
-
+  resetPassword,
   saveImageSlider,
   deleteImageById,
+  modifyOrderStore, 
+  addPromo,
+  applyDiscount,
+  resetDiscount,
+  deletePromo
 }
 

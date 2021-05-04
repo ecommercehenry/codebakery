@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import { useQuery } from "@apollo/client";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 import getUserById from "../../../../Apollo/queries/getUserById";
+import GET_STORE_BY_ID from "../../../../Apollo/queries/getStoreById";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -21,8 +22,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
+export default function Review({ shippingtype, storeId }) {
+  //variables
+  let total = 0;
+  let shipping = document.getElementById("shipping");
+  let store = document.getElementById("pickup");
+  //styles
   const classes = useStyles();
+
+  //queries
   const orderData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: parseInt(localStorage.id) },
     fetchPolicy: "no-cache",
@@ -31,7 +39,22 @@ export default function Review() {
     variables: { id: parseInt(localStorage.id) },
     fetchPolicy: "no-cache",
   });
-  let total = 0;
+
+  if (shipping && orderData.data) {
+    if (shippingtype === "store") {
+      shipping.style = "display: none";
+      store.style = "display: flex";
+    } else if (shippingtype === "delivery") {
+      shipping.style = "display: flex";
+      store.style = "display: none";
+    }
+  }
+  
+   let pickup = useQuery(GET_STORE_BY_ID,{
+    variables:{
+      id: parseInt(storeId)
+    }
+  })
   if (!orderData.loading) {
     if (orderData.data.getOrdersByUserIdInCart.orders.length != 0) {
       orderData.data.getOrdersByUserIdInCart.orders[0].lineal_order.map(
@@ -63,22 +86,44 @@ export default function Review() {
           </Typography>
         </ListItem>
       </List>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} id="shipping">
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             Shipping
           </Typography>
           <Typography gutterBottom>
-            Comprador: {userData?.data?.getUserById?.name}
+            User: {userData?.data?.getUserById?.name}
           </Typography>
           <Typography gutterBottom>
             DNI: {userData?.data?.getUserById?.dni}
           </Typography>
           <Typography gutterBottom>
-            Direccion : {userData?.data?.getUserById?.address}
+            Address : {userData?.data?.getUserById?.address}
           </Typography>
           <Typography gutterBottom>
-            Tel: {userData?.data?.getUserById?.phoneNumber}
+            Telephone: {userData?.data?.getUserById?.phoneNumber}
+          </Typography>
+        </Grid>
+        <Grid item container direction="column" xs={12} sm={6}>
+          {/* en caso de incluirse descuentos deberian ponerse aca */}
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} id="pickup">
+        <Grid item xs={12} sm={6}>
+          <Typography variant="h6" gutterBottom className={classes.title}>
+            Store pickup
+          </Typography>
+          <Typography gutterBottom>
+            User name: {userData?.data?.getUserById?.name}
+          </Typography>
+          <Typography gutterBottom>
+            Store name: {pickup?.data?.getByStore?.name}
+          </Typography>
+          <Typography gutterBottom>
+            Store Telephone: {pickup?.data?.getByStore?.phoneNumber}
+          </Typography>
+          <Typography gutterBottom>
+            Store Address: {pickup?.data?.getByStore?.address}
           </Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>

@@ -201,6 +201,7 @@ async function _formatOrder(order) {
     });
   }
   const out = {
+    storeId: order.storeId,  
     id: order.id,
     status: order.status,
     name: userOrden.name,
@@ -310,6 +311,7 @@ async function deleteProductOrder(orderId, productId) {
       let order = await Order.findOne({where: {id: orderId, placeStatus: 'cart'}})
       if(!order){
       order = await Order.create({userId : userId})
+      console.log("se creo una orden")       
       } 
       if(order.placeStatus === 'cart'){
           const newProduct = await Product.findOne({
@@ -317,7 +319,7 @@ async function deleteProductOrder(orderId, productId) {
                   id:productId
               }
           })
-          let has = await order.addProduct(newProduct, {through:{price:newProduct.price, quantity}})            
+          let has = await order.addProduct(newProduct, {through:{price:newProduct.price, quantity}})
           return {__typename: "booleanResponse" , boolean:true}
       } else {
           return { __typename: "error" , name:"concept error, see detail",detail:"You cannot add a product in a ticket order"}

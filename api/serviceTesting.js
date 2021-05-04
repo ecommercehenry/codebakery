@@ -34,6 +34,12 @@ const { addReview , modifyReview} = require("./src/services/reviewsService.js");
     //const a = await getFormatedMessage(order)
     //saveImageSlider("https://avatars.githubusercontent.com/u/68715166?v=4");
      
+ const {getTokenResetPassword} = require("./src/services/userService")
+ // Syncing all the models at once.
+ conn.sync({ force: true }).then(() => {
+   dataPopulation().then(async ()=>{
+     const a = await getTokenResetPassword(2)
+     console.log(a)
 
    })
  });

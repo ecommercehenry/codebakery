@@ -1,6 +1,5 @@
 import React,{ useState,useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Select from 'react-select';
 import { useMutation, useQuery } from '@apollo/client';
 import getAllCategories from "../Apollo/queries/getAllCategories"
 import ADD_PRODUCT from "../Apollo/mutations/addProduct";
@@ -39,7 +38,6 @@ const AddProductForm = ({setAddProduct}) => {
     }
 
     const inputHandler = (e) => {
-        console.log(e, 'mis dats')
         return setInfo({...info,[e.target.name]:e.target.value})
     }
 
@@ -68,13 +66,17 @@ const AddProductForm = ({setAddProduct}) => {
     category && (selected = selected.map(elem=>elem.value));
     selected = selected.toString();
     let options =  [];
-    categories['data'] && categories['data']['getAllCategories'].map(elem=> options.push({label:elem.name,value:elem.name}))                 
+    categories['data'] && categories['data']['getAllCategories'].map(elem=> 
+        options.push({label:elem.name,value:elem.name})
+    )                 
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(info.image, "nksdksdk");
-        if(info.image == ''){toast('Please add an image')}else{
+        if(info.image == ''){
+            toast('Please add an image')
+        }else{
             info.category=selected;
+            console.log('hola')
             addProduct({variables:
                 {
                     name:info.name,
@@ -84,37 +86,26 @@ const AddProductForm = ({setAddProduct}) => {
                     category:selected,
                     image:info.image
                 }
+            }).then(res=>{
+                setInfo({
+                    name:'',
+                    description:'',
+                    category:[],
+                    stock:'',
+                    price:'',
+                    image:''
+                })
+                toast("Producto agregado!")
+                window.history.back();
             })
-            setInfo({
-                name:'',
-                description:'',
-                category:[],
-                stock:'',
-                price:'',
-                image:''
-            })
-            toast("Producto agregado!")
-            
         }
-        
     }
-
-    useEffect(() => {
-
-        setTimeout(() => {
-            document.body.style.overflow = "hidden"
-        }, 1000);
-    
-    return () => {
-        document.body.style.overflow = "visible"
-    }
-}, [])
 
     
     return (
         
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.664)', zIndex: 5, position: 'fixed', height: '100vh', width: '100vw', top: '0', left: '0', paddingLeft: '10vw'}}>
-        <form onSubmit={submitHandler} light={status}>
+        <StyledUpper >
+        <StyledForm onSubmit={submitHandler} light={status}>
             {/* <div className="close" onClick={closeHandler}><img src={closeIcon} alt="closeIcon"/></div> */}
             <Link to="/admin/products" className="close"><img src={closeIcon} alt="closeIcon"/></Link>
             <div className="imageLoaderr">
@@ -190,8 +181,8 @@ const AddProductForm = ({setAddProduct}) => {
             <div className="submitt" >
                 <button type="submit">SAVE CHANGES</button>
             </div>
-        </form>
-        </div>
+        </StyledForm>
+        </StyledUpper>
     )
 }
 
@@ -350,6 +341,20 @@ const StyledForm = styled.form`
             cursor:pointer;
         }
     }
+`;
+
+const StyledUpper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:rgba(0, 0, 0, 0.664);
+    z-index: 15;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0; 
+    left: 0;
+    padding-left: 10vw;
 `;
 
 export default AddProductForm;
