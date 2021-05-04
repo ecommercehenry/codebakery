@@ -22,7 +22,7 @@ useEffect(() => {
 
 
   return (
-    <div style={{width:100+"vw", display:"flex", justifyContent:"center"}}>
+    // <div style={{width:100+"vw", display:"flex", justifyContent:"center"}}>
     <StyledSearchBar>
       <HiSearch size="1.5em" color="gray" style={{position: "absolute", left: "15px"}}/>
       <form id="search-form">
@@ -35,7 +35,7 @@ useEffect(() => {
           <button id="search-btn" onClick={submitHandler}>Search</button> 
       </form>
     </StyledSearchBar>
-    </div>
+    // </div>
   )
 };
 
