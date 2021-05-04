@@ -22,11 +22,26 @@ toast.configure();
 function TwoFA(){
     const [generateOTP, {data: dataGenerate, loading: loadingGenerate}] = useMutation(GENERATE_OTP);
     const [validateTotp, {data: dataValidate, loading: loadingValidate}] = useLazyQuery(VALIDATE_TOTP);
+    const [
+      functionValidate,
+      { loading: loadingCredentials, data: dataCredentials },
+    ] = useLazyQuery(VALIDATE_CREDENTIALS);
     const {id, token, name, email, role} = useSelector(state => state.dataProfileReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
-      console.log(localStorage.getItem('id'), 'ayaysysa', id)
+      if (localStorage.getItem("token")) {
+        functionValidate({
+          variables: {
+            token: localStorage.getItem("token"),
+            role: localStorage.getItem("role"),
+          },
+        });
+      }
+    },[loadingCredentials, dataCredentials, localStorage.getItem("token")]);
+
+    useEffect(() => {
+      // console.log(localStorage.getItem('id'), 'ayaysysa', id)
       if(!dataGenerate && !loadingGenerate) generateOTP({ variables: 
           { userId: parseInt(localStorage.getItem('id')) || id } 
         })
@@ -48,16 +63,21 @@ function TwoFA(){
         localStorage.setItem('role', role);
         localStorage.setItem('id', id);
         dispatch(clearDataUserProfile())
-        toast(`Welcome ${localStorage.getItem('name')}`);
+        toast.dismiss();
+        toast(`Welcome ${localStorage.getItem('name')}`, {toastId: 1});
         // window.location.reload();
+      }
+      else if(dataValidate?.validateTOTP.__typename === 'error'){
+        toast(`Error`);
       }
       
     }, [dataValidate])
 
     let roleUser = localStorage.getItem('role') ;
     let tokenUser = localStorage.getItem('token');
-    console.log(roleUser, tokenUser, 'iasiiaisias')
-    if(roleUser  && tokenUser ){
+    // console.log(roleUser, tokenUser, 'iasiiaisias')
+    // console.log(dataCredentials, 'aaaaaaaaaaaaaaaaaaa')
+    if(roleUser  && tokenUser && dataCredentials){
       if(roleUser === 'admin'){
         return <Redirect to='/admin/orders' />;
       }
@@ -66,7 +86,7 @@ function TwoFA(){
       }
     }
     const handleValidate = async (form) => {
-        // console.log(form.code, 'atstats', form.password);
+        console.log(form.code, 'atstats', parseInt(form.password), Number(form.password));
         validateTotp({
             variables: {
                 userId: parseInt(id)
@@ -75,7 +95,6 @@ function TwoFA(){
         });
         // login({variables: {email:form.login,password:form.password}});
     }
-    console.log(dataValidate, 'aaaaaaaaaaaaaaaaaaa')
     return (
       // <div>Ghola</div>
         <div className="page" style={{ height: "100vh", display: "flex", alignItems: "center" }}>
@@ -84,7 +103,7 @@ function TwoFA(){
                     {/* <Login /> */}
                     <StyledAcheDos> QR </StyledAcheDos>
                     <hr />
-                    <img src={dataGenerate?.generateTokenOTP.image}></img>
+                    {/* <img src={dataGenerate?.generateTokenOTP.image}></img> */}
                     {/* <img>ffff</img> */}
                     <form onSubmit={handleSubmit(handleValidate)}>
                         <input

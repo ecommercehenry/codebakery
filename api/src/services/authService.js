@@ -56,7 +56,8 @@ async function validateTOTP(idUser, code){
     let valid = speakeasy.totp.verify({
         secret:user.secretOtp,
         encoding:"base32",
-        token: code
+        token: code,
+        // time: 1453667708 
     })
     if(valid){
         return {__typename:"booleanResponse", boolean:true}
