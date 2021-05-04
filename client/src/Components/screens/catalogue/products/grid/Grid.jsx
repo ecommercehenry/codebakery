@@ -54,6 +54,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
                     name={element.name}
                     image={element.image}
                     price={element.price}
+                    discount={element.discount}
                     stock={element.stock}
                   />
                 );

@@ -7,7 +7,7 @@ import styled from "styled-components";
 //Components
 import ButtonAddCart from "./ButtonAddCart";
 
-const ProductCard = ({ id, name, image, price, orderId, refetchCatalogue}) => {
+const ProductCard = ({ id, name, image, price, discount, orderId, refetchCatalogue}) => {
   return (
     <StyledCard>
       <Link to={`/catalogue/detail/${id}`} className="link">
@@ -18,7 +18,20 @@ const ProductCard = ({ id, name, image, price, orderId, refetchCatalogue}) => {
           <span>{name}</span>
         </div>
         <div className="price">
-          <span>$ {price}</span>
+            
+          {
+            discount != 0 ? (
+              <>
+                <del>
+                  <span className="small">${price}</span>
+                </del>
+                
+                <span className="big">${(price-(price*discount/100)).toFixed(2)}</span>
+                
+              </>
+            ) : <span className="big">${price}</span>
+          }
+          
         </div>
       </Link>
       <div className="btn">
@@ -64,13 +77,13 @@ const StyledCard = styled.div`
     //background:yellow;
     .image {
       width: 100%;
-      height: 72%;
+      height: 60%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       img {
-        width: 100%;
+        width: 45%;
         height: 100%;
         object-fit: cover;
       }
@@ -91,6 +104,22 @@ const StyledCard = styled.div`
       }
       ${media.laptop} {
         font-size: calc(0.5rem + 6 * ((100vw - 320px) / 680));
+      }
+    }
+    .price{
+      width: 100%;
+      height: 12%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .small{
+        font-size:1rem;
+        margin-right:1rem;
+      }
+      .big{
+        font-size:1.2rem;
+        font-weight: bold;
+        text-decoration:none;
       }
     }
   }

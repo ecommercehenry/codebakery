@@ -12,6 +12,7 @@ const ProductOnCart = ({
   image,
   name,
   price,
+  discount,
   stock,
   quantity,
   orderId,
@@ -57,7 +58,12 @@ const ProductOnCart = ({
           <div className="stockk">{stock} disponibles</div>
         </div>
         <div className="pricee">
-          <div className="subtotal">${newQuantity * price}</div>
+          <div className="subtotal">
+            {
+
+            }
+            ${newQuantity * price}
+          </div>
           <div className="unitaryy">Precio: ${price}</div>
         </div>
 
