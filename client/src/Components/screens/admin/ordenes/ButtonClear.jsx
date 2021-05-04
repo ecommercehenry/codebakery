@@ -38,6 +38,7 @@ background: none;
 font-weight: bold;
 color:#5f3f71;
 border: none;
+margin-top: .3em;
 `
 
 export default ButtonClear;

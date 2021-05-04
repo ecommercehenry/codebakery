@@ -48,18 +48,19 @@ if(data){
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-   await addReview({
+    await addReview({
       variables: {
         productId: parseInt(index.id), 
         userId: parseInt(userId),
         dataReview:{
         title: input.title, 
         description: input.description, 
-        stars: value.toString(), 
+        stars: value === null ? "1" : value.toString()  
         }
       }
     })
-    toast(resultt)
+    toast(response)
+    window.history.back()
   };
 
   return (
@@ -212,7 +213,7 @@ position: relative;
             cursor:pointer;
         }
     }
-
+}
 `;
 
 export default FormReview

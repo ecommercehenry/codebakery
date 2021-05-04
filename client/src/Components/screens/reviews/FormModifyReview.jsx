@@ -42,12 +42,12 @@ const FormModify  = () => {
         dataReview:{
         title: input.title, 
         description: input.description, 
-        stars: value.toString(), 
+        stars: value === null ? "1" : value.toString()  
         }
       }
     })
-    console.log(result)
-    toast("You have successfully modified the review")
+    toast("Has modificado la review exitosamente")
+    window.history.back()
   };
 
   return (
@@ -204,7 +204,7 @@ position: relative;
             cursor:pointer;
         }
     }
-
+    }
 `;
 
 export default FormModify

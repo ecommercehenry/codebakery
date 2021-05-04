@@ -79,8 +79,6 @@ Product.belongsToMany(Order, { through: Lineal_Order });
 Order.belongsToMany(Product, { through: Lineal_Order });
 
 ////stores product order
-Store.belongsToMany(Product, { through: Store_Product });
-Product.belongsToMany(Store, { through: Store_Product });
 Store.hasMany(Order);
 Order.belongsTo(Store);
 

@@ -17,6 +17,7 @@ import '../../Assets/toast.css';
 import TwoFA from "./TwoFA";
 import { saveDataProfile } from "../../actions/dataProfileActions";
 import { EpsBankElement } from "@stripe/react-stripe-js";
+
 // import "./UserAccount.css";
 
 toast.configure();
@@ -53,49 +54,38 @@ const UserAcount = () => {
         },
       });
     }
-    if(!loading && data ){
-      if(data.validateUser.token){
+    if (!loading && data) {
+      if (data.validateUser.token) {
         // alert("logueado")
-        // si está habilitada la athenticacion twoFA guardamoen en el reducer
-        if(data.validateUser.twoFA || true ){
-          console.log('yaysyays', data.validateUser)
-          dispatch(saveDataProfile(data.validateUser))
-        }
-        else{
-          localStorage.setItem('token', data.validateUser.token);
-          localStorage.setItem('name', data.validateUser.name);
-          localStorage.setItem('email', data.validateUser.email);
-          localStorage.setItem('role', data.validateUser.role);
-          localStorage.setItem('id', data.validateUser.id);
-        }
+        localStorage.setItem("token", data.validateUser.token);
+        localStorage.setItem("name", data.validateUser.name);
+        localStorage.setItem("email", data.validateUser.email);
+        localStorage.setItem("role", data.validateUser.role);
+        localStorage.setItem("id", data.validateUser.id);
         // es necesario el reloaded para luego poder redirigir
-        toast(`Hello ${data.validateUser.name}, `);
-        // window.location.reload();
-      }else{
-        toast(data.validateUser.detail)
+        toast(`Welcome ${data.validateUser.name}`);
+        window.location.reload();
+      } else {
+        toast(data.validateUser.detail);
       }
-    
-  }},[loading, data, dataValidate]);
-
-  let role = localStorage.getItem('role') ;
-  let token = localStorage.getItem('token');
-  console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
-  if(role  && token && !dataUser.twoFA){
+    }
+  }, [loading, data, dataValidate]);
+  let role = localStorage.getItem("role");
+  let token = localStorage.getItem("token");
+  if (role && token) {
     // la redireccion se debe cambiar seún el role del usuario
-    if(role === 'admin' && dataValidate?.validateCredentials){
-      // 
-      // return <Redirect to='/TFA' />
-      return <Redirect to='/admin/orders' />;
+    if (role === "admin" && dataValidate?.validateCredentials) {
+      //
+      return <Redirect to="/admin/orders" />;
+    } else if (role === "user" && dataValidate?.validateCredentials) {
+      //
+      return <Redirect to="/catalogue" />;
     }
-    else if(role === 'user' && dataValidate?.validateCredentials) {
-      // 
-      console.log('gagggagsgas')
-      // return <Redirect to='/TFA' />
-      return <Redirect to='/catalogue' />;
-    }
-  }
-  else if(dataUser.role && dataUser.token && (dataUser.twoFA || true)){
-    return <Redirect to='/TFA' />
+    // else {
+    //
+    //   // localStorage.clear();
+    //   return <Redirect to='/log-in' />;
+    // };
   }
   const handleLogin = async (form) => {
     login({ variables: { email: form.login, password: form.password } });

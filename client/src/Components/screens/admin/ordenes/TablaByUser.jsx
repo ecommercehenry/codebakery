@@ -5,36 +5,31 @@ import styled from "styled-components";
 import OrderByUser from "./OrderByUser";
 
 const TablaByUser = ({ id }) => {
-  
-  //const [order, setOrder] = useState(false); 
   const { data } = useQuery(getOrdersByUserIdInTicket, {
     variables: { idUser: id },
+    fetchPolicy: "no-cache",
   });
 
   return (
-  
- 
-      <StyledTablaa>
-      <h1>Orders</h1>
-        {data?.getOrdersByUserIdInTicket.orders ? (
-          data.getOrdersByUserIdInTicket.orders.map((order) =>
-            order.lineal_order.map((order) => (
-              <OrderByUser
-                key={order.id}
-                id={order.id}
-                name={order.name}
-                price={order.price}
-                image={order.image}
-                quantity={order.quantity}
-                orderId={data.getOrdersByUserIdInTicket.orders.id}
-              />
-            ))
-          )
-        ) : (
-          <p></p>
-        )}
-      </StyledTablaa>
-  
+    <StyledTablaa>
+      {data?.getOrdersByUserIdInTicket.orders ? (
+        data.getOrdersByUserIdInTicket.orders.map((order) =>
+          order.lineal_order.map((order) => (
+            <OrderByUser
+              key={order.id}
+              id={order.id}
+              name={order.name}
+              price={order.price}
+              image={order.image}
+              quantity={order.quantity}
+              orderId={data.getOrdersByUserIdInTicket.orders.id}
+            />
+          ))
+        )
+      ) : (
+        <p></p>
+      )}
+    </StyledTablaa>
   );
 };
 export default TablaByUser;

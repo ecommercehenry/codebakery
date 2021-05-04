@@ -18,17 +18,24 @@ const Detail = ({ refetchCatalogue }) => {
     variables: { id },
     fetchPolicy: "no-cache",
   });
-
-  if (data) {
-    if (data.productById) {
-      if (data.productById.stock <= 0) {
-        window.addEventListener("load", function () {
-          document.getElementsByClassName(idCart.id)[0].innerHTML = "Sin Stock";
-          document.getElementsByClassName(idCart.id)[1].innerHTML = "Sin Stock";
-        });
+  
+  useEffect(() =>{
+    let button = document.getElementsByClassName(idCart.id)
+    let purple = document.getElementById("purple-btn")
+    if (data) {
+      if (data.productById) {
+        if (data.productById.stock <= 0) {
+          if (button){
+            button[0].innerHtml = "Sin Stock"
+            button[1].innerHtml = "Sin Stock"
+            button[0].innerText = "Sin Stock"
+            button[1].innerText = "Sin Stock"
+            purple.style = "display: none"
+          }
+        }
       }
     }
-  }
+  })
 
   return (
     <StyledDetailModal className="detail-container">
@@ -62,7 +69,7 @@ const Detail = ({ refetchCatalogue }) => {
                 </span>
                 <div className="bottom-btns d-flex justify-content-center">
                   <ButtonAddCart
-                    className={parseInt(idCart.id)}
+                    className={idCart.id}
                     id={parseInt(idCart.id)}
                     refetchCatalogue={refetchCatalogue}
                   />

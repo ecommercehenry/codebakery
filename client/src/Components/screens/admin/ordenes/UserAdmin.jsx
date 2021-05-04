@@ -5,6 +5,7 @@ import DELETE_USER from "../../../../Apollo/mutations/deleteUser";
 import styled from "styled-components";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import Promote from "../Promote";
+import UserInfo from "./UserInfo";
 import {
   getAllUsersWithDetails,
   orderAscByName,
@@ -22,24 +23,8 @@ const UserAdmin = ({setPromo}) => {
   const state = useSelector((state) => state);
   let dataToRender = state.userAdmin.dataToRender;
 
-  const [
-    deleteUser,
-    { data: dataDeleteUser, loading: loadingMutation },
-  ] = useMutation(DELETE_USER, {
-    refetchQueries: [{ query: GET_ALL_USERS }],
-  });
 
   let [getAllUsers, { data, loading }] = useLazyQuery(GET_ALL_USERS);
-
-  function handleClick(e) {
-    e.preventDefault();
-    console.log("en handleClick:", e.target.name);
-    deleteUser({
-      variables: {
-        userId: parseInt(e.target.name),
-      },
-    });
-  }
 
   useEffect(() => {
     setPromo(false)
@@ -49,16 +34,6 @@ const UserAdmin = ({setPromo}) => {
       dispatch(getAllUsersWithDetails(data?.getAllUsers));
     }
   }, [data, loading]);
-
-  // function handleClickAsc(e) {
-  //   e.preventDefault();
-  //   dispatch(orderAscByName());
-  // }
-
-  // function handleClickDesc(e) {
-  //   e.preventDefault();
-  //   dispatch(orderDescByName());
-  // }
 
   if (!dataToRender) {
     return <div>Loading...</div>;
@@ -87,39 +62,15 @@ const UserAdmin = ({setPromo}) => {
           </thead>
           <tbody>
             {dataToRender?.map((element) => (
-              <StyledTableRow>
-                <td key={element.id}>{element.id}</td>
-                <td className="td-name">{element.name}</td>
-                <td className="td-email">{element.email}</td>
-                <td>{element.address ? element.address : "N/A"}</td>
-                <td>{element.dni ? element.dni : "N/A"}</td>
-                <td>{element.phoneNumber ? element.phoneNumber : "N/A"}</td>
-                <td>{element.role}</td>
-                <td>
-                  {element.email === "admin@admin.com" ? (
-                    ""
-                  ) : (
-                    <Promote
-                      name={element.name}
-                      idUser={element.id}
-                      rol={element.role}
-                    />
-                  )}
-                </td>
-                <td>
-                  {element.role === "admin" ? (
-                    <RiDeleteBin6Line />
-                  ) : (
-                    <button name={element.id} onClick={(e) => handleClick(e)}>
-                      {/* <IconContext.Provider
-                        value={{ color: "red" }}
-                      >
-                        <RiDeleteBin6Line />
-                      </IconContext.Provider> */}
-                    </button>
-                  )}
-                </td>
-              </StyledTableRow>
+              <UserInfo
+                id={element.id}
+                name={element.name}
+                email={element.email}
+                address={element.address}
+                dni={element.dni}
+                phoneNumber={element.phoneNumber}
+                role={element.role}
+              ></UserInfo>
             ))}
           </tbody>
         </table>
@@ -179,8 +130,7 @@ const StyledUserAdmin = styled.div`
         padding: 0 1em;
       }
 
-      th  {
-      }
+    
     }
 
     .info-container {
@@ -188,15 +138,9 @@ const StyledUserAdmin = styled.div`
       justify-content: space-between;
       align-items: center;
     }
-  }
-`;
 
-const StyledTableRow = styled.tr`
-  .td-name {
-    padding: 0 3em;
-  }
-
-  .td-email  {
-    padding: 0 0 0 4em;
+    .deletePromote {
+      padding: 0;
+    }
   }
 `;

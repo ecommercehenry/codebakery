@@ -27,8 +27,6 @@ export default function Promote({ idUser, rol , name}) {
   console.log("value", value, "name", name)
   return (
     <>
-    <p>{name}</p>
-      <p>{value} </p>
       <Switch
         checked={value}
         // id={idUser}

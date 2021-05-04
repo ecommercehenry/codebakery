@@ -18,26 +18,16 @@ const ProductReview = ({ id }) => {
     }, 1000);
   }, []);
 
-  let suma = 0;
-  let result = 0;
-  if (data !== undefined) {
-    if (data.getAllReviewsFromAProduct.length !== 0) {
-      data.getAllReviewsFromAProduct.map((element) => {
-        suma = suma + parseInt(element.stars);
-        result = Math.ceil(suma / data.getAllReviewsFromAProduct.length);
-      });
-    }
-  }
+
   return (
     <StyledReviewProduct>
-      
-
       {loanding ? (
         <Skeleton width={400} height={300} />
       ) : (
         data?.getAllReviewsFromAProduct.map((e, i) => (
           <div>
             <Box component="fieldset" mb={3} borderColor="transparent">
+             <Rating name="read-only" value={e.stars} readOnly /> 
               <Typography component="legend" key={i}>
                 {e.title}
               </Typography>
