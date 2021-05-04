@@ -74,11 +74,8 @@ const ButtonSearch = styled.button`
   display: inline-block;
   text-transform: uppercase;
   font-size: 0.875rem;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
+  border-radius: 5px 5px 5px 5px;
+  transition: all 0.3s ease-in-out;
   :hover {
     opacity: 0.7;
   }
@@ -130,10 +127,6 @@ const StyledSearchBar = styled.div`
     font-weight: bold;
   }
   select:focus {
-    outline: none;
-  }
-  select:before {
-    color: red
     outline: none;
   }
   .vertical-line{
