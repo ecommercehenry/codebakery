@@ -19,7 +19,7 @@ const Catalogue = () => {
 
   const queryData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
-    fetchPolicy: "no-cache",
+    //fetchPolicy: "no-cache",
   });
   const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
   const [createOrder] = useMutation(CREATE_ORDER);

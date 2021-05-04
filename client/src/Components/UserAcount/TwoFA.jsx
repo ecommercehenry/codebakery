@@ -40,13 +40,6 @@ function TwoFA(){
       }
     },[loadingCredentials, dataCredentials, localStorage.getItem("token")]);
 
-    useEffect(() => {
-      // console.log(localStorage.getItem('id'), 'ayaysysa', id)
-      if(!dataGenerate && !loadingGenerate) generateOTP({ variables: 
-          { userId: parseInt(localStorage.getItem('id')) || id } 
-        })
-        console.log(dataGenerate?.generateTokenOTP, loadingGenerate)
-    }, [dataGenerate, loadingGenerate])
 
     const {
         register,
