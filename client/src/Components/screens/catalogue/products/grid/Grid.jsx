@@ -66,39 +66,6 @@ const Grid = ({ orderId, refetchCatalogue }) => {
             price={element.price} />
           }) : 'Cargando...')
         }
-        {/* {search === false
-          ? stateproducts && stateproducts?.length > 0
-            ? stateproducts.map((element) => {
-              return (
-                <ProductCard
-                  refetchCatalogue={refetchCatalogue}
-                  orderId={orderId}
-                  key={element.id}
-                  id={element.id}
-                  name={element.name}
-                  image={element.image}
-                  price={element.price}
-                  stock={element.stock}
-                />
-              );
-            })
-            : "Cargando"
-          : arr.length > 0
-            ? arr.map((element) => {
-              return (
-                <ProductCard
-                  refetchCatalogue={refetchCatalogue}
-                  orderId={orderId}
-                  key={element.id}
-                  id={element.id}
-                  name={element.name}
-                  image={element.image}
-                  price={element.price}
-                  stock={element.stock}
-                />
-              );
-            })
-            : "No se encontraron Productos"} */}
       </>
     </StyledGrid>
   );

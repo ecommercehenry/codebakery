@@ -14,6 +14,7 @@ query getOrdersByUserIdInCart($idUser: Int!){
           stock
           image
           price
+          discount
           quantity
         }
       }

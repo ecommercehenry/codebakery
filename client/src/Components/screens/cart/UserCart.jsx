@@ -38,6 +38,7 @@ const UserCart = () => {
             id={order.id}
             name={order.name}
             price={order.price}
+            discount={order.discount}
             stock={order.stock}
             image={order.image}
             quantity={order.quantity}
