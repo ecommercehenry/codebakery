@@ -46,7 +46,6 @@ const UserProfile = () => {
 
   const inputHandler = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -67,19 +66,31 @@ const UserProfile = () => {
     });
   };
 
-  const handleSubmitFA = () => {
+  const handleSubmitFA = (e) => {
+    e.preventDefault()
+    console.log(typeof parseInt(id), typeof parseInt(input.authentication))
     validateTotp({
       variables: {
         userId: parseInt(id),
-        code: input.authentication,
+        code: parseInt(input.authentication),
       },
     });
   };
 
   useEffect(() => {
-    if (!dataGenerate && !loadingGenerate)
+    console.log("helloAfuera:", dataValidate?.validateTOTP.boolean);
+
+    if (!dataValidate && !loadingValidate) {
+      // generateOTP({ variables: { userId: parseInt(id) } });
+      console.log("hello:", dataValidate?.validateTOTP.boolean);
+    }
+  }, [dataValidate, loadingValidate]);
+
+  useEffect(() => {
+    if (!dataGenerate && !loadingGenerate) {
+      console.log("¿Entra?")
       generateOTP({ variables: { userId: parseInt(id) } });
-    console.log(dataGenerate?.generateTokenOTP, loadingGenerate);
+    }
   }, [dataGenerate, loadingGenerate]);
 
   return click === 1 ? (
@@ -391,7 +402,7 @@ const UserProfile = () => {
         paddingLeft: "10vw",
       }}
     >
-      <StyledForm onSubmit={handleSubmitFA}>
+      <StyledForm onSubmit={(e) => handleSubmitFA(e)}>
         <button onClick={() => setClick(1)} className="closeee">
           <img src={closeIcon} width="30px" display="flex" alt="closeIcon" />
         </button>
@@ -401,7 +412,7 @@ const UserProfile = () => {
             <img src={dataGenerate?.generateTokenOTP.image}></img>
             <input
               name="authentication"
-              type="text"
+              type="number"
               placeholder="Authentication code"
               value={input.authentication}
               onChange={(e) => inputHandler(e)}

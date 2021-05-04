@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import "./UserAccount.css";
 import styled from "styled-components";
 import GENERATE_OTP from "../../Apollo/mutations/generateOtp";
 import VALIDATE_TOTP from "../../Apollo/queries/validateTokenTOTP";

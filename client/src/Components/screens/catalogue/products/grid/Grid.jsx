@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
-import { useQuery } from "@apollo/client";
-import GET_BY_PRODUCT from "../../../../../Apollo/queries/getByProduct";
-
-//Components
-import ProductCard from "./ProductCard";
+import styled from 'styled-components';
+//Components 
+import ProductCard from './ProductCard';
 
 const Grid = () => {
   let {status} = useSelector((state)=>state.theme);
@@ -16,21 +13,7 @@ const Grid = () => {
   //     element.name.toLowerCase().includes(filterProduct.toLowerCase()))
   //      //con includes la busq ya no pide exactitud en el string. @Lizen
   // }
-
-  useEffect(() => {
-    if (data) {
-      if (data.product) {
-        data.product.map((e) => {
-          if (e.stock <= 0) {
-            let boton = document.getElementById(`${e.id}`);
-            if (boton != null) {
-              boton.innerHTML = "Sin Stock";
-            }
-          }
-        });
-      }
-    }
-  }, [data])
+  
 
   return (
     <StyledGrid light={status}>

@@ -17,7 +17,7 @@ import '../../Assets/toast.css';
 import TwoFA from "./TwoFA";
 import { saveDataProfile } from "../../actions/dataProfileActions";
 import { EpsBankElement } from "@stripe/react-stripe-js";
-import "../../Assets/toast.css";
+// import "./UserAccount.css";
 
 toast.configure();
 
