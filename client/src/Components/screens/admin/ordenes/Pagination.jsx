@@ -79,14 +79,7 @@ export default function Pagination() {
 
 
 const StyledPagination = styled.div`
-  display: flex;
-  position: fixed;
-  justify-content: center;
-  /* float: right; */
-  width: 77vw;
+  /*
   color:${({light})=>light ? 'black' : 'white'};
-  background: white;
-  z-index: 3;
-  bottom: 0;
-  margin-left: 4rem;
+  */
 `;

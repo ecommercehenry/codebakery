@@ -17,7 +17,7 @@ const FormReview = () => {
    parseInt(index);
 
   const [value, setValue] = React.useState(1);
-  const [addReview, { data, error }] = useMutation(ADD_REVIEW, {
+  const [addReview, { data }] = useMutation(ADD_REVIEW, {
     errorPolicy: 'all'
   });
 
@@ -28,11 +28,16 @@ const FormReview = () => {
   }); 
  let  userId = localStorage.id
  let response;
+ let resultt; 
  
-if(!data?.addReview?.name){
-  response = "You added your comment successfully"
-}else {
-  response = data?.addReview?.name
+if(data){
+  if(data.addReview){
+    response = data.addReview.name;
+  }if(response === undefined){
+    resultt = "You added your comment successfully"
+  }else{
+    resultt = data.addReview.name; 
+  }
 }
 
   const inputHandler = (e) => {
@@ -43,19 +48,19 @@ if(!data?.addReview?.name){
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    let result = await addReview({
+    await addReview({
       variables: {
         productId: parseInt(index.id), 
         userId: parseInt(userId),
         dataReview:{
         title: input.title, 
         description: input.description, 
-        stars: value.toString(), 
+        stars: value === null ? "1" : value.toString()  
         }
       }
     })
-    console.log(result)
     toast(response)
+    window.history.back()
   };
 
   return (

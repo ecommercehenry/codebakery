@@ -21,7 +21,7 @@ export const Us = [
   },
   {
     name: "Lucas Acosta",
-    title: "Full Stack Developer",
+    title: "Front-end Developer",
     img: Lucas,
     git: "https://github.com/lucasacostaa",
     lin: "https://www.linkedin.com/in/lucasuracosta/",

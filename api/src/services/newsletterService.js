@@ -25,7 +25,7 @@ var mailOptions = {
   from: 'codebakeryhenry@gmail.com',
   bcc: emails,
   subject: 'Newsletter! Read for know about offers and news',
-  html: messaje
+  text: messaje
 };
 
 return transporter.sendMail(mailOptions)

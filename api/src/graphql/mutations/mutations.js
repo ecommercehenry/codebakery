@@ -45,4 +45,11 @@ type Mutation{
     
     saveImageSlider(image: String!): resultBoolean
     deleteImageById(imageId: Int!) : resultBoolean
+    addPromo(name: String!, discount: Int!, category: String!, day: String!): resultBoolean
+    applyDiscount(discount: Int!, category: String!): resultBoolean
+    deletePromo(id: Int!): resultBoolean
+    resetDiscount: resultBoolean
+    resetPassword(userId: Int!): resultUsers
+    modifyOrderStore(idStore: Int!, idOrder: Int!): resultBoolean
+
 }`;

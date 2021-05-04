@@ -9,6 +9,7 @@ const linealOrderType = require("./linealOrderType")
 const booleanType = require("./booleanType")
 const ordersType = require("./ordersType")
 const emailType = require("./emailType")
+const promoType = require("./promoType")
 const storeType = require("./storeType")
 
 const image = require("./imageType");
@@ -26,6 +27,7 @@ module.exports = `
     ${ordersType}
     ${emailType}
 
+    ${promoType}
     ${storeType}
     ${image}
 `
