@@ -24,8 +24,8 @@ var transporter = nodemailer.createTransport({
 var mailOptions = {
   from: 'codebakeryhenry@gmail.com',
   bcc: emails,
-  subject: 'Sending Email using Node.js',
-  html: messaje
+  subject: 'Newsletter! Read for know about offers and news',
+  text: messaje
 };
 
 return transporter.sendMail(mailOptions)

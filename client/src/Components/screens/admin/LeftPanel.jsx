@@ -8,6 +8,7 @@ import {
   HiOutlineUser,
 } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
+import { AiOutlineShop } from "react-icons/ai";
 
 //styles
 import styled from "styled-components";
@@ -19,6 +20,8 @@ const LeftPanel = () => {
     products: path.includes("products") ? "active" : "inactive",
     orders: path.includes("orders") ? "active" : "inactive",
     users: path.includes("users") ? "active" : "inactive",
+    store: path.includes("store") ? "active" : "inactive",
+    promos: path.includes("promos") ? "active" : "inactive",
   };
 
   let logout = () => {
@@ -33,7 +36,6 @@ const LeftPanel = () => {
             <div className="userAvatar"></div>
             <div className="userName">User Name</div>
           </div>
-
           <div className="tabs">
             <Link
               className="text-decoration-none text-white"
@@ -69,7 +71,6 @@ const LeftPanel = () => {
                 <span className="tabName">Slider</span>
               </div>
             </Link>
-            {/*Reemplazar la linea de abajo */}
             <Link
               className="text-decoration-none text-white"
               to="/admin/newsletter"
@@ -77,6 +78,24 @@ const LeftPanel = () => {
               <div className={`tab ${activeTab.users}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Newsletter</span>
+              </div>
+            </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/promos"
+            >
+              <div className={`tab ${activeTab.promos}`}>
+                <HiOutlineClipboardList size="1.3rem" className="icon" />
+                <span className="tabName">Promos</span>
+              </div>
+            </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/stores"
+            >
+              <div className={`tab ${activeTab.users}`}>
+                <HiOutlineUser size="1.3rem" className="icon" />
+                <span className="tabName">Stores</span>
               </div>
             </Link>
           </div>
@@ -123,6 +142,43 @@ const StyledPanel = styled.div`
   justify-content: center;
   padding-top: 5vh;
   color: white;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.15);
+
+  li {
+    transition: 1s all;
+    padding: 15px;
+    margin-left: -40px;
+    margin-top: 0px;
+    color: #fff;
+    list-style: none;
+    display: block;
+    border-top-right-radius: 10px 10px;
+    border-bottom-right-radius: 10px 10px;
+  }
+
+  li:hover {
+    transition: 1s all;
+    background-color: #00000040;
+    color: #fff;
+    border-top-right-radius: 10px 10px;
+    border-bottom-right-radius: 10px 10px;
+    cursor: pointer;
+  }
+
+  li ul {
+    background: #5e3f71;
+    margin-left: 140px;
+    margin-top: -38px;
+    display: none;
+    position: absolute;
+    border-top-right-radius: 15px 15px;
+    border-bottom-right-radius: 15px 15px;
+  }
+
+  li:hover > ul {
+    display: block;
+    cursor: pointer;
+  }
 
   .bottom-tabs {
     width: 100%;
@@ -145,7 +201,7 @@ const StyledPanel = styled.div`
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     .userInfo {
       width: 100%;
       height: 19vh;
@@ -182,7 +238,7 @@ const StyledPanel = styled.div`
       font-weight: bold;
       .tab {
         margin-top: 0.5rem;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         display: flex;
         justify-content: flex-start;
         flex-direction: row;

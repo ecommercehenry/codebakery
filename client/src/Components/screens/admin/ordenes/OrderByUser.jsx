@@ -1,7 +1,7 @@
 import React from "react";
-import FormReview from "../../reviews/FormReview"; 
 import { Link, useParams } from "react-router-dom";
-import styled from 'styled-components'; 
+import styled from 'styled-components';
+import AddCircleIcon from '@material-ui/icons/AddCircle'; 
 
 
 const OrderByUser = ({ id, name, price, quantity }) => {
@@ -27,13 +27,19 @@ let idd = useParams();
                         <span>Quantity </span>
                         <p> {quantity}</p>
                     </div>
+                    <div className="text-container">
+                        <span>SubTotal </span>
+                        <p> {price * quantity}</p>
+                    </div>
                     <div >
                     </div>
                     <div className="edit-button">
 
                         <button>
                 <Link to={`/user/addReview/${id}`} >
-                <span style={{ color: '#28004d' }} >Add Comment</span>
+                  <button>
+                  <span style={{ color: '#28004d' }}><AddCircleIcon/>Review</span>
+                  </button>
                 </Link>
               </button>
                     </div>
@@ -54,19 +60,19 @@ margin-top: 2rem;
 //background:red;
 .status-container {
   width: 350px;
-  height: 100px;
+  height: 80px;
   padding: 0.5rem;
   align-items: center;
 }
 .info-container {
   height: 100%;
-  width: 90%;
+  width: 80%;
   display: flex;
   justify-content: space-between;
 }
 .element-container {
   width: 100%;
-  height: 25vh;
+  height: 19vh;
   display: flex;
   align-items: center;
   justify-content: center;

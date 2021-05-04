@@ -19,6 +19,11 @@ module.exports = (sequelize) => {
         type: DataTypes.DOUBLE,
         allowNull: false,
       },
+      discount: {
+        defaultValue: 0,
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       stock: {
         type: DataTypes.INTEGER,
         allowNull: true, //puede no haber informacion de stock en el momento..?

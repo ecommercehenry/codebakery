@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Promo del Lunes",
+        "discount": "11",
+        "day": "Monday",
+        "category": "Vegan"
+    },
+    {
+        "name": "Promo del Martes",
+        "discount": "15",
+        "day": "Tuesday",
+        "category": "Cakes"
+    }
+]

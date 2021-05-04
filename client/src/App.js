@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import Landing from "./Components/screens/landing/Landing";
 import AdminPanel from "./Components/screens/admin/container/AdminPanel";
 import Catalogue from "./Components/screens/catalogue/container/Catalogue";
@@ -26,6 +26,7 @@ import ResetPassword from "./Components/ResetPassword/ResetPassword";
 import UserReview from "./Components/screens/user/UserReview";  
 import UserOrders from "./Components/screens/user/UserOrders";
 import FormReview from "./Components/screens/reviews/FormReview";
+import FormModify from "./Components/screens/reviews/FormModifyReview"
 
 import Sucursales from './Components/Maps/Sucursales'
 import NewsletterAdmin from "./Components/screens/admin/newsletter/NewsletterAdmin";
@@ -63,7 +64,7 @@ function App() {
           {/* <Route path="/admin" component={FormCRUD} /> */}
           <Route path="/admin/add-product" component={AddProductForm} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
-          <Route exact path="/reset-password" component={ResetPassword} />
+          <Route path="/reset-password" component={ResetPassword} />
           <Route exact path="/promote" component={Promote} />
 
           <Route exact path="admin/newsletter" component={NewsletterAdmin} />
@@ -89,11 +90,12 @@ function App() {
           <Route exact path="/about-us" component={AboutUs} />
           <Route exact path="/user/review/:id" component={UserReview} />
           <Route exact path="/user/addReview/:id" component={FormReview} />
+          <Route exact path="/user/modify/review/:id" component={FormModify} />
           <Route exact path="/user/orders/:id" component={UserOrders} /> 
           <Route exact path="/user/:id/profile" component={UserPanel} /> 
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
-          <Route exact path="/reset-password" component={ResetPassword} />
+          <Route path="/reset-password" component={ResetPassword} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
 
           <Route path="/*" component={() => "404 NOT FOUND"} />

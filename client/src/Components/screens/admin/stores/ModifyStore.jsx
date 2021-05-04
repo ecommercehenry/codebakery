@@ -59,6 +59,7 @@ const ModifyStore = () => {
   };
 
   const regex = new RegExp(/^-?\d*\.{0,15}\d+$/);
+
   const handleChange = (e) => {
     if (e.target.value.length >= 2) {
       if (regex.test(e.target.value)) {
@@ -186,7 +187,7 @@ const ModifyStore = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <button type="submit">Save store</button>
+            <button type="submit">Update store</button>
           </Grid>
         </form>
       </div>
