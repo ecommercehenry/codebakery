@@ -1,23 +1,125 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import MODIFY_USER from "../../../../Apollo/mutations/modifyUser";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { toast } from "react-toastify";
 import "../../../../Assets/toast.css";
+import getUserById from "../../../../Apollo/queries/getUserById";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import GET_ALL_STORES from "../../../../Apollo/queries/getAllStores";
+import { Button } from "@material-ui/core";
+import MODIFY_ORDER_STORE from "../../../../Apollo/mutations/modifyOrderStore";
+import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 
 toast.configure();
 
-export default function AddressForm() {
-  const [modifyUser] = useMutation(MODIFY_USER);
+export default function AddressForm({ setUserdata, setShippingtype, setStoreId }) {
+  //variables
+  const regex = new RegExp("^[0-9]*$");
+  const customId = "error toast";
+  let dni = document.getElementById("dni");
+  let phoneNumber = document.getElementById("phoneNumber");
+  let selector = document.getElementById("selector");
+  let selector2 = document.getElementById("selector2");
+
+  //states
+  const [shipping, setShipping] = useState("none");
   const [form, setForm] = useState({
     address: "",
     dni: "",
     phoneNumber: "",
   });
-  const handleChange = (e) => {
+  const [selected, setSelected] = useState("none");
+  //queries
+  const { data, refetch, loading } = useQuery(getUserById, {
+    variables: { id: parseInt(localStorage.id) },
+    fetchPolicy: "no-cache",
+  });
+  const stores = useQuery(GET_ALL_STORES);
+  const order = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
+    variables: {
+      idUser: parseInt(localStorage.id),
+    },
+  });
+  //mutations
+  const [modifyUser] = useMutation(MODIFY_USER);
+  const [modifyOrderStore] = useMutation(MODIFY_ORDER_STORE);
+  //useEffects
+  useEffect(() => {
+    let formContainer = document.getElementById("formContainer");
+    let store = document.getElementById("store");
+    if (formContainer) {
+      if (shipping === "none") {
+        formContainer.style = "display:none";
+        store.style = "display: none";
+      } else if (shipping === "delivery") {
+        formContainer.style = "display: ''";
+        store.style = "display: none";
+      } else if (shipping === "store") {
+        formContainer.style = "display:none";
+        store.style = "display: flex";
+      }
+    }
+  }, [shipping]);
+  useEffect(() => {
+    if (shipping === "delivery") {
+      if (data) {
+        if (data.getUserById) {
+          if (
+            data.getUserById.address === null ||
+            data.getUserById.phoneNumber === null ||
+            data.getUserById.dni === null
+          ) {
+            setUserdata(false);
+          } else {
+            setUserdata(true);
+          }
+        }
+      }
+    } else if (shipping === "none") {
+      setUserdata(false);
+    }
+  }, [loading, data, shipping, selected]);
+  //event Handlers
+  const handleStore = (e) => {
+    e.preventDefault();
+    setSelected(e.target.value);
+    setStoreId(e.target.value)
+  };
+  const submitStore = (e) => {
+    e.preventDefault();
+    if (order && order.data) {
+      let idOrder = order.data.getOrdersByUserIdInCart.orders[0].id;
+      modifyOrderStore({
+        variables: {
+          idStore: parseInt(selected),
+          idOrder: parseInt(idOrder),
+        },
+      });
+    }
+    document.getElementById("confirm-store").style = "display: none";
+    setUserdata(true);
+    toast("Store saved");
+  };
+  const handleAddress = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleChange = (e) => {
+    if (regex.test(e.target.value)) {
+      setForm({ ...form, [e.target.name]: e.target.value });
+    } else {
+      e.target.value = "";
+      toast("Numbers Only", { toastId: customId });
+    }
+  };
+  const handleShipping = (e) => {
+    e.preventDefault();
+    setShipping(e.target.value);
+    setShippingtype(e.target.value);
   };
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -37,18 +139,40 @@ export default function AddressForm() {
     address.disabled = true;
     dni.disabled = true;
     phoneNumber.disabled = true;
+    refetch();
     toast("Datos guardados");
   };
-  let dni = document.getElementById("dni");
-  let phoneNumber = document.getElementById("phoneNumber");
+  // form format/ DOM manipulation
   if (dni) {
     dni.maxLength = "8";
+    dni.minLength = "7";
     phoneNumber.maxLength = "11";
+    phoneNumber.minLength = "10";
+    selector.style = "background: #ffffff"
+    selector2.style = "background: #ffffff"
+
   }
   return (
-    
     <React.Fragment>
-      <form onSubmit={submitHandler}>
+      <div>
+        <FormControl>
+          <InputLabel htmlFor="age-native-simple">Shipping method</InputLabel>
+          <Select
+            fullWidth
+            native
+            onChange={handleShipping}
+            inputProps={{
+              name: "shipping",
+              id: "selector",
+            }}
+          >
+            <option disabled selected aria-label="None" value="none" />
+            <option value="delivery">Home delivery</option>
+            <option value="store">Store pickup</option>
+          </Select>
+        </FormControl>
+      </div>
+      <form onSubmit={submitHandler} id="formContainer">
         <Typography variant="h6" gutterBottom>
           Shipping
         </Typography>
@@ -62,7 +186,7 @@ export default function AddressForm() {
               label="Address"
               fullWidth
               autoComplete="shipping address"
-              onChange={handleChange}
+              onChange={handleAddress}
             />
           </Grid>
           <Grid item xs={12}>
@@ -71,7 +195,7 @@ export default function AddressForm() {
               required
               id="dni"
               name="dni"
-              label="DNI"
+              label="DNI (Only numbers)"
               fullWidth
               autoComplete="dni"
               onChange={handleChange}
@@ -83,24 +207,60 @@ export default function AddressForm() {
               required
               id="phoneNumber"
               name="phoneNumber"
-              label="Phone Number"
+              label="Phone Number (Only numbers)"
               fullWidth
               autoComplete="phone-number"
               onChange={handleChange}
             />
           </Grid>
           <button type="submit" className="save">
-            Guardar los datos
+            Save data
           </button>
         </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="h6" gutterBottom>
+              Your currend data:
+            </Typography>
+            <Typography gutterBottom>
+              User: {data?.getUserById?.name}
+            </Typography>
+            <Typography gutterBottom>DNI: {data?.getUserById?.dni}</Typography>
+            <Typography gutterBottom>
+              Address : {data?.getUserById?.address}
+            </Typography>
+            <Typography gutterBottom>
+              Telephone: {data?.getUserById?.phoneNumber}
+            </Typography>
+          </Grid>
+        </Grid>
       </form>
+      <div id="store">
+        <form onSubmit={submitStore}>
+          <FormControl>
+            <InputLabel htmlFor="age-native-simple">Select store</InputLabel>
+            <Select
+              fullWidth
+              native
+              onChange={handleStore}
+              inputProps={{
+                name: "stores",
+                id: "selector2",
+              }}
+            >
+              <option disabled selected aria-label="None" value="none" />
+              {stores?.data?.getAllStores?.map((element) => (
+                <option value={element.id} key={element.id}>
+                  {element.id}|{element.name}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+          <Button type="submit" id="confirm-store">
+            Confirm store
+          </Button>
+        </form>
+      </div>
     </React.Fragment>
-    
   );
 }
-
-// const StyledContainer = styled.div`
-//   background:red;
-//   width:100vw;
-//   height:fit-content;
-// `;

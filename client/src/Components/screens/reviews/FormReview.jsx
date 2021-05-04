@@ -17,7 +17,7 @@ const FormReview = () => {
    parseInt(index);
 
   const [value, setValue] = React.useState(1);
-  const [addReview, { data, error }] = useMutation(ADD_REVIEW, {
+  const [addReview, { data }] = useMutation(ADD_REVIEW, {
     errorPolicy: 'all'
   });
 

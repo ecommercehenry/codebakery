@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from "google-maps-react";
+import GET_ALL_STORES from "../../Apollo/queries/getAllStores";
+import { useQuery } from "@apollo/client";
 
 const mapStyles = {
   width: "63%",
   height: "64%",
-  margin: '10px'
+  margin: "10px",
 };
 const { REACT_APP_GOOGLE_API } = process.env;
 
 const Maps = (props) => {
+  const { data, loading } = useQuery(GET_ALL_STORES);
+
   const [state, setState] = useState({
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
   });
 
-  const onMarkerClick = (props, marker, e) => {
+  const onMarkerClick = (props, marker) => {
     setState({
       selectedPlace: props,
       activeMarker: marker,
       showingInfoWindow: true,
     });
   };
-  const onClose = (props) => {
+  const onClose = () => {
     if (state.showingInfoWindow) {
       setState({
         showingInfoWindow: false,
@@ -41,21 +45,13 @@ const Maps = (props) => {
           lng: -58.52727261548651,
         }}
       >
-        <Marker
-          onClick={onMarkerClick}
-          name={"Code Bakery Sucursal Unicenter"}
-          position={{ lat: -34.508754829751126, lng: -58.52727261548651 }}
-        />
-        <Marker
-          onClick={onMarkerClick}
-          name={"Code Bakery Sucursal Norcenter"}
-          position={{ lat: -34.5144336270837, lng: -58.52265434383605 }}
-        />
-        <Marker
-          onClick={onMarkerClick}
-          name={"Code Bakery Sucursal Hipolito Yrigoyen"}
-          position={{ lat: -34.50485009641575, lng: -58.5338863866175 }}
-        />
+        {data?.getAllStores?.map((elem) => (
+          <Marker
+            onClick={onMarkerClick}
+            name={elem.name}
+            position={{ lat: elem.lat, lng: elem.long }}
+          />
+        ))}
         <InfoWindow
           marker={state.activeMarker}
           visible={state.showingInfoWindow}

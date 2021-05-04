@@ -1,7 +1,12 @@
 import React from "react";
 
 //icons
-import { HiOutlineExternalLink, HiOutlineLogout, HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
+import {
+  HiOutlineExternalLink,
+  HiOutlineLogout,
+  HiOutlineShoppingBag,
+  HiOutlineUser,
+} from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { AiOutlineShop } from "react-icons/ai";
 
@@ -17,6 +22,7 @@ const LeftPanel = () => {
     orders: path.includes("orders") ? "active" : "inactive",
     users: path.includes("users") ? "active" : "inactive",
     store: path.includes("store") ? "active" : "inactive",
+    promos: path.includes("promos") ? "active" : "inactive",
   };
 
   let logout = () => {
@@ -26,72 +32,73 @@ const LeftPanel = () => {
   return (
     <StyledPanel>
       <div className="content">
-        <section style={{width: "100%"}}>
-        <div className="userInfo">
-          <div className="userAvatar"></div>
-          <div className="userName">User Name</div>
-        </div>
-
-        <div className="tabs">
-          <Link
-            className="text-decoration-none text-white"
-            to="/admin/products"
-          >
-            <div className={`tab ${activeTab.products}`}>
-              <HiOutlineShoppingBag size="1.3rem" className="icon" />
-              <span className="tabName">Products</span>
-            </div>
-          </Link>
-          <Link className="text-decoration-none text-white" to="/admin/orders">
-            <div className={`tab ${activeTab.orders}`}>
+        <section style={{ width: "100%" }}>
+          <div className="userInfo">
+            <div className="userAvatar"></div>
+            <div className="userName">User Name</div>
+          </div>
+          <div className="tabs">
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/products"
+            >
+              <div className={`tab ${activeTab.products}`}>
+                <HiOutlineShoppingBag size="1.3rem" className="icon" />
+                <span className="tabName">Products</span>
+              </div>
+            </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/orders"
+            >
+              <div className={`tab ${activeTab.orders}`}>
+                <HiOutlineClipboardList size="1.3rem" className="icon" />
+                <span className="tabName">Orders</span>
+              </div>
+            </Link>
+            <Link className="text-decoration-none text-white" to="/admin/users">
+              <div className={`tab ${activeTab.users}`}>
+                <HiOutlineUser size="1.3rem" className="icon" />
+                <span className="tabName">Users</span>
+              </div>
+            </Link>
+            <Link className="text-decoration-none text-white" to="/admin/promos">
+            <div className={`tab ${activeTab.promos}`}>
               <HiOutlineClipboardList size="1.3rem" className="icon" />
-              <span className="tabName">Orders</span>
+              <span className="tabName">Promos</span>
             </div>
           </Link>
-          <Link className="text-decoration-none text-white" to="/admin/users">
-            <div className={`tab ${activeTab.users}`}>
-              <HiOutlineUser size="1.3rem" className="icon" />
-              <span className="tabName">Users</span>
-            </div>
-          </Link>
-          
-              <div className={`tab ${activeTab.discounts} link`}>
-              <ul>
-                <li> <AiOutlineShop size="1.3rem" className="icon" />  Discounts
-                  <ul >
-                    <li><a href="#">Slider</a></li>
-                    <li><a href="#">Email</a></li>
-                  </ul>
-                </li>
-              </ul>
-              </div> 
-          
-        </div>
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/stores"
+            >
+              <div className={`tab ${activeTab.users}`}>
+                <HiOutlineUser size="1.3rem" className="icon" />
+                <span className="tabName">Stores</span>
+              </div>
+            </Link>
+          </div>
         </section>
 
-        <section style={{display:"flex", flexDirection: "column", width: "100%"}}>
-        
-        {/* <ThemeSwitch /> */}
+        <section
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
+          {/* <ThemeSwitch /> */}
 
-        <Link 
-            className="text-decoration-none text-white"
-            to="/"
-          >
+          <Link className="text-decoration-none text-white" to="/">
             <div className="bottom-tabs">
-            <HiOutlineExternalLink size="1rem" className="icon"/>
-            <span>Home</span>
-            
+              <HiOutlineExternalLink size="1rem" className="icon" />
+              <span>Home</span>
             </div>
           </Link>
-        <Link 
+          <Link
             className="text-decoration-none text-white"
             to="/"
             onClick={logout}
           >
             <div className="bottom-tabs">
-            <HiOutlineLogout size="1rem" className="icon"/>
-            <span>Logout</span>
-            
+              <HiOutlineLogout size="1rem" className="icon" />
+              <span>Logout</span>
             </div>
           </Link>
         </section>
@@ -114,6 +121,7 @@ const StyledPanel = styled.div`
   justify-content: center;
   padding-top: 5vh;
   color: white;
+  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.15);
 
   li{
     transition: 1s all;
@@ -160,9 +168,9 @@ const StyledPanel = styled.div`
     justify-content: flex-start;
     align-items: center;
     padding-left: 1.6em;
-    margin-top: .5em;
+    margin-top: 0.5em;
 
-    span{
+    span {
       font-size: 1rem;
       margin-left: 0.5rem;
     }
@@ -233,39 +241,39 @@ const StyledPanel = styled.div`
     }
   }
 
-	@media (max-width: 1025px){
-		width: 10rem;
+  @media (max-width: 1025px) {
+    width: 10rem;
 
-		.tabs{
-			.tab{
-				padding-left: 0.75rem!important;
-		}
-	}
+    .tabs {
+      .tab {
+        padding-left: 0.75rem !important;
+      }
+    }
 
-	@media (max-width: 768px){
-		width: 5rem;
+    @media (max-width: 768px) {
+      width: 5rem;
 
-		.content{
-			.userInfo{
-					margin-top: 2rem;
+      .content {
+        .userInfo {
+          margin-top: 2rem;
 
-					.userName{
-						font-size: 1rem!important;
-						text-align: center;
-					}
-			}
-		}
-		
-		.tabs{
-			.tab{
-			padding-left: 1.5rem!important;
-				.tabName{
-					display: none;
-				}
-			}
-		}
-	}
-  }`
+          .userName {
+            font-size: 1rem !important;
+            text-align: center;
+          }
+        }
+      }
 
+      .tabs {
+        .tab {
+          padding-left: 1.5rem !important;
+          .tabName {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default LeftPanel;

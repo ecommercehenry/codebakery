@@ -3,7 +3,7 @@ import {MODIFY_PRODUCT} from "../actions/modifyProductAction";
 import { ADD_CATEGORY_TO_PRODUCT } from "../actions/addCategoryToProductAction";
   
   const initialState = {
-    products:{}
+    products: {}
   };
   const reducer = (state = initialState, action) => {
     let productsModified = state.products
@@ -17,7 +17,7 @@ import { ADD_CATEGORY_TO_PRODUCT } from "../actions/addCategoryToProductAction";
       case MODIFY_PRODUCT:
        for(let key in state.products){
          if(Number(key) === Number(action.payload.id)){
-            productsModified[key]=action.payload.data
+            productsModified[key]=action.payload.data 
          }
        }
         return {

@@ -7,7 +7,7 @@ import { HiSearch } from "react-icons/hi";
 const SearchBar = () => {
 
 const dispatch = useDispatch()
-const [input, setInput] = useState([])
+const [input, setInput] = useState([]) 
 
 const handlerChange = (e) => {
   setInput(e.target.value); 
@@ -16,13 +16,13 @@ const submitHandler = (event) => {
   event.preventDefault();
 } 
 useEffect(() => {
-  dispatch(setSearch(true))
-  dispatch(fetchByName(input))
+  // dispatch(setSearch(true));
+  dispatch(fetchByName(input));
 }, [input])
 
 
   return (
-    <div style={{width:100+"vw", display:"flex", justifyContent:"center"}}>
+    // <div style={{width:100+"vw", display:"flex", justifyContent:"center"}}>
     <StyledSearchBar>
       <HiSearch size="1.5em" color="gray" style={{position: "absolute", left: "15px"}}/>
       <form id="search-form">
@@ -35,7 +35,7 @@ useEffect(() => {
           <button id="search-btn" onClick={submitHandler}>Search</button> 
       </form>
     </StyledSearchBar>
-    </div>
+    // </div>
   )
 };
 
