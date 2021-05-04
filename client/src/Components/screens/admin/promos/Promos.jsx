@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React, {useEffect} from 'react'
 import FormPromo from "./FormPromo"
 import PromoList from "./PromoList"
 import styled from 'styled-components'
