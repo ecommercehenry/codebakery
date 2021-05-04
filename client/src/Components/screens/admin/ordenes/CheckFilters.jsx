@@ -10,8 +10,6 @@ import $ from 'jquery'
 
 function CheckFilters({ displayFilter, setDisplayFilter }) {
   let { status } = useSelector((state) => state.theme);
-  let [all, setAll] = useState(true);
-  let [activeFilters, setActiveFilters] = useState(0)
 
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -32,7 +30,6 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
   };
 
   const handleAllChange = () => {
-    setAll(true)
     document.getElementById("ALL").checked = true;
     handleAll()
   }
