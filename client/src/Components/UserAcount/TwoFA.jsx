@@ -103,7 +103,7 @@ function TwoFA(){
                     {/* <Login /> */}
                     <StyledAcheDos> QR </StyledAcheDos>
                     <hr />
-                    <img src={dataGenerate?.generateTokenOTP.image}></img>
+                    {/* <img src={dataGenerate?.generateTokenOTP.image}></img> */}
                     {/* <img>ffff</img> */}
                     <form onSubmit={handleSubmit(handleValidate)}>
                         <input

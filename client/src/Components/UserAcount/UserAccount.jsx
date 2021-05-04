@@ -53,7 +53,8 @@ const UserAcount = () => {
       if(data.validateUser.token){
         // alert("logueado")
         // si está habilitada la athenticacion twoFA guardamoen en el reducer
-        if(data.validateUser.twoFA || true ){
+        // ññññ
+        if(data.validateUser.twoFA ){
           console.log('yaysyays', data.validateUser)
           dispatch(saveDataProfile(data.validateUser))
         }
@@ -85,7 +86,8 @@ const UserAcount = () => {
       return <Redirect to='/catalogue' />;
     }
   }
-  else if(dataUser.role && dataUser.token && (dataUser.twoFA || true)){
+  // ñññ
+  else if(dataUser.role && dataUser.token && (dataUser.twoFA )){
     return <Redirect to='/TFA' />
   }
   const handleLogin = async (form) => {
