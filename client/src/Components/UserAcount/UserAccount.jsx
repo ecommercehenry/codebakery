@@ -54,9 +54,8 @@ const UserAcount = () => {
       if (data.validateUser.token) {
         // alert("logueado")
         // si está habilitada la athenticacion twoFA guardamoen en el reducer
-        // ññññ
         if(data.validateUser.twoFA ){
-          console.log('yaysyays', data.validateUser)
+          // console.log('yaysyays', data.validateUser)
           dispatch(saveDataProfile(data.validateUser))
         }
         else{
@@ -67,7 +66,7 @@ const UserAcount = () => {
           localStorage.setItem('id', data.validateUser.id);
         }
         // es necesario el reloaded para luego poder redirigir
-        toast(`Hello ${data.validateUser.name}, you must do 2FA`);
+        // toast(`Hello ${data.validateUser.name}, you must do 2FA`);
         // window.location.reload();
       }else{
         toast(data.validateUser.detail)
@@ -78,8 +77,10 @@ const UserAcount = () => {
   let role = localStorage.getItem('role') ;
   let token = localStorage.getItem('token');
   // console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
+  console.log(role, token, dataValidate, 'tasttatas')
   if(role  && token && dataValidate){
     // la redireccion se debe cambiar seún el role del usuario
+    toast(`Welcome ${data.validateUser.name}`);
     if(role === 'admin' && dataValidate?.validateCredentials){
       return <Redirect to='/admin/orders' />;
     }
@@ -87,8 +88,9 @@ const UserAcount = () => {
       return <Redirect to='/catalogue' />;
     }
   }
-  // ñññ
-  else if(dataUser.role && dataUser.token && (dataUser.twoFA )){
+  
+  else if(dataUser.role && dataUser.token && dataUser.twoFA ){
+    toast(`Hello ${data.validateUser.name}, you must do 2FA`);
     return <Redirect to='/TFA' />
   }
   const handleLogin = async (form) => {

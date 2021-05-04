@@ -19,7 +19,7 @@ const dataProfileReducer = (state = initialState, action) => {
             email: action.payload.email,
             role: action.payload.role,
             id : action.payload.id,
-            twoFA:false
+            twoFA: action.payload.twoFA
         }: {...state};
       case CLEAR_DATA_USER_PROFILE:
         return {...state,
