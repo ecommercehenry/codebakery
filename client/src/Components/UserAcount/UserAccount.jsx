@@ -29,18 +29,14 @@ const UserAcount = () => {
     functionValidate,
     { loading: loadingValidate, data: dataValidate },
   ] = useLazyQuery(VALIDATE_CREDENTIALS);
-  // const loadingValidate = validateCredentials[1]?.loading?.validateCredentials,
-  // dataValidate = validateCredentials[1]?.data?.validateCredentials,
-  // functionValidate = validateCredentials[0];
+
   const dataUser = useSelector(state => state.dataProfileReducer)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  //
 
-  //
   // Google login
   const dispatch = useDispatch();
 
@@ -69,7 +65,7 @@ const UserAcount = () => {
           localStorage.setItem('id', data.validateUser.id);
         }
         // es necesario el reloaded para luego poder redirigir
-        toast(`Hello ${data.validateUser.name}, `);
+        toast(`Hello ${data.validateUser.name}, you must do 2FA`);
         // window.location.reload();
       }else{
         toast(data.validateUser.detail)
@@ -79,18 +75,13 @@ const UserAcount = () => {
 
   let role = localStorage.getItem('role') ;
   let token = localStorage.getItem('token');
-  console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
-  if(role  && token && !dataUser.twoFA){
+  // console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
+  if(role  && token && dataValidate){
     // la redireccion se debe cambiar seún el role del usuario
     if(role === 'admin' && dataValidate?.validateCredentials){
-      // 
-      // return <Redirect to='/TFA' />
       return <Redirect to='/admin/orders' />;
     }
     else if(role === 'user' && dataValidate?.validateCredentials) {
-      // 
-      console.log('gagggagsgas')
-      // return <Redirect to='/TFA' />
       return <Redirect to='/catalogue' />;
     }
   }
