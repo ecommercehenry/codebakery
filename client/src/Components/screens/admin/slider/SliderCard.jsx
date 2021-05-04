@@ -1,11 +1,10 @@
 import React from "react";
-import Upload from "../upload/Upload";
+
 import TableSlider from "./TableSlider";
 
 const SliderCard = () => {
   return (
-    <div>
-      <Upload />
+    <div style={{ width: "90%" }}>
       <TableSlider />
     </div>
   );

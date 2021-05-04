@@ -19,7 +19,7 @@ import StoreOptions from "../stores/StoreOptions";
 import StorePanel from "../stores/StoresPanel";
 import ModifyStore from "../stores/ModifyStore";
 
-import NewsletterAdmin from '../newsletter/NewsletterAdmin';
+import NewsletterAdmin from "../newsletter/NewsletterAdmin";
 
 import SliderCard from "../slider/SliderCard";
 
@@ -41,14 +41,14 @@ const AdminPanel = () => {
           />
           <Route path="/admin/orders" component={CheckFilters} />
         </div>
-       
+
         <div className="bottom">
           <Route path="/admin/products" component={ListCRUD} />
           <Route path="/admin/orders" component={TablaOrdenes} />
           <Route path="/admin/users" component={UserAdmin} />
           <Route path="/admin/newsletter" component={NewsletterAdmin} />
-           {/*Borrar la linea de abajo */}
-           <Route path="/admin/slider" component={SliderCard} />
+          {/*Reemplazar la linea de abajo */}
+          <Route path="/admin/slider" component={SliderCard} />
 
           {stores === "seeStores" ? (
             <Route path="/admin/stores" component={StorePanel} />
@@ -59,7 +59,6 @@ const AdminPanel = () => {
           ) : (
             <p></p>
           )}
-
         </div>
         <Route path="/admin/orders">
           <Pagination />
@@ -106,6 +105,7 @@ const StyledAdminPanel = styled.div`
       align-items: center;
       z-index: 1;
       margin-left: 4rem;
+      margin-bottom: 5rem;
     }
     .edit-grid {
       position: absolute;
