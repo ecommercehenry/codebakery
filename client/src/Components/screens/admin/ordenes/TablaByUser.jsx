@@ -11,6 +11,7 @@ const TablaByUser = ({ id }) => {
   });
 
   return (
+
     <StyledTablaa>
       {data?.getOrdersByUserIdInTicket.orders ? (
         data.getOrdersByUserIdInTicket.orders.map((order) =>
@@ -30,6 +31,8 @@ const TablaByUser = ({ id }) => {
         <p></p>
       )}
     </StyledTablaa>
+  
+
   );
 };
 export default TablaByUser;

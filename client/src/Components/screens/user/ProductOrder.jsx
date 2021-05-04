@@ -1,14 +1,12 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
 import styled from 'styled-components';
-import AddCircleIcon from '@material-ui/icons/AddCircle'; 
 
 
-const OrderByUser = ({ id, name, price, quantity }) => {
-let idd = useParams(); 
+const ProductOrder = ({ id, name, price, quantity, image }) => {
+
     return (
      
-        <StyledOrd>
+        <StyledProduct>
             <div key={id} className="element-container">
                 <div className="info-container">
                     <div className="text-container">
@@ -34,26 +32,18 @@ let idd = useParams();
                     <div >
                     </div>
                     <div className="edit-button">
-
-                        <button>
-                <Link to={`/user/addReview/${id}`} >
-                  <button>
-                  <span style={{ color: '#28004d' }}><AddCircleIcon/>Review</span>
-                  </button>
-                </Link>
-              </button>
                     </div>
                 </div>
             </div>
-        </StyledOrd>
+        </StyledProduct>
       
 
     )
 }
 
-export default OrderByUser;
+export default ProductOrder;
 
-const StyledOrd = styled.div`
+const StyledProduct = styled.div`
 display: flex;
 align-items: flex-start;
 justify-content: center;
@@ -111,4 +101,5 @@ margin-top: 2rem;
   border: none;
   background: transparent;
 }
-`;
+
+`; 

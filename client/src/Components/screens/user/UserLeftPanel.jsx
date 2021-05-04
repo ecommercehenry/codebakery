@@ -60,6 +60,17 @@ const UserLeftPanel = ({ click, setClick }) => {
               </button>
             </div>
           </div>
+          <div
+            className="text-decoration-none text-white"
+            to={`/user/review/${id}`}
+          >
+            <div className={`tab  ${activeTab.reviews}`}>
+              <HiOutlineClipboardList size="1.3rem" className="icon" />
+              <button className="tabName" onClick={() => setClick(4)}>
+                Products
+              </button>
+            </div>
+          </div>
           <Link
             className="text-decoration-none text-white"
             to="/"

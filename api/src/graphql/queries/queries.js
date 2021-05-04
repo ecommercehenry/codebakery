@@ -25,5 +25,7 @@ module.exports = `
         getAllStores: [store]
         getByStore(id: Int!) : store
         getPromos: [promo]
+        getAllOrdersUser (userId: Int!): ordersResult
+
     }
 `;

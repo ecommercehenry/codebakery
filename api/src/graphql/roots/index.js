@@ -57,7 +57,8 @@ const {
     getReviewByUserId,
     getAllStores,
     getByStore,
-    getPromos
+    getPromos, 
+    getAllOrdersUser, 
 } = require("./queriesResolvers/")
 
 // product
@@ -121,7 +122,8 @@ const root = {
     getReviewByUserId,
     getPromos,
     getAllStores,
-    getByStore
+    getByStore, 
+    getAllOrdersUser
 }
 
 module.exports = root
