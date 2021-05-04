@@ -5,7 +5,6 @@ import {
   clearCheckboxes,
 } from "../../../../actions";
 import styled from "styled-components";
-import ButtonClear from "./ButtonClear";
 import { useState } from "react";
 import $ from 'jquery'
 
@@ -67,7 +66,6 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
               className="checkbox larger-check"
               id="UNPAID"
               onChange={handleChange}
-              className="larger-check"
             />
             <label for="UNPAID">Unpaid</label>
           </div>
@@ -78,7 +76,6 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
               className="checkbox larger-check"
               id="PAID"
               onChange={handleChange}
-              className="larger-check"
             />
             <label for="PAID">Paid</label>
           </div>
@@ -89,7 +86,6 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
               className="checkbox larger-check"
               id="SENT"
               onChange={handleChange}
-              className="larger-check"
             />
             <label for="SENT">Sent</label>
           </div>
@@ -100,7 +96,6 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
               className="checkbox larger-check"
               id="RECEIVED"
               onChange={handleChange}
-              className="larger-check"
             />
             <label for="RECEIVED">Received</label>
           </div>
@@ -111,7 +106,6 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
               className="checkbox larger-check"
               id="CANCELLED"
               onChange={handleChange}
-              className="larger-check"
             />
             <label for="CANCELLED">Cancelled</label>
           </div>
