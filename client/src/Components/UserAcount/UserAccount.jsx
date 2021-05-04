@@ -50,6 +50,7 @@ const UserAcount = () => {
         },
       });
     }
+
     if (!loading && data) {
       if (data.validateUser.token) {
         // alert("logueado")
@@ -57,6 +58,7 @@ const UserAcount = () => {
         if(data.validateUser.twoFA ){
           // console.log('yaysyays', data.validateUser)
           dispatch(saveDataProfile(data.validateUser))
+          toast(`Hello ${data.validateUser.name}, you must do 2FA`);
         }
         else{
           localStorage.setItem('token', data.validateUser.token);
@@ -64,6 +66,8 @@ const UserAcount = () => {
           localStorage.setItem('email', data.validateUser.email);
           localStorage.setItem('role', data.validateUser.role);
           localStorage.setItem('id', data.validateUser.id);
+          toast(`Welcome ${data.validateUser.name}`);
+          window.location.reload();
         }
         // es necesario el reloaded para luego poder redirigir
         // toast(`Hello ${data.validateUser.name}, you must do 2FA`);
@@ -73,11 +77,12 @@ const UserAcount = () => {
       }
     
   }},[loading, data, dataValidate]);
-
+ 
   let role = localStorage.getItem('role') ;
   let token = localStorage.getItem('token');
   // console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
   console.log(role, token, dataValidate, 'tasttatas')
+  console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
   if(role  && token && dataValidate){
     // la redireccion se debe cambiar seún el role del usuario
     toast(`Welcome ${data.validateUser.name}`);

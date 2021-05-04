@@ -70,7 +70,7 @@ function Login() {
     if(!loadingValidate && dataValidate){
       
       if(dataValidate.validateUserWithGoogle.token){
-        if(dataValidate.validateUserWithGoogle.twoFA || true ){
+        if(dataValidate.validateUserWithGoogle.twoFA ){
           dispatch(saveDataProfile(dataValidate.validateUserWithGoogle));
         }
         else{
