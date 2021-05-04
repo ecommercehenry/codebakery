@@ -13,7 +13,6 @@ import { toast } from "react-toastify";
 import "../../../Assets/toast.css";
 import DisableTFA from "./DisableTFA";
 import StatusAuthentication from "./StatusAuthentication.jsx";
-import closeIcon from "../../../icons/close2.svg"; 
 
 
 toast.configure();
