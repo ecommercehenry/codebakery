@@ -21,7 +21,7 @@ async function dataPopulation() {
     await createUser("lau","12345","lau@gmail.com","user")
     await createUser("guille","12345","guille@gmail.com","user")
     await createUser("pablo","12345","elxebec@gmail.com","user")
-    await createUser("fran","12345","fran@gmail.com","user")
+    await createUser("fran","12345","frank.ronaldo_17@hotmail.com","user")
     await createUser("Nicolas Lohuandus","12345","nlohuandus@gmail.com","user")
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
@@ -100,7 +100,14 @@ async function dataPopulation() {
     await conn.query(`insert into "product-category" ("productId","categoryId") values (8,3)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (9,4)`)
 
-    
+    //Pruebas no debe ir
+    const user = await Users.findOne({
+        where:{
+            id:2
+        }
+    })
+    user.secretOtp = "HBGSUVDMHZLDY7JVMZASULZOIFPCSZKR"
+    user.save()
 
     return true
 

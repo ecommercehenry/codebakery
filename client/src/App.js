@@ -29,16 +29,25 @@ import FormReview from "./Components/screens/reviews/FormReview";
 import FormModify from "./Components/screens/reviews/FormModifyReview"
 
 import Sucursales from './Components/Maps/Sucursales'
-
+import TwoFA from "./Components/UserAcount/TwoFA";
+import { useSelector } from "react-redux";
 
 let token = localStorage.getItem("token");
 let role = localStorage.getItem("role");
 
 function App() {
+  // variable para comprobar si existió 2FA
+  const { twoFA } = useSelector(state => state.dataProfileReducer);
+  // console.log(TwoFA, 'atstattsappppp')
+  // si la TwoFAValidation es true tomamos los valores del LS sino no debemos logear
   const [validateUser, { data, loading }] = useLazyQuery(VALIDATE_CREDENTIALS);
   useEffect(() => {
-    validateUser({ variables: { token: token, role: role } });
+    if(TwoFA){
+      // console.log('tatstatstats')
+      validateUser({ variables: { token: token, role: role } });
+    }
   }, [data]);
+
   const isAuthenticated = data?.validateCredentials;
 
   if (isAuthenticated && role === "admin") {
@@ -91,7 +100,7 @@ function App() {
           <Route exact path="/sign-up" component={CreateUserAccount} />
           <Route exact path="/reset-password" component={ResetPassword} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
-
+          <Route exact path="/TFA" component={TwoFA} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>

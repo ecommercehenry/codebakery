@@ -7,6 +7,7 @@ union resultBoolean  = booleanResponse | error
 union resultOrder = order | error
 union reviewResult = review | error
 union emailResponse = email | error
+union otpTokenResponse = otpToken | error
 type Mutation{
     modifyProduct(id: Int!, dataToModify: productInput!): resultProduct
     updateCategory(id : Int!, input: categoryInput): resultCategory
@@ -37,4 +38,5 @@ type Mutation{
     deleteStore(id:Int):resultBoolean
     modifyOrderStore(idStore: Int!, idOrder: Int!): resultBoolean
     addPromo(name:String!, discount: Int!, day: String!, category: String!): resultBoolean
+    generateTokenOTP(userId: Int!): otpTokenResponse
 }`;
