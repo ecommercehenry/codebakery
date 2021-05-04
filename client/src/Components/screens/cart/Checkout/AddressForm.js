@@ -106,7 +106,7 @@ export default function AddressForm({ setUserdata, setShippingtype, setStoreId }
       setUserdata(true);
       toast("Store saved");
     }else{
-      toast("Must selesct a store")
+      toast("Must select a store")
     }
 
   };
