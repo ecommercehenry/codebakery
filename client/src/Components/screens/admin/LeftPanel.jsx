@@ -69,6 +69,15 @@ const LeftPanel = () => {
                 <span className="tabName">Slider</span>
               </div>
             </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/newsletter"
+            >
+              <div className={`tab ${activeTab.users}`}>
+                <HiOutlineUser size="1.3rem" className="icon" />
+                <span className="tabName">Newsletter</span>
+              </div>
+            </Link>
           </div>
         </section>
 

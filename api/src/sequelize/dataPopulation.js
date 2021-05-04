@@ -28,6 +28,7 @@ async function dataPopulation() {
     await modifyUser(6,null,null,null,null,null,null,null, null, true)
     await modifyUser(7,null,null,null,null,null,null,null, null, true)
     await modifyUser(2,null,null,null,null,null,null,null, null, true)
+    await modifyUser(9,null,null,null,null,null,null,null, null, true)
 
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
