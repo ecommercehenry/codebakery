@@ -16,23 +16,23 @@ import { useDispatch, useSelector } from "react-redux";
 import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
+import { clearDataUserProfile } from "../../actions/dataProfileActions";
 
 toast.configure();
 
 function TwoFA(){
-
-  console.log('atstatstattas')
-    // const [generateOTP, {data: dataGenerate, loading: loadingGenerate}] = useMutation(GENERATE_OTP);
+    const [generateOTP, {data: dataGenerate, loading: loadingGenerate}] = useMutation(GENERATE_OTP);
     const [validateTotp, {data: dataValidate, loading: loadingValidate}] = useLazyQuery(VALIDATE_TOTP);
     const {id, token, name, email, role} = useSelector(state => state.dataProfileReducer);
     const dispatch = useDispatch();
-    // generateOTP({ variables: { userId: parseInt(localStorage.getItem('id'))} });
-    // useEffect(() => {
-    //     if(!dataGenerate && !loadingGenerate) generateOTP({ variables: 
-    //       { userId: parseInt(localStorage.getItem('id')) || id } 
-    //     })
-    //     console.log(dataGenerate?.generateTokenOTP, loadingGenerate)
-    // }, [dataGenerate, loadingGenerate])
+
+    useEffect(() => {
+      console.log(localStorage.getItem('id'), 'ayaysysa', id)
+      if(!dataGenerate && !loadingGenerate) generateOTP({ variables: 
+          { userId: parseInt(localStorage.getItem('id')) || id } 
+        })
+        console.log(dataGenerate?.generateTokenOTP, loadingGenerate)
+    }, [dataGenerate, loadingGenerate])
 
     const {
         register,
@@ -42,19 +42,30 @@ function TwoFA(){
 
     useEffect(() => {
       // colocar info del user en el LS y enviar accion de borrar el stados redux
-      // validateTOTP: {__typename: "booleanResponse", boolean: true}
       if(dataValidate?.validateTOTP.boolean){
         localStorage.setItem('token', token);
         localStorage.setItem('name', name);
         localStorage.setItem('email', email);
         localStorage.setItem('role', role);
         localStorage.setItem('id', id);
-        // dispatch(clearDataUserProfile())
-        toast(`Welcome ${localStorage.getItem(name)}`);
+        dispatch(clearDataUserProfile())
+        toast(`Welcome ${localStorage.getItem('name')}`);
         // window.location.reload();
       }
       
     }, [dataValidate])
+
+    let roleUser = localStorage.getItem('role') ;
+    let tokenUser = localStorage.getItem('token');
+    console.log(roleUser, tokenUser, 'iasiiaisias')
+    if(roleUser  && tokenUser ){
+      if(roleUser === 'admin'){
+        return <Redirect to='/admin/orders' />;
+      }
+      else if( roleUser === 'user' ) {
+        return <Redirect to='/catalogue' />;
+      }
+    }
     const handleValidate = async (form) => {
         // console.log(form.code, 'atstats', form.password);
         validateTotp({
@@ -74,7 +85,7 @@ function TwoFA(){
                     {/* <Login /> */}
                     <StyledAcheDos> QR </StyledAcheDos>
                     <hr />
-                    {/* <img src={dataGenerate?.generateTokenOTP.image}></img> */}
+                    <img src={dataGenerate?.generateTokenOTP.image}></img>
                     {/* <img>ffff</img> */}
                     <form onSubmit={handleSubmit(handleValidate)}>
                         <input

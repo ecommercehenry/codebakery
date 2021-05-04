@@ -51,7 +51,7 @@ const UserAcount = () => {
         // alert("logueado")
         // si está habilitada la athenticacion twoFA guardamoen en el reducer
         if(data.validateUser.twoFA || true ){
-          // console.log('yaysyays')
+          console.log('yaysyays', data.validateUser)
           dispatch(saveDataProfile(data.validateUser))
         }
         else{
@@ -62,13 +62,14 @@ const UserAcount = () => {
           localStorage.setItem('id', data.validateUser.id);
         }
         // es necesario el reloaded para luego poder redirigir
-        toast(`Welcome ${data.validateUser.name}`);
-        window.location.reload();
+        toast(`Hello ${data.validateUser.name}, `);
+        // window.location.reload();
       }else{
         toast(data.validateUser.detail)
       }
     
-  }},[loading, data, dataValidate])
+  }},[loading, data, dataValidate]);
+
   let role = localStorage.getItem('role') ;
   let token = localStorage.getItem('token');
   console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')

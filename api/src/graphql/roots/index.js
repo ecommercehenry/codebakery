@@ -54,7 +54,6 @@ const {
     getReviewByUserId,
     getAllStores,
     getByStore,
-    getReviewByUserId, 
     validateTOTP,
 } = require("./queriesResolvers/")
 

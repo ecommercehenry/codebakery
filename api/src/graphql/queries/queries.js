@@ -22,7 +22,6 @@ module.exports = `
         validateUserWithGoogle(email: String!, tokenId: String): resultValidate
         getReviewByUserId(userId: Int!) : [review]
         validateTOTP(userId:Int!, code:Int!) : resultBoolean
-        getReviewByUserId(userId: Int!) : [review],
         getAllStores: [store]
         getByStore(id: Int!) : store
     }

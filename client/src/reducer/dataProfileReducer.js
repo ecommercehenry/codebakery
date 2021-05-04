@@ -1,4 +1,4 @@
-import { SAVE_DATA_PROFILE } from "../actions/dataProfileActions";
+import { CLEAR_DATA_USER_PROFILE, SAVE_DATA_PROFILE } from "../actions/dataProfileActions";
 
 const initialState = {
     name: '',
@@ -21,7 +21,14 @@ const dataProfileReducer = (state = initialState, action) => {
             id : action.payload.id,
             twoFA:false
         }: {...state};
-  
+      case CLEAR_DATA_USER_PROFILE:
+        return {...state,
+          name: '',
+          token: '',
+          email: '',
+          role: '',
+          id : null,
+        }
       default:
         return state;
     }
