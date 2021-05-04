@@ -1,12 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 import { Rating } from "@material-ui/lab";
 import styled from "styled-components";
 import SettingsIcon from "@material-ui/icons/Settings";
 import DeleteIcon from "@material-ui/icons/Delete";
+import  DELETE_REVIEW  from "../../../Apollo/mutations/deleteReview"; 
 
 
 const ReviewByUser = ({ productId, id, title, description, stars}) => {
+
+  const [deleteReview] = useMutation(DELETE_REVIEW);
+
+  const deleteHandler = async (e, id) => {
+    e.preventDefault()
+    await deleteReview({
+      variables: {
+        id: parseInt(id),
+      },
+    });
+  }
 
   return (
     <StyledRev>
@@ -44,13 +57,13 @@ const ReviewByUser = ({ productId, id, title, description, stars}) => {
               </span>
             </div>
           </Link>
-          <Link to={`/user/modify/delete`}>
-            <div className="edit-button">
+          <button onClick={deleteHandler} >
+          <div className="edit-button">
               <span style={{ color: "#28004d" }}>
                 <DeleteIcon />
               </span>
             </div>
-          </Link>
+          </button>
         </div>
       </div>
     </StyledRev>

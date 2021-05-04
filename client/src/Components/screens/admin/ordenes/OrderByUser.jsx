@@ -37,7 +37,9 @@ let idd = useParams();
 
                         <button>
                 <Link to={`/user/addReview/${id}`} >
-                <span style={{ color: '#28004d' }}><AddCircleIcon/>Review</span>
+                  <button>
+                  <span style={{ color: '#28004d' }}><AddCircleIcon/>Review</span>
+                  </button>
                 </Link>
               </button>
                     </div>

@@ -24,7 +24,7 @@ const ButtonAddCart = ({ id, orderId, refetchCatalogue }) => {
   const dispatch = useDispatch();
   const buttonHandler = async (id, e) => {
     console.log(e.target.innerHTML);
-    if (e.target.innerHTML === "Sin Stock") {
+    if (e.target.innerHTML === "Sin Stock" || e.target.innerText === "Sin Stock") {
       toast("No stock sorry");
     } else if (!logged) {
       dispatch(addProductToCart(id));
