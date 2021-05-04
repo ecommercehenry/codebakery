@@ -8,6 +8,7 @@ import styled from "styled-components";
 import ButtonAddCart from "./ButtonAddCart";
 
 const ProductCard = ({ id, name, image, price, discount, orderId, refetchCatalogue}) => {
+  console.log("price", price,"discount", discount)
   return (
     <StyledCard>
       <Link to={`/catalogue/detail/${id}`} className="link">

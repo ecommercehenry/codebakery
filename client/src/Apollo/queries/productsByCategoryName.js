@@ -8,6 +8,7 @@ query getProductByCategoryName($name: String!){
     price
     stock
     image
+    discount
   }
 }
 `

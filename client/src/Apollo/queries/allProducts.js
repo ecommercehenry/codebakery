@@ -10,6 +10,7 @@ query{
     price
     discount
     stock
+    discount
     categories{
       name
       id

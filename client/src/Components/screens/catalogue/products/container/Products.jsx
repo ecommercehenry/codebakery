@@ -14,7 +14,6 @@ const Products = ({ orderId, refetchCatalogue }) => {
   const dispatch = useDispatch();
 
   let { data } = useQuery(allProducts, { fetchPolicy: "no-cache" });
-
   useEffect(() => {
     dispatch(guardarProductos(data));
   }, [data]);

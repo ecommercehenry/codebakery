@@ -13,7 +13,6 @@ const Grid = ({ orderId, refetchCatalogue }) => {
     (state) => state.reducer
   );
   let arr = [];
-
   if (search === true) {
     arr = allProduct.filter((element) =>
       element.name.toLowerCase().includes(filterProduct.toLowerCase())
@@ -54,7 +53,8 @@ const Grid = ({ orderId, refetchCatalogue }) => {
             id={element.id} 
             name={element.name}
             image={element.image} 
-            price={element.price} />
+            price={element.price}
+            discount= {element.discount} />
           }) : "No se encontraron Productos") : (productsToRender?.length > 0 ? productsToRender.map((element) => {
             return <ProductCard 
             refetchCatalogue={refetchCatalogue}
@@ -63,7 +63,8 @@ const Grid = ({ orderId, refetchCatalogue }) => {
             id={element.id} 
             name={element.name}
             image={element.image} 
-            price={element.price} />
+            price={element.price}
+            discount= {element.discount} />
           }) : 'Cargando...')
         }
       </>
