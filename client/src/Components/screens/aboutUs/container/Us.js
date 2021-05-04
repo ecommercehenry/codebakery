@@ -3,6 +3,7 @@ import Patsy from "./img/patsy.jpg";
 import Lucas from "./img/lucas.jpeg";
 import Santi from "./img/santi.jpg";
 import Jhoa from "./img/jhoa.jpeg";
+import Wenli from "./img/Wenli.jpeg";
 
 export const Us = [
   {
@@ -63,9 +64,9 @@ export const Us = [
     lin: "https://www.linkedin.com/in/nlohuandus/",
   },
   {
-    name: "Laura Wenli Chu",
+    name: "Wenli Chu",
     title: "Full Stack Developer",
-    img: "https://avatars.githubusercontent.com/u/73196552?v=4",
+    img: Wenli,
     git: "https://github.com/Laura87-web",
     lin: "https://www.linkedin.com/in/laura-wenli-chu/",
   },
