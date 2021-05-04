@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import '../Assets/toast.css'
 //styles
 import styled from 'styled-components';
-
 import closeIcon from '../icons/close2.svg'
 
 toast.configure()
@@ -73,6 +72,7 @@ const AddProductForm = ({setAddProduct}) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        console.log(info.image, "nksdksdk");
         if(info.image == ''){toast('Please add an image')}else{
             info.category=selected;
             addProduct({variables:
@@ -114,7 +114,7 @@ const AddProductForm = ({setAddProduct}) => {
     return (
         
         <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.664)', zIndex: 5, position: 'fixed', height: '100vh', width: '100vw', top: '0', left: '0', paddingLeft: '10vw'}}>
-        <StyledForm onSubmit={submitHandler} light={status}>
+        <form onSubmit={submitHandler} light={status}>
             {/* <div className="close" onClick={closeHandler}><img src={closeIcon} alt="closeIcon"/></div> */}
             <Link to="/admin/products" className="close"><img src={closeIcon} alt="closeIcon"/></Link>
             <div className="imageLoaderr">
@@ -190,7 +190,7 @@ const AddProductForm = ({setAddProduct}) => {
             <div className="submitt" >
                 <button type="submit">SAVE CHANGES</button>
             </div>
-        </StyledForm>
+        </form>
         </div>
     )
 }
