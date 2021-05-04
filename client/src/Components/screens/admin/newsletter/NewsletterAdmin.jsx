@@ -6,13 +6,16 @@ import SEND_NEWSLETTER from "../../../../Apollo/mutations/sendNewsletter";
 
 export default function NewsletterAdmin(){
 
-   
     const [sendNews, loading, error] = useMutation(SEND_NEWSLETTER, {});
     const [preview,setPreview] = useState('');
     const [info, setInfo] = useState({
         description:'',
         image:''
     })
+
+    const inputHandler = (e) => {
+        return setInfo({...info,[e.target.name]:e.target.value})
+    }
 
     const imageHandler = (e) => {
         const image = e.target.files[0];
@@ -26,18 +29,21 @@ export default function NewsletterAdmin(){
         fileReader.onloadend = () => {
             setPreview(fileReader.result);
             setInfo({...info,image:fileReader.result});
-        }
-        
+        }   
     }
 
-    let messajeExport = info.image;
+    // let messajeExport =`<html><span>Hi ${info.description}</span> <br>
+    // <img src=${info.image}/>
+    // </html>`
 
+    
     function handlerOnClick (e){
+        console.log(info, 'info');
         e.preventDefault();
-       console.log(messajeExport, 'info image');
+      // console.log(messajeExport, 'info image');
         sendNews({
             variables: {
-              message: messajeExport,
+              message: info.image,
               
             },
           })
@@ -48,7 +54,16 @@ export default function NewsletterAdmin(){
     return(
 
         <form onSubmit={handlerOnClick} >
-           
+           <div className="descriptionn">
+                    <label>Description</label>
+                    <textarea 
+                        name="description"
+                        type="text" 
+                        placeholder="add a description..." 
+                        value={info.description} 
+                        onChange={inputHandler}
+                    />
+                </div>
            <div className="imageLoaderr">
                 <div className="previeww">
                     {
