@@ -102,6 +102,16 @@ width:100%;
 margin-top: 0.5rem;
 height: 100%;
 
-
+button{
+    border: none;
+    color: beige;
+    border-radius: 15px;
+    padding: 1px;
+    margin-left: 6px;
+    height: fit-content;
+    background-color: rgb(126, 96, 155);
+    border: none;
+    padding: 6px;
+}
 
 `;
