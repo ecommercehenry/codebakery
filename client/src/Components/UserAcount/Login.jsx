@@ -85,7 +85,7 @@ function Login() {
   useEffect(()=>{
     if(!loadingUser && dataUser){
       // 
-      validate({variables: {email: dataUser.createUser.email}});
+      validate({variables: {email: dataUser.createUser.email}}); 
       // 
     }
   },[loadingUser, dataUser])

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import "./UserAccount.css";
@@ -8,14 +8,16 @@ import CREATE_USER from "../../Apollo/mutations/createUser";
 
 import { Redirect } from "react-router-dom";
 
-// Login/ out
 import Login from "./Login";
 import Logout from "./Logout";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
 import '../../Assets/toast.css'; 
+import TwoFA from "./TwoFA";
+import { saveDataProfile } from "../../actions/dataProfileActions";
+import { EpsBankElement } from "@stripe/react-stripe-js";
 
 toast.configure() 
 
@@ -27,6 +29,7 @@ const UserAcount = () => {
   // const loadingValidate = validateCredentials[1]?.loading?.validateCredentials, 
   // dataValidate = validateCredentials[1]?.data?.validateCredentials,
   // functionValidate = validateCredentials[0];
+  const dataUser = useSelector(state => state.dataProfileReducer)
   const {
     register,
     handleSubmit,
@@ -43,39 +46,49 @@ const UserAcount = () => {
       
       functionValidate({ variables: { token: localStorage.getItem('token'), role: localStorage.getItem('role') } });
     }
-    if(!loading && data){
+    if(!loading && data ){
       if(data.validateUser.token){
         // alert("logueado")
-        localStorage.setItem('token', data.validateUser.token);
-        localStorage.setItem('name', data.validateUser.name);
-        localStorage.setItem('email', data.validateUser.email);
-        localStorage.setItem('role', data.validateUser.role);
-        localStorage.setItem('id', data.validateUser.id);
+        // si está habilitada la athenticacion twoFA guardamoen en el reducer
+        if(data.validateUser.twoFA || true ){
+          console.log('yaysyays', data.validateUser)
+          dispatch(saveDataProfile(data.validateUser))
+        }
+        else{
+          localStorage.setItem('token', data.validateUser.token);
+          localStorage.setItem('name', data.validateUser.name);
+          localStorage.setItem('email', data.validateUser.email);
+          localStorage.setItem('role', data.validateUser.role);
+          localStorage.setItem('id', data.validateUser.id);
+        }
         // es necesario el reloaded para luego poder redirigir
-        toast(`Welcome ${data.validateUser.name}`);
-        window.location.reload();
+        toast(`Hello ${data.validateUser.name}, `);
+        // window.location.reload();
       }else{
         toast(data.validateUser.detail)
       }
     
-  }},[loading, data, dataValidate])
-  let role = localStorage.getItem('role');
+  }},[loading, data, dataValidate]);
+
+  let role = localStorage.getItem('role') ;
   let token = localStorage.getItem('token');
-  if(role  && token){
+  console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
+  if(role  && token && !dataUser.twoFA){
     // la redireccion se debe cambiar seún el role del usuario
     if(role === 'admin' && dataValidate?.validateCredentials){
       // 
+      // return <Redirect to='/TFA' />
       return <Redirect to='/admin/orders' />;
     }
     else if(role === 'user' && dataValidate?.validateCredentials) {
       // 
+      console.log('gagggagsgas')
+      // return <Redirect to='/TFA' />
       return <Redirect to='/catalogue' />;
     }
-    // else {
-    //   
-    //   // localStorage.clear();
-    //   return <Redirect to='/log-in' />;
-    // };
+  }
+  else if(dataUser.role && dataUser.token && (dataUser.twoFA || true)){
+    return <Redirect to='/TFA' />
   }
   const handleLogin = async (form) => {
     login({variables: {email:form.login,password:form.password}});

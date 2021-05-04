@@ -27,6 +27,7 @@ const {modifyStore} = require("./modifyStore")
 const {deleteStore} = require("./deleteStore")
 const {modifyOrderStore} = require("./modifyOrderStore")
 const {addPromo} = require("./addPromo")
+const {generateTokenOTP} = require("./generateTokenOTP")
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -57,5 +58,6 @@ module.exports = {
   modifyStore,
   deleteStore, 
   modifyOrderStore, 
-  addPromo
+  addPromo,
+  generateTokenOTP
 }

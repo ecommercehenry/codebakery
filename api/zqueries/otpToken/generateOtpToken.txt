@@ -1,0 +1,15 @@
+mutation generateTokenOtp($userId:Int!){
+  generateTokenOTP(userId:$userId){
+    ... on otpToken{
+      image
+    }
+    ... on error{
+      name
+      detail
+    }
+  }
+}
+
+{
+  "userId": 1
+}
