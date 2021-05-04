@@ -1,6 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-
+import React from "react";
+import { Link } from "react-router-dom";
 
 //styles
 import styled from "styled-components";
@@ -8,24 +7,31 @@ import styled from "styled-components";
 //Components
 import ButtonAddCart from "./ButtonAddCart";
 
-const ProductCard = ({id,name,image, price }) => {
-    return (
-        <StyledCard>
-            <Link to={`/catalogue/detail/${id}`} className='link'>
-                <div className="image">
-                    <img src={image} alt={name}/>
-                </div>
-                <div className="name"><span>{name}</span></div>
-                <div className="price"><span>$ {price}</span></div>
-            </Link>
-            <div className="btn">
-                       <ButtonAddCart id={id} />
-                       </div> 
-            </StyledCard>
-            
-        
-    )
-}
+const ProductCard = ({ id, name, image, price, orderId, refetchCatalogue}) => {
+  return (
+    <StyledCard>
+      <Link to={`/catalogue/detail/${id}`} className="link">
+        <div className="image">
+          <img src={image} alt={name} />
+        </div>
+        <div className="name">
+          <span>{name}</span>
+        </div>
+        <div className="price">
+          <span>$ {price}</span>
+        </div>
+      </Link>
+      <div className="btn">
+        <ButtonAddCart
+          refetchCatalogue={refetchCatalogue}
+          orderId={orderId}
+          id={id}
+          className={id}
+        />
+      </div>
+    </StyledCard>
+  );
+};
 
 const media = {
   tablet: "@media(min-width:768px)",
@@ -34,7 +40,7 @@ const media = {
 };
 
 const StyledCard = styled.div`
-  //background:green;
+  //background: green;
   //width:23vw;
   height: 20rem;
   margin: 2rem 3rem;

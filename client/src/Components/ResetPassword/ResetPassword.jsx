@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useMutation } from "@apollo/client";
+import { useSelector, useDispatch } from "react-redux";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import MODIFY_USER from "../../Apollo/mutations/modifyUser";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams, useLocation, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../Assets/toast.css";
 import styled from "styled-components";
+import GET_ALL_USERS from "../../Apollo/queries/getAllUsers";
+import RESET_PASSWORD from "../../Apollo/mutations/resetPassword";
+import { saveToken } from "../../actions/saveToken";
+
 
 toast.configure();
 
@@ -14,14 +19,32 @@ function ResetPassword() {
     Si la contraseña y el email coinciden lo dejo actualizar
     con la otra contraseña que envié
   */
+  const customId = 1;
+  const dispatch = useDispatch();
+
   const [modifyUser, { data, loading }] = useMutation(MODIFY_USER);
-  let redirect = localStorage.getItem("redirect");
+  const { data: dataUsers } = useQuery(GET_ALL_USERS);
+  const [
+    resetPassword,
+    { data: dataReset, loading: loadingReset },
+  ] = useMutation(RESET_PASSWORD);
+
+  const { token, emailReducer } = useSelector((state) => state.reducerToken);
+
   const [input, setInput] = useState({
     email: "",
-    oldPassword: "",
+    // oldPassword: "",
     newPassword: "",
     newnewPasswordRepeat: "",
   });
+
+  const [flagSubmit, setFlagSubmit] = useState(false);
+
+  const search = useLocation().search;
+  const resetToken = new URLSearchParams(search).get("resetToken");
+  const email = new URLSearchParams(search).get("email");
+  // const newPassword = new URLSearchParams(search).get("newPassword");
+  // const newPasswordRepeat = new URLSearchParams(search).get("newPasswordRepeat");
 
   function handleInputChange(e) {
     setInput({
@@ -30,106 +53,137 @@ function ResetPassword() {
     });
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmitOne = (e) => {
     e.preventDefault();
-    modifyUser({
-      variables: {
-        id: null,
-        name: null,
-        password: input.oldPassword,
-        newPassword: input.newPassword,
-        email: input.email,
-        role: null,
-        address: null,
-        dni: null,
-        phoneNumber: null,
-      },
-    });
-  };
-
-  const customId = 1;
-
-  useEffect(() => {
     if (
       input.newPassword !== "" &&
       input.newPasswordRepeat !== "" &&
       input.newPassword !== input.newPasswordRepeat
     ) {
       toast("New passwords should match", {
-        toastId: customId
+        toastId: customId,
       });
-    } else if (!loading) {
-      if (data?.modifyUser.__typename === "error") {
-        toast(data?.modifyUser.detail, {
-          toastId: customId
+    }
+    else if ((token === resetToken) && (emailReducer === email)) {
+      if (resetToken && email) {
+        modifyUser({
+          variables: {
+            id: null,
+            name: null,
+            password: null,
+            newPassword: input.newPassword,
+            email: email,
+            role: null,
+            address: null,
+            dni: null,
+            phoneNumber: null,
+          },
         });
-      } else if (data?.modifyUser.__typename === "user") {
-        toast("Your password has successfully changed");
-        localStorage.setItem("redirect", true);
-        setInput({
-          email: "",
-          oldPassword: "",
-          newPassword: "",
-          newPasswordRepeat: "",
+      }
+      toast("You have changed password successfully", {
+        toastId: customId,
+      });
+      setFlagSubmit(true);
+      dispatch(saveToken("", ""));
+    } else {
+      toast("Try resetting your password again", {
+        toastId: customId,
+      });
+    }
+  };
+
+  const handleSubmitTwo = (e) => {
+    e.preventDefault();
+    if (dataUsers?.getAllUsers) {
+      let user = dataUsers.getAllUsers.filter(
+        (el) => el.email === input.email
+      )[0];
+      if (user) {
+        resetPassword({ variables: { userId: user.id } });
+        toast("Check your email and reset your password", {
+          toastId: customId,
         });
-        window.location.reload();
+      } else {
+        toast("User Not Found", {
+          toastId: customId,
+        });
       }
     }
-  }, [data]);
+  };
 
-  if (redirect) {
-    localStorage.setItem("redirect", false);
-    return <Redirect to="/log-in" />;
-  }
+  useEffect(() => {
+    if (dataReset?.resetPassword) {
+      dispatch(saveToken(dataReset?.resetPassword.token, dataReset?.resetPassword.email));
+    }
+  }, [dataReset, loadingReset]);
 
-  return (
-    <div
-      classname="page"
-      style={{ height: "100vh", display: "flex", alignItems: "center" }}
-    >
-      <div className="wrapper fadeInDown" style={{ marginBottom: "10vh" }}>
-        <div className="formContent">
-          <StyledAcheDos></StyledAcheDos>
-          <hr />
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <input
-              type="email"
-              name="email"
-              onChange={handleInputChange}
-              value={input.email}
-              placeholder="Email"
-              required
-            />
-            <input
-              type="password"
-              name="oldPassword"
-              onChange={handleInputChange}
-              value={input.oldPassword}
-              placeholder="Current password"
-              required
-            />
-            <input
-              type="password"
-              name="newPassword"
-              onChange={handleInputChange}
-              value={input.newPassword}
-              placeholder="New password"
-              required
-            />
-            <input
-              type="password"
-              name="newPasswordRepeat"
-              onChange={handleInputChange}
-              value={input.newPasswordRepeat}
-              placeholder="Confirm new password"
-              required
-            />
-            <input type="submit" value="SUBMIT" />
-          </form>
+  if (flagSubmit) {
+    return <Redirect to="/" />;
+  } else if (resetToken && email) {
+    return (
+      <div
+        className="page"
+        style={{ height: "100vh", display: "flex", alignItems: "center" }}
+      >
+        <div className="wrapper fadeInDown" style={{ marginBottom: "10vh" }}>
+          <div className="formContent">
+            <StyledAcheDos></StyledAcheDos>
+            <hr />
+            <form onSubmit={(e) => handleSubmitOne(e)}>
+              <input
+                type="password"
+                name="newPassword"
+                onChange={handleInputChange}
+                value={input.newPassword}
+                placeholder="New password"
+                required
+              />
+              <input
+                type="password"
+                name="newPasswordRepeat"
+                onChange={handleInputChange}
+                value={input.newPasswordRepeat}
+                placeholder="Confirm new password"
+                required
+              />
+              <input type="submit" value="SUBMIT" />
+              <div className="formFooter">
+                <Link to="/log-in">Login</Link>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div
+        className="page"
+        style={{ height: "100vh", display: "flex", alignItems: "center" }}
+      >
+        <div className="wrapper fadeInDown" style={{ marginBottom: "10vh" }}>
+          <div className="formContent">
+            <StyledAcheDos></StyledAcheDos>
+            <hr />
+            <form onSubmit={(e) => handleSubmitTwo(e)}>
+              <input
+                type="email"
+                name="email"
+                onChange={handleInputChange}
+                value={input.email}
+                placeholder="Email"
+                required
+              />
+              <input type="submit" value="SUBMIT" />
+              <div className="formFooter">
+                <Link to="/catalogue">Go home</Link>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 const StyledAcheDos = styled.h2`

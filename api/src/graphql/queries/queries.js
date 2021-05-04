@@ -5,7 +5,7 @@ module.exports = `
     type Query{
         product: [product],
         productById(id :Int!): product,
-        productCategory(id: Int!): product
+        productCategory(id: Int!): product,
         getProductByCategoryName(name: String!): [product],
         getAllCategories:[category],
         getProductByName(name: String!): product, 
@@ -24,5 +24,6 @@ module.exports = `
         validateTOTP(userId:Int!, code:Int!) : resultBoolean
         getAllStores: [store]
         getByStore(id: Int!) : store
+        getPromos: [promo]
     }
 `;

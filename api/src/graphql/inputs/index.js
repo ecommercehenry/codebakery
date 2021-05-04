@@ -3,6 +3,7 @@ const dataProductsOrderInput = require("./dataProductsOrderInput");
 const productInput = require("./productInput");
 const reviewInput = require("./reviewInput");
 const storeInput = require("./storeInput");
+const promoInput = require("./promoInput");
 
 // aqui exportas tu input
 module.exports = `
@@ -11,4 +12,5 @@ module.exports = `
     ${dataProductsOrderInput}
     ${reviewInput}
     ${storeInput}
+    ${promoInput}
 `;

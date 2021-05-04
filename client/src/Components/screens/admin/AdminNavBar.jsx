@@ -1,23 +1,26 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, Route } from "react-router-dom";
+import SearchBarUserAdmin from "./ordenes/SearchBarUserAdmin";
 
 //styles
 import styled from "styled-components";
 import FormCreateCategory from "../../FormCreateCategory/FormCreateCategory";
 import SortByPrice from "./ordenes/SortByPrice";
+import PromoNavBar from "./promos/PromoNavBar"
+import AddPromoButton from "./promos/AddPromoButton"
 
 //components
 import SearchBar from "./SearchBar";
 import SearchBarAdmin from "./SearchBarAdmin";
 
-const AdminNavBar = ({ setAddProduct }) => {
+const AdminNavBar = ({ setAddProduct, promo, setPromo }) => {
   const buttonHandler = () => {
     setAddProduct(true);
   };
 
   const [add, setAdd] = useState(false);
-  let {status} = useSelector((state)=>state.theme);
+  let { status } = useSelector((state) => state.theme);
 
   return (
     <StyledNavBar light={status}>
@@ -34,12 +37,25 @@ const AdminNavBar = ({ setAddProduct }) => {
 
         <Route path="/admin/users">
           <div className="optionTab">USERS</div>
+          <SearchBarUserAdmin />
         </Route>
+        
+        <Route path="/admin/promos">
+          <div className="optionTab">PROMOS</div>
+          <PromoNavBar/>
+        </Route>
+        
       </div>
 
       <Route path="/admin/orders">
         <div className="onRight">
-          <SortByPrice />
+        <SortByPrice />
+        </div>
+      </Route>
+
+      <Route path="/admin/promos">
+        <div className="onRight">
+          <AddPromoButton setPromo={setPromo}/>
         </div>
       </Route>
 
@@ -71,15 +87,16 @@ const AdminNavBar = ({ setAddProduct }) => {
 };
 
 const StyledNavBar = styled.div`
-  width: 77vw;
+  width: 100%;
   max-width: 100%;
   height: 6em;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 6rem 0 4rem;
+  background: #f1f1f1;
+
   background: ${({light})=>light 
-    ? 'white' 
+    ? '#f1f1f1' 
     : '#222222'};
   .onLeft {
     .optionTab {
@@ -87,7 +104,7 @@ const StyledNavBar = styled.div`
       height: 4.5vh;
       font-size: 2em;
       display: flex;
-      align-items: center;
+      align-items: center
     }
     display: flex;
     justify-content: space-between;

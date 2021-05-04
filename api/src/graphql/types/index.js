@@ -8,6 +8,7 @@ const linealOrderType = require("./linealOrderType")
 const booleanType = require("./booleanType")
 const ordersType = require("./ordersType")
 const emailType = require("./emailType")
+const promoType = require("./promoType")
 const storeType = require("./storeType")
 const otpToken = require("./otpToken")
 // aqui exportas tu type
@@ -23,5 +24,6 @@ module.exports = `
     ${ordersType}
     ${emailType}
     ${otpToken}
+    ${promoType}
     ${storeType}
 `

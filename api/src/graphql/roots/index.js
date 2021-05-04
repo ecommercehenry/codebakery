@@ -23,13 +23,16 @@ const {
     modifyReview,
     deleteUser,
     sendEmail,
+    resetPassword,
     addStore,
     modifyStore,
     deleteStore, 
     modifyOrderStore, 
     addPromo,
+    applyDiscount,
+    resetDiscount,
+    deletePromo,
     generateTokenOTP,
-    
 } = require("./mutationsResolver/")
 
 const {
@@ -55,6 +58,7 @@ const {
     getAllStores,
     getByStore,
     validateTOTP,
+    getPromos
 } = require("./queriesResolvers/")
 
 // product
@@ -82,11 +86,15 @@ const root = {
     modifyReview,
     sendEmail,
     deleteUser,
+    resetPassword,
     addStore,
     modifyStore,
     deleteStore,
     modifyOrderStore,
-    addPromo, 
+    addPromo,
+    applyDiscount,
+    resetDiscount,
+    deletePromo,  
     generateTokenOTP,
 
     //Queries    
@@ -113,6 +121,7 @@ const root = {
     getAllReviewsFromAProduct,
     validateUserWithGoogle,
     getReviewByUserId,
+    getPromos,
     getAllStores,
     getByStore,
     validateTOTP

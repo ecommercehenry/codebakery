@@ -19,6 +19,7 @@ const LeftPanel = () => {
     products: path.includes("products") ? "active" : "inactive",
     orders: path.includes("orders") ? "active" : "inactive",
     users: path.includes("users") ? "active" : "inactive",
+    promos: path.includes("promos") ? "active" : "inactive",
   };
 
   let logout = () => {
@@ -58,6 +59,12 @@ const LeftPanel = () => {
                 <span className="tabName">Users</span>
               </div>
             </Link>
+            <Link className="text-decoration-none text-white" to="/admin/promos">
+            <div className={`tab ${activeTab.promos}`}>
+              <HiOutlineClipboardList size="1.3rem" className="icon" />
+              <span className="tabName">Promos</span>
+            </div>
+          </Link>
             <Link
               className="text-decoration-none text-white"
               to="/admin/stores"
@@ -111,6 +118,7 @@ const StyledPanel = styled.div`
   justify-content: center;
   padding-top: 5vh;
   color: white;
+  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.15);
 
   .bottom-tabs {
     width: 100%;

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import Landing from "./Components/screens/landing/Landing";
 import AdminPanel from "./Components/screens/admin/container/AdminPanel";
 import Catalogue from "./Components/screens/catalogue/container/Catalogue";
@@ -72,7 +72,7 @@ function App() {
           {/* <Route path="/admin" component={FormCRUD} /> */}
           <Route path="/admin/add-product" component={AddProductForm} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
-          <Route exact path="/reset-password" component={ResetPassword} />
+          <Route path="/reset-password" component={ResetPassword} />
           <Route exact path="/promote" component={Promote} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
@@ -98,7 +98,7 @@ function App() {
           <Route exact path="/user/:id/profile" component={UserPanel} /> 
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
-          <Route exact path="/reset-password" component={ResetPassword} />
+          <Route path="/reset-password" component={ResetPassword} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route exact path="/TFA" component={TwoFA} />
           <Route path="/*" component={() => "404 NOT FOUND"} />

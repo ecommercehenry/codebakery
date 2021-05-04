@@ -1,4 +1,4 @@
-const { Product, Category, Users, conn } = require("../db");
+const { Product, Category, Users, conn, Promo } = require("../db");
 const { createOrder, getOrderById, updateOrderToTicket, modifyOrderStatus, modifyOrderCancelled } = require("../services/orderService");
 const { addReview } = require("../services/reviewsService");
 const { createUser } = require("../services/userService");
@@ -7,11 +7,13 @@ const {addStore} = require("../services/storeService")
 const MOCK_CATEOGRIES = require("./MOCK_CATEOGRIES.json");
 const MOCK_PRODUCTS = require("./MOCK_PRODUCTS.json");
 const MOCK_USER = require("./MOCK_USER.json");
+const MOCK_PROMOS = require("./MOCK_PROMOS.json");
 
 async function dataPopulation() {
     
     await Category.bulkCreate(MOCK_CATEOGRIES),
     await Product.bulkCreate(MOCK_PRODUCTS)
+    await Promo.bulkCreate(MOCK_PROMOS)
     await createUser("admin","12345","admin@admin.com","admin")
     await createUser("santi","12345","santiagorincon2001@gmail.com","user")
     await createUser("ivan","12345","ivan@gmail.com","user")
@@ -21,8 +23,9 @@ async function dataPopulation() {
     await createUser("lau","12345","lau@gmail.com","user")
     await createUser("guille","12345","guille@gmail.com","user")
     await createUser("pablo","12345","elxebec@gmail.com","user")
-    await createUser("fran","12345","frank.ronaldo_17@hotmail.com","user")
     await createUser("Nicolas Lohuandus","12345","nlohuandus@gmail.com","user")
+    await createUser("fran","12345","frank.ronaldo_17@hotmail.com","user")
+
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
     await createOrder([{id:3,quantity:6},{id:7,quantity:5}],1)
