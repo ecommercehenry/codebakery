@@ -10,10 +10,7 @@ import BootBox from "react-bootbox";
 function UserInfo({ id, name, email, address, dni, phoneNumber, role }) {
   const [show, setShow] = useState(false);
 
-  const [
-    deleteUser,
-    { data: dataDeleteUser, loading: loadingMutation },
-  ] = useMutation(DELETE_USER, {
+  const [deleteUser] = useMutation(DELETE_USER, {
     refetchQueries: [{ query: GET_ALL_USERS }],
   });
 

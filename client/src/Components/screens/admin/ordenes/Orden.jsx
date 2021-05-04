@@ -60,7 +60,7 @@ export default function Orden({ id, orden }) {
     }
   };
 
-  const [modifyOrderStatus, { data, loading }] = useMutation(
+  const [modifyOrderStatus] = useMutation(
     MODIFY_ORDER_STATUS
   );
 

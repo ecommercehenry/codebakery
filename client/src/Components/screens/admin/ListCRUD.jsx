@@ -47,37 +47,9 @@ function ListCRUD({setPromo}) {
     setPage(0)
   }, [rowsPerPage])
 
-  function isScrollable(element) {
-    /* console.log(element.attributes) */
-    const childNodes = element
-    /* let heightSum = 0;
-    for (let key in childNodes) {
-      if(typeof childNodes[key]?.offsetHeight !== "undefined")
-          heightSum += parseInt(childNodes[key]?.offsetHeight, 10)
-      } */
-    
-    /* return element.scrollHeight > heightSum; */
-    return childNodes
-  };
-
-
-  if(document.getElementById('table-body')){
-    var myParent = document.getElementById('table-body').attributes
-   /*  document.getElementById('table-body').style.display =  */ 
-  }
-
-  //
   return (
     <StyledListCRUD>
       <table border="0" cellPadding="0" cellSpacing="0" className="flexy">
-          {/* <colgroup>
-            <col span="1" style={{width: "2%"}}/>
-            <col span="1" style={{width: "30%"}}/>
-            <col span="1" style={{width: "25%"}}/>
-            <col span="1" style={{width: "10%"}}/>
-            <col span="1" style={{width: "10%"}}/>
-            <col span="2" style={{width: "5%"}}/>
-          </colgroup> */}
         <thead>
           <tr>
             <th width="10%" id="img-column">{/* Blank characters -->*/}⠀⠀⠀⠀⠀⠀</th> 

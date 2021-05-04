@@ -1,4 +1,4 @@
-import React, { useEffect, useDispatch } from "react";
+import React, { useEffect } from "react";
 import { useLazyQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -31,12 +31,7 @@ const UserAcount = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  //
-
-  //
-  // Google login
-  const dispatch = useDispatch();
-
+  
   useEffect(() => {
     if (localStorage.getItem("token")) {
       functionValidate({

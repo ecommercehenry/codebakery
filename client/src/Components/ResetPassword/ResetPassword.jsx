@@ -22,7 +22,7 @@ function ResetPassword() {
   const customId = 1;
   const dispatch = useDispatch();
 
-  const [modifyUser, { data, loading }] = useMutation(MODIFY_USER);
+  const [modifyUser] = useMutation(MODIFY_USER);
   const { data: dataUsers } = useQuery(GET_ALL_USERS);
   const [
     resetPassword,

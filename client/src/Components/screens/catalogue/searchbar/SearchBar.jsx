@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchByName, setSearch } from '../../../../actions';
+import { fetchByName } from '../../../../actions';
 import { useDispatch} from "react-redux";
 import styled from 'styled-components';
 import { HiSearch } from "react-icons/hi";

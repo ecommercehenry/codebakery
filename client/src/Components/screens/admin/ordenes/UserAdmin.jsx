@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GET_ALL_USERS from "../../../../Apollo/queries/getAllUsers";
 import styled from "styled-components";
@@ -9,7 +9,6 @@ import {
 } from "../../../../actions/index";
 
 const UserAdmin = ({setPromo}) => {
-  const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   let dataToRender = state.userAdmin.dataToRender;
