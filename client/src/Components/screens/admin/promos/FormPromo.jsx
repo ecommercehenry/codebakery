@@ -38,6 +38,8 @@ const FormPromo = ({ promo, setPromo }) => {
         switch (option) {
             case 'options':
                 setCategory(value)
+            default:
+                console.log("Un error que no deberia salir, FormPromo.jsx 42")
         }
     }
 

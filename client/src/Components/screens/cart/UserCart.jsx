@@ -27,7 +27,7 @@ const UserCart = () => {
         dispatch(setQuantityOrdersCardBackend(0));
       }
     }
-  }, [data]);
+  }, [data, dispatch]);
   console.log(data)
   return (
     <StyledCart>

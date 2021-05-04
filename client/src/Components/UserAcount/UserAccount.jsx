@@ -20,12 +20,8 @@ const UserAcount = () => {
   const [login, { loading, data }] = useLazyQuery(validateUser);
   // const validate = useLazyQuery(VALIDATE_CREDENTIALS);
   const [
-    functionValidate,
-    { loading: loadingValidate, data: dataValidate },
+    functionValidate,{data: dataValidate },
   ] = useLazyQuery(VALIDATE_CREDENTIALS);
-  // const loadingValidate = validateCredentials[1]?.loading?.validateCredentials,
-  // dataValidate = validateCredentials[1]?.data?.validateCredentials,
-  // functionValidate = validateCredentials[0];
   const {
     register,
     handleSubmit,

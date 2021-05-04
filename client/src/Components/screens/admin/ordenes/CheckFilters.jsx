@@ -5,7 +5,6 @@ import {
   clearCheckboxes,
 } from "../../../../actions";
 import styled from "styled-components";
-import { useState } from "react";
 import $ from 'jquery'
 
 function CheckFilters({ displayFilter, setDisplayFilter }) {

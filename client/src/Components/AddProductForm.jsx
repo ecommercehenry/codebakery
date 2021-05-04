@@ -72,7 +72,7 @@ const AddProductForm = ({setAddProduct}) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        if(info.image == ''){
+        if(info.image === ''){
             toast('Please add an image')
         }else{
             info.category=selected;

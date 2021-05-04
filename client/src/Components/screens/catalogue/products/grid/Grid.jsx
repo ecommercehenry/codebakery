@@ -27,7 +27,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
   useEffect(() => {
     if (data) {
       if (data.product) {
-        data.product.map((e) => {
+        data.product.forEach((e) => {
           if (e.stock <= 0) {
             let boton = document.getElementById(`${e.id}`);
             if (boton != null) {
