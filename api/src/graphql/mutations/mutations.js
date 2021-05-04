@@ -41,5 +41,4 @@ type Mutation{
     modifyStore(id: Int!, name: String!, lat: Float!, long: Float!, address: String!, phoneNumber: String): store,
     deleteStore(id:Int):resultBoolean
     modifyOrderStore(idStore: Int!, idOrder: Int!): resultBoolean
-
 }`;

@@ -44,7 +44,7 @@ const AdminPanel = () => {
               component={() => StoreOptions({ setStores })}
             />
             <AdminNavBar setAddProduct={setAddProduct} promo={promo} setPromo={setPromo} displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
-            <Route path="/admin/orders" component={CheckFilters}/>
+            <Route path="/admin/orders"/>
           </div>
         : ""
         }

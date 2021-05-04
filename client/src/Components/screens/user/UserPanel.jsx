@@ -11,7 +11,6 @@ const UserPanel = () => {
   let { status } = useSelector((state) => state.theme);
   const [click, setClick] = useState(3);
   useEffect(() => {}, [click]);
-  console.log(click);
   return (
     <StyledUserPanel light={status}>
       <UserLeftPanel click={click} setClick={setClick} />
@@ -22,7 +21,7 @@ const UserPanel = () => {
       ) : click === 3 ? (
         <UserProfile />
       ) : (
-        <p>te fuise</p>
+        <p>''</p>
       )}
     </StyledUserPanel>
   );

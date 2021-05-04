@@ -42,12 +42,12 @@ const FormModify  = () => {
         dataReview:{
         title: input.title, 
         description: input.description, 
-        stars: value.toString(), 
+        stars: value === null ? "1" : value.toString()  
         }
       }
     })
-    console.log(result)
     toast("Has modificado la review exitosamente")
+    window.history.back()
   };
 
   return (
@@ -108,7 +108,7 @@ const FormModify  = () => {
             </div>
           </Box>
           <div className="submitt">
-            <button type="submit">Change Review</button>
+            <button type="submit">Update Review</button>
           </div>
         </div>
       </StyledForm>
