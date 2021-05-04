@@ -10,16 +10,25 @@ import {toast} from 'react-toastify'
 import '../../../../Assets/toast.css'
 const stripePromise = loadStripe('pk_test_51IikJvLv5RMhUlp35i74LPIzdy7M5Ei6esRBW9vI01qzArgdAhhBT452AQzT2E0ePUfYEmW3cb6ddVcx7Uyx7rv800bCIJ2c3z')
 toast.configure()
+
 const StripeForm = () => {
     let userId = parseInt(localStorage.id);
     const res = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
         variables: { idUser: userId },
         fetchPolicy: "no-cache",
     });
+
     const [success,setSuccess] = useState(false)
     const stripe = useStripe();
     const elements = useElements();
-    let total =90
+    let total = 0;
+
+    if(res && res.data && res.data.getOrdersByUserIdInCart.orders[0]){
+        res.data.getOrdersByUserIdInCart.orders[0].lineal_order.map((elem) => (
+            total = total + (elem.price - (elem.price*elem.discount)/100)*elem.quantity
+        ))
+    }
+    
     
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -66,9 +75,7 @@ const Stripe = () => {
             <Elements stripe={stripePromise}>
                 <StripeForm/>
             </Elements>
-            
         </StyledStripe>
-        
     )
 }
 
