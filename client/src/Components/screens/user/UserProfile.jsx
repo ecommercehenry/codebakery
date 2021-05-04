@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import React, { useState, useEffect } from "react";
+import { useQuery, useMutation, useLazyQuery } from "@apollo/client";
 import getUserById from "../../../Apollo/queries/getUserById";
 import styled from "styled-components";
 import { useParams } from "react-router";
@@ -7,10 +7,21 @@ import MODIFY_USER from "../../../Apollo/mutations/modifyUser";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import closeIcon from "../../../icons/close2.svg";
+import GENERATE_OTP from "../../../Apollo/mutations/generateOtp";
+import VALIDATE_TOTP from "../../../Apollo/queries/validateTokenTOTP";
 //import SettingsIcon from "@material-ui/icons/Settings";
 
 const UserProfile = () => {
   let { id } = useParams();
+
+  const [
+    generateOTP,
+    { data: dataGenerate, loading: loadingGenerate },
+  ] = useMutation(GENERATE_OTP);
+  const [
+    validateTotp,
+    { data: dataValidate, loading: loadingValidate },
+  ] = useLazyQuery(VALIDATE_TOTP);
 
   const [click, setClick] = useState(1);
   const [modifyUser, { data }] = useMutation(MODIFY_USER, {
@@ -30,11 +41,12 @@ const UserProfile = () => {
     dni: "",
     password: "",
     phoneNumber: "",
+    authentication: "",
   });
 
   const inputHandler = (e) => {
     e.preventDefault();
-    console.log(e.target.value)
+    console.log(e.target.value);
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -54,6 +66,21 @@ const UserProfile = () => {
       },
     });
   };
+
+  const handleSubmitFA = () => {
+    validateTotp({
+      variables: {
+        userId: parseInt(id),
+        code: input.authentication,
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (!dataGenerate && !loadingGenerate)
+      generateOTP({ variables: { userId: parseInt(id) } });
+    console.log(dataGenerate?.generateTokenOTP, loadingGenerate);
+  }, [dataGenerate, loadingGenerate]);
 
   return click === 1 ? (
     <StyledUseer>
@@ -110,6 +137,15 @@ const UserProfile = () => {
               <span>Password</span>
               <p>{$USER?.getUserById.password}</p>
               <Button value="password" onClick={() => setClick(7)}>
+                Editar
+              </Button>
+            </div>
+          </div>
+          <div className="element-naame">
+            <div className="text-container">
+              <span>Authentication</span>
+              <p></p>
+              <Button value="authentication" onClick={() => setClick(8)}>
                 Editar
               </Button>
             </div>
@@ -335,6 +371,44 @@ const UserProfile = () => {
           </div>
           <div className="submitt">
             <button type="submit">Update</button>
+          </div>
+        </div>
+      </StyledForm>
+    </div>
+  ) : click === 8 ? (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.664)",
+        zIndex: 5,
+        position: "fixed",
+        height: "100vh",
+        width: "100vw",
+        top: "0",
+        left: "0",
+        paddingLeft: "10vw",
+      }}
+    >
+      <StyledForm onSubmit={handleSubmitFA}>
+        <button onClick={() => setClick(1)} className="closeee">
+          <img src={closeIcon} width="30px" display="flex" alt="closeIcon" />
+        </button>
+        <div className="infoProductt">
+          <div className="namee">
+            <label>Authentication</label>
+            <img src={dataGenerate?.generateTokenOTP.image}></img>
+            <input
+              name="authentication"
+              type="text"
+              placeholder="Authentication code"
+              value={input.authentication}
+              onChange={(e) => inputHandler(e)}
+            />
+          </div>
+          <div className="submitt">
+            <button type="submit">Authenticate</button>
           </div>
         </div>
       </StyledForm>
