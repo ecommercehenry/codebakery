@@ -11,7 +11,9 @@ import { withStyles } from "@material-ui/core";
 
 
 function ListCRUD({setPromo}) {
-  const { data, loading } = useQuery(allProducts);
+  const { data, loading } = useQuery(allProducts,{
+    fetchPolicy: "no-cache"
+  });
   const dispatch = useDispatch();
   useEffect(() => {
     setPromo(false)
@@ -37,14 +39,12 @@ function ListCRUD({setPromo}) {
   }
 
   const handleChangeRowsPerPage = async (event) => {
-    console.log(event.target.value)
     await setRowsPerPage(parseInt(event.target.value, 10));
   };
 
   useEffect(() => {
     (async() => await setRows([0, rowsPerPage - 1]))()
     setPage(0)
-    console.log('after change',rows, page)
   }, [rowsPerPage])
 
   function isScrollable(element) {
@@ -64,7 +64,6 @@ function ListCRUD({setPromo}) {
   if(document.getElementById('table-body')){
     var myParent = document.getElementById('table-body').attributes
    /*  document.getElementById('table-body').style.display =  */ 
-    console.log(isScrollable(myParent))
   }
 
   //
@@ -137,7 +136,7 @@ const StyledListCRUD = styled.div`
   background: white;
   height: 83vh;
   margin-bottom: 2rem;
-  box-shadow: 0px 5px 20px 0px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 30%);
   clear: both;
   overflow: hidden;
   

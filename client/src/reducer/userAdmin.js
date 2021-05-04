@@ -30,6 +30,8 @@ const reducer = (state = initialState, action) => {
     case ORDER_ASC_BY_NAME:
         return {
             ...state,
+            dataUserAdmin: state.dataUserAdmin.sort(function(a, b) {
+              return a.name.localeCompare(b.name)}),
             dataToRender: state.dataUserAdmin.sort(function(a, b) {
                 return a.name.localeCompare(b.name)
         })
@@ -37,6 +39,8 @@ const reducer = (state = initialState, action) => {
     case ORDER_DESC_BY_NAME:
         return {
             ...state,
+            dataUserAdmin: state.dataUserAdmin.sort(function(a, b) {
+              return b.name.localeCompare(a.name)}),
             dataToRender: state.dataUserAdmin.sort(function(a, b) {
                 return b.name.localeCompare(a.name)
         })

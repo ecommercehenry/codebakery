@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles} from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
 import { useDispatch} from "react-redux";
 import Button from "@material-ui/core/Button";
@@ -11,6 +11,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 // import SendIcon from '@material-ui/icons/Send';
 
 import { pricetolow, pricetohigh } from "../../../../actions";
+import styled from "styled-components";
 
 const useStyles = makeStyles({
   root: {
@@ -87,7 +88,7 @@ export default function SortByPrice() {
   };
 
   return (
-    <div>
+    <StyledSortButton>
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
@@ -105,7 +106,7 @@ export default function SortByPrice() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        <StyledMenuItem className="option-drop">
           <ListItemText
             primary="Price-low to high"
             onClick={low}
@@ -113,31 +114,34 @@ export default function SortByPrice() {
           />
         </StyledMenuItem>
 
-        <StyledMenuItem>
+        <StyledMenuItem className="option-drop">
           <ListItemText primary="Price-high to low" onClick={high} />
         </StyledMenuItem>
       </StyledMenu>
-    </div>
+    </StyledSortButton>
   );
 }
 
-{
-  /* <StyledMenuItem>
-                    
-                          <div className={classes.root}>
-                              <div id="range-slider">
-                                  Price
-                              </div>
-                  
-                              <Slider
-                                  value={value}
-                                  onChange={handleChange}
-                                  valueLabelDisplay="auto"
-                                  aria-labelledby="range-slider"
-                                  getAriaValueText={valuetext}
-                                  
-                              />
-                          </div>
+const StyledSortButton = styled.div`
+.addProduct{
+  background: #D5D5D5 !important;
+  box-shadow: none;
+  color: #0a0a0a !important;
+  text-transform: none;
+  border: 1px solid transparent;
+  transition: none;
+  border-radius: 10px;
+  font-size: 1em;
 
-                    </StyledMenuItem> */
+  &:hover{
+    background: white !important;
+    box-shadow: none;
+    border: 1px solid #D9D9D9;
+  }
 }
+
+.customized-menu{
+  background: red;
+  box-shadow: 0 15px 20px 0 rgb(0 0 0 / 8%), 0 1px 4px 0 rgb(0 0 0 / 8%) !important;
+}
+`
