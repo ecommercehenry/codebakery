@@ -39,7 +39,6 @@ const AddProductForm = ({setAddProduct}) => {
     }
 
     const inputHandler = (e) => {
-        console.log(e, 'mis dats')
         return setInfo({...info,[e.target.name]:e.target.value})
     }
 
@@ -68,12 +67,17 @@ const AddProductForm = ({setAddProduct}) => {
     category && (selected = selected.map(elem=>elem.value));
     selected = selected.toString();
     let options =  [];
-    categories['data'] && categories['data']['getAllCategories'].map(elem=> options.push({label:elem.name,value:elem.name}))                 
+    categories['data'] && categories['data']['getAllCategories'].map(elem=> 
+        options.push({label:elem.name,value:elem.name})
+    )                 
 
     const submitHandler = (e) => {
         e.preventDefault();
-        if(info.image == ''){toast('Please add an image')}else{
+        if(info.image == ''){
+            toast('Please add an image')
+        }else{
             info.category=selected;
+            console.log('hola')
             addProduct({variables:
                 {
                     name:info.name,
@@ -83,31 +87,20 @@ const AddProductForm = ({setAddProduct}) => {
                     category:selected,
                     image:info.image
                 }
+            }).then(res=>{
+                setInfo({
+                    name:'',
+                    description:'',
+                    category:[],
+                    stock:'',
+                    price:'',
+                    image:''
+                })
+                toast("Producto agregado!")
+                window.history.back();
             })
-            setInfo({
-                name:'',
-                description:'',
-                category:[],
-                stock:'',
-                price:'',
-                image:''
-            })
-            toast("Producto agregado!")
-            
         }
-        
     }
-
-    useEffect(() => {
-
-        setTimeout(() => {
-            document.body.style.overflow = "hidden"
-        }, 1000);
-    
-    return () => {
-        document.body.style.overflow = "visible"
-    }
-}, [])
 
     
     return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useQuery } from "@apollo/client";
 import GET_ALL_STORES from "../../../../Apollo/queries/getAllStores";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
@@ -30,18 +30,24 @@ const StyledTableRow = withStyles((theme) => ({
 const useStyles = makeStyles({
   table: {
     margin: "3rem",
+    //background:"red",
   },
   container: {
     width: "70rem",
     display: "flex",
+    //background:"blue",
+    marginTop: "6em",
   },
 });
 
-const StoresPanel = () => {
+const StoresPanel = ({setPromo}) => {
   const classes = useStyles();
   const { data } = useQuery(GET_ALL_STORES, {
     fetchPolicy: "no-cache",
   });
+  useEffect(() => {
+    setPromo(false)
+  },[])
   return (
     <TableContainer component={Paper} className={classes.container}>
       <Table className={classes.table} aria-label="customized table">

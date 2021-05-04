@@ -39,6 +39,10 @@ const AdminPanel = () => {
       {   
         !promo ? 
           <div className="top">
+            <Route
+              path="/admin/stores"
+              component={() => StoreOptions({ setStores })}
+            />
             <AdminNavBar setAddProduct={setAddProduct} promo={promo} setPromo={setPromo} displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
             <Route path="/admin/orders" component={CheckFilters}/>
           </div>
@@ -63,11 +67,23 @@ const AdminPanel = () => {
             </Route>      
           </Switch>
           {stores === "seeStores" ? (
-            <Route path="/admin/stores" component={StorePanel} />
+            (
+              <Route path="/admin/stores">
+                <StorePanel promo={promo} setPromo={setPromo}/>
+              </Route>
+            )
           ) : stores === "modifyStore" ? (
-            <Route path="/admin/stores" component={ModifyStore} />
+            (
+              <Route path="/admin/stores">
+                <ModifyStore/>
+              </Route>
+            )
           ) : stores === "addStore" ? (
-            <Route path="/admin/stores" component={ManageStores} />
+            (
+              <Route path="/admin/stores">
+                <ManageStores/>
+              </Route>
+            )
           ) : (
             <p></p>
           )}
