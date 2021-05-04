@@ -65,7 +65,7 @@ const StyledSearchBar = styled.div`
         outline: none;
       }
       select:before {
-        color: red
+        color: red;
         outline: none;
       }
 `;
