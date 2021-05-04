@@ -14,7 +14,6 @@ import AddProductForm from "../../../AddProductForm";
 import TablaOrdenes from "../../admin/ordenes/TablaOrdenes";
 import UserAdmin from "../ordenes/UserAdmin";
 import Pagination from "../ordenes/Pagination";
-import CheckFilters from "../ordenes/CheckFilters";
 import ManageStores from "../stores/ManageStores";
 import StoreOptions from "../stores/StoreOptions";
 import StorePanel from "../stores/StoresPanel";
