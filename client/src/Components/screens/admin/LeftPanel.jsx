@@ -8,7 +8,6 @@ import {
   HiOutlineUser,
 } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
-import { AiOutlineShop } from "react-icons/ai";
 
 
 //styles
