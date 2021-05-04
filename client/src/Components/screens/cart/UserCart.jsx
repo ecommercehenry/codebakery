@@ -27,8 +27,8 @@ const UserCart = () => {
         dispatch(setQuantityOrdersCardBackend(0));
       }
     }
-  }, [data, dispatch]);
-
+  }, [data]);
+  console.log(data)
   return (
     <StyledCart>
       {data?.getOrdersByUserIdInCart.orders[0] ? (

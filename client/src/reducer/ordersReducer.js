@@ -9,6 +9,7 @@ import {
   CHECKBOX_CHANGE,
   CLEAR_CHECKBOXES,
   FILTER_NAME,
+  CHANGE_STATUS
 } from "../actions/index";
 
 const initialState = {
@@ -256,6 +257,13 @@ const reducer = (state = initialState, action) => {
         ALL: true,
         filterStatus: [],
       }
+
+    case CHANGE_STATUS:
+      return{
+        ...state,
+        orders: state.orders.map(el => el.id === action.payload.id ? {...el, status: action.payload.status} : el )
+      }
+      
     default:
       return state;
   }

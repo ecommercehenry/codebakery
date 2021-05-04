@@ -14,6 +14,12 @@ export const CHANGE_PAGE = "CHANGE_PAGE";
 export const CHECKBOX_CHANGE = "CHECKBOX_CHANGE";
 export const CLEAR_CHECKBOXES = "CLEAR_CHECKBOXES";
 export const FILTER_NAME = "FILTER_NAME";
+export const GET_ALL_USERS_WITH_DETAILS = "GET_ALL_USERS_WITH_DETAILS"
+export const ORDER_ASC_BY_NAME = "ORDER_ASC_BY_NAME"
+export const ORDER_DESC_BY_NAME = "ORDER_DESC_BY_NAME"
+export const SEARCH_BY_NAME = "SEARCH_BY_NAME"
+
+
 
 export const setSearch = () => {
   return {
@@ -96,18 +102,20 @@ export const pricetohigh = () => {
   };
 };
 
-export const changedStatus = () => {
+export const changeStatus = (id, status) => {
   return {
     type: CHANGE_STATUS,
+    payload: {id, status}
   };
 };
 
 export const changePage = (num) => {
   return {
     type: CHANGE_PAGE,
-    payload:num
+    payload: num
   };
 };
+
 export const checkboxChange = (id) => {
   return {
     type: CHECKBOX_CHANGE,
@@ -118,3 +126,38 @@ export const checkboxChange = (id) => {
 export const clearCheckboxes = () => {
   return { type : CLEAR_CHECKBOXES }
 }
+
+export const productToHigh = () => {
+  return { type: PRICE_LOW_TO_HIGH }
+}
+
+export const productToLow = () => {
+  return { type: PRICE_HIGH_TO_LOW }
+}
+export const getAllUsersWithDetails = (data) => {
+  return { 
+    type : GET_ALL_USERS_WITH_DETAILS,
+    payload: data 
+  }
+}
+
+export const orderAscByName = () => {
+  return { 
+    type : ORDER_ASC_BY_NAME,
+  }
+}
+
+export const orderDescByName = () => {
+  return { 
+    type : ORDER_DESC_BY_NAME,
+  }
+}
+
+export const searchByName = (payload) => {
+  return { 
+    type : SEARCH_BY_NAME,
+    payload,
+  }
+}
+
+

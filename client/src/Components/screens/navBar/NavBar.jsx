@@ -1,9 +1,17 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useMutation, useQuery } from '@apollo/client';
+import APPLY_DISCOUNT from "../../../Apollo/mutations/applyDiscount";
+import RESET_DISCOUNT from "../../../Apollo/mutations/resetDiscount";
+import getPromos from '../../../Apollo/queries/getPromos';
+import { RoundButton } from "../../GlobalStyle";
 import CountCart from "../cart/container/CountCart";
 import styled from "styled-components";
 import ThemeSwitch from "./ThemeSwitch";
+
 const NavBar = ({ color }) => {
+
   const textColor = color === "white" ? "text-inactive" : "text-dark";
   const navTag = `text-decoration-none ${textColor}`;
   const btnColor = color === "white" ? "white" : "purple";
@@ -38,6 +46,48 @@ const NavBar = ({ color }) => {
   let role = window.localStorage.getItem("role");
   let id = window.localStorage.getItem("id");
   let logeed = storage.token ? true : false;
+
+  const isCart = window.location.pathname.includes("cart");
+
+  let date = new Date();
+
+  let weekday = new Array(7);
+  weekday[0] = "Sunday";
+  weekday[1] = "Monday";
+  weekday[2] = "Tuesday";
+  weekday[3] = "Wednesday";
+  weekday[4] = "Thursday";
+  weekday[5] = "Friday";
+  weekday[6] = "Saturday";
+
+  let today = weekday[date.getDay()];
+
+  const promos= useQuery(getPromos,{
+    fetchPolicy:"no-cache"
+  });
+  
+  const [applyDiscount] = useMutation(APPLY_DISCOUNT);
+  const [resetDiscount] = useMutation(RESET_DISCOUNT);
+
+  useEffect(() => {
+    if(promos && promos['data'] && promos['data']['getPromos']){
+      if(promos['data']['getPromos'].length == 0){
+        resetDiscount();
+      }else{
+        promos['data']['getPromos'].map(elem=>{
+          if(elem.day==today){
+            resetDiscount();
+            applyDiscount({variables:
+              {
+                discount:elem.discount,
+                category:elem.category,
+              }
+            })
+          }
+        })
+      }
+    }
+  },[promos])
 
   return (
     <StyledNavBar className="navbar d-flex align-items-center mx-5">
@@ -90,7 +140,9 @@ const NavBar = ({ color }) => {
               className={`login-btn text-decoration-none ${textColor}`}
             >
               <div className={`usuario ${navTag}`}>
-                Hi! {logeed ? localStorage.name : ""}
+              {localStorage.role === "admin" ? "" : <div> Hi! {logeed ? localStorage.name : ""}</div>
+              
+              }
               </div>
             </Link>
             <Link

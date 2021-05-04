@@ -6,7 +6,7 @@ module.exports = `
     type Query{
         product: [product],
         productById(id :Int!): product,
-        productCategory(id: Int!): product
+        productCategory(id: Int!): product,
         getProductByCategoryName(name: String!): [product],
         getAllCategories:[category],
         getProductByName(name: String!): product, 
@@ -18,9 +18,12 @@ module.exports = `
         validateUser(email:String, password:String): resultValidate,
         getOrderById(id: Int!): orderResult,
         getAllReviewsFromAProduct(productId: Int!): [review]
-        getUserById(id: Int!) : user
+        getUserById(id: Int!) : user,
         validateCredentials(token: String!, role: String!): Boolean,
         validateUserWithGoogle(email: String!, tokenId: String): resultValidate
-        getReviewByUserId(userId: Int!) : [review]
+        getReviewByUserId(userId: Int!) : [review],
+        getAllStores: [store]
+        getByStore(id: Int!) : store
+        getPromos: [promo]
     }
 `;

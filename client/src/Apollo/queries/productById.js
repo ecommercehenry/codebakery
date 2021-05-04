@@ -8,7 +8,7 @@ const getData = gql`
       price
       stock
       image
-    }
+       }
     }
 `
 

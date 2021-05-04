@@ -28,7 +28,7 @@ const Categories = () => {
     
      products= todosproductos?.data?.product ? todosproductos.data.product :products;
     } 
-
+ 
     //Obtenemos todas las categorias de apolo client
     const categories = useQuery(getAllCategories);
 
@@ -49,7 +49,7 @@ const Categories = () => {
     //caso BASE: Al presionar un btn ALL/TODOS, se hace un llamado a todos los productos
     const handleClick = (e) =>{
         // accion para modificar el estado del booleano 'search'
-        dispatch(setSearch());
+        // dispatch(setSearch());
         setName(e.target.name);
     }
 

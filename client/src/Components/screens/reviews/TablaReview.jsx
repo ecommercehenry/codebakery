@@ -7,14 +7,15 @@ import ReviewByUser from "./ReviewsByUser";
 
 const TablaReview = ({id}) => {
 
+    
     const { data,  refetch } = useQuery(GET_REVIEW_BY_USER, {
         variables: { userId: id },
+        fetchPolicy : "no-cache"
     });
-
-
     return (
 
         <StyledRevv>
+            <h1 className="titlee">Reviews</h1>
             {
                     data?.getReviewByUserId?.map((e) => (
                         <ReviewByUser

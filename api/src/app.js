@@ -8,7 +8,7 @@ const cors = require("cors");
 const { errorType } = require("./graphql/roots/errorsHandlers/errors");
 require("./db.js");
 const stripe = new Stripe(process.env.STRIPE_KEY);
-const { Order } = require("./db");
+const { Order, Product } = require("./db");
 /// mercadopago
 const mercadopago = require("mercadopago"); //requerimos mercado pago
 
@@ -20,9 +20,9 @@ const {schema, root} = require("./graphql/schema");
 const { sendEmail, getFormatedMessage } = require('./services/emailService');
 const { getOrderById } = require('./services/orderService');
 const { getCurrentDomainApi, getCurrentDomainFront } = require("./config/currentDomain");
+const product = require("./graphql/roots/queriesResolvers/product");
 server.name = 'API';
 
-server.use(express.json());
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
@@ -69,34 +69,55 @@ server.use("/create_preference", (req, res) => {
     });
 });
 
+server.get("/feedback", async function (req, res) {
+  //ruta que responde con el status del pago
 
-server.use('/feedback', async function(req, res) {     //ruta que responde con el status del pago
-  
-  let orden = await Order.findByPk(parseInt(req.query.external_reference))
-  let ordenCompleta = await getOrderById(orden.id)
+  let orden = await Order.findByPk(parseInt(req.query.external_reference));
+  let ordenCompleta = await getOrderById(orden.id);
 
-  if (req.query.status === 'approved'){
-      orden.placeStatus = 'ticket'
-      orden.status = 'paid'
-      await orden.save()
-      await sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
-    }else if (req.query.status === 'pending'){
-      orden.placeStatus = 'ticket'
-      orden.status = 'unpaid'
-      await orden.save()
-      await sendEmail(orden.userId, `Order #${orden.id} pending`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
+  if (req.query.status === "approved") {
+    orden.placeStatus = "ticket";
+    orden.status = "paid";
+    try {
+      ordenCompleta.lineal_order.map(async (producto) => {
+        productDb = await Product.findByPk(producto.id);
+        productDb.stock = productDb.stock - producto.quantity;
+        productDb.save();
+      });
+    } catch (error) {
+      console.log(error);
     }
-    if(process.env.NODE_ENV === "production"){
-      return res.redirect(`${getCurrentDomainFront()}/catalogue`);
-    }
-    
-  
-})
+    await orden.save();
+    await sendEmail(
+      ordenCompleta.userId,
+      `Order #${ordenCompleta.id} approved`,
+      getFormatedMessage(
+        ordenCompleta.name,
+        "approved",
+        ordenCompleta.lineal_order
+      )
+    );
+  } else if (req.query.status === "pending") {
+    orden.placeStatus = "ticket";
+    orden.status = "unpaid";
+    await orden.save();
+    await sendEmail(
+      orden.userId,
+      `Order #${orden.id} pending`,
+      getFormatedMessage(
+        ordenCompleta.name,
+        "approved",
+        ordenCompleta.lineal_order
+      )
+    );
+  }
+  return res.redirect(`${getCurrentDomainFront()}/catalogue`);
+});
 ///mercadopago
 
 server.use(
   "/graphql",
-  graphqlHTTP((req) => {
+  graphqlHTTP((_req) => {
     return {
       schema: schema,
       extensions({ result, variables, document }) {},
@@ -113,29 +134,45 @@ server.use("/stripe/checkout", async (req, res) => {
       amount,
       currency: "USD",
       description: "",
-      payment_method:id,
-      confirm:true
-    })
-    let order = await Order.findByPk(parseInt(req.body.products.id))
-    let ordenCompleta = await getOrderById(order.id)
+      payment_method: id,
+      confirm: true,
+    });
+    let order = await Order.findByPk(parseInt(req.body.products.id));
+    let ordenCompleta = await getOrderById(order.id);
     //console.log(payment.status)
     //console.log(order)
-    if(payment.status === 'succeeded'){
-      order.status = 'paid'
-      order.placeStatus = 'ticket'
-      await order.save()
-      sendEmail(ordenCompleta.userId, `Order #${ordenCompleta.id} approved!`, getFormatedMessage(ordenCompleta.name, "approved", ordenCompleta.lineal_order ))
-      res.json({message:'successfull transaction'})
+    if (payment.status === "succeeded") {
+      order.status = "paid";
+      order.placeStatus = "ticket";
+      try {
+        ordenCompleta.lineal_order.map(async (producto) => {
+          productDb = await Product.findByPk(producto.id);
+          productDb.stock = productDb.stock - producto.quantity;
+          productDb.save();
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      await order.save();
+      sendEmail(
+        ordenCompleta.userId,
+        `Order #${ordenCompleta.id} approved!`,
+        getFormatedMessage(
+          ordenCompleta.name,
+          "approved",
+          ordenCompleta.lineal_order
+        )
+      );
+      res.json({ message: "successfull transaction" });
     }
   } catch (error) {
-    console.log(error)
-    res.send({message:error.message})
-
+    console.log(error);
+    res.send({ message: error.message });
   }
 });
 
 // Error catching endware.
-server.use((err, req, res, next) => {
+server.use((err, _req, res, _next) => {
   // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;

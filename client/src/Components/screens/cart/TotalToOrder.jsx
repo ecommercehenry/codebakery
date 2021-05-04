@@ -3,7 +3,6 @@ import {useSelector} from 'react-redux'
 import { toast } from "react-toastify";
 import '../../../Assets/toast.css'; 
 
-
 //styles
 import styled from "styled-components";
 import { getCurrentDomainFront } from '../../../config/currentDomain';
