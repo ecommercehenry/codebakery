@@ -41,6 +41,7 @@ async function generateTokenOTP(idUser){
 async function validateTOTP(idUser, code){
     //Obtener el usuario
     let user = null
+    console.log("validateTOTP", idUser, code)
     try{
         user = await Users.findOne({
             where:{

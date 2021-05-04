@@ -9,7 +9,13 @@ import { Link } from "react-router-dom";
 import closeIcon from "../../../icons/close2.svg";
 import GENERATE_OTP from "../../../Apollo/mutations/generateOtp";
 import VALIDATE_TOTP from "../../../Apollo/queries/validateTokenTOTP";
-//import SettingsIcon from "@material-ui/icons/Settings";
+import { toast } from "react-toastify";
+import "../../../Assets/toast.css";
+import DisableTFA from "./DisableTFA";
+import StatusAuthentication from "./StatusAuthentication.jsx";
+
+
+toast.configure();
 
 const UserProfile = () => {
   let { id } = useParams();
@@ -24,15 +30,18 @@ const UserProfile = () => {
   ] = useLazyQuery(VALIDATE_TOTP);
 
   const [click, setClick] = useState(1);
-  const [modifyUser, { data }] = useMutation(MODIFY_USER, {
-    variables: { id: parseInt(id) },
-    fetchPolicy: "no-cache",
-    refetchQueries: [{ query: getUserById }],
-  });
   const { data: $USER } = useQuery(getUserById, {
     variables: { id: parseInt(id) },
-    fetchPolicy: "no-cache",
+    // fetchPolicy: "no-cache",
   });
+
+  const [modifyUser, { data }] = useMutation(MODIFY_USER, {
+    variables: { id: parseInt(id) },
+    // fetchPolicy: "no-cache",
+    refetchQueries: [{
+      query: getUserById,
+      variables: { id: parseInt(id) }
+    }]})
 
   const [input, setInput] = useState({
     name: "",
@@ -53,7 +62,7 @@ const UserProfile = () => {
   };
 
   const submitHandler = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     modifyUser({
       variables: {
         name: input.name,
@@ -67,8 +76,7 @@ const UserProfile = () => {
   };
 
   const handleSubmitFA = (e) => {
-    e.preventDefault()
-    console.log(typeof parseInt(id), typeof parseInt(input.authentication))
+    e.preventDefault();
     validateTotp({
       variables: {
         userId: parseInt(id),
@@ -78,17 +86,27 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    console.log("helloAfuera:", dataValidate?.validateTOTP.boolean);
-
-    if (!dataValidate && !loadingValidate) {
-      // generateOTP({ variables: { userId: parseInt(id) } });
-      console.log("hello:", dataValidate?.validateTOTP.boolean);
+    console.log(dataValidate?.validateTOTP);
+    if (dataValidate?.validateTOTP.boolean) {
+      modifyUser({
+        variables: {
+          id: parseInt(id),
+          twoFA: dataValidate?.validateTOTP.boolean,
+        },
+      });
+      toast("Two steps authentication activated", {
+        toastId: 1,
+      });
+    } else if (dataValidate?.validateTOTP.name) {
+      console.log(dataValidate?.validateTOTP.name);
+      toast(dataValidate?.validateTOTP.detail, {
+        toastId: 2,
+      });
     }
-  }, [dataValidate, loadingValidate]);
+  }, [loadingValidate]);
 
   useEffect(() => {
     if (!dataGenerate && !loadingGenerate) {
-      console.log("¿Entra?")
       generateOTP({ variables: { userId: parseInt(id) } });
     }
   }, [dataGenerate, loadingGenerate]);
@@ -156,9 +174,12 @@ const UserProfile = () => {
             <div className="text-container">
               <span>Authentication</span>
               <p></p>
+              <StatusAuthentication twoFA={$USER?.getUserById.twoFA} />
+
               <Button value="authentication" onClick={() => setClick(8)}>
-                Editar
+                Enable Authentication
               </Button>
+              <DisableTFA id={id} />
             </div>
           </div>
         </div>
@@ -441,12 +462,12 @@ const StyledUseer = styled.div`
     background-color: rgb(236, 227, 250);
     border-radius: 40px;
     width: 650px;
-    height: 70px;
+    height: 300px;
     margin: 10px;
   }
   .text-container {
     width: 350px;
-    height: 80px;
+    height: 300px;
     padding: 0.5rem;
     overflow: hidden;
   }
