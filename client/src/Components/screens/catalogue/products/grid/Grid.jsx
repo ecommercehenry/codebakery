@@ -9,7 +9,7 @@ import ProductCard from "./ProductCard";
 
 const Grid = ({ orderId, refetchCatalogue }) => {
   let { status } = useSelector((state) => state.theme);
-  let { stateproducts, filterProduct, allProduct, search } = useSelector(
+  let { stateproducts, filterProduct, allProduct, search, productsToRender } = useSelector(
     (state) => state.reducer
   );
   let arr = [];
@@ -23,6 +23,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
   const { data } = useQuery(GET_BY_PRODUCT, {
     fetchPolicy: "no-cache",
   });
+
 
   useEffect(() => {
     if (data) {
@@ -40,27 +41,34 @@ const Grid = ({ orderId, refetchCatalogue }) => {
   }, [data]);
 
   return (
+
     <StyledGrid light={status}>
       <>
-        {search === false
+        {
+          search ? 
+          (productsToRender ?.length > 0 ? productsToRender.map((element) => {
+            return <ProductCard 
+            refetchCatalogue={refetchCatalogue}
+            orderId={orderId} 
+            key={element.id} 
+            id={element.id} 
+            name={element.name}
+            image={element.image} 
+            price={element.price} />
+          }) : "No se encontraron Productos") : (productsToRender?.length > 0 ? productsToRender.map((element) => {
+            return <ProductCard 
+            refetchCatalogue={refetchCatalogue}
+            orderId={orderId}
+            key={element.id} 
+            id={element.id} 
+            name={element.name}
+            image={element.image} 
+            price={element.price} />
+          }) : 'Cargando...')
+        }
+        {/* {search === false
           ? stateproducts && stateproducts?.length > 0
             ? stateproducts.map((element) => {
-                return (
-                  <ProductCard
-                    refetchCatalogue={refetchCatalogue}
-                    orderId={orderId}
-                    key={element.id}
-                    id={element.id}
-                    name={element.name}
-                    image={element.image}
-                    price={element.price}
-                    stock={element.stock}
-                  />
-                );
-              })
-            : "Cargando"
-          : arr.length > 0
-          ? arr.map((element) => {
               return (
                 <ProductCard
                   refetchCatalogue={refetchCatalogue}
@@ -74,7 +82,23 @@ const Grid = ({ orderId, refetchCatalogue }) => {
                 />
               );
             })
-          : "No se encontraron Productos"}
+            : "Cargando"
+          : arr.length > 0
+            ? arr.map((element) => {
+              return (
+                <ProductCard
+                  refetchCatalogue={refetchCatalogue}
+                  orderId={orderId}
+                  key={element.id}
+                  id={element.id}
+                  name={element.name}
+                  image={element.image}
+                  price={element.price}
+                  stock={element.stock}
+                />
+              );
+            })
+            : "No se encontraron Productos"} */}
       </>
     </StyledGrid>
   );
