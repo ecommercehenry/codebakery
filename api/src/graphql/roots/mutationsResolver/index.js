@@ -28,6 +28,7 @@ const {modifyStore} = require("./modifyStore")
 const {deleteStore} = require("./deleteStore")
 const {modifyOrderStore} = require("./modifyOrderStore")
 const {addPromo} = require("./addPromo")
+const {generateTokenOTP} = require("./generateTokenOTP")
 const {applyDiscount} = require("./applyDiscount");
 const {resetDiscount} = require("./resetDiscount");
 const {deletePromo} = require("./deletePromo");
@@ -63,6 +64,7 @@ module.exports = {
   deleteStore, 
   modifyOrderStore, 
   addPromo,
+  generateTokenOTP,
   applyDiscount,
   resetDiscount,
   deletePromo

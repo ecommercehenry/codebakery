@@ -1,155 +1,127 @@
 import React, { useEffect } from "react";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery} from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import VALIDATE_TOTP from "../../Apollo/queries/validateTokenTOTP";
 
 import { Redirect } from "react-router-dom";
-
-import Login from "./Login";
-
 import { useDispatch, useSelector } from "react-redux";
-
-import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
-import '../../Assets/toast.css'; 
-import { saveDataProfile } from "../../actions/dataProfileActions";
-
-// import "./UserAccount.css";
+import { clearDataUserProfile } from "../../actions/dataProfileActions";
 
 toast.configure();
 
-const UserAcount = () => {
-  // valida que exista el usuario y lo devuelve con un token
-  const [login, { loading, data }] = useLazyQuery(validateUser);
-  // const validate = useLazyQuery(VALIDATE_CREDENTIALS);
-  const [
-    functionValidate,{data: dataValidate },
-  ] = useLazyQuery(VALIDATE_CREDENTIALS);
+function TwoFA(){
 
-  const dataUser = useSelector(state => state.dataProfileReducer)
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-
-  // Google login
-  const dispatch = useDispatch();
-
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      functionValidate({
-        variables: {
-          token: localStorage.getItem("token"),
-          role: localStorage.getItem("role"),
-        },
-      });
-    }
-
-    if (!loading && data) {
-      if (data.validateUser.token) {
-        // alert("logueado")
-        // si está habilitada la athenticacion twoFA guardamoen en el reducer
-        if(data.validateUser.twoFA ){
-          // console.log('yaysyays', data.validateUser)
-          dispatch(saveDataProfile(data.validateUser))
-          toast(`Hello ${data.validateUser.name}, you must do 2FA`);
-        }
-        else{
-          localStorage.setItem('token', data.validateUser.token);
-          localStorage.setItem('name', data.validateUser.name);
-          localStorage.setItem('email', data.validateUser.email);
-          localStorage.setItem('role', data.validateUser.role);
-          localStorage.setItem('id', data.validateUser.id);
-          toast(`Welcome ${data.validateUser.name}`);
-          window.location.reload();
-        }
-        // es necesario el reloaded para luego poder redirigir
-        // toast(`Hello ${data.validateUser.name}, you must do 2FA`);
-        // window.location.reload();
-      }else{
-        toast(data.validateUser.detail)
-      }
+    const [validateTotp, {data: dataValidate}] = useLazyQuery(VALIDATE_TOTP);
+    const [
+      functionValidate,
+      { loading: loadingCredentials, data: dataCredentials },
+    ] = useLazyQuery(VALIDATE_CREDENTIALS);
+    const {id, token, name, email, role} = useSelector(state => state.dataProfileReducer);
+    const dispatch = useDispatch();
+    let tokenLocal = localStorage.getItem("token")
 
     
-  }},[loading, data, dataValidate, dispatch, functionValidate]);
- 
-  let role = localStorage.getItem('role') ;
-  let token = localStorage.getItem('token');
-  // console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
-  if(role  && token && dataValidate){
+    
+    useEffect(() => {
+      
+      if (localStorage.getItem("token")) {
+        functionValidate({
+          variables: {
+            token: localStorage.getItem("token"),
+            role: localStorage.getItem("role"),
+          },
+        })
+      }
+      console.log("ENTROOOOOOOOO")
+    },[loadingCredentials, dataCredentials, tokenLocal, functionValidate]);
 
-    // la redireccion se debe cambiar seún el role del usuario
-    toast(`Welcome ${localStorage.getItem('name')}`);
-    if(role === 'admin' && dataValidate?.validateCredentials){
-      return <Redirect to='/admin/orders' />;
-    }
-    else if(role === 'user' && dataValidate?.validateCredentials) {
-      return <Redirect to='/catalogue' />;
-    }
-  }
-  
-  else if(dataUser.role && dataUser.token && dataUser.twoFA ){
-    toast(`Hello ${data?.validateUser.name}, you must do 2FA`);
-    return <Redirect to='/TFA' />
-  }
-  const handleLogin = async (form) => {
-    login({ variables: { email: form.login, password: form.password } });
-  };
 
-  return (
-    <StyledUserPanel className="page" style={{height: "100vh", display: "flex", alignItems: "center"}}>
-    <div className="wrapper fadeInDown" style={{marginBottom: "10vh"}}>
-      <div className="formContent">
-        <Login />
-        <StyledAcheDos> OR </StyledAcheDos>
-        <hr />
-        <form onSubmit={handleSubmit(handleLogin)}>
-          <input
-            type="email"
-            className="fadeIn second"
-            name="login"
-            placeholder="Email"
-            aria-invalid={errors.name ? "true" : "false"}
-            {...register("login", { required: true })}
-          />
-          {errors.name && errors.name.type === "required" && (
-            <p className="error" role="alert">
-              This is required
-            </p>
-          )}
-          <input
-            type="password"
-            className="fadeIn third"
-            name="password"
-            placeholder="Contraseña"
-            aria-invalid={errors.name ? "true" : "false"}
-            {...register("password", { required: true })}
-          />
-          {errors.name && errors.name.type === "required" && (
-            <p className="error" role="alert">
-              This is required
-            </p>
-          )}
-          <input type="submit" className="fadeIn fourth" value="Log In" />
-        </form>
-        <p className="formFooter">
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm();
+
+      let roleUser = localStorage.getItem('role') ;
+      let tokenUser = localStorage.getItem('token');
+    useEffect(() => {
+      // colocar info del user en el LS y enviar accion de borrar el stados redux
+      if(dataValidate?.validateTOTP.boolean && !roleUser){
+        localStorage.setItem('token', token);
+        localStorage.setItem('name', name);
+        localStorage.setItem('email', email);
+        localStorage.setItem('role', role);
+        localStorage.setItem('id', id);
+        dispatch(clearDataUserProfile())
+        toast.dismiss();
+        toast(`Welcome ${localStorage.getItem('name')}`, {toastId: 1});
+        // window.location.reload();
+      }
+      else if(dataValidate?.validateTOTP.__typename === 'error'){
+        toast(`Error`);
+      }
+      
+    }, [dataValidate, dispatch, email, id, name, role, token, roleUser])
+
+    if(roleUser  && tokenUser && dataCredentials){
+      if(roleUser === 'admin'){
+        return <Redirect to='/admin/orders' />;
+      }
+      else if( roleUser === 'user' ) {
+        return <Redirect to='/catalogue' />;
+      }
+    }
+    
+    const handleValidate = async (form) => {
+        validateTotp({
+            variables: {
+                userId: parseInt(id),
+                code: form.password
+            }
+          });
+        // login({variables: {email:form.login,password:form.password}});
+    }
+    return (
+      // <div>Ghola</div>
+        <StyledUserPanel className="page" style={{ height: "100vh", display: "flex", alignItems: "center" }}>
+            <div className="wrapper fadeInDown" style={{ marginBottom: "10vh" }}>
+                <div className="formContent">
+                    {/* <Login /> */}
+                    <StyledAcheDos> Google Authenticator Code </StyledAcheDos>
+                    <hr />
+                    {/* <img src={dataGenerate?.generateTokenOTP.image}></img> */}
+                    {/* <img>ffff</img> */}
+                    <form onSubmit={handleSubmit(handleValidate)}>
+                        <input
+                            type="password"
+                            className="fadeIn third"
+                            name="pasword"
+                            placeholder="Enter your googleAuth code"
+                            aria-invalid={errors.name ? "true" : "false"}
+                            {...register("password", { required: true })}
+                        />
+                        {errors.name && errors.name.type === "required" && (
+                            <p className="error" role="alert">
+                                This is required
+                            </p>
+                        )}
+                        <input type="submit" className="fadeIn fourth" value="Validate" />
+                    </form>
+                    {/* <button className="fadeIn fourth">Log In</button> */}
+                    {/* <p className="formFooter">
           ¿No tienes cuenta? <Link to="/sign-up">Creala aqui</Link>
         </p>
         <p className="formFooter">
           <Link to="/reset-password">Reset password</Link>
-        </p>
-      </div>
-    </div>
-    </StyledUserPanel>
-  );
-};
-
+        </p> */}
+                </div>
+            </div>
+        </StyledUserPanel>
+    );
+}
 const StyledAcheDos = styled.h2`
   text-align: center;
   font-size: 1rem;
@@ -481,5 +453,4 @@ form {
 }
 
 `;
-
-export default UserAcount;
+export default TwoFA;

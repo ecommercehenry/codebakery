@@ -11,6 +11,7 @@ const GET_ORDERS_BY = gql`
         lastModified
         lineal_order {
           name
+          discount
         }
       }
       ... on error {

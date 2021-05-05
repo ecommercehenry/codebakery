@@ -1,0 +1,16 @@
+query validateTokenTOTP($userId:Int!, $code:Int!){
+  validateTOTP(userId:$userId code:$code){
+    ... on booleanResponse{
+      boolean
+    }
+    ... on error{
+      name
+      detail
+    }
+  }
+}
+
+{
+  "userId": 2,
+  "code": 913082
+}

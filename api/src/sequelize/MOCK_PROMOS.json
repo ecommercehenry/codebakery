@@ -1,14 +1,32 @@
 [
     {
         "name": "Promo del Lunes",
-        "discount": "11",
+        "discount": "50",
         "day": "Monday",
         "category": "Vegan"
     },
     {
         "name": "Promo del Martes",
-        "discount": "15",
+        "discount": "50",
         "day": "Tuesday",
-        "category": "Cakes"
+        "category": "Vegan"
+    },
+    {
+        "name": "Promo del Miercoles",
+        "discount": "50",
+        "day": "Wednesday",
+        "category": "Vegan"
+    },
+    {
+        "name": "Promo del Jueves",
+        "discount": "50",
+        "day": "Thursday",
+        "category": "Vegan"
+    },
+    {
+        "name": "Promo del Viernes",
+        "discount": "50",
+        "day": "Friday",
+        "category": "Vegan"
     }
 ]

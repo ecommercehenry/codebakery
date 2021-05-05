@@ -8,11 +8,11 @@ import { guardarProductos } from "../../../../../actions/index";
 import Grid from "../grid/Grid";
 import "./Products.css";
 import ProductBar from "./ProductBar";
+
 const Products = ({ orderId, refetchCatalogue }) => {
   const dispatch = useDispatch();
 
   let { data } = useQuery(allProducts, { fetchPolicy: "no-cache" });
-
   useEffect(() => {
     dispatch(guardarProductos(data));
   }, [data, dispatch]);

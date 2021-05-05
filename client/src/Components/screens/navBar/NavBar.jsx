@@ -67,18 +67,24 @@ const NavBar = ({ color }) => {
   useEffect(() => {
     if(promos && promos['data'] && promos['data']['getPromos']){
       if(promos['data']['getPromos'].length === 0){
-        resetDiscount();
       }else{
         promos['data']['getPromos'].forEach(elem=>{
-          if(elem.day.toString()=== today.toString()){
-            resetDiscount();
+          if(elem.day===today){
             applyDiscount({variables:
               {
                 discount:elem.discount,
                 category:elem.category,
               }
-            })
+            });
           }
+          // else{
+          //   applyDiscount({variables:
+          //     {
+          //       discount:0,
+          //       category:elem.category,
+          //     }
+          //   });
+          // }
         })
       }
     }

@@ -37,7 +37,7 @@ server.use("/create_preference", (req, res) => {
   lineal_order.map((item) => {
     let newitem = {
       title: item.name,
-      unit_price: parseInt(item.price),
+      unit_price: parseInt(Math.ceil(item.price-(item.price*item.discount)/100)),
       quantity: parseInt(item.quantity),
       description: item.name, /// esto
       picture_url: item.image, /// esto
@@ -120,7 +120,10 @@ server.use(
   graphqlHTTP((_req) => {
     return {
       schema: schema,
-      extensions({ result, variables, document }) {},
+      extensions({ result, variables, document }) {
+        console.log(variables)
+        console.log(result)
+      },
       rootValue: root,
       graphiql: true,
     };
@@ -129,6 +132,7 @@ server.use(
 
 server.use("/stripe/checkout", async (req, res) => {
   const { id, amount } = req.body;
+  console.log(amount)
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
