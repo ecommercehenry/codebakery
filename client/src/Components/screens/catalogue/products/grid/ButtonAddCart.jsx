@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import cartIcon from "../../../../../icons/cart.svg";
 import { addProductToCart } from "../../../../../actions/cartActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ADD_PRODUCT_TO_ORDER from "../../../../../Apollo/mutations/addProductToOrder";
 import { useMutation, useQuery } from "@apollo/client";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../../Apollo/queries/getOrdersByUserIdInCart";
@@ -16,52 +16,73 @@ const ButtonAddCart = ({ id, orderId, refetchCatalogue }) => {
   const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
   let logged = localStorage.token ? true : false;
   let userId = logged ? parseInt(localStorage.id) : null;
+  let { itemsToCart } = useSelector((state) => state.cart);
 
   const { data, refetch, loading } = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
     fetchPolicy: "no-cache",
   });
   const dispatch = useDispatch();
+  let poc = [];
+  if (data && !loading) {
+    data.getOrdersByUserIdInCart.orders[0].lineal_order.map((element) =>
+      poc.push(element.id)
+    );
+  }
+  if (!logged && itemsToCart.length > 0) {
+    itemsToCart.map((ele) => poc.push(ele.id));
+  }
   const buttonHandler = async (id, e) => {
-    if (e.target.innerHTML === "Sin Stock" || e.target.innerText === "Sin Stock") {
+    if (
+      e.target.innerHTML === "Sin Stock" ||
+      e.target.innerText === "Sin Stock"
+    ) {
       toast("No stock sorry");
-    } else if (!logged) {
-      dispatch(addProductToCart(id));
-      toast("Product added to cart", { autoClose: 1000 });
-    } else {
-      if (!loading) {
-        dispatch(
-          setQuantityOrdersCardBackend(
-            orderId
-              ? data?.getOrdersByUserIdInCart?.orders[0]?.lineal_order?.length +
-                  1
-              : 1
-          )
-        );
-        if (orderId !== undefined) {
-          await addProductToOrder({
-            variables: {
-              orderId: orderId,
-              productId: id,
-              quantity: 1,
-              userId: userId,
-            },
-          });
-          await refetch();
-          await refetchCatalogue();
+    } else if (poc.length >= 0) {
+      if (poc.includes(id)) {
+        toast("Already in cart");
+      } else if (!logged) {
+        if(poc.includes(id)){
+          toast("Already in cart");
+        }else{
+          dispatch(addProductToCart(id));
           toast("Product added to cart", { autoClose: 1000 });
-        } else {
-          await addProductToOrder({
-            variables: {
-              orderId: -1,
-              productId: id,
-              quantity: 1,
-              userId: userId,
-            },
-          });
-          await refetch();
-          await refetchCatalogue();
-          toast("Product added to cart", { autoClose: 1000 });
+        }
+      } else {
+        if (!loading) {
+          dispatch(
+            setQuantityOrdersCardBackend(
+              orderId
+                ? data?.getOrdersByUserIdInCart?.orders[0]?.lineal_order
+                    ?.length + 1
+                : 1
+            )
+          );
+          if (orderId !== undefined) {
+            await addProductToOrder({
+              variables: {
+                orderId: orderId,
+                productId: id,
+                quantity: 1,
+                userId: userId,
+              },
+            });
+            await refetch();
+            await refetchCatalogue();
+            toast("Product added to cart", { autoClose: 1000 });
+          } else {
+            await addProductToOrder({
+              variables: {
+                orderId: -1,
+                productId: id,
+                quantity: 1,
+                userId: userId,
+              },
+            });
+            await refetch();
+            await refetchCatalogue();
+            toast("Product added to cart", { autoClose: 1000 });
+          }
         }
       }
     }
