@@ -10,21 +10,23 @@ import ordersReducer from "../reducer/ordersReducer";
 import counterReducer from "../reducer/counterReducer";
 import reducerToken from "../reducer/resetPassword";
 import userAdmin from "../reducer/userAdmin"
+import dataProfileReducer from "../reducer/dataProfileReducer";
 
 const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["cart", "theme", "reducerToken"],
-};
+    key:'root',
+    storage,
+    whitelist: ["cart","theme", "dataProfileReducer", "reducerToken"]
+}
 const rootReducer = combineReducers({
-  productsReducer: productsReducer,
-  reducer: reducer,
-  cart: cartReducer,
-  theme: themeReducer,
-  loginReducer: loginReducer,
-  ordersReducer: ordersReducer,
-  counterReducer: counterReducer,
-  reducerToken: reducerToken,
-  userAdmin: userAdmin,
-});
-export default persistReducer(persistConfig, rootReducer);
+    productsReducer: productsReducer,
+    reducer: reducer,
+    cart:cartReducer,
+    theme:themeReducer,
+    loginReducer:loginReducer,
+    ordersReducer:ordersReducer,
+    counterReducer:counterReducer,
+    userAdmin: userAdmin,
+    dataProfileReducer: dataProfileReducer,
+    reducerToken: reducerToken,
+  })
+export default persistReducer(persistConfig,rootReducer);

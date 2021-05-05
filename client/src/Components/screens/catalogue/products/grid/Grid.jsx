@@ -1,17 +1,24 @@
+import { useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
-import { useQuery } from "@apollo/client";
-import GET_BY_PRODUCT from "../../../../../Apollo/queries/getByProduct";
+import styled from 'styled-components';
+//Components 
+import ProductCard from './ProductCard';
+import GET_BY_PRODUCT from "../../../../../Apollo/queries/getByProduct"
 
-//Components
-import ProductCard from "./ProductCard";
 
 const Grid = ({ orderId, refetchCatalogue }) => {
   let { status } = useSelector((state) => state.theme);
   let { search, productsToRender } = useSelector(
     (state) => state.reducer
   );
+  // let arr = [];
+  // if (search === true) {
+  //   arr = allProduct.filter((element) =>
+  //     element.name.toLowerCase().includes(filterProduct.toLowerCase())
+  //   );
+  //   //con includes la busq ya no pide exactitud en el string. @Lizen
+  // }
   // let arr = [];
 
   // if (search === true) {
@@ -20,9 +27,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
   //   );
   //   //con includes la busq ya no pide exactitud en el string. @Lizen
   // }
-  const { data } = useQuery(GET_BY_PRODUCT, {
-    fetchPolicy: "no-cache",
-  });
+  const { data } = useQuery(GET_BY_PRODUCT, {});
 
 
   useEffect(() => {
@@ -40,11 +45,13 @@ const Grid = ({ orderId, refetchCatalogue }) => {
     }
   }, [data]);
 
+
   return (
 
     <StyledGrid light={status}>
       <>
         {
+
           search ? 
           (productsToRender?.length > 0 ? productsToRender.map((element) => {
             return <ProductCard 
@@ -54,7 +61,8 @@ const Grid = ({ orderId, refetchCatalogue }) => {
             id={element.id} 
             name={element.name}
             image={element.image} 
-            price={element.price} />
+            price={element.price}
+            discount= {element.discount} />
           }) : "No se encontraron Productos") : (productsToRender?.length > 0 ? productsToRender.map((element) => {
             return <ProductCard 
             refetchCatalogue={refetchCatalogue}
@@ -63,42 +71,11 @@ const Grid = ({ orderId, refetchCatalogue }) => {
             id={element.id} 
             name={element.name}
             image={element.image} 
-            price={element.price} />
+            price={element.price}
+            discount= {element.discount} />
           }) : !productsToRender ? 'Cargando...': "No se encontraron Productos" )
         }
-        {/* {search === false
-          ? stateproducts && stateproducts?.length > 0
-            ? stateproducts.map((element) => {
-              return (
-                <ProductCard
-                  refetchCatalogue={refetchCatalogue}
-                  orderId={orderId}
-                  key={element.id}
-                  id={element.id}
-                  name={element.name}
-                  image={element.image}
-                  price={element.price}
-                  stock={element.stock}
-                />
-              );
-            })
-            : "Cargando"
-          : arr.length > 0
-            ? arr.map((element) => {
-              return (
-                <ProductCard
-                  refetchCatalogue={refetchCatalogue}
-                  orderId={orderId}
-                  key={element.id}
-                  id={element.id}
-                  name={element.name}
-                  image={element.image}
-                  price={element.price}
-                  stock={element.stock}
-                />
-              );
-            })
-            : "No se encontraron Productos"} */}
+
       </>
     </StyledGrid>
   );

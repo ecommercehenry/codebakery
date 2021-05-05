@@ -1,24 +1,20 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useQuery, gql } from "@apollo/client";
-// import {useDispatch} from 'react-redux';
-// import {removeAll} from '../../../actions/cartActions';
 //styles
 import styled from "styled-components";
+import {motion} from 'framer-motion';
+import {pageAnimation} from '../../PageAnimation'
 //components
 import ProductOnCart from "./ProductOnCart";
 import EmptyAlert from "./EmptyAlert"
 import TotalToOrder from "./TotalToOrder"
 
 const GuestCart = () => {
-  // const dispatch = useDispatch()
   let { itemsToCart } = useSelector((state) => state.cart);
   let productsArray = itemsToCart.map((elem) => elem.id);
   productsArray = JSON.stringify(productsArray);
 
-  // const resetCartHandler = () => {
-  //   dispatch(removeAll())
-  // }
 
   const getProductByArray = gql`
     {
@@ -28,6 +24,7 @@ const GuestCart = () => {
             name
             price
             stock
+            discount
         }
     }
     `;
@@ -41,13 +38,14 @@ const GuestCart = () => {
           item.price = elem.price;
           item.stock = elem.stock;
           item.image = elem.image;
+          item.discount = elem.discount;
         }
       });
     });
     localStorage.setItem(`cart`, JSON.stringify(itemsToCart));
   }
   return (
-    <StyledCart>
+    <StyledCart variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
         {data && itemsToCart.length !==0 ? (
           itemsToCart.map((elem) => (
             <ProductOnCart
@@ -57,6 +55,7 @@ const GuestCart = () => {
               stock={elem.stock}
               image={elem.image}
               quantity={elem.quantity}
+              discount={elem.discount}
             />
           ))
         ) : (
@@ -67,7 +66,7 @@ const GuestCart = () => {
   );
 };
 
-const StyledCart = styled.div`
+const StyledCart = styled(motion.div)`
   //background: red;
   height: fit-content;
   width: 100%;

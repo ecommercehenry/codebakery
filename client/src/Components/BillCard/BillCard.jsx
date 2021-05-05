@@ -18,7 +18,7 @@ const BillCard = () => {
     (element) => element.id === Number(id)
   );
 
-  /* console.log(result);
+  /* 
 
   const { lineal_order } = result[0];
   const finalResult = result[0]?.lineal_order?.filter(
@@ -46,7 +46,6 @@ const BillCard = () => {
     .reduce((a, b) => a + b, 0)
     .toFixed(2);
 
-  /* console.log("SubTotal: ", subTotal); */
 
   const subTotalPor = ((subTotal * 21) / 100).toFixed(2);
 

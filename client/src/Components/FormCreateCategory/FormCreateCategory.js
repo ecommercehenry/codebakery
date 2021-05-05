@@ -75,7 +75,7 @@ margin-top: 0;
   width: 20rem;
   border-radius: 40px;
   border: 1.3px solid #949494;
-  height: 4.5vh;
+  height: 2rem;
   margin: 0;
   text-align: left;
   padding-left: 2%;

@@ -1,24 +1,48 @@
-import React, { useState } from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import React, { useState, useEffect } from "react";
+import { useQuery, useMutation, useLazyQuery } from "@apollo/client";
 import getUserById from "../../../Apollo/queries/getUserById";
 import styled from "styled-components";
 import { useParams } from "react-router";
 import MODIFY_USER from "../../../Apollo/mutations/modifyUser";
 import Button from "@material-ui/core/Button";
 import closeIcon from "../../../icons/close2.svg";
-//import SettingsIcon from "@material-ui/icons/Settings";
+import GENERATE_OTP from "../../../Apollo/mutations/generateOtp";
+import VALIDATE_TOTP from "../../../Apollo/queries/validateTokenTOTP";
+import { toast } from "react-toastify";
+import "../../../Assets/toast.css";
+import DisableTFA from "./DisableTFA";
+import StatusAuthentication from "./StatusAuthentication.jsx";
+
+
+toast.configure();
 
 const UserProfile = () => {
   let { id } = useParams();
 
+
+  const [
+    generateOTP,
+    { data: dataGenerate, loading: loadingGenerate },
+  ] = useMutation(GENERATE_OTP);
+  const [
+    validateTotp,
+    { data: dataValidate, loading: loadingValidate },
+  ] = useLazyQuery(VALIDATE_TOTP);
+
   const [click, setClick] = useState(1);
-  const [modifyUser] = useMutation(MODIFY_USER, {
-    variables: { id: parseInt(id) },
-  });
+
   const { data: $USER } = useQuery(getUserById, {
     variables: { id: parseInt(id) },
-    refetchQueries: [{ query: getUserById }],
+    // fetchPolicy: "no-cache",
   });
+
+  const [modifyUser] = useMutation(MODIFY_USER, {
+    variables: { id: parseInt(id) },
+    // fetchPolicy: "no-cache",
+    refetchQueries: [{
+      query: getUserById,
+      variables: { id: parseInt(id) }
+    }]})
 
   const [input, setInput] = useState({
     name: "",
@@ -27,7 +51,9 @@ const UserProfile = () => {
     dni: "",
     password: "",
     phoneNumber: "",
+    authentication: "",
   });
+
   const inputHandler = (e) => {
     e.preventDefault();
     setInput({
@@ -44,10 +70,44 @@ const UserProfile = () => {
         address: input.address,
         dni: input.dni,
         phoneNumber: input.phoneNumber,
-        password: input.password,
+        newPassword: input.password,
       },
     });
   };
+
+  const handleSubmitFA = (e) => {
+    e.preventDefault();
+    validateTotp({
+      variables: {
+        userId: parseInt(id),
+        code: input.authentication,
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (dataValidate?.validateTOTP.boolean) {
+      modifyUser({
+        variables: {
+          id: parseInt(id),
+          twoFA: dataValidate?.validateTOTP.boolean,
+        },
+      });
+      toast("Two steps authentication activated", {
+        toastId: 1,
+      });
+    } else if (dataValidate?.validateTOTP.name) {
+      toast(dataValidate?.validateTOTP.detail, {
+        toastId: 2,
+      });
+    }
+  }, [loadingValidate, dataValidate, id, modifyUser]);
+
+  useEffect(() => {
+    if (!dataGenerate && !loadingGenerate) {
+      generateOTP({ variables: { userId: parseInt(id) } });
+    }
+  }, [dataGenerate, loadingGenerate, generateOTP, id]);
 
   return click === 1 ? (
     <StyledUseer>
@@ -102,10 +162,22 @@ const UserProfile = () => {
           <div className="element-naame">
             <div className="text-container">
               <span>Password</span>
-              <p>{$USER?.getUserById.address}</p>
+              <p>{$USER?.getUserById.password}</p>
               <Button value="password" onClick={() => setClick(7)}>
                 Editar
               </Button>
+            </div>
+          </div>
+          <div className="element-naame">
+            <div className="text-container">
+              <span>Authentication</span>
+              <p></p>
+              <StatusAuthentication twoFA={$USER?.getUserById.twoFA} />
+
+              <Button value="authentication" onClick={() => setClick(8)}>
+                Enable Authentication
+              </Button>
+              <DisableTFA id={id} />
             </div>
           </div>
         </div>
@@ -139,7 +211,7 @@ const UserProfile = () => {
               type="text"
               placeholder="Name"
               value={input.name}
-              onChange={inputHandler}
+              onChange={(e) => inputHandler(e)}
             />
           </div>
           <div className="submitt">
@@ -176,7 +248,7 @@ const UserProfile = () => {
               type="text"
               placeholder="Document"
               value={input.dni}
-              onChange={inputHandler}
+              onChange={(e) => inputHandler(e)}
             />
           </div>
           <div className="submitt">
@@ -213,7 +285,7 @@ const UserProfile = () => {
               type="text"
               placeholder="Email"
               value={input.email}
-              onChange={inputHandler}
+              onChange={(e) => inputHandler(e)}
             />
           </div>
           <div className="submitt">
@@ -250,7 +322,7 @@ const UserProfile = () => {
               type="text"
               placeholder="Phone Number"
               value={input.phoneNumber}
-              onChange={inputHandler}
+              onChange={(e) => inputHandler(e)}
             />
           </div>
           <div className="submitt">
@@ -287,7 +359,7 @@ const UserProfile = () => {
               type="text"
               placeholder="Address"
               value={input.address}
-              onChange={inputHandler}
+              onChange={(e) => inputHandler(e)}
             />
           </div>
           <div className="submitt">
@@ -323,12 +395,50 @@ const UserProfile = () => {
               name="password"
               type="password"
               placeholder="Password"
-              value={input.Password}
-              onChange={inputHandler}
+              value={input.password}
+              onChange={(e) => inputHandler(e)}
             />
           </div>
           <div className="submitt">
             <button type="submit">Update</button>
+          </div>
+        </div>
+      </StyledForm>
+    </div>
+  ) : click === 8 ? (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.664)",
+        zIndex: 5,
+        position: "fixed",
+        height: "100vh",
+        width: "100vw",
+        top: "0",
+        left: "0",
+        paddingLeft: "10vw",
+      }}
+    >
+      <StyledForm onSubmit={(e) => handleSubmitFA(e)}>
+        <button onClick={() => setClick(1)} className="closeee">
+          <img src={closeIcon} width="30px" display="flex" alt="closeIcon" />
+        </button>
+        <div className="infoProductt">
+          <div className="namee">
+            <label>Authentication</label>
+            <img src={dataGenerate?.generateTokenOTP.image} alt="" ></img>
+            <input
+              name="authentication"
+              type="number"
+              placeholder="Authentication code"
+              value={input.authentication}
+              onChange={(e) => inputHandler(e)}
+            />
+          </div>
+          <div className="submitt">
+            <button type="submit">Authenticate</button>
           </div>
         </div>
       </StyledForm>
@@ -350,12 +460,12 @@ const StyledUseer = styled.div`
     background-color: rgb(236, 227, 250);
     border-radius: 40px;
     width: 650px;
-    height: 70px;
+    height: 300px;
     margin: 10px;
   }
   .text-container {
     width: 350px;
-    height: 80px;
+    height: 300px;
     padding: 0.5rem;
     overflow: hidden;
   }

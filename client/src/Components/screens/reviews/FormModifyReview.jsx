@@ -46,7 +46,7 @@ const FormModify  = () => {
         }
       }
     })
-    toast("Has modificado la review exitosamente")
+    toast("You have successfully modified the review")
     window.history.back()
   };
 
@@ -201,7 +201,7 @@ position: relative;
             cursor:pointer;
         }
     }
-
+    }
 `;
 
 export default FormModify

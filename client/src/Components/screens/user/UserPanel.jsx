@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import {motion} from 'framer-motion';
+import {pageAnimation} from '../../PageAnimation'
 import UserLeftPanel from "./UserLeftPanel";
 import UserOrders from "./UserOrders";
+import UserProduct from "./UserProduct";
 import UserProfile from "./UserProfile";
 import UserReview from "./UserReview";
 //aqui voy a mostrar mi otros componente
@@ -12,7 +15,7 @@ const UserPanel = () => {
   const [click, setClick] = useState(3);
   useEffect(() => {}, [click]);
   return (
-    <StyledUserPanel light={status}>
+    <StyledUserPanel light={status} variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
       <UserLeftPanel click={click} setClick={setClick} />
       {click === 1 ? (
         <UserOrders />
@@ -20,6 +23,8 @@ const UserPanel = () => {
         <UserReview />
       ) : click === 3 ? (
         <UserProfile />
+      ) : click === 4 ? (
+        <UserProduct/>
       ) : (
         <p>''</p>
       )}
@@ -27,7 +32,7 @@ const UserPanel = () => {
   );
 };
 
-const StyledUserPanel = styled.div`
+const StyledUserPanel = styled(motion.div)`
   background: ${({ light }) => (light ? "transparent" : "#222222")};
   color: ${({ light }) => (light ? "inherit" : "white")};
   width: 100vw;

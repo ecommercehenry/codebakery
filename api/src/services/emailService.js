@@ -23,7 +23,7 @@ async function sendEmail(idUser, affair, message) {
 		service: 'gmail',
         auth: {
             user: 'codebakeryhenry@gmail.com',
-            pass: 'ucobxdgpbyzqlchi' // naturally, replace both with your real credentials or an application-specific password
+            pass: 'patsyLaPeligrosa' // naturally, replace both with your real credentials or an application-specific password
         }
 	})
     //What is been sent to the client?

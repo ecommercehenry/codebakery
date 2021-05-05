@@ -16,7 +16,7 @@ function ListCRUD({setPromo}) {
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    setPromo(false)
+    //setPromo(false)
     if (!loading) {
       dispatch(saveProducts(data.product));
     }
@@ -57,7 +57,7 @@ function ListCRUD({setPromo}) {
             <th width="30%">Categories</th>
             <th width="10%">Stock</th>
             <th width="10%" id="price-column">Price</th>
-            <th width="10%">Action</th>
+            <th width="10%" style={{textAlign:"center"}}>Action</th>
           </tr>
         </thead>
         <tbody id="table-body">
@@ -136,8 +136,8 @@ const StyledListCRUD = styled.div`
 
     tbody {
       display:block;
-      overflow-y:auto;
-      width: 100%;
+      overflow-y:scroll;
+      width: 101.3%;
       height: 66vh;
 
       td {

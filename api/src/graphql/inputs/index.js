@@ -4,6 +4,7 @@ const productInput = require("./productInput");
 const reviewInput = require("./reviewInput");
 const storeInput = require("./storeInput");
 const promoInput = require("./promoInput");
+const emailNewsletter= require("./emailNewsletter")
 
 // aqui exportas tu input
 module.exports = `
@@ -13,4 +14,5 @@ module.exports = `
     ${reviewInput}
     ${storeInput}
     ${promoInput}
+    ${emailNewsletter}
 `;
