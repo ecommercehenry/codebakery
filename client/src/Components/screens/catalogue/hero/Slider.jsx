@@ -3,21 +3,17 @@ import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 // Componente img
 import ImgComp from "./ImgComp";
-import banner3Low from "./banner3Low.png";
 import { useLazyQuery, useQuery } from "@apollo/client";
 
 import GET_ALL_IMAGES from "../../../../Apollo/queries/getImageSlider";
 import Cardhero from "./Cardhero";
 
 const Slider = () => {
-  // Revisar esto
-  // Data deberia traer un array de objetos con los siguientes campos:
-  // __typename, id, name, date
-  const[ getImage, { data }] = useLazyQuery(GET_ALL_IMAGES);
- 
-  useEffect(()=>{
-    getImage()   
-  },[data])
+  const [getImage, { data }] = useLazyQuery(GET_ALL_IMAGES);
+
+  useEffect(() => {
+    getImage();
+  }, [data]);
 
   console.log("DR: ", data?.getImageSlider);
 
@@ -27,8 +23,8 @@ const Slider = () => {
     imageSlider = data?.getImageSlider.map((img) => {
       return <ImgComp src={img.name} />;
     });
-  } 
-  console.log(imageSlider)
+  }
+  console.log(imageSlider);
   const [x, setX] = useState(0);
 
   const goLeft = () => {
@@ -39,12 +35,12 @@ const Slider = () => {
     x === -100 * (imageSlider.length - 1) ? setX(0) : setX(x - 100);
   };
 
-  if (imageSlider?.length) {
-    console.log("entro al setTimeOut")
+  /* if (imageSlider?.length) {
+    console.log("entro al setTimeOut");
     setTimeout(() => {
       x === -100 * (imageSlider.length - 1) ? setX(0) : setX(x - 100);
     }, 5000);
-  }
+  } */
 
   return !imageSlider?.length ? (
     <Cardhero />
@@ -57,7 +53,6 @@ const Slider = () => {
             key={indx}
             style={{ transform: `translateX(${x}%)` }}
           >
-            {/**Revisar que es item. Deberia ser item.name */}
             {item}
           </div>
         );
@@ -71,10 +66,6 @@ const Slider = () => {
     </SliderAtr>
   );
 };
-
-/**
- *
- */
 
 const ButtonSlider = styled.button`
   position: absolute;
@@ -115,9 +106,6 @@ const SliderAtr = styled.div`
     min-width: 100%;
     height: 20rem;
     transition: 0.5s;
-  }
-  :hover {
-    transform: translateX(0%);
   }
 `;
 

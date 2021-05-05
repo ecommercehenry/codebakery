@@ -18,19 +18,18 @@ import ManageStores from "../stores/ManageStores";
 import StoreOptions from "../stores/StoreOptions";
 import StorePanel from "../stores/StoresPanel";
 import ModifyStore from "../stores/ModifyStore";
-import Promos from '../promos/Promos';
+import Promos from "../promos/Promos";
 
-
-import NewsletterAdmin from '../newsletter/NewsletterAdmin';
+import NewsletterAdmin from "../newsletter/NewsletterAdmin";
 
 import SliderCard from "../slider/SliderCard";
 
 const AdminPanel = () => {
   const [addProduct, setAddProduct] = useState(false);
-  const [displayFilter, setDisplayFilter] = useState(false)
+  const [displayFilter, setDisplayFilter] = useState(false);
   let { status } = useSelector((state) => state.theme);
   const [stores, setStores] = useState("seeStores");
-  const [promo,setPromo ] = useState(false);
+  const [promo, setPromo] = useState(false);
 
   return (
     <StyledAdminPanel light={status}>
@@ -38,76 +37,57 @@ const AdminPanel = () => {
         <LeftPanel />
       </div>
       <div className="right">
-        <div className="top">
-          <AdminNavBar setAddProduct={setAddProduct} />
-          <Route
-            path="/admin/stores"
-            component={() => StoreOptions({ setStores })}
-          />
-          <Route path="/admin/orders" component={CheckFilters} />
-        </div>
-       </div>
-        <div className="bottom">
-          <Route path="/admin/products" component={ListCRUD} />
-          <Route path="/admin/orders" component={TablaOrdenes} />
-          <Route path="/admin/users" component={UserAdmin} />
-          <Route path="/admin/newsletter" component={NewsletterAdmin} />
-           {/*Borrar la linea de abajo */}
-           <Route path="/admin/slider" component={SliderCard} />
-
-
-      {   
-        !promo ? 
+        {!promo ? (
           <div className="top">
             <Route
               path="/admin/stores"
               component={() => StoreOptions({ setStores })}
             />
-            <AdminNavBar setAddProduct={setAddProduct} promo={promo} setPromo={setPromo} displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
-            <Route path="/admin/orders"/>
+            <AdminNavBar
+              setAddProduct={setAddProduct}
+              promo={promo}
+              setPromo={setPromo}
+              displayFilter={displayFilter}
+              setDisplayFilter={setDisplayFilter}
+            />
+            <Route path="/admin/orders" />
           </div>
-        : ""
-        }
+        ) : (
+          ""
+        )}
 
-       
         <div className="bottom">
-        
           <Switch>
-            <Route path='/admin/products'>
-              <ListCRUD setPromo={setPromo}/>
+            <Route path="/admin/products">
+              <ListCRUD setPromo={setPromo} />
             </Route>
-            <Route path='/admin/orders'>
-              <TablaOrdenes setPromo={setPromo}/>
+            <Route path="/admin/orders">
+              <TablaOrdenes setPromo={setPromo} />
             </Route>
-            <Route path='/admin/users'>
-              <UserAdmin setPromo={setPromo}/>
+            <Route path="/admin/users">
+              <UserAdmin setPromo={setPromo} />
             </Route>
-            <Route path='/admin/promos'>
-              <Promos promo={promo} setPromo={setPromo}/>
-            </Route>      
+            <Route path="/admin/promos">
+              <Promos promo={promo} setPromo={setPromo} />
+            </Route>
+            <Route path="/admin/newsletter" component={NewsletterAdmin} />
+            <Route path="/admin/slider" component={SliderCard} />
           </Switch>
           {stores === "seeStores" ? (
-            (
-              <Route path="/admin/stores">
-                <StorePanel promo={promo} setPromo={setPromo}/>
-              </Route>
-            )
+            <Route path="/admin/stores">
+              <StorePanel promo={promo} setPromo={setPromo} />
+            </Route>
           ) : stores === "modifyStore" ? (
-            (
-              <Route path="/admin/stores">
-                <ModifyStore/>
-              </Route>
-            )
+            <Route path="/admin/stores">
+              <ModifyStore />
+            </Route>
           ) : stores === "addStore" ? (
-            (
-              <Route path="/admin/stores">
-                <ManageStores/>
-              </Route>
-            )
+            <Route path="/admin/stores">
+              <ManageStores />
+            </Route>
           ) : (
             <p></p>
           )}
-
         </div>
         <Route path="/admin/orders">
           <Pagination />
@@ -122,54 +102,51 @@ const AdminPanel = () => {
 
 const StyledAdminPanel = styled.div`
   min-height: 100vh;
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: ${({ light }) => (light ? "#F1F1F1" : "#222222")};
+  color: ${({ light }) => (light ? "inherit" : "white")};
+  .left {
+    width: 13%;
+    z-index: 10;
+  }
+  .right {
+    width: 87%;
+    display: flex;
+    flex-direction: column;
     height: fit-content;
-    width: 100%;
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    background:${({light})=>light 
-    ? '#F1F1F1' 
-    : '#222222'};
-    color:${({light})=>light 
-    ? 'inherit' 
-    : 'white'};
-    .left{
-        width:13%;
-        z-index: 10;
+    .top {
+      position: sticky;
+      z-index: 2;
+      width: 100%;
+      top: 0;
+      padding-left: 4rem;
+      padding-right: 4rem;
+      background: #f1f1f1;
     }
-    .right{
-        width:87%;
-        display:flex;
-        flex-direction:column;
-        height: fit-content;
-        .top{
-            position: sticky;
-            z-index: 2;
-            width: 100%;
-            top: 0;
-            padding-left: 4rem;
-            padding-right: 4rem;
-            background: #f1f1f1
-            
-        }
-        .bottom{
-            position: relative;
-            //background: black;
-            height:fit-content;
-            width: 100%;
-            display:flex;
-            flex-direction: column;
-            justify-content:center;
-            align-items:center;
-            z-index: 1;
-            padding: 0 4rem;
-        }
-        .edit-grid{
-            position: absolute;
-            z-index: 3;
-            background: #eeeeee00;
-            top: 12vh;
-            width: 85vw;
-        }}`;
+    .bottom {
+      position: relative;
+      //background: black;
+      height: fit-content;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      padding: 0 4rem;
+    }
+    .edit-grid {
+      position: absolute;
+      z-index: 3;
+      background: #eeeeee00;
+      top: 12vh;
+      width: 85vw;
+    }
+  }
+`;
 
 export default AdminPanel;

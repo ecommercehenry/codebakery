@@ -94,16 +94,15 @@ export default function NewsletterAdmin(){
 }
 
 const StyledNewsletter = styled.div`
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 0.5rem;
+  height: 100%;
 
-color:black;
-display:flex;
-flex-direction:column;
-align-items:flex-start;
-width:100%;
-margin-top: 0.5rem;
-height: 100%;
-
-button{
+  button {
     border: none;
     color: beige;
     border-radius: 15px;
@@ -113,6 +112,5 @@ button{
     background-color: rgb(126, 96, 155);
     border: none;
     padding: 6px;
-}
-
+  }
 `;

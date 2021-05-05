@@ -1,95 +1,80 @@
 import React, { useEffect, useState } from "react";
-import MUIDataTable, { TableFilterList } from "mui-datatables";
+
+// Libreria
+import MUIDataTable from "mui-datatables";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Chip from "@material-ui/core/Chip";
-import { useLazyQuery, useQuery, useMutation } from "@apollo/client";
 
+// Componente
+import Upload from "../upload/Upload";
+
+// GraphQL
+import { useQuery, useMutation } from "@apollo/client";
+import SAVE_IMAGE from "../../../../Apollo/mutations/saveImageSlider";
 import DELETE_IMAGE from "../../../../Apollo/mutations/deleteImageById";
 import GET_ALL_IMAGES from "../../../../Apollo/queries/getImageSlider";
 
-const TableSlider = () => {  
-  
-  const [deleteImageById, { loading, error }] = useMutation(DELETE_IMAGE);
+const TableSlider = () => {
+  const [deleteImageById, { error }] = useMutation(DELETE_IMAGE);
   const [responsive, setResponsive] = useState("vertical");
   const [tableBodyHeight, setTableBodyHeight] = useState("400px");
-  const [tableBodyMaxHeight, setTableBodyMaxHeight] = useState("");   
-  const[ getImage, { data }] = useLazyQuery(GET_ALL_IMAGES);
- 
-  useEffect(()=>{
-    getImage()   
-  },[data])
-  console.log ("esto es data")
-  console.log(data)
+  const [tableBodyMaxHeight, setTableBodyMaxHeight] = useState("");
+  // Almaceno la URL
+  const [image, setImage] = useState();
+  const [serverRefresh, setServerRefresh] = useState(false);
 
-// let dataImage;
-  // console.log("DRu: ", data?.getImageSlider);
-  // data ? dataImage = data?.getImageSlider : console.log("todavia no hay data")
-  // let dataImage =  data?.getImageSlider;
-  // console.log("esto es dataImage. ")
-  // console.log(dataImage)
-  
-   let dataImage = data?.getImageslider?.map(  (i) => {
-    const name =  i.name.split("/").pop()
-    return  {
-      type: i.__typename,
-      id: i.id,
-      name,
-      date: i.date
-      
-      }
-    })
+  const { data, refetch } = useQuery(GET_ALL_IMAGES);
+  const [saveImageSlider, { loading }] = useMutation(SAVE_IMAGE);
 
-    console.log("esto es dataImage. ")
-    console.log(dataImage)
+  useEffect(() => {
+    setImage(
+      data?.getImageSlider.map((i) => {
+        const name = i.name.split("/").pop();
+        return {
+          type: i.__typename,
+          id: i.id,
+          name,
+          date: i.date,
+        };
+      })
+    );
+  }, [data]);
 
-  // [{id: 1, name: "PABLO", date: "20/04/2021"},{id: 2, name: "LAU", date: "20/04/2021"}, ];
-  // data?.getImageSlider.map(async (img) => {
-  //   console.log("img  bbb" +  await img)
-  //   let obj = await{
-  //     name: img.name,
-  //     date: img.date,
-  //   }
-  //   console.log("obj" + await obj)
-  //   return obj
-  // });
-  //const name = uploadedResponse.url.split("/").pop();
+  useEffect(() => {
+    if (serverRefresh) {
+      refetch();
+      setServerRefresh(false);
+    }
+  }, [serverRefresh]);
 
-const columns = [
-    { name: "__typename",
-      label: "Type",
-      options: {
-       filter: true,
-       sort: true,
-      }
-     },
+  const columns = [
     {
-    name: "id",
-    label: "ID",
-    options: {
-     filter: true,
-     sort: true,
-    }
-   },
-   {
-    name: "name",
-    label: "Name",
-    options: {
-     filter: true,
-     sort: false,
-    }
-   },
-   {
-    name: "date",
-    label: "Date",
-    options: {
-     filter: true,
-     sort: false,
-    }
-   }];
-
+      name: "id",
+      label: "ID",
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+    {
+      name: "name",
+      label: "Name",
+      options: {
+        filter: true,
+        sort: false,
+      },
+    },
+    {
+      name: "date",
+      label: "Date",
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+  ];
 
   let $ID;
   const options = {
@@ -98,22 +83,31 @@ const columns = [
     responsive,
     tableBodyHeight,
     tableBodyMaxHeight,
-    onRowsDelete: (rowsDeleted) => {
-      $ID = rowsDeleted.data[0].index + 1;
+    onRowsDelete: (rowsDeleted, dataRows) => {
+      let je = dataRows.map((d) => d[0]);
+
+      $ID = image.filter((f) => {
+        return !je.includes(f.id);
+      })[0].id;
+
       deleteImageById({
         variables: {
           imageId: $ID,
         },
       });
+      setServerRefresh(true);
       console.log($ID, "were deleted!");
     },
   };
 
-  
-
-
   return (
     <>
+      <Upload
+        saveImageSlider={saveImageSlider}
+        loading={loading}
+        serverRefresh={serverRefresh}
+        setServerRefresh={setServerRefresh}
+      />
       <FormControl>
         <InputLabel id="demo-simple-select-label">View Height</InputLabel>
         <Select
@@ -129,7 +123,7 @@ const columns = [
       </FormControl>
       <MUIDataTable
         title={"Slider Images"}
-        data={data?.getImageSlider}
+        data={image}
         columns={columns}
         options={options}
       />

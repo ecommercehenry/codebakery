@@ -22,8 +22,9 @@ const { getOrderById } = require("./services/orderService");
 const product = require("./graphql/roots/queriesResolvers/product");
 server.name = "API";
 
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
+// ME LLEVA LA CACHETADA....
+server.use(express.urlencoded({ extended: true, limit: "50mb" }));
+server.use(express.json({ limit: "50mb", extended: true }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(cors());
@@ -37,9 +38,6 @@ server.use((_req, res, next) => {
   next();
 });
 
-const getErrorCode = (errorName) => {
-  return errorType[errorName];
-};
 ///mercadopago
 server.post("/create_preference", (req, res) => {
   //ruta para crear preferencia
@@ -131,10 +129,7 @@ server.use(
   graphqlHTTP((_req) => {
     return {
       schema: schema,
-      extensions({ result, variables, document }) {
-        console.log(result)
-        console.log(variables)
-      },
+      extensions({ result, variables, document }) {},
       rootValue: root,
       graphiql: true,
     };

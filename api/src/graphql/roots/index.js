@@ -134,6 +134,7 @@ const root = {
     getAllStores,
   
     getImageSlider,
+    getByStore
 }
 
 

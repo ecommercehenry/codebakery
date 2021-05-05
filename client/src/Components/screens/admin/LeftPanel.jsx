@@ -10,7 +10,6 @@ import {
 import { HiOutlineClipboardList } from "react-icons/hi";
 import { AiOutlineShop } from "react-icons/ai";
 
-
 //styles
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -70,23 +69,7 @@ const LeftPanel = () => {
               <div className={`tab ${activeTab.users}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Slider</span>
-                </div>
-                </Link>
-
-            <Link className="text-decoration-none text-white" to="/admin/promos">
-            <div className={`tab ${activeTab.promos}`}>
-              <HiOutlineClipboardList size="1.3rem" className="icon" />
-              <span className="tabName">Promos</span>
-            </div>
-          </Link>
-
-            <Link
-              className="text-decoration-none text-white"
-              to="/admin/stores">
-              <div className={`tab ${activeTab.users}`}>
-                <HiOutlineUser size="1.3rem" className="icon" />
-                <span className="tabName">Stores</span>
-                </div>
+              </div>
             </Link>
             <Link
               className="text-decoration-none text-white"
@@ -95,6 +78,24 @@ const LeftPanel = () => {
               <div className={`tab ${activeTab.users}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Newsletter</span>
+              </div>
+            </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/promos"
+            >
+              <div className={`tab ${activeTab.promos}`}>
+                <HiOutlineClipboardList size="1.3rem" className="icon" />
+                <span className="tabName">Promos</span>
+              </div>
+            </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/stores"
+            >
+              <div className={`tab ${activeTab.users}`}>
+                <HiOutlineUser size="1.3rem" className="icon" />
+                <span className="tabName">Stores</span>
               </div>
             </Link>
           </div>
@@ -141,9 +142,9 @@ const StyledPanel = styled.div`
   justify-content: center;
   padding-top: 5vh;
   color: white;
-  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.15);
 
-  li{
+  li {
     transition: 1s all;
     padding: 15px;
     margin-left: -40px;
@@ -153,21 +154,18 @@ const StyledPanel = styled.div`
     display: block;
     border-top-right-radius: 10px 10px;
     border-bottom-right-radius: 10px 10px;
-    
   }
 
-  li:hover{
+  li:hover {
     transition: 1s all;
     background-color: #00000040;
-    color: #FFF;
+    color: #fff;
     border-top-right-radius: 10px 10px;
     border-bottom-right-radius: 10px 10px;
     cursor: pointer;
   }
 
- 
-
-  li ul{
+  li ul {
     background: #5e3f71;
     margin-left: 140px;
     margin-top: -38px;
@@ -177,7 +175,7 @@ const StyledPanel = styled.div`
     border-bottom-right-radius: 15px 15px;
   }
 
-  li:hover > ul{
+  li:hover > ul {
     display: block;
     cursor: pointer;
   }

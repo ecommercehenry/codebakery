@@ -38,7 +38,6 @@ const {applyDiscount} = require("./applyDiscount");
 const {resetDiscount} = require("./resetDiscount");
 const {deletePromo} = require("./deletePromo");
 
-
 module.exports = {
   modifyProduct,
   updateCategory,
