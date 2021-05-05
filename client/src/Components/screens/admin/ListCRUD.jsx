@@ -138,15 +138,15 @@ const StyledListCRUD = styled.div`
       display:flex;
       flex-flow: column nowrap;
       overflow-y:scroll;
-      width: 101.3%;
       height: 66vh;
       justify-content:flex-start;
 
 
       td {
+        justify-content:center;
+        text-align: center;
         height: 5rem;
         border-bottom: 1px solid #ddd;
-        padding:0 1em;
       }
     }
 

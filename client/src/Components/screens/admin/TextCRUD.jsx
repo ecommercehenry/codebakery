@@ -23,8 +23,8 @@ function TextCRUD({ id }) {
             <td width="1%">
               <img src={product.image} alt="" style={{ width: "4rem", marginLeft:"0.3rem" }} />
             </td>
-            <td width="30%">{product.name}</td>
-            <td width="30%">
+            <td width="30%" style={{textAlign:"left"}}>{product.name}</td>
+            <td width="30%" style={{textAlign:"left"}}>
               {product.categories.map((element, idx, arr) => 
                   element.name
               ).join(', ')}
