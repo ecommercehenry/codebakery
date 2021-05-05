@@ -32,7 +32,7 @@ useEffect(() => {
           value={input}
           onChange={handlerChange}
         />
-          <button id="search-btn" onClick={submitHandler}>Search</button> 
+          {/* <button id="search-btn" onClick={submitHandler}>Search</button>  */}
       </form>
     </StyledSearchBar>
     // </div>
