@@ -17,10 +17,7 @@ import AddPromoButton from "./promos/AddPromoButton"
 import SearchBar from "./SearchBar";
 import SearchBarAdmin from "./SearchBarAdmin";
 
-const AdminNavBar = ({ setAddProduct, promo, setPromo, displayFilter, setDisplayFilter  }) => {
-  const buttonHandler = () => {
-    setAddProduct(true);
-  };
+const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
 
   const [add, setAdd] = useState(false);
   let { status } = useSelector((state) => state.theme);
@@ -56,6 +53,10 @@ const AdminNavBar = ({ setAddProduct, promo, setPromo, displayFilter, setDisplay
           <div className="optionTab">PROMOS</div>
           <PromoNavBar/>
         </Route>
+
+        <Route path="/admin/stores">
+          <div className="optionTab">STORES</div>
+        </Route>
         
       </div>
 
@@ -75,9 +76,6 @@ const AdminNavBar = ({ setAddProduct, promo, setPromo, displayFilter, setDisplay
           <AddPromoButton setPromo={setPromo}/>
         </div>
       </Route>
-
-
-      
       <Route path="/admin/products">
         <>
           {add ? (
@@ -93,7 +91,6 @@ const AdminNavBar = ({ setAddProduct, promo, setPromo, displayFilter, setDisplay
           <Link
             to="/admin/add-product"
             className="addProduct purple-btn"
-            onClick={buttonHandler}
           >
             + ADD PRODUCT
           </Link>
@@ -144,7 +141,7 @@ const StyledNavBar = styled.div`
       ? '#D5D5D5' 
       : '#222222'};
       border: none;
-      height: 4.5vh;
+      height: 2rem;
       border: 1px solid transparent;
       z-index: 2;
       font-size: 1em;
@@ -185,6 +182,7 @@ const StyledNavBar = styled.div`
     align-items: center;
     justify-content: center;
     color: rgba(0, 0, 0, 0.726);
+    height: 2rem;
   }
   .add-category:hover {
     color: black;
@@ -192,7 +190,7 @@ const StyledNavBar = styled.div`
   }
   .purple-btn {
     display: flex;
-    height: 4.5vh;
+    height: 2rem;
     width: fit-content !important;
     border-radius: 40px;
     border: none;

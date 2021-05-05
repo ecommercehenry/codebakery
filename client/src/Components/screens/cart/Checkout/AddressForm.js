@@ -83,7 +83,7 @@ export default function AddressForm({ setUserdata, setShippingtype, setStoreId }
     } else if (shipping === "none") {
       setUserdata(false);
     }
-  }, [loading, data, shipping, selected]);
+  }, [loading, data, shipping, selected, setUserdata]);
   //event Handlers
   const handleStore = (e) => {
     e.preventDefault();
@@ -92,18 +92,23 @@ export default function AddressForm({ setUserdata, setShippingtype, setStoreId }
   };
   const submitStore = (e) => {
     e.preventDefault();
-    if (order && order.data) {
-      let idOrder = order.data.getOrdersByUserIdInCart.orders[0].id;
-      modifyOrderStore({
-        variables: {
-          idStore: parseInt(selected),
-          idOrder: parseInt(idOrder),
-        },
-      });
+    if (selected !== "none"){
+      if (order && order.data) {
+        let idOrder = order.data.getOrdersByUserIdInCart.orders[0].id;
+        modifyOrderStore({
+          variables: {
+            idStore: parseInt(selected),
+            idOrder: parseInt(idOrder),
+          },
+        });
+      }
+      document.getElementById("confirm-store").style = "display: none";
+      setUserdata(true);
+      toast("Store saved");
+    }else{
+      toast("Must select a store")
     }
-    document.getElementById("confirm-store").style = "display: none";
-    setUserdata(true);
-    toast("Store saved");
+
   };
   const handleAddress = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

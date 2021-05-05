@@ -3,10 +3,12 @@ import styled from "styled-components";
 import NavBar from "../../navBar/NavBar";
 import AboutUs from "./AboutUs";
 import { Us } from "./Us";
+import {motion} from 'framer-motion';
+import {pageAnimation} from '../../../PageAnimation'
 
 const AboutUsGrid = () => {
   return (
-    <>
+    <StyledWrapper variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
       <div style={{backgroundColor: '#5e3f71'}} >
         <div id="navBackground">
           <NavBar color="white" />
@@ -15,7 +17,7 @@ const AboutUsGrid = () => {
       <AboutUsInfo>
         <h1>Meet Our team</h1>
         <p>
-        We are students from <a target="_blank" href="https://www.soyhenry.com/"> 
+        We are students from <a target="_blank" rel="noopener noreferrer" href="https://www.soyhenry.com/"> 
             Henry's bootcamp
           </a> {" "}  where <span>Code Bakery</span> is our final project. 
         </p>
@@ -34,7 +36,7 @@ const AboutUsGrid = () => {
           );
         })}
       </AboutUsConteinerGrid>
-    </>
+    </StyledWrapper>
   );
 };
 
@@ -43,6 +45,10 @@ const media = {
   laptop: "@media(min-width:992px)",
   desktop: "@media(min-width:1200px)",
 };
+
+const StyledWrapper = styled(motion.div)`
+
+`
 
 const AboutUsInfo = styled.div`
   

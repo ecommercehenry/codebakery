@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Landing from "./Components/screens/landing/Landing";
 import AdminPanel from "./Components/screens/admin/container/AdminPanel";
 import Catalogue from "./Components/screens/catalogue/container/Catalogue";
 import Cart from "./Components/screens/cart/container/Cart";
 import AboutUs from "./Components/screens/aboutUs/container/AboutUsGrid";
-import FormCreateCategory from "./Components/FormCreateCategory/FormCreateCategory";
-// import FormCRUD from "./Components/screens/admin/FormCRUD"
 import Checkout from './Components/screens/cart/Checkout/Checkout'
 import Stripe from "./Components/screens/cart/Checkout/Stripe"
 import GlobalStyle from "./Components/GlobalStyle";
-import GuestCart from "./Components/screens/cart/GuestCart";
 import UserAccount from "./Components/UserAcount/UserAccount";
 import UserPanel from "./Components/screens/user/UserPanel"
 import CreateUserAccount from "./Components/UserAcount/CreateUserAccount";
@@ -29,24 +26,27 @@ import FormReview from "./Components/screens/reviews/FormReview";
 import FormModify from "./Components/screens/reviews/FormModifyReview"
 
 import Sucursales from './Components/Maps/Sucursales'
+import NewsletterAdmin from "./Components/screens/admin/newsletter/NewsletterAdmin";
+
 import TwoFA from "./Components/UserAcount/TwoFA";
-import { useSelector } from "react-redux";
+
 
 let token = localStorage.getItem("token");
 let role = localStorage.getItem("role");
 
 function App() {
+
   // variable para comprobar si existió 2FA
-  const { twoFA } = useSelector(state => state.dataProfileReducer);
   // console.log(TwoFA, 'atstattsappppp')
   // si la TwoFAValidation es true tomamos los valores del LS sino no debemos logear
-  const [validateUser, { data, loading }] = useLazyQuery(VALIDATE_CREDENTIALS);
+  const [validateUser, { data }] = useLazyQuery(VALIDATE_CREDENTIALS);
   useEffect(() => {
     if(TwoFA){
       // console.log('tatstatstats')
       validateUser({ variables: { token: token, role: role } });
     }
-  }, [data]);
+  }, [data, validateUser]);
+
 
   const isAuthenticated = data?.validateCredentials;
 
@@ -74,7 +74,12 @@ function App() {
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route path="/reset-password" component={ResetPassword} />
           <Route exact path="/promote" component={Promote} />
+
+          <Route exact path="admin/newsletter" component={NewsletterAdmin} />
+
           <Route path="/*" component={() => "404 NOT FOUND"} />
+
+
         </Switch>
       </>
     );

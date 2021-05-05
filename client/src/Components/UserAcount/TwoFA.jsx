@@ -1,18 +1,11 @@
 import React, { useEffect } from "react";
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery} from "@apollo/client";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import GENERATE_OTP from "../../Apollo/mutations/generateOtp";
 import VALIDATE_TOTP from "../../Apollo/queries/validateTokenTOTP";
 
 import { Redirect } from "react-router-dom";
-
-// Login/ out
-import Login from "./Login";
-import Logout from "./Logout";
 import { useDispatch, useSelector } from "react-redux";
-import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
 import { clearDataUserProfile } from "../../actions/dataProfileActions";
@@ -20,25 +13,30 @@ import { clearDataUserProfile } from "../../actions/dataProfileActions";
 toast.configure();
 
 function TwoFA(){
-    const [generateOTP, {data: dataGenerate, loading: loadingGenerate}] = useMutation(GENERATE_OTP);
-    const [validateTotp, {data: dataValidate, loading: loadingValidate}] = useLazyQuery(VALIDATE_TOTP);
+
+    const [validateTotp, {data: dataValidate}] = useLazyQuery(VALIDATE_TOTP);
     const [
       functionValidate,
       { loading: loadingCredentials, data: dataCredentials },
     ] = useLazyQuery(VALIDATE_CREDENTIALS);
     const {id, token, name, email, role} = useSelector(state => state.dataProfileReducer);
     const dispatch = useDispatch();
+    let tokenLocal = localStorage.getItem("token")
 
+    
+    
     useEffect(() => {
+      
       if (localStorage.getItem("token")) {
         functionValidate({
           variables: {
             token: localStorage.getItem("token"),
             role: localStorage.getItem("role"),
           },
-        });
+        })
       }
-    },[loadingCredentials, dataCredentials, localStorage.getItem("token")]);
+      console.log("ENTROOOOOOOOO")
+    },[loadingCredentials, dataCredentials, tokenLocal, functionValidate]);
 
 
     const {
@@ -47,9 +45,11 @@ function TwoFA(){
         formState: { errors },
       } = useForm();
 
+      let roleUser = localStorage.getItem('role') ;
+      let tokenUser = localStorage.getItem('token');
     useEffect(() => {
       // colocar info del user en el LS y enviar accion de borrar el stados redux
-      if(dataValidate?.validateTOTP.boolean){
+      if(dataValidate?.validateTOTP.boolean && !roleUser){
         localStorage.setItem('token', token);
         localStorage.setItem('name', name);
         localStorage.setItem('email', email);
@@ -64,12 +64,8 @@ function TwoFA(){
         toast(`Error`);
       }
       
-    }, [dataValidate])
+    }, [dataValidate, dispatch, email, id, name, role, token, roleUser])
 
-    let roleUser = localStorage.getItem('role') ;
-    let tokenUser = localStorage.getItem('token');
-    // console.log(roleUser, tokenUser, 'iasiiaisias')
-    // console.log(dataCredentials, 'aaaaaaaaaaaaaaaaaaa')
     if(roleUser  && tokenUser && dataCredentials){
       if(roleUser === 'admin'){
         return <Redirect to='/admin/orders' />;
@@ -78,14 +74,14 @@ function TwoFA(){
         return <Redirect to='/catalogue' />;
       }
     }
-    const handleValidate = (form) => {
-        console.log(form.password, 'atstats');
+    
+    const handleValidate = async (form) => {
         validateTotp({
             variables: {
-                userId: parseInt(id)
-                , code: form.password
+                userId: parseInt(id),
+                code: form.password
             }
-        });
+          });
         // login({variables: {email:form.login,password:form.password}});
     }
     return (

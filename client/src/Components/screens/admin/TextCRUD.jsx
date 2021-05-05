@@ -14,13 +14,6 @@ function TextCRUD({ id }) {
     setShow(!show);
   }
 
-  {
-    /* <div className="product-container-edit" onDoubleClick={handlerOnClick}>
-      {show ? (
-        <div className="element-container" id={id}>
-           */
-  }
-
   if (product) {
     return (
       <>
@@ -29,7 +22,7 @@ function TextCRUD({ id }) {
             <td width="10%">
               <img src={product.image} alt="" style={{ width: "4rem", marginLeft:"0.3rem" }} />
             </td>
-            <td width="31.5%">{product.name}</td>
+            <td width="30%">{product.name}</td>
             <td width="30%">
               {product.categories.map((element, idx, arr) => 
                   element.name
@@ -77,11 +70,3 @@ const StyledTableRow = styled.tr`
 }
 `
 
-const StyledTextCRUD = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 1.5rem;
-  height: 100%;
-`;

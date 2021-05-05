@@ -7,8 +7,10 @@ const getAllProducts = gql`
       name
       description
       price
+      discount
       stock
       image
+      discount
     }
   }
 `

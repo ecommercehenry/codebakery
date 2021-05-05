@@ -8,7 +8,6 @@ module.exports = {
       const authToken = args.headers.authtoken;
       const decoded = jwt.verify(authToken, "secret");
       let {authrole} = args.headers;
-      console.log("roots", _.userId)
       if (authrole === "admin") {
         return deleteUser(_.userId);
       } else return { __typename: "error", name: "error", detail: "No admin" };

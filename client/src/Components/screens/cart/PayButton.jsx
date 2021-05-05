@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
+import { getCurrentDomainApi } from '../../../config/currentDomain';
 
 const FORM_ID = 'payment-form';
 
 export default function PayButton({productos}){
-
+    console.log("Pay button")
+    console.log(process.env.NODE_ENV)
+    console.log(`${getCurrentDomainApi()}/create_preference`)
     const [preferenceId, setPreferenceId] = useState(null);
     
     useEffect(() => {
-      axios.post('http://localhost:3001/create_preference',productos) //se crea la preferencia )
+      axios.post(`${getCurrentDomainApi()}/create_preference`,productos) //se crea la preferencia )
       .then((order) => {
         setPreferenceId(order.data.id);    // se guarda la respuesta en el estado local (la respuesta de crear la preferencia es un id)
       });

@@ -16,39 +16,29 @@ const { ACCESS_TOKEN } = process.env;
 mercadopago.configurations.setAccessToken(`${ACCESS_TOKEN}`); //access-key
 /// mercadopago
 const server = express();
-const { schema, root } = require("./graphql/schema");
-const { sendEmail, getFormatedMessage } = require("./services/emailService");
-const { getOrderById } = require("./services/orderService");
+const {schema, root} = require("./graphql/schema");
+const { sendEmail, getFormatedMessage } = require('./services/emailService');
+const { getOrderById } = require('./services/orderService');
+const { getCurrentDomainApi, getCurrentDomainFront } = require("./config/currentDomain");
 const product = require("./graphql/roots/queriesResolvers/product");
-server.name = "API";
+server.name = 'API';
 
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
+// ME LLEVA LA CACHETADA....
+server.use(express.urlencoded({ extended: true, limit: "50mb" }));
+server.use(express.json({ limit: "50mb", extended: true }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(cors());
-server.use((_req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
 
-const getErrorCode = (errorName) => {
-  return errorType[errorName];
-};
 ///mercadopago
-server.post("/create_preference", (req, res) => {
+server.use("/create_preference", (req, res) => {
   //ruta para crear preferencia
   let { lineal_order } = req.body;
   let items = [];
   lineal_order.map((item) => {
     let newitem = {
       title: item.name,
-      unit_price: parseInt(item.price),
+      unit_price: parseInt(Math.ceil(item.price-(item.price*item.discount)/100)),
       quantity: parseInt(item.quantity),
       description: item.name, /// esto
       picture_url: item.image, /// esto
@@ -64,9 +54,9 @@ server.post("/create_preference", (req, res) => {
       installments: 1, //Cantidad maxima de cuotas
     },
     back_urls: {
-      success: "http://localhost:3001/feedback", //luego modificar si se quiere redigir en cada caso
-      failure: "http://localhost:3000/cart",
-      pending: "http://localhost:3001/feedback",
+      success: `${getCurrentDomainApi()}/feedback`, //luego modificar si se quiere redigir en cada caso
+      failure: `${getCurrentDomainApi()}/cart`,
+      pending: `${getCurrentDomainApi()}/feedback`
     },
   };
 
@@ -122,7 +112,7 @@ server.get("/feedback", async function (req, res) {
       )
     );
   }
-  res.redirect("http://localhost:3000/catalogue");
+  return res.redirect(`${getCurrentDomainFront()}/catalogue`);
 });
 ///mercadopago
 
@@ -131,15 +121,19 @@ server.use(
   graphqlHTTP((_req) => {
     return {
       schema: schema,
-      extensions({ result, variables, document }) {},
+      extensions({ result, variables, document }) {
+        console.log(variables)
+        console.log(result)
+      },
       rootValue: root,
       graphiql: true,
     };
   })
 );
 
-server.post("/stripe/checkout", async (req, res) => {
+server.use("/stripe/checkout", async (req, res) => {
   const { id, amount } = req.body;
+  console.log(amount)
   try {
     const payment = await stripe.paymentIntents.create({
       amount,

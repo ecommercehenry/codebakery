@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 import getPromos from '../../../../Apollo/queries/getPromos';
 import DELETE_PROMO from '../../../../Apollo/mutations/deletePromo';
@@ -23,12 +23,13 @@ const PromoList = () => {
     }
     return (
         <StyledPromoList>
+            <div className="table-container">
             <div className="topp">
                 <div className="namee">Name</div>
                 <div className="discountt">Discount</div>
                 <div className="dayy">Day</div>
                 <div className="categoryy">Category</div>
-                <div className="editt"></div>
+                <div className="editt"> Action</div>
             </div>
             {
                 data && data['getPromos'] && data['getPromos'].map((elem,i) =>
@@ -44,25 +45,31 @@ const PromoList = () => {
                         </div>
                         
                     </div>
+                    
                 )
-            } 
+            }
+            </div> 
         </StyledPromoList>
     )
 }
 
 const StyledPromoList = styled.div`
-    margin-top:5rem;
-    width:76vw;
+    width:90%;
     height:60;
+    
+    .table-container{
+        
+    }
     //background:red;
     .topp{
-        color:white;
-        background:#5E3F71;
+        color:black;
+        background:transparent;
         display:flex;
         width:100%;
         flex-direction:row;
         justify-content:space-between;
-        margin-bottom:1.5rem;
+        height: 5rem;
+        border-bottom: 1px solid #ddd;
         .discountt,
         .dayy,
         .categoryy,
@@ -71,6 +78,7 @@ const StyledPromoList = styled.div`
             display:flex;
             align-items:center;
             justify-content:center;
+            font-weight: bold;
         }
         .discountt{
             //background:blue;
@@ -86,7 +94,9 @@ const StyledPromoList = styled.div`
         }
         .namee{
             //background:green;
-            width: 45%;
+            width: 20%;
+            display:flex;
+            justify-content: flex-start;
         }
         .editt{
             //background:green;
@@ -99,7 +109,8 @@ const StyledPromoList = styled.div`
         width:100%;
         flex-direction:row;
         justify-content:space-between;
-        margin-bottom:1rem;
+        height: 5rem;
+        border-bottom: 1px solid #ddd;
         .listName,
         .listDiscount,
         .listDay,
@@ -110,7 +121,9 @@ const StyledPromoList = styled.div`
             justify-content:center;
         }
         .listName{
-            width: 45%;
+            width: 20%;
+            display:flex;
+            justify-content: flex-start;
         }
         .listDiscount{
             width: 8%;

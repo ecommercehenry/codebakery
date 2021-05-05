@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useMutation } from "@apollo/client";
 import MODIFY_USER from "../../../Apollo/mutations/modifyUser";
 import getUserById from "../../../Apollo/queries/getUserById";
 
 export default function DisableTFA({ id }) {
-  const [modifyUser, { data, loading, error }] = useMutation(MODIFY_USER, {
+  const [modifyUser] = useMutation(MODIFY_USER, {
     refetchQueries: [{
       query: getUserById,
       variables: { id: parseInt(id) }

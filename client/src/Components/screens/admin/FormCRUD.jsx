@@ -6,11 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { modifyProduct } from "../../../actions/modifyProductAction";
 // import { addCategoryToProductAction } from "../../../actions/addCategoryToProductAction";
 import styled from "styled-components";
-import { HiOutlinePencil, HiOutlineSave, HiOutlineX } from "react-icons/hi";
+import { HiOutlineSave, HiOutlineX } from "react-icons/hi";
 import { toast } from "react-toastify";
 
 import '../../../Assets/toast.css'
-import { NonceProvider } from "react-select";
 
 
 toast.configure()
@@ -22,15 +21,13 @@ function FormCRUD({ id, handlerOnClick }) {
   function onChangeNewCategory(e) {
     setValueNewCategory(e.target.value);
   }
-  function submitNewCategory() {
-    setInputs(...inputs);
-  }
   const [inputs, setInputs] = useState({
     name: product.name,
     description: product.description,
     categories: product.categories,
     stock: product.stock,
     price: product.price,
+    discount: product.discount,
     image: product.image,
   });
   const dispatch = useDispatch();
@@ -40,12 +37,12 @@ function FormCRUD({ id, handlerOnClick }) {
       [e.target.name]: e.target.value,
     });
   }
-  const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT);
+  const [modificar, { data, loading }] = useMutation(MODIFY_PRODUCT);
   useEffect(() => {
     if (data && !loading) {
       dispatch(modifyProduct(id, data.modifyProduct));
     }
-  }, [data]);
+  }, [data,dispatch, id, loading]);
   /**
    * When edit button is clicked
    */
@@ -60,6 +57,7 @@ function FormCRUD({ id, handlerOnClick }) {
           stock: Number(inputs.stock),
           image: inputs.image,
           categories: inputs.categories.map((c) => c.name),
+          discount: inputs.discount
         },
       },
     });
@@ -289,7 +287,3 @@ input{
   }
 }
 `;
-
-      {/* <StyledFormCRUD onSubmit={submitHandler}> */}
-
-                {/* <div key={i}> */}

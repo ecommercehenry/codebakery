@@ -17,10 +17,10 @@ const ThemeSwitch = () => {
         dispatch(changeTheme())
     }
     useEffect(()=>{
-        if(location.pathname=='/'){
+        if(location.pathname==='/'){
             setHome(true)
         }
-    },[])
+    },[location.pathname])
     
     /* console.log(location,home) */
     return (

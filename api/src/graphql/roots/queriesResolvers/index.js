@@ -1,3 +1,4 @@
+
 const { categories } = require("./categories")
 const { product } = require("./product")
 const { productById } = require("./productById")
@@ -21,6 +22,11 @@ const { getReviewByUserId } = require("./getReviewByUserId");
 const { getPromos } = require("./getPromos");
 const {getAllStores} = require("./getAllStores")
 const {getByStore} = require("./getByStore")
+
+
+const { getImageSlider } = require("./getImageSlider");
+
+
 const {validateTOTP} = require("./validateTOTP")
 
 
@@ -45,8 +51,9 @@ module.exports = {
   getUserById,
   validateUserWithGoogle,
   getReviewByUserId,
-  getPromos,
-  getAllStores, 
   getByStore,
+  getAllStores,
+  getImageSlider,
+  getPromos,
   validateTOTP
 }

@@ -23,10 +23,9 @@ async function sendEmail(idUser, affair, message) {
 		service: 'gmail',
         auth: {
             user: 'codebakeryhenry@gmail.com',
-            pass: 'ucobxdgpbyzqlchi' // naturally, replace both with your real credentials or an application-specific password
+            pass: 'patsyLaPeligrosa' // naturally, replace both with your real credentials or an application-specific password
         }
 	})
-    console.log("Sending email to: " + user.email)
     //What is been sent to the client?
     const mailOptions = {
         to: user.email,
@@ -36,11 +35,9 @@ async function sendEmail(idUser, affair, message) {
     //Send the email
     return transporter.sendMail(mailOptions)
     .then(info=>{
-        console.log("Email send!")
         return {__typename:"email", email:info.accepted[0], messageId:info.messageId}
     })
     .catch(err=>{
-        console.log(err)
         return {__typename:"error",name:"Error sending email", detail:err.toString()}
     })
     

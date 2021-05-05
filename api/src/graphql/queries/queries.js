@@ -23,6 +23,8 @@ module.exports = `
         getReviewByUserId(userId: Int!) : [review]
         validateTOTP(userId:Int!, code:String!) : resultBoolean
         getAllStores: [store]
+        
+        getImageSlider: [image]
         getByStore(id: Int!) : store
         getPromos: [promo]
     }

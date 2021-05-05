@@ -1,8 +1,5 @@
 import React from 'react'
-import { useSelector } from "react-redux";
-import styled from 'styled-components';
 // import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
 import { useDispatch} from "react-redux";
 import Button from "@material-ui/core/Button";
@@ -10,19 +7,6 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { productToHigh, productToLow } from '../../../../../../actions';
-
-
-const useStyles = makeStyles({
-    root: {
-      padding: 15,
-      width: 300,
-      height: 80,
-    },
-  });
-  
-  function valuetext(value) {
-    return `${value}°C`;
-  }
   
 const StyledMenu = withStyles({
     paper: {
@@ -56,11 +40,6 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 const SortButton = () => {
-    // let {status} = useSelector((state)=>state.theme);
-    const classes = useStyles();
-    // const [value, setValue] = React.useState([20, 37]);
-    //estado local del rango
-
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     // const handleChange = (event, newValue) => {
@@ -120,37 +99,8 @@ const SortButton = () => {
             </StyledMenuItem>
         </StyledMenu>
         </div>
-        // <StyledSortButton light={status}>
-        //     <span>Order by: Price</span>
-        // </StyledSortButton>
     )
 }
 
-const StyledSortButton = styled.button`
-    background:${({light})=>light ? 'transparent' : '#222222'};
-    color:${({light})=>light ? 'inherit' : 'white'};
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:none;
-    padding: 1rem 1rem;
-    border: 1px solid #d4d4d4;
-    border-radius: 13px;
-    width:9rem;
-    img{
-        width:1rem;
-        height:1rem;
-        margin-right:0.3rem;
-        //background:yellow;
-    }
-    span{
-        //background:red;
-        //width:1.1rem;
-        height:1.1rem;
-        display:flex;
-        align-items:center;
-        
-    }
-`;
 
 export default SortButton

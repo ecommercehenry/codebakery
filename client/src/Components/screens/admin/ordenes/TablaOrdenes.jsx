@@ -24,12 +24,12 @@ export default function TablaOrdenes({setPromo}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setPromo(false)
+    //setPromo(false)
     dispatch(saveOrders(ordersQ));
-  }, [data]);
+  }, [data, dispatch, ordersQ, setPromo]);
 
   //traigo info del reducer..
-  const { orders, search, filterOrders, idError, status, renderPage } = useSelector(
+  const { search, filterOrders, idError, status, renderPage } = useSelector(
     (state) => state.ordersReducer
   );
 
@@ -116,7 +116,7 @@ table {
 
   thead {
     display: table;
-    overflow: auto;
+    overflow: scroll;
     width: 100%;
 
     th {
@@ -130,8 +130,8 @@ table {
 
   tbody {
     display:block;
-    overflow-y:auto;
-    width: 100%;
+    overflow-y:scroll;
+    width: 101.3%;
     height: 66vh;
 
     td {

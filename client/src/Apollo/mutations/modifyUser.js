@@ -10,8 +10,11 @@ const MODIFY_USER = gql`
     $role: String
     $address: String
     $dni: String
-    $phoneNumber: String,
+    $phoneNumber: String
+
+    $newsletter: Boolean
     $twoFA: Boolean
+
   ) {
     modifyUser(
       id: $id
@@ -23,6 +26,8 @@ const MODIFY_USER = gql`
       address: $address
       dni: $dni
       phoneNumber: $phoneNumber
+
+      newsletter: $newsletter
       twoFA: $twoFA
     ) {
       __typename
@@ -34,6 +39,7 @@ const MODIFY_USER = gql`
         address
         dni
         phoneNumber
+        newsletter
         twoFA
       }
       __typename

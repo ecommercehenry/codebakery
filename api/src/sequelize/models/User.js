@@ -57,6 +57,10 @@ module.exports = (sequelize) => {
         return () => this.getDataValue("salt")
       },
     },
+    newsletter: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     twoFA: {
       type: DataTypes.BOOLEAN
     }

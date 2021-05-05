@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import GET_ALL_USERS from "../../../../Apollo/queries/getAllUsers";
 import DELETE_USER from "../../../../Apollo/mutations/deleteUser";
 import styled from "styled-components";
@@ -10,10 +10,7 @@ import BootBox from "react-bootbox";
 function UserInfo({ id, name, email, address, dni, phoneNumber, role }) {
   const [show, setShow] = useState(false);
 
-  const [
-    deleteUser,
-    { data: dataDeleteUser, loading: loadingMutation },
-  ] = useMutation(DELETE_USER, {
+  const [deleteUser] = useMutation(DELETE_USER, {
     refetchQueries: [{ query: GET_ALL_USERS }],
   });
 
@@ -49,7 +46,7 @@ function UserInfo({ id, name, email, address, dni, phoneNumber, role }) {
         {email === "admin@admin.com" ? (
           ""
         ) : (
-          <Promote name={name} idUser={id} rol={role} />
+          <Promote idUser={id} rol={role} />
         )}
       </td>
       <td width="5%">

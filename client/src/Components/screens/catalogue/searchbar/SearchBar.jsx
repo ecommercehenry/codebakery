@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchByName, setSearch } from '../../../../actions';
+import { fetchByName } from '../../../../actions';
 import { useDispatch} from "react-redux";
 import styled from 'styled-components';
 import { HiSearch } from "react-icons/hi";
@@ -12,27 +12,23 @@ const [input, setInput] = useState([])
 const handlerChange = (e) => {
   setInput(e.target.value); 
 }
-const submitHandler = (event) => {
-  event.preventDefault();
-} 
 useEffect(() => {
   // dispatch(setSearch(true));
   dispatch(fetchByName(input));
-}, [input])
+}, [input, dispatch])
 
 
   return (
     // <div style={{width:100+"vw", display:"flex", justifyContent:"center"}}>
     <StyledSearchBar>
-      <HiSearch size="1.5em" color="gray" style={{position: "absolute", left: "15px"}}/>
+      <HiSearch className="lupita" size="1.5em" color="gray" style={{left: "15px"}}/>
       <form id="search-form">
         <input
           type="text"
           placeholder="Find your favorite dessert"
           value={input}
           onChange={handlerChange}
-        />
-          <button id="search-btn" onClick={submitHandler}>Search</button> 
+        />        
       </form>
     </StyledSearchBar>
     // </div>
@@ -55,6 +51,9 @@ const StyledSearchBar = styled.div`
   align-items:center;
   border: 1.3px solid #949494;
   border-radius:20px;
+  .lupita{
+    margin-left:0.5em;
+  }
   button{
       width:10%;
       height:2rem;
@@ -78,25 +77,18 @@ const StyledSearchBar = styled.div`
     justify-content: space-between;
 
     input{
+      padding-left:0.7em;
       width:70%;
       height:2rem;
       border:none;
       font-size:1.3rem;
       background: none;
       text-align: left;
-  }
+      outline: none;
 
-  #search-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    right: 0;
-    color: black;
-    width: 10%;
-    padding: 10px 40px;
-    border: solid 1px #CECECE;
-    border-radius: 40px;
   }
+  
+
   }
 `;
 
