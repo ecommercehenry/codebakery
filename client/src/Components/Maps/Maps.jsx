@@ -88,7 +88,7 @@ const StyledMapContainer = styled.div`
 
     .map {
       margin: 1em auto;
-      width: 90vw !important;
+      width: 95vw !important;
       height: 55vh !important;
     }
   }
