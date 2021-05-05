@@ -16,6 +16,7 @@ import ManageStores from "../stores/ManageStores";
 import StorePanel from "../stores/StoresPanel";
 import ModifyStore from "../stores/ModifyStore";
 import Promos from "../promos/Promos";
+import StoreOptions from "../stores/StoreOptions"
 
 import NewsletterAdmin from "../newsletter/NewsletterAdmin";
 
