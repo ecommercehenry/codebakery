@@ -7,7 +7,6 @@ module.exports = {
     { id, name, password, newPassword, email, role, address, dni, phoneNumber, twoFA },
     args
   ) => {
-    console.log("mutation API", id, name, password, newPassword, email, role, address, dni, phoneNumber, twoFA)
     try {
       let num = await modifyUser(
         id,

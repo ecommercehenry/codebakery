@@ -87,7 +87,6 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    console.log(dataValidate?.validateTOTP);
     if (dataValidate?.validateTOTP.boolean) {
       modifyUser({
         variables: {

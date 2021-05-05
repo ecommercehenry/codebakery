@@ -45,7 +45,6 @@ const ModifyStore = () => {
     fetchPolicy: "no-cache",
   });
 
-  console.log(data);
   const [form, setForm] = useState({
     id: "",
     name: "",

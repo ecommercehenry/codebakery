@@ -139,7 +139,6 @@ async function modifyUser(
   if (dni) obj.dni = dni;
   if (phoneNumber) obj.phoneNumber = phoneNumber;
   obj.twoFA = twoFA;
-  console.log("userService", id, twoFA)
   try {
     if (id) {
       let user = await Users.findOne({ where: { id } });

@@ -13,6 +13,8 @@ import { setQuantityOrdersCardBackend } from "../../../../actions/setQuantityOrd
 import styled from "styled-components";
 import CREATE_ORDER from "../../../../Apollo/mutations/createOrder";
 import ADD_PRODUCT_TO_ORDER from "../../../../Apollo/mutations/addProductToOrder";
+import {removeAll} from "../../../../actions/cartActions"
+
 const Catalogue = () => {
   let storage = window.localStorage;
   let logged = storage.token ? true : false;
@@ -59,6 +61,8 @@ const Catalogue = () => {
               },
             });
           });
+          localStorage.removeItem("cart")
+          dispatch(removeAll())
         } else {
           createOrder({
             variables: {
@@ -71,6 +75,8 @@ const Catalogue = () => {
               }),
             },
           });
+          localStorage.removeItem("cart")
+          dispatch(removeAll())
         }
       }
     }

@@ -35,7 +35,6 @@ function TwoFA(){
           },
         })
       }
-      console.log("ENTROOOOOOOOO")
     },[loadingCredentials, dataCredentials, tokenLocal, functionValidate]);
 
 

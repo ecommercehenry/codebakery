@@ -45,9 +45,7 @@ function Login() {
   // descomentar ambos useEffect para el logeo con creación de usuario
   useEffect(()=>{
     // 
-    console.log("Antes del if")
     if(!loadingValidate && dataValidate){
-      console.log("validar if")
       if(dataValidate.validateUserWithGoogle.token){
         if(dataValidate.validateUserWithGoogle.twoFA ){
           dispatch(saveDataProfile(dataValidate.validateUserWithGoogle));

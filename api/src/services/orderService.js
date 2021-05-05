@@ -311,7 +311,6 @@ async function deleteProductOrder(orderId, productId) {
       let order = await Order.findOne({where: {id: orderId, placeStatus: 'cart'}})
       if(!order){
       order = await Order.create({userId : userId})
-      console.log("se creo una orden")       
       } 
       if(order.placeStatus === 'cart'){
           const newProduct = await Product.findOne({
