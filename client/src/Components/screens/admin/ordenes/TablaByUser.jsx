@@ -13,6 +13,7 @@ const TablaByUser = ({ id }) => {
   return (
 
     <StyledTablaa>
+      <h1 className="titlee">Orders</h1>
       {data?.getOrdersByUserIdInTicket.orders ? (
         data.getOrdersByUserIdInTicket.orders.map((order) =>
           order.lineal_order.map((order) => (
@@ -28,10 +29,9 @@ const TablaByUser = ({ id }) => {
           ))
         )
       ) : (
-        <p></p>
+        <p>You have no current Orders</p>
       )}
     </StyledTablaa>
-  
 
   );
 };

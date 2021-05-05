@@ -47,15 +47,14 @@ const StyledTableCell = withStyles((theme) => ({
     let { id } = useParams();
     const { data } = useQuery(GET_ALL_ORDERS_USER, {
         variables: {
-            userId: parseInt(id)
+            userId: parseInt(id), 
+            fetchPolicy: "no-cache",
         }
     });
-
-    console.log(data?.getAllOrdersUser?.orders[0]?.lineal_order, 'dtsssss')
-    let result; 
  
     return (
       <TableContainer component={Paper} className={classes.container}>
+        <h1 className="titlee">Order history</h1>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -63,7 +62,7 @@ const StyledTableCell = withStyles((theme) => ({
               <StyledTableCell align="left">Name</StyledTableCell>
               <StyledTableCell align="left">Price</StyledTableCell>
               <StyledTableCell align="left">Quantity</StyledTableCell>
-              <StyledTableCell align="left">SubTotal</StyledTableCell>
+              <StyledTableCell align="left">Total</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -73,11 +72,11 @@ const StyledTableCell = withStyles((theme) => ({
                 <StyledTableCell component="th" e="row">
                   {e.name}
                 </StyledTableCell>
-                <StyledTableCell align="left">{e.price}</StyledTableCell>
+                <StyledTableCell align="left">$ {e.price}</StyledTableCell>
                 <StyledTableCell align="left">
                   {e.quantity}
                 </StyledTableCell>
-                <StyledTableCell align="left">{e.quantity*e.price}</StyledTableCell>
+                <StyledTableCell align="left">$ {e.quantity*e.price}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
