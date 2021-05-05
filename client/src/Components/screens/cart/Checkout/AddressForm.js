@@ -92,7 +92,7 @@ export default function AddressForm({ setUserdata, setShippingtype, setStoreId }
   };
   const submitStore = (e) => {
     e.preventDefault();
-    if (selected != "none"){
+    if (selected !== "none"){
       if (order && order.data) {
         let idOrder = order.data.getOrdersByUserIdInCart.orders[0].id;
         modifyOrderStore({
