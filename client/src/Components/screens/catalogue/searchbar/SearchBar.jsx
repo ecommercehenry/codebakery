@@ -12,9 +12,6 @@ const [input, setInput] = useState([])
 const handlerChange = (e) => {
   setInput(e.target.value); 
 }
-const submitHandler = (event) => {
-  event.preventDefault();
-} 
 useEffect(() => {
   // dispatch(setSearch(true));
   dispatch(fetchByName(input));
