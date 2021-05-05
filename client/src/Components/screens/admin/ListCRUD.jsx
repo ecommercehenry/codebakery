@@ -135,10 +135,13 @@ const StyledListCRUD = styled.div`
     }
 
     tbody {
-      display:block;
+      display:flex;
+      flex-flow: column nowrap;
       overflow-y:scroll;
       width: 101.3%;
       height: 66vh;
+      justify-content:flex-start;
+
 
       td {
         height: 5rem;

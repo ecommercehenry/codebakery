@@ -19,7 +19,8 @@ function TextCRUD({ id }) {
       <>
         {show ? (
           <StyledTableRow onDoubleClick={handlerOnClick}>
-            <td width="10%">
+            <tr>
+            <td width="1%">
               <img src={product.image} alt="" style={{ width: "4rem", marginLeft:"0.3rem" }} />
             </td>
             <td width="30%">{product.name}</td>
@@ -37,6 +38,7 @@ function TextCRUD({ id }) {
               </button>
               </div>
             </td>
+            </tr>
           </StyledTableRow>
         ) : (
           <FormCRUD id={id} key={id} handlerOnClick={handlerOnClick} />
