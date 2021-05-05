@@ -8,9 +8,10 @@ const { deleteById } = require("./deleteById");
 const { addProduct } = require("./addProduct");
 const { createUser } = require("./createUser");
 const { modifyUser } = require("./modifyUser");
-const {createOrder } = require("./createOrder");
-const {updateOrderPrices} = require("./updateOrderPrices");
+const { createOrder } = require("./createOrder");
+const { updateOrderPrices } = require("./updateOrderPrices");
 const { deleteProductOrder } = require("./deleteProductOrder");
+
 const {addProductToOrder} = require("./addProductToOrder")
 const {deleteOrder} = require("./deleteOrder")
 const {updateOrderToTicket} = require("./updateOrderToTicket")
@@ -22,16 +23,22 @@ const { addReview } = require("./addReview")
 const {modifyReview} = require("./modifyReview")
 const {deleteUser} = require("./deleteUser");
 const {sendEmail} = require("./sendEmail")
-const {resetPassword} = require("./resetPassword")
+const {sendNewsletter} = require("./sendNewsletter")
+// const {suscribeToNewsletter} = require("./suscribeToNewsletter")
 const {addStore} = require("./addStore")
 const {modifyStore} = require("./modifyStore")
 const {deleteStore} = require("./deleteStore")
-const {modifyOrderStore} = require("./modifyOrderStore")
+
+const { saveImageSlider } = require("./saveImageSlider");
+const { deleteImageById } = require("./deleteImageById");
+const {resetPassword} = require("./resetPassword");
+const {modifyOrderStore} = require("./modifyOrderStore");
 const {addPromo} = require("./addPromo")
 const {generateTokenOTP} = require("./generateTokenOTP")
 const {applyDiscount} = require("./applyDiscount");
 const {resetDiscount} = require("./resetDiscount");
 const {deletePromo} = require("./deletePromo");
+
 module.exports = {
   modifyProduct,
   updateCategory,
@@ -50,18 +57,25 @@ module.exports = {
   deleteOrder,
   updateOrderToTicket,
   modifyOrderStatus,
-  incrementQuantity, 
-  decrementQuantity, 
+  incrementQuantity,
+  decrementQuantity,
   deleteReview,
   addReview,
   modifyReview,
   decrementQuantity,
   deleteUser,
   sendEmail,
-  resetPassword,
+
+  sendNewsletter,
+
+  // suscribeToNewsletter,
+
   addStore,
   modifyStore,
-  deleteStore, 
+  deleteStore,
+  resetPassword,
+  saveImageSlider,
+  deleteImageById,
   modifyOrderStore, 
   addPromo,
   generateTokenOTP,
@@ -69,3 +83,4 @@ module.exports = {
   resetDiscount,
   deletePromo
 }
+

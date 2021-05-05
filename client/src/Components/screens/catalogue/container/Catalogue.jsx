@@ -11,6 +11,7 @@ import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersB
 import { useDispatch, useSelector } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../../actions/setQuantityOrdersCardBackend";
 import styled from "styled-components";
+import Footer from "../../footer/Footer";
 import CREATE_ORDER from "../../../../Apollo/mutations/createOrder";
 import ADD_PRODUCT_TO_ORDER from "../../../../Apollo/mutations/addProductToOrder";
 import {removeAll} from "../../../../actions/cartActions"
@@ -89,6 +90,7 @@ const Catalogue = () => {
       <Route path="/catalogue/detail/:id">
         <Detail refetchCatalogue={queryData.refetch}></Detail>
       </Route>
+      <Footer></Footer>
     </StyledCatalogue>
   );
 };

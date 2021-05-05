@@ -4,7 +4,7 @@ const { modifyUser } = require("../../../services/userService");
 
 module.exports = {
   modifyUser: async (
-    { id, name, password, newPassword, email, role, address, dni, phoneNumber, twoFA },
+    { id, name, password, newPassword, email, role, address, dni, phoneNumber,newsletter, twoFA },
     args
   ) => {
     try {
@@ -18,6 +18,7 @@ module.exports = {
         address,
         dni,
         phoneNumber,
+        newsletter,
         twoFA
       );
 

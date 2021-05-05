@@ -26,6 +26,7 @@ import FormReview from "./Components/screens/reviews/FormReview";
 import FormModify from "./Components/screens/reviews/FormModifyReview"
 
 import Sucursales from './Components/Maps/Sucursales'
+import NewsletterAdmin from "./Components/screens/admin/newsletter/NewsletterAdmin";
 
 import TwoFA from "./Components/UserAcount/TwoFA";
 
@@ -71,7 +72,12 @@ function App() {
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route path="/reset-password" component={ResetPassword} />
           <Route exact path="/promote" component={Promote} />
+
+          <Route exact path="admin/newsletter" component={NewsletterAdmin} />
+
           <Route path="/*" component={() => "404 NOT FOUND"} />
+
+
         </Switch>
       </>
     );

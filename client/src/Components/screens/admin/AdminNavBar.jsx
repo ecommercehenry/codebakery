@@ -76,9 +76,6 @@ const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
           <AddPromoButton setPromo={setPromo}/>
         </div>
       </Route>
-
-
-      
       <Route path="/admin/products">
         <>
           {add ? (
