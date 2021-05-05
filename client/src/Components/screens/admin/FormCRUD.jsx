@@ -32,6 +32,7 @@ function FormCRUD({ id, handlerOnClick }) {
     stock: product.stock,
     price: product.price,
     image: product.image,
+    discount: product.discount
   });
   const dispatch = useDispatch();
   function inputHandler(e) {
@@ -41,6 +42,7 @@ function FormCRUD({ id, handlerOnClick }) {
     });
   }
   const [modificar, { data, loading, error }] = useMutation(MODIFY_PRODUCT);
+
   useEffect(() => {
     if (data && !loading) {
       dispatch(modifyProduct(id, data.modifyProduct));
@@ -60,6 +62,7 @@ function FormCRUD({ id, handlerOnClick }) {
           stock: Number(inputs.stock),
           image: inputs.image,
           categories: inputs.categories.map((c) => c.name),
+          discount: inputs.discount
         },
       },
     });

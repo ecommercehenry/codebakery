@@ -10,7 +10,8 @@ export const saveProducts = (products) => {
       stock:el.stock,
       price:el.price,
       image:el.image,
-      categories:el.categories
+      categories:el.categories,
+      discount: el.discount
     }
   })
   return {
