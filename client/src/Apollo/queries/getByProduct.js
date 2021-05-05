@@ -6,6 +6,7 @@ query{
   product{
     id
     stock
+    discount
      }
   }
 
