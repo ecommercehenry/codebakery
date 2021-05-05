@@ -26,5 +26,6 @@ conn.sync({ force: true }).then(async () => {
 
   server.listen(process.env.PORT || 3001, () => {
     console.log("Iniciado!")
+
   });
 });

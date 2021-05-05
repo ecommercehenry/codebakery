@@ -1,6 +1,8 @@
 /*****CUAL ES LA UTILIDAD DE ESTE ARCHIVO?
  * PROBAR SERVICIOS DIRECTAMENTE SIN TENER QUE PASAR POR GRAPHQL
  */
+const { conn } = require("./src/db.js");
+const { dataPopulation } = require("./src/sequelize/dataPopulation");
 
 const { conn } = require("./src/db.js");
 const { dataPopulation } = require("./src/sequelize/dataPopulation");

@@ -91,7 +91,7 @@ async function createUser(name, password, email, role, google) {
     };
   }
 }
-
+//---- MODIFY USER ----
 async function modifyUser(
   id,
   name,
@@ -102,6 +102,7 @@ async function modifyUser(
   address,
   dni,
   phoneNumber,
+  newsletter,//******** */
   twoFA
 ) {
   let obj = {};
@@ -138,8 +139,9 @@ async function modifyUser(
   if (address) obj.address = address;
   if (dni) obj.dni = dni;
   if (phoneNumber) obj.phoneNumber = phoneNumber;
+  if (newsletter) obj.newsletter = newsletter;//**********/
+
   obj.twoFA = twoFA;
-  console.log("userService", id, twoFA)
   try {
     if (id) {
       let user = await Users.findOne({ where: { id } });
@@ -161,7 +163,9 @@ async function modifyUser(
   }
 }
 
-async function loginUserWithGoogle(email, tokenId) {
+//---- LOGIN WHIT GOOGLE  ----
+async function loginUserWithGoogle(email, tokenId){
+  
   const user = await Users.findOne({
     where: {
       email,
@@ -275,7 +279,7 @@ async function loginUser(email, password) {
     }
   }
 }
-
+//------ DELETE USER ---------
 async function deleteUser(id) {
   try {
     const userToDelete = await Users.findByPk(id);

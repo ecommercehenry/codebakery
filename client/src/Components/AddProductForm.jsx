@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import '../Assets/toast.css'
 //styles
 import styled from 'styled-components';
-
 import closeIcon from '../icons/close2.svg'
 
 toast.configure()

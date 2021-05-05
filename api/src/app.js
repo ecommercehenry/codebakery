@@ -23,8 +23,9 @@ const { getCurrentDomainApi, getCurrentDomainFront } = require("./config/current
 const product = require("./graphql/roots/queriesResolvers/product");
 server.name = 'API';
 
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
+// ME LLEVA LA CACHETADA....
+server.use(express.urlencoded({ extended: true, limit: "50mb" }));
+server.use(express.json({ limit: "50mb", extended: true }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(cors());

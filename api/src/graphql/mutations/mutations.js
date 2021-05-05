@@ -18,7 +18,7 @@ type Mutation{
     removeCategoryFromProduct(idProduct: Int!,idCategory: Int!): resultProduct
     addProduct(category: String!, name: String!, description: String!, price: Float!, stock: Int!, image: String!): resultProduct
     createUser(name: String!, password: String!, email: String!, role: String!, google: Boolean): resultUsers
-    modifyUser(id: Int, name:String, password: String, newPassword: String, email: String, role: String, address: String, dni: String, phoneNumber: String, twoFA: Boolean): resultUsers
+    modifyUser(id: Int, name:String, password: String, newPassword: String, email: String, role: String, address: String, dni: String, phoneNumber: String, twoFA: Boolean, newsletter: Boolean): resultUsers
     createOrder(idUser: Int!, dataProducts: [dataProductsOrderInput]) : resultOrder
     updateOrderPrices(orderId: Int!) : resultBoolean
     deleteProductOrder(orderId: Int!, productId: Int!): resultBoolean
@@ -33,6 +33,8 @@ type Mutation{
     deleteReview(productId: Int!, userId: Int!): deletes
     deleteUser(userId: Int!) : resultBoolean
     sendEmail(userId: Int!, affair: String!, message: String!): emailResponse
+
+    sendNewsletter(message: String!, image:String!) : emailResponse 
     addPromo(name: String!, discount: Int!, category: String!, day: String!): resultBoolean
     applyDiscount(discount: Int!, category: String!): resultBoolean
     deletePromo(id: Int!): resultBoolean
@@ -42,5 +44,7 @@ type Mutation{
     modifyStore(id: Int!, name: String!, lat: Float!, long: Float!, address: String!, phoneNumber: String): store,
     deleteStore(id:Int):resultBoolean
     modifyOrderStore(idStore: Int!, idOrder: Int!): resultBoolean
+    saveImageSlider(image: String!): resultBoolean
+    deleteImageById(imageId: Int!) : resultBoolean
     generateTokenOTP(userId: Int!): otpTokenResponse
 }`;

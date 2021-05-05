@@ -16,7 +16,7 @@ function ListCRUD({setPromo}) {
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    setPromo(false)
+    //setPromo(false)
     if (!loading) {
       dispatch(saveProducts(data.product));
     }
