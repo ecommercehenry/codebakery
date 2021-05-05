@@ -11,16 +11,17 @@ import { withStyles } from "@material-ui/core";
 
 
 function ListCRUD({setPromo}) {
-  const { data, loading } = useQuery(allProducts,{
-    fetchPolicy: "no-cache"
+  const { data, loading, refetch } = useQuery(allProducts,{
+    // fetchPolicy: "no-cache"
   });
   const dispatch = useDispatch();
   useEffect(() => {
     //setPromo(false)
     if (!loading) {
       dispatch(saveProducts(data.product));
+      refetch()
     }
-  }, [data, dispatch, setPromo, loading]);
+  }, [data, dispatch, setPromo, loading. refetch]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -135,15 +136,18 @@ const StyledListCRUD = styled.div`
     }
 
     tbody {
-      display:block;
+      display:flex;
+      flex-flow: column nowrap;
       overflow-y:scroll;
-      width: 101.3%;
       height: 66vh;
+      justify-content:flex-start;
+
 
       td {
+        justify-content:center;
+        text-align: center;
         height: 5rem;
         border-bottom: 1px solid #ddd;
-        padding:0 1em;
       }
     }
 
