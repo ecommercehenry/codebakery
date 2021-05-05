@@ -18,7 +18,6 @@ export default function StatusAuthentication({ twoFA }) {
 
   return (
     <>
-      <div>{twoFA ? twoFA : "Nada de nada"}</div>
       <Switch
         on={true}
         off={false}

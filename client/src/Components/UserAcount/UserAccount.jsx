@@ -15,7 +15,7 @@ import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
 import '../../Assets/toast.css'; 
 import TwoFA from "./TwoFA";
-import { saveDataProfile } from "../../actions/dataProfileActions";
+import { clearDataUserProfile, saveDataProfile } from "../../actions/dataProfileActions";
 import { EpsBankElement } from "@stripe/react-stripe-js";
 
 // import "./UserAccount.css";
@@ -77,7 +77,7 @@ const UserAcount = () => {
       }
     
   }},[loading, data, dataValidate]);
- 
+  // dispatch(clearDataUserProfile());
   let role = localStorage.getItem('role') ;
   let token = localStorage.getItem('token');
   // console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')

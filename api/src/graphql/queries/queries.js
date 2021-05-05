@@ -21,7 +21,7 @@ module.exports = `
         validateCredentials(token: String!, role: String!): Boolean,
         validateUserWithGoogle(email: String!, tokenId: String): resultValidate
         getReviewByUserId(userId: Int!) : [review]
-        validateTOTP(userId:Int!, code:Int!) : resultBoolean
+        validateTOTP(userId:Int!, code:String!) : resultBoolean
         getAllStores: [store]
         getByStore(id: Int!) : store
         getPromos: [promo]

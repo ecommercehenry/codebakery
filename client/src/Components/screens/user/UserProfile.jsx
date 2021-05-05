@@ -80,7 +80,7 @@ const UserProfile = () => {
     validateTotp({
       variables: {
         userId: parseInt(id),
-        code: parseInt(input.authentication),
+        code: input.authentication,
       },
     });
   };
@@ -433,7 +433,7 @@ const UserProfile = () => {
             <img src={dataGenerate?.generateTokenOTP.image}></img>
             <input
               name="authentication"
-              type="number"
+              type="password"
               placeholder="Authentication code"
               value={input.authentication}
               onChange={(e) => inputHandler(e)}

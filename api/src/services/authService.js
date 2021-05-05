@@ -40,7 +40,8 @@ async function generateTokenOTP(idUser){
 
 async function validateTOTP(idUser, code){
     //Obtener el usuario
-    let user = null
+    let user = null;
+    // code = code.toString().length === 5 ? '0'+code: ''+code;
     console.log("validateTOTP", idUser, code)
     try{
         user = await Users.findOne({

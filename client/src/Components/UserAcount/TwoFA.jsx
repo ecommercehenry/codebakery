@@ -78,12 +78,12 @@ function TwoFA(){
         return <Redirect to='/catalogue' />;
       }
     }
-    const handleValidate = async (form) => {
-        console.log(form.code, 'atstats', parseInt(form.password), Number(form.password));
+    const handleValidate = (form) => {
+        console.log(form.password, 'atstats');
         validateTotp({
             variables: {
                 userId: parseInt(id)
-                , code: parseInt(form.password)
+                , code: form.password
             }
         });
         // login({variables: {email:form.login,password:form.password}});

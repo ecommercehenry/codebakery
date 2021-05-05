@@ -25,7 +25,7 @@ const Grid = () => {
           }) : "No se encontraron Productos"): (productsToRender?.length > 0 ? productsToRender.map((element) => {
             return <ProductCard key={element.id} id={element.id} name={element.name} 
                     image={element.image} price={element.price} />
-          }): 'Cargando...')
+          }): !productsToRender ? 'Cargando...': "No se encontraron Productos" )
         }
         {/* {
           search === false ?

@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client"
 
 const VALIDATE_TOTP = gql`
-    query validateTokenTOTP($userId:Int!, $code:Int!){
+    query validateTokenTOTP($userId:Int!, $code:String!){
         validateTOTP(userId:$userId code:$code){
             __typename
             ... on booleanResponse{
