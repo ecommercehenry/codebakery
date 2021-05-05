@@ -28,6 +28,7 @@ const GuestCart = () => {
             name
             price
             stock
+            discount
         }
     }
     `;
@@ -41,6 +42,7 @@ const GuestCart = () => {
           item.price = elem.price;
           item.stock = elem.stock;
           item.image = elem.image;
+          item.discount = elem.discount;
         }
       });
     });
@@ -57,6 +59,7 @@ const GuestCart = () => {
               stock={elem.stock}
               image={elem.image}
               quantity={elem.quantity}
+              discount={elem.discount}
             />
           ))
         ) : (
