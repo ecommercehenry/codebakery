@@ -9,8 +9,8 @@ import MODIFY_ORDER_STATUS from "../../../../Apollo/mutations/modifyOrderStatus"
 import { useDispatch } from "react-redux";
 import { changeStatus } from "../../../../actions";
 import { useMutation } from "@apollo/client";
+import SEND_EMAIL_SENT from "../../../../Apollo/mutations/sendEmailSent";
 
-// @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
   const [orderStatus, setOrderStatus] = useState(orden.status);
@@ -27,6 +27,10 @@ export default function Orden({ id, orden }) {
 
   const [modifyOrderStatus] = useMutation(
     MODIFY_ORDER_STATUS
+  );
+
+  const [sendEmailSent] = useMutation(
+    SEND_EMAIL_SENT
   );
 
   const handleCancel  = () => {
@@ -47,8 +51,15 @@ export default function Orden({ id, orden }) {
       setOrderStatus(selectedStatus)
       setShow(false)
     })
-
-    
+    if (selectedStatus === "sent") {
+      sendEmailSent({
+        variables: {
+          userId: orden.userId, 
+          affair: "Order sent",
+          message: `Your order ${orden.id} has been sent to your home and you should received it within 3 days - STAY HOME!`
+        }
+      })
+    }
   }
 
   let handleOption = async (e) => {
