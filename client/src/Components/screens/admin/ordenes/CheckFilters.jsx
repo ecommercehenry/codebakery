@@ -3,17 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   checkboxChange,
   clearCheckboxes,
-  clearFilter,
 } from "../../../../actions";
 import styled from "styled-components";
-import ButtonClear from "./ButtonClear";
-import { useState } from "react";
 import $ from 'jquery'
 
 function CheckFilters({ displayFilter, setDisplayFilter }) {
   let { status } = useSelector((state) => state.theme);
-  let [all, setAll] = useState(true);
-  let [activeFilters, setActiveFilters] = useState(0)
 
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -34,7 +29,6 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
   };
 
   const handleAllChange = () => {
-    setAll(true)
     document.getElementById("ALL").checked = true;
     handleAll()
   }
@@ -65,10 +59,9 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
           <div className="checkbox-tab">
             <input
               type="checkbox"
-              className="checkbox"
+              className="checkbox larger-check"
               id="UNPAID"
               onChange={handleChange}
-              className="larger-check"
             />
             <label for="UNPAID">Unpaid</label>
           </div>
@@ -76,10 +69,9 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
           <div className="checkbox-tab">
             <input
               type="checkbox"
-              className="checkbox"
+              className="checkbox larger-check"
               id="PAID"
               onChange={handleChange}
-              className="larger-check"
             />
             <label for="PAID">Paid</label>
           </div>
@@ -87,10 +79,9 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
           <div className="checkbox-tab">
             <input
               type="checkbox"
-              className="checkbox"
+              className="checkbox larger-check"
               id="SENT"
               onChange={handleChange}
-              className="larger-check"
             />
             <label for="SENT">Sent</label>
           </div>
@@ -98,10 +89,9 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
           <div className="checkbox-tab">
             <input
               type="checkbox"
-              className="checkbox"
+              className="checkbox larger-check"
               id="RECEIVED"
               onChange={handleChange}
-              className="larger-check"
             />
             <label for="RECEIVED">Received</label>
           </div>
@@ -109,10 +99,9 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
           <div className="checkbox-tab">
             <input
               type="checkbox"
-              className="checkbox"
+              className="checkbox larger-check"
               id="CANCELLED"
               onChange={handleChange}
-              className="larger-check"
             />
             <label for="CANCELLED">Cancelled</label>
           </div>

@@ -16,32 +16,21 @@ const { ACCESS_TOKEN } = process.env;
 mercadopago.configurations.setAccessToken(`${ACCESS_TOKEN}`); //access-key
 /// mercadopago
 const server = express();
-const { schema, root } = require("./graphql/schema");
-const { sendEmail, getFormatedMessage } = require("./services/emailService");
-const { getOrderById } = require("./services/orderService");
+const {schema, root} = require("./graphql/schema");
+const { sendEmail, getFormatedMessage } = require('./services/emailService');
+const { getOrderById } = require('./services/orderService');
+const { getCurrentDomainApi, getCurrentDomainFront } = require("./config/currentDomain");
 const product = require("./graphql/roots/queriesResolvers/product");
-server.name = "API";
+server.name = 'API';
 
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(cors());
-server.use((_req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
 
-const getErrorCode = (errorName) => {
-  return errorType[errorName];
-};
 ///mercadopago
-server.post("/create_preference", (req, res) => {
+server.use("/create_preference", (req, res) => {
   //ruta para crear preferencia
   let { lineal_order } = req.body;
   let items = [];
@@ -64,9 +53,9 @@ server.post("/create_preference", (req, res) => {
       installments: 1, //Cantidad maxima de cuotas
     },
     back_urls: {
-      success: "http://localhost:3001/feedback", //luego modificar si se quiere redigir en cada caso
-      failure: "http://localhost:3000/cart",
-      pending: "http://localhost:3001/feedback",
+      success: `${getCurrentDomainApi()}/feedback`, //luego modificar si se quiere redigir en cada caso
+      failure: `${getCurrentDomainApi()}/cart`,
+      pending: `${getCurrentDomainApi()}/feedback`
     },
   };
 
@@ -122,7 +111,7 @@ server.get("/feedback", async function (req, res) {
       )
     );
   }
-  res.redirect("http://localhost:3000/catalogue");
+  return res.redirect(`${getCurrentDomainFront()}/catalogue`);
 });
 ///mercadopago
 
@@ -138,7 +127,7 @@ server.use(
   })
 );
 
-server.post("/stripe/checkout", async (req, res) => {
+server.use("/stripe/checkout", async (req, res) => {
   const { id, amount } = req.body;
   console.log(amount)
   try {

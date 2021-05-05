@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlineSearch } from "react-icons/hi";
 
@@ -15,7 +15,7 @@ const SearchBarAdmin = () => {
     if(stateSearch === false){
       setValue("id","")
     }
-  },[stateSearch])
+  },[stateSearch, setValue])
 
   const onSubmit = ({ id, type }) => {
 
@@ -60,26 +60,6 @@ const SearchBarAdmin = () => {
     </StyledSearchBar>
   );
 };
-
-const ButtonSearch = styled.button`
-  background-color: #8a6db1;
-  position: relative;
-  height: 80%;
-  border: none;
-  color: #dce8f1;
-  padding: 0px 10px;
-  margin-left: 2vw;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  border-radius: 5px 5px 5px 5px;
-  transition: all 0.3s ease-in-out;
-  :hover {
-    opacity: 0.7;
-  }
-`;
 
 const StyledSearchBar = styled.div`
   background: white;

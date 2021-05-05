@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import MODIFY_USER from "../../Apollo/mutations/modifyUser";
-import { Redirect, useParams, useLocation, Link } from "react-router-dom";
+import { Redirect, useLocation, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../../Assets/toast.css";
 import styled from "styled-components";
@@ -22,7 +22,7 @@ function ResetPassword() {
   const customId = 1;
   const dispatch = useDispatch();
 
-  const [modifyUser, { data, loading }] = useMutation(MODIFY_USER);
+  const [modifyUser] = useMutation(MODIFY_USER);
   const { data: dataUsers } = useQuery(GET_ALL_USERS);
   const [
     resetPassword,
@@ -115,7 +115,7 @@ function ResetPassword() {
     if (dataReset?.resetPassword) {
       dispatch(saveToken(dataReset?.resetPassword.token, dataReset?.resetPassword.email));
     }
-  }, [dataReset, loadingReset]);
+  }, [dataReset, loadingReset, dispatch]);
 
   if (flagSubmit) {
     return <Redirect to="/" />;
@@ -194,37 +194,6 @@ const StyledAcheDos = styled.h2`
   display: inline-block;
   margin: 40px 8px 10px 8px;
   color: #cccccc;
-`;
-
-const StyledUserPanel = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  min-height: 100%;
-  padding: 20px;
-  .formContent {
-    -webkit-border-radius: 10px 10px 10px 10px;
-    border-radius: 10px 10px 10px 10px;
-    background: #fff;
-    padding: 30px;
-    width: 90%;
-    max-width: 450px;
-    position: relative;
-    padding: 0px;
-    -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-    text-align: center;
-    .formFooter {
-      background-color: #f6f6f6;
-      border-top: 1px solid #dce8f1;
-      padding: 25px;
-      text-align: center;
-      -webkit-border-radius: 0 0 10px 10px;
-      border-radius: 0 0 10px 10px;
-    }
-  }
 `;
 
 export default ResetPassword;

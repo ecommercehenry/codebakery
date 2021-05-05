@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import cartIcon from "../../../../../icons/cart.svg";
 import { addProductToCart } from "../../../../../actions/cartActions";
@@ -39,7 +39,7 @@ const ButtonAddCart = ({ id, orderId, refetchCatalogue }) => {
               : 1
           )
         );
-        if (orderId != undefined) {
+        if (orderId !== undefined) {
           await addProductToOrder({
             variables: {
               orderId: orderId,

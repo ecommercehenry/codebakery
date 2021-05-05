@@ -47,7 +47,7 @@ const StoresPanel = ({setPromo}) => {
   });
   useEffect(() => {
     setPromo(false)
-  },[])
+  },[setPromo])
   return (
     <TableContainer component={Paper} className={classes.container}>
       <Table className={classes.table} aria-label="customized table">
