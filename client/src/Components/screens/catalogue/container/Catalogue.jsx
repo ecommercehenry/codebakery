@@ -24,10 +24,10 @@ const Catalogue = () => {
   const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
   const [createOrder] = useMutation(CREATE_ORDER);
   const dispatch = useDispatch();
-  setOrderId(queryData?.data?.getOrdersByUserIdInCart?.orders[0]?.id);
   useEffect(() => {
     setOrderId(queryData?.data?.getOrdersByUserIdInCart?.orders[0]?.id);
   }, [queryData]);
+
   useEffect(() => {
     if (queryData?.data && !queryData.loading) {
       if (logged) {
