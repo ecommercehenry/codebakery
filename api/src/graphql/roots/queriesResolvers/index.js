@@ -49,6 +49,6 @@ module.exports = {
   getPromos,
   getAllStores, 
   getByStore,
-  validateTOTP
+  validateTOTP,
   getAllOrdersUser
 }
