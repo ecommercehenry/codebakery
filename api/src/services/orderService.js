@@ -7,7 +7,7 @@ async function getAllOrdersUser(args) {
 try{
  const orders = await Order.findAll({
    where: {
-     id: userId
+    userId: userId
    }
  })
  const out = [];

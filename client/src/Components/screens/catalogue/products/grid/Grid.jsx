@@ -58,7 +58,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
                   />
                 );
               })
-            : "Cargando"
+            : "The product with that category was not found"
           : arr.length > 0
           ? arr.map((element) => {
               return (
@@ -74,7 +74,8 @@ const Grid = ({ orderId, refetchCatalogue }) => {
                 />
               );
             })
-          : "No se encontraron Productos"}
+          : "Product not found"
+      }
       </>
     </StyledGrid>
   );

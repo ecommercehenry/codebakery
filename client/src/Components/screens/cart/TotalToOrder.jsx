@@ -15,7 +15,7 @@ const TotalToOrder = () => {
     if(itemsFromCart!==undefined){itemsFromCart.map(elem => {total = total + (elem.price)*(elem.quantity)} )}
     
     const clickHandler = () => {
-       toast('Debe estar logueado para comprar, doble click en "comprar" para loguearse',{
+       toast('You must be logged in to buy, double click on "buy" to login',{
         toastId: customId
       }) 
     }
