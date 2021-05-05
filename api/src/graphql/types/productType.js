@@ -3,7 +3,7 @@ module.exports = `
         id : Int!
         name : String!,
         description: String!,
-        discount: Int,
+        discount: Int!,
         price: Float!,
         stock: Int!,
         image: String!,

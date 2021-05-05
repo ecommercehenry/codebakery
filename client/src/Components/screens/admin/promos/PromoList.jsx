@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 import getPromos from '../../../../Apollo/queries/getPromos';
 import DELETE_PROMO from '../../../../Apollo/mutations/deletePromo';

@@ -9,6 +9,7 @@ const MODIFY_PRODUCT = gql`
         name
         stock
         price
+        discount
         categories {
           name
         }

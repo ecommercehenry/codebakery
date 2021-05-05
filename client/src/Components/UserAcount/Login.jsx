@@ -1,7 +1,6 @@
 import { useLazyQuery, useMutation } from "@apollo/client";
 import React, { useEffect } from "react";
 import { useGoogleLogin } from "react-google-login";
-import VALID_USER from "../../Apollo/queries/validateUser"
 import { FcGoogle } from "react-icons/fc";
 import styled from "styled-components";
 import CREATE_USER from "../../Apollo/mutations/createUser";
@@ -12,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { saveDataProfile } from "../../actions/dataProfileActions";
 
 toast.configure();
-const clientId = "896421264771-puonusmobbd2vfeo6b03itcpknghfte7.apps.googleusercontent.com"; 
+const clientId = "665438682738-h07vsict9p633du2obn2b9rga62lptbe.apps.googleusercontent.com"; 
 
 function Login() {
   const dispatch = useDispatch();
@@ -25,34 +24,13 @@ function Login() {
   // const [login, { loading, data }] = useLazyQuery(VALID_USER);
 
   const onSuccess = (res) => {
-    // 
-    // forma con parámetro de dominio alojado (Nota: debe ir comentada si se desea usar la manera de 
-    // logueo con creación de usuario)
-    // localStorage.setItem('token', res.tokenId);
-    // localStorage.setItem('name', res.profileObj.name);
-    // localStorage.setItem('email', res.profileObj.email);
-    // localStorage.setItem('role', 'user');
-    // localStorage.setItem('id', res.googleId);
-    // toast(`Bienvenido ${res.profileObj.name}`);
-    // // al refrescar el componente padre hace la validacion con los parametros dentro del 
-    // // localStorage y habilita si todo está bien
-    // window.location.reload();
-    // forma de crear usuario usando los valores obtenidos (Nota: se requiere manejar
-    // la creación de usuario una vez que ya está creado hacerle saber al usuario cual es su con
-    // traseña y además definir que hacer cuando un usuario quiere crear una cuenta pero ya 
-    // la había creado con google, Nota2: fue hecho con el modelo de validacion de usuario
-    // con nombre de usuario eso se debe modificar, los demás cambios necesarios para vlidacion
-    // están hechos)
-    // const p = window.promt('Por favor elige tu contra: ')
-    // tomamos los datos he intentamos validar, en caso de q ya esté registrado logeamos
-    // validate({
-    //   variables: {
-    //     email: res.profileObj.email
-    //   }
-    // })
-    // let passwordFromPrompt = window.prompt('Type here');
-    // let bar = window.confirm('Confirm or deny');
-    // 
+    console.log({variables: {
+      name: res.profileObj.name,
+      password: res.googleId,
+      email: res.profileObj.email,
+      role: "user",
+      google: true
+    }})
     createUser({
       variables: {
         name: res.profileObj.name,
@@ -67,8 +45,9 @@ function Login() {
   // descomentar ambos useEffect para el logeo con creación de usuario
   useEffect(()=>{
     // 
+    console.log("Antes del if")
     if(!loadingValidate && dataValidate){
-      
+      console.log("validar if")
       if(dataValidate.validateUserWithGoogle.token){
         if(dataValidate.validateUserWithGoogle.twoFA ){
           dispatch(saveDataProfile(dataValidate.validateUserWithGoogle));
@@ -91,12 +70,14 @@ function Login() {
   }, [loadingValidate, dataValidate]);
 
   useEffect(()=>{
+
     if(!loadingUser && dataUser){
       // 
       validate({variables: {email: dataUser.createUser.email}}); 
       // 
     }
   },[loadingUser, dataUser])
+
 
   const { signIn } = useGoogleLogin({
     onSuccess,

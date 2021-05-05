@@ -49,7 +49,7 @@ function FormCreateCategory() {
         setAdded(true);
       }
     }
-  },[data])
+  },[data, loading])
   
 
   return (

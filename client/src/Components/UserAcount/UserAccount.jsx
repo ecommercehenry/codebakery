@@ -3,13 +3,14 @@ import { useLazyQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import CREATE_USER from "../../Apollo/mutations/createUser";
 
 import { Redirect } from "react-router-dom";
 
 import Login from "./Login";
+
 import Logout from "./Logout";
 import { useDispatch, useSelector } from "react-redux";
+
 import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
@@ -27,19 +28,21 @@ const UserAcount = () => {
   const [login, { loading, data }] = useLazyQuery(validateUser);
   // const validate = useLazyQuery(VALIDATE_CREDENTIALS);
   const [
-    functionValidate,
-    { loading: loadingValidate, data: dataValidate },
+    functionValidate,{data: dataValidate },
   ] = useLazyQuery(VALIDATE_CREDENTIALS);
 
   const dataUser = useSelector(state => state.dataProfileReducer)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+
   // Google login
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -75,6 +78,7 @@ const UserAcount = () => {
       }else{
         toast(data.validateUser.detail)
       }
+
     
   }},[loading, data, dataValidate]);
  
@@ -82,6 +86,7 @@ const UserAcount = () => {
   let token = localStorage.getItem('token');
   // console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
   if(role  && token && dataValidate){
+
     // la redireccion se debe cambiar seún el role del usuario
     toast(`Welcome ${localStorage.getItem('name')}`);
     if(role === 'admin' && dataValidate?.validateCredentials){

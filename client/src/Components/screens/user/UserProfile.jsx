@@ -20,6 +20,7 @@ toast.configure();
 const UserProfile = () => {
   let { id } = useParams();
 
+
   const [
     generateOTP,
     { data: dataGenerate, loading: loadingGenerate },
@@ -30,6 +31,13 @@ const UserProfile = () => {
   ] = useLazyQuery(VALIDATE_TOTP);
 
   const [click, setClick] = useState(1);
+
+ 
+  const [modifyUser] = useMutation(MODIFY_USER, {
+    variables: { id: parseInt(id) },
+   
+  });
+
   const { data: $USER } = useQuery(getUserById, {
     variables: { id: parseInt(id) },
     // fetchPolicy: "no-cache",

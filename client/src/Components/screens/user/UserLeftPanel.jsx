@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import styled from "styled-components";
-import { Route } from "react-router-dom";
 
 const UserLeftPanel = ({ click, setClick }) => {
   const path = window.location.pathname;
@@ -13,7 +12,6 @@ const UserLeftPanel = ({ click, setClick }) => {
     reviews: path.includes("reviews") ? "active" : "inactive",
   };
 
-  let storage = window.localStorage;
   let id = window.localStorage.getItem("id");
   let user = localStorage.name;
   let logout = () => {

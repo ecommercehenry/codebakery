@@ -14,13 +14,6 @@ function TextCRUD({ id }) {
     setShow(!show);
   }
 
-  {
-    /* <div className="product-container-edit" onDoubleClick={handlerOnClick}>
-      {show ? (
-        <div className="element-container" id={id}>
-           */
-  }
-
   if (product) {
     return (
       <>
@@ -77,11 +70,3 @@ const StyledTableRow = styled.tr`
 }
 `
 
-const StyledTextCRUD = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-around;
-  width: 100%;
-  margin-top: 1.5rem;
-  height: 100%;
-`;

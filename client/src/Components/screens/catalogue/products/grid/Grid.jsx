@@ -4,40 +4,78 @@ import styled from 'styled-components';
 //Components 
 import ProductCard from './ProductCard';
 
-const Grid = () => {
-  let {status} = useSelector((state)=>state.theme);
-  let { stateproducts, filterProduct, allProduct, search, productsToRender } = useSelector((state) => state.reducer);
+
+const Grid = ({ orderId, refetchCatalogue }) => {
+  let { status } = useSelector((state) => state.theme);
+  let { search, productsToRender } = useSelector(
+    (state) => state.reducer
+  );
   // let arr = [];
-  // if(search === true){
-  //   arr = allProduct.filter((element) => 
-  //     element.name.toLowerCase().includes(filterProduct.toLowerCase()))
-  //      //con includes la busq ya no pide exactitud en el string. @Lizen
+  // if (search === true) {
+  //   arr = allProduct.filter((element) =>
+  //     element.name.toLowerCase().includes(filterProduct.toLowerCase())
+  //   );
+  //   //con includes la busq ya no pide exactitud en el string. @Lizen
   // }
-  
+  // let arr = [];
+
+  // if (search === true) {
+  //   arr = allProduct.filter((element) =>
+  //     element.name.toLowerCase().includes(filterProduct.toLowerCase())
+  //   );
+  //   //con includes la busq ya no pide exactitud en el string. @Lizen
+  // }
+  const { data } = useQuery(GET_BY_PRODUCT, {
+    fetchPolicy: "no-cache",
+  });
+
+
+  useEffect(() => {
+    if (data) {
+      if (data.product) {
+        data.product.forEach((e) => {
+          if (e.stock <= 0) {
+            let boton = document.getElementById(`${e.id}`);
+            if (boton != null) {
+              boton.innerHTML = "Sin Stock";
+            }
+          }
+        });
+      }
+    }
+  }, [data]);
+
 
   return (
+
     <StyledGrid light={status}>
       <>
         {
-          search ? (productsToRender?.length > 0 ? productsToRender.map((element) => {
-            return <ProductCard key={element.id} id={element.id} name={element.name} 
-                    image={element.image} price={element.price} />
-          }) : "No se encontraron Productos"): (productsToRender?.length > 0 ? productsToRender.map((element) => {
-            return <ProductCard key={element.id} id={element.id} name={element.name} 
-                    image={element.image} price={element.price} />
-          }): 'Cargando...')
+
+          search ? 
+          (productsToRender?.length > 0 ? productsToRender.map((element) => {
+            return <ProductCard 
+            refetchCatalogue={refetchCatalogue}
+            orderId={orderId} 
+            key={element.id} 
+            id={element.id} 
+            name={element.name}
+            image={element.image} 
+            price={element.price}
+            discount= {element.discount} />
+          }) : "No se encontraron Productos") : (productsToRender?.length > 0 ? productsToRender.map((element) => {
+            return <ProductCard 
+            refetchCatalogue={refetchCatalogue}
+            orderId={orderId}
+            key={element.id} 
+            id={element.id} 
+            name={element.name}
+            image={element.image} 
+            price={element.price}
+            discount= {element.discount} />
+          }) : 'No hay productos en esta categoria')
         }
-        {/* {
-          search === false ?
-            (stateproducts && stateproducts?.length > 0
-              ? stateproducts.map((element) => {
-                return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price} />
-              }) : "Cargando")
-            : (productsToRender.length > 0 ? productsToRender.map((element) => {
-              return <ProductCard key={element.id} id={element.id} name={element.name} image={element.image} price={element.price} />
-            }) : "No se encontraron Productos"
-            )
-        } */}
+
       </>
     </StyledGrid>
   );

@@ -11,7 +11,7 @@ const mapStyles = {
 const { REACT_APP_GOOGLE_API } = process.env;
 
 const Maps = (props) => {
-  const { data, loading } = useQuery(GET_ALL_STORES);
+  const { data } = useQuery(GET_ALL_STORES);
 
   const [state, setState] = useState({
     showingInfoWindow: false,

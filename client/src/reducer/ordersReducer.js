@@ -3,14 +3,13 @@ import {
   PRICE_LOW_TO_HIGH,
   PRICE_HIGH_TO_LOW,
   FILTER_ORDER,
-  CHANGE_STATUS,
   FILTER_USERS,
   CLEAR_FILTER,
   CHANGE_PAGE,
-  filterOrders,
   CHECKBOX_CHANGE,
   CLEAR_CHECKBOXES,
   FILTER_NAME,
+  CHANGE_STATUS
 } from "../actions/index";
 
 const initialState = {
