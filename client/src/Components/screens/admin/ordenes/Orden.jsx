@@ -3,13 +3,12 @@ import styled from "styled-components";
 import BootBox from 'react-bootbox';
 
 import "rsuite/lib/styles/index.less";
-/* import "./prueba.css" */
-import { useQuery, useMutation } from "@apollo/client";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import MODIFY_ORDER_STATUS from "../../../../Apollo/mutations/modifyOrderStatus";
 import { useDispatch } from "react-redux";
 import { changeStatus } from "../../../../actions";
+import { useMutation } from "@apollo/client";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
@@ -18,50 +17,15 @@ export default function Orden({ id, orden }) {
   const [selectedStatus, setSelectedStatus] = useState();
   const [show, setShow] = useState(false);
 
-  /* let status;
-  if (orden.status === "unpaid") status = 0;
-  if (orden.status === "paid") status = 1;
-  if (orden.status === "received") status = 2;
-
-  const instance = (
-    <Steps current={1}>
-      <Steps.Item onClick={() => console.log("cambiar status a paid")} />
-      <Steps.Item onClick={() => console.log("cambiar status a send")} />
-      <Steps.Item onClick={() => console.log("cambiar status a recived")} />
-    </Steps>
-  ); */
-
-  let active;
-
   useEffect(() => {
-    setOrderStatus(orden.status);
-
+    setOrderStatus(orderStatus);
     document.getElementById(
       `status-select-${orden.id}`
     ).value = orderStatus;
 
-    active = {
-      unpaid: orderStatus === "unpaid" ? "selected" : "⠀",
-      paid: orderStatus === "paid" ? "selected" : "⠀",
-      sent: orderStatus === "sent" ? "selected" : "⠀",
-      received: orderStatus === "received" ? "selected" : "⠀",
-    };
+  }, [orden.id, orden.status, orderStatus]);
 
-    /* console.log(document.getElementById(`status-select-${orden.id}`).outerHTML) */
-  }, []);
-
-  let handleSubmit = (e) => {
-    if (window.confirm("You want to change this order status?")) {
-      e.preventDefault();
-      /* var el = document.getElementById(`status-select-${orden.id}`);
-      var value= el.selectElement.options[e.selectedIndex].value;// get selected option value */
-      console.log(selectedStatus);
-    } else {
-      e.preventDefault();
-    }
-  };
-
-  const [modifyOrderStatus, { data, loading }] = useMutation(
+  const [modifyOrderStatus] = useMutation(
     MODIFY_ORDER_STATUS
   );
 
@@ -78,14 +42,17 @@ export default function Orden({ id, orden }) {
   const handleConfirm = () => {
     modifyOrderStatus({
       variables: { orderId: orden.id, status: selectedStatus },
-    });
+    }).then(()=>{
+      dispatch(changeStatus(orden.id, selectedStatus))
+      setOrderStatus(selectedStatus)
+      setShow(false)
+    })
 
-    dispatch(changeStatus(orden.id, selectedStatus))
-    setOrderStatus(selectedStatus)
-    setShow(false)
+    
   }
 
   let handleOption = async (e) => {
+
    setSelectedStatus(e.target.value);
    setShow(true)
   };
@@ -99,6 +66,8 @@ export default function Orden({ id, orden }) {
           onYesClick = {handleConfirm}
           onNoClick = {handleCancel}
           onClose = {handleCancel}/>
+
+
             <td width="10%">
               {orden.date}
             </td>

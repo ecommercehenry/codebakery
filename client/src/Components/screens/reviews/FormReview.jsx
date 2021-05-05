@@ -16,11 +16,10 @@ const FormReview = () => {
   let index = useParams(); 
    parseInt(index);
 
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = useState(1);
   const [addReview, { data }] = useMutation(ADD_REVIEW, {
     errorPolicy: 'all'
   });
-
    const [input, setInput] = useState({
     title: '',
     description: '',
@@ -28,15 +27,10 @@ const FormReview = () => {
   }); 
  let  userId = localStorage.id
  let response;
- let resultt; 
  
 if(data){
   if(data.addReview){
     response = data.addReview.name;
-  }if(response === undefined){
-    resultt = "You added your comment successfully"
-  }else{
-    resultt = data.addReview.name; 
   }
 }
 
@@ -213,7 +207,7 @@ position: relative;
             cursor:pointer;
         }
     }
-
+}
 `;
 
 export default FormReview

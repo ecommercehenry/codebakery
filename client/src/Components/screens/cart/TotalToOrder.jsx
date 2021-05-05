@@ -5,6 +5,7 @@ import '../../../Assets/toast.css';
 
 //styles
 import styled from "styled-components";
+import { getCurrentDomainFront } from '../../../config/currentDomain';
 
 toast.configure()
 
@@ -12,7 +13,7 @@ const TotalToOrder = () => {
     const customId = "custom-id-yes";
     const itemsFromCart = useSelector(state=>state.cart.itemsToCart);
     let total = 0;
-    if(itemsFromCart!==undefined){itemsFromCart.map(elem => {total = total + (elem.price)*(elem.quantity)} )}
+    if(itemsFromCart!==undefined){itemsFromCart.forEach(elem => {total = total + (elem.price)*(elem.quantity)} )}
     
     const clickHandler = () => {
        toast('Debe estar logueado para comprar, doble click en "comprar" para loguearse',{
@@ -20,7 +21,7 @@ const TotalToOrder = () => {
       }) 
     }
     const doubleClickHandler = () => {
-        window.location.href = "http://localhost:3000/log-in"; 
+        window.location.href = `${getCurrentDomainFront()}/log-in`; 
      }
 
     return (

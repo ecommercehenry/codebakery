@@ -4,6 +4,7 @@ const getProductByName = gql`
   {
     getProductByName(name: "Cuchillo") {
       name
+      discount
     }
   }
 `

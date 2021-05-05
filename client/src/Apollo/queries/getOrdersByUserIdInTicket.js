@@ -14,6 +14,7 @@ const getOrdersByUserIdInTicket = gql`
             stock
             image
             price
+            discount
             quantity
           }
         }

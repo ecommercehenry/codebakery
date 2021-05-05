@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import bread1 from './bread1.png';
 import bread2 from './bread2.png';
 import { Redirect } from 'react-router-dom'
+import {motion} from 'framer-motion';
+import {pageAnimation} from '../../PageAnimation'
 
 const Landing = () => {
     const [redirect, setRedirect] = useState(false)
@@ -12,7 +14,7 @@ const Landing = () => {
     return (
         <>
             <NavBar color='black' />
-            <StyledLanding>
+            <StyledLanding variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
                 <div className="background-photo">
                     <img src={bread1} alt="" id="bread1" />
                     <img src={bread2} alt="" id="bread2" />
@@ -35,7 +37,7 @@ const Landing = () => {
 
 export default Landing;
 
-const StyledLanding = styled.div`
+const StyledLanding = styled(motion.div)`
 position: absolute;
 height: 100vh;
 width: 100vw;

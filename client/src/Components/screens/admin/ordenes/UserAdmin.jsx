@@ -1,24 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GET_ALL_USERS from "../../../../Apollo/queries/getAllUsers";
-import DELETE_USER from "../../../../Apollo/mutations/deleteUser";
 import styled from "styled-components";
-import { useLazyQuery, useMutation } from "@apollo/client";
-import Promote from "../Promote";
+import { useLazyQuery } from "@apollo/client";
 import UserInfo from "./UserInfo";
 import {
   getAllUsersWithDetails,
-  orderAscByName,
-  orderDescByName,
-  searchByName,
 } from "../../../../actions/index";
-import SearchBarUserAdmin from "./SearchBarUserAdmin";
-
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { IconContext } from "react-icons";
 
 const UserAdmin = ({setPromo}) => {
-  const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   let dataToRender = state.userAdmin.dataToRender;
@@ -33,7 +23,7 @@ const UserAdmin = ({setPromo}) => {
     } else if (data && data.getAllUsers) {
       dispatch(getAllUsersWithDetails(data?.getAllUsers));
     }
-  }, [data, loading]);
+  }, [data, loading, dispatch, getAllUsers, setPromo]);
 
   if (!dataToRender) {
     return <div>Loading...</div>;

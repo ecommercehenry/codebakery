@@ -1,11 +1,10 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from 'styled-components';
 import AddCircleIcon from '@material-ui/icons/AddCircle'; 
 
 
 const OrderByUser = ({ id, name, price, quantity }) => {
-let idd = useParams(); 
     return (
      
         <StyledOrd>
