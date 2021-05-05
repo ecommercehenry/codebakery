@@ -18,7 +18,7 @@ const Catalogue = () => {
   let logged = storage.token ? true : false;
   let userId = logged ? parseInt(storage.id) : null;
   let { itemsToCart } = useSelector((state) => state.cart); 
-  const [orderId, setOrderId] = useState()
+  // const [orderId, setOrderId] = useState()
   const queryData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
     fetchPolicy: "no-cache",
@@ -26,10 +26,8 @@ const Catalogue = () => {
   const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
   const [createOrder] = useMutation(CREATE_ORDER);
   const dispatch = useDispatch();
-  useEffect(() => {
-    setOrderId(queryData?.data?.getOrdersByUserIdInCart?.orders[0]?.id);
-  }, [queryData]);
-
+  let orderId = queryData?.data?.getOrdersByUserIdInCart?.orders[0]?.id;
+ 
   useEffect(() => {
     if (queryData?.data && !queryData.loading) {
       if (logged) {

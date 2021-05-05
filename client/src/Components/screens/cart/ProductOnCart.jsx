@@ -64,7 +64,7 @@ const ProductOnCart = ({
             discount != 0 ? 
             (
               <div className="subtotal">
-                ${(newQuantity * (price-((price*discount)/100).toFixed(2)))}
+                ${(newQuantity * (price-((price*discount)/100))).toFixed(2)}
               </div>
             ) : 
             <div className="subtotal">
