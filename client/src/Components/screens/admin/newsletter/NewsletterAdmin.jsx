@@ -1,12 +1,11 @@
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react"
-import styled from "styled-components";
 import SEND_NEWSLETTER from "../../../../Apollo/mutations/sendNewsletter";
 
 
 export default function NewsletterAdmin(){
 
-    const [sendNews, loading, error] = useMutation(SEND_NEWSLETTER, {});
+    const [sendNews] = useMutation(SEND_NEWSLETTER, {});
     const [preview,setPreview] = useState('');
     const [info, setInfo] = useState({
         description:'',
@@ -53,7 +52,6 @@ export default function NewsletterAdmin(){
 
     }
     return(
-
         <form onSubmit={handlerOnClick} >
            <div className="descriptionn">
                     <label>Description</label>
@@ -68,7 +66,7 @@ export default function NewsletterAdmin(){
            <div className="imageLoaderr">
                 <div className="previeww">
                     {
-                        preview && <img src={preview} alt="image-preview"/>
+                        preview && <img src={preview} alt=""/>
                     }
                 </div>
                 <div className="fakeButtonn">
@@ -84,33 +82,9 @@ export default function NewsletterAdmin(){
             <div  >
             <button type="submit">Enviar Newsletter a todos los subscriptos</button>
             </div>
-               
-           
-            {/* <button
-                onClick={handlerOnClick}
-            >Enviar Newsletter a todos los subscriptos</button> */}
+            
         </form>
     )
 }
 
-const StyledNewsletter = styled.div`
-  color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  margin-top: 0.5rem;
-  height: 100%;
 
-  button {
-    border: none;
-    color: beige;
-    border-radius: 15px;
-    padding: 1px;
-    margin-left: 6px;
-    height: fit-content;
-    background-color: rgb(126, 96, 155);
-    border: none;
-    padding: 6px;
-  }
-`;

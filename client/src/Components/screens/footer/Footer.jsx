@@ -29,17 +29,17 @@ export default function Footer() {
           </div>
         </div>
         <div className="redes">
-          <a target="_blank" href="https://es-la.facebook.com/">
+          <a target="_blank" rel="noopener noreferrer" href="https://es-la.facebook.com/">
             <img className="icon-git" src={fb} alt="Facebook" />
           </a>
-          <a target="_blank" href="https://twitter.com/?lang=es">
+          <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/?lang=es">
             <img className="icon-git" src={tw} alt="Twitter" />
           </a>
-          <a target="_blank" href="">
+          <a target="_blank" rel="noopener noreferrer" href="https://web.whatsapp.com/">
             {" "}
             <img className="icon-git" src={wa} alt="Whatsapp" />
           </a>
-          <a target="_blank" href="https://www.instagram.com/?hl=es-la">
+          <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/?hl=es-la">
             <img className="icon-git" src={is} alt="Instagram" />
           </a>
         </div>

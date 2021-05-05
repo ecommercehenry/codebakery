@@ -17,10 +17,10 @@ import DELETE_IMAGE from "../../../../Apollo/mutations/deleteImageById";
 import GET_ALL_IMAGES from "../../../../Apollo/queries/getImageSlider";
 
 const TableSlider = () => {
-  const [deleteImageById, { error }] = useMutation(DELETE_IMAGE);
-  const [responsive, setResponsive] = useState("vertical");
+  const [deleteImageById ] = useMutation(DELETE_IMAGE);
+  const [responsive] = useState("vertical");
   const [tableBodyHeight, setTableBodyHeight] = useState("400px");
-  const [tableBodyMaxHeight, setTableBodyMaxHeight] = useState("");
+  const [tableBodyMaxHeight] = useState("");
   // Almaceno la URL
   const [image, setImage] = useState();
   const [serverRefresh, setServerRefresh] = useState(false);
@@ -47,7 +47,7 @@ const TableSlider = () => {
       refetch();
       setServerRefresh(false);
     }
-  }, [serverRefresh]);
+  }, [serverRefresh, refetch]);
 
   const columns = [
     {

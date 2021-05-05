@@ -7,10 +7,7 @@ import SUBSCRIBE_USER from "../../../Apollo/mutations/suscribeToNewsletter";
 export default function Newsletter() {
   const [suscrito, setSuscrito] = useState(false);
 
-  const [input, setInput] = useState();
-  function handlerChange() {}
-
-  const [suscribe, { loading, error }] = useMutation(SUBSCRIBE_USER, {});
+  const [suscribe] = useMutation(SUBSCRIBE_USER, {});
   // const userId = 5;
   let userId = window.localStorage.getItem("id");
   let user = localStorage.name;

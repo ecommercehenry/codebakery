@@ -44,7 +44,7 @@ const Upload = ({
         });
       };
     });
-  }, []);
+  }, [saveImageSlider, setServerRefresh]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

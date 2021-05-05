@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 // Componente img
 import ImgComp from "./ImgComp";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 
 import GET_ALL_IMAGES from "../../../../Apollo/queries/getImageSlider";
 import Cardhero from "./Cardhero";
@@ -13,7 +13,7 @@ const Slider = () => {
 
   useEffect(() => {
     getImage();
-  }, [data]);
+  }, [data,getImage]);
 
   console.log("DR: ", data?.getImageSlider);
 

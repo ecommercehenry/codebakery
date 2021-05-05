@@ -24,7 +24,6 @@ import SliderCard from "../slider/SliderCard";
 
 const AdminPanel = () => {
 
-  const [addProduct, setAddProduct] = useState(false);
   const [displayFilter, setDisplayFilter] = useState(false);
 
   let { status } = useSelector((state) => state.theme);
@@ -45,7 +44,6 @@ const AdminPanel = () => {
             />
 
             <AdminNavBar
-              setAddProduct={setAddProduct}
               promo={promo}
               setPromo={setPromo}
               displayFilter={displayFilter}
