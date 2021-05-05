@@ -7,17 +7,18 @@ import Grid from "@material-ui/core/Grid";
 import { toast } from "react-toastify";
 import "../../../../Assets/toast.css";
 import { makeStyles } from "@material-ui/core/styles";
+import styled from "styled-components";
 
 toast.configure();
 const useStyles = makeStyles((theme) => ({
   formContainer: {
     width: "70%",
     borderRadius: "1rem",
-    backgroundColor: "#5E3F71",
-    color: "#ffffff", //color de titulos
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
+    backgroundColor: "white",
+    color: "black", //color de titulos
+    margin: "auto",
     padding: theme.spacing(2),
+    position: "relative"
   },
 }));
 
@@ -72,9 +73,6 @@ const ManageStores = () => {
     <React.Fragment>
       <div className={classes.formContainer}>
         <form onSubmit={submitHandler}>
-          <Typography variant="h6" gutterBottom>
-            Add a new store
-          </Typography>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <TextField
@@ -120,7 +118,7 @@ const ManageStores = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{display: "flex", flexDirection: "column"}}>
               <TextField
                 variant="filled"
                 required
@@ -130,13 +128,28 @@ const ManageStores = () => {
                 fullWidth
                 onChange={handleChange}
               />
+              <StyledPrincipalButton type="submit" style={{alignSelf:"flex-end", marginTop: "1em"}}>Save store</StyledPrincipalButton>
             </Grid>
-            <button type="submit">Save store</button>
           </Grid>
         </form>
       </div>
     </React.Fragment>
   );
 };
+
+export const StyledPrincipalButton = styled.button`
+  position: relative; 
+  width:fit-content;
+  padding: .2em 1em;
+  border-radius: 10px;
+  border: none;
+  background-color: #5f3f71;
+  color: white;
+  font-weight: bold;
+
+  &:hover{
+    background-color: #493157;
+  }
+`
 
 export default ManageStores;

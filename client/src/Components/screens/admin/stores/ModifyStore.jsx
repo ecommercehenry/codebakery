@@ -13,6 +13,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import GET_ALL_STORES from "../../../../Apollo/queries/getAllStores";
 import { Button } from "@material-ui/core";
 import DELETE_STORE from "../../../../Apollo/mutations/deleteStore";
+import { StyledPrincipalButton } from "./ManageStores";
 
 toast.configure();
 
@@ -20,18 +21,20 @@ const useStyles = makeStyles((theme) => ({
   formContainer: {
     width: "70%",
     borderRadius: "1rem",
-    backgroundColor: "#5E3F71",
-    color: "#ffffff", //color de titulos
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
+    backgroundColor: "white",
+    color: "black", //color de titulos
+    marginTop: "auto",
     padding: theme.spacing(2),
   },
   formControl: {
     backgroundColor: "#ffffff",
+    display: "flex",
+    justifyContent: "center"
   },
   deletebutton: {
     backgroundColor: "#ffffff",
     left: "5rem",
+    marginTop: "16px"
   },
 }));
 
@@ -102,14 +105,12 @@ const ModifyStore = () => {
     <React.Fragment>
       <div className={classes.formContainer}>
         <form onSubmit={submitHandler}>
-          <Typography variant="h6" gutterBottom>
-            Modify an existing store
-          </Typography>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple">Store</InputLabel>
+            <Grid item xs={12} style={{display: "flex", alignItems: "center", paddingTop:"0"}}>
+              <FormControl className={classes.formControl} >
+                <InputLabel htmlFor="age-native-simple" >Store</InputLabel>
                 <Select
+                  required
                   fullWidth
                   native
                   onChange={handleAddress}
@@ -176,7 +177,7 @@ const ModifyStore = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{display: "flex", flexDirection: "column"}}>
               <TextField
                 variant="filled"
                 required
@@ -186,8 +187,8 @@ const ModifyStore = () => {
                 fullWidth
                 onChange={handleChange}
               />
+              <StyledPrincipalButton type="submit" style={{alignSelf:"flex-end", marginTop: "1em"}}>Update store</StyledPrincipalButton>
             </Grid>
-            <button type="submit">Update store</button>
           </Grid>
         </form>
       </div>

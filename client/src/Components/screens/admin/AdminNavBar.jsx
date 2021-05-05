@@ -53,6 +53,10 @@ const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
           <div className="optionTab">PROMOS</div>
           <PromoNavBar/>
         </Route>
+
+        <Route path="/admin/stores">
+          <div className="optionTab">STORES</div>
+        </Route>
         
       </div>
 
