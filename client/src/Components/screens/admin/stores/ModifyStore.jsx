@@ -73,12 +73,16 @@ const ModifyStore = () => {
   };
   const deleteHandler = async (e) => {
     e.preventDefault();
-    await deleteStore({
-      variables: {
-        id: parseInt(form.id),
-      },
-    });
-    refetch();
+    if(form.id !== ""){
+      await deleteStore({
+        variables: {
+          id: parseInt(form.id),
+        },
+      });
+      refetch();
+    }else {
+      toast("Must select a store")
+    }
   };
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -94,6 +98,7 @@ const ModifyStore = () => {
     });
     toast("Store Modified");
   };
+  console.log(form)
   let phoneNumber = document.getElementById("phoneNumber");
   if (phoneNumber) {
     phoneNumber.maxLength = "11";
