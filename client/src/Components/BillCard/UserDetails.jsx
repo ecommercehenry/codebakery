@@ -1,8 +1,9 @@
 import React from "react";
+import styled from "styled-components";
 
 const UserDetails = ({ name, email, dni, address, phoneNumber }) => {
   return (
-    <div className="info info-details">
+    <UserDetailsStyled>
       <div
         style={{
           flex: "50%",
@@ -10,7 +11,7 @@ const UserDetails = ({ name, email, dni, address, phoneNumber }) => {
         }}
       >
         <h3 className="parrafo" style={{ fontWeight: "600" }}>
-          Client:
+          Client
         </h3>
         <p>{name ? name : "N/A"}</p>
       </div>
@@ -22,7 +23,7 @@ const UserDetails = ({ name, email, dni, address, phoneNumber }) => {
         }}
       >
         <h3 className="parrafo" style={{ fontWeight: "600" }}>
-          Email:
+          Email
         </h3>
         <p>{email ? email : "N/A"}</p>
       </div>
@@ -34,7 +35,7 @@ const UserDetails = ({ name, email, dni, address, phoneNumber }) => {
         }}
       >
         <h3 className="parrafo" style={{ fontWeight: "600" }}>
-          DNI:
+          DNI
         </h3>
         <p>{dni ? dni : "N/A"}</p>
       </div>
@@ -46,7 +47,7 @@ const UserDetails = ({ name, email, dni, address, phoneNumber }) => {
         }}
       >
         <h3 className="parrafo" style={{ fontWeight: "600" }}>
-          Address:
+          Address
         </h3>
         <p>{address ? address : "N/A"}</p>
       </div>
@@ -58,12 +59,28 @@ const UserDetails = ({ name, email, dni, address, phoneNumber }) => {
         }}
       >
         <h3 className="parrafo" style={{ fontWeight: "600" }}>
-          Phone:
+          Phone
         </h3>
         <p>{phoneNumber ? phoneNumber : "N/A"}</p>
       </div>
-    </div>
+    </UserDetailsStyled>
   );
 };
+
+const UserDetailsStyled = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .parrafo {
+    font-weight: 600;
+    color: #402e57;
+  }
+
+  h3,
+  p {
+    font-size: 1rem;
+  }
+`;
 
 export default UserDetails;
