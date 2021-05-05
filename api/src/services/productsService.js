@@ -96,6 +96,7 @@ async function addProduct(args) {
  * @param  {} dataToModify object that contains the data to be modified
  */
 async function modifyProduct(id, dataToModify) {
+
   async function getCategoriesDB(categoriesStr){
     let out = []
     for(categorie of categoriesStr){
@@ -121,9 +122,11 @@ async function modifyProduct(id, dataToModify) {
     });
     return product
   }
+
   const categories = dataToModify["categories"]
   const dataProduct = dataToModify
   delete dataProduct["categories"]
+  
   if (validateNewData(dataProduct)) {
     try {
       const product = await getProductById(id)
@@ -147,7 +150,7 @@ async function modifyProduct(id, dataToModify) {
   }
 
   function validateNewData(data) {
-    const validInputs = ["name", "description", "price", "stock", "image","categories"];
+    const validInputs = ["name", "description", "price", "stock", "image","categories","discount"];
     for (element in data) {
       if (!validInputs.includes(element)) {
         

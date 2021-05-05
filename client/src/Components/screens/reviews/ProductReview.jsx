@@ -18,7 +18,6 @@ const ProductReview = ({ id }) => {
     }, 1000);
   }, []);
 
-
   return (
     <StyledReviewProduct>
       {loanding ? (

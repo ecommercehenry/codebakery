@@ -1,4 +1,4 @@
-import React ,{ useState,useEffect } from 'react'
+import React ,{ useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 import ADD_PROMO from "../../../../Apollo/mutations/addPromo";
 import getAllCategories from "../../../../Apollo/queries/getAllCategories"
@@ -8,7 +8,7 @@ import closeIcon from "../../../../icons/close2.svg"
 
 const FormPromo = ({ promo, setPromo }) => {
 
-    const [addPromo, { data }] = useMutation(ADD_PROMO)
+    const [addPromo] = useMutation(ADD_PROMO)
     const [category,setCategory] = useState('');
     const [day,setDay] = useState('');
     const [info, setInfo] = useState({
@@ -38,6 +38,9 @@ const FormPromo = ({ promo, setPromo }) => {
         switch (option) {
             case 'options':
                 setCategory(value)
+                break;
+            default:
+                console.log("Un error que no deberia salir, FormPromo.jsx 42")
         }
     }
 
@@ -45,6 +48,9 @@ const FormPromo = ({ promo, setPromo }) => {
         switch (option) {
             case 'options':
                 setDay(value)
+                break;
+            default:
+                console.log("ESTE ERROR NO DEBERIA SALIR FormPromo.jsx 52")
         }
     }
 

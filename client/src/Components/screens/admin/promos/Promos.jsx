@@ -1,11 +1,11 @@
-import React, {useState,useEffect} from 'react'
+import React, {useEffect} from 'react'
 import FormPromo from "./FormPromo"
 import PromoList from "./PromoList"
 import styled from 'styled-components'
 
 const Promos = ({promo,setPromo}) => {
 
-    useEffect(() => {},[FormPromo])
+    useEffect(() => {},[])
     
     return (
         <StyledPromos>

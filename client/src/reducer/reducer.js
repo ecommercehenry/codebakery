@@ -36,7 +36,6 @@ const reducer = (state = initialState, action) => {
     case GET_ALL_PRODUCTS:
       // los productos cambian según la categoría buscada por lo que debemos tomar en cuenta 
       // los filtros de orden y de requerirse el de busqueda
-      console.log(action.payload, 'atsttats');
       // se ordenan los productos segun el criterio(por precio)
       // se debe solventar problema de carga de daros fallida
       sortArr = action.payload?.length > 0 ? sortByPrice(action.payload, state.sort): action.payload;

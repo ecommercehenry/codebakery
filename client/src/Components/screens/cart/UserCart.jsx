@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
+import {motion} from 'framer-motion';
+import {pageAnimation} from '../../PageAnimation'
 import ProductOnCart from "./ProductOnCart";
 import { useDispatch } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../actions/setQuantityOrdersCardBackend";
@@ -27,10 +29,10 @@ const UserCart = () => {
         dispatch(setQuantityOrdersCardBackend(0));
       }
     }
-  }, [data]);
+  }, [data, dispatch]);
   console.log(data)
   return (
-    <StyledCart>
+    <StyledCart variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
       {data?.getOrdersByUserIdInCart.orders[0] ? (
         data.getOrdersByUserIdInCart.orders[0].lineal_order.map((order) => (
           <ProductOnCart
@@ -38,6 +40,7 @@ const UserCart = () => {
             id={order.id}
             name={order.name}
             price={order.price}
+            discount={order.discount}
             stock={order.stock}
             image={order.image}
             quantity={order.quantity}
@@ -62,7 +65,7 @@ const UserCart = () => {
     </StyledCart>
   );
 };
-const StyledCart = styled.div`
+const StyledCart = styled(motion.div)`
   //background: black;
   height: fit-content;
   width: 100%;

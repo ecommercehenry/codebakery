@@ -12,7 +12,7 @@ const UserProfile = () => {
   let { id } = useParams();
 
   const [click, setClick] = useState(1)
-  const [modifyUser, { data }] = useMutation(MODIFY_USER, {
+  const [modifyUser] = useMutation(MODIFY_USER, {
     variables: { id: parseInt(id) },
    
   });

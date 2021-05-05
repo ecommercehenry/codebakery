@@ -8,7 +8,7 @@ import GET_ALL_USERS from "../../../Apollo/queries/getAllUsers";
 //Promote recibira el id del componente padre, ese componente renderizara este boton y le pasara como propiedad el id del usuario actual.. Por ahora harcode violento
 export default function Promote({ idUser, rol}) {
   const [value, setValue] = useState(rol);
-  const [promoteUser, { loading, error }] = useMutation(PROMOTE_USER, {
+  const [promoteUser] = useMutation(PROMOTE_USER, {
     refetchQueries: [{ query: GET_ALL_USERS }],
   });
 
@@ -19,7 +19,7 @@ export default function Promote({ idUser, rol}) {
         role: value,
       },
     });
-  }, [value]);
+  }, [value, idUser, promoteUser]);
   return (
     <>
       <Switch

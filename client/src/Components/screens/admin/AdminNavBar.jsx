@@ -17,10 +17,7 @@ import AddPromoButton from "./promos/AddPromoButton"
 import SearchBar from "./SearchBar";
 import SearchBarAdmin from "./SearchBarAdmin";
 
-const AdminNavBar = ({ setAddProduct, promo, setPromo, displayFilter, setDisplayFilter  }) => {
-  const buttonHandler = () => {
-    setAddProduct(true);
-  };
+const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
 
   const [add, setAdd] = useState(false);
   let { status } = useSelector((state) => state.theme);
@@ -90,7 +87,6 @@ const AdminNavBar = ({ setAddProduct, promo, setPromo, displayFilter, setDisplay
           <Link
             to="/admin/add-product"
             className="addProduct purple-btn"
-            onClick={buttonHandler}
           >
             + ADD PRODUCT
           </Link>

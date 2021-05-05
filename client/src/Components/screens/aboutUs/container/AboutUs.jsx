@@ -25,11 +25,11 @@ const AboutUs = ({ name, title, img, git, linkedin }) => {
               <h2>{name}</h2>
               <p>{title}</p>
               <div className="icons">
-                <a target="_blank" href={git}>
+                <a target="_blank" rel="noopener noreferrer" href={git}>
                   <img className="icon-git" src={Git} alt="GitHub" />
                 </a>
 
-                <a target="_blank" href={linkedin}>
+                <a target="_blank" rel="noopener noreferrer" href={linkedin}>
                   <img className="icon-linke" src={Linke} alt="Likedin" />
                 </a>
           </div>
@@ -84,7 +84,9 @@ const AboutUsConteiner = styled.div`
     font-weight: 800;
     font-size: 20px;
     margin: 0px 0px 0px 0px;
-    line-height: 120%;    
+
+    line-height: 120%;
+
     opacity: 0.7;
     text-align: center;
     
