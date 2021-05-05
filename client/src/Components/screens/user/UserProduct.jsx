@@ -11,54 +11,60 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-
 const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: "#5E3F71",
-      color: "#000000",
+  head: {
+    backgroundColor: "#5E3F71",
+    color: "#000000",
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
     },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
-  
-  const StyledTableRow = withStyles((theme) => ({
-    root: {
-      "&:nth-of-type(odd)": {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }))(TableRow);
-  const useStyles = makeStyles({
-    table: {
-      margin: "3rem",
-      //background:"red",
-    },
-    container: {
-      width: "70rem",
-      display: "flex",
-      //background:"blue",
-      marginTop: "6em",
+  },
+}))(TableRow);
+const useStyles = makeStyles({
+  titlee: {
+    position: "absolute",
+    left: "7em",
+    bottom:"13em"
+  },
+  table: {
+    margin: "3rem",
+    //background:"red",
+  },
+  container: {
+    width: "70rem",
+    display: "flex",
+    //background:"blue",
+    marginTop: "6em",
+    marginLeft: "13em",
+  },
+});
+const UserProduct = () => {
+  const classes = useStyles();
+
+  let { id } = useParams();
+  const { data } = useQuery(GET_ALL_ORDERS_USER, {
+    variables: {
+      userId: parseInt(id),
+      fetchPolicy: "no-cache",
     },
   });
-  const UserProduct = () => {
-    const classes = useStyles();
 
-    let { id } = useParams();
-    const { data } = useQuery(GET_ALL_ORDERS_USER, {
-        variables: {
-            userId: parseInt(id), 
-            fetchPolicy: "no-cache",
-        }
-    });
- 
-    return (
+  return (
+    <div>
+      <h1 className={classes.titlee} >Order history</h1>
       <TableContainer component={Paper} className={classes.container}>
-        <h1 className="titlee">Order history</h1>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Store ID</StyledTableCell>
+              <StyledTableCell> ID</StyledTableCell>
               <StyledTableCell align="left">Name</StyledTableCell>
               <StyledTableCell align="left">Price</StyledTableCell>
               <StyledTableCell align="left">Quantity</StyledTableCell>
@@ -73,16 +79,17 @@ const StyledTableCell = withStyles((theme) => ({
                   {e.name}
                 </StyledTableCell>
                 <StyledTableCell align="left">$ {e.price}</StyledTableCell>
+                <StyledTableCell align="left">{e.quantity}</StyledTableCell>
                 <StyledTableCell align="left">
-                  {e.quantity}
+                  $ {e.quantity * e.price}
                 </StyledTableCell>
-                <StyledTableCell align="left">$ {e.quantity*e.price}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-    );
+    </div>
+  );
 };
 
 export default UserProduct;

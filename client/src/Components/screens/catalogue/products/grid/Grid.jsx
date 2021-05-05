@@ -9,25 +9,33 @@ import ProductCard from "./ProductCard";
 
 const Grid = ({ orderId, refetchCatalogue }) => {
   let { status } = useSelector((state) => state.theme);
-  let { stateproducts, filterProduct, allProduct, search } = useSelector(
+  let { search, productsToRender } = useSelector(
     (state) => state.reducer
   );
-  let arr = [];
+  // let arr = [];
+  // if (search === true) {
+  //   arr = allProduct.filter((element) =>
+  //     element.name.toLowerCase().includes(filterProduct.toLowerCase())
+  //   );
+  //   //con includes la busq ya no pide exactitud en el string. @Lizen
+  // }
+  // let arr = [];
 
-  if (search === true) {
-    arr = allProduct.filter((element) =>
-      element.name.toLowerCase().includes(filterProduct.toLowerCase())
-    );
-    //con includes la busq ya no pide exactitud en el string. @Lizen
-  }
+  // if (search === true) {
+  //   arr = allProduct.filter((element) =>
+  //     element.name.toLowerCase().includes(filterProduct.toLowerCase())
+  //   );
+  //   //con includes la busq ya no pide exactitud en el string. @Lizen
+  // }
   const { data } = useQuery(GET_BY_PRODUCT, {
     fetchPolicy: "no-cache",
   });
 
+
   useEffect(() => {
     if (data) {
       if (data.product) {
-        data.product.map((e) => {
+        data.product.forEach((e) => {
           if (e.stock <= 0) {
             let boton = document.getElementById(`${e.id}`);
             if (boton != null) {
@@ -40,6 +48,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
   }, [data]);
 
   return (
+
     <StyledGrid light={status}>
       <>
         {search === false

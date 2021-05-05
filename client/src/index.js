@@ -8,13 +8,14 @@ import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client'
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import {store,persistor} from "./store/index"
+import { getCurrentDomainApi } from "./config/currentDomain"
 import 'bootstrap/dist/css/bootstrap.css'
 
 // cliente apollo
 const token = localStorage.getItem('token');
 const role = localStorage.getItem('role');
 const client = new ApolloClient({
-  uri: 'http://localhost:3001/graphql',
+  uri: `${getCurrentDomainApi()}/graphql`,
   cache: new InMemoryCache(),
   headers: {authtoken:token, authrole: role}
 })

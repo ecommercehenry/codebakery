@@ -34,10 +34,6 @@ const AddProductForm = ({setAddProduct}) => {
         image:''
     })
 
-    const closeHandler = () => {
-        setAddProduct(false)
-    }
-
     const inputHandler = (e) => {
         return setInfo({...info,[e.target.name]:e.target.value})
     }
@@ -60,6 +56,9 @@ const AddProductForm = ({setAddProduct}) => {
         switch (option) {
             case 'options':
                 setCategory(value)
+                break
+            default:
+                setCategory(null)
         }
         setSelected([...value])
     }
@@ -73,11 +72,10 @@ const AddProductForm = ({setAddProduct}) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        if(info.image == ''){
+        if(info.image === ''){
             toast('Please add an image')
         }else{
             info.category=selected;
-            console.log('hola')
             addProduct({variables:
                 {
                     name:info.name,
@@ -112,7 +110,7 @@ const AddProductForm = ({setAddProduct}) => {
             <div className="imageLoaderr">
                 <div className="previeww">
                     {
-                        preview && <img src={preview} alt="image-preview"/>
+                        preview && <img src={preview} alt="preview"/>
                     }
                 </div>
                 <div className="fakeButtonn">
