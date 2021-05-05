@@ -64,7 +64,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
             name={element.name}
             image={element.image} 
             price={element.price} />
-          }) : 'Cargando...')
+          }) : !productsToRender ? 'Cargando...': "No se encontraron Productos" )
         }
         {/* {search === false
           ? stateproducts && stateproducts?.length > 0
