@@ -2,12 +2,15 @@ const { cloudinary } = require('../../utils/cloudinary')
 var nodemailer = require('nodemailer');
 const { Users } = require("../db");
 
-async function sendNewsletter(messaje){
+async function sendNewsletter(args){
   let emails;
   let imageUrl;
-  console.log('back', messaje);
+  let description = args.description;
+  console.log("DESCRIPTION", description);
+  
     try{
-        let imageString = messaje;
+        let imageString = args.image;
+     
         const uploadedResponse = await cloudinary.uploader.upload(imageString,{upload_preset:'code_bakery'});
         imageUrl = uploadedResponse.url;
         //console.log('url', uploadedResponse);
@@ -36,7 +39,7 @@ var transporter = nodemailer.createTransport({
 var mailOptions = {
   from: 'codebakeryhenry@gmail.com',
   bcc: emails,
-  subject: 'Prueba newsletter',
+  subject: description ? description: "Code Bakery Promotions",
   html: `<HTML><HEAD>
   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8"></HEAD>
   <BODY>
@@ -47,7 +50,7 @@ var mailOptions = {
   `
 };
 
-return transporter.sendMail(mailOptions)
+ return await transporter.sendMail(mailOptions)
     .then(info=>{
         console.log("Email send!")
         return {__typename:"email", email:info.accepted[0], messageId:info.messageId}

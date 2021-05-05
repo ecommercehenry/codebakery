@@ -37,7 +37,7 @@ type Mutation{
     deleteUser(userId: Int!) : resultBoolean
     sendEmail(userId: Int!, affair: String!, message: String!): emailResponse
 
-    sendNewsletter(message: String!) : emailResponse 
+    sendNewsletter(message: String!, image:String!) : emailResponse 
     addPromo(name: String!, discount: Int!, category: String!, day: String!): resultBoolean
     applyDiscount(discount: Int!, category: String!): resultBoolean
     deletePromo(id: Int!): resultBoolean

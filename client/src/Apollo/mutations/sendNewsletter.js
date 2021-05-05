@@ -1,20 +1,20 @@
 import { gql } from "@apollo/client"
 
 const SEND_NEWSLETTER= gql`
-mutation sendNewsletter ($message: String!){
-    sendNewsletter(message: $message){
-      __typename
-	...on email{
-    email
-    messageId
+mutation sendNewsletter ($message: String!, $image:String!){
+  sendNewsletter(message: $message, image:$image){
+    __typename
+...on email{
+  email
+  messageId
+}
+  ...on error{
+    name
+    detail
   }
-    ...on error{
-      name
-      detail
-    }
-      
-      
-    }
+    
+    
+  }
 }
 `
 

@@ -43,7 +43,8 @@ export default function NewsletterAdmin(){
       // console.log(messajeExport, 'info image');
         sendNews({
             variables: {
-              message: info.image,
+              message: info.description,
+              image:info.image
               
             },
           })
