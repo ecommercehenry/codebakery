@@ -58,7 +58,7 @@ export default function Review({ shippingtype, storeId }) {
   if (!orderData.loading) {
     if (orderData.data.getOrdersByUserIdInCart.orders.length !== 0) {
       orderData.data.getOrdersByUserIdInCart.orders[0].lineal_order.map(
-        (elem) => (total = total + elem.price * elem.quantity)
+        (elem) => (total = total + ((elem.price-(elem.price*elem.discount)/100)).toFixed(2) * elem.quantity)
       );
     }
   }
@@ -76,7 +76,14 @@ export default function Review({ shippingtype, storeId }) {
                 primary={product.name}
                 secondary={`cantidad ${product.quantity}`}
               />
-              <Typography variant="body2">{`$${product.price}`}</Typography>
+              {
+                product.discount !=0 ?
+                  (
+                    <Typography variant="body2">{`$${(product.price-((product.price*product.discount/100))).toFixed(2)}`}</Typography>
+                  )
+                :  <Typography variant="body2">{`$${product.price}`}</Typography>
+              }
+              
             </ListItem>
           )
         )}

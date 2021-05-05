@@ -76,7 +76,6 @@ const AddProductForm = ({setAddProduct}) => {
             toast('Please add an image')
         }else{
             info.category=selected;
-            console.log('hola')
             addProduct({variables:
                 {
                     name:info.name,

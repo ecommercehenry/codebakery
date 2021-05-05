@@ -27,7 +27,9 @@ function FormCRUD({ id, handlerOnClick }) {
     categories: product.categories,
     stock: product.stock,
     price: product.price,
+    discount: product.discount,
     image: product.image,
+    discount: product.discount
   });
   const dispatch = useDispatch();
   function inputHandler(e) {
@@ -56,6 +58,7 @@ function FormCRUD({ id, handlerOnClick }) {
           stock: Number(inputs.stock),
           image: inputs.image,
           categories: inputs.categories.map((c) => c.name),
+          discount: inputs.discount
         },
       },
     });
