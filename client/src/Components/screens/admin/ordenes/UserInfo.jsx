@@ -49,7 +49,7 @@ function UserInfo({ id, name, email, address, dni, phoneNumber, role }) {
         {email === "admin@admin.com" ? (
           ""
         ) : (
-          <Promote name={name} idUser={id} rol={role} />
+          <Promote idUser={id} rol={role} />
         )}
       </td>
       <td width="5%">
