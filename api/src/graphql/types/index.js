@@ -14,6 +14,7 @@ const storeType = require("./storeType")
 
 const image = require("./imageType");
 
+const otpToken = require("./otpToken")
 // aqui exportas tu type
 module.exports = `
     ${categoryType}
@@ -26,6 +27,7 @@ module.exports = `
     ${booleanType}
     ${ordersType}
     ${emailType}
+    ${otpToken}
     ${promoType}
     ${storeType}
     ${image}

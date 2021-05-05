@@ -12,7 +12,6 @@ export const saveProducts = (products) => {
       discount:el.discount,
       image:el.image,
       categories:el.categories,
-      discount: el.discount
     }
   })
   return {

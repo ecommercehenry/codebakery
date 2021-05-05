@@ -28,14 +28,26 @@ import FormModify from "./Components/screens/reviews/FormModifyReview"
 import Sucursales from './Components/Maps/Sucursales'
 import NewsletterAdmin from "./Components/screens/admin/newsletter/NewsletterAdmin";
 
+import TwoFA from "./Components/UserAcount/TwoFA";
+
+
 let token = localStorage.getItem("token");
 let role = localStorage.getItem("role");
 
 function App() {
+
+  // variable para comprobar si existió 2FA
+  // console.log(TwoFA, 'atstattsappppp')
+  // si la TwoFAValidation es true tomamos los valores del LS sino no debemos logear
   const [validateUser, { data }] = useLazyQuery(VALIDATE_CREDENTIALS);
   useEffect(() => {
-    validateUser({ variables: { token: token, role: role } });
+    if(TwoFA){
+      // console.log('tatstatstats')
+      validateUser({ variables: { token: token, role: role } });
+    }
   }, [data, validateUser]);
+
+
   const isAuthenticated = data?.validateCredentials;
 
   if (isAuthenticated && role === "admin") {
@@ -93,7 +105,7 @@ function App() {
           <Route exact path="/sign-up" component={CreateUserAccount} />
           <Route path="/reset-password" component={ResetPassword} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
-
+          <Route exact path="/TFA" component={TwoFA} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>

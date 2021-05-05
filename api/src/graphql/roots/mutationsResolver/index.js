@@ -34,6 +34,7 @@ const { deleteImageById } = require("./deleteImageById");
 const {resetPassword} = require("./resetPassword");
 const {modifyOrderStore} = require("./modifyOrderStore");
 const {addPromo} = require("./addPromo")
+const {generateTokenOTP} = require("./generateTokenOTP")
 const {applyDiscount} = require("./applyDiscount");
 const {resetDiscount} = require("./resetDiscount");
 const {deletePromo} = require("./deletePromo");
@@ -77,6 +78,7 @@ module.exports = {
   deleteImageById,
   modifyOrderStore, 
   addPromo,
+  generateTokenOTP,
   applyDiscount,
   resetDiscount,
   deletePromo

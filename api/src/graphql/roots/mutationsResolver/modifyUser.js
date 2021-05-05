@@ -4,9 +4,10 @@ const { modifyUser } = require("../../../services/userService");
 
 module.exports = {
   modifyUser: async (
-    { id, name, password, newPassword, email, role, address, dni, phoneNumber,newsletter },
+    { id, name, password, newPassword, email, role, address, dni, phoneNumber,newsletter, twoFA },
     args
   ) => {
+    console.log("mutation API", id, name, password, newPassword, email, role, address, dni, phoneNumber, twoFA)
     try {
       let num = await modifyUser(
         id,
@@ -19,6 +20,7 @@ module.exports = {
         dni,
         phoneNumber,
         newsletter,
+        twoFA
       );
 
       return { ...num };

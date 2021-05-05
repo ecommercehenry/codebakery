@@ -37,6 +37,7 @@ const {
     deleteStore,
     saveImageSlider,
     deleteImageById,
+    generateTokenOTP,
 } = require("./mutationsResolver/")
 
 const {
@@ -63,6 +64,7 @@ const {
     
     getImageSlider,
     getByStore,
+    validateTOTP,
     getPromos
 } = require("./queriesResolvers/")
 
@@ -100,6 +102,7 @@ const root = {
     applyDiscount,
     resetDiscount,
     deletePromo,  
+    generateTokenOTP,
 
     sendNewsletter,
 
@@ -134,7 +137,9 @@ const root = {
     getAllStores,
   
     getImageSlider,
-    getByStore
+    getByStore,
+    getByStore,
+    validateTOTP
 }
 
 

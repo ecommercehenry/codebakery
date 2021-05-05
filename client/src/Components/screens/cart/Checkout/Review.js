@@ -77,7 +77,7 @@ export default function Review({ shippingtype, storeId }) {
                 secondary={`cantidad ${product.quantity}`}
               />
               {
-                product.discount !=0 ?
+                product.discount !== 0 ?
                   (
                     <Typography variant="body2">{`$${(product.price-((product.price*product.discount/100))).toFixed(2)}`}</Typography>
                   )

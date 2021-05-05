@@ -116,7 +116,7 @@ table {
 
   thead {
     display: table;
-    overflow: auto;
+    overflow: scroll;
     width: 100%;
 
     th {
@@ -130,8 +130,8 @@ table {
 
   tbody {
     display:block;
-    overflow-y:auto;
-    width: 100%;
+    overflow-y:scroll;
+    width: 101.3%;
     height: 66vh;
 
     td {

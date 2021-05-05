@@ -8,6 +8,7 @@ import { guardarProductos } from "../../../../../actions/index";
 import Grid from "../grid/Grid";
 import "./Products.css";
 import ProductBar from "./ProductBar";
+
 const Products = ({ orderId, refetchCatalogue }) => {
   const dispatch = useDispatch();
 

@@ -27,6 +27,7 @@ const {getByStore} = require("./getByStore")
 const { getImageSlider } = require("./getImageSlider");
 
 
+const {validateTOTP} = require("./validateTOTP")
 
 
 module.exports = {
@@ -53,5 +54,6 @@ module.exports = {
   getByStore,
   getAllStores,
   getImageSlider,
-  getPromos
+  getPromos,
+  validateTOTP
 }

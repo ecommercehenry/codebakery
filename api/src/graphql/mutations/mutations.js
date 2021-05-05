@@ -7,6 +7,7 @@ union resultBoolean  = booleanResponse | error
 union resultOrder = order | error
 union reviewResult = review | error
 union emailResponse = email | error
+union otpTokenResponse = otpToken | error
 type Mutation{
     modifyProduct(id: Int!, dataToModify: productInput!): resultProduct
     updateCategory(id : Int!, input: categoryInput): resultCategory
@@ -17,11 +18,7 @@ type Mutation{
     removeCategoryFromProduct(idProduct: Int!,idCategory: Int!): resultProduct
     addProduct(category: String!, name: String!, description: String!, price: Float!, stock: Int!, image: String!): resultProduct
     createUser(name: String!, password: String!, email: String!, role: String!, google: Boolean): resultUsers
-    
-
-    modifyUser(id: Int, name:String, password: String, newPassword: String, email: String, role: String, address: String, dni: String, phoneNumber: String, newsletter: Boolean): resultUsers
-    
-
+    modifyUser(id: Int, name:String, password: String, newPassword: String, email: String, role: String, address: String, dni: String, phoneNumber: String, twoFA: Boolean, newsletter: Boolean): resultUsers
     createOrder(idUser: Int!, dataProducts: [dataProductsOrderInput]) : resultOrder
     updateOrderPrices(orderId: Int!) : resultBoolean
     deleteProductOrder(orderId: Int!, productId: Int!): resultBoolean
@@ -49,4 +46,5 @@ type Mutation{
     modifyOrderStore(idStore: Int!, idOrder: Int!): resultBoolean
     saveImageSlider(image: String!): resultBoolean
     deleteImageById(imageId: Int!) : resultBoolean
+    generateTokenOTP(userId: Int!): otpTokenResponse
 }`;

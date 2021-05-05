@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import NavBar from "../../navBar/NavBar";
 import Hero from "../hero/Hero";
@@ -22,7 +22,7 @@ const Catalogue = () => {
   // const [orderId, setOrderId] = useState()
   const queryData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
-    fetchPolicy: "no-cache",
+    //fetchPolicy: "no-cache",
   });
   const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
   const [createOrder] = useMutation(CREATE_ORDER);
