@@ -1,8 +1,10 @@
+import { useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import styled from 'styled-components';
 //Components 
 import ProductCard from './ProductCard';
+import GET_BY_PRODUCT from "../../../../../Apollo/queries/getByProduct"
 
 
 const Grid = ({ orderId, refetchCatalogue }) => {
@@ -25,9 +27,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
   //   );
   //   //con includes la busq ya no pide exactitud en el string. @Lizen
   // }
-  const { data } = useQuery(GET_BY_PRODUCT, {
-    fetchPolicy: "no-cache",
-  });
+  const { data } = useQuery(GET_BY_PRODUCT, {});
 
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
             image={element.image} 
             price={element.price}
             discount= {element.discount} />
-          }) : 'No hay productos en esta categoria')
+          }) : !productsToRender ? 'Cargando...': "No se encontraron Productos" )
         }
 
       </>

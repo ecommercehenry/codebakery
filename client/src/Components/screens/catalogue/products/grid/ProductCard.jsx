@@ -19,14 +19,14 @@ const ProductCard = ({ id, name, image, price, discount, stock, orderId, refetch
         </div>
         <div className="price">
           {
-            stock == 0 ?
+            stock === 0 ?
             (
               <span className="big">NOT AVAILABLE :( </span>
             )
             :
             (
               
-                discount != 0 ? (
+                discount !== 0 ? (
                   <>
                     <del>
                       <span className="small">${price}</span>

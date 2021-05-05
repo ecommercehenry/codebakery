@@ -67,7 +67,7 @@ function Login() {
         toast(dataValidate.validateUserWithGoogle.detail);
       }
     }
-  }, [loadingValidate, dataValidate]);
+  }, [loadingValidate, dataValidate, dispatch]);
 
   useEffect(()=>{
 
@@ -76,7 +76,7 @@ function Login() {
       validate({variables: {email: dataUser.createUser.email}}); 
       // 
     }
-  },[loadingUser, dataUser])
+  },[loadingUser, dataUser, validate])
 
 
   const { signIn } = useGoogleLogin({

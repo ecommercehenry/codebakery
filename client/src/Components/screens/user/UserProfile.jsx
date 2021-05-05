@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { useParams } from "react-router";
 import MODIFY_USER from "../../../Apollo/mutations/modifyUser";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
 import closeIcon from "../../../icons/close2.svg";
 import GENERATE_OTP from "../../../Apollo/mutations/generateOtp";
 import VALIDATE_TOTP from "../../../Apollo/queries/validateTokenTOTP";
@@ -32,18 +31,12 @@ const UserProfile = () => {
 
   const [click, setClick] = useState(1);
 
- 
-  const [modifyUser] = useMutation(MODIFY_USER, {
-    variables: { id: parseInt(id) },
-   
-  });
-
   const { data: $USER } = useQuery(getUserById, {
     variables: { id: parseInt(id) },
     // fetchPolicy: "no-cache",
   });
 
-  const [modifyUser, { data }] = useMutation(MODIFY_USER, {
+  const [modifyUser] = useMutation(MODIFY_USER, {
     variables: { id: parseInt(id) },
     // fetchPolicy: "no-cache",
     refetchQueries: [{
@@ -88,7 +81,7 @@ const UserProfile = () => {
     validateTotp({
       variables: {
         userId: parseInt(id),
-        code: parseInt(input.authentication),
+        code: input.authentication,
       },
     });
   };
@@ -106,18 +99,17 @@ const UserProfile = () => {
         toastId: 1,
       });
     } else if (dataValidate?.validateTOTP.name) {
-      console.log(dataValidate?.validateTOTP.name);
       toast(dataValidate?.validateTOTP.detail, {
         toastId: 2,
       });
     }
-  }, [loadingValidate]);
+  }, [loadingValidate, dataValidate, id, modifyUser]);
 
   useEffect(() => {
     if (!dataGenerate && !loadingGenerate) {
       generateOTP({ variables: { userId: parseInt(id) } });
     }
-  }, [dataGenerate, loadingGenerate]);
+  }, [dataGenerate, loadingGenerate, generateOTP, id]);
 
   return click === 1 ? (
     <StyledUseer>
@@ -438,7 +430,7 @@ const UserProfile = () => {
         <div className="infoProductt">
           <div className="namee">
             <label>Authentication</label>
-            <img src={dataGenerate?.generateTokenOTP.image}></img>
+            <img src={dataGenerate?.generateTokenOTP.image} alt="" ></img>
             <input
               name="authentication"
               type="number"

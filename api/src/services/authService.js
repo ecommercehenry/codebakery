@@ -41,7 +41,6 @@ async function generateTokenOTP(idUser){
 async function validateTOTP(idUser, code){
     //Obtener el usuario
     let user = null
-    console.log("validateTOTP", idUser, code)
     try{
         user = await Users.findOne({
             where:{
@@ -52,12 +51,11 @@ async function validateTOTP(idUser, code){
     }catch(err){
         return {__typename:"error", name:"Error al obtener un usuario", detail:`El usuario ${idUser} no existe`}
     }
-    console.log(code, 'aaaaaaaaaaaaaa', user)
     let valid = speakeasy.totp.verify({
         secret:user.secretOtp,
         encoding:"base32",
         token: code,
-        // time: 1453667708 
+    // time: 1453667708 
     })
     if(valid){
         return {__typename:"booleanResponse", boolean:true}

@@ -28,7 +28,6 @@ import FormModify from "./Components/screens/reviews/FormModifyReview"
 import Sucursales from './Components/Maps/Sucursales'
 
 import TwoFA from "./Components/UserAcount/TwoFA";
-import { useSelector } from "react-redux";
 
 
 let token = localStorage.getItem("token");
@@ -37,16 +36,15 @@ let role = localStorage.getItem("role");
 function App() {
 
   // variable para comprobar si existió 2FA
-  const { twoFA } = useSelector(state => state.dataProfileReducer);
   // console.log(TwoFA, 'atstattsappppp')
   // si la TwoFAValidation es true tomamos los valores del LS sino no debemos logear
-  const [validateUser, { data, loading }] = useLazyQuery(VALIDATE_CREDENTIALS);
+  const [validateUser, { data }] = useLazyQuery(VALIDATE_CREDENTIALS);
   useEffect(() => {
     if(TwoFA){
       // console.log('tatstatstats')
       validateUser({ variables: { token: token, role: role } });
     }
-  }, [data]);
+  }, [data, validateUser]);
 
 
   const isAuthenticated = data?.validateCredentials;

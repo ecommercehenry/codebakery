@@ -8,16 +8,13 @@ import { Redirect } from "react-router-dom";
 
 import Login from "./Login";
 
-import Logout from "./Logout";
 import { useDispatch, useSelector } from "react-redux";
 
 import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
 import '../../Assets/toast.css'; 
-import TwoFA from "./TwoFA";
 import { saveDataProfile } from "../../actions/dataProfileActions";
-import { EpsBankElement } from "@stripe/react-stripe-js";
 
 // import "./UserAccount.css";
 
@@ -80,7 +77,7 @@ const UserAcount = () => {
       }
 
     
-  }},[loading, data, dataValidate]);
+  }},[loading, data, dataValidate, dispatch, functionValidate]);
  
   let role = localStorage.getItem('role') ;
   let token = localStorage.getItem('token');
