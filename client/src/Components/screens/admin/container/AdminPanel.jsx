@@ -16,7 +16,6 @@ import ManageStores from "../stores/ManageStores";
 import StorePanel from "../stores/StoresPanel";
 import ModifyStore from "../stores/ModifyStore";
 import Promos from "../promos/Promos";
-import StoreOptions from "../stores/StoreOptions"
 
 import NewsletterAdmin from "../newsletter/NewsletterAdmin";
 
@@ -38,11 +37,6 @@ const AdminPanel = () => {
       <div className="right">
         {!promo ? (
           <div className="top">
-            <Route
-              path="/admin/stores"
-              component={() => StoreOptions({ setStores })}
-            />
-
             <AdminNavBar
               promo={promo}
               setPromo={setPromo}
@@ -50,9 +44,6 @@ const AdminPanel = () => {
               setDisplayFilter={setDisplayFilter}
             />
             <Route path="/admin/orders" />
-
-            <AdminNavBar promo={promo} setPromo={setPromo} displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
-            <Route path="/admin/orders"/>
           </div>
         ) : (
           ""
