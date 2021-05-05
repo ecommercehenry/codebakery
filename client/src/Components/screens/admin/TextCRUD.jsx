@@ -21,7 +21,7 @@ function TextCRUD({ id }) {
           <StyledTableRow onDoubleClick={handlerOnClick}>
             <tr>
             <td width="1%">
-              <img src={product.image} alt="" style={{ width: "4rem", marginLeft:"0.3rem" }} />
+              <img src={product.image} alt="" style={{ width: "4rem", marginLeft:"0.3rem", marginRight:"1em" }} />
             </td>
             <td width="30%" style={{textAlign:"left"}}>{product.name}</td>
             <td width="30%" style={{textAlign:"left"}}>

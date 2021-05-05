@@ -11,16 +11,17 @@ import { withStyles } from "@material-ui/core";
 
 
 function ListCRUD({setPromo}) {
-  const { data, loading } = useQuery(allProducts,{
-    fetchPolicy: "no-cache"
+  const { data, loading, refetch } = useQuery(allProducts,{
+    // fetchPolicy: "no-cache"
   });
   const dispatch = useDispatch();
   useEffect(() => {
     //setPromo(false)
     if (!loading) {
       dispatch(saveProducts(data.product));
+      refetch()
     }
-  }, [data, dispatch, setPromo, loading]);
+  }, [data, dispatch, setPromo, loading. refetch]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
