@@ -9,7 +9,7 @@ import  DELETE_REVIEW  from "../../../Apollo/mutations/deleteReview";
 import { useParams } from "react-router-dom";
 
 
-const ReviewByUser = ({ productId, id, title, description, stars}) => {
+const ReviewByUser = ({ productId, id, title, description, stars, refetch}) => {
   let index = useParams(); 
  
   const [deleteReview] = useMutation(DELETE_REVIEW);
@@ -20,10 +20,9 @@ const ReviewByUser = ({ productId, id, title, description, stars}) => {
       variables: {
         productId: productId,
         userId: parseInt(index.id)
-        
       },
     });
-    console.log(result, 'respuesta')
+    refetch()
   }
 
   return (
