@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {motion} from 'framer-motion';
 import {pageAnimation} from '../../PageAnimation'
 import ProductOnCart from "./ProductOnCart";
+import EmptyAlert from "./EmptyAlert"
 import { useDispatch } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../actions/setQuantityOrdersCardBackend";
 import { Link } from "react-router-dom";
@@ -30,7 +31,7 @@ const UserCart = () => {
       }
     }
   }, [data, dispatch]);
-  console.log(data)
+
   return (
     <StyledCart variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
       {data?.getOrdersByUserIdInCart.orders[0] ? (
@@ -49,7 +50,7 @@ const UserCart = () => {
           />
         ))
       ) : (
-        <p></p>
+        <EmptyAlert/>
       )}
       <div className="buttonContainer">
       <Link className="text-decoration-none" to="/checkout">

@@ -1,9 +1,12 @@
 import React,{useState} from 'react'
+import { useSelector } from "react-redux";
 import {Redirect} from 'react-router-dom'
 import styled from 'styled-components';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSadTear } from "@fortawesome/free-solid-svg-icons";
 
 const EmptyAlert = () => {
-
+    let { status } = useSelector((state) => state.theme);
     const [empty,setEmpty] = useState(false);
     const emptyHandler = () => {
         setEmpty(true)
@@ -11,8 +14,8 @@ const EmptyAlert = () => {
 
     return (
         <StyledLevelUp>
-            <StyledAlert>
-                <span>Your cart is empty</span> 
+            <StyledAlert light={status}>
+                <span>Your cart is empty <FontAwesomeIcon icon={faSadTear} /></span> 
                 <button className="purple-btn" onClick={emptyHandler}>Go shopping!</button>
                 { empty ? <Redirect to='/catalogue'/> : ""}
             </StyledAlert>
@@ -21,8 +24,15 @@ const EmptyAlert = () => {
 }
 
 const StyledAlert = styled.div`
-    background:white;
-    border: 5px solid #5e3f71;
+    background: ${({ light }) => 
+    (light ? 
+    "white" : 
+    "#222222")};
+    color: ${({ light }) => 
+    (light ? 
+    "inherit" : 
+    "white")};
+    border: 2px solid #5e3f71;
     border-radius: 13px;
     padding: 4rem 8rem;
     text-align:center;

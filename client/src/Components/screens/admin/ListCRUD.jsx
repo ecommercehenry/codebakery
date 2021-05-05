@@ -11,9 +11,7 @@ import { withStyles } from "@material-ui/core";
 
 
 function ListCRUD({setPromo}) {
-  const { data, loading } = useQuery(allProducts,{
-    fetchPolicy: "no-cache"
-  });
+  const { data, loading } = useQuery(allProducts);
   const dispatch = useDispatch();
   useEffect(() => {
     setPromo(false)
