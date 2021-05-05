@@ -5,6 +5,8 @@ import { useQuery, gql } from "@apollo/client";
 // import {removeAll} from '../../../actions/cartActions';
 //styles
 import styled from "styled-components";
+import {motion} from 'framer-motion';
+import {pageAnimation} from '../../PageAnimation'
 //components
 import ProductOnCart from "./ProductOnCart";
 import EmptyAlert from "./EmptyAlert"
@@ -49,7 +51,7 @@ const GuestCart = () => {
     localStorage.setItem(`cart`, JSON.stringify(itemsToCart));
   }
   return (
-    <StyledCart>
+    <StyledCart variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
         {data && itemsToCart.length !==0 ? (
           itemsToCart.map((elem) => (
             <ProductOnCart
@@ -70,7 +72,7 @@ const GuestCart = () => {
   );
 };
 
-const StyledCart = styled.div`
+const StyledCart = styled(motion.div)`
   //background: red;
   height: fit-content;
   width: 100%;

@@ -4,6 +4,8 @@ import NavBar from "../../navBar/NavBar";
 import Hero from "../hero/Hero";
 import Products from "../products/container/Products";
 import Detail from "../../detail/Detail.jsx";
+import {motion} from 'framer-motion';
+import {pageAnimation} from '../../../PageAnimation'
 import { useMutation,useQuery } from "@apollo/client";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useDispatch, useSelector } from "react-redux";
@@ -76,7 +78,7 @@ const Catalogue = () => {
     }
   }, [queryData, itemsToCart]);
   return (
-    <StyledCatalogue>
+    <StyledCatalogue variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
       <NavBar color="white" />
       <Hero />
       <Products orderId={orderId} refetchCatalogue={queryData.refetch} />
@@ -87,7 +89,7 @@ const Catalogue = () => {
   );
 };
 
-const StyledCatalogue = styled.div`
+const StyledCatalogue = styled(motion.div)`
   width: 100vw;
   box-sizing: border-box;
 `;
