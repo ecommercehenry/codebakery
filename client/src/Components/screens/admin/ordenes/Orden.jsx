@@ -55,7 +55,7 @@ export default function Orden({ id, orden }) {
       sendEmailSent({
         variables: {
           userId: orden.userId, 
-          affair: "Order sent",
+          affair: `Order ${orden.id} sent`,
           message: `Your order ${orden.id} has been sent to your home and you should received it within 3 days - STAY HOME!`
         }
       })
