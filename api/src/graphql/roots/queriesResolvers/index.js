@@ -22,6 +22,7 @@ const { getPromos } = require("./getPromos");
 const {getAllStores} = require("./getAllStores")
 const {getByStore} = require("./getByStore")
 const {validateTOTP} = require("./validateTOTP")
+const {getAllOrdersUser} = require("./getAllOrdersUser")
 
 
 module.exports = {
@@ -49,4 +50,5 @@ module.exports = {
   getAllStores, 
   getByStore,
   validateTOTP
+  getAllOrdersUser
 }

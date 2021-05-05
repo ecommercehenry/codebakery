@@ -58,7 +58,8 @@ const {
     getAllStores,
     getByStore,
     validateTOTP,
-    getPromos
+    getPromos,
+    getAllOrdersUser, 
 } = require("./queriesResolvers/")
 
 // product
@@ -124,7 +125,8 @@ const root = {
     getPromos,
     getAllStores,
     getByStore,
-    validateTOTP
+    validateTOTP,
+    getAllOrdersUser
 }
 
 module.exports = root
