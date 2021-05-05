@@ -14,7 +14,6 @@ import AddProductForm from "../../../AddProductForm";
 import TablaOrdenes from "../../admin/ordenes/TablaOrdenes";
 import UserAdmin from "../ordenes/UserAdmin";
 import Pagination from "../ordenes/Pagination";
-import CheckFilters from "../ordenes/CheckFilters";
 import ManageStores from "../stores/ManageStores";
 import StoreOptions from "../stores/StoreOptions";
 import StorePanel from "../stores/StoresPanel";
@@ -23,7 +22,6 @@ import Promos from '../promos/Promos';
 
 
 const AdminPanel = () => {
-  const [addProduct, setAddProduct] = useState(false);
   const [displayFilter, setDisplayFilter] = useState(false)
   let { status } = useSelector((state) => state.theme);
   const [stores, setStores] = useState("seeStores");
@@ -43,7 +41,7 @@ const AdminPanel = () => {
               path="/admin/stores"
               component={() => StoreOptions({ setStores })}
             />
-            <AdminNavBar setAddProduct={setAddProduct} promo={promo} setPromo={setPromo} displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
+            <AdminNavBar promo={promo} setPromo={setPromo} displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
             <Route path="/admin/orders"/>
           </div>
         : ""

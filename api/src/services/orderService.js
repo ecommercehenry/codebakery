@@ -87,7 +87,6 @@ async function getOrdersByUserIdInCart(userId) {
       },
     });
     const out = [];
-
     for (let i = 0; i < order.length; i++) {
       const element = order[i];
       const formatted = await _formatOrder(element);
@@ -175,7 +174,7 @@ async function createOrder(products, idUser) {
       let result = await getProductById({ id: product.id });
       //Al crear la orden se usara el precio del producto en la db, otra opcion es usar el precio del carrito, discutir
       let has = await order.addProduct(result, {
-        through: { price: result.price, quantity: product.quantity },
+        through: { price: result.price, quantity: product.quantity, discount: product.discount},
       });
     }
   } catch (err) {
@@ -222,6 +221,7 @@ async function _formatOrder(order) {
       id: productsOrden[i].id,
       name: productsOrden[i].name,
       price: lineal_Order[i].price,
+      discount: productsOrden[i].discount,
       quantity: lineal_Order[i].quantity,
       stock: productsOrden[i].stock,
       image: productsOrden[i].image,

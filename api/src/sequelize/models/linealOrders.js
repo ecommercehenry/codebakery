@@ -8,6 +8,11 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
+      discount: {
+        defaultValue: 0,
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,

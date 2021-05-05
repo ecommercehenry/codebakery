@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import CREATE_USER from "../../Apollo/mutations/createUser";
 
 import { Redirect } from "react-router-dom";
 
 // Login/ out
 import Login from "./Login";
-import Logout from "./Logout";
-import { useDispatch } from "react-redux";
 import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
@@ -23,23 +20,14 @@ const UserAcount = () => {
   const [login, { loading, data }] = useLazyQuery(validateUser);
   // const validate = useLazyQuery(VALIDATE_CREDENTIALS);
   const [
-    functionValidate,
-    { loading: loadingValidate, data: dataValidate },
+    functionValidate,{data: dataValidate },
   ] = useLazyQuery(VALIDATE_CREDENTIALS);
-  // const loadingValidate = validateCredentials[1]?.loading?.validateCredentials,
-  // dataValidate = validateCredentials[1]?.data?.validateCredentials,
-  // functionValidate = validateCredentials[0];
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  //
-
-  //
-  // Google login
-  const dispatch = useDispatch();
-
+  
   useEffect(() => {
     if (localStorage.getItem("token")) {
       functionValidate({
@@ -64,7 +52,7 @@ const UserAcount = () => {
         toast(data.validateUser.detail);
       }
     }
-  }, [loading, data, dataValidate]);
+  }, [loading, data, dataValidate, functionValidate]);
   let role = localStorage.getItem("role");
   let token = localStorage.getItem("token");
   if (role && token) {

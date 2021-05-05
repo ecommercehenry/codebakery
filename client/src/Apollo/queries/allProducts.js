@@ -8,6 +8,7 @@ query{
     id
     image
     price
+    discount
     stock
     categories{
       name

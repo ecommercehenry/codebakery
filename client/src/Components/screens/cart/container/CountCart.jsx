@@ -13,7 +13,7 @@ let storage = window.localStorage;
   let sum = 0;
 
   if (itemsFromCart !== undefined) {
-    itemsFromCart.map((elem) => {
+    itemsFromCart.forEach((elem) => {
       sum = sum + elem.quantity;
     });
   } 

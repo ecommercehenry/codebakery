@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { removeProductFromCart } from "../../../actions/cartActions";
 import { removeItem } from "../../../actions/setQuantityOrdersCardBackend";
@@ -12,11 +12,13 @@ const ProductOnCart = ({
   image,
   name,
   price,
+  discount,
   stock,
   quantity,
   orderId,
   refetch,
 }) => {
+  console.log(discount)
   let logged = localStorage.token ? true : false;
   let [newQuantity, setNewQuantity] = useState(quantity);
   const [deleteProductOrder] = useMutation(DELETE_PRODUCT_ORDER);
@@ -36,6 +38,7 @@ const ProductOnCart = ({
       refetch();
     }
   };
+  useEffect(() => {},[deleteHandler])
   return (
     <StyledProductOnCart>
       <article className="item">
@@ -57,8 +60,22 @@ const ProductOnCart = ({
           <div className="stockk">{stock} disponibles</div>
         </div>
         <div className="pricee">
-          <div className="subtotal">${newQuantity * price}</div>
-          <div className="unitaryy">Precio: ${price}</div>
+          {
+            discount != 0 ? 
+            (
+              <div className="subtotal">
+                ${(newQuantity * (price-((price*discount)/100))).toFixed(2)}
+              </div>
+            ) : 
+            <div className="subtotal">
+              ${newQuantity * price}
+            </div>
+          }
+          
+          <div className="unitaryy">Precio:${price}</div>
+          {
+            discount != 0 ? <div className="unitaryy">Descuento:{discount}%</div> : ""
+          }
         </div>
 
         <button className="deleteItemm" onClick={() => deleteHandler(id)}>
