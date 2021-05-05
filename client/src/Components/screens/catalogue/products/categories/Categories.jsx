@@ -1,11 +1,10 @@
-import React, {useEffect, useState}  from 'react';
+import React, {useEffect}  from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import { useQuery } from "@apollo/client";
 import productsByCategoryName from '../../../../../Apollo/queries/productsByCategoryName';
-// import getData from '../../../../../Apollo/queries/productById';
 import getAllCategories from '../../../../../Apollo/queries/getAllCategories';
 import allProducts from '../../../../../Apollo/queries/allProducts';
-import { getAllProducts, setSearch } from '../../../../../actions';
+import { getAllProducts } from '../../../../../actions';
 import styles from './Categories.module.css';
 import styled from 'styled-components'
 
@@ -19,10 +18,6 @@ const Categories = () => {
         variables: { name: name },
     });
     products = products?.data?.getProductByCategoryName ? products.data.getProductByCategoryName :products.data;
-    
-    //Obtenemos el estado global de los productos de redux (ESTA ES TU DATA JOHANNA)
-    const {stateproducts}= useSelector(state =>  state);
-
 
     const dispatch= useDispatch();
     //Obtenemos todos los productos de apolo client 
@@ -45,7 +40,7 @@ const Categories = () => {
         // 
         dispatch(getAllProducts(products));
         // 
-    }, [products]);
+    }, [products, dispatch]);
 
     //tenemos un query para pedir los productos por categorias
     //cada categoria sera renderizada como un boton que al hacer clic llama a la query

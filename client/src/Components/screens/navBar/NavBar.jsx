@@ -1,11 +1,9 @@
 import React,{useEffect} from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useMutation, useQuery } from '@apollo/client';
 import APPLY_DISCOUNT from "../../../Apollo/mutations/applyDiscount";
 import RESET_DISCOUNT from "../../../Apollo/mutations/resetDiscount";
 import getPromos from '../../../Apollo/queries/getPromos';
-import { RoundButton } from "../../GlobalStyle";
 import CountCart from "../cart/container/CountCart";
 import styled from "styled-components";
 import ThemeSwitch from "./ThemeSwitch";
@@ -46,9 +44,6 @@ const NavBar = ({ color }) => {
   let role = window.localStorage.getItem("role");
   let id = window.localStorage.getItem("id");
   let logeed = storage.token ? true : false;
-
-  const isCart = window.location.pathname.includes("cart");
-
   let date = new Date();
 
   let weekday = new Array(7);
@@ -71,11 +66,11 @@ const NavBar = ({ color }) => {
 
   useEffect(() => {
     if(promos && promos['data'] && promos['data']['getPromos']){
-      if(promos['data']['getPromos'].length == 0){
+      if(promos['data']['getPromos'].length === 0){
         resetDiscount();
       }else{
-        promos['data']['getPromos'].map(elem=>{
-          if(elem.day==today){
+        promos['data']['getPromos'].forEach(elem=>{
+          if(elem.day.toString()=== today.toString()){
             resetDiscount();
             applyDiscount({variables:
               {
@@ -87,7 +82,7 @@ const NavBar = ({ color }) => {
         })
       }
     }
-  },[promos])
+  },[promos, applyDiscount, resetDiscount, today])
 
   return (
     <StyledNavBar className="navbar d-flex align-items-center mx-5">

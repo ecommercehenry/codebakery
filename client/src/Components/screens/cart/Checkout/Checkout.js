@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
+import {getCurrentDomainFront} from "../../../../config/currentDomain"
 import NavBar from "../../navBar/NavBar";
 
 function Copyright() {
@@ -20,7 +21,7 @@ function Copyright() {
     <StyledFooter light={status}>
       <Typography variant="body2" align="center">
         {"Copyright © "}
-        <Link color="inherit" href="http://localhost:3000/">
+        <Link color="inherit" href={getCurrentDomainFront()}>
           Code Bakery
         </Link>{" "}
         {new Date().getFullYear()}

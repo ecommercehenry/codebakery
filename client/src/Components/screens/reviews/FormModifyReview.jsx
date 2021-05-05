@@ -16,7 +16,7 @@ const FormModify  = () => {
 
   let {id} = useParams(); 
   const [value, setValue] = React.useState(1);
-  const [modifyReview, { data }] = useMutation(MODIFY_REVIEW, {
+  const [modifyReview] = useMutation(MODIFY_REVIEW, {
     errorPolicy: 'all'
   });
 
@@ -36,7 +36,7 @@ const FormModify  = () => {
   };
   const submitHandler = async (e) => {
     e.preventDefault();
-    let result = await modifyReview({
+    await modifyReview({
       variables: {
         reviewId: parseInt(id), 
         dataReview:{
@@ -116,9 +116,6 @@ const FormModify  = () => {
   );
 };
 
-{/* <Link to={`/user/addReview/${id}`} >
-<span style={{ color: '#28004d' }} >Add Comment</span>
-</Link> */}
 const StyledForm = styled.form`
 width:35%;
 height: 80vh;

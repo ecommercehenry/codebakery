@@ -8,6 +8,7 @@ import { useQuery } from "@apollo/client";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersByUserIdInCart";
 import {toast} from 'react-toastify'
 import '../../../../Assets/toast.css'
+import { getCurrentDomainApi } from '../../../../config/currentDomain';
 const stripePromise = loadStripe('pk_test_51IikJvLv5RMhUlp35i74LPIzdy7M5Ei6esRBW9vI01qzArgdAhhBT452AQzT2E0ePUfYEmW3cb6ddVcx7Uyx7rv800bCIJ2c3z')
 toast.configure()
 const StripeForm = () => {
@@ -32,7 +33,7 @@ const StripeForm = () => {
         if(!error){
             const {id} = paymentMethod;
             try {
-                const {data} = await axios.post('http://localhost:3001/stripe/checkout',
+                const {data} = await axios.post(`${getCurrentDomainApi()}/stripe/checkout`,
                 {
                     id,
                     amount: total*100,
@@ -40,7 +41,7 @@ const StripeForm = () => {
                 }
                 )
                 elements.getElement(CardElement).clear()
-                if(data.message=="successfull transaction"){
+                if(data.message==="successfull transaction"){
                     toast(data.message)
                     setSuccess(true)
                 }else{

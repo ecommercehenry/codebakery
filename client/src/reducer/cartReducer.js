@@ -45,7 +45,7 @@ const reducer = (state = initialState, action) => {
             return { ...state, itemsToCart: []};
             
         case CHANGE_QUANTITY    :
-            state.itemsToCart.map(item=>{
+            state.itemsToCart.forEach(item=>{
                 if(item.id===action.payload.id){
                     item.quantity=action.payload.newQuantity;
                 }

@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import SearchBar from "../../searchbar/SearchBar";
 import Categories from "../categories/Categories";
-import HomeButton from "../home&sort/homeButton/HomeButton";
-import SortButton from "../home&sort/sortButton/SortButton";
 import { useDispatch } from "react-redux";
 import allProducts from "../../../../../Apollo/queries/allProducts";
 import { useQuery } from "@apollo/client";
@@ -17,7 +15,7 @@ const Products = ({ orderId, refetchCatalogue }) => {
 
   useEffect(() => {
     dispatch(guardarProductos(data));
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <div className="cardProduct">

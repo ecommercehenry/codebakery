@@ -56,12 +56,13 @@ export default function Review({ shippingtype, storeId }) {
     }
   })
   if (!orderData.loading) {
-    if (orderData.data.getOrdersByUserIdInCart.orders.length != 0) {
+    if (orderData.data.getOrdersByUserIdInCart.orders.length !== 0) {
       orderData.data.getOrdersByUserIdInCart.orders[0].lineal_order.map(
         (elem) => (total = total + elem.price * elem.quantity)
       );
     }
   }
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
