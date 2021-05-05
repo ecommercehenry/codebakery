@@ -21,7 +21,6 @@ const Detail = ({ refetchCatalogue }) => {
   
   useEffect(() =>{
     let button = document.getElementsByClassName(idCart.id)
-    let purple = document.getElementById("purple-btn")
     if (data) {
       if (data.productById) {
         if (data.productById.stock <= 0) {
@@ -30,7 +29,6 @@ const Detail = ({ refetchCatalogue }) => {
             button[1].innerHtml = "Sin Stock"
             button[0].innerText = "Sin Stock"
             button[1].innerText = "Sin Stock"
-            purple.style = "display: none"
           }
         }
       }
@@ -73,15 +71,6 @@ const Detail = ({ refetchCatalogue }) => {
                     id={parseInt(idCart.id)}
                     refetchCatalogue={refetchCatalogue}
                   />
-                  <Link
-                    to="/cart"
-                    className="text-decoration-none"
-                    style={{ height: "100%" }}
-                  >
-                    <button id="purple-btn" className="purple-btn">
-                      Buy now
-                    </button>
-                  </Link>
                 </div>
               </>
             </div>
