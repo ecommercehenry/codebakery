@@ -52,8 +52,8 @@ const Grid = ({ orderId, refetchCatalogue }) => {
     <StyledGrid light={status}>
       <>
         {search === false
-          ? stateproducts && stateproducts?.length > 0
-            ? stateproducts.map((element) => {
+          ? productsToRender && productsToRender?.length > 0
+            ? productsToRender.map((element) => {
                 return (
                   <ProductCard
                     refetchCatalogue={refetchCatalogue}
@@ -68,8 +68,8 @@ const Grid = ({ orderId, refetchCatalogue }) => {
                 );
               })
             : "The product with that category was not found"
-          : arr.length > 0
-          ? arr.map((element) => {
+          : productsToRender.length > 0
+          ? productsToRender.map((element) => {
               return (
                 <ProductCard
                   refetchCatalogue={refetchCatalogue}

@@ -7,11 +7,7 @@ async function getAllOrdersUser(args) {
 try{
  const orders = await Order.findAll({
    where: {
-<<<<<<< HEAD
     userId: userId
-=======
-     userId: userId
->>>>>>> 3060261e6f5f47629c8c42a05d9ccae678078bc9
    }
  })
  console.log(orders)
