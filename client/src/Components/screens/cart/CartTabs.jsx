@@ -41,9 +41,9 @@ let userId = parseInt(storage.id);
     )
 }
 
-const StyledTabs = styled.div`
+export const StyledTabs = styled.div`
   background:${({light})=>light 
-  ? '#F1F1F1' 
+  ? '#ffffff' 
   : '#222222'};
   color:${({light})=>light 
   ? 'black' 

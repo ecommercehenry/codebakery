@@ -20,7 +20,7 @@ const LeftPanel = () => {
     products: path.includes("products") ? "active" : "inactive",
     orders: path.includes("orders") ? "active" : "inactive",
     users: path.includes("users") ? "active" : "inactive",
-    store: path.includes("store") ? "active" : "inactive",
+    stores: path.includes("stores") ? "active" : "inactive",
     promos: path.includes("promos") ? "active" : "inactive",
   };
 
@@ -71,7 +71,7 @@ const LeftPanel = () => {
               className="text-decoration-none text-white"
               to="/admin/stores"
             >
-              <div className={`tab ${activeTab.users}`}>
+              <div className={`tab ${activeTab.stores}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Stores</span>
               </div>
@@ -227,6 +227,10 @@ const StyledPanel = styled.div`
         padding: 0.7rem;
         padding-left: 1.5rem;
         border-left: solid 4px transparent;
+
+        &:hover{
+          border-left: solid 4px white;
+        }
 
         .tabName {
           margin-left: 0.5rem;

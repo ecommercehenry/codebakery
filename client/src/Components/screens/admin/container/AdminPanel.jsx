@@ -13,9 +13,7 @@ import ListCRUD from "../ListCRUD";
 import AddProductForm from "../../../AddProductForm";
 import TablaOrdenes from "../../admin/ordenes/TablaOrdenes";
 import UserAdmin from "../ordenes/UserAdmin";
-import Pagination from "../ordenes/Pagination";
 import ManageStores from "../stores/ManageStores";
-import StoreOptions from "../stores/StoreOptions";
 import StorePanel from "../stores/StoresPanel";
 import ModifyStore from "../stores/ModifyStore";
 import Promos from '../promos/Promos';
@@ -37,10 +35,6 @@ const AdminPanel = () => {
       {   
         !promo ? 
           <div className="top">
-            <Route
-              path="/admin/stores"
-              component={() => StoreOptions({ setStores })}
-            />
             <AdminNavBar promo={promo} setPromo={setPromo} displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
             <Route path="/admin/orders"/>
           </div>
@@ -67,7 +61,7 @@ const AdminPanel = () => {
           {stores === "seeStores" ? (
             (
               <Route path="/admin/stores">
-                <StorePanel promo={promo} setPromo={setPromo}/>
+                <StorePanel promo={promo} setPromo={setPromo} setStores={setStores}/>
               </Route>
             )
           ) : stores === "modifyStore" ? (
@@ -86,9 +80,6 @@ const AdminPanel = () => {
             <p></p>
           )}
         </div>
-        <Route path="/admin/orders">
-          <Pagination />
-        </Route>
         <Route path="/admin/add-product">
           <AddProductForm />
         </Route>
