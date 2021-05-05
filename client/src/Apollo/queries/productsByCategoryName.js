@@ -6,6 +6,7 @@ query getProductByCategoryName($name: String!){
     id
     name
     price
+    discount
     stock
     image
     discount

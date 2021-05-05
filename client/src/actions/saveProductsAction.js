@@ -9,6 +9,7 @@ export const saveProducts = (products) => {
       description:el.description,
       stock:el.stock,
       price:el.price,
+      discount:el.discount,
       image:el.image,
       categories:el.categories,
       discount: el.discount

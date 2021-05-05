@@ -6,6 +6,7 @@ const getData = gql`
       name
       description
       price
+      discount
       stock
       image
       discount

@@ -31,6 +31,7 @@ function FormCRUD({ id, handlerOnClick }) {
     categories: product.categories,
     stock: product.stock,
     price: product.price,
+    discount: product.discount,
     image: product.image,
     discount: product.discount
   });
