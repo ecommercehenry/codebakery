@@ -18,8 +18,7 @@ export default function Orden({ id, orden }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    setOrderStatus(orden.status);
-
+    setOrderStatus(orderStatus);
     document.getElementById(
       `status-select-${orden.id}`
     ).value = orderStatus;
@@ -43,14 +42,17 @@ export default function Orden({ id, orden }) {
   const handleConfirm = () => {
     modifyOrderStatus({
       variables: { orderId: orden.id, status: selectedStatus },
-    });
+    }).then(()=>{
+      dispatch(changeStatus(orden.id, selectedStatus))
+      setOrderStatus(selectedStatus)
+      setShow(false)
+    })
 
-    dispatch(changeStatus(orden.id, selectedStatus))
-    setOrderStatus(selectedStatus)
-    setShow(false)
+    
   }
 
   let handleOption = async (e) => {
+
    setSelectedStatus(e.target.value);
    setShow(true)
   };
@@ -64,6 +66,8 @@ export default function Orden({ id, orden }) {
           onYesClick = {handleConfirm}
           onNoClick = {handleCancel}
           onClose = {handleCancel}/>
+
+
             <td width="10%">
               {orden.date}
             </td>
