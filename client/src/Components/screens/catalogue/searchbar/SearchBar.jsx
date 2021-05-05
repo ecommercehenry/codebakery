@@ -24,15 +24,14 @@ useEffect(() => {
   return (
     // <div style={{width:100+"vw", display:"flex", justifyContent:"center"}}>
     <StyledSearchBar>
-      <HiSearch size="1.5em" color="gray" style={{position: "absolute", left: "15px"}}/>
+      <HiSearch size="1.5em" color="gray" style={{left: "15px"}}/>
       <form id="search-form">
         <input
           type="text"
           placeholder="Find your favorite dessert"
           value={input}
           onChange={handlerChange}
-        />
-          {/* <button id="search-btn" onClick={submitHandler}>Search</button>  */}
+        />        
       </form>
     </StyledSearchBar>
     // </div>
@@ -86,17 +85,6 @@ const StyledSearchBar = styled.div`
       text-align: left;
   }
 
-  #search-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    right: 0;
-    color: black;
-    width: 10%;
-    padding: 10px 40px;
-    border: solid 1px #CECECE;
-    border-radius: 40px;
-  }
   }
 `;
 
