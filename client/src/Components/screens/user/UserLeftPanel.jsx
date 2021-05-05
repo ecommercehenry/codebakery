@@ -4,6 +4,11 @@ import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import styled from "styled-components";
 
+import { Route } from "react-router-dom";
+import {   HiOutlineExternalLink,
+  HiOutlineLogout } from "react-icons/hi";
+
+
 const UserLeftPanel = ({ click, setClick }) => {
   const path = window.location.pathname;
   const activeTab = {
@@ -43,7 +48,7 @@ const UserLeftPanel = ({ click, setClick }) => {
             <div className={`tab ${activeTab.orders}`}>
               <HiOutlineShoppingBag size="1.3rem" className="icon" />
               <button className="tabName" onClick={() => setClick(1)}>
-                Orders
+                Product
               </button>
             </div>
           </div>
@@ -58,21 +63,39 @@ const UserLeftPanel = ({ click, setClick }) => {
               </button>
             </div>
           </div>
+          <div
+            className="text-decoration-none text-white"
+            to={`/user/review/${id}`}
+          >
+            <div className={`tab  ${activeTab.reviews}`}>
+              <HiOutlineClipboardList size="1.3rem" className="icon" />
+              <button className="tabName" onClick={() => setClick(4)}>
+                Orders
+              </button>
+            </div>
+          </div>
           <Link
             className="text-decoration-none text-white"
             to="/"
             onClick={logout}
           >
-            Logout
+            <div className="bottom-tabs">
+              <HiOutlineLogout size="1rem" className="icon" />
+              <span>Logout</span>
+            </div>
           </Link>
           <Link className="text-decoration-none text-white" to="/">
-            Home
+          <div className="bottom-tabs">
+            <HiOutlineExternalLink size="1rem" className="icon" />
+            <span>Home</span>
+            </div>
           </Link>
         </div>
       </div>
     </StyledUserLeftPanel>
   );
 };
+
 
 const StyledUserLeftPanel = styled.div`
   background: #5e3f71;
@@ -178,6 +201,19 @@ const StyledUserLeftPanel = styled.div`
           }
         }
       }
+    }
+  }
+  .bottom-tabs{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1.6em;
+    margin-top: 0.5em;
+
+    span {
+      font-size: 1rem;
+      margin-left: 0.5rem;
     }
   }
 `;

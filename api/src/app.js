@@ -133,7 +133,6 @@ server.use(
 
 server.use("/stripe/checkout", async (req, res) => {
   const { id, amount } = req.body;
-  console.log(amount)
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
@@ -144,8 +143,6 @@ server.use("/stripe/checkout", async (req, res) => {
     });
     let order = await Order.findByPk(parseInt(req.body.products.id));
     let ordenCompleta = await getOrderById(order.id);
-    //console.log(payment.status)
-    //console.log(order)
     if (payment.status === "succeeded") {
       order.status = "paid";
       order.placeStatus = "ticket";

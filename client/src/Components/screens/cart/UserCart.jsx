@@ -30,7 +30,6 @@ const UserCart = () => {
       }
     }
   }, [data, dispatch]);
-  console.log(data)
   return (
     <StyledCart variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
       {data?.getOrdersByUserIdInCart.orders[0] ? (

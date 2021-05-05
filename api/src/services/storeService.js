@@ -58,7 +58,6 @@ async function addStore({ name, lat, long, address, phoneNumber }) {
   }
 }
 async function modifyStore(args) {
-  console.log("claro que si");
   try {
       let {id} = args
     let store = await Store.findByPk(id);

@@ -47,11 +47,9 @@ export default function TablaOrdenes({setPromo}) {
     });
     return <ButtonClear name="Volver al principio" />;
   } else {
-    //console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
     dataRENDER = renderPage;
   }
 
-/* console.log('render', dataRENDER) */
   return (
     <StyledTablaOrdenes>
       <table border="0" cellPadding="0" cellSpacing="0">

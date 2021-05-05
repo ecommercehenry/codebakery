@@ -28,10 +28,7 @@ const initialState = {
 
 const pagination= (modifyState) => {
   //va a preguntar si hay algo en filter orders
-  //console.log ('modifystate', modifyState);
-  //console.log('uhiajssm',modifyState)
   if (modifyState.filterOrders.length > 0) {
-   // console.log('lo q sea');
     return modifyState?.filterOrders?.slice(modifyState.numPage, modifyState.numPage+10)
   } else {
     return modifyState?.orders?.slice(modifyState.numPage, modifyState.numPage+10)
@@ -44,16 +41,13 @@ const pagination= (modifyState) => {
 // según todos los checkboxes
 const filterByStatus = (currentState) =>{
   // const
-  // console.log(currentState, 'aysyayyays')
   if(currentState.filterOrders.length > 0){
-    // console.log('primero')
     return currentState.filterStatus.length > 0 ? 
     currentState.filterOrders.filter((order => 
       (currentState.filterStatus.includes(order.status.toUpperCase()) && !order.cancelled) || 
       (currentState.filterStatus.includes('CANCELLED') && order.cancelled) )):
     currentState.filterOrders;
   } else{
-    // console.log('seg', currentState.orders.filter((order => currentState.filterStatus.includes(order.status.toUpperCase()))))
     return currentState.filterStatus.length > 0 ? 
     currentState.orders.filter((order => 
       (currentState.filterStatus.includes(order.status.toUpperCase()) && !order.cancelled) || 
@@ -80,7 +74,6 @@ const reducer = (state = initialState, action) => {
         };
         return filter;
       })
-     // console.log('data', data);
       return {
         ...state,
         orders: data,
@@ -239,7 +232,6 @@ const reducer = (state = initialState, action) => {
         filterStatus: modificateFilterStatus,
         filterOrders: filterByStatus({...state, filterStatus: modificateFilterStatus})
       };
-      // console.log(modificateState)
       return {
         ...state,
         statusOrders: filterByStatus({...state, filterStatus: modificateFilterStatus}),

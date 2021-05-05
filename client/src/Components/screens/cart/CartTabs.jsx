@@ -35,7 +35,6 @@ let userId = parseInt(storage.id);
         <StyledTabs light={status}>
             <ul role="tablist" >
                 <li className="selected"><Link to="/cart" className="text-decoration-none linked tabLink">Cart ({logged ? ordersInBacked : sum})</Link></li>
-                <li><Link to="#" className="text-decoration-none text-muted tabLink">Wishlist (0)</Link></li>
             </ul>
         </StyledTabs>
     )
