@@ -1,3 +1,4 @@
+
 const { categories } = require("./categories")
 const { product } = require("./product")
 const { productById } = require("./productById")
@@ -23,6 +24,10 @@ const {getAllStores} = require("./getAllStores")
 const {getByStore} = require("./getByStore")
 
 
+const { getImageSlider } = require("./getImageSlider");
+
+
+const {validateTOTP} = require("./validateTOTP")
 
 
 module.exports = {
@@ -46,7 +51,9 @@ module.exports = {
   getUserById,
   validateUserWithGoogle,
   getReviewByUserId,
+  getByStore,
+  getAllStores,
+  getImageSlider,
   getPromos,
-  getAllStores, 
-  getByStore
+  validateTOTP
 }

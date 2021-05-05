@@ -3,10 +3,12 @@ import Maps from "./Maps";
 import NavBar from "../screens/navBar/NavBar";
 import SucursalCard from "./SucursalCard";
 import styled from "styled-components";
+import {motion} from 'framer-motion';
+import {pageAnimation} from '../PageAnimation'
 
 const Sucursales = () => {
   return (
-    <StyledStoresContainer>
+    <StyledStoresContainer variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
       <div id="navBackground" style={{ backgroundColor: "#5e3f71" }}>
         <NavBar color="white" />
       </div>
@@ -22,7 +24,7 @@ const Sucursales = () => {
   );
 };
 
-const StyledStoresContainer = styled.div`
+const StyledStoresContainer = styled(motion.div)`
   .both-container {
     display: flex;
   }
@@ -43,6 +45,7 @@ const StyledStoresContainer = styled.div`
     flex-direction: column-reverse;
     justify-content: left;
     align-items: flex-end;
+    justify-content: flex-end;
   }
 
   @media (max-width: 1200px) {

@@ -6,12 +6,17 @@ import styled from "styled-components";
 
 import { Redirect } from "react-router-dom";
 
-// Login/ out
 import Login from "./Login";
+
+import { useDispatch, useSelector } from "react-redux";
+
 import validateUser from "../../Apollo/queries/validateUser";
 import VALIDATE_CREDENTIALS from "../../Apollo/queries/validateCredentials";
 import { toast } from "react-toastify";
-import "../../Assets/toast.css";
+import '../../Assets/toast.css'; 
+import { saveDataProfile } from "../../actions/dataProfileActions";
+
+// import "./UserAccount.css";
 
 toast.configure();
 
@@ -22,12 +27,20 @@ const UserAcount = () => {
   const [
     functionValidate,{data: dataValidate },
   ] = useLazyQuery(VALIDATE_CREDENTIALS);
+
+  const dataUser = useSelector(state => state.dataProfileReducer)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
+
+
+  // Google login
+  const dispatch = useDispatch();
+
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       functionValidate({
@@ -37,38 +50,53 @@ const UserAcount = () => {
         },
       });
     }
+
     if (!loading && data) {
       if (data.validateUser.token) {
         // alert("logueado")
-        localStorage.setItem("token", data.validateUser.token);
-        localStorage.setItem("name", data.validateUser.name);
-        localStorage.setItem("email", data.validateUser.email);
-        localStorage.setItem("role", data.validateUser.role);
-        localStorage.setItem("id", data.validateUser.id);
+        // si está habilitada la athenticacion twoFA guardamoen en el reducer
+        if(data.validateUser.twoFA ){
+          // console.log('yaysyays', data.validateUser)
+          dispatch(saveDataProfile(data.validateUser))
+          toast(`Hello ${data.validateUser.name}, you must do 2FA`);
+        }
+        else{
+          localStorage.setItem('token', data.validateUser.token);
+          localStorage.setItem('name', data.validateUser.name);
+          localStorage.setItem('email', data.validateUser.email);
+          localStorage.setItem('role', data.validateUser.role);
+          localStorage.setItem('id', data.validateUser.id);
+          toast(`Welcome ${data.validateUser.name}`);
+          window.location.reload();
+        }
         // es necesario el reloaded para luego poder redirigir
-        toast(`Welcome ${data.validateUser.name}`);
-        window.location.reload();
-      } else {
-        toast(data.validateUser.detail);
+        // toast(`Hello ${data.validateUser.name}, you must do 2FA`);
+        // window.location.reload();
+      }else{
+        toast(data.validateUser.detail)
       }
-    }
-  }, [loading, data, dataValidate, functionValidate]);
-  let role = localStorage.getItem("role");
-  let token = localStorage.getItem("token");
-  if (role && token) {
+
+    
+  }},[loading, data, dataValidate, dispatch, functionValidate]);
+ 
+  let role = localStorage.getItem('role') ;
+  let token = localStorage.getItem('token');
+  // console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
+  if(role  && token && dataValidate){
+
     // la redireccion se debe cambiar seún el role del usuario
-    if (role === "admin" && dataValidate?.validateCredentials) {
-      //
-      return <Redirect to="/admin/orders" />;
-    } else if (role === "user" && dataValidate?.validateCredentials) {
-      //
-      return <Redirect to="/catalogue" />;
+    toast(`Welcome ${localStorage.getItem('name')}`);
+    if(role === 'admin' && dataValidate?.validateCredentials){
+      return <Redirect to='/admin/orders' />;
     }
-    // else {
-    //
-    //   // localStorage.clear();
-    //   return <Redirect to='/log-in' />;
-    // };
+    else if(role === 'user' && dataValidate?.validateCredentials) {
+      return <Redirect to='/catalogue' />;
+    }
+  }
+  
+  else if(dataUser.role && dataUser.token && dataUser.twoFA ){
+    toast(`Hello ${data?.validateUser.name}, you must do 2FA`);
+    return <Redirect to='/TFA' />
   }
   const handleLogin = async (form) => {
     login({ variables: { email: form.login, password: form.password } });

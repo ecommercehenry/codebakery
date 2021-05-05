@@ -1,4 +1,5 @@
 const {
+
     updateCategory, 
     modifyProduct, 
     addCategory, 
@@ -23,16 +24,20 @@ const {
     modifyReview,
     deleteUser,
     sendEmail,
+
+    sendNewsletter,
     resetPassword,
-    addStore,
-    modifyStore,
-    deleteStore, 
     modifyOrderStore, 
     addPromo,
     applyDiscount,
     resetDiscount,
-    deletePromo
-    
+    deletePromo,
+    addStore,
+    modifyStore,
+    deleteStore,
+    saveImageSlider,
+    deleteImageById,
+    generateTokenOTP,
 } = require("./mutationsResolver/")
 
 const {
@@ -56,7 +61,10 @@ const {
     validateUserWithGoogle,
     getReviewByUserId,
     getAllStores,
+    
+    getImageSlider,
     getByStore,
+    validateTOTP,
     getPromos
 } = require("./queriesResolvers/")
 
@@ -94,6 +102,12 @@ const root = {
     applyDiscount,
     resetDiscount,
     deletePromo,  
+    generateTokenOTP,
+
+    sendNewsletter,
+
+    saveImageSlider,
+    deleteImageById,
 
     //Queries    
     productById,
@@ -121,7 +135,12 @@ const root = {
     getReviewByUserId,
     getPromos,
     getAllStores,
-    getByStore
+  
+    getImageSlider,
+    getByStore,
+    getByStore,
+    validateTOTP
 }
 
-module.exports = root
+
+module.exports = root;

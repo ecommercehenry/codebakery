@@ -24,7 +24,7 @@ export default function TablaOrdenes({setPromo}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setPromo(false)
+    //setPromo(false)
     dispatch(saveOrders(ordersQ));
   }, [data, dispatch, ordersQ, setPromo]);
 
