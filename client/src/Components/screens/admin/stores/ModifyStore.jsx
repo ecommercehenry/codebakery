@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import MODIFY_STORE from "../../../../Apollo/mutations/modifyStore";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { toast } from "react-toastify";
 import "../../../../Assets/toast.css";
