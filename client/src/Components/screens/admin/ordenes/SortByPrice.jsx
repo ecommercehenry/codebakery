@@ -71,7 +71,7 @@ export default function SortByPrice() {
         variant="contained"
         className="addProduct"
         onClick={handleClick}
-        style={{height: "4.5vh"}}
+        style={{height: "2rem"}}
       >
         Sort By Price
       </Button>

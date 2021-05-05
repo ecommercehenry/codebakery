@@ -144,7 +144,7 @@ const StyledNavBar = styled.div`
       ? '#D5D5D5' 
       : '#222222'};
       border: none;
-      height: 4.5vh;
+      height: 2rem;
       border: 1px solid transparent;
       z-index: 2;
       font-size: 1em;
@@ -185,6 +185,7 @@ const StyledNavBar = styled.div`
     align-items: center;
     justify-content: center;
     color: rgba(0, 0, 0, 0.726);
+    height: 2rem;
   }
   .add-category:hover {
     color: black;
@@ -192,7 +193,7 @@ const StyledNavBar = styled.div`
   }
   .purple-btn {
     display: flex;
-    height: 4.5vh;
+    height: 2rem;
     width: fit-content !important;
     border-radius: 40px;
     border: none;

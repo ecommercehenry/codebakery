@@ -82,9 +82,6 @@ const AdminPanel = () => {
             <p></p>
           )}
         </div>
-        <Route path="/admin/orders">
-          <Pagination />
-        </Route>
         <Route path="/admin/add-product">
           <AddProductForm />
         </Route>

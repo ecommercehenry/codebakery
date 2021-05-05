@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const SearchBar = () => {
     return (
         <StyledSearchBar>
-            <HiOutlineSearch size="1.5rem" color="#5E3F71"/>
+            <HiOutlineSearch size="1.3em" color="#5E3F71"/>
             <input type="text" placeholder="Search"/>
             <div className="vertical-line"></div>
                 <select name="" id="">
@@ -19,7 +19,7 @@ const SearchBar = () => {
 
 const StyledSearchBar = styled.div`
     background: white;
-    height: 4.6vh;
+    height: 2rem;
     width: fit-content;
     padding: 0 0.5rem;
     display:flex;
@@ -37,23 +37,23 @@ const StyledSearchBar = styled.div`
     }
     input{
         width:15vw;
-        height:4.5vh;
+        height: 2rem;
         border:none;
         font-size:1rem;
         background: none;
-        padding-left: 0.5%;
+        padding-left: 2%;
     }
     input:focus{
         outline: none;
     }
     .vertical-line{
         border-left: 1px solid grey;
-        height: 60%;
+        height: 1.5rem;
         margin-right: 2%;
     }
     select{
         width:fit-content;
-        height:90%;
+        height:1.8rem;
         font-size:1.1rem;
         border-radius:40px;
         padding: 0 0.5rem;

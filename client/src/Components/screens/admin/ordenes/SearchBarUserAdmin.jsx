@@ -1,8 +1,8 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchByName } from "../../../../actions/index";
-import styled from 'styled-components';
-import { HiSearch } from "react-icons/hi";
+import styled from "styled-components";
+import { HiOutlineSearch} from "react-icons/hi";
 
 const SearchBarUserAdmin = () => {
   const [input, setInput] = useState("");
@@ -28,19 +28,23 @@ const SearchBarUserAdmin = () => {
     // <div
     //   style={{ width: 100 + "vw", display: "flex", justifyContent: "center", marginTop: "2rem", marginRight: "8rem" }}
     // >
-      <StyledSearchBar>
-      <HiSearch size="1.5em" color="gray" style={{position: "absolute", left: "15px"}}/>
-        <form id="search-form" onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            placeholder="Search by name"
-            value={input}
-            onChange={(e) => handleChange(e)}
-            required
-          />
-          {/* <input type="submit" value="SEARCH" /> */}
-        </form>
-      </StyledSearchBar>
+    <StyledSearchBar>
+      <HiOutlineSearch
+        size="1.3em"
+        color="#5E3F71"
+        /* style={{ position: "absolute", left: "15px" }} */
+      />
+      <form id="search-form" onSubmit={(e) => handleSubmit(e)}>
+        <input
+          type="text"
+          placeholder="Search by name"
+          value={input}
+          onChange={(e) => handleChange(e)}
+          required
+        />
+        {/* <input type="submit" value="SEARCH" /> */}
+      </form>
+    </StyledSearchBar>
     // </div>
   );
 };
@@ -48,12 +52,12 @@ const SearchBarUserAdmin = () => {
 export default SearchBarUserAdmin;
 
 const StyledSearchBar = styled.div`
-  background: #e9e8e8;
+  background: white;
   display: flex;
   position: relative;
   z-index: 2;
   margin-left: 4rem;
-  height: 3rem;
+  height: 2rem;
   width: 30rem;
   padding: 0 0.5rem;
   display: flex;
@@ -61,21 +65,7 @@ const StyledSearchBar = styled.div`
   align-items: center;
   border: 1.3px solid #949494;
   border-radius: 20px;
-  /* button {
-    width: 10%;
-    height: 2rem;
-    border: none;
-    background: none;
-  } */
-  /* select {
-    width: fit-content;
-    height: 2rem;
-    font-size: 1.1rem;
-    border-radius: 13px;
-    padding: 0 0.5rem;
-    background: #cfcfcf;
-    border: none;
-  } */
+
   #search-form {
     /* display: flex; */
     width: 100%;
@@ -86,11 +76,11 @@ const StyledSearchBar = styled.div`
       width: 70%;
       height: 2rem;
       border: none;
-      font-size: 1.3rem;
+      font-size: 1rem;
       background: none;
       text-align: left;
       outline: none;
-      margin-left: 2.1rem;
+      padding-left: 2%;
     }
   }
 `;
