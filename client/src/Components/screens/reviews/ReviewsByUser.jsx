@@ -6,19 +6,23 @@ import styled from "styled-components";
 import SettingsIcon from "@material-ui/icons/Settings";
 import DeleteIcon from "@material-ui/icons/Delete";
 import  DELETE_REVIEW  from "../../../Apollo/mutations/deleteReview"; 
+import { useParams } from "react-router-dom";
 
 
-const ReviewByUser = ({ productId, id, title, description, stars}) => {
-
+const ReviewByUser = ({ productId, id, title, description, stars, refetch}) => {
+  let index = useParams(); 
+ 
   const [deleteReview] = useMutation(DELETE_REVIEW);
 
-  const deleteHandler = async (e, id) => {
-    e.preventDefault()
-    await deleteReview({
+  const deleteHandler = async (e) => {
+  e.preventDefault()
+   let result =  await deleteReview({
       variables: {
-        id: parseInt(id),
+        productId: productId,
+        userId: parseInt(index.id)
       },
     });
+    refetch()
   }
 
   return (

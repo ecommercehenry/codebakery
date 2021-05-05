@@ -18,12 +18,18 @@ const Promos = ({promo,setPromo}) => {
 
 const StyledPromos = styled.div`
     //padding-top:6rem;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    //background:red;
-    width:100vw;
-    height:fit-content;
+    display: flex;
+position: relative;
+background: white;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+height: fit-content;
+width: 100%;
+padding: 2rem;
+padding-top: 0;
+border-radius: 20px;
+box-shadow: 0 1px 2px 0 rgb(0 0 0 / 30%);
 `
 
 export default Promos

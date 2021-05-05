@@ -26,7 +26,6 @@ const ProductReview = ({ id }) => {
         data?.getAllReviewsFromAProduct.map((e, i) => (
           <div>
             <Box component="fieldset" mb={3} borderColor="transparent">
-             <Rating name="read-only" value={e.stars} readOnly /> 
               <Typography component="legend" key={i}>
                 {e.title}
               </Typography>

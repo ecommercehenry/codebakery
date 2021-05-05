@@ -21,7 +21,7 @@ const NavBar = ({ color }) => {
     catalogue: "inactive",
     cart: "inactive",
     about_us: "inactive",
-    stores: "inactive"
+    stores: "inactive",
   };
 
   if (actualPath.startsWith("/catalogue")) isActive["catalogue"] = "active";
@@ -30,9 +30,9 @@ const NavBar = ({ color }) => {
   if (actualPath.startsWith("/stores")) isActive["stores"] = "active";
 
   const tagCat = `${navTag} ${isActive["catalogue"]}`;
-  const tagCart  = `${navTag} ${isActive["cart"]}`;
+  const tagCart = `${navTag} ${isActive["cart"]}`;
   const tagAbout = `${navTag} ${isActive["about-us"]}`;
-  const tagStores = `${navTag} ${isActive["stores"]}`
+  const tagStores = `${navTag} ${isActive["stores"]}`;
 
   let logged = localStorage.token ? true : false;
 
@@ -67,25 +67,31 @@ const NavBar = ({ color }) => {
   useEffect(() => {
     if(promos && promos['data'] && promos['data']['getPromos']){
       if(promos['data']['getPromos'].length === 0){
-        resetDiscount();
       }else{
         promos['data']['getPromos'].forEach(elem=>{
-          if(elem.day.toString()=== today.toString()){
-            resetDiscount();
+          if(elem.day===today){
             applyDiscount({variables:
               {
                 discount:elem.discount,
                 category:elem.category,
               }
-            })
+            });
           }
+          // else{
+          //   applyDiscount({variables:
+          //     {
+          //       discount:0,
+          //       category:elem.category,
+          //     }
+          //   });
+          // }
         })
       }
     }
   },[promos, applyDiscount, resetDiscount, today])
 
   return (
-    <StyledNavBar className="navbar d-flex align-items-center mx-5">
+    <StyledNavBar className="navbar d-flex align-items-center">
       <div className="left-tags d-flex justify-content-between align-items-center me-auto">
         <Link to="/" className={brandTag} style={{ fontWeight: "bold" }}>
           <h5 className="mb-0 text-center display-linebreak">
@@ -93,7 +99,10 @@ const NavBar = ({ color }) => {
           </h5>
         </Link>
         {role === "admin" ? (
-          <Link to="/admin/orders" className={`text-decoration-none ${textColor}`}>
+          <Link
+            to="/admin/orders"
+            className={`text-decoration-none ${textColor}`}
+          >
             <div>Admin Panel</div>
           </Link>
         ) : (
@@ -108,15 +117,8 @@ const NavBar = ({ color }) => {
             Catalogue
           </Link>
         </div>
-        <div
-          style={{ padding: "0.2rem 0" }}
-          className={isActive["stores"]}
-        >
-          <Link
-            id="stores"
-            to="/stores"
-            className={tagStores}
-          >
+        <div style={{ padding: "0.2rem 0" }} className={isActive["stores"]}>
+          <Link id="stores" to="/stores" className={tagStores}>
             Stores
           </Link>
         </div>
@@ -175,15 +177,16 @@ const NavBar = ({ color }) => {
 };
 
 const StyledNavBar = styled.nav`
-  height: 5rem;
-  background-color: #ffffff00;
-  padding-right: 1%;
+  background-color: #5e3f71;
+  padding: 0 5rem;
   z-index: 2;
   font-weight: bold;
 
   .left-tags {
     width: 35rem;
     font-size: 0.9rem;
+    padding-bottom: 1rem;
+    padding-top: 0.5rem;
   }
 
   .right-buttons {
@@ -247,8 +250,8 @@ const StyledNavBar = styled.nav`
     border-bottom: 2px solid transparent;
   }
   .active {
-    color: white!important;
-    font-weight: bold!important;
+    color: white !important;
+    font-weight: bold !important;
     border-bottom: 2px solid white;
 
     a {

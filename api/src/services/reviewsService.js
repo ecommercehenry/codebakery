@@ -1,7 +1,7 @@
 const { Review , Product, Users} = require("../db.js")
 
 async function deleteReview(productId, userId) {
-  try {
+   try {
     const reviewToDelete = await Review.findOne({
       where: {
         productId: productId,
@@ -14,6 +14,7 @@ async function deleteReview(productId, userId) {
     return { __typename: "error", name: "error", detail: `Review not found: ${error.message}` }
   }
 }
+
 
 async function getAllReviewsFromAProduct(productId) {
   try {

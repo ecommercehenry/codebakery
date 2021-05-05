@@ -6,7 +6,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 const OrderByUser = ({ id, name, price, quantity }) => {
     return (
-
+     
         <StyledOrd>
             <div key={id} className="element-container">
                 <div className="info-container">
@@ -45,6 +45,8 @@ const OrderByUser = ({ id, name, price, quantity }) => {
                 </div>
             </div>
         </StyledOrd>
+      
+
     )
 }
 

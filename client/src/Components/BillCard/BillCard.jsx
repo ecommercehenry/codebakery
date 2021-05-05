@@ -18,7 +18,13 @@ const BillCard = () => {
     (element) => element.id === Number(id)
   );
 
-  let { status } = useSelector((state) => state.theme);
+  /* 
+
+  const { lineal_order } = result[0];
+  const finalResult = result[0]?.lineal_order?.filter(
+    (element) => element.id === Number(id)
+  ); */
+  let {status} = useSelector((state)=>state.theme);
   const date = result[0]?.creation;
   const userId = result[0]?.userId;
 
@@ -39,6 +45,7 @@ const BillCard = () => {
     ?.map((r) => r.price * r.quantity)
     .reduce((a, b) => a + b, 0)
     .toFixed(2);
+
 
   const subTotalPor = ((subTotal * 21) / 100).toFixed(2);
 
@@ -115,28 +122,28 @@ const BillCard = () => {
         </div>
 
         <div className="info info-total">
-          <h3 className="info-parrafo">
+          {/* <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
             Subtotal:{" "}
             <p style={{ paddingTop: "1rem" }}>
               {subTotal ? `$ ${subTotal}` : 0}
             </p>
-          </h3>
-          <h3 className="info-parrafo">
+          </h3> */}
+          {/* <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
             IVA 12%:{" "}
             <p style={{ paddingTop: "1rem" }}>
               {" "}
               {subTotalPor ? `$ ${subTotalPor}` : 0}
             </p>
-          </h3>
-          <h3 className="info-parrafo">
+          </h3> */}
+          {/* <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
             Costo de Envio:{" "}
             <p style={{ paddingTop: "1rem" }}>
               {shipping ? `$ ${shipping}` : 0}
             </p>
-          </h3>
-          <h3 className="info-parrafo">
+          </h3> */}
+          <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
             Total:{" "}
-            <p style={{ paddingTop: "1rem" }}>{total ? `$ ${total}` : 0}</p>
+            <p style={{ paddingTop: "1rem" }}>{subTotal ? `$ ${subTotal}` : 0}</p>
           </h3>
         </div>
         <ButtonStyled>

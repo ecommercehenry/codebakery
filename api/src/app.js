@@ -23,8 +23,9 @@ const { getCurrentDomainApi, getCurrentDomainFront } = require("./config/current
 const product = require("./graphql/roots/queriesResolvers/product");
 server.name = 'API';
 
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
+// ME LLEVA LA CACHETADA....
+server.use(express.urlencoded({ extended: true, limit: "50mb" }));
+server.use(express.json({ limit: "50mb", extended: true }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(cors());
@@ -37,7 +38,7 @@ server.use("/create_preference", (req, res) => {
   lineal_order.map((item) => {
     let newitem = {
       title: item.name,
-      unit_price: parseInt(item.price),
+      unit_price: parseInt(Math.ceil(item.price-(item.price*item.discount)/100)),
       quantity: parseInt(item.quantity),
       description: item.name, /// esto
       picture_url: item.image, /// esto
@@ -120,7 +121,10 @@ server.use(
   graphqlHTTP((_req) => {
     return {
       schema: schema,
-      extensions({ result, variables, document }) {},
+      extensions({ result, variables, document }) {
+        console.log(variables)
+        console.log(result)
+      },
       rootValue: root,
       graphiql: true,
     };
@@ -139,8 +143,6 @@ server.use("/stripe/checkout", async (req, res) => {
     });
     let order = await Order.findByPk(parseInt(req.body.products.id));
     let ordenCompleta = await getOrderById(order.id);
-    //console.log(payment.status)
-    //console.log(order)
     if (payment.status === "succeeded") {
       order.status = "paid";
       order.placeStatus = "ticket";

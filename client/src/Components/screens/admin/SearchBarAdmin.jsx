@@ -39,7 +39,7 @@ const SearchBarAdmin = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <HiOutlineSearch
           onClick={handleSubmit(onSubmit)}
-          size="1.5rem"
+          size="1.3em"
           color="#5E3F71"
         />
         <input
@@ -63,7 +63,7 @@ const SearchBarAdmin = () => {
 
 const StyledSearchBar = styled.div`
   background: white;
-  height: 4.6vh;
+  height: 2rem;
   width: 30rem;
   padding: 0 0.5rem;
   display:flex;
@@ -82,7 +82,7 @@ const StyledSearchBar = styled.div`
   }
   input::placeholder {
     color: black;
-    font-size: 20px;
+    font-size: 1rem;
     opacity: 0.5;
   }
   input {
@@ -90,7 +90,7 @@ const StyledSearchBar = styled.div`
     width: 70%;
     height: 2rem;
     border: none;
-    font-size: 1.3rem;
+    font-size: 1rem;
     background: none;
     text-align: left;
     padding-left: 2%;
@@ -98,7 +98,7 @@ const StyledSearchBar = styled.div`
   select {
     display: inline-block;
     width: fit-content;
-    height: 80%;
+    height: 1.8rem;
     font-size: 1.1rem;
     border-radius: 40px;
     padding: 0 0.5rem;
@@ -118,7 +118,7 @@ const StyledSearchBar = styled.div`
   }
   .vertical-line{
     border-left: 1px solid grey;
-    height: 60%;
+    height: 1.5rem;
     margin-right: 2%;
 }
 `;
