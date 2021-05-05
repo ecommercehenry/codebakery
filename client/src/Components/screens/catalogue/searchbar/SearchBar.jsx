@@ -83,7 +83,10 @@ const StyledSearchBar = styled.div`
       font-size:1.3rem;
       background: none;
       text-align: left;
+      outline: none;
+
   }
+  
 
   }
 `;
