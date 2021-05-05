@@ -81,11 +81,9 @@ const UserAcount = () => {
   let role = localStorage.getItem('role') ;
   let token = localStorage.getItem('token');
   // console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
-  console.log(role, token, dataValidate, 'tasttatas')
-  console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
   if(role  && token && dataValidate){
     // la redireccion se debe cambiar seún el role del usuario
-    toast(`Welcome ${data.validateUser.name}`);
+    toast(`Welcome ${localStorage.getItem('name')}`);
     if(role === 'admin' && dataValidate?.validateCredentials){
       return <Redirect to='/admin/orders' />;
     }
@@ -95,7 +93,7 @@ const UserAcount = () => {
   }
   
   else if(dataUser.role && dataUser.token && dataUser.twoFA ){
-    toast(`Hello ${data.validateUser.name}, you must do 2FA`);
+    toast(`Hello ${data?.validateUser.name}, you must do 2FA`);
     return <Redirect to='/TFA' />
   }
   const handleLogin = async (form) => {
