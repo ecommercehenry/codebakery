@@ -21,8 +21,7 @@ const { getReviewByUserId } = require("./getReviewByUserId");
 const { getPromos } = require("./getPromos");
 const {getAllStores} = require("./getAllStores")
 const {getByStore} = require("./getByStore")
-
-
+const {validateTOTP} = require("./validateTOTP")
 
 
 module.exports = {
@@ -48,5 +47,6 @@ module.exports = {
   getReviewByUserId,
   getPromos,
   getAllStores, 
-  getByStore
+  getByStore,
+  validateTOTP
 }

@@ -38,7 +38,7 @@ const ProductOnCart = ({
       refetch();
     }
   };
-  useEffect(() => {},[deleteHandler])
+  useEffect(() => {},[])
   return (
     <StyledProductOnCart>
       <article className="item">
@@ -61,7 +61,7 @@ const ProductOnCart = ({
         </div>
         <div className="pricee">
           {
-            discount != 0 ? 
+            discount !== 0 ? 
             (
               <div className="subtotal">
                 ${(newQuantity * (price-((price*discount)/100))).toFixed(2)}
@@ -74,7 +74,7 @@ const ProductOnCart = ({
           
           <div className="unitaryy">Precio:${price}</div>
           {
-            discount != 0 ? <div className="unitaryy">Descuento:{discount}%</div> : ""
+            discount !== 0 ? <div className="unitaryy">Descuento:{discount}%</div> : ""
           }
         </div>
 

@@ -101,7 +101,8 @@ async function modifyUser(
   role,
   address,
   dni,
-  phoneNumber
+  phoneNumber,
+  twoFA
 ) {
   let obj = {};
   if (password && newPassword) {
@@ -137,7 +138,8 @@ async function modifyUser(
   if (address) obj.address = address;
   if (dni) obj.dni = dni;
   if (phoneNumber) obj.phoneNumber = phoneNumber;
-
+  obj.twoFA = twoFA;
+  console.log("userService", id, twoFA)
   try {
     if (id) {
       let user = await Users.findOne({ where: { id } });
@@ -146,7 +148,8 @@ async function modifyUser(
       });
       return { __typename: "user", ...newUser.dataValues };
     }
-    if (email && !id) {
+
+    else if (email && !id) {
       let user = await Users.findOne({ where: { email } });
       let newUser = await user.update(obj, {
         attributes: { exclude: ["password", "salt"] },
@@ -187,6 +190,7 @@ async function loginUserWithGoogle(email, tokenId) {
       email: user.email,
       token: token,
       role: user.role,
+      twoFA: user.twoFA
     };
   }
 }
@@ -260,6 +264,7 @@ async function loginUser(email, password) {
         email: user.email,
         token: token,
         role: user.role,
+        twoFA: user.twoFA
       };
     } else {
       return {

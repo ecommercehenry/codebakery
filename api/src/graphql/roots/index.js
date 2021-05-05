@@ -31,8 +31,8 @@ const {
     addPromo,
     applyDiscount,
     resetDiscount,
-    deletePromo
-    
+    deletePromo,
+    generateTokenOTP,
 } = require("./mutationsResolver/")
 
 const {
@@ -57,6 +57,7 @@ const {
     getReviewByUserId,
     getAllStores,
     getByStore,
+    validateTOTP,
     getPromos
 } = require("./queriesResolvers/")
 
@@ -94,6 +95,7 @@ const root = {
     applyDiscount,
     resetDiscount,
     deletePromo,  
+    generateTokenOTP,
 
     //Queries    
     productById,
@@ -121,7 +123,8 @@ const root = {
     getReviewByUserId,
     getPromos,
     getAllStores,
-    getByStore
+    getByStore,
+    validateTOTP
 }
 
 module.exports = root

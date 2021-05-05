@@ -11,6 +11,7 @@ module.exports = `
         reviews: [review]
         token: String,
         order: order,
+        twoFA: Boolean
     }
 
 `;
