@@ -2,23 +2,102 @@ import React from "react";
 import Maps from "./Maps";
 import NavBar from "../screens/navBar/NavBar";
 import SucursalCard from "./SucursalCard";
+import styled from "styled-components";
 
 const Sucursales = () => {
   return (
-    <div>
-    <div style={{backgroundColor: '#5e3f71'}} >
-      <div id="navBackground">
+    <StyledStoresContainer>
+      <div id="navBackground" style={{ backgroundColor: "#5e3f71" }}>
         <NavBar color="white" />
       </div>
-    </div>
-      <div className="maps" style={{ width: "50%", heigh: "50%", display:'flex', msFlexDirection:'row', alignItems:'left', justifyContent:'left' }}>
-      <Maps />
+      <div className="both-container" style={{ display: "flex" }}>
+        <div className="map-container">
+          <Maps />
+        </div>
+        <div className="card-container">
+          <SucursalCard />
+        </div>
       </div>
-    <div style={{display: 'flex', flexDirection: 'column-reverse', justifyContent: 'left', alignItems:'flex-end'}}>
-    <SucursalCard/>
-  </div>
-  </div>
+    </StyledStoresContainer>
   );
 };
+
+const StyledStoresContainer = styled.div`
+  .both-container {
+    display: flex;
+  }
+
+  .map-container {
+    display: flex;
+    width: 80vw;
+    flex-direction: row;
+    align-items: left;
+    justify-content: left;
+  }
+
+  .card-container {
+    display: flex;
+    width: 23vw;
+    height: 80vh;
+    overflow-y: scroll;
+    flex-direction: column-reverse;
+    justify-content: left;
+    align-items: flex-end;
+  }
+
+  @media (max-width: 1200px) {
+    .map-container {
+      width: 75vw;
+    }
+
+    .card-container {
+      width: 29vw;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .map-container {
+      width: 73vw;
+    }
+
+    .card-container {
+      width: 35vw;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .both-container {
+      flex-direction: column;
+    }
+
+    .map-container {
+      width: 100vw;
+      height: 60vh;
+    }
+
+    .card-container {
+      width: 100vw;
+      height: fit-content;
+      padding: 0 0.5em;
+    }
+  }
+
+  @media (max-width: 503px) {
+    .both-container {
+      flex-direction: column;
+    }
+
+    .map-container {
+      width: 100vw;
+      height: 70vh;
+    }
+
+    .card-container {
+      width: 100vw;
+      height: fit-content;
+      padding: 0 0.5em;
+    }
+  }
+`;
 
 export default Sucursales;
