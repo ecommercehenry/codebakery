@@ -93,14 +93,14 @@ const StyledMapContainer = styled.div`
     }
   }
 
-  @media (max-width: 503px) {
+  /* @media (max-width: 503px) {
     margin:0;
     .map {
       margin: 1em auto;
       width: 100vw !important;
       height: 65vh !important;
     }
-  }
+  } */
 `;
 
 export default GoogleApiWrapper({

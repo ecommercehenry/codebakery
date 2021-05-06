@@ -16,7 +16,7 @@ const TotalToOrder = () => {
     if(itemsFromCart!==undefined){itemsFromCart.forEach(elem => {total = total + (elem.price)*(elem.quantity)} )}
     
     const clickHandler = () => {
-       toast('Debe estar logueado para comprar, doble click en "comprar" para loguearse',{
+       toast('You must be logged in to buy, double click on "buy" to login',{
         toastId: customId
       }) 
     }
@@ -53,7 +53,6 @@ const StyledTotal = styled.div`
     z-index:1;
     margin-top: 2rem;
     .buttonContainer{
-        //background:violet;
         margin-top: 1rem;
         width:87%;
         display:flex;

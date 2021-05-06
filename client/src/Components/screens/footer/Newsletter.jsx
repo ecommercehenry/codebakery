@@ -11,6 +11,7 @@ export default function Newsletter() {
   const [newSubs, setNewSubs] = useState(false);
   const [suscribe] = useMutation(SUBSCRIBE_USER, {});
 
+
   const { data } = useQuery(getUserById, { 
     variables: { id: parseInt(userId) },
     // fetchPolicy: "no-cache",
@@ -20,7 +21,6 @@ export default function Newsletter() {
   const newsletter = data?.getUserById.newsletter
   console.log(newsletter)
  
-
 
   function handleSubmit(e) {
     e.preventDefault();    
@@ -39,7 +39,9 @@ export default function Newsletter() {
           <h2 > Suscribe to our Newsletter</h2>
           <span className="ocultar">Join our suscribers list to get the latest news, updates and special offers delivered directly in your inbox </span>
 
+
           {newSubs ? (
+
            <h4> Thanks for subscribe!! </h4>
           ) : (
             <button type="submit" className="suscribe-btn">
@@ -91,7 +93,9 @@ h2{
   font-weight: 600;
 }
 
+
 .suscribe-btn :hover {
+
   background-color: white;
   color:#755588;
 
@@ -115,18 +119,37 @@ h2{
  
 }
 
+
 .btn :hover {
+
   
   background-color: white;
   color:#755588;
  
 }
 
-@media (min-width: 320 px) and (max-width: 480px ) {
+
+@media (max-width: 500px)  {
   .ocultar {
-    display: none;
+    display: none!important; 
+  }
+  h2{
+    font-size: 1em!important;
+  }
+  .suscribe-btn {
+    margin:10px;
+    color:white;
+    width:10rem;
+    padding: 10px 10px;
+    border: solid 2px ;
+    border-radius: 40px;
+    border-color: white;
+    background-color: Transparent; /* Green */;
+    transition: 0.3s;
   }
 }
+
+
 
   
 `;

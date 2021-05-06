@@ -70,6 +70,7 @@ export default function NewsletterAdmin(){
                         name="image-product" 
                         id="image-product"
                         onChange={imageHandler}
+                        
                     />
                 </div>
             </div>
@@ -96,12 +97,16 @@ const StyledNewsletter = styled.form`
 width:60%;
 //height: 30vh;
 
+
 border-radius:65px;
 padding: 3rem 4rem;
 border:2px solid #f3dff3;
 position: relative;
 background:white;
-border-color:#755588;
+margin-bottom: 2rem;
+box-shadow: 0 1px 2px 0 rgb(0 0 0 / 30%);
+clear: both;
+overflow: hidden;
 
 input[type=text], select, textarea {
   width: 100%;
@@ -135,7 +140,8 @@ label {
       width:40%;
       display:flex;
       justify-content:flex-end;
-      margin-right:15px;
+      margin-right:10px;
+      margin-left: 10px;
       align-items:center;
       input{
           width:100%;
@@ -167,12 +173,10 @@ label {
   justify-content:center;
   align-items:center;
   color:#755588;
-  
-
 
 }
 .submitt{
- // width: 20%;
+  
 
   height:auto;
   display:flex;

@@ -35,7 +35,7 @@ const LeftPanel = () => {
         <section style={{ width: "100%" }}>
           <div className="userInfo">
             <div className="userAvatar"></div>
-            <div className="userName">User Name</div>
+            <div className="userName">Admin</div>
           </div>
           <div className="tabs">
             <Link
@@ -221,7 +221,7 @@ const StyledPanel = styled.div`
         border-radius: 50%;
         width: 100%;
         padding-bottom: 100%;
-        background: white;
+        background: transparent;
         content: "";
         display: inline-block;
       }

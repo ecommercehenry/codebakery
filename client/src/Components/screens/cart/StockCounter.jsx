@@ -99,6 +99,26 @@ const StyledCounter = styled.div`
     border-left: none;
     border-right: none;
   }
+
+  @media (max-width: 768px) {
+    .state{
+      height: 2em
+    }
+
+    .leftB{
+      height: 2em
+    }
+
+    .rightB {
+      height: 2em
+    }
+  }
+
+  @media(max-width: 350px){
+    .state{
+      width: 1.5rem;
+    }
+  }
 `;
 
 export default StockCounter;
