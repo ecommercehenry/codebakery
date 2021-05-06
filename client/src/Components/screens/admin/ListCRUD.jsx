@@ -11,11 +11,11 @@ import { withStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 function ListCRUD({setPromo}) {
-  let { status } = useSelector((state) => state.theme);
-  const { data, loading } = useQuery(allProducts);
+let { status } = useSelector((state) => state.theme);
+  const { data, loading, refetch } = useQuery(allProducts,{
+  });
   const dispatch = useDispatch();
   useEffect(() => {
-    //setPromo(false)
     if (!loading) {
       dispatch(saveProducts(data.product));
       refetch()
@@ -27,23 +27,23 @@ function ListCRUD({setPromo}) {
   const [rows, setRows] = useState([0, rowsPerPage - 1])
   
   const totalPages = data?.product.length
-  const handlePageChange = async (event, newPage) => {
+  const handlePageChange = async ( newPage) => {
     if(newPage === 0){
-      await setRows([0, rowsPerPage])
+      setRows([0, rowsPerPage])
     } else {
       let newFinalRow = newPage * rowsPerPage
-      await setRows([newFinalRow, newFinalRow + (rowsPerPage)])
+      setRows([newFinalRow, newFinalRow + (rowsPerPage)])
     }
   
-    await setPage(newPage)
+    setPage(newPage)
   }
 
-  const handleChangeRowsPerPage = async (event) => {
-    await setRowsPerPage(parseInt(event.target.value, 10));
+  const handleChangeRowsPerPage = (event) => {
+     setRowsPerPage(parseInt(event.target.value, 10));
   };
 
   useEffect(() => {
-    (async() => await setRows([0, rowsPerPage - 1]))()
+    (() => setRows([0, rowsPerPage - 1]))()
     setPage(0)
   }, [rowsPerPage])
 
