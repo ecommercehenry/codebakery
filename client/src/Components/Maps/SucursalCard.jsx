@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   root: {
     margin: "10px",
     width: "100%",
-    backgroundColor: "#5F3F71",
+    backgroundColor: "#5e3f71",
     height: "7rem",
     padding: 0,
     color: "white"

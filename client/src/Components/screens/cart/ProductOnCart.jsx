@@ -76,7 +76,7 @@ const ProductOnCart = ({
             </div>
           }
           
-          <div className="unitaryy" >Precio:${price}</div>
+          <div className="unitaryy" >Precio: ${price}</div>
           {
             discount !== 0 ? <div className="unitaryy">Descuento:{discount}%</div> : ""
           }

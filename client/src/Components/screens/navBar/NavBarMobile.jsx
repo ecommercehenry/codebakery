@@ -10,6 +10,7 @@ import ThemeSwitch from "./ThemeSwitch";
 import { HiOutlineHand, HiOutlineInformationCircle, HiOutlineLogin, HiOutlineLogout, HiOutlineMap, HiOutlineMenu, HiOutlineShoppingBag, HiOutlineX } from "react-icons/hi";
 import { useState } from "react";
 import logo from './Logo.png'
+import logoBlack from './LogoBlack.png'
 import $ from 'jquery'
 
 const NavBarMobile = ({ color }) => {
@@ -99,29 +100,32 @@ const [showMenu, setShowMenu] = useState(false)
     $(".menu-drop-container").hide()
   }, [])
 
+  const path = window.location.pathname;
+  const landing = path === '/';
+
   return (
-    <StyledMobileNav white={color} showMenu={showMenu}>
+    <StyledMobileNav white={color} showMenu={showMenu} landing={landing}>
       <div className="top-bar">
         <div id="left-icon">
           {showMenu ?
             <button className="icon-btn" onClick={() => handleShowMenu(false)}>
             <HiOutlineX
               size="2em"
-              color="white"
+              color={landing ? "black" : "white"}
             />
             </button>
           :
           <button className="icon-btn" onClick={() => handleShowMenu(true)}>
           <HiOutlineMenu
             size="2em"
-            color="white"
+            color={landing ? "black" : "white"}
           />
           </button>
           }
         </div>
         <div id="logo">
           <Link to="/" className={""} style={{ fontWeight: "bold" }}>
-            <img src={logo} style={{height:"2em", width: "auto"}}/>
+            <img src={landing ? logoBlack : logo} style={{height:"2em", width: "auto"}}/>
           </Link>
         </div>
         {role === "admin" ? (
@@ -134,7 +138,7 @@ const [showMenu, setShowMenu] = useState(false)
         ) : (
           <div className="cart-logo">
             <Link id="Cart" to="/cart" className={""}>
-              <CountCart color={"white"} />
+              <CountCart color={landing ? "black" : "white"} />
             </Link>
           </div>
         )}
@@ -223,6 +227,13 @@ const [showMenu, setShowMenu] = useState(false)
 };
 
 const StyledMobileNav = styled.div`
+   @media(min-width: 851px){
+    display: none;
+  }
+
+  z-index: 4;
+  position: ${({landing}) => landing ? "absolute" : "static"};
+
   .top-bar {
     display: flex;
     justify-content: space-between;
@@ -230,7 +241,7 @@ const StyledMobileNav = styled.div`
     padding: 0 1em;
     height: 3.5rem;
     width: 100vw;
-    background: ${({ white }) => (white ? "#5e3f71" : "transparent")};
+    background: ${({ landing }) => landing ? "transparent" :  "#5e3f71"};
 
     .icon-btn{
       background: none;
@@ -240,7 +251,7 @@ const StyledMobileNav = styled.div`
 
   .menu-drop-container {
     position: absolute;
-    background: white;
+    background: white!important;
     display: block;
     border-bottom: 1px solid #ddd;
     padding-bottom: 2em;

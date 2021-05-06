@@ -14,7 +14,7 @@ const Cart = () => {
 
   return (
     <StyledCart light={status}>
-        {/* <NavBar color="white"/> */}
+        <NavBar color="white"/>
         <NavBarMobile color="white"/>
       <div id="cartBackground" light={status}>
         <div id="cartContainer" light={status}>

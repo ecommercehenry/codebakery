@@ -8,10 +8,12 @@ import {pageAnimation} from '../PageAnimation'
 import NavBarMobile from "../screens/navBar/NavBarMobile";
 
 const Sucursales = () => {
+  
+
   return (
     <StyledStoresContainer variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
-      <div id="navBackground">{/* 
-        <NavBar color="white" /> */}
+      <div id="navBackground">
+        <NavBar color="white" />
         <NavBarMobile color="white"/>
       </div>
       <div className="both-container" style={{ display: "flex" }}>
@@ -27,6 +29,7 @@ const Sucursales = () => {
 };
 
 const StyledStoresContainer = styled(motion.div)`
+
   .both-container {
     display: flex;
   }

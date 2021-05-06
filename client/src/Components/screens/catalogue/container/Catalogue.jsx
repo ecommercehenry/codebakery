@@ -79,7 +79,7 @@ const Catalogue = () => {
   }, [queryData, itemsToCart, addProductToOrder, createOrder, dispatch, logged, userId, orderId]);
   return (
     <StyledCatalogue variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
-      {/* <NavBar color="white" className="desktop-navbar"/> */}
+      <NavBar color="white" className="desktop-navbar"/>
       <NavBarMobile color="white"/>
       <Hero />
       <Products orderId={orderId} refetchCatalogue={queryData.refetch} />

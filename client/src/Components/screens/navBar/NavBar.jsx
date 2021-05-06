@@ -6,7 +6,9 @@ import RESET_DISCOUNT from "../../../Apollo/mutations/resetDiscount";
 import getPromos from "../../../Apollo/queries/getPromos";
 import CountCart from "../cart/container/CountCart";
 import styled from "styled-components";
-import ThemeSwitch from "./ThemeSwitch";
+import logo from './Logo.png'
+import logoBlack from './LogoBlack.png'
+/* import ThemeSwitch from "./ThemeSwitch"; */
 
 const NavBar = ({ color }) => {
   const textColor = color === "white" ? "text-inactive" : "text-dark";
@@ -89,14 +91,15 @@ const NavBar = ({ color }) => {
     }
   }, [promos, applyDiscount, resetDiscount, today]);
 
+  const path = window.location.pathname;
+  const landing = path === '/';
+
   return (
     <StyledNavBar white={ color } className="navbar d-flex align-items-center">
       <div className="left-tags me-auto">
         <div id="logo">
         <Link to="/" className={brandTag} style={{ fontWeight: "bold" }}>
-          <h5 className="mb-0 text-center display-linebreak">
-            Code {"\n"} Bakery
-          </h5>
+          <img src={landing ? logoBlack : logo} style={{height:"2.3em", width: "auto"}}/>
         </Link>
         </div>
         {role === "admin" ? (
@@ -128,7 +131,7 @@ const NavBar = ({ color }) => {
             About us
           </Link>
         </div>
-        <ThemeSwitch className="tab"/>
+        {/* <ThemeSwitch className="tab"/> */}
       </div>
       <div className="right-buttons d-flex align-items-center">
         {logged ? (
@@ -180,7 +183,11 @@ const NavBar = ({ color }) => {
 };
 
 const StyledNavBar = styled.nav`
-  background-color: ${({white}) => white ? "#5e3f71" : "transparent"};
+ @media(max-width: 850px){
+    display: none!important;
+  }
+
+  background-color: ${({white}) => white === "white" ? "#5e3f71" : "transparent"};
   padding: 0 5rem;
   z-index: 2;
   font-weight: bold;
@@ -274,11 +281,9 @@ const StyledNavBar = styled.nav`
     align-items: center;
     width: 35rem;
     font-size: 0.9rem;
-    padding-bottom: 1rem;
-    padding-top: 0.5rem;
 
     @media (max-width: 1024px) {
-      width: 30rem;
+      width: 30rem!important;
     }
   }
 
@@ -288,6 +293,10 @@ const StyledNavBar = styled.nav`
     font-size: 0.9rem;
     justify-content: flex-end;
     
+  }
+
+  @media (max-width: 1024px) {
+      padding: 0 2rem!important;
   }
 
   
