@@ -3,10 +3,6 @@ import styled from "styled-components";
 
 // Libreria
 import MUIDataTable from "mui-datatables";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 
 // Componente
 import Upload from "../upload/Upload";
@@ -20,7 +16,7 @@ import GET_ALL_IMAGES from "../../../../Apollo/queries/getImageSlider";
 const TableSlider = () => {
   const [deleteImageById] = useMutation(DELETE_IMAGE);
   const [responsive] = useState("vertical");
-  const [tableBodyHeight, setTableBodyHeight] = useState("400px");
+  const [tableBodyHeight] = useState("400px");
   const [tableBodyMaxHeight] = useState("");
   // Almaceno la URL
   const [image, setImage] = useState();

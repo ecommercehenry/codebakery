@@ -47,12 +47,6 @@ const BillCard = () => {
     .toFixed(2);
 
 
-  const subTotalPor = ((subTotal * 21) / 100).toFixed(2);
-
-  const shipping = 0;
-
-  const total = (+subTotal + +subTotalPor + +shipping).toFixed(2);
-
   return (
     <div
       className="container-two"

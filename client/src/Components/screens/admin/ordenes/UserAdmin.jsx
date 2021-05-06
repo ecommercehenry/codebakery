@@ -9,6 +9,7 @@ import {
 } from "../../../../actions/index";
 
 const UserAdmin = ({setPromo}) => {
+  let {status} = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   let dataToRender = state.userAdmin.dataToRender;
@@ -29,7 +30,7 @@ const UserAdmin = ({setPromo}) => {
     return <div>Loading...</div>;
   } else {
     return (
-      <StyledUserAdmin>
+      <StyledUserAdmin light={status}>
         <table border="0" cellPadding="0" cellSpacing="0" className="flexy">
           <thead>
             <tr>
@@ -74,13 +75,16 @@ export default UserAdmin;
 const StyledUserAdmin = styled.div`
   padding: 2rem;
   padding-top: 0;
-  background: white;
+  background: ${({ light }) => 
+    (light ? 
+    "white" : 
+    "#292929")
+  };
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  background: white;
   height: 83vh;
   margin-bottom: 2rem;
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.07);
@@ -103,7 +107,11 @@ const StyledUserAdmin = styled.div`
         position: sticky;
         top: 0;
         padding: 1rem 1em;
-        background: white;
+        background: ${({ light }) => 
+          (light ? 
+          "white" : 
+          "#292929")
+        };
         border-bottom: 1px solid #ddd;
       }
     }
