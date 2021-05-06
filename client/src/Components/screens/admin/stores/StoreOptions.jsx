@@ -33,7 +33,7 @@ const StoreOptions = ({ setStores }) => {
       ? (barBackground.style = "")
       : (barBackground.style = "background:#222222");
     console.log(barBackground);
-  }, []);
+  }, [status]);
   const classes = useStyles();
   const clickHandler = (e) => {
     e.preventDefault();

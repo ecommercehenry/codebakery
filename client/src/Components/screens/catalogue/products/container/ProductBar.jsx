@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import HomeButton from "../home&sort/homeButton/HomeButton";
 import SortButton from "../home&sort/sortButton/SortButton";
 import { useSelector } from "react-redux";
 

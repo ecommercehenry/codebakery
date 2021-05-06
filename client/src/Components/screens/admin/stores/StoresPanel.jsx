@@ -59,7 +59,7 @@ const StoresPanel = ({setPromo}) => {
     setPromo(false)
     let background = document.getElementById("content");
     status ? background.style="background:white" : background.style="background:#969696";
-  },[setPromo])
+  },[setPromo, status])
   
   return (
     <StyledContainer >
