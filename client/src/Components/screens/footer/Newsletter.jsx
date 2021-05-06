@@ -1,30 +1,30 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SUBSCRIBE_USER from "../../../Apollo/mutations/suscribeToNewsletter";
+import getUserById from "../../../Apollo/queries/getUserById";
 
 export default function Newsletter() {
-  const [suscrito, setSuscrito] = useState(false);
-
+  
+  let userId = window.localStorage.getItem("id");    
+  const [newSubs, setNewSubs] = useState(false);
   const [suscribe] = useMutation(SUBSCRIBE_USER, {});
-  // const userId = 5;
-  let userId = window.localStorage.getItem("id");
-  let user = localStorage.name;
+
+  const { data } = useQuery(getUserById, { 
+    variables: { id: parseInt(userId) },
+    // fetchPolicy: "no-cache",
+  });
+
+  // const {name, id, newsletter} = data?.getUserById
+  const newsletter = data?.getUserById.newsletter
+  console.log(newsletter)
  
 
-  // useEffect(() => {
-  //   suscribe({
-  //     variables: {
-  //       id: userId,
-  //       newsletter: suscrito,
-  //     },
-  //   }, error);
-  // }, [suscrito]);
 
   function handleSubmit(e) {
-    e.preventDefault();
-    setSuscrito(true);
+    e.preventDefault();    
+    setNewSubs(true)
     suscribe({
       variables: {
         id: +userId,
@@ -34,12 +34,12 @@ export default function Newsletter() {
   }
   return (
     <>
-      {user ? (
+      { !newsletter && userId  ? (
         <StyledNewsletter onSubmit={handleSubmit}>
           <h2 > Suscribe to our Newsletter</h2>
           <span className="ocultar">Join our suscribers list to get the latest news, updates and special offers delivered directly in your inbox </span>
 
-          {suscrito ? (
+          {newSubs ? (
            <h4> Thanks for subscribe!! </h4>
           ) : (
             <button type="submit" className="suscribe-btn">
@@ -47,7 +47,9 @@ export default function Newsletter() {
             </button>
           )}
         </StyledNewsletter>
-      ) : (
+      ) : userId && newsletter ? (
+        <h5> Check your email for view more news!! </h5>
+       ) : (
         <StyledNewsletter>
           <h6>Login to subscribe our Newsletter</h6>
           <Link to="/log-in" className="center">
@@ -89,7 +91,7 @@ h2{
   font-weight: 600;
 }
 
-.suscribe-btn: hover{
+.suscribe-btn :hover {
   background-color: white;
   color:#755588;
 
@@ -113,7 +115,7 @@ h2{
  
 }
 
-.btn: hover {
+.btn :hover {
   
   background-color: white;
   color:#755588;
@@ -121,7 +123,7 @@ h2{
 }
 
 @media (min-width: 320 px) and (max-width: 480px ) {
-  ,ocultar {
+  .ocultar {
     display: none;
   }
 }
