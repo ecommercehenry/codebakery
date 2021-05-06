@@ -38,10 +38,7 @@ const AdminPanel = () => {
       <div className="right">
         {!promo ? (
           <div className="top">
-            <Route
-              path="/admin/stores"
-              component={() => StoreOptions({ setStores })}
-            />
+            
 
             <AdminNavBar
               promo={promo}
@@ -51,8 +48,8 @@ const AdminPanel = () => {
             />
             <Route path="/admin/orders" />
 
-            <AdminNavBar promo={promo} setPromo={setPromo} displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
-            <Route path="/admin/orders"/>
+          
+            
           </div>
         ) : (
           ""

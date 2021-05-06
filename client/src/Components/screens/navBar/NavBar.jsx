@@ -31,7 +31,7 @@ const NavBar = ({ color }) => {
 
   const tagCat = `${navTag} ${isActive["catalogue"]}`;
   const tagCart = `${navTag} ${isActive["cart"]}`;
-  const tagAbout = `${navTag} ${isActive["about-us"]}`;
+  const tagAbout = `${navTag} ${isActive["about_us"]}`;
   const tagStores = `${navTag} ${isActive["stores"]}`;
 
   let logged = localStorage.token ? true : false;

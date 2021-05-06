@@ -21,6 +21,8 @@ const LeftPanel = () => {
     users: path.includes("users") ? "active" : "inactive",
     stores: path.includes("stores") ? "active" : "inactive",
     promos: path.includes("promos") ? "active" : "inactive",
+    slider: path.includes("slider") ? "active" : "inactive",
+    newsletter: path.includes("newsletter") ? "active" : "inactive",
   };
 
   let logout = () => {
@@ -65,7 +67,7 @@ const LeftPanel = () => {
               className="text-decoration-none text-white"
               to="/admin/slider"
             >
-              <div className={`tab ${activeTab.users}`}>
+              <div className={`tab ${activeTab.slider}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Slider</span>
               </div>
@@ -74,7 +76,7 @@ const LeftPanel = () => {
               className="text-decoration-none text-white"
               to="/admin/newsletter"
             >
-              <div className={`tab ${activeTab.users}`}>
+              <div className={`tab ${activeTab.newsletter}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Newsletter</span>
               </div>
