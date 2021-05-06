@@ -60,7 +60,7 @@ export default function TablaOrdenes({setPromo}) {
             <th width="10%">User ID</th>
             <th width="10%">User Name</th>
             <th width="10%">Status</th>
-            <th width="10%">Cancelled</th>
+            {/* <th width="10%">Cancelled</th> */}
             <th width="10%" id="price-column">Total</th>
             <th width="10%">Action</th>
           </tr>

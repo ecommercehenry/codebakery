@@ -114,6 +114,7 @@ const StyledAdminPanel = styled.div`
   }
   .right {
     width: 87%;
+    margin-bottom: 1.4em;
     display: flex;
     flex-direction: column;
     height: fit-content;

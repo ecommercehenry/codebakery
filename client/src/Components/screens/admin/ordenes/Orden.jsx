@@ -8,13 +8,16 @@ import { Link } from "react-router-dom";
 import MODIFY_ORDER_STATUS from "../../../../Apollo/mutations/modifyOrderStatus";
 import { useDispatch } from "react-redux";
 import { changeStatus } from "../../../../actions";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation,useQuery, useLazyQuery } from "@apollo/client";
 import SEND_EMAIL_SENT from "../../../../Apollo/mutations/sendEmailSent";
 import GET_ORDERS_BY from "../../../../Apollo/queries/getOrderById";
+import GET_All_ORDERS from "../../../../Apollo/queries/getAllOrders";
 
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
-  const [orderStatus, setOrderStatus] = useState(orden.status);
+  console.log(orden)
+  const [orderStatus, setOrderStatus] = useState(orden.cancelled === true ? "cancelled" : orden.status);
+  console.log(orderStatus)
   const [selectedStatus, setSelectedStatus] = useState();
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -22,7 +25,11 @@ export default function Orden({ id, orden }) {
     document.getElementById(`status-select-${orden.id}`).value = orderStatus;
   }, [orden.id, orden.status, orderStatus]);
 
-  const [modifyOrderStatus] = useMutation(MODIFY_ORDER_STATUS);
+  const [modifyOrderStatus] = useMutation(MODIFY_ORDER_STATUS, {
+    refetchQueries: [{ query: GET_All_ORDERS }],
+  });
+
+  const [getAllOrders] = useLazyQuery(GET_All_ORDERS);
 
   const [sendEmailSent] = useMutation(
     SEND_EMAIL_SENT
@@ -45,7 +52,7 @@ export default function Orden({ id, orden }) {
   let dispatch = useDispatch();
 
   const handleConfirm = () => {
-
+    getAllOrders()
     modifyOrderStatus({
       variables: { orderId: orden.id, status: selectedStatus },
     }).then(()=>{
@@ -76,15 +83,17 @@ export default function Orden({ id, orden }) {
     }
   }
 
+  // useEffect(() => {
+
+  // }, [data, loading])
+
   let handleOption = async (e) => {
     setSelectedStatus(e.target.value);
     setShow(true);
   };
   if (orden) {
-    let total = 0 
-    orden.price.map((e) =>
-      total = total + e
-    )
+    let total = 0;
+    orden.price.map((e) => (total = total + e));
     return (
       <StyledOrden>
         <BootBox
@@ -118,16 +127,19 @@ export default function Orden({ id, orden }) {
               <option value="received" id={`received-${orden.id}`}>
                 Received
               </option>
+              <option value="cancelled" id={`received-${orden.id}`}>
+                Cancelled
+              </option>
             </select>
           </div>
         </td>
-        <td width="10%">
+        {/* <td width="10%">
           {orden.cancelled === false ? (
             <p>O</p>
           ) : (
             <p className="order-cacelled">X</p>
           )}
-        </td>
+        </td> */}
         <td width="10%">{total} </td>
 
         <td width="10%">
