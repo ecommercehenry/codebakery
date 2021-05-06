@@ -127,28 +127,28 @@ const BillCard = () => {
         </div>
 
         <div className="info info-total">
-          <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
+          {/* <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
             Subtotal:{" "}
             <p style={{ paddingTop: "1rem" }}>
               {subTotal ? `$ ${subTotal}` : 0}
             </p>
-          </h3>
-          <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
+          </h3> */}
+          {/* <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
             IVA 12%:{" "}
             <p style={{ paddingTop: "1rem" }}>
               {" "}
               {subTotalPor ? `$ ${subTotalPor}` : 0}
             </p>
-          </h3>
-          <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
+          </h3> */}
+          {/* <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
             Costo de Envio:{" "}
             <p style={{ paddingTop: "1rem" }}>
               {shipping ? `$ ${shipping}` : 0}
             </p>
-          </h3>
+          </h3> */}
           <h3 style={{ fontSize: "1rem", padding: "1rem" }}>
             Total:{" "}
-            <p style={{ paddingTop: "1rem" }}>{total ? `$ ${total}` : 0}</p>
+            <p style={{ paddingTop: "1rem" }}>{subTotal ? `$ ${subTotal}` : 0}</p>
           </h3>
         </div>
 
