@@ -73,18 +73,18 @@ const Prueba = ({ setClick, index }) => {
                   </Typography>
                   <Typography variant="body2" component="p">
                     Total Price
-                    <br/> $ {sectionId.quantity* sectionId.quantity}
+                    <br/> $ {sectionId.quantity* sectionId.price}
                     <br />
                     {'"Code Backery"'}
                   </Typography>
                   <CardActions>
-        <Button className={classes.boton}onClick={() => setClick(1)} size="small">Exit</Button>
       </CardActions>
                 </CardContent>
               </Card>
 
               )
             )}
+<Button className={classes.boton}onClick={() => setClick(1)} size="small">Exit</Button>
 
      
     </StyledDetail>
