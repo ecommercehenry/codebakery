@@ -30,7 +30,6 @@ function FormCRUD({ id, handlerOnClick }) {
     price: product.price,
     discount: product.discount,
     image: product.image,
-    discount: product.discount
   });
   const dispatch = useDispatch();
   function inputHandler(e) {

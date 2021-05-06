@@ -15,11 +15,12 @@ function ListCRUD({setPromo}) {
   const { data, loading } = useQuery(allProducts);
   const dispatch = useDispatch();
   useEffect(() => {
-    setPromo(false)
+    //setPromo(false)
     if (!loading) {
       dispatch(saveProducts(data.product));
+      refetch()
     }
-  }, [data, dispatch, setPromo, loading]);
+  }, [data, dispatch, setPromo, loading. refetch]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -56,7 +57,7 @@ function ListCRUD({setPromo}) {
             <th width="30%">Categories</th>
             <th width="10%">Stock</th>
             <th width="10%" id="price-column">Price</th>
-            <th width="10%">Action</th>
+            <th width="10%" style={{textAlign:"center"}}>Action</th>
           </tr>
         </thead>
         <tbody id="table-body">
@@ -143,15 +144,18 @@ const StyledListCRUD = styled.div`
     }
 
     tbody {
-      display:block;
-      overflow-y:auto;
-      width: 100%;
+      display:flex;
+      flex-flow: column nowrap;
+      overflow-y:scroll;
       height: 66vh;
+      justify-content:flex-start;
+
 
       td {
+        justify-content:center;
+        text-align: center;
         height: 5rem;
         border-bottom: 1px solid #ddd;
-        padding:0 1em;
       }
     }
 

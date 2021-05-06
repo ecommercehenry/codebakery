@@ -24,7 +24,7 @@ export default function TablaOrdenes({setPromo}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setPromo(false)
+    //setPromo(false)
     dispatch(saveOrders(ordersQ));
   }, [data, dispatch, ordersQ, setPromo]);
 
@@ -47,11 +47,9 @@ export default function TablaOrdenes({setPromo}) {
     });
     return <ButtonClear name="Volver al principio" />;
   } else {
-    //console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
     dataRENDER = renderPage;
   }
 
-/* console.log('render', dataRENDER) */
   return (
     <StyledTablaOrdenes light={theme.status}>
       <table border="0" cellPadding="0" cellSpacing="0">
@@ -119,7 +117,7 @@ table {
 
   thead {
     display: table;
-    overflow: auto;
+    overflow: scroll;
     width: 100%;
 
     th {
@@ -137,8 +135,8 @@ table {
 
   tbody {
     display:block;
-    overflow-y:auto;
-    width: 100%;
+    overflow-y:scroll;
+    width: 101.3%;
     height: 66vh;
 
     td {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import NavBar from "../../navBar/NavBar";
 import Hero from "../hero/Hero";
@@ -11,8 +11,11 @@ import GET_ORDERS_BY_USER_ID_IN_CART from "../../../../Apollo/queries/getOrdersB
 import { useDispatch, useSelector } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../../actions/setQuantityOrdersCardBackend";
 import styled from "styled-components";
+import Footer from "../../footer/Footer";
 import CREATE_ORDER from "../../../../Apollo/mutations/createOrder";
 import ADD_PRODUCT_TO_ORDER from "../../../../Apollo/mutations/addProductToOrder";
+import {removeAll} from "../../../../actions/cartActions"
+
 const Catalogue = () => {
   let storage = window.localStorage;
   let logged = storage.token ? true : false;
@@ -21,7 +24,7 @@ const Catalogue = () => {
   // const [orderId, setOrderId] = useState()
   const queryData = useQuery(GET_ORDERS_BY_USER_ID_IN_CART, {
     variables: { idUser: userId },
-    fetchPolicy: "no-cache",
+    //fetchPolicy: "no-cache",
   });
   const [addProductToOrder] = useMutation(ADD_PRODUCT_TO_ORDER);
   const [createOrder] = useMutation(CREATE_ORDER);
@@ -59,6 +62,8 @@ const Catalogue = () => {
               },
             });
           });
+          localStorage.removeItem("cart")
+          dispatch(removeAll())
         } else {
           createOrder({
             variables: {
@@ -71,6 +76,8 @@ const Catalogue = () => {
               }),
             },
           });
+          localStorage.removeItem("cart")
+          dispatch(removeAll())
         }
       }
     }
@@ -83,6 +90,7 @@ const Catalogue = () => {
       <Route path="/catalogue/detail/:id">
         <Detail refetchCatalogue={queryData.refetch}></Detail>
       </Route>
+      <Footer></Footer>
     </StyledCatalogue>
   );
 };

@@ -19,11 +19,12 @@ function TextCRUD({ id }) {
       <>
         {show ? (
           <StyledTableRow onDoubleClick={handlerOnClick}>
-            <td width="10%">
-              <img src={product.image} alt="" style={{ width: "4rem", marginLeft:"0.3rem" }} />
+            <tr>
+            <td width="1%">
+              <img src={product.image} alt="" style={{ width: "4rem", marginLeft:"0.3rem", marginRight:"1em" }} />
             </td>
-            <td width="31.5%">{product.name}</td>
-            <td width="30%">
+            <td width="30%" style={{textAlign:"left"}}>{product.name}</td>
+            <td width="30%" style={{textAlign:"left"}}>
               {product.categories.map((element, idx, arr) => 
                   element.name
               ).join(', ')}
@@ -37,6 +38,7 @@ function TextCRUD({ id }) {
               </button>
               </div>
             </td>
+            </tr>
           </StyledTableRow>
         ) : (
           <FormCRUD id={id} key={id} handlerOnClick={handlerOnClick} />

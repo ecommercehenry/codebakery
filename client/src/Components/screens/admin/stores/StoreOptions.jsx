@@ -37,6 +37,7 @@ const StoreOptions = ({ setStores }) => {
     e.preventDefault();
     setStores(e.currentTarget.value);
   };
+
   return (
     <div className={classes.container} id="bar">
       <div className={classes.title}>

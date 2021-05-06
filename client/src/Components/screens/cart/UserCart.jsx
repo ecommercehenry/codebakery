@@ -31,7 +31,6 @@ const UserCart = () => {
       }
     }
   }, [data, dispatch]);
-
   return (
     <StyledCart variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
       {data?.getOrdersByUserIdInCart.orders[0] ? (

@@ -35,15 +35,14 @@ let userId = parseInt(storage.id);
         <StyledTabs light={status}>
             <ul role="tablist" >
                 <li className="selected"><Link to="/cart" className="text-decoration-none linked tabLink">Cart ({logged ? ordersInBacked : sum})</Link></li>
-                <li><Link to="#" className="text-decoration-none text-muted tabLink">Wishlist (0)</Link></li>
             </ul>
         </StyledTabs>
     )
 }
 
-const StyledTabs = styled.div`
+export const StyledTabs = styled.div`
   background:${({light})=>light 
-  ? '#F1F1F1' 
+  ? '#ffffff' 
   : '#222222'};
   color:${({light})=>light 
   ? 'black' 

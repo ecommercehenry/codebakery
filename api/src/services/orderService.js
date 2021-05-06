@@ -1,6 +1,33 @@
 const { Order, Lineal_Order, Product, Users } = require("../db");
 const { getProductById } = require("./productsService");
 
+
+async function getAllOrdersUser(args) {
+  let { userId } = args
+try{
+ const orders = await Order.findAll({
+   where: {
+     userId: userId
+   }
+ })
+ console.log(orders)
+ const out = [];
+
+    for (let i = 0; i < orders.length; i++) {
+      const element = orders[i];
+      const formatted = await _formatOrder(element);
+      out.push({ __typename: orders, ...formatted });
+    }
+ console.log(orders)
+ return { __typename: "orders", orders: out };
+}catch(err){
+  return {
+    __typename: "error",
+    name: "db error",
+    detail: `Problem getting order: ${err.message}`,
+  };
+}
+}
 async function getAllOrders() {
   try {
     const order = await Order.findAll({
@@ -311,7 +338,6 @@ async function deleteProductOrder(orderId, productId) {
       let order = await Order.findOne({where: {id: orderId, placeStatus: 'cart'}})
       if(!order){
       order = await Order.create({userId : userId})
-      console.log("se creo una orden")       
       } 
       if(order.placeStatus === 'cart'){
           const newProduct = await Product.findOne({
@@ -480,4 +506,5 @@ module.exports = {
   incrementQuantity,
   decrementQuantity,
   modifyOrderCancelled,
+  getAllOrdersUser,
 };

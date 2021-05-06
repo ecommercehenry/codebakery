@@ -7,11 +7,14 @@ import CREATE_USER from "../../Apollo/mutations/createUser";
 import { toast } from "react-toastify"; 
 import '../../Assets/toast.css';
 import VALIDATE_USER_WITH_GOOGLE from "../../Apollo/queries/validateUserWithGoogle";
+import { useDispatch } from "react-redux";
+import { saveDataProfile } from "../../actions/dataProfileActions";
 
 toast.configure();
 const clientId = "665438682738-h07vsict9p633du2obn2b9rga62lptbe.apps.googleusercontent.com"; 
 
 function Login() {
+  const dispatch = useDispatch();
   // necesitamos crear el usuario
   const [createUser, { loading: loadingUser, data: dataUser }] = useMutation(CREATE_USER);
   // validamos el usuario para generar el token, luego el componente 
@@ -41,35 +44,38 @@ function Login() {
   // vemos si la validacion trae el usuario
   // descomentar ambos useEffect para el logeo con creación de usuario
   useEffect(()=>{
+    // 
     if(!loadingValidate && dataValidate){
-      console.log("validar if")
       if(dataValidate.validateUserWithGoogle.token){
-        alert("logueado")
-        localStorage.setItem('token', dataValidate.validateUserWithGoogle.token);
-        localStorage.setItem('name', dataValidate.validateUserWithGoogle.name);
-        localStorage.setItem('email', dataValidate.validateUserWithGoogle.email);
-        localStorage.setItem('role', dataValidate.validateUserWithGoogle.role);
-        localStorage.setItem('id', dataValidate.validateUserWithGoogle.id);
-        // es necesario el reloaded para luego poder redirigir
-        toast(`Bienvenido ${dataValidate.validateUserWithGoogle.name}`); 
+        if(dataValidate.validateUserWithGoogle.twoFA ){
+          dispatch(saveDataProfile(dataValidate.validateUserWithGoogle));
+        }
+        else{
+          alert("logueado")
+          localStorage.setItem('token', dataValidate.validateUserWithGoogle.token);
+          localStorage.setItem('name', dataValidate.validateUserWithGoogle.name);
+          localStorage.setItem('email', dataValidate.validateUserWithGoogle.email);
+          localStorage.setItem('role', dataValidate.validateUserWithGoogle.role);
+          localStorage.setItem('id', dataValidate.validateUserWithGoogle.id);
+          // es necesario el reloaded para luego poder redirigir
+          toast(`Bienvenido ${dataValidate.validateUserWithGoogle.name}`); 
+        }
         window.location.reload();
       }else{
         toast(dataValidate.validateUserWithGoogle.detail);
       }
     }
-  }, [loadingValidate, dataValidate]);
+  }, [loadingValidate, dataValidate, dispatch]);
 
   useEffect(()=>{
-    if(!loadingUser && dataUser){ 
-      validate({variables: {email: dataUser.createUser.email}});
+
+    if(!loadingUser && dataUser){
+      // 
+      validate({variables: {email: dataUser.createUser.email}}); 
+      // 
     }
   },[loadingUser, dataUser, validate])
-  // 
 
-  // const onFailure = (res) => {
-  //   // 
-    
-  // };
 
   const { signIn } = useGoogleLogin({
     onSuccess,

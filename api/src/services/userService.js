@@ -91,7 +91,7 @@ async function createUser(name, password, email, role, google) {
     };
   }
 }
-
+//---- MODIFY USER ----
 async function modifyUser(
   id,
   name,
@@ -101,7 +101,9 @@ async function modifyUser(
   role,
   address,
   dni,
-  phoneNumber
+  phoneNumber,
+  newsletter,//******** */
+  twoFA
 ) {
   let obj = {};
   if (password && newPassword) {
@@ -137,7 +139,9 @@ async function modifyUser(
   if (address) obj.address = address;
   if (dni) obj.dni = dni;
   if (phoneNumber) obj.phoneNumber = phoneNumber;
+  if (newsletter) obj.newsletter = newsletter;//**********/
 
+  obj.twoFA = twoFA;
   try {
     if (id) {
       let user = await Users.findOne({ where: { id } });
@@ -146,7 +150,8 @@ async function modifyUser(
       });
       return { __typename: "user", ...newUser.dataValues };
     }
-    if (email && !id) {
+
+    else if (email && !id) {
       let user = await Users.findOne({ where: { email } });
       let newUser = await user.update(obj, {
         attributes: { exclude: ["password", "salt"] },
@@ -158,7 +163,9 @@ async function modifyUser(
   }
 }
 
-async function loginUserWithGoogle(email, tokenId) {
+//---- LOGIN WHIT GOOGLE  ----
+async function loginUserWithGoogle(email, tokenId){
+  
   const user = await Users.findOne({
     where: {
       email,
@@ -187,6 +194,7 @@ async function loginUserWithGoogle(email, tokenId) {
       email: user.email,
       token: token,
       role: user.role,
+      twoFA: user.twoFA
     };
   }
 }
@@ -260,6 +268,7 @@ async function loginUser(email, password) {
         email: user.email,
         token: token,
         role: user.role,
+        twoFA: user.twoFA
       };
     } else {
       return {
@@ -270,7 +279,7 @@ async function loginUser(email, password) {
     }
   }
 }
-
+//------ DELETE USER ---------
 async function deleteUser(id) {
   try {
     const userToDelete = await Users.findByPk(id);

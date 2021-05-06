@@ -8,24 +8,26 @@ import styled from "styled-components";
 //components
 import LeftPanel from "../LeftPanel";
 import AdminNavBar from "../AdminNavBar";
-// import TextCRUD from '../TextCRUD'
 import ListCRUD from "../ListCRUD";
 import AddProductForm from "../../../AddProductForm";
 import TablaOrdenes from "../../admin/ordenes/TablaOrdenes";
 import UserAdmin from "../ordenes/UserAdmin";
-import Pagination from "../ordenes/Pagination";
 import ManageStores from "../stores/ManageStores";
-import StoreOptions from "../stores/StoreOptions";
 import StorePanel from "../stores/StoresPanel";
 import ModifyStore from "../stores/ModifyStore";
-import Promos from '../promos/Promos';
+import Promos from "../promos/Promos";
 
+import NewsletterAdmin from "../newsletter/NewsletterAdmin";
+
+import SliderCard from "../slider/SliderCard";
 
 const AdminPanel = () => {
-  const [displayFilter, setDisplayFilter] = useState(false)
+
+  const [displayFilter, setDisplayFilter] = useState(false);
+
   let { status } = useSelector((state) => state.theme);
   const [stores, setStores] = useState("seeStores");
-  const [promo,setPromo ] = useState(false);
+  const [promo, setPromo] = useState(false);
 
   return (
     <StyledAdminPanel light={status}>
@@ -33,62 +35,55 @@ const AdminPanel = () => {
         <LeftPanel />
       </div>
       <div className="right">
-
-      {   
-        !promo ? 
+        {!promo ? (
           <div className="top">
-            <Route
-              path="/admin/stores"
-              component={() => StoreOptions({ setStores })}
+            <AdminNavBar
+              promo={promo}
+              setPromo={setPromo}
+              displayFilter={displayFilter}
+              setDisplayFilter={setDisplayFilter}
             />
-            <AdminNavBar promo={promo} setPromo={setPromo} displayFilter={displayFilter} setDisplayFilter={setDisplayFilter}/>
-            <Route path="/admin/orders"/>
+            <Route path="/admin/orders" />
           </div>
-        : ""
-        }
+        ) : (
+          ""
+        )}
 
-       
         <div className="bottom">
-        
           <Switch>
-            <Route path='/admin/products'>
-              <ListCRUD setPromo={setPromo}/>
+            <Route path="/admin/products">
+              <ListCRUD setPromo={setPromo} />
             </Route>
-            <Route path='/admin/orders'>
-              <TablaOrdenes setPromo={setPromo}/>
+            <Route path="/admin/orders">
+              <TablaOrdenes setPromo={setPromo} />
             </Route>
-            <Route path='/admin/users'>
-              <UserAdmin setPromo={setPromo}/>
+            <Route path="/admin/users">
+              <UserAdmin setPromo={setPromo} />
             </Route>
-            <Route path='/admin/promos'>
-              <Promos promo={promo} setPromo={setPromo}/>
-            </Route>      
+            <Route path="/admin/promos">
+              <Promos promo={promo} setPromo={setPromo} />
+            </Route>
+            <Route path="/admin/newsletter" component={NewsletterAdmin} />
+            <Route path="/admin/slider" component={SliderCard} />
           </Switch>
           {stores === "seeStores" ? (
             (
               <Route path="/admin/stores">
-                <StorePanel promo={promo} setPromo={setPromo}/>
+                <StorePanel promo={promo} setPromo={setPromo} setStores={setStores}/>
               </Route>
             )
           ) : stores === "modifyStore" ? (
-            (
-              <Route path="/admin/stores">
-                <ModifyStore/>
-              </Route>
-            )
+            <Route path="/admin/stores">
+              <ModifyStore />
+            </Route>
           ) : stores === "addStore" ? (
-            (
-              <Route path="/admin/stores">
-                <ManageStores/>
-              </Route>
-            )
+            <Route path="/admin/stores">
+              <ManageStores />
+            </Route>
           ) : (
             <p></p>
           )}
         </div>
-        <Route path="/admin/orders">
-          <Pagination />
-        </Route>
         <Route path="/admin/add-product">
           <AddProductForm />
         </Route>
@@ -99,7 +94,22 @@ const AdminPanel = () => {
 
 const StyledAdminPanel = styled.div`
   min-height: 100vh;
-    height: fit-content;
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: ${({ light }) => (light ? "#F1F1F1" : "#222222")};
+  color: ${({ light }) => (light ? "inherit" : "white")};
+  .left {
+    width: 13%;
+    z-index: 10;
+  }
+  .right {
+    // width: 87%;
+    // display: flex;
+    // flex-direction: column;
+    // height: fit-content;
     width: 100%;
     display:flex;
     flex-direction:row;
