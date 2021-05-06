@@ -10,23 +10,23 @@ const OrderDetail = (props) => {
       <div className="element-container-odtls">
         <div className="info-container-odtls">
           <div className="text-container-odtls">
-            <span>Name: </span>
+            <span>Name</span>
             <p>{name}</p>
           </div>
           <div className="text-container-odtls image">
-            <span style={{ marginLeft: "1rem" }}>Product: </span>
+            <span style={{ marginLeft: "1rem" }}>Product</span>
             <img className="image-odtls" src={image} alt={`img-${image}`} />
           </div>
           <div className="text-container-odtls">
-            <span>Amount: </span>
+            <span>Amount</span>
             <p>{quantity}</p>
           </div>
           <div className="text-container-odtls">
-            <span>Price: </span>
+            <span>Price</span>
             <p>{price}</p>
           </div>
           <div className="text-container-odtls">
-            <span>Sub Total: </span>
+            <span>Sub Total</span>
             <p>{price * quantity}</p>
           </div>
         </div>
@@ -40,15 +40,12 @@ const StyledOrden = styled.div`
   align-items: flex-start;
   justify-content: space-around;
   width: 100%;
-  margin-top: 2rem;
-  //background:red;
+  border-bottom: 3px solid #402e57;
 
   .image-odtls {
-    display: block;
     height: 8vh;
     width: 8vw;
     block-size: auto;
-    position: absolute;
   }
 
   .image {
@@ -67,12 +64,10 @@ const StyledOrden = styled.div`
 
   .element-container-odtls {
     width: 100%;
-    height: 30vh;
+    height: 35vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 3px solid #402e57;
-    padding: 50px 0px 150px;
   }
   .element-container-odtls span {
     font-weight: 700;
