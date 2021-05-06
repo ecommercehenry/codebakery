@@ -84,16 +84,19 @@ export default function Orden({ id, orden }) {
               <option value="received" id={`received-${orden.id}`}>
                 Received
               </option>
+              <option value="cancelled" id={`received-${orden.id}`}>
+                Cancelled
+              </option>
             </select>
           </div>
         </td>
-        <td width="10%">
+        {/* <td width="10%">
           {orden.cancelled === false ? (
             <p>O</p>
           ) : (
             <p className="order-cacelled">X</p>
           )}
-        </td>
+        </td> */}
         <td width="10%">{total} </td>
 
         <td width="10%">
