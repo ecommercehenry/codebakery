@@ -2,15 +2,15 @@ const { Order, Lineal_Order, Product, Users } = require("../db");
 const { getProductById } = require("./productsService");
 
 async function getAllOrdersUser(args) {
-  let { userId } = args;
-  try {
-    const orders = await Order.findAll({
-      where: {
-        userId: userId,
-      },
-    });
-    console.log(orders);
-    const out = [];
+  let { userId } = args
+try{
+ const orders = await Order.findAll({
+   where: {
+    userId: userId
+   }
+ })
+
+ const out = [];
 
     for (let i = 0; i < orders.length; i++) {
       const element = orders[i];
