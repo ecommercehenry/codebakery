@@ -68,7 +68,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
           "No se encontraron Productos") : 
           (productsToRender?.length > 0 ? 
             productsToRender.map((element) => 
-              (element.stock != 0 ? (
+              (element.stock !== 0 ? (
             <ProductCard 
             refetchCatalogue={refetchCatalogue}
             orderId={orderId}
