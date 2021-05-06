@@ -68,9 +68,9 @@ const reducer = (state = initialState, action) => {
           userId: o.userId,
           date: o.creation,
           status: o.status,
-          price: o.lineal_order.map((u) => u).map((g) => g.price),
+          price: o.lineal_order.map((u) => u).map((g) => g.price * g.quantity),
           cancelled: o.cancelled,
-          name: o.name
+          name: o.name,
         };
         return filter;
       })
