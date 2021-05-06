@@ -67,8 +67,9 @@ const Grid = ({ orderId, refetchCatalogue }) => {
           }) : 
           "No se encontraron Productos") : 
           (productsToRender?.length > 0 ? 
-            productsToRender.map((element) => {
-            return <ProductCard 
+            productsToRender.map((element) => 
+              (element.stock != 0 ? (
+            <ProductCard 
             refetchCatalogue={refetchCatalogue}
             orderId={orderId}
             key={element.id} 
@@ -76,8 +77,9 @@ const Grid = ({ orderId, refetchCatalogue }) => {
             name={element.name}
             image={element.image} 
             price={element.price}
-            discount= {element.discount} />
-          }) : !productsToRender ? 'Cargando...': "No se encontraron Productos" )
+            discount= {element.discount} /> )
+            : "")
+          ) : !productsToRender ? 'Cargando...': "No se encontraron Productos" )
         }
 
       </>

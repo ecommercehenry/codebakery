@@ -141,6 +141,7 @@ function FormCRUD({ id, handlerOnClick }) {
               type="number"
               value={inputs.stock}
               name="stock"
+              min="0"
               onChange={inputHandler}
             />
           </td>
@@ -149,6 +150,7 @@ function FormCRUD({ id, handlerOnClick }) {
               value={inputs.price}
               name="price"
               type="number"
+              min="0"
               onChange={inputHandler}
             />
           </td>

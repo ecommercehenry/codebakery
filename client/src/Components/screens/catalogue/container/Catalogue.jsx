@@ -90,7 +90,7 @@ const Catalogue = () => {
       <Route path="/catalogue/detail/:id">
         <Detail refetchCatalogue={queryData.refetch}></Detail>
       </Route>
-      <Footer></Footer>
+      <Footer/>
     </StyledCatalogue>
   );
 };
