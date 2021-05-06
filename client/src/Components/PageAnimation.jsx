@@ -1,12 +1,11 @@
-
 export const pageAnimation = {
     hidden:{
-        opacity:0.7
+        opacity:0.9,
     },
     show:{
         opacity:1,
         transition:{
-            duration:0.3,
+            duration:0.1,
         },
     }
 };

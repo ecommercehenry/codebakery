@@ -25,13 +25,15 @@ const EmptyAlert = () => {
 
 const StyledAlert = styled.div`
     background: ${({ light }) => 
-    (light ? 
-    "white" : 
-    "#222222")};
+        (light ? 
+        "white" : 
+        "#222222")
+    };
     color: ${({ light }) => 
-    (light ? 
-    "inherit" : 
-    "white")};
+        (light ? 
+        "inherit" : 
+        "white")
+    };
     border: 2px solid #5e3f71;
     border-radius: 13px;
     padding: 4rem 8rem;

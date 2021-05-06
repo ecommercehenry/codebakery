@@ -8,9 +8,10 @@ import { saveProducts } from "../../../actions/saveProductsAction";
 import styled from "styled-components";
 import TablePagination from '@material-ui/core/TablePagination';
 import { withStyles } from "@material-ui/core";
-
+import { useSelector } from "react-redux";
 
 function ListCRUD({setPromo}) {
+  let { status } = useSelector((state) => state.theme);
   const { data, loading } = useQuery(allProducts);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -46,7 +47,7 @@ function ListCRUD({setPromo}) {
   }, [rowsPerPage])
 
   return (
-    <StyledListCRUD>
+    <StyledListCRUD light={status}>
       <table border="0" cellPadding="0" cellSpacing="0" className="flexy">
         <thead>
           <tr>
@@ -91,19 +92,24 @@ export default ListCRUD;
 const StyledTablePagination = withStyles((theme) => ({
   root: {
     height: 60,
+    color:"#9a48cc"
     },
 }))(TablePagination);
 
 const StyledListCRUD = styled.div`
   padding: 2rem;
   padding-top: 0;
-  background: white;
+  //background: white;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  background: white;
+  background: ${({ light }) => 
+    (light ? 
+    "white" : 
+    "#292929")
+  };
   height: 83vh;
   margin-bottom: 2rem;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 30%);
@@ -127,7 +133,11 @@ const StyledListCRUD = styled.div`
         position: sticky;
         top: 0;
         padding: 1rem 1em;
-        background: white;
+        background: ${({ light }) => 
+          (light ? 
+          "white" : 
+          "#292929")
+        };
         border-bottom: 1px solid #ddd;
       }
     }
@@ -151,7 +161,11 @@ const StyledListCRUD = styled.div`
         position: sticky;
         top: 0;
         padding: 1rem 1em;
-        background: white;
+        background: ${({ light }) => 
+          (light ? 
+          "white" : 
+          "#292929")
+        };
       }
 
       #pagination-container{

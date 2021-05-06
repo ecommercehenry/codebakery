@@ -57,6 +57,7 @@ export default function Pagination() {
      const StyledTablePagination = withStyles((theme) => ({
       root: {
         height: 60,
+        color:"#9a48cc",
         },
     }))(TablePagination);
 

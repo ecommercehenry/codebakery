@@ -105,11 +105,13 @@ const StyledAdminPanel = styled.div`
     flex-direction:row;
     justify-content:space-between;
     background:${({light})=>light 
-    ? '#F1F1F1' 
-    : '#222222'};
+      ? '#F1F1F1' 
+      : '#222222'
+      };
     color:${({light})=>light 
-    ? 'inherit' 
-    : 'white'};
+      ? 'inherit' 
+      : 'white'
+    };
     .left{
         width:13%;
         z-index: 10;
@@ -126,8 +128,10 @@ const StyledAdminPanel = styled.div`
             top: 0;
             padding-left: 4rem;
             padding-right: 4rem;
-            background: #f1f1f1
-            
+            background:${({light})=>light 
+              ? '#F1F1F1' 
+              : '#222222'
+            };
         }
         .bottom{
             position: relative;
