@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 // Libreria
 import MUIDataTable from "mui-datatables";
@@ -17,7 +18,7 @@ import DELETE_IMAGE from "../../../../Apollo/mutations/deleteImageById";
 import GET_ALL_IMAGES from "../../../../Apollo/queries/getImageSlider";
 
 const TableSlider = () => {
-  const [deleteImageById ] = useMutation(DELETE_IMAGE);
+  const [deleteImageById] = useMutation(DELETE_IMAGE);
   const [responsive] = useState("vertical");
   const [tableBodyHeight, setTableBodyHeight] = useState("400px");
   const [tableBodyMaxHeight] = useState("");
@@ -101,34 +102,30 @@ const TableSlider = () => {
   };
 
   return (
-    <>
+    <StyledTableSlider>
       <Upload
         saveImageSlider={saveImageSlider}
         loading={loading}
         serverRefresh={serverRefresh}
         setServerRefresh={setServerRefresh}
       />
-      <FormControl>
-        <InputLabel id="demo-simple-select-label">View Height</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={tableBodyHeight}
-          style={{ width: "200px", marginBottom: "10px", marginRight: 10 }}
-          onChange={(e) => setTableBodyHeight(e.target.value)}
-        >
-          <MenuItem value={"400px"}>All</MenuItem>
-          <MenuItem value={""}>Less</MenuItem>
-        </Select>
-      </FormControl>
       <MUIDataTable
+        className="muiDataTable"
         title={"Slider Images"}
         data={image}
         columns={columns}
         options={options}
       />
-    </>
+    </StyledTableSlider>
   );
 };
 
 export default TableSlider;
+
+const StyledTableSlider = styled.div`
+  display: flex;
+
+  .muiDataTable {
+    width: 45%;
+  }
+`;

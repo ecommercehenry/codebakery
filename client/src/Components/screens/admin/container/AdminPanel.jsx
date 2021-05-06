@@ -107,6 +107,7 @@ const StyledAdminPanel = styled.div`
   }
   .right {
     width: 87%;
+    margin-bottom: 1.4em;
     display: flex;
     flex-direction: column;
     height: fit-content;
@@ -130,6 +131,7 @@ const StyledAdminPanel = styled.div`
       align-items: center;
       z-index: 1;
       padding: 0 4rem;
+      margin-top: 2.4em;
     }
     .edit-grid {
       position: absolute;

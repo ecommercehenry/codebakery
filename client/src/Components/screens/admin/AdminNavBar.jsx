@@ -57,6 +57,14 @@ const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
         <Route path="/admin/stores">
           <div className="optionTab">STORES</div>
         </Route>
+
+        <Route path="/admin/slider">
+          <div className="optionTab">SLIDER</div>
+        </Route>
+
+        <Route path="/admin/newsletter">
+          <div className="optionTab">NEWSLETTERS</div>
+        </Route>
         
       </div>
 
