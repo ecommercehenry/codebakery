@@ -5,6 +5,7 @@ import {motion} from 'framer-motion';
 import {pageAnimation} from '../../PageAnimation'
 import UserLeftPanel from "./UserLeftPanel";
 import UserOrders from "./UserOrders";
+import UserProduct from "./UserProduct";
 import UserProfile from "./UserProfile";
 import UserReview from "./UserReview";
 //aqui voy a mostrar mi otros componente
@@ -22,6 +23,8 @@ const UserPanel = () => {
         <UserReview />
       ) : click === 3 ? (
         <UserProfile />
+      ) : click === 4 ? (
+        <UserProduct/>
       ) : (
         <p>''</p>
       )}

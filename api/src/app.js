@@ -122,8 +122,8 @@ server.use(
     return {
       schema: schema,
       extensions({ result, variables, document }) {
-        console.log(variables)
-        console.log(result)
+        // console.log(variables)
+        // console.log(result)
       },
       rootValue: root,
       graphiql: true,
@@ -133,7 +133,6 @@ server.use(
 
 server.use("/stripe/checkout", async (req, res) => {
   const { id, amount } = req.body;
-  console.log(amount)
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
@@ -144,8 +143,6 @@ server.use("/stripe/checkout", async (req, res) => {
     });
     let order = await Order.findByPk(parseInt(req.body.products.id));
     let ordenCompleta = await getOrderById(order.id);
-    //console.log(payment.status)
-    //console.log(order)
     if (payment.status === "succeeded") {
       order.status = "paid";
       order.placeStatus = "ticket";
@@ -181,7 +178,7 @@ server.use((err, _req, res, _next) => {
   // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;
-  //console.error(err);
+
   res.status(status).send(message);
 });
 

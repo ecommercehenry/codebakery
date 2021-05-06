@@ -45,9 +45,7 @@ function Login() {
   // descomentar ambos useEffect para el logeo con creación de usuario
   useEffect(()=>{
     // 
-    console.log("Antes del if")
     if(!loadingValidate && dataValidate){
-      console.log("validar if")
       if(dataValidate.validateUserWithGoogle.token){
         if(dataValidate.validateUserWithGoogle.twoFA ){
           dispatch(saveDataProfile(dataValidate.validateUserWithGoogle));
@@ -55,7 +53,6 @@ function Login() {
           // window.location.reload();
         }
         else{
-          alert("logueado")
           localStorage.setItem('token', dataValidate.validateUserWithGoogle.token);
           localStorage.setItem('name', dataValidate.validateUserWithGoogle.name);
           localStorage.setItem('email', dataValidate.validateUserWithGoogle.email);
@@ -64,7 +61,6 @@ function Login() {
           // es necesario el reloaded para luego poder redirigir
           toast(`Bienvenido ${dataValidate.validateUserWithGoogle.name}`);
           // window.location.reload();
-          alert('se va a reload 2 login')
           window.location.reload();
         }
       }else{

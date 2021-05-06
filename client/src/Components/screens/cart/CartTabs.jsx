@@ -35,7 +35,6 @@ let userId = parseInt(storage.id);
         <StyledTabs light={status}>
             <ul role="tablist" >
                 <li className="selected"><Link to="/cart" className="text-decoration-none linked tabLink">Cart ({logged ? ordersInBacked : sum})</Link></li>
-                <li><Link to="#" className="text-decoration-none text-muted tabLink">Wishlist (0)</Link></li>
             </ul>
         </StyledTabs>
     )
@@ -51,6 +50,14 @@ export const StyledTabs = styled.div`
   width: 80%;
   height: fit-content;
   border-bottom: 1px solid #e6e6e6;
+
+  @media(max-width: 1024px){
+    width: 90%;
+  }
+
+  @media(max-width: 768px){
+      display: none!important;
+  }
 
   ul{
   display: flex;

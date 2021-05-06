@@ -38,12 +38,10 @@ function App() {
   let token = localStorage.getItem("token");
   let role = localStorage.getItem("role");
   // variable para comprobar si existió 2FA
-  // console.log(TwoFA, 'atstattsappppp')
   // si la TwoFAValidation es true tomamos los valores del LS sino no debemos logear
   const [validateUser, { data }] = useLazyQuery(VALIDATE_CREDENTIALS);
   useEffect(() => {
     if(token){
-      console.log('esta verificanfdo')
       validateUser({ variables: { token: token, role: role } });
     }
   }, [data, validateUser, token, role]);

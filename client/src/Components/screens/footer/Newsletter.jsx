@@ -11,8 +11,7 @@ export default function Newsletter() {
   // const userId = 5;
   let userId = window.localStorage.getItem("id");
   let user = localStorage.name;
-  console.log("id--------------->" + userId);
-  console.log("user---------->" + user);
+ 
 
   // useEffect(() => {
   //   suscribe({
@@ -37,21 +36,21 @@ export default function Newsletter() {
     <>
       {user ? (
         <StyledNewsletter onSubmit={handleSubmit}>
-          <h2> suscribite a nuestro Newsletter</h2>
-          <p>participa de sorteos, enterarte de descuentos exclusivos</p>
+          <h2 > Suscribe to our Newsletter</h2>
+          <span className="ocultar">Join our suscribers list to get the latest news, updates and special offers delivered directly in your inbox </span>
 
           {suscrito ? (
-            <p> Thanks for subscribe!! </p>
+           <h4> Thanks for subscribe!! </h4>
           ) : (
-            <button type="submit" className="search-btn">
-              subscribe
+            <button type="submit" className="suscribe-btn">
+             <span className="fontbold">SUSCRIBE</span>
             </button>
           )}
         </StyledNewsletter>
       ) : (
         <StyledNewsletter>
-          Login to subscribe our Newsletter
-          <Link to="/log-in">
+          <h6>Login to subscribe our Newsletter</h6>
+          <Link to="/log-in" className="center">
             <button className="btn">Go</button>
           </Link>
         </StyledNewsletter>
@@ -61,41 +60,87 @@ export default function Newsletter() {
 }
 
 const StyledNewsletter = styled.form`
-  border-radius: 10px;
-  padding: 20px 10px;
-  width: 50%;
-  margin: auto;
-  color: #694e7a;
-  font-size: 1.5rem;
-  background: #7555880a;
 
-  .search-btn {
-    color: #e2d9d9;
-    width: 15%;
+border-radius: 10px;
+padding: 3px 10px;
+width: 50%;
+margin-top: 15px;
+color: white;
+font-size: 1rem;
+//background-color: green;
+
+h2{
+  color:#EDC174;
+}
+
+.suscribe-btn {
+  margin:10px;
+  color:white;
+  width:20rem;
+  padding: 10px 10px;
+  border: solid 2px ;
+  border-radius: 40px;
+  border-color: white;
+  background-color: Transparent; /* Green */;
+  transition: 0.3s;
+}
+
+.fontbold{
+  font-weight: 600;
+}
+
+.suscribe-btn: hover{
+  background-color: white;
+  color:#755588;
+
+}
+.center {
+  display:block;
+  align-content:center;
+  justify-content:center;
+}
+.btn {
+  
+  margin:8px;
+  align-content:center;
+  justify-content:center;
+  color:white;
+  width:10rem;
+  border: solid 2px ;
+  border-radius: 40px;
+  border-color: white;
+  transition: 0.3s;
+ 
+}
+
+.btn: hover {
+  
+  background-color: white;
+  color:#755588;
+ 
+}
+
+@media (max-width: 500px)  {
+  .ocultar {
+    display: none!important; 
+  }
+  h2{
+    font-size: 1em!important;
+  }
+  .suscribe-btn {
+    margin:10px;
+    color:white;
+    width:10rem;
     padding: 10px 10px;
-    border: solid 1px #cecece;
+    border: solid 2px ;
     border-radius: 40px;
+    border-color: white;
+    background-color: Transparent; /* Green */;
+    transition: 0.3s;
   }
-  .btn {
-    background-color: hsla(
-      277.6470588235294,
-      23.076923076923077%,
-      43.333333333333336%,
-      0.62
-    );
-    color: #e2d9d9;
-    width: 10%;
-    padding: 6px 6px;
-    border: solid 1px #cecece;
-    border-radius: 40px;
-    margin-left: 1rem;
-  }
-  .btn:hover {
-    background-color: #6944a5;
-    color: #ffffff;
-  }
-  .btn:active {
-    background-color: #ffffff;
-    color: #6944a5;
-  }
+}
+
+
+
+  
 `;

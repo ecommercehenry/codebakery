@@ -10,7 +10,6 @@ import FormCreateCategory from "../../FormCreateCategory/FormCreateCategory";
 import CheckFilters from "./ordenes/CheckFilters";
 import SortByPrice from "./ordenes/SortByPrice";
 import { HiOutlineFilter } from "react-icons/hi";
-import PromoNavBar from "./promos/PromoNavBar"
 import AddPromoButton from "./promos/AddPromoButton"
 
 //components
@@ -28,7 +27,6 @@ const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
     } else {
       $("#filter-btn").removeClass('displayFilter')
     }
-    
   }, [displayFilter])
 
   return (
@@ -36,7 +34,7 @@ const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
       <div className="onLeft">
         <Route path="/admin/products">
           <div className="optionTab">PRODUCTS</div>
-          <SearchBar />
+          {/* <SearchBar /> */}
         </Route>
 
         <Route path="/admin/orders">
@@ -51,11 +49,19 @@ const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
         
         <Route path="/admin/promos">
           <div className="optionTab">PROMOS</div>
-          <PromoNavBar/>
+          {/* <PromoNavBar/> */}
         </Route>
 
         <Route path="/admin/stores">
           <div className="optionTab">STORES</div>
+        </Route>
+
+        <Route path="/admin/slider">
+          <div className="optionTab">SLIDER</div>
+        </Route>
+
+        <Route path="/admin/newsletter">
+          <div className="optionTab">NEWSLETTERS</div>
         </Route>
         
       </div>
@@ -76,6 +82,7 @@ const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
           <AddPromoButton setPromo={setPromo}/>
         </div>
       </Route>
+
       <Route path="/admin/products">
         <>
           {add ? (
@@ -137,15 +144,17 @@ const StyledNavBar = styled.div`
       margin-left: 1rem;
       padding: 0 1rem;
       border-radius: 10px;
-      background: ${({light})=>light 
-      ? '#D5D5D5' 
-      : '#222222'};
+      background: #D5D5D5;
+      /* color:${({light})=>light 
+        ? 'inherit' 
+        : 'white'
+      }; */
       border: none;
       height: 2rem;
       border: 1px solid transparent;
       z-index: 2;
       font-size: 1em;
-      font-weight: bold;
+      font-weight: 500;
 
       #filter-logo{
         margin-right: .5em;

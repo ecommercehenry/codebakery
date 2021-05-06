@@ -4,8 +4,9 @@ const { Users } = require("../db");
 
 async function generateTokenOTP(idUser){
     //Generacion y guardado del token
+    let user = null
     try{
-        const user = await Users.findOne({
+        user = await Users.findOne({
             where:{
                 id:idUser
             }
@@ -18,7 +19,7 @@ async function generateTokenOTP(idUser){
     }
 
     //Envio del token formateado
-    let url = `otpauth://totp/juancho?secret=${secret.base32}`
+    let url = `otpauth://totp/Codebakery(${user.email})?secret=${secret.base32}`
     return _generateQRCode(url)
     .then(res=>{
         return {__typename:"otpToken", image:res}
