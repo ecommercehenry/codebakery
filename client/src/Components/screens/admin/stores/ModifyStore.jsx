@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black", //color de titulos
     marginTop: "auto",
     padding: theme.spacing(2),
+    marginTop:"2.5rem"
   },
   formControl: {
     backgroundColor: "#ffffff",

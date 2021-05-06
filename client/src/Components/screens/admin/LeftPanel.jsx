@@ -74,7 +74,7 @@ const LeftPanel = () => {
               className="text-decoration-none text-white"
               to="/admin/newsletter"
             >
-              <div className={`tab ${activeTab.users}`}>
+              <div className={`tab ${activeTab.stores}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Newsletter</span>
               </div>

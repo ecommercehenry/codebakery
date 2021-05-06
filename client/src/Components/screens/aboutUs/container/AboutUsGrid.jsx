@@ -3,12 +3,14 @@ import styled from "styled-components";
 import NavBar from "../../navBar/NavBar";
 import AboutUs from "./AboutUs";
 import { Us } from "./Us";
+import { useSelector } from "react-redux";
 import {motion} from 'framer-motion';
 import {pageAnimation} from '../../../PageAnimation'
 
 const AboutUsGrid = () => {
+  let { status } = useSelector((state) => state.theme);
   return (
-    <StyledWrapper variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
+    <StyledWrapper variants={pageAnimation} initial='hidden' animate='show' exit='exit' light={status}>
       <div style={{backgroundColor: '#5e3f71'}} >
         <div id="navBackground">
           <NavBar color="white" />
@@ -47,15 +49,24 @@ const media = {
 };
 
 const StyledWrapper = styled(motion.div)`
-
+  background: ${({ light }) => 
+    (light ? 
+    "white" : 
+    "#222222")};
+  color: ${({ light }) => 
+    (light ? 
+    "inherit" : 
+    "white")};
 `
 
 const AboutUsInfo = styled.div`
-  
+  background: ${({ light }) => 
+    (light ? 
+    "#f4f2f8" : 
+    "#cec7dd")};
   align-items: center;
   justify-content: center;
   padding: 3rem;
-  background: #f4f2f8;
   color: #402e57;
   font-weight: 500;
   line-height: 1;
