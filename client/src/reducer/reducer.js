@@ -19,7 +19,6 @@ const initialState = {
 };
 
 const sortByPrice = (arr, sort) =>{
-  // console.log(arr[0], sort, 'ooooooooooooooo')
   return sort === '' ? arr: sort === 'HIGH_TO_LOW' ? [...arr].sort((a,b) => {
     return b.price - a.price;
   }): [...arr].sort((a,b) => {
@@ -77,7 +76,6 @@ const reducer = (state = initialState, action) => {
       sortArr = sortByPrice([...state.stateproducts], state.sort);
       if(action.payload !== '' && !Array.isArray(action.payload)){
         
-        // console.log(action.payload, 'entrada')
         return {
           ...state,
           filterProduct: action.payload,

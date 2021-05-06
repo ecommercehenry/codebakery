@@ -1,8 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useQuery, gql } from "@apollo/client";
-// import {useDispatch} from 'react-redux';
-// import {removeAll} from '../../../actions/cartActions';
 //styles
 import styled from "styled-components";
 import {motion} from 'framer-motion';
@@ -13,14 +11,10 @@ import EmptyAlert from "./EmptyAlert"
 import TotalToOrder from "./TotalToOrder"
 
 const GuestCart = () => {
-  // const dispatch = useDispatch()
   let { itemsToCart } = useSelector((state) => state.cart);
   let productsArray = itemsToCart.map((elem) => elem.id);
   productsArray = JSON.stringify(productsArray);
 
-  // const resetCartHandler = () => {
-  //   dispatch(removeAll())
-  // }
 
   const getProductByArray = gql`
     {

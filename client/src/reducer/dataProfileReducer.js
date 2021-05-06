@@ -12,7 +12,6 @@ const initialState = {
 const dataProfileReducer = (state = initialState, action) => {
     switch (action.type) {
       case SAVE_DATA_PROFILE:
-        console.log(action.payload)
         return  action.payload ? {...state, 
             name: action.payload.name,
             token: action.payload.token,

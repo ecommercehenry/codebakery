@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { pageAnimation } from "../../PageAnimation";
 import ProductOnCart from "./ProductOnCart";
+import EmptyAlert from "./EmptyAlert"
 import { useDispatch } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../actions/setQuantityOrdersCardBackend";
 import { Link } from "react-router-dom";
@@ -30,7 +31,10 @@ const UserCart = () => {
       }
     }
   }, [data, dispatch]);
+<<<<<<< HEAD
   console.log(data);
+=======
+>>>>>>> 8db60091d55e24d338de333eb0dcc63297cb05cd
   return (
     <StyledCart
       variants={pageAnimation}
@@ -55,7 +59,7 @@ const UserCart = () => {
           />
         ))
       ) : (
-        <p></p>
+        <EmptyAlert/>
       )}
       </div>
       <div className="buttonContainer">

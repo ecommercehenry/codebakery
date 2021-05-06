@@ -31,15 +31,9 @@ export default function NewsletterAdmin(){
         }   
     }
 
-    // let messajeExport =`<html><span>Hi ${info.description}</span> <br>
-    // <img src=${info.image}/>
-    // </html>`
-
-    
     function handlerOnClick (e){
         console.log(info, 'info');
         e.preventDefault();
-      // console.log(messajeExport, 'info image');
         sendNews({
             variables: {
               message: info.description,
@@ -80,9 +74,8 @@ export default function NewsletterAdmin(){
                 </div>
             </div>
             <div  >
-            <button type="submit">Enviar Newsletter a todos los subscriptos</button>
+            <button type="submit">Send the newsletter to all subscriptors</button>
             </div>
-            
         </form>
     )
 }

@@ -15,16 +15,13 @@ export default function Pagination() {
     let longitud;
 
     if (search && filterOrders.length > 0) {
-      // console.log(filterStatus.length, 'aysyayysays', statusOrders.length)
       longitud= filterStatus.length > 0 ? statusOrders.length : filterOrders?.length;
     } else {
-      /* console.log('no search') */
       longitud= filterStatus.length > 0 ? statusOrders.length : orders?.length;
    
     };
 
 
-    //console.log('estado redux', orders);
     const dispatch = useDispatch();
 
     const [page, setPage] = React.useState(0);
@@ -52,11 +49,11 @@ export default function Pagination() {
       
      // let cont= orders?.slice( page * rowsPerPage + rowsPerPage);
 
-     // console.log('numero de paginas', cont);
 
      const StyledTablePagination = withStyles((theme) => ({
       root: {
         height: 60,
+        color:"#9a48cc",
         },
     }))(TablePagination);
 

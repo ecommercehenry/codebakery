@@ -56,7 +56,6 @@ const UserAcount = () => {
         // alert("logueado")
         // si está habilitada la athenticacion twoFA guardamoen en el reducer
         if(data.validateUser.twoFA ){
-          // console.log('yaysyays', data.validateUser)
           dispatch(saveDataProfile(data.validateUser))
           toast(`Hello ${data.validateUser.name}, you must do 2FA`);
         }
@@ -81,7 +80,6 @@ const UserAcount = () => {
  
   let role = localStorage.getItem('role') ;
   let token = localStorage.getItem('token');
-  // console.log(dataUser.role , dataUser.token , dataUser.twoFA, 'yyyyyyyyyyyyyyy')
   if(role  && token && dataValidate){
 
     // la redireccion se debe cambiar seún el role del usuario

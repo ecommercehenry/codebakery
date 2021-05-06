@@ -18,7 +18,6 @@ const ProductOnCart = ({
   orderId,
   refetch,
 }) => {
-  console.log(discount)
   let logged = localStorage.token ? true : false;
   let [newQuantity, setNewQuantity] = useState(quantity);
   const [deleteProductOrder] = useMutation(DELETE_PRODUCT_ORDER);
