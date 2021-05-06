@@ -20,7 +20,6 @@ export default function NewsletterAdmin(){
 
     const imageHandler = (e) => {
         const image = e.target.files[0];
-        console.log(image, 'image');
         previewImage(image);
     }
     
@@ -49,6 +48,13 @@ export default function NewsletterAdmin(){
               
             },
           })
+
+        setInfo({
+          description:'',
+          image:''
+        })
+
+       
          
          alert("Newsletter Enviado!") 
 
@@ -57,11 +63,12 @@ export default function NewsletterAdmin(){
       <StyledNewsletter onSubmit={handlerOnClick}>
         
            <div className="imageLoaderr">
+              {!preview ? <div className="ver"><span>Upload image</span></div> :
                 <div className="previeww">
                     {
                         preview && <img src={preview} alt=""/>
                     }
-                </div>
+                </div>}
                 <div className="fakeButtonn">
                     <input 
                         type="file"
@@ -148,13 +155,27 @@ label {
   //background: purple;
   width:40%;
   border-radius:28px;
-  overflow:hidden;
+  //overflow:hidden;
   //display : flex;
   img{
       width:100%;
       height:100%;
       object-fit:fill;
   }
+}
+
+.ver {
+  display:flex;
+  width:300px;
+  height:250px;
+  background:#E3DDE7;
+  border-radius:28px;
+  justify-content:center;
+  align-items:center;
+  color:#755588;s
+  
+
+
 }
 .submitt{
  // width: 20%;
