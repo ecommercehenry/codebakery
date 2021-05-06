@@ -35,7 +35,7 @@ useEffect(() => {
 };
 
 const StyledSearchBar = styled.div`
-  background: #e9e8e8;
+  background: white;
   display: flex;
   align-items: center;
   position:relative;
@@ -50,6 +50,8 @@ const StyledSearchBar = styled.div`
   align-items:center;
   border: 1.3px solid #949494;
   border-radius:20px;
+  max-width: 628px;
+  width: 90%;
   .lupita{
     margin-left:0.5em;
   }
@@ -85,8 +87,14 @@ const StyledSearchBar = styled.div`
       text-align: left;
       outline: none;
 
-  }
-  
+      @media(max-width: 768px){
+        width: 100%;
+      }
+
+      @media(max-width: 500px){
+        font-size: 1.1rem;
+      }
+  }  
 
   }
 `;
