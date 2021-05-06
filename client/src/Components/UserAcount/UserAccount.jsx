@@ -59,7 +59,7 @@ const UserAcount = () => {
           // console.log('yaysyays', data.validateUser)
           dispatch(saveDataProfile(data.validateUser))
           toast(`Hello ${data.validateUser.name}, you must do 2FA`);
-          // window.location.reload();
+          window.location.reload();
         }
         else{
           localStorage.setItem('token', data.validateUser.token);
@@ -68,7 +68,7 @@ const UserAcount = () => {
           localStorage.setItem('role', data.validateUser.role);
           localStorage.setItem('id', data.validateUser.id);
           toast(`Welcome ${data.validateUser.name}`);
-          // alert('se va a reload userAccount');
+          alert('se va a reload userAccount');
           window.location.reload();
         }
         // es necesario el reloaded para luego poder redirigir
@@ -99,7 +99,7 @@ const UserAcount = () => {
   
   else if(dataUser.role && dataUser.token && dataUser.twoFA ){
     toast(`Hello ${data?.validateUser.name || dataUser.name}, you must do 2FA`);
-    // alert('se va a redireccion')
+    alert('se va a redireccion')
     return <Redirect to='/TFA' />
   }
   const handleLogin = async (form) => {
