@@ -122,8 +122,8 @@ server.use(
     return {
       schema: schema,
       extensions({ result, variables, document }) {
-        console.log(variables)
-        console.log(result)
+        // console.log(variables)
+        // console.log(result)
       },
       rootValue: root,
       graphiql: true,
