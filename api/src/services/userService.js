@@ -1,6 +1,7 @@
 const { Users, Product, Review } = require("../db");
 const jwt = require("jsonwebtoken");
 const { sendEmail } = require("./emailService");
+const { getCurrentDomainFront } = require("../config/currentDomain");
 
 async function getAllUsers() {
   try {
@@ -214,11 +215,18 @@ async function resetPassword(id) {
       "resetPassword",
       { expiresIn: 60 * 60 }
     ); //60*60 = 3600 seg = 1 hour
-    sendEmail(
+    let urlReset = `${getCurrentDomainFront()}/reset-password?resetToken=${token}&email=${user.email}`
+    let textEmail  = `<html>`
+    textEmail+= `<span>Hi ${user.name}</span><br>`
+    textEmail+= `<span>If you wanna reset your password click <a href=${urlReset}>here</a></span><br>`
+    textEmail += `<span>Have a good day!</span><br><br>`
+    textEmail += `<span>Codebakery</span>`
+    
+    console.log(sendEmail(
       user.id,
       `Reset password user ${user.name}`,
-      `http://localhost:3000/reset-password?resetToken=${token}&email=${user.email}`
-    );
+      textEmail
+    ))
     return {
       __typename: "user",
       id: user.id,
@@ -227,7 +235,8 @@ async function resetPassword(id) {
       role: user.role,
       token: token,
     };
-  } catch {
+  } catch(err){
+    console.log(err.message)
     return {
       __typename: "error",
       name: "Not Found",

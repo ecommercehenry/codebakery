@@ -25,9 +25,11 @@ const ButtonAddCart = ({ id, orderId, refetchCatalogue }) => {
   const dispatch = useDispatch();
   let poc = [];
   if (data && !loading) {
-    data.getOrdersByUserIdInCart.orders[0].lineal_order.map((element) =>
-      poc.push(element.id)
-    );
+    if(data.getOrdersByUserIdInCart.orders[0]){
+      data.getOrdersByUserIdInCart.orders[0].lineal_order.map((element) =>
+        poc.push(element.id)
+      );
+    }
   }
   if (!logged && itemsToCart.length > 0) {
     itemsToCart.map((ele) => poc.push(ele.id));

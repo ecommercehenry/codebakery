@@ -122,8 +122,8 @@ server.use(
     return {
       schema: schema,
       extensions({ result, variables, document }) {
-        console.log(variables)
-        console.log(result)
+        // console.log(variables)
+        // console.log(result)
       },
       rootValue: root,
       graphiql: true,
@@ -178,7 +178,7 @@ server.use((err, _req, res, _next) => {
   // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;
-  //console.error(err);
+
   res.status(status).send(message);
 });
 
