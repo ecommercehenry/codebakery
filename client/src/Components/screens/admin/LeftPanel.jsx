@@ -21,6 +21,8 @@ const LeftPanel = () => {
     users: path.includes("users") ? "active" : "inactive",
     stores: path.includes("stores") ? "active" : "inactive",
     promos: path.includes("promos") ? "active" : "inactive",
+    sliders: path.includes("slider") ? "active" : "inactive",
+    newsletters: path.includes("newsletter") ? "active" : "inactive",
   };
 
   let logout = () => {
@@ -33,7 +35,7 @@ const LeftPanel = () => {
         <section style={{ width: "100%" }}>
           <div className="userInfo">
             <div className="userAvatar"></div>
-            <div className="userName">User Name</div>
+            <div className="userName">Admin</div>
           </div>
           <div className="tabs">
             <Link
@@ -65,7 +67,7 @@ const LeftPanel = () => {
               className="text-decoration-none text-white"
               to="/admin/slider"
             >
-              <div className={`tab ${activeTab.users}`}>
+              <div className={`tab ${activeTab.sliders}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Slider</span>
               </div>
@@ -74,7 +76,7 @@ const LeftPanel = () => {
               className="text-decoration-none text-white"
               to="/admin/newsletter"
             >
-              <div className={`tab ${activeTab.users}`}>
+              <div className={`tab ${activeTab.newsletters}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Newsletter</span>
               </div>
@@ -219,7 +221,7 @@ const StyledPanel = styled.div`
         border-radius: 50%;
         width: 100%;
         padding-bottom: 100%;
-        background: white;
+        background: transparent;
         content: "";
         display: inline-block;
       }
@@ -233,10 +235,10 @@ const StyledPanel = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      margin-top: 4rem;
+      margin-top: 2.5em;
       font-weight: bold;
       .tab {
-        margin-top: 0.5rem;
+        margin-top: 0.1em;
         font-size: 1.1rem;
         display: flex;
         justify-content: flex-start;
@@ -250,7 +252,7 @@ const StyledPanel = styled.div`
           border-left: solid 4px white;
         }
 
-        .tabName {
+        .º {
           margin-left: 0.5rem;
           font-size: inherit;
         }

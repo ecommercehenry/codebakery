@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
     color: "black", //color de titulos
     margin: "auto",
     padding: theme.spacing(2),
-    position: "relative"
+    position: "relative",
+    marginTop:"5rem"
   },
 }));
 

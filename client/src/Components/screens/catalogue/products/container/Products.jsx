@@ -12,9 +12,10 @@ import ProductBar from "./ProductBar";
 const Products = ({ orderId, refetchCatalogue }) => {
   const dispatch = useDispatch();
 
-  let { data } = useQuery(allProducts, { fetchPolicy: "no-cache" });
+  let { data,refetch} = useQuery(allProducts);
   useEffect(() => {
     dispatch(guardarProductos(data));
+    refetch()
   }, [data, dispatch]);
 
   return (

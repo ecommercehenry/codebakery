@@ -5,12 +5,16 @@ import SucursalCard from "./SucursalCard";
 import styled from "styled-components";
 import {motion} from 'framer-motion';
 import {pageAnimation} from '../PageAnimation'
+import NavBarMobile from "../screens/navBar/NavBarMobile";
 
 const Sucursales = () => {
+  
+
   return (
     <StyledStoresContainer variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
-      <div id="navBackground" style={{ backgroundColor: "#5e3f71" }}>
+      <div id="navBackground">
         <NavBar color="white" />
+        <NavBarMobile color="white"/>
       </div>
       <div className="both-container" style={{ display: "flex" }}>
         <div className="map-container">
@@ -25,6 +29,7 @@ const Sucursales = () => {
 };
 
 const StyledStoresContainer = styled(motion.div)`
+
   .both-container {
     display: flex;
   }
@@ -92,7 +97,7 @@ const StyledStoresContainer = styled(motion.div)`
 
     .map-container {
       width: 100vw;
-      height: 70vh;
+      height: 60vh;
     }
 
     .card-container {

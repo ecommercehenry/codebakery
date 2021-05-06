@@ -94,7 +94,7 @@ const ButtonSlider = styled.button`
 
 const SliderAtr = styled.div`
   position: relative;
-  background-color: #755588;
+  background-color: #5F3F71!important;
   z-index: 1;
   height: 20rem;
   width: 100%;

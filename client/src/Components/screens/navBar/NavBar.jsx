@@ -1,15 +1,16 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from "@apollo/client";
 import APPLY_DISCOUNT from "../../../Apollo/mutations/applyDiscount";
 import RESET_DISCOUNT from "../../../Apollo/mutations/resetDiscount";
-import getPromos from '../../../Apollo/queries/getPromos';
+import getPromos from "../../../Apollo/queries/getPromos";
 import CountCart from "../cart/container/CountCart";
 import styled from "styled-components";
-import ThemeSwitch from "./ThemeSwitch";
+import logo from './Logo.png'
+import logoBlack from './LogoBlack.png'
+/* import ThemeSwitch from "./ThemeSwitch"; */
 
 const NavBar = ({ color }) => {
-
   const textColor = color === "white" ? "text-inactive" : "text-dark";
   const navTag = `text-decoration-none ${textColor}`;
   const btnColor = color === "white" ? "white" : "purple";
@@ -31,7 +32,7 @@ const NavBar = ({ color }) => {
 
   const tagCat = `${navTag} ${isActive["catalogue"]}`;
   const tagCart = `${navTag} ${isActive["cart"]}`;
-  const tagAbout = `${navTag} ${isActive["about-us"]}`;
+  const tagAbout = `${navTag} ${isActive["about_us"]}`;
   const tagStores = `${navTag} ${isActive["stores"]}`;
 
   let logged = localStorage.token ? true : false;
@@ -57,24 +58,24 @@ const NavBar = ({ color }) => {
 
   let today = weekday[date.getDay()];
 
-  const promos= useQuery(getPromos,{
-    fetchPolicy:"no-cache"
+  const promos = useQuery(getPromos, {
+    fetchPolicy: "no-cache",
   });
-  
+
   const [applyDiscount] = useMutation(APPLY_DISCOUNT);
   const [resetDiscount] = useMutation(RESET_DISCOUNT);
 
   useEffect(() => {
-    if(promos && promos['data'] && promos['data']['getPromos']){
-      if(promos['data']['getPromos'].length === 0){
-      }else{
-        promos['data']['getPromos'].forEach(elem=>{
-          if(elem.day===today){
-            applyDiscount({variables:
-              {
-                discount:elem.discount,
-                category:elem.category,
-              }
+    if (promos && promos["data"] && promos["data"]["getPromos"]) {
+      if (promos["data"]["getPromos"].length === 0) {
+      } else {
+        promos["data"]["getPromos"].forEach((elem) => {
+          if (elem.day === today) {
+            applyDiscount({
+              variables: {
+                discount: elem.discount,
+                category: elem.category,
+              },
             });
           }
           // else{
@@ -85,49 +86,52 @@ const NavBar = ({ color }) => {
           //     }
           //   });
           // }
-        })
+        });
       }
     }
-  },[promos, applyDiscount, resetDiscount, today])
+  }, [promos, applyDiscount, resetDiscount, today]);
+
+  const path = window.location.pathname;
+  const landing = path === '/';
 
   return (
-    <StyledNavBar className="navbar d-flex align-items-center">
-      <div className="left-tags d-flex justify-content-between align-items-center me-auto">
+    <StyledNavBar white={ color } className="navbar d-flex align-items-center">
+      <div className="left-tags me-auto">
+        <div id="logo">
         <Link to="/" className={brandTag} style={{ fontWeight: "bold" }}>
-          <h5 className="mb-0 text-center display-linebreak">
-            Code {"\n"} Bakery
-          </h5>
+          <img src={landing ? logoBlack : logo} style={{height:"2.3em", width: "auto"}} alt=""/>
         </Link>
+        </div>
         {role === "admin" ? (
           <Link
             to="/admin/orders"
             className={`text-decoration-none ${textColor}`}
           >
-            <div>Admin Panel</div>
+            <div className="tab">Admin Panel</div>
           </Link>
         ) : (
+          <div className="cart-logo">
           <Link id="Cart" to="/cart" className={tagCart}>
-            <div>
               <CountCart />
-            </div>
           </Link>
+          </div>
         )}
-        <div style={{ padding: "0.2rem 0" }} className={isActive["catalogue"]}>
+        <div style={{ padding: "0.2rem 0" }} className={`tab ${isActive["catalogue"]}`}>
           <Link id="Catalogue" to="/catalogue" className={tagCat}>
             Catalogue
           </Link>
         </div>
-        <div style={{ padding: "0.2rem 0" }} className={isActive["stores"]}>
+        <div style={{ padding: "0.2rem 0" }} className={`tab ${isActive["stores"]}`}>
           <Link id="stores" to="/stores" className={tagStores}>
             Stores
           </Link>
         </div>
-        <div style={{ padding: "0.2rem 0" }} className={isActive["about-us"]}>
+        <div style={{ padding: "0.2rem 0" }} className={`tab ${isActive["about-us"]}`}>
           <Link id="About us" to="/about-us" className={tagAbout}>
             About us
           </Link>
         </div>
-        <ThemeSwitch />
+        {/* <ThemeSwitch className="tab"/> */}
       </div>
       <div className="right-buttons d-flex align-items-center">
         {logged ? (
@@ -137,9 +141,11 @@ const NavBar = ({ color }) => {
               className={`login-btn text-decoration-none ${textColor}`}
             >
               <div className={`usuario ${navTag}`}>
-              {localStorage.role === "admin" ? "" : <div> Hi! {logeed ? localStorage.name : ""}</div>
-              
-              }
+                {localStorage.role === "admin" ? (
+                  ""
+                ) : (
+                  <div> Hi! {logeed ? localStorage.name : ""}</div>
+                )}
               </div>
             </Link>
             <Link
@@ -177,24 +183,16 @@ const NavBar = ({ color }) => {
 };
 
 const StyledNavBar = styled.nav`
-  background-color: #5e3f71;
+ @media(max-width: 850px){
+    display: none!important;
+  }
+
+  background-color: ${({white}) => white === "white" ? "#5e3f71" : "transparent"};
   padding: 0 5rem;
   z-index: 2;
   font-weight: bold;
-
-  .left-tags {
-    width: 35rem;
-    font-size: 0.9rem;
-    padding-bottom: 1rem;
-    padding-top: 0.5rem;
-  }
-
-  .right-buttons {
-    display: flex;
-    width: 17vw;
-    font-size: 0.9rem;
-    justify-content: flex-end;
-  }
+  height: 4.5rem;
+  position: relative;
 
   .log-in-btn {
     margin-right: 14px;
@@ -276,6 +274,32 @@ const StyledNavBar = styled.nav`
   #Cart {
     border: none !important;
   }
+
+  .left-tags {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 35rem;
+    font-size: 0.9rem;
+
+    @media (max-width: 1024px) {
+      width: 30rem!important;
+    }
+  }
+
+  .right-buttons {
+    display: flex;
+    width: 17vw;
+    font-size: 0.9rem;
+    justify-content: flex-end;
+    
+  }
+
+  @media (max-width: 1024px) {
+      padding: 0 2rem!important;
+  }
+
+  
 `;
 
 export default NavBar;

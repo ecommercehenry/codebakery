@@ -88,8 +88,8 @@ async function dataPopulation() {
     await modifyOrderStatus(12, 'received');
     await modifyOrderStatus(13, 'received');
     await modifyOrderStatus(14, 'received');
-    await modifyOrderCancelled(15, true);
-    await modifyOrderCancelled(1, true);
+    await modifyOrderStatus(15, "cancelled");
+    await modifyOrderStatus(1, "cancelled");
 
 
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,1)`)

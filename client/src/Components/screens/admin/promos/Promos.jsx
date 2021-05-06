@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import FormPromo from "./FormPromo"
 import PromoList from "./PromoList"
 import styled from 'styled-components'
+import { useSelector } from "react-redux";
+
 
 const Promos = ({promo,setPromo}) => {
 
-    useEffect(() => {},[])
+    let { status } = useSelector((state) => state.theme);
     
     return (
-        <StyledPromos>
+        <StyledPromos light={status}>
             {
                 promo ? <FormPromo promo={promo} setPromo={setPromo}/> : <PromoList/>
             }
@@ -20,7 +22,7 @@ const StyledPromos = styled.div`
     //padding-top:6rem;
     display: flex;
 position: relative;
-background: white;
+background: ${({ light }) => (light ? "white" : "#292929")};
 flex-direction: column;
 justify-content: space-between;
 align-items: center;

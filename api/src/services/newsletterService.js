@@ -5,7 +5,7 @@ const { Users } = require("../db");
 async function sendNewsletter(args){
   let emails;
   let imageUrl;
-  let description = args.description;
+  let description = args.message;
   console.log("DESCRIPTION", description);
   
     try{
@@ -43,8 +43,10 @@ var mailOptions = {
   html: `<HTML><HEAD>
   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8"></HEAD>
   <BODY>
+  <h1>${description}</h1>
   <img src=${imageUrl} />
-  <a href="https://www.codebakery.store/"><button>Ir a la tienda</button></a>
+  <a href="https://www.codebakery.store/"><br>
+  <button>Ir a la tienda</button></a>
   </BODY>
   </HTML>
   `
