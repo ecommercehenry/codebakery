@@ -34,11 +34,13 @@ function TwoFA(){
             role: localStorage.getItem("role"),
           },
         })
+        // window.location.reload();
+        // console.log("ENTROOOOOOOOO")
       }
-      console.log("ENTROOOOOOOOO")
     },[loadingCredentials, dataCredentials, tokenLocal, functionValidate]);
-
-
+    // console.log('ttttttttttttttttttttttttttttttttt')
+    
+    // dispatch(clearDataUserProfile())
     const {
         register,
         handleSubmit,
@@ -66,7 +68,17 @@ function TwoFA(){
       
     }, [dataValidate, dispatch, email, id, name, role, token, roleUser])
 
+    useEffect(() => {
+      console.log(dataCredentials?.validateCredentials, 'atstattstatas')
+      if(dataCredentials?.validateCredentials) {
+        // alert('se va a reload twoFA')
+        window.location.reload();
+
+      }
+    },[dataCredentials?.validateCredentials])
+    // console.log(roleUser, tokenUser, dataCredentials)
     if(roleUser  && tokenUser && dataCredentials){
+      // console.log(roleUser,'ayysyaysyas')
       if(roleUser === 'admin'){
         return <Redirect to='/admin/orders' />;
       }

@@ -51,6 +51,8 @@ function Login() {
       if(dataValidate.validateUserWithGoogle.token){
         if(dataValidate.validateUserWithGoogle.twoFA ){
           dispatch(saveDataProfile(dataValidate.validateUserWithGoogle));
+          // alert('se va a reload 1 login')
+          window.location.reload();
         }
         else{
           alert("logueado")
@@ -61,8 +63,10 @@ function Login() {
           localStorage.setItem('id', dataValidate.validateUserWithGoogle.id);
           // es necesario el reloaded para luego poder redirigir
           toast(`Bienvenido ${dataValidate.validateUserWithGoogle.name}`); 
+          // window.location.reload();
+          // alert('se va a reload 2 login')
+          window.location.reload();
         }
-        window.location.reload();
       }else{
         toast(dataValidate.validateUserWithGoogle.detail);
       }

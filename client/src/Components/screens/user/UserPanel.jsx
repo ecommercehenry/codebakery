@@ -11,7 +11,7 @@ import UserReview from "./UserReview";
 
 const UserPanel = () => {
   let { status } = useSelector((state) => state.theme);
-  const [click, setClick] = useState(3);
+  const [click, setClick] = useState(3); 
   useEffect(() => {}, [click]);
   return (
     <StyledUserPanel light={status} variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
