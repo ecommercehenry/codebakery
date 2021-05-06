@@ -17,31 +17,24 @@ export default function Footer() {
     <>
       <StyledFooter>
         <Newsletter />
-        <div className="adicionales">
-          <div className="legales">
-            <p>Aviso Legal</p>
-            <p>Politica de Privacidad</p>
-            <p>Politica de Cockies</p>
-            <p>Copyright © </p>
-            <Link to="/about-us" style={{ textDecoration: "none" }}>
-              <p className="linea-final">Desarrollado por alumnos de Henry</p>
-            </Link>
-          </div>
-        </div>
         <div className="redes">
-          <a target="_blank" rel="noopener noreferrer" href="https://es-la.facebook.com/">
+         <h5>Follow Us!</h5>
+          <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/codebakery.ar">
             <img className="icon-git" src={fb} alt="Facebook" />
           </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/?lang=es">
-            <img className="icon-git" src={tw} alt="Twitter" />
-          </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://web.whatsapp.com/">
-            {" "}
-            <img className="icon-git" src={wa} alt="Whatsapp" />
-          </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/?hl=es-la">
+          <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/codebakery.ar/">
             <img className="icon-git" src={is} alt="Instagram" />
           </a>
+        </div>
+        <div className="plano">
+        <div className="adicionales">
+          <div className="legales">
+            <p>Copyright © 2021 | <Link to="/about-us" className="color">
+           Developed by Students from Henry's Bootcamp
+              </Link></p>
+            
+            </div>
+          </div>
         </div>
       </StyledFooter>
     </>
@@ -49,59 +42,83 @@ export default function Footer() {
 }
 
 const StyledFooter = styled.footer`
-  background: url(${footer});
+ background: url(${footer});
+  
   display: flex;
   text-align: center;
   flex-direction: column;
   align-items: center;
+  color:white;
 
-  margin-top: 3rem;
   /* justify-content: center; */
   border-top: 1px inset #694e7a;
 
   .legales {
-    padding: 1rem;
+    
     width: inherit;
+   
+  }
+  .legales p{
+    color: white;
+    margin: 0;
+  }
+  .color{
+    color:white;
+  }
+  .legales h6{
+    margin:10px;
+    color:white;
+  }
+
+  .legales h6: hover{
+    color:#EDC174;
+  }
+  .plano {
+    padding:8px;
+    width: 100%;
+    background-color: #3f2551;
   }
 
   .redes {
-    width: 50%;
+    //background-color:green;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    
   }
 
   .icon-git {
-    height: 2rem;
-    width: 2rem;
-    margin-bottom: 1rem;
+    height: 1.5 rem;
+    width: 1.5rem;
+    margin-bottom: 0.5rem ;
+    
   }
 
-  p {
-    color: #694e7a;
-    margin: 0;
-  }
   .adicionales {
-    width: 80%;
-    margin: 1rem;
+    width: 100%;
+    margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+  
   }
 
-  .linea-final {
-    background-color: hsla(
-      277.6470588235294,
-      23.076923076923077%,
-      43.333333333333336%,
-      0.62
-    );
-    color: hsl(264.00000000000017, 26.31578947368428%, 96.27450980392156%);
-    padding: 1rem;
-    border-radius: 10px;
-  }
 
-  .linea-final:hover {
-    background-color: #694e7a;
-  }
+
+  // .linea-final {
+  //   background-color: hsla(
+  //     277.6470588235294,
+  //     23.076923076923077%,
+  //     43.333333333333336%,
+  //     0.62
+  //   );
+  //   color: hsl(264.00000000000017, 26.31578947368428%, 96.27450980392156%);
+  //   padding: 1rem;
+  //   border-radius: 10px;
+  // }
+
+  // .linea-final:hover {
+  //   background-color: #694e7a;
+  // }
 `;

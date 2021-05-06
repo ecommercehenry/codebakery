@@ -34,7 +34,7 @@ const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
       <div className="onLeft">
         <Route path="/admin/products">
           <div className="optionTab">PRODUCTS</div>
-          <SearchBar />
+          {/* <SearchBar /> */}
         </Route>
 
         <Route path="/admin/orders">
@@ -64,6 +64,14 @@ const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
           <div className="optionTab">NEWSLETTERS</div>
         </Route>
         
+        <Route path="/admin/slider">
+          <div className="optionTab">SLIDER</div>
+        </Route>
+
+        <Route path="/admin/newsletter">
+          <div className="optionTab">NEWSLETTER</div>
+        </Route>
+        
       </div>
 
       <Route path="/admin/orders">
@@ -82,6 +90,7 @@ const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {
           <AddPromoButton setPromo={setPromo}/>
         </div>
       </Route>
+
       <Route path="/admin/products">
         <>
           {add ? (

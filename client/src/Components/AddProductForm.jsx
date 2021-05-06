@@ -194,6 +194,7 @@ const StyledForm = styled.form`
     padding: 3rem 4rem;
     border:1px solid #f3dff3;
     position: relative;
+
     .close{
         position:absolute;
         top:2.5rem;
@@ -207,13 +208,14 @@ const StyledForm = styled.form`
     .imageLoaderr{
         width:100%;
         height:30%;
-        //background:red;
+        background:red;
         display:flex;
         justify-content:space-between;
         align-items:center;
         .previeww{
             height:100%;
             background: #E3DDE7;
+            background: purple;
             width:55%;
             border-radius:28px;
             overflow:hidden;
@@ -224,7 +226,7 @@ const StyledForm = styled.form`
             }
         }
         .fakeButtonn{
-            //background:red;
+            background:green;
             width:60%;
             display:flex;
             justify-content:flex-end;
@@ -234,6 +236,7 @@ const StyledForm = styled.form`
             }
         }
     }
+    
     .infoProductt{
         //background:blue;
         height:60%;
