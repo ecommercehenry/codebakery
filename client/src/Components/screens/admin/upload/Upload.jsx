@@ -65,7 +65,7 @@ const Upload = ({
       >
         <input {...getInputProps()} placeholder="Drag and Drop here" />
         <p style={{ margin: "0", color: "#755588" }}>
-          Drag 'n' drop some files here, or click to select files
+          Drag & drop some files here or click to select files
         </p>
       </div>
     </DropZone>
@@ -76,11 +76,13 @@ const Uploading = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 2em;
   height: 8rem;
   margin-bottom: 3rem;
   color: #755588;
-  padding: 1rem;
+  padding: 0.1em;
+  width: 50%;
+  margin-left: 0.7em;
 
   .waiting {
     margin: 0;
@@ -90,7 +92,8 @@ const Uploading = styled.div`
 `;
 
 const DropZone = styled.form`
-  width: 100%;
+  width: 43%;
+  margin-right: 0.7em;
 
   input {
     border: none;
@@ -102,22 +105,29 @@ const DropZone = styled.form`
   }
 
   .dropzone {
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    height: 8rem;
-    padding: 1rem;
+    /* margin-top: 3rem; */
+    /* margin-bottom: 1rem; */
+    height: 100%;
+    padding: 1em;
     border: 2px dashed #755588;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
+    font-size: 1.8em;
     font-weight: bold;
     cursor: pointer;
+    margin: 0;
+    border-radius: 0.5em;
   }
 
   .active {
     border: 2px solid rebeccapurple;
   }
+
+  .p {
+    font-size: 1.2em;
+  }
+
 `;
 
 export default Upload;

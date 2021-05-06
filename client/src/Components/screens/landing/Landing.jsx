@@ -7,13 +7,15 @@ import bread2 from './bread2.png';
 import { Redirect } from 'react-router-dom'
 import {motion} from 'framer-motion';
 import {pageAnimation} from '../../PageAnimation'
+import NavBarMobile from '../navBar/NavBarMobile';
 
 const Landing = () => {
     const [redirect, setRedirect] = useState(false)
 
     return (
         <>
-            <NavBar color='white' />
+            <NavBar color='black'/>
+            <NavBarMobile color='white'/>
             <StyledLanding variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
                 <div className="background-photo">
                     <img src={bread1} alt="" id="bread1" />
@@ -69,7 +71,7 @@ top: 0;
     position: absolute;
     left: 2em;
     bottom: 1em;
-    height: 40vh;
+    height: 20rem;
     width: auto;
 }
 #bread2{
@@ -114,4 +116,109 @@ top: 0;
   .purple-btn:hover{
     background-color: #532c6b
   }
+
+
+@media(max-width: 1024px){
+    #title-btn-wrapper{
+        position: fixed!important;
+        width: 100vw;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        top: 0!important;
+        left: 0!important;
+        
+    }
+
+    .landing-title{
+        font-size: 6rem;
+        text-align: center;
+    }
+    
+}
+
+@media(max-width: 850px){
+    #bread1{
+        display:static;
+        height: 17rem;
+    }
+
+    #bread2{
+        display:none!important;
+    }
+
+    #title-btn-wrapper{
+        padding-bottom: 8rem!important;
+    }
+
+    .go-shop-btn{
+        width: 18rem!important;
+        height: 3rem;
+
+        margin-top: 1.3em;
+        font-size: 1.3em;
+    }
+    
+    .landing-title{
+        font-size: 5rem;
+        text-align: center;
+    }
+}
+
+@media(max-width: 600px){
+    #bread1{
+        height: 15rem;
+    }
+
+    #title-btn-wrapper{
+        padding-bottom: 8rem!important;
+    }
+
+    .go-shop-btn{
+        width: 20rem!important;
+        height: 3rem;
+
+        margin-top: 1.3em;
+        font-size: 1.3em;
+    }
+    
+}
+
+@media(max-width: 480px){
+    #bread1{
+        display:none
+    }
+
+    .background-photo{
+        background-image: none!important;
+    }
+
+    .go-shop-btn{
+        margin-top: 2em!important;
+    }
+    
+    #title-btn-wrapper{
+        padding-bottom: 8rem!important;
+        top: 1em!important;
+    }
+
+    .landing-title{
+        font-size: 4.5rem;
+        text-align: center;
+    }
+}
+
+@media(max-width: 325px){
+    .landing-title{
+        font-size: 3.8rem;
+        text-align: center;
+    }
+
+    .go-shop-btn{
+        width: 18rem!important;
+        font-size: 1.2em;
+    }
+}
+
+
 `

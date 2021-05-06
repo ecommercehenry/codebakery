@@ -27,5 +27,7 @@ module.exports = `
         getImageSlider: [image]
         getByStore(id: Int!) : store
         getPromos: [promo]
+        getAllOrdersUser (userId: Int!): ordersResult
+
     }
 `;

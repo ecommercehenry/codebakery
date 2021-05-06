@@ -65,7 +65,8 @@ const {
     getImageSlider,
     getByStore,
     validateTOTP,
-    getPromos
+    getPromos,
+    getAllOrdersUser, 
 } = require("./queriesResolvers/")
 
 // product
@@ -139,7 +140,8 @@ const root = {
     getImageSlider,
     getByStore,
     getByStore,
-    validateTOTP
+    validateTOTP,
+    getAllOrdersUser
 }
 
 

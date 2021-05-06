@@ -14,6 +14,9 @@ import styled from "styled-components";
 import Footer from "../../footer/Footer";
 import CREATE_ORDER from "../../../../Apollo/mutations/createOrder";
 import ADD_PRODUCT_TO_ORDER from "../../../../Apollo/mutations/addProductToOrder";
+import NavBarMobile from "../../navBar/NavBarMobile";
+import {removeAll} from "../../../../actions/cartActions"
+
 const Catalogue = () => {
   let storage = window.localStorage;
   let logged = storage.token ? true : false;
@@ -60,6 +63,8 @@ const Catalogue = () => {
               },
             });
           });
+          localStorage.removeItem("cart")
+          dispatch(removeAll())
         } else {
           createOrder({
             variables: {
@@ -72,13 +77,16 @@ const Catalogue = () => {
               }),
             },
           });
+          localStorage.removeItem("cart")
+          dispatch(removeAll())
         }
       }
     }
   }, [queryData, itemsToCart, addProductToOrder, createOrder, dispatch, logged, userId, orderId]);
   return (
     <StyledCatalogue variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
-      <NavBar color="white" />
+      <NavBar color="white" className="desktop-navbar"/>
+      <NavBarMobile color="white"/>
       <Hero />
       <Products orderId={orderId} refetchCatalogue={queryData.refetch} />
       <Route path="/catalogue/detail/:id">

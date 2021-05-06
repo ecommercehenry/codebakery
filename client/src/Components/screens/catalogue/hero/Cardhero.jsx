@@ -21,7 +21,7 @@ const StyledHero = styled.div`
   position: relative;
 
   width: 100%;
-  background-color: #755588;
+  background-color: #5F3F71;
   /*  border-radius: 0px 0px 50px 50px; */
   z-index: 1;
   background-size: 30rem;

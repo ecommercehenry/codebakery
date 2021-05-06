@@ -53,7 +53,8 @@ const Grid = ({ orderId, refetchCatalogue }) => {
         {
 
           search ? 
-          (productsToRender?.length > 0 ? productsToRender.map((element) => {
+          (productsToRender?.length > 0 ? 
+            productsToRender.map((element) => {
             return <ProductCard 
             refetchCatalogue={refetchCatalogue}
             orderId={orderId} 
@@ -63,7 +64,10 @@ const Grid = ({ orderId, refetchCatalogue }) => {
             image={element.image} 
             price={element.price}
             discount= {element.discount} />
-          }) : "No se encontraron Productos") : (productsToRender?.length > 0 ? productsToRender.map((element) => {
+          }) : 
+          "No se encontraron Productos") : 
+          (productsToRender?.length > 0 ? 
+            productsToRender.map((element) => {
             return <ProductCard 
             refetchCatalogue={refetchCatalogue}
             orderId={orderId}
@@ -88,8 +92,14 @@ const media = {
 };
 
 const StyledGrid = styled.div`
-  background: ${({ light }) => (light ? "transparent" : "#222222")};
-  color: ${({ light }) => (light ? "inherit" : "white")};
+  background: ${({ light }) =>
+  (light ? 
+  "transparent" :
+  "#222222")};
+  color: ${({ light }) =>
+  (light ? 
+  "inherit" : 
+  "white")};
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-auto-rows: 37vh;

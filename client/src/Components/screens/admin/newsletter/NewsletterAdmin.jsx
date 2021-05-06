@@ -32,15 +32,9 @@ export default function NewsletterAdmin(){
         }   
     }
 
-    // let messajeExport =`<html><span>Hi ${info.description}</span> <br>
-    // <img src=${info.image}/>
-    // </html>`
-
-    
     function handlerOnClick (e){
         //console.log(info, 'info');
         e.preventDefault();
-      // console.log(messajeExport, 'info image');
         sendNews({
             variables: {
               message: info.description,
@@ -76,6 +70,7 @@ export default function NewsletterAdmin(){
                         name="image-product" 
                         id="image-product"
                         onChange={imageHandler}
+                        
                     />
                 </div>
             </div>
@@ -144,7 +139,8 @@ label {
       width:40%;
       display:flex;
       justify-content:flex-end;
-      margin-right:15px;
+      margin-right:10px;
+      margin-left: 10px;
       align-items:center;
       input{
           width:100%;
@@ -175,14 +171,11 @@ label {
   border-radius:28px;
   justify-content:center;
   align-items:center;
-  color:#755588;s
-  
-
+  color:#755588;
 
 }
 .submitt{
- // width: 20%;
-
+  
   height:auto;
   display:flex;
   justify-content: center;

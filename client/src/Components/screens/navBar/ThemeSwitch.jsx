@@ -22,7 +22,6 @@ const ThemeSwitch = () => {
         }
     },[location.pathname])
     
-    /* console.log(location,home) */
     return (
         <StyledContainer home={home}>
             <span>
