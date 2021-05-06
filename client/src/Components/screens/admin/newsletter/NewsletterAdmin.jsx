@@ -107,7 +107,10 @@ padding: 3rem 4rem;
 border:2px solid #f3dff3;
 position: relative;
 background:white;
-border-color:#755588;
+margin-bottom: 2rem;
+box-shadow: 0 1px 2px 0 rgb(0 0 0 / 30%);
+clear: both;
+overflow: hidden;
 
 input[type=text], select, textarea {
   width: 100%;
