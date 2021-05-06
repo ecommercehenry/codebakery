@@ -4,7 +4,6 @@ import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import styled from "styled-components";
 
-import { Route } from "react-router-dom";
 import {   HiOutlineExternalLink,
   HiOutlineLogout } from "react-icons/hi";
 

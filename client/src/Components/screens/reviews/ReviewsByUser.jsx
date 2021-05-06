@@ -16,7 +16,7 @@ const ReviewByUser = ({ productId, id, title, description, stars, refetch}) => {
 
   const deleteHandler = async (e) => {
   e.preventDefault()
-   let result =  await deleteReview({
+   await deleteReview({
       variables: {
         productId: productId,
         userId: parseInt(index.id)

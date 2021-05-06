@@ -12,6 +12,7 @@ const GET_ORDERS_BY = gql`
         lineal_order {
           name
           discount
+          quantity
         }
       }
       ... on error {

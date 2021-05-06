@@ -20,7 +20,7 @@ let { status } = useSelector((state) => state.theme);
       dispatch(saveProducts(data.product));
       refetch()
     }
-  }, [data, dispatch, setPromo, loading. refetch]);
+  }, [data, dispatch, setPromo, loading, refetch]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

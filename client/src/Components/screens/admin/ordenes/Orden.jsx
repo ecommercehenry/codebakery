@@ -8,15 +8,15 @@ import { Link } from "react-router-dom";
 import MODIFY_ORDER_STATUS from "../../../../Apollo/mutations/modifyOrderStatus";
 import { useDispatch } from "react-redux";
 import { changeStatus } from "../../../../actions";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import SEND_EMAIL_SENT from "../../../../Apollo/mutations/sendEmailSent";
+import GET_ORDERS_BY from "../../../../Apollo/queries/getOrderById";
 
-// @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
   const [orderStatus, setOrderStatus] = useState(orden.status);
   const [selectedStatus, setSelectedStatus] = useState();
   const [show, setShow] = useState(false);
-
   useEffect(() => {
     setOrderStatus(orderStatus);
     document.getElementById(`status-select-${orden.id}`).value = orderStatus;
@@ -24,23 +24,57 @@ export default function Orden({ id, orden }) {
 
   const [modifyOrderStatus] = useMutation(MODIFY_ORDER_STATUS);
 
-  const handleCancel = () => {
-    document.getElementById(`status-select-${orden.id}`).value = orderStatus;
+  const [sendEmailSent] = useMutation(
+    SEND_EMAIL_SENT
+  );
 
-    setShow(false);
-  };
+  const {data:dataOrder}= useQuery(GET_ORDERS_BY, {
+    variables:{
+      idOrder:orden.id
+    }
+  })
+
+  const handleCancel  = () => {
+    document.getElementById(
+      `status-select-${orden.id}`
+    ).value = orderStatus;
+    
+    setShow(false)
+  }
 
   let dispatch = useDispatch();
 
   const handleConfirm = () => {
+
     modifyOrderStatus({
       variables: { orderId: orden.id, status: selectedStatus },
-    }).then(() => {
-      dispatch(changeStatus(orden.id, selectedStatus));
-      setOrderStatus(selectedStatus);
-      setShow(false);
-    });
-  };
+    }).then(()=>{
+      dispatch(changeStatus(orden.id, selectedStatus))
+      setOrderStatus(selectedStatus)
+      setShow(false)
+    })
+    if (selectedStatus === "sent") {
+      let htmlOrdenes = "<ul>"
+      dataOrder.getOrderById.lineal_order.forEach(or=>htmlOrdenes+=`<li>${or.name}(${or.quantity})</li>`)
+      htmlOrdenes += "</ul>"
+      
+      sendEmailSent({
+        variables: {
+          userId: orden.userId, 
+          affair: `Order ${orden.id} sent`,
+          message: `<html>
+          <span> Hi!</span><br>
+          <span> Your order ${orden.id} has been sent!, in one hour you get yours delicious products </span>
+          ${htmlOrdenes}
+
+          Thanks for buy with us
+
+          Have a good day!
+          </html>`
+        }
+      })
+    }
+  }
 
   let handleOption = async (e) => {
     setSelectedStatus(e.target.value);
