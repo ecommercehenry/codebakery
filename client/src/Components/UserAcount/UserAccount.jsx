@@ -40,6 +40,7 @@ const UserAcount = () => {
   // Google login
   const dispatch = useDispatch();
 
+  
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -50,8 +51,7 @@ const UserAcount = () => {
         },
       });
     }
-
-    if (!loading && data) {
+    if (!loading && data && !localStorage.getItem("token")) {
       if (data.validateUser.token) {
         // alert("logueado")
         // si está habilitada la athenticacion twoFA guardamoen en el reducer
@@ -77,7 +77,7 @@ const UserAcount = () => {
 
     
   }},[loading, data, dataValidate, dispatch, functionValidate]);
- 
+  // dispatch(saveDataProfile(data.validateUser))
   let role = localStorage.getItem('role') ;
   let token = localStorage.getItem('token');
   if(role  && token && dataValidate){
@@ -93,7 +93,7 @@ const UserAcount = () => {
   }
   
   else if(dataUser.role && dataUser.token && dataUser.twoFA ){
-    toast(`Hello ${data?.validateUser.name}, you must do 2FA`);
+    toast(`Hello ${data?.validateUser.name || dataUser.name}, you must do 2FA`);
     return <Redirect to='/TFA' />
   }
   const handleLogin = async (form) => {
