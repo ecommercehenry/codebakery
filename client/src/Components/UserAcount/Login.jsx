@@ -62,7 +62,7 @@ function Login() {
           localStorage.setItem('role', dataValidate.validateUserWithGoogle.role);
           localStorage.setItem('id', dataValidate.validateUserWithGoogle.id);
           // es necesario el reloaded para luego poder redirigir
-          toast(`Bienvenido ${dataValidate.validateUserWithGoogle.name}`); 
+          toast(`Bienvenido ${dataValidate.validateUserWithGoogle.name}`);
           // window.location.reload();
           // alert('se va a reload 2 login')
           window.location.reload();
