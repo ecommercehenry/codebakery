@@ -120,11 +120,27 @@ h2{
  
 }
 
-@media (min-width: 320 px) and (max-width: 480px ) {
-  ,ocultar {
-    display: none;
+@media (max-width: 500px)  {
+  .ocultar {
+    display: none!important; 
+  }
+  h2{
+    font-size: 1em!important;
+  }
+  .suscribe-btn {
+    margin:10px;
+    color:white;
+    width:10rem;
+    padding: 10px 10px;
+    border: solid 2px ;
+    border-radius: 40px;
+    border-color: white;
+    background-color: Transparent; /* Green */;
+    transition: 0.3s;
   }
 }
+
+
 
   
 `;
