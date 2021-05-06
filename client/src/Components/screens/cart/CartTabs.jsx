@@ -52,6 +52,14 @@ export const StyledTabs = styled.div`
   height: fit-content;
   border-bottom: 1px solid #e6e6e6;
 
+  @media(max-width: 1024px){
+    width: 90%;
+  }
+
+  @media(max-width: 768px){
+      display: none!important;
+  }
+
   ul{
   display: flex;
   padding: 0;

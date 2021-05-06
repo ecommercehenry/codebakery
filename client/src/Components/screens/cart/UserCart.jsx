@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import GET_ORDERS_BY_USER_ID_IN_CART from "../../../Apollo/queries/getOrdersByUserIdInCart";
 import { useQuery } from "@apollo/client";
 import styled from "styled-components";
-import {motion} from 'framer-motion';
-import {pageAnimation} from '../../PageAnimation'
+import { motion } from "framer-motion";
+import { pageAnimation } from "../../PageAnimation";
 import ProductOnCart from "./ProductOnCart";
 import { useDispatch } from "react-redux";
 import { setQuantityOrdersCardBackend } from "../../../actions/setQuantityOrdersCardBackend";
@@ -30,9 +30,15 @@ const UserCart = () => {
       }
     }
   }, [data, dispatch]);
-  console.log(data)
+  console.log(data);
   return (
-    <StyledCart variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
+    <StyledCart
+      variants={pageAnimation}
+      initial="hidden"
+      animate="show"
+      exit="exit"
+    >
+      <div className="products">
       {data?.getOrdersByUserIdInCart.orders[0] ? (
         data.getOrdersByUserIdInCart.orders[0].lineal_order.map((order) => (
           <ProductOnCart
@@ -51,16 +57,16 @@ const UserCart = () => {
       ) : (
         <p></p>
       )}
+      </div>
       <div className="buttonContainer">
-      <Link className="text-decoration-none" to="/checkout">
-        
+        <Link className="text-decoration-none btn-a" to="/checkout">
           {data &&
           data?.getOrdersByUserIdInCart?.orders[0]?.lineal_order.length ? (
             <button className="payMee">Checkout</button>
           ) : (
             ""
           )}
-      </Link>
+        </Link>
       </div>
     </StyledCart>
   );
@@ -73,6 +79,16 @@ const StyledCart = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .products{
+    height: fit-content;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .buttonContainer {
     //background:violet;
     margin-top: 2rem;
@@ -90,6 +106,44 @@ const StyledCart = styled(motion.div)`
       border-radius: 20px;
       font-size: 1.2rem;
       font-weight: bold;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .buttonContainer {
+      width: 90% !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+
+    .products{
+      margin-bottom: 6rem;
+    }
+    
+    .buttonContainer{
+      width: 100% !important;
+      background: white;
+      padding: 1em;
+      position: fixed;
+      bottom: 0;
+    }
+  }
+
+  @media(max-width: 480px){
+    .buttonContainer {
+      width: 100% !important;
+
+      .btn-a{
+        width: 100%;
+      }
+
+      .payMee{
+        width: 100%;
+        button{
+        width: 100%;
+      }
+      }
     }
   }
 `;

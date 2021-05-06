@@ -51,6 +51,8 @@ const StyledSearchBar = styled.div`
   align-items:center;
   border: 1.3px solid #949494;
   border-radius:20px;
+  max-width: 628px;
+  width: 90%;
   .lupita{
     margin-left:0.5em;
   }

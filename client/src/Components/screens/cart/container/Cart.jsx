@@ -5,6 +5,7 @@ import GuestCart from "../GuestCart";
 import UserCart from "../UserCart";
 import styled from 'styled-components'
 import CartTabs from "../CartTabs.jsx";
+import NavBarMobile from "../../navBar/NavBarMobile";
 
 const Cart = () => {
   let storage = window.localStorage;
@@ -13,12 +14,11 @@ const Cart = () => {
 
   return (
     <StyledCart light={status}>
-      <div id="navBackground">
-        <NavBar color="white"/>
-      </div>
+        {/* <NavBar color="white"/> */}
+        <NavBarMobile color="white"/>
       <div id="cartBackground" light={status}>
         <div id="cartContainer" light={status}>
-          <CartTabs />
+          <CartTabs className="cart-tabs"/>
           {logueado ? <UserCart /> : <GuestCart />}
         </div>
       </div>
@@ -68,6 +68,21 @@ const StyledCart = styled.div`
     height: fit-content;
     width: 100vw;
     background-color: #5e3f71;
+  }
+
+  @media(max-width: 1024px){
+    #cartContainer{
+      padding-top: 2rem!important;
+    }
+  }
+
+  @media(max-width: 768px){
+    #cartContainer{
+      width: 100vw!important;
+      margin: 0!important;
+      border-radius: 0!important;
+      padding: 0!important;
+    }
   }
 `
 
