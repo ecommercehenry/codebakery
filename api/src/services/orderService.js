@@ -10,7 +10,7 @@ try{
     userId: userId
    }
  })
- console.log(orders)
+
  const out = [];
 
     for (let i = 0; i < orders.length; i++) {
