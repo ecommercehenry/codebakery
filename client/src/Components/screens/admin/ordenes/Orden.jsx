@@ -8,12 +8,14 @@ import { Link } from "react-router-dom";
 import MODIFY_ORDER_STATUS from "../../../../Apollo/mutations/modifyOrderStatus";
 import { useDispatch } from "react-redux";
 import { changeStatus } from "../../../../actions";
-import { useMutation } from "@apollo/client";
+import { useMutation, useLazyQuery } from "@apollo/client";
+import GET_All_ORDERS from "../../../../Apollo/queries/getAllOrders";
 
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
-  const [orderStatus, setOrderStatus] = useState(orden.status);
+  const [orderStatus, setOrderStatus] = useState(orden.cancelled === true ? "cancelled" : orden.status);
+  console.log(orderStatus)
   const [selectedStatus, setSelectedStatus] = useState();
   const [show, setShow] = useState(false);
 
@@ -22,11 +24,11 @@ export default function Orden({ id, orden }) {
     document.getElementById(`status-select-${orden.id}`).value = orderStatus;
   }, [orden.id, orden.status, orderStatus]);
 
-  const [modifyOrderStatus] = useMutation(MODIFY_ORDER_STATUS);
+  const [modifyOrderStatus] = useMutation(MODIFY_ORDER_STATUS, {
+  });
 
   const handleCancel = () => {
     document.getElementById(`status-select-${orden.id}`).value = orderStatus;
-
     setShow(false);
   };
 
@@ -42,15 +44,17 @@ export default function Orden({ id, orden }) {
     });
   };
 
+  // useEffect(() => {
+
+  // }, [data, loading])
+
   let handleOption = async (e) => {
     setSelectedStatus(e.target.value);
     setShow(true);
   };
   if (orden) {
-    let total = 0 
-    orden.price.map((e) =>
-      total = total + e
-    )
+    let total = 0;
+    orden.price.map((e) => (total = total + e));
     return (
       <StyledOrden>
         <BootBox

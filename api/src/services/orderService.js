@@ -429,7 +429,7 @@ async function modifyOrderStatus(orderId, status) {
     const order = await Order.findOne({
       where: { id: orderId },
     });
-    if (status === "cancelled") {
+    if (status === "cancelled" && order.placeStatus === "ticket") {
       order.cancelled = true;
       await order.save();
       return { __typename: "booleanResponse", boolean: true };
