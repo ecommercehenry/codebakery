@@ -10,6 +10,7 @@ query validateUser($email: String!, $password: String!){
            role
            token
            id
+           twoFA
          }
          __typename
          ... on error{

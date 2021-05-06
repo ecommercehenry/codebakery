@@ -47,12 +47,23 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       allowNull: true
     },
+    secretOtp:{
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     salt: {
       type: DataTypes.STRING,
       get() {
         return () => this.getDataValue("salt")
       },
     },
+    newsletter: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    twoFA: {
+      type: DataTypes.BOOLEAN
+    }
   }, { timestamps: true })
   
 

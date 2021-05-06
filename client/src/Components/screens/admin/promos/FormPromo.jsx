@@ -64,7 +64,6 @@ const FormPromo = ({ promo, setPromo }) => {
     }
 
     const submitHandler = (e) => {
-        console.log("ewfw")
         e.preventDefault();
         info.category=category.value
         info.day=day.value

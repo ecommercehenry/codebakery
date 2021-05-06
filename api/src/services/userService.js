@@ -1,6 +1,7 @@
 const { Users, Product, Review } = require("../db");
 const jwt = require("jsonwebtoken");
 const { sendEmail } = require("./emailService");
+const { getCurrentDomainFront } = require("../config/currentDomain");
 
 async function getAllUsers() {
   try {
@@ -91,7 +92,7 @@ async function createUser(name, password, email, role, google) {
     };
   }
 }
-
+//---- MODIFY USER ----
 async function modifyUser(
   id,
   name,
@@ -101,7 +102,9 @@ async function modifyUser(
   role,
   address,
   dni,
-  phoneNumber
+  phoneNumber,
+  newsletter,//******** */
+  twoFA
 ) {
   let obj = {};
   if (password && newPassword) {
@@ -137,7 +140,9 @@ async function modifyUser(
   if (address) obj.address = address;
   if (dni) obj.dni = dni;
   if (phoneNumber) obj.phoneNumber = phoneNumber;
+  if (newsletter) obj.newsletter = newsletter;//**********/
 
+  obj.twoFA = twoFA;
   try {
     if (id) {
       let user = await Users.findOne({ where: { id } });
@@ -146,7 +151,8 @@ async function modifyUser(
       });
       return { __typename: "user", ...newUser.dataValues };
     }
-    if (email && !id) {
+
+    else if (email && !id) {
       let user = await Users.findOne({ where: { email } });
       let newUser = await user.update(obj, {
         attributes: { exclude: ["password", "salt"] },
@@ -158,7 +164,9 @@ async function modifyUser(
   }
 }
 
-async function loginUserWithGoogle(email, tokenId) {
+//---- LOGIN WHIT GOOGLE  ----
+async function loginUserWithGoogle(email, tokenId){
+  
   const user = await Users.findOne({
     where: {
       email,
@@ -187,6 +195,7 @@ async function loginUserWithGoogle(email, tokenId) {
       email: user.email,
       token: token,
       role: user.role,
+      twoFA: user.twoFA
     };
   }
 }
@@ -206,11 +215,18 @@ async function resetPassword(id) {
       "resetPassword",
       { expiresIn: 60 * 60 }
     ); //60*60 = 3600 seg = 1 hour
-    sendEmail(
+    let urlReset = `${getCurrentDomainFront()}/reset-password?resetToken=${token}&email=${user.email}`
+    let textEmail  = `<html>`
+    textEmail+= `<span>Hi ${user.name}</span><br>`
+    textEmail+= `<span>If you wanna reset your password click <a href=${urlReset}>here</a></span><br>`
+    textEmail += `<span>Have a good day!</span><br><br>`
+    textEmail += `<span>Codebakery</span>`
+    
+    console.log(sendEmail(
       user.id,
       `Reset password user ${user.name}`,
-      `http://localhost:3000/reset-password?resetToken=${token}&email=${user.email}`
-    );
+      textEmail
+    ))
     return {
       __typename: "user",
       id: user.id,
@@ -219,7 +235,8 @@ async function resetPassword(id) {
       role: user.role,
       token: token,
     };
-  } catch {
+  } catch(err){
+    console.log(err.message)
     return {
       __typename: "error",
       name: "Not Found",
@@ -260,6 +277,7 @@ async function loginUser(email, password) {
         email: user.email,
         token: token,
         role: user.role,
+        twoFA: user.twoFA
       };
     } else {
       return {
@@ -270,7 +288,7 @@ async function loginUser(email, password) {
     }
   }
 }
-
+//------ DELETE USER ---------
 async function deleteUser(id) {
   try {
     const userToDelete = await Users.findByPk(id);

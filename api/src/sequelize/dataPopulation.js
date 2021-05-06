@@ -1,7 +1,7 @@
 const { Product, Category, Users, conn, Promo } = require("../db");
 const { createOrder, getOrderById, updateOrderToTicket, modifyOrderStatus, modifyOrderCancelled } = require("../services/orderService");
 const { addReview } = require("../services/reviewsService");
-const { createUser } = require("../services/userService");
+const { createUser, modifyUser } = require("../services/userService");
 const {addStore} = require("../services/storeService")
 
 const MOCK_CATEOGRIES = require("./MOCK_CATEOGRIES.json");
@@ -16,15 +16,20 @@ async function dataPopulation() {
     await Promo.bulkCreate(MOCK_PROMOS)
     await createUser("admin","12345","admin@admin.com","admin")
     await createUser("santi","12345","santiagorincon2001@gmail.com","user")
-    await createUser("ivan","12345","ivanebo7@gmail.com","user")
+    await createUser("ivan","12345","ivan@gmail.com","user")
     await createUser("lucas","12345","lucasuracosta@gmail.com","user")
     await createUser("Joha","12345","johanarezabala1211@gmail.com","user")
     await createUser("patsy","12345","patsy.guerrero95@gmail.com","user")
-    await createUser("lau","12345","lau@gmail.com","user")
+    await createUser("lau","12345","lizen777@gmail.com","user")
     await createUser("guille","12345","guille@gmail.com","user")
     await createUser("pablo","12345","elxebec@gmail.com","user")
-    await createUser("Nicolas Lohuandus","12345","nlohuandus@gmail.com","user")
     await createUser("fran","12345","frank.ronaldo_17@hotmail.com","user")
+    await createUser("Nicolas Lohuandus","12345","nlohuandus@gmail.com","user")
+
+    await modifyUser(6,null,null,null,null,null,null,null, null, true)
+    await modifyUser(7,null,null,null,null,null,null,null, null, true)
+    await modifyUser(2,null,null,null,null,null,null,null, null, true)
+    await modifyUser(9,null,null,null,null,null,null,null, null, true)
 
     await createOrder([{id:1,quantity:10},{id:2,quantity:100}],1)
     await createOrder([{id:2,quantity:3},{id:6,quantity:4}],1)
@@ -83,8 +88,8 @@ async function dataPopulation() {
     await modifyOrderStatus(12, 'received');
     await modifyOrderStatus(13, 'received');
     await modifyOrderStatus(14, 'received');
-    await modifyOrderCancelled(15, true);
-    await modifyOrderCancelled(1, true);
+    await modifyOrderStatus(15, "cancelled");
+    await modifyOrderStatus(1, "cancelled");
 
 
     await conn.query(`insert into "product-category" ("productId","categoryId") values (1,1)`)
@@ -103,7 +108,14 @@ async function dataPopulation() {
     await conn.query(`insert into "product-category" ("productId","categoryId") values (8,3)`)
     await conn.query(`insert into "product-category" ("productId","categoryId") values (9,4)`)
 
-    
+    //Pruebas no debe ir
+    const user = await Users.findOne({
+        where:{
+            id:2
+        }
+    })
+    user.secretOtp = "HBGSUVDMHZLDY7JVMZASULZOIFPCSZKR"
+    user.save()
 
     return true
 

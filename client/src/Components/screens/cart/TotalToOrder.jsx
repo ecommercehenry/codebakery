@@ -53,7 +53,6 @@ const StyledTotal = styled.div`
     z-index:1;
     margin-top: 2rem;
     .buttonContainer{
-        //background:violet;
         margin-top: 1rem;
         width:87%;
         display:flex;

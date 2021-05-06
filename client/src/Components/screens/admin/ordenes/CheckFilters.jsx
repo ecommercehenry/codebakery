@@ -12,7 +12,6 @@ function CheckFilters({ displayFilter, setDisplayFilter }) {
 
   const dispatch = useDispatch();
   const handleChange = (e) => {
-    // console.log(e.target)
     document.getElementById("ALL").checked = false;
     dispatch(checkboxChange(e.target.id));
     // despachar una accion de tipo cambio de checkbox

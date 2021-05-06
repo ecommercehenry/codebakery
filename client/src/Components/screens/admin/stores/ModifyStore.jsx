@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import MODIFY_STORE from "../../../../Apollo/mutations/modifyStore";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { toast } from "react-toastify";
 import "../../../../Assets/toast.css";
@@ -13,6 +12,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import GET_ALL_STORES from "../../../../Apollo/queries/getAllStores";
 import { Button } from "@material-ui/core";
 import DELETE_STORE from "../../../../Apollo/mutations/deleteStore";
+import { StyledPrincipalButton } from "./ManageStores";
 
 toast.configure();
 
@@ -20,18 +20,20 @@ const useStyles = makeStyles((theme) => ({
   formContainer: {
     width: "70%",
     borderRadius: "1rem",
-    backgroundColor: "#5E3F71",
-    color: "#ffffff", //color de titulos
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
+    backgroundColor: "white",
+    color: "black", //color de titulos
     padding: theme.spacing(2),
+    marginTop:"2.5rem"
   },
   formControl: {
     backgroundColor: "#ffffff",
+    display: "flex",
+    justifyContent: "center"
   },
   deletebutton: {
     backgroundColor: "#ffffff",
     left: "5rem",
+    marginTop: "16px"
   },
 }));
 
@@ -43,7 +45,6 @@ const ModifyStore = () => {
     fetchPolicy: "no-cache",
   });
 
-  console.log(data);
   const [form, setForm] = useState({
     id: "",
     name: "",
@@ -72,12 +73,16 @@ const ModifyStore = () => {
   };
   const deleteHandler = async (e) => {
     e.preventDefault();
-    await deleteStore({
-      variables: {
-        id: parseInt(form.id),
-      },
-    });
-    refetch();
+    if(form.id !== ""){
+      await deleteStore({
+        variables: {
+          id: parseInt(form.id),
+        },
+      });
+      refetch();
+    }else {
+      toast("Must select a store")
+    }
   };
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -93,6 +98,7 @@ const ModifyStore = () => {
     });
     toast("Store Modified");
   };
+  console.log(form)
   let phoneNumber = document.getElementById("phoneNumber");
   if (phoneNumber) {
     phoneNumber.maxLength = "11";
@@ -102,14 +108,12 @@ const ModifyStore = () => {
     <React.Fragment>
       <div className={classes.formContainer}>
         <form onSubmit={submitHandler}>
-          <Typography variant="h6" gutterBottom>
-            Modify an existing store
-          </Typography>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple">Store</InputLabel>
+            <Grid item xs={12} style={{display: "flex", alignItems: "center", paddingTop:"0"}}>
+              <FormControl className={classes.formControl} >
+                <InputLabel htmlFor="age-native-simple" >Store</InputLabel>
                 <Select
+                  required
                   fullWidth
                   native
                   onChange={handleAddress}
@@ -176,7 +180,7 @@ const ModifyStore = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} style={{display: "flex", flexDirection: "column"}}>
               <TextField
                 variant="filled"
                 required
@@ -186,8 +190,8 @@ const ModifyStore = () => {
                 fullWidth
                 onChange={handleChange}
               />
+              <StyledPrincipalButton type="submit" style={{alignSelf:"flex-end", marginTop: "1em"}}>Update store</StyledPrincipalButton>
             </Grid>
-            <button type="submit">Update store</button>
           </Grid>
         </form>
       </div>

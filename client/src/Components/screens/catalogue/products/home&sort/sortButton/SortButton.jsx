@@ -51,7 +51,6 @@ const SortButton = () => {
     };
 
     const handleClick = (event) => {
-        // console.log(event.currentTarget)
         setAnchorEl(event.currentTarget);
     };
 

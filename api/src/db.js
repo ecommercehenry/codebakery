@@ -67,6 +67,7 @@ const {
   Lineal_Order,
   Store,
   Store_Product,
+  ImageSlider,
 } = sequelize.models;
 
 // Aca vendrian las relaciones

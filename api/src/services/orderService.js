@@ -1,7 +1,6 @@
 const { Order, Lineal_Order, Product, Users } = require("../db");
 const { getProductById } = require("./productsService");
 
-
 async function getAllOrdersUser(args) {
   let { userId } = args
 try{
@@ -18,15 +17,15 @@ try{
       const formatted = await _formatOrder(element);
       out.push({ __typename: orders, ...formatted });
     }
- console.log(orders)
- return { __typename: "orders", orders: out };
-}catch(err){
-  return {
-    __typename: "error",
-    name: "db error",
-    detail: `Problem getting order: ${err.message}`,
-  };
-}
+    console.log(orders);
+    return { __typename: "orders", orders: out };
+  } catch (err) {
+    return {
+      __typename: "error",
+      name: "db error",
+      detail: `Problem getting order: ${err.message}`,
+    };
+  }
 }
 async function getAllOrders() {
   try {
@@ -174,7 +173,11 @@ async function createOrder(products, idUser) {
       let result = await getProductById({ id: product.id });
       //Al crear la orden se usara el precio del producto en la db, otra opcion es usar el precio del carrito, discutir
       let has = await order.addProduct(result, {
-        through: { price: result.price, quantity: product.quantity, discount: product.discount},
+        through: {
+          price: result.price,
+          quantity: product.quantity,
+          discount: product.discount,
+        },
       });
     }
   } catch (err) {
@@ -228,7 +231,7 @@ async function _formatOrder(order) {
     });
   }
   const out = {
-    storeId: order.storeId,  
+    storeId: order.storeId,
     id: order.id,
     status: order.status,
     name: userOrden.name,
@@ -333,29 +336,34 @@ async function deleteProductOrder(orderId, productId) {
  * @param  {} productId
  * @param  {} quantity
  */
- async function addProductToOrder(orderId, productId, quantity,userId){
+async function addProductToOrder(orderId, productId, quantity, userId) {
   try {
-      let order = await Order.findOne({where: {id: orderId, placeStatus: 'cart'}})
-      if(!order){
-      order = await Order.create({userId : userId})
-      console.log("se creo una orden")       
-      } 
-      if(order.placeStatus === 'cart'){
-          const newProduct = await Product.findOne({
-              where:{
-                  id:productId
-              }
-          })
-          let has = await order.addProduct(newProduct, {through:{price:newProduct.price, quantity}})
-          return {__typename: "booleanResponse" , boolean:true}
-      } else {
-          return { __typename: "error" , name:"concept error, see detail",detail:"You cannot add a product in a ticket order"}
-      }
-
+    let order = await Order.findOne({
+      where: { id: orderId, placeStatus: "cart" },
+    });
+    if (!order) {
+      order = await Order.create({ userId: userId });
+    }
+    if (order.placeStatus === "cart") {
+      const newProduct = await Product.findOne({
+        where: {
+          id: productId,
+        },
+      });
+      let has = await order.addProduct(newProduct, {
+        through: { price: newProduct.price, quantity },
+      });
+      return { __typename: "booleanResponse", boolean: true };
+    } else {
+      return {
+        __typename: "error",
+        name: "concept error, see detail",
+        detail: "You cannot add a product in a ticket order",
+      };
+    }
   } catch (err) {
-      return { __typename: "error" , name:"unknow",detail:err.message}
+    return { __typename: "error", name: "unknow", detail: err.message };
   }
-
 }
 
 /**
@@ -421,8 +429,13 @@ async function modifyOrderStatus(orderId, status) {
     const order = await Order.findOne({
       where: { id: orderId },
     });
-    if (order.placeStatus === "ticket") {
+    if (status === "cancelled" && order.placeStatus === "ticket") {
+      order.cancelled = true;
+      await order.save();
+      return { __typename: "booleanResponse", boolean: true };
+    } else if (order.placeStatus === "ticket") {
       order.status = status;
+      order.cancelled = false;
       await order.save();
       return { __typename: "booleanResponse", boolean: true };
     } else {
@@ -463,7 +476,6 @@ async function modifyOrderCancelled(orderId, cancelled) {
 }
 
 async function incrementQuantity(orderId, productId, quantity) {
-  
   let obj = {};
   if (quantity) obj.quantity = quantity;
   try {
@@ -479,7 +491,7 @@ async function incrementQuantity(orderId, productId, quantity) {
 
 async function decrementQuantity(orderId, productId, quantity) {
   let obj = {};
-  
+
   if (quantity) obj.quantity = quantity;
   try {
     let order = await Lineal_Order.findOne({

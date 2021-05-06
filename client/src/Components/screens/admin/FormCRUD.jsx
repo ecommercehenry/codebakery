@@ -4,6 +4,7 @@ import MODIFY_PRODUCT from "../../../Apollo/mutations/modifyProduct";
 // import './FormCRUD.css'
 import { useDispatch, useSelector } from "react-redux";
 import { modifyProduct } from "../../../actions/modifyProductAction";
+import allProducts from "../../../Apollo/queries/allProducts";
 // import { addCategoryToProductAction } from "../../../actions/addCategoryToProductAction";
 import styled from "styled-components";
 import { HiOutlineSave, HiOutlineX } from "react-icons/hi";
@@ -29,7 +30,6 @@ function FormCRUD({ id, handlerOnClick }) {
     price: product.price,
     discount: product.discount,
     image: product.image,
-    discount: product.discount
   });
   const dispatch = useDispatch();
   function inputHandler(e) {
@@ -38,12 +38,17 @@ function FormCRUD({ id, handlerOnClick }) {
       [e.target.name]: e.target.value,
     });
   }
-  const [modificar, { data, loading }] = useMutation(MODIFY_PRODUCT);
+  const [modificar, { data, loading }] = useMutation(MODIFY_PRODUCT,
+    {
+      refetchQueries: [{ query: allProducts }],
+    });
+
+
   useEffect(() => {
-    if (data && !loading) {
+    if (data) {
       dispatch(modifyProduct(id, data.modifyProduct));
     }
-  }, [data,dispatch, id, loading]);
+  }, [data,dispatch,loading, id]);
   /**
    * When edit button is clicked
    */
@@ -136,6 +141,7 @@ function FormCRUD({ id, handlerOnClick }) {
               type="number"
               value={inputs.stock}
               name="stock"
+              min="0"
               onChange={inputHandler}
             />
           </td>
@@ -144,6 +150,7 @@ function FormCRUD({ id, handlerOnClick }) {
               value={inputs.price}
               name="price"
               type="number"
+              min="0"
               onChange={inputHandler}
             />
           </td>

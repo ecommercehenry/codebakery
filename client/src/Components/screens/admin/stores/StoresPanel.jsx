@@ -1,56 +1,70 @@
 import React,{useEffect} from "react";
+import { useSelector } from "react-redux";
 import { useQuery } from "@apollo/client";
 import GET_ALL_STORES from "../../../../Apollo/queries/getAllStores";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import styled from "styled-components";
+import TableContainer from '@material-ui/core/TableContainer';
+
 
 const StyledTableCell = withStyles((theme) => ({
+  
   head: {
     backgroundColor: "#5E3F71",
-    color: "#000000",
+    color:"white"
   },
   body: {
-    fontSize: 14,
+    fontSize: 14
   },
+
 }))(TableCell);
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
     "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
+      color:"white"
     },
   },
 }))(TableRow);
+
 const useStyles = makeStyles({
   table: {
     margin: "3rem",
-    //background:"red",
+    background:"white",
+    color:"white"
   },
   container: {
     width: "70rem",
     display: "flex",
-    //background:"blue",
+    background:"transparent",
     marginTop: "6em",
+    color:"white"
   },
 });
 
 const StoresPanel = ({setPromo}) => {
+  let {status} = useSelector((state) => state.theme)
   const classes = useStyles();
   const { data } = useQuery(GET_ALL_STORES, {
     fetchPolicy: "no-cache",
   });
   useEffect(() => {
     setPromo(false)
-  },[setPromo])
+    let background = document.getElementById("content");
+    status ? background.style="background:white" : background.style="background:#969696";
+  },[setPromo, status])
+  
   return (
-    <TableContainer component={Paper} className={classes.container}>
-      <Table className={classes.table} aria-label="customized table">
+    <StyledContainer >
+      <TableContainer component={Paper} className={classes.container} >
+      <Table className={classes.table} aria-label="customized table" id="content">
         <TableHead>
           <TableRow>
             <StyledTableCell>Store ID</StyledTableCell>
@@ -78,8 +92,14 @@ const StoresPanel = ({setPromo}) => {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+      </TableContainer>
+    </StyledContainer>
   );
 };
+
+const StyledContainer = styled.div`
+  //background:red;
+  height:fit-content;
+`;
 
 export default StoresPanel;

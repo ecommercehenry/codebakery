@@ -10,6 +10,7 @@ query validateUserWithGoogle($email: String!, $tokenId: String){
             role
             token
             id
+            twoFA
             }
         __typename
         ... on error{

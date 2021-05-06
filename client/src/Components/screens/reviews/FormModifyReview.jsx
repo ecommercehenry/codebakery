@@ -201,7 +201,7 @@ position: relative;
             cursor:pointer;
         }
     }
-
+    }
 `;
 
 export default FormModify

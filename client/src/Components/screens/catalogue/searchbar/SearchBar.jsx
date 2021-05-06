@@ -12,9 +12,6 @@ const [input, setInput] = useState([])
 const handlerChange = (e) => {
   setInput(e.target.value); 
 }
-const submitHandler = (event) => {
-  event.preventDefault();
-} 
 useEffect(() => {
   // dispatch(setSearch(true));
   dispatch(fetchByName(input));
@@ -24,23 +21,21 @@ useEffect(() => {
   return (
     // <div style={{width:100+"vw", display:"flex", justifyContent:"center"}}>
     <StyledSearchBar>
-      <HiSearch size="1.5em" color="gray" style={{position: "absolute", left: "15px"}}/>
+      <HiSearch className="lupita" size="1.5em" color="gray" style={{left: "15px"}}/>
       <form id="search-form">
         <input
           type="text"
           placeholder="Find your favorite dessert"
           value={input}
           onChange={handlerChange}
-        />
-          <button id="search-btn" onClick={submitHandler}>Search</button> 
+        />        
       </form>
     </StyledSearchBar>
-    // </div>
   )
 };
 
 const StyledSearchBar = styled.div`
-  background: #e9e8e8;
+  background: white;
   display: flex;
   align-items: center;
   position:relative;
@@ -53,8 +48,13 @@ const StyledSearchBar = styled.div`
   display:flex;
   justify-content:space-between;
   align-items:center;
-  border: 1.3px solid #949494;
+  border: 1px solid #d2cdd6;
   border-radius:20px;
+  max-width: 628px;
+  width: 90%;
+  .lupita{
+    margin-left:0.5em;
+  }
   button{
       width:10%;
       height:2rem;
@@ -78,25 +78,24 @@ const StyledSearchBar = styled.div`
     justify-content: space-between;
 
     input{
+      padding-left:0.7em;
       width:70%;
       height:2rem;
       border:none;
       font-size:1.3rem;
       background: none;
       text-align: left;
-  }
+      outline: none;
 
-  #search-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    right: 0;
-    color: black;
-    width: 10%;
-    padding: 10px 40px;
-    border: solid 1px #CECECE;
-    border-radius: 40px;
-  }
+      @media(max-width: 768px){
+        width: 100%;
+      }
+
+      @media(max-width: 500px){
+        font-size: 1.1rem;
+      }
+  }  
+
   }
 `;
 

@@ -8,47 +8,47 @@ import { saveProducts } from "../../../actions/saveProductsAction";
 import styled from "styled-components";
 import TablePagination from '@material-ui/core/TablePagination';
 import { withStyles } from "@material-ui/core";
-
+import { useSelector } from "react-redux";
 
 function ListCRUD({setPromo}) {
-  const { data, loading } = useQuery(allProducts,{
-    fetchPolicy: "no-cache"
+let { status } = useSelector((state) => state.theme);
+  const { data, loading, refetch } = useQuery(allProducts,{
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    setPromo(false)
     if (!loading) {
       dispatch(saveProducts(data.product));
+      refetch()
     }
-  }, [data, dispatch, setPromo, loading]);
+  }, [data, dispatch, setPromo, loading, refetch]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = useState([0, rowsPerPage - 1])
   
   const totalPages = data?.product.length
-  const handlePageChange = async (event, newPage) => {
+  const handlePageChange = async ( newPage) => {
     if(newPage === 0){
-      await setRows([0, rowsPerPage])
+      setRows([0, rowsPerPage])
     } else {
       let newFinalRow = newPage * rowsPerPage
-      await setRows([newFinalRow, newFinalRow + (rowsPerPage)])
+      setRows([newFinalRow, newFinalRow + (rowsPerPage)])
     }
   
-    await setPage(newPage)
+    setPage(newPage)
   }
 
-  const handleChangeRowsPerPage = async (event) => {
-    await setRowsPerPage(parseInt(event.target.value, 10));
+  const handleChangeRowsPerPage = (event) => {
+     setRowsPerPage(parseInt(event.target.value, 10));
   };
 
   useEffect(() => {
-    (async() => await setRows([0, rowsPerPage - 1]))()
+    (() => setRows([0, rowsPerPage - 1]))()
     setPage(0)
   }, [rowsPerPage])
 
   return (
-    <StyledListCRUD>
+    <StyledListCRUD light={status}>
       <table border="0" cellPadding="0" cellSpacing="0" className="flexy">
         <thead>
           <tr>
@@ -57,7 +57,7 @@ function ListCRUD({setPromo}) {
             <th width="30%">Categories</th>
             <th width="10%">Stock</th>
             <th width="10%" id="price-column">Price</th>
-            <th width="10%">Action</th>
+            <th width="10%" style={{textAlign:"center"}}>Action</th>
           </tr>
         </thead>
         <tbody id="table-body">
@@ -93,19 +93,24 @@ export default ListCRUD;
 const StyledTablePagination = withStyles((theme) => ({
   root: {
     height: 60,
+    color:"#9a48cc"
     },
 }))(TablePagination);
 
 const StyledListCRUD = styled.div`
   padding: 2rem;
   padding-top: 0;
-  background: white;
+  //background: white;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  background: white;
+  background: ${({ light }) => 
+    (light ? 
+    "white" : 
+    "#292929")
+  };
   height: 83vh;
   margin-bottom: 2rem;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 30%);
@@ -129,21 +134,28 @@ const StyledListCRUD = styled.div`
         position: sticky;
         top: 0;
         padding: 1rem 1em;
-        background: white;
+        background: ${({ light }) => 
+          (light ? 
+          "white" : 
+          "#292929")
+        };
         border-bottom: 1px solid #ddd;
       }
     }
 
     tbody {
-      display:block;
-      overflow-y:auto;
-      width: 100%;
+      display:flex;
+      flex-flow: column nowrap;
+      overflow-y:scroll;
       height: 66vh;
+      justify-content:flex-start;
+
 
       td {
+        justify-content:center;
+        text-align: center;
         height: 5rem;
         border-bottom: 1px solid #ddd;
-        padding:0 1em;
       }
     }
 
@@ -153,7 +165,11 @@ const StyledListCRUD = styled.div`
         position: sticky;
         top: 0;
         padding: 1rem 1em;
-        background: white;
+        background: ${({ light }) => 
+          (light ? 
+          "white" : 
+          "#292929")
+        };
       }
 
       #pagination-container{

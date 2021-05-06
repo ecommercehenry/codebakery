@@ -8,12 +8,12 @@ import { saveOrders } from "../../../../actions";
 import { toast } from "react-toastify";
 import ButtonClear from "./ButtonClear";
 import Pagination from "./Pagination";
-
 //traerme todas las ordenes hechas.. estan en la BD--Uso query de Apollo
 //guardo en el reducer ordersReducer las ordenes para aplicar busquedas y filtros uso dispatch
 //mostrarlas haciendo un mapeo sobre la data, renderizando cada vez un componente Orden
 
 export default function TablaOrdenes({setPromo}) {
+  let theme = useSelector((state) => state.theme);
   const customId = "custom-id-yes";
 
   let { data } = useQuery(GET_All_ORDERS);
@@ -24,7 +24,7 @@ export default function TablaOrdenes({setPromo}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setPromo(false)
+    //setPromo(false)
     dispatch(saveOrders(ordersQ));
   }, [data, dispatch, ordersQ, setPromo]);
 
@@ -47,13 +47,11 @@ export default function TablaOrdenes({setPromo}) {
     });
     return <ButtonClear name="Volver al principio" />;
   } else {
-    //console.log("MUESTRA DATA RENDER POR EL ELSE..ORDERS");
     dataRENDER = renderPage;
   }
 
-/* console.log('render', dataRENDER) */
   return (
-    <StyledTablaOrdenes>
+    <StyledTablaOrdenes light={theme.status}>
       <table border="0" cellPadding="0" cellSpacing="0">
       <thead>
           <tr>
@@ -62,7 +60,7 @@ export default function TablaOrdenes({setPromo}) {
             <th width="10%">User ID</th>
             <th width="10%">User Name</th>
             <th width="10%">Status</th>
-            <th width="10%">Cancelled</th>
+            {/* <th width="10%">Cancelled</th> */}
             <th width="10%" id="price-column">Total</th>
             <th width="10%">Action</th>
           </tr>
@@ -93,13 +91,16 @@ export default function TablaOrdenes({setPromo}) {
 const StyledTablaOrdenes = styled.div`
 padding: 2rem;
 padding-top: 0;
-background: white;
+background: ${({ light }) => 
+  (light ? 
+  "white" : 
+  "#292929")
+};
 border-radius: 20px;
 display: flex;
 flex-direction: column;
 align-items: flex-start;
 width: 100%;
-background: white;
 height: 83vh;
 margin-bottom: 2rem;
 box-shadow: 0 1px 2px 0 rgb(0 0 0 / 30%);
@@ -116,22 +117,26 @@ table {
 
   thead {
     display: table;
-    overflow: auto;
+    overflow: scroll;
     width: 100%;
 
     th {
       position: sticky;
       top: 0;
       padding: 1rem 1em;
-      background: white;
+      background: ${({ light }) => 
+        (light ? 
+        "white" : 
+        "#292929")
+      };
       border-bottom: 1px solid #ddd;
     }
   }
 
   tbody {
     display:block;
-    overflow-y:auto;
-    width: 100%;
+    overflow-y:scroll;
+    width: 101.3%;
     height: 66vh;
 
     td {
@@ -147,7 +152,11 @@ table {
       position: sticky;
       top: 0;
       padding: 1rem 1em;
-      background: white;
+      background: ${({ light }) => 
+        (light ? 
+        "white" : 
+        "#292929")
+      };
     }
 
     #pagination-container{

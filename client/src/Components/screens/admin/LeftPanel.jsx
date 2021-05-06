@@ -9,7 +9,6 @@ import {
 } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 
-
 //styles
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -20,8 +19,10 @@ const LeftPanel = () => {
     products: path.includes("products") ? "active" : "inactive",
     orders: path.includes("orders") ? "active" : "inactive",
     users: path.includes("users") ? "active" : "inactive",
-    store: path.includes("store") ? "active" : "inactive",
+    stores: path.includes("stores") ? "active" : "inactive",
     promos: path.includes("promos") ? "active" : "inactive",
+    sliders: path.includes("slider") ? "active" : "inactive",
+    newsletters: path.includes("newsletter") ? "active" : "inactive",
   };
 
   let logout = () => {
@@ -34,7 +35,7 @@ const LeftPanel = () => {
         <section style={{ width: "100%" }}>
           <div className="userInfo">
             <div className="userAvatar"></div>
-            <div className="userName">User Name</div>
+            <div className="userName">Admin</div>
           </div>
           <div className="tabs">
             <Link
@@ -61,17 +62,39 @@ const LeftPanel = () => {
                 <span className="tabName">Users</span>
               </div>
             </Link>
-            <Link className="text-decoration-none text-white" to="/admin/promos">
-            <div className={`tab ${activeTab.promos}`}>
-              <HiOutlineClipboardList size="1.3rem" className="icon" />
-              <span className="tabName">Promos</span>
-            </div>
-          </Link>
+            {/*Reemplazar la linea de abajo */}
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/slider"
+            >
+              <div className={`tab ${activeTab.sliders}`}>
+                <HiOutlineUser size="1.3rem" className="icon" />
+                <span className="tabName">Slider</span>
+              </div>
+            </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/newsletter"
+            >
+              <div className={`tab ${activeTab.newsletters}`}>
+                <HiOutlineUser size="1.3rem" className="icon" />
+                <span className="tabName">Newsletter</span>
+              </div>
+            </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to="/admin/promos"
+            >
+              <div className={`tab ${activeTab.promos}`}>
+                <HiOutlineClipboardList size="1.3rem" className="icon" />
+                <span className="tabName">Promos</span>
+              </div>
+            </Link>
             <Link
               className="text-decoration-none text-white"
               to="/admin/stores"
             >
-              <div className={`tab ${activeTab.users}`}>
+              <div className={`tab ${activeTab.stores}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Stores</span>
               </div>
@@ -120,9 +143,9 @@ const StyledPanel = styled.div`
   justify-content: center;
   padding-top: 5vh;
   color: white;
-  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.15);
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.15);
 
-  li{
+  li {
     transition: 1s all;
     padding: 15px;
     margin-left: -40px;
@@ -132,21 +155,18 @@ const StyledPanel = styled.div`
     display: block;
     border-top-right-radius: 10px 10px;
     border-bottom-right-radius: 10px 10px;
-    
   }
 
-  li:hover{
+  li:hover {
     transition: 1s all;
     background-color: #00000040;
-    color: #FFF;
+    color: #fff;
     border-top-right-radius: 10px 10px;
     border-bottom-right-radius: 10px 10px;
     cursor: pointer;
   }
 
- 
-
-  li ul{
+  li ul {
     background: #5e3f71;
     margin-left: 140px;
     margin-top: -38px;
@@ -156,12 +176,12 @@ const StyledPanel = styled.div`
     border-bottom-right-radius: 15px 15px;
   }
 
-  li:hover > ul{
+  li:hover > ul {
     display: block;
     cursor: pointer;
   }
 
-  .bottom-tabs{
+  .bottom-tabs {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -201,7 +221,7 @@ const StyledPanel = styled.div`
         border-radius: 50%;
         width: 100%;
         padding-bottom: 100%;
-        background: white;
+        background: transparent;
         content: "";
         display: inline-block;
       }
@@ -215,10 +235,10 @@ const StyledPanel = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      margin-top: 4rem;
+      margin-top: 2.5em;
       font-weight: bold;
       .tab {
-        margin-top: 0.5rem;
+        margin-top: 0.1em;
         font-size: 1.1rem;
         display: flex;
         justify-content: flex-start;
@@ -228,7 +248,11 @@ const StyledPanel = styled.div`
         padding-left: 1.5rem;
         border-left: solid 4px transparent;
 
-        .tabName {
+        &:hover{
+          border-left: solid 4px white;
+        }
+
+        .º {
           margin-left: 0.5rem;
           font-size: inherit;
         }

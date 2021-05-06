@@ -9,6 +9,7 @@ const getUserById = gql`
       address
       dni
       phoneNumber
+      twoFA
     }
   }
 `;

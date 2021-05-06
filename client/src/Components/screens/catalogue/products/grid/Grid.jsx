@@ -1,11 +1,11 @@
+import { useQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
-import { useQuery } from "@apollo/client";
-import GET_BY_PRODUCT from "../../../../../Apollo/queries/getByProduct";
+import styled from 'styled-components';
+//Components 
+import ProductCard from './ProductCard';
+import GET_BY_PRODUCT from "../../../../../Apollo/queries/getByProduct"
 
-//Components
-import ProductCard from "./ProductCard";
 
 const Grid = ({ orderId, refetchCatalogue }) => {
   let { status } = useSelector((state) => state.theme);
@@ -27,9 +27,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
   //   );
   //   //con includes la busq ya no pide exactitud en el string. @Lizen
   // }
-  const { data } = useQuery(GET_BY_PRODUCT, {
-    fetchPolicy: "no-cache",
-  });
+  const { data } = useQuery(GET_BY_PRODUCT, {});
 
 
   useEffect(() => {
@@ -47,44 +45,43 @@ const Grid = ({ orderId, refetchCatalogue }) => {
     }
   }, [data]);
 
+
   return (
 
     <StyledGrid light={status}>
       <>
-        {search === false
-          ? productsToRender && productsToRender?.length > 0
-            ? productsToRender.map((element) => {
-                return (
-                  <ProductCard
-                    refetchCatalogue={refetchCatalogue}
-                    orderId={orderId}
-                    key={element.id}
-                    id={element.id}
-                    name={element.name}
-                    image={element.image}
-                    price={element.price}
-                    stock={element.stock}
-                  />
-                );
-              })
-            : "The product with that category was not found"
-          : productsToRender.length > 0
-          ? productsToRender.map((element) => {
-              return (
-                <ProductCard
-                  refetchCatalogue={refetchCatalogue}
-                  orderId={orderId}
-                  key={element.id}
-                  id={element.id}
-                  name={element.name}
-                  image={element.image}
-                  price={element.price}
-                  stock={element.stock}
-                />
-              );
-            })
-          : "Product not found"
-      }
+        {
+
+          search ? 
+          (productsToRender?.length > 0 ? 
+            productsToRender.map((element) => {
+            return <ProductCard 
+            refetchCatalogue={refetchCatalogue}
+            orderId={orderId} 
+            key={element.id} 
+            id={element.id} 
+            name={element.name}
+            image={element.image} 
+            price={element.price}
+            discount= {element.discount} />
+          }) : 
+          "No se encontraron Productos") : 
+          (productsToRender?.length > 0 ? 
+            productsToRender.map((element) => 
+              (element.stock != 0 ? (
+            <ProductCard 
+            refetchCatalogue={refetchCatalogue}
+            orderId={orderId}
+            key={element.id} 
+            id={element.id} 
+            name={element.name}
+            image={element.image} 
+            price={element.price}
+            discount= {element.discount} /> )
+            : "")
+          ) : !productsToRender ? 'Cargando...': "No se encontraron Productos" )
+        }
+
       </>
     </StyledGrid>
   );
@@ -97,8 +94,14 @@ const media = {
 };
 
 const StyledGrid = styled.div`
-  background: ${({ light }) => (light ? "transparent" : "#222222")};
-  color: ${({ light }) => (light ? "inherit" : "white")};
+  background: ${({ light }) =>
+  (light ? 
+  "transparent" :
+  "#222222")};
+  color: ${({ light }) =>
+  (light ? 
+  "inherit" : 
+  "white")};
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-auto-rows: 37vh;
