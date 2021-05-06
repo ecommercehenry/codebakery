@@ -4,7 +4,6 @@ import getUserById from "../../../Apollo/queries/getUserById";
 import styled from "styled-components";
 import { useParams } from "react-router";
 import MODIFY_USER from "../../../Apollo/mutations/modifyUser";
-import Button from "@material-ui/core/Button";
 import closeIcon from "../../../icons/close2.svg";
 import GENERATE_OTP from "../../../Apollo/mutations/generateOtp";
 import VALIDATE_TOTP from "../../../Apollo/queries/validateTokenTOTP";
