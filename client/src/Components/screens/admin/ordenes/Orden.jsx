@@ -8,15 +8,15 @@ import { Link } from "react-router-dom";
 import MODIFY_ORDER_STATUS from "../../../../Apollo/mutations/modifyOrderStatus";
 import { useDispatch } from "react-redux";
 import { changeStatus } from "../../../../actions";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import SEND_EMAIL_SENT from "../../../../Apollo/mutations/sendEmailSent";
+import GET_ORDERS_BY from "../../../../Apollo/queries/getOrderById";
 
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
   const [orderStatus, setOrderStatus] = useState(orden.status);
   const [selectedStatus, setSelectedStatus] = useState();
   const [show, setShow] = useState(false);
-
   useEffect(() => {
     setOrderStatus(orderStatus);
     document.getElementById(
@@ -33,6 +33,12 @@ export default function Orden({ id, orden }) {
     SEND_EMAIL_SENT
   );
 
+  const {data:dataOrder}= useQuery(GET_ORDERS_BY, {
+    variables:{
+      idOrder:orden.id
+    }
+  })
+
   const handleCancel  = () => {
     document.getElementById(
       `status-select-${orden.id}`
@@ -44,6 +50,7 @@ export default function Orden({ id, orden }) {
   let dispatch = useDispatch()
 
   const handleConfirm = () => {
+
     modifyOrderStatus({
       variables: { orderId: orden.id, status: selectedStatus },
     }).then(()=>{
@@ -52,11 +59,23 @@ export default function Orden({ id, orden }) {
       setShow(false)
     })
     if (selectedStatus === "sent") {
+      let htmlOrdenes = "<ul>"
+      dataOrder.getOrderById.lineal_order.forEach(or=>htmlOrdenes+=`<li>${or.name}(${or.quantity})</li>`)
+      htmlOrdenes += "</ul>"
+      
       sendEmailSent({
         variables: {
           userId: orden.userId, 
           affair: `Order ${orden.id} sent`,
-          message: `Your order ${orden.id} has been sent to your home and you should received it within 3 days - STAY HOME!`
+          message: `<html>
+          <span> Hi!</span><br>
+          <span> Your order ${orden.id} has been sent!, in one hour you get yours delicious products </span>
+          ${htmlOrdenes}
+
+          Thanks for buy with us
+
+          Have a good day!
+          </html>`
         }
       })
     }
