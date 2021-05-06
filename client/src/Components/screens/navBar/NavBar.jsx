@@ -99,7 +99,7 @@ const NavBar = ({ color }) => {
       <div className="left-tags me-auto">
         <div id="logo">
         <Link to="/" className={brandTag} style={{ fontWeight: "bold" }}>
-          <img src={landing ? logoBlack : logo} style={{height:"2.3em", width: "auto"}}/>
+          <img src={landing ? logoBlack : logo} style={{height:"2.3em", width: "auto"}} alt=""/>
         </Link>
         </div>
         {role === "admin" ? (

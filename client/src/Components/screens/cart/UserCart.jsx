@@ -31,10 +31,6 @@ const UserCart = () => {
       }
     }
   }, [data, dispatch]);
-<<<<<<< HEAD
-  console.log(data);
-=======
->>>>>>> 8db60091d55e24d338de333eb0dcc63297cb05cd
   return (
     <StyledCart
       variants={pageAnimation}

@@ -6,7 +6,7 @@ import RESET_DISCOUNT from "../../../Apollo/mutations/resetDiscount";
 import getPromos from "../../../Apollo/queries/getPromos";
 import CountCart from "../cart/container/CountCart";
 import styled from "styled-components";
-import ThemeSwitch from "./ThemeSwitch";
+/* import ThemeSwitch from "./ThemeSwitch"; */
 import { HiOutlineHand, HiOutlineInformationCircle, HiOutlineLogin, HiOutlineLogout, HiOutlineMap, HiOutlineMenu, HiOutlineShoppingBag, HiOutlineX } from "react-icons/hi";
 import { useState } from "react";
 import logo from './Logo.png'
@@ -125,7 +125,7 @@ const [showMenu, setShowMenu] = useState(false)
         </div>
         <div id="logo">
           <Link to="/" className={""} style={{ fontWeight: "bold" }}>
-            <img src={landing ? logoBlack : logo} style={{height:"2em", width: "auto"}}/>
+            <img src={landing ? logoBlack : logo} style={{height:"2em", width: "auto"}} alt=""/>
           </Link>
         </div>
         {role === "admin" ? (
