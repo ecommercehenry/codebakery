@@ -18,7 +18,7 @@ export default function Footer() {
       <StyledFooter>
         <Newsletter />
         <div className="redes">
-         
+         <h5>Follow Us!</h5>
           <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/codebakery.ar">
             <img className="icon-git" src={fb} alt="Facebook" />
           </a>
@@ -33,10 +33,8 @@ export default function Footer() {
            Developed by Students from Henry's Bootcamp
               </Link></p>
             
+            </div>
           </div>
-        </div>
-       
-        
         </div>
       </StyledFooter>
     </>
@@ -52,7 +50,6 @@ const StyledFooter = styled.footer`
   align-items: center;
   color:white;
 
- 
   /* justify-content: center; */
   border-top: 1px inset #694e7a;
 
@@ -80,9 +77,8 @@ const StyledFooter = styled.footer`
     padding:8px;
     width: 100%;
     background-color: #3f2551;
-    
-
   }
+
   .redes {
     //background-color:green;
     width: 100%;
@@ -105,8 +101,7 @@ const StyledFooter = styled.footer`
     display: flex;
     align-items: center;
     justify-content: center;
-    
-   
+  
   }
 
 

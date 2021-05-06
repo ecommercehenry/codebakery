@@ -36,8 +36,8 @@ export default function Newsletter() {
     <>
       {user ? (
         <StyledNewsletter onSubmit={handleSubmit}>
-          <h2> Suscribe to our Newsletter</h2>
-          <span>Join our suscribers list to get the latest news, updates and special offers delivered directly in your inbox </span>
+          <h2 > Suscribe to our Newsletter</h2>
+          <span className="ocultar">Join our suscribers list to get the latest news, updates and special offers delivered directly in your inbox </span>
 
           {suscrito ? (
            <h4> Thanks for subscribe!! </h4>
@@ -120,20 +120,11 @@ h2{
  
 }
 
-  // width: 10%;
-  // padding: 6px 6px;
-  // border: solid 1px #cecece;
-  // border-radius: 40px;
-  // margin-left: 1rem;
+@media (min-width: 320 px) and (max-width: 480px ) {
+  ,ocultar {
+    display: none;
+  }
+}
 
-
-// .btn:hover {
-
-//   color: #ffffff;
-// }
-// .btn:active {
-  
-//   color: #6944a5;
-// }
   
 `;
