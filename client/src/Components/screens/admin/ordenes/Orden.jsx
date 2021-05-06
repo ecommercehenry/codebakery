@@ -14,6 +14,7 @@ import GET_All_ORDERS from "../../../../Apollo/queries/getAllOrders";
 // @-WenLi
 //Recibe id de la orden y la orden...va renderizando los datos que necesita
 export default function Orden({ id, orden }) {
+  console.log(orden)
   const [orderStatus, setOrderStatus] = useState(orden.cancelled === true ? "cancelled" : orden.status);
   console.log(orderStatus)
   const [selectedStatus, setSelectedStatus] = useState();
@@ -25,7 +26,10 @@ export default function Orden({ id, orden }) {
   }, [orden.id, orden.status, orderStatus]);
 
   const [modifyOrderStatus] = useMutation(MODIFY_ORDER_STATUS, {
+    refetchQueries: [{ query: GET_All_ORDERS }],
   });
+
+  const [getAllOrders, { data, loading }] = useLazyQuery(GET_All_ORDERS);
 
   const handleCancel = () => {
     document.getElementById(`status-select-${orden.id}`).value = orderStatus;
@@ -35,6 +39,7 @@ export default function Orden({ id, orden }) {
   let dispatch = useDispatch();
 
   const handleConfirm = () => {
+    getAllOrders()
     modifyOrderStatus({
       variables: { orderId: orden.id, status: selectedStatus },
     }).then(() => {
