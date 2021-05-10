@@ -49,7 +49,7 @@ function App() {
 
   const isAuthenticated = data?.validateCredentials;
 
-  if (isAuthenticated && role === "admin") {
+  if (isAuthenticated && role === "admin") { 
     return (
       <>
         <GlobalStyle />
