@@ -79,7 +79,7 @@ const UserProfile = () => {
       {
         <div key={id} className="container">
           <div className="container-profile">
-            <h1>PROFILE</h1>
+            <h1>MY DATA</h1>
           </div>
           <div className="container-cards">
             <div>
@@ -249,6 +249,7 @@ const StyledUseer = styled.div`
   h1 {
     font-weight: 700;
     color: #5e3f71;
+    margin-bottom: 0;
   }
   .container {
     width: 100vw;
@@ -277,17 +278,19 @@ const StyledUseer = styled.div`
     justify-content: space-between;
     overflow: hidden;
   }
-  .container-profile {
-    position: fixed;
+  .container-profile{
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: center;
     // margin-bottom: 40rem;
     width: 100%;
     height: 3.3rem;
     background-color: #f1f1f1;
+    z-index: 1;
   }
-  .container-cards {
-    margin-top: 3rem;
+  .container-cards{
+    margin-top: 0;
   }
   .text-container p {
     margin: 0;
@@ -322,97 +325,6 @@ const StyledUseer = styled.div`
     }
     ${media.laptop} {
       font-size: calc(0.25rem + 6 * ((100vw - 320px) / 680));
-    }
-  }
-`;
-
-const StyledForm = styled.form`
-  width: 35%;
-  height: 80vh;
-  background: white;
-  border-radius: 65px;
-  padding: 3rem 4rem;
-  border: 1px solid #f3dff3;
-  position: relative;
-
-  .closeee {
-    display: flex;
-    justify-content: flex-end;
-    border: none;
-  }
-  .infoProductt {
-    // background:blue;
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    // align-items: center;
-    font-weight: 700;
-    .namee {
-      //background:green;
-      height: 20%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .descriptionn {
-      //background:green;
-      height: 20%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      textarea {
-        width: 100%;
-        margin-top: 0.5rem;
-        padding: 0 1rem;
-        //height:3rem;
-        border-radius: 23px;
-        border: 1px solid #dad7dc;
-        background: #e3dde7;
-      }
-    }
-    input {
-      width: 100%;
-      margin: 0.8rem 0px;
-      padding: 0 1rem;
-      height: 3rem;
-      border-radius: 23px;
-      border: 1px solid #dad7dc;
-      background: #e3dde7;
-    }
-    .ratiing {
-      padding: 3rem 4rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .ratingg {
-      padding: 3rem 4rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .submitt {
-      height: 10%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      //background:red;
-      button {
-        background: #5e3f71;
-        color: white;
-        width: 23%;
-        height: 3rem;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 20px;
-        padding: 0 2.3rem;
-        border: none;
-        cursor: pointer;
-      }
     }
   }
 `;

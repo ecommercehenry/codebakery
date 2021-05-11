@@ -98,8 +98,7 @@ function App() {
           <Route exact path="/user/addReview/:id" component={FormReview} />
           <Route exact path="/user/modify/review/:id" component={FormModify} />
           <Route exact path="/user/orders/:id" component={UserOrders} /> 
-          <Route path="/user/:id/profile" component={UserPanel} /> 
-          {/* <Route exact path="/user/:id/profile/enableTFA" component={EnableTFA} /> */}
+          <Route path="/user/:id/" component={UserPanel} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
           <Route path="/reset-password" component={ResetPassword} />

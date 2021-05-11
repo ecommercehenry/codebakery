@@ -11,9 +11,10 @@ import {   HiOutlineExternalLink,
 const UserLeftPanel = ({ click, setClick }) => {
   const path = window.location.pathname;
   const activeTab = {
-    profile: path.includes("profile") ? "active" : "inactive",
-    orders: path.includes("orders") ? "active" : "inactive",
+    myData: path.includes("my-data") ? "active" : "inactive",
+    forReview: path.includes("for-review") ? "active" : "inactive",
     reviews: path.includes("reviews") ? "active" : "inactive",
+    orders: path.includes("orders") ? "active" : "inactive",
   };
 
   let id = window.localStorage.getItem("id");
@@ -23,6 +24,7 @@ const UserLeftPanel = ({ click, setClick }) => {
   };
   return (
     <StyledUserLeftPanel>
+      <div className="menu">
       <div className="content">
         <div className="userInfo">
           <div className="userAvatar"></div>
@@ -31,13 +33,13 @@ const UserLeftPanel = ({ click, setClick }) => {
         <div className="tabs">
           <Link
             className="text-decoration-none text-white"
-            to={`/user/${id}/profile`}
+            to={`/user/${id}/my-data`}
           >
-            <div className={`tab ${activeTab.profile}`}>
+            <div className={`tab ${activeTab.myData}`}>
               <HiOutlineUser size="1.3rem" className="icon" />
-              <button onClick={() => setClick(3)} className="tabName">
-                Profile
-              </button>
+              <span className="tabName">
+                My Data
+              </span>
             </div>
           </Link>
           <div
@@ -51,28 +53,28 @@ const UserLeftPanel = ({ click, setClick }) => {
               </button>
             </div>
           </div>
-          <div
+          <Link
             className="text-decoration-none text-white"
-            to={`/user/review/${id}`}
+            to={`/user/${id}/for-review`}
           >
-            <div className={`tab  ${activeTab.reviews}`}>
+            <div className={`tab  ${activeTab.forReview}`}>
               <HiOutlineClipboardList size="1.3rem" className="icon" />
-              <button className="tabName" onClick={() => setClick(2)}>
-                Reviews
-              </button>
+              <span className="tabName">
+                For Review
+              </span>
             </div>
-          </div>
-          <div
+          </Link>
+          <Link
             className="text-decoration-none text-white"
             to={`/user/review/${id}`}
           >
             <div className={`tab  ${activeTab.reviews}`}>
               <HiOutlineClipboardList size="1.3rem" className="icon" />
-              <button className="tabName" onClick={() => setClick(4)}>
+              <span className="tabName">
                 Orders
-              </button>
+              </span>
             </div>
-          </div>
+          </Link>
           <Link
             className="text-decoration-none text-white"
             to="/"
@@ -91,25 +93,32 @@ const UserLeftPanel = ({ click, setClick }) => {
           </Link>
         </div>
       </div>
+      </div>
     </StyledUserLeftPanel>
   );
 };
 
 
 const StyledUserLeftPanel = styled.div`
-  background: #5e3f71;
-  height: 100vh;
-  width: 11rem;
-  position: fixed;
+  background: #00000040;
+  width: fit-content;
+  position: sticky;
   top: 0;
-  left: 0;
-  z-index: 1;
-  border-top-right-radius: 60px;
-  border-bottom-right-radius: 60px;
-  display: flex;
-  justify-content: center;
-  padding-top: 5vh;
-  color: white;
+  z-index: 3;
+  .menu{
+    background: #F7F7F7;
+    height: 100vh;
+    width: 11rem;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    padding-top: 5vh;
+    color: #333;
+    border-right: 1px solid #ddd
+  }
   .content {
     width: 100%;
     height: 45vh;
@@ -124,20 +133,6 @@ const StyledUserLeftPanel = styled.div`
       justify-content: space-between;
       flex-direction: column;
       align-items: center;
-      .userAvatar {
-        display: inline-block;
-        min-width: 15%;
-        width: 60%;
-        white-space: nowrap;
-      }
-      .userAvatar:before {
-        border-radius: 50%;
-        width: 100%;
-        padding-bottom: 100%;
-        background: transparent;
-        content: "";
-        display: inline-block;
-      }
       .userName {
         font-size: 1.3rem;
       }
@@ -148,6 +143,8 @@ const StyledUserLeftPanel = styled.div`
       flex-direction: column;
       justify-content: flex-start;
       margin-top: 4rem;
+      color: #333;
+
       .tab {
         margin-top: 0.5rem;
         font-size: 1.3rem;
@@ -156,19 +153,20 @@ const StyledUserLeftPanel = styled.div`
         flex-direction: row;
         align-items: center;
         padding: 0.7rem;
-        padding-left: 1.5rem;
-        border-left: solid 4px transparent;
+        padding-left: 1rem;
+        border-left: solid 7px transparent;
+        color: #333;
         .tabName {
           margin-left: 0.5rem;
           font-size: inherit;
           background: transparent;
           border: none;
-          color: white;
+          color: #333;
         }
       }
       .active {
-        background: #00000040;
-        border-left: solid 4px white;
+        background: #f1f1f1;
+        border-left: solid 7px #5F3F71;
       }
     }
   }

@@ -13,7 +13,9 @@ const TablaByUser = ({ id }) => {
   return (
 
     <StyledTablaa>
-      <h1 className="titlee">Orders</h1>
+       <div className='container-profile'>
+            <h1>For Review</h1>
+      </div>
       {data?.getOrdersByUserIdInTicket.orders ? (
         data.getOrdersByUserIdInTicket.orders.map((order) =>
           order.lineal_order.map((order) => (
@@ -40,8 +42,28 @@ export default TablaByUser;
 
 const StyledTablaa = styled.div`
   display: flex;
-  justify-content: center;
-  width: 90%;
+  justify-content: flex-start;
+  width: 100%;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  min-height: 100vh;
+  background: #f1f1f1;
+  .container-profile{
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // margin-bottom: 40rem;
+    width: 100%;
+    height: 3.3rem;
+    background-color: #f1f1f1;
+    z-index: 1;
+    font-weight: bold!important;
+  }
+  h1{
+    font-weight: 700;
+    color: #5e3f71;
+    margin-bottom: 0;
+  }
 `;
