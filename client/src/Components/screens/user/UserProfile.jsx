@@ -10,7 +10,6 @@ import DisableTFA from "./DisableTFA";
 import StatusAuthentication from "./StatusAuthentication.jsx";
 import { HiOutlinePencilAlt, HiOutlineSave, HiOutlineX } from "react-icons/hi";
 import { toast } from "react-toastify";
-import EnableTFA from "./EnableTFA";
 
 toast.configure();
 
@@ -219,7 +218,7 @@ const UserProfile = () => {
                   </div>
                   {!$USER?.getUserById.twoFA ? (
                     <button value="authentication" className="button-twoFA">
-                      <Link to={`/user/${id}/profile/enableTFA`}>Enable</Link>
+                      <Link to={`/user/${id}/my-data/enableTFA`}>Enable</Link>
                     </button>
                   ) : (
                     <DisableTFA id={id} />
