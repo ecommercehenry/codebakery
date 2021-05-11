@@ -4,6 +4,8 @@
 
 # Henry
 
+Deployed: www.codebakery.store (*WIP)
+
 ## Objetivos del Proyecto
 
 - Construir una App JavaScript desde cero.

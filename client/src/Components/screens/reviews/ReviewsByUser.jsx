@@ -97,11 +97,12 @@ const StyledRev = styled.div`
   }
   .element-container {
     width: 100%;
-    height: 16vh;
+    height: 100%;
+    padding: 1em;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(236, 227, 250);
+    background-color: white;
     border-radius: 40px;
   }
   .element-container span {
@@ -127,10 +128,17 @@ const StyledRev = styled.div`
     align-items: center;
     display: flex;
     flex-direction: column;
+    background: none;
+    border: none;
   }
   .edit-button button {
     margin-top: 0.5rem;
     border: none;
     background: transparent;
+
+    button{
+    background: none;
+    border: none
+  }
   }
 `;
