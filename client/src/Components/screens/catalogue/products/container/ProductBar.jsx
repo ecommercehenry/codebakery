@@ -9,7 +9,6 @@ const ProductBar = () => {
     return (
         <StyledProductBar light={status}>
             <PaginationGrid />
-            <div>Hola</div>
             <SortButton/>
         </StyledProductBar>
     )
