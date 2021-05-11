@@ -14,10 +14,11 @@ export const CHANGE_PAGE = "CHANGE_PAGE";
 export const CHECKBOX_CHANGE = "CHECKBOX_CHANGE";
 export const CLEAR_CHECKBOXES = "CLEAR_CHECKBOXES";
 export const FILTER_NAME = "FILTER_NAME";
-export const GET_ALL_USERS_WITH_DETAILS = "GET_ALL_USERS_WITH_DETAILS"
-export const ORDER_ASC_BY_NAME = "ORDER_ASC_BY_NAME"
-export const ORDER_DESC_BY_NAME = "ORDER_DESC_BY_NAME"
-export const SEARCH_BY_NAME = "SEARCH_BY_NAME"
+export const GET_ALL_USERS_WITH_DETAILS = "GET_ALL_USERS_WITH_DETAILS";
+export const ORDER_ASC_BY_NAME = "ORDER_ASC_BY_NAME";
+export const ORDER_DESC_BY_NAME = "ORDER_DESC_BY_NAME";
+export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
+export const CHANGE_GRID_PAGE = "CHANGE_GRID_PAGE";
 
 
 
@@ -70,7 +71,7 @@ export const filterName = (name) => {
   };
 };
 
-export const filterUsers = (usersId) => {
+export const filterUsers = (usersId) => { 
   return {
     type: FILTER_USERS,
     payload: usersId,
@@ -127,6 +128,13 @@ export const clearCheckboxes = () => {
   return { type : CLEAR_CHECKBOXES }
 }
 
+export const changeGridPage = (num) => {
+  // console.log(num, 'actions')
+  return {
+    type: CHANGE_GRID_PAGE,
+    payload: num
+  };
+}
 export const productToHigh = () => {
   return { type: PRICE_LOW_TO_HIGH }
 }
