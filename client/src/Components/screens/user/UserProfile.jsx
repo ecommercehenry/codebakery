@@ -114,7 +114,7 @@ const UserProfile = () => {
       {
         <div key={id} className="container">
           <div className='container-profile'>
-            <h1>PROFILE</h1>
+            <h1>MY DATA</h1>
           </div>
           <div className='container-cards'>
             <div className="element-naame">
@@ -498,6 +498,7 @@ const StyledUseer = styled.div`
   h1{
     font-weight: 700;
     color: #5e3f71;
+    margin-bottom: 0;
   }
   .container {
     width: 100vw;
@@ -527,16 +528,18 @@ const StyledUseer = styled.div`
     overflow: hidden;
   }
   .container-profile{
-    position: fixed;
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: center;
     // margin-bottom: 40rem;
     width: 100%;
     height: 3.3rem;
     background-color: #f1f1f1;
+    z-index: 1;
   }
   .container-cards{
-    margin-top: 3rem;
+    margin-top: 0;
   }
   .text-container p {
     margin: 0;

@@ -70,6 +70,7 @@ margin-top: 2rem;
   width: 80%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .element-container {
   width: 100%;
@@ -77,7 +78,7 @@ margin-top: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(236, 227, 250);
+  background-color: white;
   border-radius: 40px;
 }
 .element-container span {
