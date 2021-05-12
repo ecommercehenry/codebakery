@@ -55,7 +55,7 @@ export default function PaginationGrid() {
      const StyledTablePagination = withStyles((theme) => ({
       root: {
         height: 60,
-        color:"#9a48cc",
+        color:"#333",
         },
     }))(TablePagination);
 
@@ -78,7 +78,6 @@ export default function PaginationGrid() {
 
 
 const StyledPagination = styled.div`
-  /*
-  color:${({light})=>light ? 'black' : 'white'};
-  */
+  display: flex;
+  justify-content: center;
 `;

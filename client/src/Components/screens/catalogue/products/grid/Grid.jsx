@@ -67,7 +67,6 @@ const Grid = ({ orderId, refetchCatalogue }) => {
             : "")
           ) : !productsToRender ? 'Cargando...': "No se encontraron Productos" )
         }
-
       </>
     </StyledGrid>
   );
