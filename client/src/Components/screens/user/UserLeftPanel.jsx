@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
+import { HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import styled from "styled-components";
 
