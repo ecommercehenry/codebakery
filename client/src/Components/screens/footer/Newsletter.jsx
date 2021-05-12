@@ -89,7 +89,7 @@ h2{
   font-weight: 600;
 }
 
-.suscribe-btn: hover{
+.suscribe-btn:hover{
   background-color: white;
   color:#755588;
 
@@ -113,7 +113,7 @@ h2{
  
 }
 
-.btn: hover {
+.btn:hover {
   
   background-color: white;
   color:#755588;

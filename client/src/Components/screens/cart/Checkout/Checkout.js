@@ -168,11 +168,45 @@ export default function Checkout() {
         </main>
       </React.Fragment>
     </StyledCheckout>
+    
   );
 }
 
+
+
 const StyledCheckout = styled.div`
   background: ${({ light }) => (light ? "white" : "#222222")};
+  background-color: #f1f1f1;
+  
+  display: flex;
+  flex-direction: column;
+  
+  @media (min-width: 648px){}
+
+.makeStyles-paper-3 {
+    color: black; /*letra de titulo "checkout" */
+    padding: 24px;
+    background: white;
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+.makeStyles-stepper-4 {
+    padding: 24px 80px 24px;
+    background: white;
+}
+.MuiButton-label {
+    width: 100%;
+    display: inherit;
+    align-items: inherit;
+    justify-content: center;
+    background-color: #8677bf;
+    padding: 6px;
+    position: relative;
+    top: 7px;
+    right: -15px;
+
+}
+
 `;
 
 const StyledFooter = styled.div`

@@ -34,7 +34,7 @@ const Options = () => {
       <div className="options">
         <div className="mp" onClick={mpHandler}>
           <img
-            src="https://res.cloudinary.com/ggonzalescbs/image/upload/v1618977878/code_bakery/mercadopago_krspnc.jpg"
+            src="https://res.cloudinary.com/ggonzalescbs/image/upload/v1620857137/code_bakery/p6shcnd7k58gugfzuvhb.jpg"
             alt="mercadopago"
           />
         </div>
@@ -82,7 +82,9 @@ const StyledOptions = styled.div`
       overflow: hidden;
       img {
         width: 100%;
-        height: 100%;
+        height:auto;
+        min-width: 50%;
+        
       }
     }
   }

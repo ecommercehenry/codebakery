@@ -160,9 +160,9 @@ export default function AddressForm({ setUserdata, setShippingtype, setStoreId }
   return (
     <React.Fragment>
       <div>
-        <FormControl>
+        <FormControl >
           <InputLabel htmlFor="age-native-simple">Shipping method</InputLabel>
-          <Select
+          <Select 
             fullWidth
             native
             onChange={handleShipping}
