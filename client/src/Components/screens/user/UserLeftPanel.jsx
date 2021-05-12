@@ -4,11 +4,9 @@ import { HiOutlineShoppingBag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import styled from "styled-components";
 
-import {   HiOutlineExternalLink,
-  HiOutlineLogout } from "react-icons/hi";
+import { HiOutlineExternalLink, HiOutlineLogout } from "react-icons/hi";
 
-
-const UserLeftPanel = ({ click, setClick }) => {
+const UserLeftPanel = () => {
   const path = window.location.pathname;
   const activeTab = {
     myData: path.includes("my-data") ? "active" : "inactive",
@@ -25,79 +23,61 @@ const UserLeftPanel = ({ click, setClick }) => {
   return (
     <StyledUserLeftPanel>
       <div className="menu">
-      <div className="content">
-        <div className="userInfo">
-          <div className="userAvatar"></div>
-          <div className="userName">{user}</div>
-        </div>
-        <div className="tabs">
-          <Link
-            className="text-decoration-none text-white"
-            to={`/user/${id}/my-data`}
-          >
-            <div className={`tab ${activeTab.myData}`}>
-              <HiOutlineUser size="1.3rem" className="icon" />
-              <span className="tabName">
-                My Data
-              </span>
-            </div>
-          </Link>
-          <div
-            className="text-decoration-none text-white"
-            to={`/user/orders/${id}`}
-          >
-            <div className={`tab ${activeTab.orders}`}>
-              <HiOutlineShoppingBag size="1.3rem" className="icon" />
-              <button className="tabName" onClick={() => setClick(1)}>
-                Product
-              </button>
-            </div>
+        <div className="content">
+          <div className="userInfo">
+            <div className="userAvatar"></div>
+            <div className="userName">{user}</div>
           </div>
-          <Link
-            className="text-decoration-none text-white"
-            to={`/user/${id}/for-review`}
-          >
-            <div className={`tab  ${activeTab.forReview}`}>
-              <HiOutlineClipboardList size="1.3rem" className="icon" />
-              <span className="tabName">
-                For Review
-              </span>
-            </div>
-          </Link>
-          <Link
-            className="text-decoration-none text-white"
-            to={`/user/review/${id}`}
-          >
-            <div className={`tab  ${activeTab.reviews}`}>
-              <HiOutlineClipboardList size="1.3rem" className="icon" />
-              <span className="tabName">
-                Orders
-              </span>
-            </div>
-          </Link>
-          <Link
-            className="text-decoration-none text-white"
-            to="/"
-            onClick={logout}
-          >
-            <div className="bottom-tabs">
-              <HiOutlineLogout size="1rem" className="icon" />
-              <span>Logout</span>
-            </div>
-          </Link>
-          <Link className="text-decoration-none text-white" to="/">
-          <div className="bottom-tabs">
-            <HiOutlineExternalLink size="1rem" className="icon" />
-            <span>Home</span>
-            </div>
-          </Link>
+          <div className="tabs">
+            <Link
+              className="text-decoration-none text-white"
+              to={`/user/${id}/my-data`}
+            >
+              <div className={`tab ${activeTab.myData}`}>
+                <HiOutlineUser size="1.3rem" className="icon" />
+                <span className="tabName">My Data</span>
+              </div>
+            </Link>
+              <Link
+              className="text-decoration-none text-white"
+              to={`/user/${id}/orders`}
+            >
+              <div className={`tab  ${activeTab.orders}`}>
+                <HiOutlineClipboardList size="1.3rem" className="icon" />
+                <span className="tabName">Orders</span>
+              </div>
+            </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to={`/user/${id}/for-review`}
+            >
+              <div className={`tab  ${activeTab.forReview}`}>
+                <HiOutlineClipboardList size="1.3rem" className="icon" />
+                <span className="tabName">For Review</span>
+              </div>
+            </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to="/"
+              onClick={logout}
+            >
+              <div className="bottom-tabs">
+                <HiOutlineLogout size="1rem" className="icon" />
+                <span>Logout</span>
+              </div>
+            </Link>
+            <Link className="text-decoration-none text-white" to="/">
+              <div className="bottom-tabs">
+                <HiOutlineExternalLink size="1rem" className="icon" />
+                <span>Home</span>
+              </div>
+            </Link>
+          </div>
         </div>
-      </div>
       </div>
     </StyledUserLeftPanel>
   );
 };
-
 
 const StyledUserLeftPanel = styled.div`
   background: #00000040;
@@ -105,8 +85,8 @@ const StyledUserLeftPanel = styled.div`
   position: sticky;
   top: 0;
   z-index: 3;
-  .menu{
-    background: #F7F7F7;
+  .menu {
+    background: #f7f7f7;
     height: 100vh;
     width: 11rem;
     position: absolute;
@@ -117,7 +97,7 @@ const StyledUserLeftPanel = styled.div`
     justify-content: center;
     padding-top: 5vh;
     color: #333;
-    border-right: 1px solid #ddd
+    border-right: 1px solid #ddd;
   }
   .content {
     width: 100%;
@@ -166,7 +146,7 @@ const StyledUserLeftPanel = styled.div`
       }
       .active {
         background: #f1f1f1;
-        border-left: solid 7px #5F3F71;
+        border-left: solid 7px #5f3f71;
       }
     }
   }
@@ -200,7 +180,7 @@ const StyledUserLeftPanel = styled.div`
       }
     }
   }
-  .bottom-tabs{
+  .bottom-tabs {
     width: 100%;
     display: flex;
     justify-content: flex-start;
