@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import APPLY_DISCOUNT from "../../../Apollo/mutations/applyDiscount";
 import RESET_DISCOUNT from "../../../Apollo/mutations/resetDiscount";
@@ -39,7 +39,9 @@ const NavBar = ({ color }) => {
 
   let logout = () => {
     localStorage.clear();
-    window.location.reload();
+    // window.location.href = "http://localhost:3000/";
+    window.location.replace("http://localhost:3000/")
+    // window.location.reload();
   };
 
   let storage = window.localStorage;
