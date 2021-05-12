@@ -2,11 +2,13 @@ import React from 'react'
 import styled from 'styled-components';
 import SortButton from "../home&sort/sortButton/SortButton";
 import { useSelector } from "react-redux";
+import PaginationGrid from '../grid/PaginationGrid';
 
 const ProductBar = () => {
     let {status} = useSelector((state)=>state.theme);
     return (
-        <StyledProductBar light={status}>                     
+        <StyledProductBar light={status}>
+            <PaginationGrid />
             <SortButton/>
         </StyledProductBar>
     )
