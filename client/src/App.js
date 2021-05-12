@@ -75,7 +75,6 @@ function App() {
           <Route exact path="/promote" component={Promote} />
           <Route exact path="/user/:id/profile" component={UserPanel} />
           <Route exact path="admin/newsletter" component={NewsletterAdmin} />
-
           <Route path="/*" component={() => "404 NOT FOUND"} />
 
 

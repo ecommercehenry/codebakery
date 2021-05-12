@@ -8,6 +8,7 @@ import UserOrders from "./UserOrders";
 import UserProduct from "./UserProduct";
 import UserProfile from "./UserProfile";
 import UserReview from "./UserReview";
+import EnableTFA from "./EnableTFA";
 import NavBarMobile from "../navBar/NavBarMobile";
 import NavBar from "../navBar/NavBar";
 import { Route } from "react-router";
@@ -26,6 +27,7 @@ const UserPanel = () => {
       <Route path={`/user/:id/for-review`} component={UserOrders}/>
       <Route path={`/user/:id/reviews`} component={UserReview}/>
       <Route path={`/user/:id/orders`} component={UserProduct}/>
+      <Route path={`/user/:id/my-data/enableTFA`} component={EnableTFA}/>
       </div>
     </StyledUserPanel>
   );
