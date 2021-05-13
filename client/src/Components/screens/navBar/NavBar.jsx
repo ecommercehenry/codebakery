@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import APPLY_DISCOUNT from "../../../Apollo/mutations/applyDiscount";
 import RESET_DISCOUNT from "../../../Apollo/mutations/resetDiscount";
