@@ -22,6 +22,7 @@ const GET_All_ORDERS = gql`
             stock
             image
             price
+            discount
             quantity
           }
         }

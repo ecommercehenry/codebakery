@@ -6,9 +6,8 @@ import RESET_DISCOUNT from "../../../Apollo/mutations/resetDiscount";
 import getPromos from "../../../Apollo/queries/getPromos";
 import CountCart from "../cart/container/CountCart";
 import styled from "styled-components";
-import logo from './Logo.png'
-import logoBlack from './LogoBlack.png'
-/* import ThemeSwitch from "./ThemeSwitch"; */
+import logo from './Logo.png';
+import logoBlack from './LogoBlack.png';
 
 const NavBar = ({ color }) => {
   const textColor = color === "white" ? "text-inactive" : "text-dark";
