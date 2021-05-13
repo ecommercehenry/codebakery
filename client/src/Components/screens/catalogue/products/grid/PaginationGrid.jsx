@@ -8,19 +8,12 @@ import { changeGridPage } from "../../../../../actions";
 
 export default function PaginationGrid() {
 
-    let {orders, filterOrders, filterStatus, statusOrders} = useSelector(state => state.ordersReducer);
-    let { search, productsToRender, allProduct } = useSelector(
+    /* let {orders, filterOrders, filterStatus, statusOrders} = useSelector(state => state.ordersReducer); */
+    let { allProduct } = useSelector(
         (state) => state.reducer
       );
     let {status} = useSelector((state)=>state.theme);
     let longitud = allProduct?.length || 0;
-    // console.log(productsToRender, 'yyyyyyyy', longitud)
-    // if (search && filterOrders.length > 0) {
-    //   longitud= filterStatus.length > 0 ? statusOrders.length : filterOrders?.length;
-    // } else {
-    //   longitud= filterStatus.length > 0 ? statusOrders.length : orders?.length;
-   
-    // };
 
 
     const dispatch = useDispatch();

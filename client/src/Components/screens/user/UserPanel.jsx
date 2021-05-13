@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import {motion} from 'framer-motion';
@@ -21,7 +21,9 @@ const UserPanel = () => {
     <StyledUserPanel light={status} variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
       <NavBar color="white" />
       <NavBarMobile color="white" />
+      <div className="left-side">
       <UserLeftPanel />
+      </div>
       <div className="right-side">
       <Route path={`/user/:id/my-data`} component={UserProfile}/>
       <Route path={`/user/:id/for-review`} component={UserOrders}/>
@@ -41,6 +43,17 @@ const StyledUserPanel = styled(motion.div)`
 
   .right-side{
     padding-left: 11rem;
+    height: calc(100vh - 4.5rem);
+    overflow-y: auto;
+  }
+
+  @media (max-width: 850px) {
+    .left-side{
+    display: none;
+    }
+    .right-side{
+    padding-left: 0;
+    }
   }
 `;
 

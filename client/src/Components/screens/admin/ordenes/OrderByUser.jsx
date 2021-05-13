@@ -98,7 +98,8 @@ margin-top: 2rem;
 }
 .edit-button {
   padding: 0.5rem;
-  height: 100%;
+  padding-bottom: 2em;
+  height: fit-content;
   justify-self: center;
   align-self: center;
   justify-content: flex-start;

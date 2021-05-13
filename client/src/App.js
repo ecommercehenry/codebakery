@@ -29,6 +29,8 @@ import Sucursales from './Components/Maps/Sucursales'
 import NewsletterAdmin from "./Components/screens/admin/newsletter/NewsletterAdmin";
 
 import TwoFA from "./Components/UserAcount/TwoFA";
+import UserLeftPanel from "./Components/screens/user/UserLeftPanel";
+import NavBarMobile from "./Components/screens/navBar/NavBarMobile";
 
 
 // let token = localStorage.getItem("token");
@@ -74,9 +76,8 @@ function App() {
           <Route path="/reset-password" component={ResetPassword} />
           <Route exact path="/promote" component={Promote} />
           <Route exact path="/user/:id/profile" component={UserPanel} />
-          <Route exact path="admin/newsletter" component={NewsletterAdmin} />
+          <Route exact path="/admin/newsletter" component={NewsletterAdmin} />
           <Route path="/*" component={() => "404 NOT FOUND"} />
-
 
         </Switch>
       </>
@@ -104,6 +105,10 @@ function App() {
           <Route path="/reset-password" component={ResetPassword} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route exact path="/TFA" component={TwoFA} />
+          <Route path="/user-menu">
+            <NavBarMobile />
+            <UserLeftPanel/>
+          </Route>
           <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
