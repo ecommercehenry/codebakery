@@ -69,13 +69,13 @@ function TwoFA(){
     }, [dataValidate, dispatch, email, id, name, role, token, roleUser])
 
     useEffect(() => {
-      console.log(dataCredentials?.validateCredentials, 'atstattstatas')
+      // console.log(dataCredentials?.validateCredentials, 'atstattstatas')
       if(dataCredentials?.validateCredentials) {
         // alert('se va a reload twoFA')
         window.location.reload();
 
       }
-    },[dataCredentials?.validateCredentials])
+    },[dataCredentials])
     // console.log(roleUser, tokenUser, dataCredentials)
     if(roleUser  && tokenUser && dataCredentials){
       // console.log(roleUser,'ayysyaysyas')

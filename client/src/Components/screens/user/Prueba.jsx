@@ -48,7 +48,6 @@ const Prueba = ({ setClick, index }) => {
   }
 
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <StyledDetail >

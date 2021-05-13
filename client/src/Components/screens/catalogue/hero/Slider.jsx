@@ -72,7 +72,7 @@ const ButtonSlider = styled.button`
   top: 10rem;
   transform: translateY(-50%);
   width: 5%;
-  height: 20rem;
+  height: 100%;
   background: none;
   border: none;
   background-color: hsla(0, 0%, 0%, 0.446);
@@ -96,7 +96,7 @@ const SliderAtr = styled.div`
   position: relative;
   background-color: #5F3F71!important;
   z-index: 1;
-  height: 20rem;
+  height: fit-content;
   width: 100%;
   display: flex;
   align-items: center;
@@ -104,7 +104,8 @@ const SliderAtr = styled.div`
 
   .slide {
     min-width: 100%;
-    height: 20rem;
+    height: fit-content;
+    max-height: 20rem;
     transition: 0.5s;
   }
 `;

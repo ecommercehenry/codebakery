@@ -49,7 +49,7 @@ function App() {
 
   const isAuthenticated = data?.validateCredentials;
 
-  if (isAuthenticated && role === "admin") {
+  if (isAuthenticated && role === "admin") { 
     return (
       <>
         <GlobalStyle />
@@ -75,7 +75,6 @@ function App() {
           <Route exact path="/promote" component={Promote} />
           <Route exact path="/user/:id/profile" component={UserPanel} />
           <Route exact path="admin/newsletter" component={NewsletterAdmin} />
-
           <Route path="/*" component={() => "404 NOT FOUND"} />
 
 
@@ -99,13 +98,13 @@ function App() {
           <Route exact path="/user/addReview/:id" component={FormReview} />
           <Route exact path="/user/modify/review/:id" component={FormModify} />
           <Route exact path="/user/orders/:id" component={UserOrders} /> 
-          <Route exact path="/user/:id/profile" component={UserPanel} /> 
+          <Route path="/user/:id/" component={UserPanel} />
           <Route exact path="/log-in" component={UserAccount} />
           <Route exact path="/sign-up" component={CreateUserAccount} />
           <Route path="/reset-password" component={ResetPassword} />
           <Route exact path="/catalogue/detail/:id" component={Detail} />
           <Route exact path="/TFA" component={TwoFA} />
-          <Route path="/*" component={() => "404 NOT FOUNDffff"} />
+          <Route path="/*" component={() => "404 NOT FOUND"} />
         </Switch>
       </>
     );

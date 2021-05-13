@@ -2,9 +2,13 @@ import React from "react";
 
 //icons
 import {
+  HiOutlineDesktopComputer,
   HiOutlineExternalLink,
   HiOutlineLogout,
+  HiOutlineMailOpen,
   HiOutlineShoppingBag,
+  HiOutlineTag,
+  HiOutlineTruck,
   HiOutlineUser,
 } from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
@@ -34,7 +38,6 @@ const LeftPanel = () => {
       <div className="content">
         <section style={{ width: "100%" }}>
           <div className="userInfo">
-            <div className="userAvatar"></div>
             <div className="userName">Admin</div>
           </div>
           <div className="tabs">
@@ -67,8 +70,8 @@ const LeftPanel = () => {
               className="text-decoration-none text-white"
               to="/admin/slider"
             >
-              <div className={`tab ${activeTab.slider}`}>
-                <HiOutlineUser size="1.3rem" className="icon" />
+              <div className={`tab ${activeTab.sliders}`}>
+                <HiOutlineDesktopComputer size="1.3rem" className="icon" />
                 <span className="tabName">Slider</span>
               </div>
             </Link>
@@ -76,8 +79,8 @@ const LeftPanel = () => {
               className="text-decoration-none text-white"
               to="/admin/newsletter"
             >
-              <div className={`tab ${activeTab.newsletter}`}>
-                <HiOutlineUser size="1.3rem" className="icon" />
+              <div className={`tab ${activeTab.newsletters}`}>
+                <HiOutlineMailOpen size="1.3rem" className="icon" />
                 <span className="tabName">Newsletter</span>
               </div>
             </Link>
@@ -86,7 +89,7 @@ const LeftPanel = () => {
               to="/admin/promos"
             >
               <div className={`tab ${activeTab.promos}`}>
-                <HiOutlineClipboardList size="1.3rem" className="icon" />
+                <HiOutlineTag size="1.3rem" className="icon" />
                 <span className="tabName">Promos</span>
               </div>
             </Link>
@@ -95,7 +98,7 @@ const LeftPanel = () => {
               to="/admin/stores"
             >
               <div className={`tab ${activeTab.stores}`}>
-                <HiOutlineUser size="1.3rem" className="icon" />
+                <HiOutlineTruck size="1.3rem" className="icon" />
                 <span className="tabName">Stores</span>
               </div>
             </Link>
@@ -144,6 +147,10 @@ const StyledPanel = styled.div`
   padding-top: 5vh;
   color: white;
   box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.15);
+
+  .tabName{
+    padding-left: 1em;
+  }
 
   li {
     transition: 1s all;
@@ -205,26 +212,12 @@ const StyledPanel = styled.div`
     font-size: 1.2rem;
     .userInfo {
       width: 100%;
-      height: 19vh;
+      height: 10vh;
       display: flex;
       justify-content: space-between;
       flex-direction: column;
       align-items: center;
-      .userAvatar {
-        display: inline-block;
-        min-width: 15%;
-        width: 60%;
-        white-space: nowrap;
-      }
-
-      .userAvatar:before {
-        border-radius: 50%;
-        width: 100%;
-        padding-bottom: 100%;
-        background: transparent;
-        content: "";
-        display: inline-block;
-      }
+      
       .userName {
         font-size: 1.3rem;
         //font-weight: bold;
@@ -235,7 +228,7 @@ const StyledPanel = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      margin-top: 2.5em;
+      margin-top: 1em;
       font-weight: bold;
       .tab {
         margin-top: 0.1em;

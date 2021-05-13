@@ -256,10 +256,25 @@ const StyledMobileNav = styled.div`
     border-bottom: 1px solid #ddd;
     padding-bottom: 2em;
     z-index: 99;
+    transform-style: preserve-3d;
+
+    ::before{
+      position: absolute;
+      content: "";
+      width: 20px;
+      height: 20px;
+      z-index: 90;
+      top: -5px;
+      margin-left: 1.35em;
+      background-color: white;
+      transform: rotate(45deg) translateZ(-1px);
+    }
 
     .menu-drop{
       display: flex;
       flex-direction: column;
+      height: 100%;
+      z-index: -1;
 
       .tab{
         color: #333;
@@ -310,7 +325,11 @@ const StyledMobileNav = styled.div`
   @media(max-width: 480px){
     .menu-drop-container{
       z-index: 3;
-      height: 100%!important;
+      height: 100vh;
+
+      .menu{
+        height: 100%;
+      }
     }
   }
 `;

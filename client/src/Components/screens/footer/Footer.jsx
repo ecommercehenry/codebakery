@@ -8,8 +8,6 @@ import footer from "./footer.jpg";
 
 // Icons
 import fb from "./img/Orion_facebook.svg";
-import tw from "./img/Orion_twitter.svg";
-import wa from "./img/Orion_whatsapp.svg";
 import is from "./img/Orion_instagram.svg";
 
 export default function Footer() {

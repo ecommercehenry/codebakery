@@ -1,6 +1,6 @@
 const { ImageSlider } = require("../db");
-const { cloudinary } = require("../../utils/cloudinary");
-const { response } = require("../app");
+const { cloudinary } = require("../../utils/cloudinary"); 
+// const { response } = require("../app");
 
 async function saveImageSlider(image) {
   try {
