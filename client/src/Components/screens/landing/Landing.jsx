@@ -8,6 +8,7 @@ import { Redirect } from 'react-router-dom'
 import {motion} from 'framer-motion';
 import {pageAnimation} from '../../PageAnimation'
 import NavBarMobile from '../navBar/NavBarMobile';
+import mobilePhoto from './Frame3.png'
 
 const Landing = () => {
     const [redirect, setRedirect] = useState(false)
@@ -192,7 +193,9 @@ top: 0;
     }
 
     .background-photo{
-        background-image: none!important;
+        background-image: url(${mobilePhoto});
+        background-position-x: center;
+        background-position-y: bottom;
     }
 
     .go-shop-btn{
@@ -201,7 +204,7 @@ top: 0;
     
     #title-btn-wrapper{
         padding-bottom: 8rem!important;
-        top: 1em!important;
+        top: -1em!important;
     }
 
     .landing-title{

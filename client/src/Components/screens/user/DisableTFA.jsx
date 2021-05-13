@@ -63,6 +63,4 @@ const StyledButton = styled.button`
   ${media.laptop} {
     font-size: calc(0.25rem + 6 * ((100vw - 320px) / 680));
   }
-}
-  
 `;

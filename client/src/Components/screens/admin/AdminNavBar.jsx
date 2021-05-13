@@ -13,7 +13,6 @@ import { HiOutlineFilter } from "react-icons/hi";
 import AddPromoButton from "./promos/AddPromoButton"
 
 //components
-import SearchBar from "./SearchBar";
 import SearchBarAdmin from "./SearchBarAdmin";
 
 const AdminNavBar = ({ promo, setPromo, displayFilter, setDisplayFilter  }) => {

@@ -12,10 +12,7 @@ import Collapse from "@material-ui/core/Collapse";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
 import Button from "@material-ui/core/Button";
-import styled from "styled-components";
-import closeIcon from "../../../icons/close2.svg"; 
 import Prueba from "./Prueba"; 
 
 const useStyles = makeStyles((theme) => ({
@@ -142,30 +139,3 @@ export default function UserProduct() {
   );
 }
 
-const StyledForm = styled.form`
-width:35%;
-height: 80vh;
-background: white;
-border-radius:65px;
-padding: 3rem 4rem;
-border:1px solid #f3dff3;
-position: relative;
-
-.closeee{
-  display: flex;
-  justify-content: flex-end;
-
-}
-.infoProductt{
-  //background:blue;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  .namee{
-      //background:green;
-      height:20%;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-  }
-`; 

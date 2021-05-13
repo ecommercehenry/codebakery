@@ -12,21 +12,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
   let { search, productsToRender } = useSelector(
     (state) => state.reducer
   );
-  // let arr = [];
-  // if (search === true) {
-  //   arr = allProduct.filter((element) =>
-  //     element.name.toLowerCase().includes(filterProduct.toLowerCase())
-  //   );
-  //   //con includes la busq ya no pide exactitud en el string. @Lizen
-  // }
-  // let arr = [];
-
-  // if (search === true) {
-  //   arr = allProduct.filter((element) =>
-  //     element.name.toLowerCase().includes(filterProduct.toLowerCase())
-  //   );
-  //   //con includes la busq ya no pide exactitud en el string. @Lizen
-  // }
+  
   const { data } = useQuery(GET_BY_PRODUCT, {});
 
 
@@ -68,7 +54,7 @@ const Grid = ({ orderId, refetchCatalogue }) => {
           "No se encontraron Productos") : 
           (productsToRender?.length > 0 ? 
             productsToRender.map((element) => 
-              (element.stock != 0 ? (
+              (element.stock !== 0 ? (
             <ProductCard 
             refetchCatalogue={refetchCatalogue}
             orderId={orderId}

@@ -38,6 +38,7 @@ const StyledHero = styled.div`
     font-size: 7rem;
     font-weight: bold;
     font-style: italic;
+    margin-top: -4rem;
   }
 
   #vertical {
@@ -51,6 +52,34 @@ const StyledHero = styled.div`
     left: 55%;
     top: 60%;
   }
+
+  @media(max-width: 1300px){
+    #vertical{
+      display: none;
+    }
+    #horizontal {
+      display: none;
+  }
+    background-position-x: 100%;
+  }
+  @media(max-width: 800px){
+    background-position-x: 120%;
+  }
+  @media(max-width: 650px){
+    background-position-x: 140%;
+    }
+    @media(max-width: 650px){
+    background-image: none;
+    background-position-x: none;
+    #hero-title {
+    position: relative;
+    color: white;
+    font-size: 7rem;
+    margin-left: -4rem;
+    font-weight: bold;
+    font-style: italic;
+  }
+    }
 `;
 
 export default Cardhero;
