@@ -40,6 +40,7 @@ const AboutUs = ({ name, title, img, git, linkedin }) => {
   );
 };
 
+
 const AboutUsConteiner = styled.div`
   * {
     margin: 0;
