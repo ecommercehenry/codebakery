@@ -8,7 +8,6 @@ import { changeGridPage } from "../../../../../actions";
 
 export default function PaginationGrid() {
 
-    /* let {orders, filterOrders, filterStatus, statusOrders} = useSelector(state => state.ordersReducer); */
     let { allProduct } = useSelector(
         (state) => state.reducer
       );

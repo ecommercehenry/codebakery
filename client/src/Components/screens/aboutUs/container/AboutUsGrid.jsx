@@ -42,10 +42,13 @@ const AboutUsGrid = () => {
   );
 };
 
+
 const media = {
-  tablet: "@media(min-width:768px)",
+  //tablet: "@media(min-width:768px)",
   laptop: "@media(min-width:992px)",
   desktop: "@media(min-width:1200px)",
+  ipads: "(max-width: 768px) and (min-width: 481px)",
+  celular: "(max-width: 480px) and (min-width:320px)",
 };
 
 const StyledWrapper = styled(motion.div)`
@@ -114,6 +117,17 @@ const AboutUsConteinerGrid = styled.div`
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1rem;
   }
-`;
 
+  ${media.ipads} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+  }
+
+  ${media.celular} {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.5rem;
+  }
+`;
 export default AboutUsGrid;
