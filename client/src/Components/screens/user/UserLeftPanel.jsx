@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HiOutlineUser } from "react-icons/hi";
+import {
+  HiOutlineBadgeCheck,
+  HiOutlineChevronRight,
+  HiOutlineStar,
+  HiOutlineUser,
+} from "react-icons/hi";
 import { HiOutlineClipboardList } from "react-icons/hi";
 import styled from "styled-components";
-
-import { HiOutlineExternalLink, HiOutlineLogout } from "react-icons/hi";
 
 const UserLeftPanel = () => {
   const path = window.location.pathname;
@@ -17,9 +20,7 @@ const UserLeftPanel = () => {
 
   let id = window.localStorage.getItem("id");
   let user = localStorage.name;
-  let logout = () => {
-    localStorage.clear();
-  };
+
   return (
     <StyledUserLeftPanel>
       <div className="menu">
@@ -36,15 +37,36 @@ const UserLeftPanel = () => {
               <div className={`tab ${activeTab.myData}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">My Data</span>
+                <HiOutlineChevronRight
+                  size="1.3rem"
+                  className="icon responsive"
+                />
               </div>
             </Link>
-              <Link
+            <Link
               className="text-decoration-none text-white"
               to={`/user/${id}/orders`}
             >
               <div className={`tab  ${activeTab.orders}`}>
                 <HiOutlineClipboardList size="1.3rem" className="icon" />
                 <span className="tabName">Orders</span>
+                <HiOutlineChevronRight
+                  size="1.3rem"
+                  className="icon responsive"
+                />
+              </div>
+            </Link>
+            <Link
+              className="text-decoration-none text-white"
+              to={`/user/${id}/reviews`}
+            >
+              <div className={`tab  ${activeTab.reviews}`}>
+                <HiOutlineBadgeCheck size="1.3rem" className="icon" />
+                <span className="tabName">Reviews</span>
+                <HiOutlineChevronRight
+                  size="1.3rem"
+                  className="icon responsive"
+                />
               </div>
             </Link>
             <Link
@@ -52,24 +74,12 @@ const UserLeftPanel = () => {
               to={`/user/${id}/for-review`}
             >
               <div className={`tab  ${activeTab.forReview}`}>
-                <HiOutlineClipboardList size="1.3rem" className="icon" />
+                <HiOutlineStar size="1.3rem" className="icon" />
                 <span className="tabName">For Review</span>
-              </div>
-            </Link>
-            <Link
-              className="text-decoration-none text-white"
-              to="/"
-              onClick={logout}
-            >
-              <div className="bottom-tabs">
-                <HiOutlineLogout size="1rem" className="icon" />
-                <span>Logout</span>
-              </div>
-            </Link>
-            <Link className="text-decoration-none text-white" to="/">
-              <div className="bottom-tabs">
-                <HiOutlineExternalLink size="1rem" className="icon" />
-                <span>Home</span>
+                <HiOutlineChevronRight
+                  size="1.3rem"
+                  className="icon responsive"
+                />
               </div>
             </Link>
           </div>
@@ -87,7 +97,7 @@ const StyledUserLeftPanel = styled.div`
   z-index: 3;
   .menu {
     background: #f7f7f7;
-    height: 100vh;
+    min-height: calc(100vh - 4.5rem);
     width: 11rem;
     position: absolute;
     top: 0px;
@@ -143,6 +153,10 @@ const StyledUserLeftPanel = styled.div`
           border: none;
           color: #333;
         }
+
+        .responsive {
+          display: none;
+        }
       }
       .active {
         background: #f1f1f1;
@@ -158,39 +172,32 @@ const StyledUserLeftPanel = styled.div`
         padding-left: 0.75rem !important;
       }
     }
-
-    @media (max-width: 768px) {
-      width: 5rem;
-      .content {
-        .userInfo {
-          margin-top: 2rem;
-          .userName {
-            font-size: 1rem !important;
-            text-align: center;
-          }
-        }
-      }
-      .tabs {
-        .tab {
-          padding-left: 1.5rem !important;
-          .tabName {
-            display: none;
-          }
-        }
-      }
-    }
   }
-  .bottom-tabs {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 1.6em;
-    margin-top: 0.5em;
 
-    span {
-      font-size: 1rem;
-      margin-left: 0.5rem;
+  @media (max-width: 850px) {
+    .menu {
+      width: 100vw;
+      padding-top: 0;
+    }
+
+    .userInfo {
+      display: none !important;
+    }
+
+    .tabs {
+      margin-top: 0 !important;
+
+      .tab {
+        position: relative;
+        border-bottom: 1px solid #ddd;
+
+        .responsive {
+          display: block !important;
+          position: absolute;
+          right: .5em;
+          margin-bottom: .3em;
+        }
+      }
     }
   }
 `;

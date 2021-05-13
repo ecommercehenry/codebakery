@@ -53,13 +53,13 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(6),
       padding: theme.spacing(3),
-      color: "#f4f2f8",
-      background: "#8a6db1", //fondo del form
+      color: "#8a6db1",
+      // background: "#8a6db1", //fondo del form
     },
   },
   stepper: {
     padding: theme.spacing(3, 10, 3),
-    background: "#8a6db1", //fondo de steps
+    // background: "#8a6db1", //fondo de steps
   },
   buttons: {
     display: "flex",
@@ -68,8 +68,8 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
-    color: "#f4f2f8",
-    background: "#402e57",
+    // color: "#f4f2f8",
+    // background: "#402e57",
   },
 }));
 
@@ -168,11 +168,89 @@ export default function Checkout() {
         </main>
       </React.Fragment>
     </StyledCheckout>
+    
   );
 }
 
+
+
 const StyledCheckout = styled.div`
   background: ${({ light }) => (light ? "white" : "#222222")};
+  background-color: #f1f1f1;
+  
+  display: flex;
+  flex-direction: column;
+  
+  @media (min-width: 648px){}
+
+.makeStyles-paper-3 {
+    color:  #855eb7; /*letra de titulo "checkout" */
+    padding: 24px;
+    background: white;
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+.makeStyles-stepper-4 {
+    padding: 24px 80px 24px;
+    background: white;
+}
+.MuiButton-label {
+   
+    
+    top: 7px;
+    right: -15px;
+    background-color: #5e3f71;
+    color: #cecece;
+    position: relative;
+    left: 9px;
+    padding: 6px;
+    border-radius: 9px;
+    border: none;
+
+}
+button.save {
+    background-color: #5e3f71;
+    color: #cecece;
+    position: relative;
+    left: 9px;
+    padding: 6px;
+    border-radius: 9px;
+    border: none;
+}
+.makeStyles-button-6 {
+    color: #f4f2f8;
+    background: #f8f9fa;
+    margin-top: 24px;
+    margin-left: 8px;
+}
+.MuiButton-contained:hover {
+    box-shadow: none;
+    background-color: #d5d5d5;
+}
+.MuiButton-contained {
+    color: rgba(0, 0, 0, 0.87);
+    box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 20%), 0px 0px 0px 0px rgb(0 0 0 / 14%), 0px 0px 0px 0px rgb(0 0 0 / 12%);
+    background-color: white;
+}
+.MuiButton-contained:hover{    
+    background-color: #ffffff00;
+}
+
+.MuiButton-root {
+    padding: 0px 0px;
+   
+}
+.MuiStepIcon-root.MuiStepIcon-active {
+    color:  #855eb7;
+}
+.MuiStepIcon-root.MuiStepIcon-completed {
+    color:  #855eb7;
+}
+.MuiGrid-spacing-xs-2 > .MuiGrid-item {
+    padding: 8px;
+    margin-top: 20px;
+}
+
 `;
 
 const StyledFooter = styled.div`

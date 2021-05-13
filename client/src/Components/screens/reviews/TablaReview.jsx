@@ -46,9 +46,11 @@ flex-direction: column;
 align-items: center;
 min-height: 100vh;
 background: #f1f1f1;
+margin-top: 1rem;
+
 .container-profile{
     position: sticky;
-    top: 0;
+    top: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,5 +65,11 @@ background: #f1f1f1;
     font-weight: 700;
     color: #5e3f71;
     margin-bottom: 0;
+  }
+
+  @media (max-width: 850px) {
+    .container-profile{
+        display:none;
+    }
   }
 `;

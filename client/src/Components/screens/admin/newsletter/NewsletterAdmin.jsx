@@ -97,6 +97,7 @@ const StyledNewsletter = styled.form`
 width:60%;
 //height: 30vh;
 
+
 border-radius:65px;
 padding: 3rem 4rem;
 border:2px solid #f3dff3;
@@ -176,6 +177,7 @@ label {
 }
 .submitt{
   
+
   height:auto;
   display:flex;
   justify-content: center;

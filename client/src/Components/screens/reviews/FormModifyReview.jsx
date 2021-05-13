@@ -202,6 +202,10 @@ position: relative;
         }
     }
     }
+
+    @media(max-width: 850px){
+      width: 90%;
+    }
 `;
 
 export default FormModify

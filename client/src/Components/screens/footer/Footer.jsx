@@ -41,7 +41,9 @@ export default function Footer() {
 
 const StyledFooter = styled.footer`
  background: url(${footer});
+
  width: 100%;
+
   display: flex;
   text-align: center;
   flex-direction: column;
@@ -102,6 +104,7 @@ const StyledFooter = styled.footer`
   
   }
 
+
   @media (max-width: 500px)  {
     .redes {
       //background-color:green;
@@ -120,6 +123,7 @@ const StyledFooter = styled.footer`
     }
 
   }
+
 
   // .linea-final {
   //   background-color: hsla(

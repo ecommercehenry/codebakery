@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route} from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import APPLY_DISCOUNT from "../../../Apollo/mutations/applyDiscount";
 import RESET_DISCOUNT from "../../../Apollo/mutations/resetDiscount";
@@ -7,14 +7,25 @@ import getPromos from "../../../Apollo/queries/getPromos";
 import CountCart from "../cart/container/CountCart";
 import styled from "styled-components";
 /* import ThemeSwitch from "./ThemeSwitch"; */
-import { HiOutlineHand, HiOutlineInformationCircle, HiOutlineLogin, HiOutlineLogout, HiOutlineMap, HiOutlineMenu, HiOutlineShoppingBag, HiOutlineX } from "react-icons/hi";
+import {
+  HiOutlineHand,
+  HiOutlineInformationCircle,
+  HiOutlineLogin,
+  HiOutlineLogout,
+  HiOutlineMap,
+  HiOutlineMenu,
+  HiOutlineShoppingBag,
+  HiOutlineUserCircle,
+  HiOutlineX,
+} from "react-icons/hi";
 import { useState } from "react";
-import logo from './Logo.png'
-import logoBlack from './LogoBlack.png'
-import $ from 'jquery'
+import logo from "./Logo.png";
+import logoBlack from "./LogoBlack.png";
+import $ from "jquery";
+import UserNavBar from "./UserNavBar";
 
 const NavBarMobile = ({ color }) => {
-const [showMenu, setShowMenu] = useState(false)
+  const [showMenu, setShowMenu] = useState(false);
 
   const actualPath = window.location.pathname;
 
@@ -37,8 +48,8 @@ const [showMenu, setShowMenu] = useState(false)
   };
 
   let storage = window.localStorage;
-  let role = window.localStorage.getItem("role");
-  let id = window.localStorage.getItem("id");
+  let role = window.localStorage.getItem("role");/* 
+  let id = window.localStorage.getItem("id"); */
   let logeed = storage.token ? true : false;
   let date = new Date();
 
@@ -87,52 +98,46 @@ const [showMenu, setShowMenu] = useState(false)
   }, [promos, applyDiscount, resetDiscount, today]);
 
   const handleShowMenu = (show) => {
-    show ?
-    $(".menu-drop-container").toggle()
-    && 
-    setShowMenu(true)
-    :
-    $(".menu-drop-container").toggle()
-    && setShowMenu(false)
-  }
+    show
+      ? $(".menu-drop-container").toggle() && setShowMenu(true)
+      : $(".menu-drop-container").toggle() && setShowMenu(false);
+  };
 
   useEffect(() => {
-    $(".menu-drop-container").hide()
-  }, [])
+    $(".menu-drop-container").hide();
+  }, []);
 
   const path = window.location.pathname;
-  const landing = path === '/';
+  const landing = path === "/";
 
   return (
     <StyledMobileNav white={color} showMenu={showMenu} landing={landing}>
       <div className="top-bar">
+        <Route path="/user/:id/">
+              <UserNavBar />
+        </Route>
         <div id="left-icon">
-          {showMenu ?
+          {showMenu ? (
             <button className="icon-btn" onClick={() => handleShowMenu(false)}>
-            <HiOutlineX
-              size="2em"
-              color={landing ? "black" : "white"}
-            />
+              <HiOutlineX size="2em" color={landing ? "black" : "white"} />
             </button>
-          :
-          <button className="icon-btn" onClick={() => handleShowMenu(true)}>
-          <HiOutlineMenu
-            size="2em"
-            color={landing ? "black" : "white"}
-          />
-          </button>
-          }
+          ) : (
+            <button className="icon-btn" onClick={() => handleShowMenu(true)}>
+              <HiOutlineMenu size="2em" color={landing ? "black" : "white"} />
+            </button>
+          )}
         </div>
         <div id="logo">
           <Link to="/" className={""} style={{ fontWeight: "bold" }}>
-            <img src={landing ? logoBlack : logo} style={{height:"2em", width: "auto"}} alt=""/>
+            <img
+              src={landing ? logoBlack : logo}
+              style={{ height: "2em", width: "auto" }}
+              alt=""
+            />
           </Link>
         </div>
         {role === "admin" ? (
-          <Link
-            to="/admin/orders"
-            className={``}
-          >
+          <Link to="/admin/orders" className={``}>
             <div className="tab">Admin Panel</div>
           </Link>
         ) : (
@@ -143,96 +148,103 @@ const [showMenu, setShowMenu] = useState(false)
           </div>
         )}
       </div>
-        
-      <div className="menu-drop-container">
-      <div className="menu-drop">
 
+      <div className="menu-drop-container">
+        <div className="menu-drop">
           <div className="top-tabs">
-          {logged ? (
-            <>
-              <Link
-                to={`/user/${id}/profile`}
-              >
+
+            {logged ? (
+              <>
+                <Link to={`/user-menu`}>
                   {localStorage.role === "admin" ? (
                     ""
                   ) : (
-                    <div className="tab">
-                      <HiOutlineHand size="1.7em" className="tab-icon"/>
-                      <span>Hi! {logeed ? localStorage.name : ""}</span>
+                    <>
+                      <div className="tab">
+                        <HiOutlineHand size="1.7em" className="tab-icon" />
+                        <span>Hi! {logeed ? localStorage.name : ""}</span>
                       </div>
+                      <div className="tab">
+                        <HiOutlineUserCircle size="1.7em" className="tab-icon" />
+                        <span>Profile</span>
+                      </div>
+                    </>
                   )}
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/log-in"
-              >
-                <div className="tab">
-                  <HiOutlineLogin size="1.7em" className="tab-icon"/>
-                Login
-                </div>
-              </Link>
-            </>
-          )}
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/log-in">
+                  <div className="tab">
+                    <HiOutlineLogin size="1.7em" className="tab-icon" />
+                    Login
+                  </div>
+                </Link>
+              </>
+            )}
           </div>
-        
-          <Link id="Catalogue" to="/catalogue" className={""}>
-          <div
-          style={{marginTop: "0.7em"}}
-          className={`tab ${isActive["catalogue"]}`}
-        >
-          <HiOutlineShoppingBag size="1.7em" className="tab-icon"/>
-            <span>Catalogue</span>
-            </div>
-          </Link>
-        
-        
-          <Link id="stores" to="/stores" className={""}>
-          <div
-          className={`tab ${isActive["stores"]}`}
-        >
-          <HiOutlineMap size="1.7em" className="tab-icon"/>
-            <span>Stores</span>
-            </div>
-          </Link>
-        
-        <div className="tab-separation" style={{borderTop: "1px solid #ddd", borderBottom:"1px solid #ddd"}}>
-          <Link id="About us" to="/about-us" className={""}>
-          <div
-          className={`tab ${isActive["about-us"]}`}
-        >
-          <HiOutlineInformationCircle size="1.7em" className="tab-icon"/>
-            <span >About us</span>
-            </div>
-          </Link>
-        </div>
 
-          {logged ? <Link
-                to="/"
-                onClick={logout}
-              >
-                <div className="tab">
-                <HiOutlineLogout size="1.7em" className="tab-icon" id="logout-icon"/>
+          <Link id="Catalogue" to="/catalogue" className={""}>
+            <div
+              style={{ marginTop: "0.7em" }}
+              className={`tab ${isActive["catalogue"]}`}
+            >
+              <HiOutlineShoppingBag size="1.7em" className="tab-icon" />
+              <span>Catalogue</span>
+            </div>
+          </Link>
+
+          <Link id="stores" to="/stores" className={""}>
+            <div className={`tab ${isActive["stores"]}`}>
+              <HiOutlineMap size="1.7em" className="tab-icon" />
+              <span>Stores</span>
+            </div>
+          </Link>
+
+          <div
+            className="tab-separation"
+            style={{
+              borderTop: "1px solid #ddd",
+              borderBottom: "1px solid #ddd",
+            }}
+          >
+            <Link id="About us" to="/about-us" className={""}>
+              <div className={`tab ${isActive["about-us"]}`}>
+                <HiOutlineInformationCircle size="1.7em" className="tab-icon" />
+                <span>About us</span>
+              </div>
+            </Link>
+          </div>
+
+          {logged ? (
+            <Link to="/" onClick={logout}>
+              <div className="tab">
+                <HiOutlineLogout
+                  size="1.7em"
+                  className="tab-icon"
+                  id="logout-icon"
+                />
                 <span>Logout</span>
-                </div>
-              </Link> : <></>}
-        
-        {/* <ThemeSwitch className="tab" /> */}
+              </div>
+            </Link>
+          ) : (
+            <></>
+          )}
+
+          {/* <ThemeSwitch className="tab" /> */}
         </div>
       </div>
-      
     </StyledMobileNav>
   );
 };
 
 const StyledMobileNav = styled.div`
-   @media(min-width: 851px){
+  @media (min-width: 851px) {
     display: none;
   }
 
   z-index: 4;
-  position: ${({landing}) => landing ? "absolute" : "static"};
+  position: ${({ landing }) => (landing ? "absolute" : "static")};
 
   .top-bar {
     display: flex;
@@ -241,9 +253,9 @@ const StyledMobileNav = styled.div`
     padding: 0 1em;
     height: 3.5rem;
     width: 100vw;
-    background: ${({ landing }) => landing ? "transparent" :  "#5e3f71"};
+    background: ${({ landing }) => (landing ? "transparent" : "#5e3f71")};
 
-    .icon-btn{
+    .icon-btn {
       background: none;
       border: none;
     }
@@ -251,14 +263,14 @@ const StyledMobileNav = styled.div`
 
   .menu-drop-container {
     position: absolute;
-    background: white!important;
+    background: white !important;
     display: block;
     border-bottom: 1px solid #ddd;
     padding-bottom: 2em;
     z-index: 99;
     transform-style: preserve-3d;
 
-    ::before{
+    ::before {
       position: absolute;
       content: "";
       width: 20px;
@@ -270,64 +282,62 @@ const StyledMobileNav = styled.div`
       transform: rotate(45deg) translateZ(-1px);
     }
 
-    .menu-drop{
+    .menu-drop {
       display: flex;
       flex-direction: column;
       height: 100%;
       z-index: -1;
 
-      .tab{
+      .tab {
         color: #333;
         display: flex;
         width: 100vw;
         padding-left: 1em;
-        margin: .2em 0;
+        margin: 0.2em 0;
         justify-content: flex-start;
         align-items: center;
         height: 3em;
         font-weight: bold;
 
-        .tab-icon{
-          margin-right: .8em;
+        .tab-icon {
+          margin-right: 0.8em;
         }
 
-        #logout-icon{
-          margin-left: .2em;
-          margin-right: .65em
+        #logout-icon {
+          margin-left: 0.2em;
+          margin-right: 0.65em;
         }
 
-        span{
-          margin-bottom: -.2em;
+        span {
+          margin-bottom: -0.2em;
         }
       }
 
-
-      .top-tabs{
+      .top-tabs {
         border-bottom: 1px solid #ddd;
-        padding: .5em 0;
+        padding: 0.5em 0;
       }
 
-      .tab-separation{
+      .tab-separation {
         border-top: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
-        margin: .5em 0;
+        margin: 0.5em 0;
       }
 
-      .active{
+      .active {
         background: #f1f1f1;
-        color: #6A83FA;
+        color: #6a83fa;
         font-weight: bold;
       }
     }
-
   }
 
-  @media(max-width: 480px){
-    .menu-drop-container{
+  @media (max-width: 480px) {
+    .menu-drop-container {
       z-index: 3;
       height: 100vh;
 
-      .menu{
+      .menu {
         height: 100%;
       }
     }
