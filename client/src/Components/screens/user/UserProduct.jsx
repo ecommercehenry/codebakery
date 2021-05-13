@@ -14,25 +14,20 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Button from "@material-ui/core/Button";
 import Prueba from "./Prueba"; 
+import styled from "styled-components";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     maxWidth: 850,
     //backgroundColor: theme.palette.background.paper,
-    background: "rgb(236, 227, 250)",
-    position: "absolute",
-    left: 250,
-    top: 85,
+    background: "white",
+    position: "relative",
+    height: "fit-content"
   },
   nested: {
     paddingLeft: theme.spacing(4),
-  },
-  titlee: {
-    position: "absolute",
-    left: "15rem",
-    top: "1.5rem",
-  },
+  }
 }));
 
 export default function UserProduct() {
@@ -59,12 +54,17 @@ export default function UserProduct() {
     },
   });
 
+  console.log(data)
+
   return (
-    click === 1 ? 
-    (<div>
-      <h1 className={classes.titlee}>Orders History</h1>
+    <StyledUserOrders>
+    <div className="container-profile">
+            <h1>Orders History</h1>
+    </div>
+    {click === 1 ? 
+    (<div className="order-container">
       <List className={classes.root} subheader={<li />}>
-        {data?.getAllOrdersUser?.orders.map((sectionId) => (
+        {data?.getAllOrdersUser.orders.length > 0 ? data?.getAllOrdersUser?.orders.map((sectionId) => (
           <li key={`section-${sectionId.id}`} className={classes.listSection}>
             <ul className={classes.ul}>
               <ListSubheader>{`Orders ${sectionId.id}`}</ListSubheader>
@@ -86,56 +86,55 @@ export default function UserProduct() {
                           detail
                         </Button>
                       </ListItem>
-                      {/* {
-                     sectionId.lineal_order.map(
-                        (item) => (
-                            <ListItem key={`item-${sectionId.id}-${item}`}>
-                            <ListItemText primary={`Product ${item.name} `} />
-                            <ListItemText primary={`Price $ ${item.price}`} />
-                          </ListItem>
-                        )
-                      )} */}
                     </ListItem>
                   </List>
                 </Collapse>
               </ListItem>
             </ul>
           </li>
-        ))}
+        )) : "You haven't made an order yet"}
       </List>
-      ;
-    </div>) : (
-      <Prueba setClick={setClick} click={click} setIndex={setIndex} index={index}/> 
-  //  <div style={{
-  //       display: "flex",
-  //       justifyContent: "center",
-  //       alignItems: "center",
-  //       backgroundColor: "rgba(0, 0, 0, 0.664)",
-  //       zIndex: 5,
-  //       position: "fixed",
-  //       height: "100vh",
-  //       width: "100vw",
-  //       top: "0",
-  //       left: "0",
-  //       paddingLeft: "10vw",
-  //     }}
-  //   >
-  //     <StyledForm>
-  //     <button onClick={()  => setClick(1)} className="closeee"><img src={closeIcon} width="30px" display="flex" alt="closeIcon"/></button> 
-  //       <div className="infoProductt">
-  //         <div className="namee">
-            
-  //           <label>Password</label>
-  //           {
-  //           (console.log(click, 'seguncdo'))
-  //           }
+    </div>
+    
+    ) : (
+      <Prueba setClick={setClick} click={click} setIndex={setIndex} index={index}/>
 
-  //         </div>
-  //     </div>
-  //     </StyledForm>
-  // </div>
-
-    ) 
+    )} 
+    </StyledUserOrders>
   );
 }
+
+const StyledUserOrders  = styled.div`
+margin-top: 1rem;
+h1 {
+    font-weight: 700;
+    color: #5e3f71;
+    margin-bottom: 0;
+  }
+
+.container-profile {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    // margin-bottom: 40rem;
+    width: 100%;
+    height: 3.3rem;
+    background-color: #f1f1f1;
+    z-index: 1;
+  }
+
+.order-container{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 4.5rem);
+}
+
+@media (max-width: 850px) {
+    .container-profile{
+      display: none;
+    }
+  }
+`
 

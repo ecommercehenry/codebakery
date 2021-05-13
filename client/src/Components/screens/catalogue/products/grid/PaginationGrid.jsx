@@ -13,13 +13,6 @@ export default function PaginationGrid() {
       );
     let {status} = useSelector((state)=>state.theme);
     let longitud = allProduct?.length || 0;
-    // console.log(productsToRender, 'yyyyyyyy', longitud)
-    // if (search && filterOrders.length > 0) {
-    //   longitud= filterStatus.length > 0 ? statusOrders.length : filterOrders?.length;
-    // } else {
-    //   longitud= filterStatus.length > 0 ? statusOrders.length : orders?.length;
-   
-    // };
 
 
     const dispatch = useDispatch();
@@ -54,7 +47,7 @@ export default function PaginationGrid() {
      const StyledTablePagination = withStyles((theme) => ({
       root: {
         height: 60,
-        color:"#9a48cc",
+        color:"#333",
         },
     }))(TablePagination);
 
@@ -77,7 +70,6 @@ export default function PaginationGrid() {
 
 
 const StyledPagination = styled.div`
-  /*
-  color:${({light})=>light ? 'black' : 'white'};
-  */
+  display: flex;
+  justify-content: center;
 `;

@@ -8,6 +8,7 @@ import { guardarProductos } from "../../../../../actions/index";
 import Grid from "../grid/Grid";
 import "./Products.css";
 import ProductBar from "./ProductBar";
+import PaginationGrid from "../grid/PaginationGrid";
 
 const Products = ({ orderId, refetchCatalogue }) => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Products = ({ orderId, refetchCatalogue }) => {
       <Categories />
       <ProductBar />
       <Grid orderId={orderId} refetchCatalogue={refetchCatalogue} />
+      <PaginationGrid />
     </div>
   );
 };

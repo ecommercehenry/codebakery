@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components';
 import SortButton from "../home&sort/sortButton/SortButton";
 import { useSelector } from "react-redux";
-import PaginationGrid from '../grid/PaginationGrid';
+import HomeButton from '../home&sort/homeButton/HomeButton';
 
 const ProductBar = () => {
     let {status} = useSelector((state)=>state.theme);
     return (
         <StyledProductBar light={status}>
-            <PaginationGrid />
+            <HomeButton />
             <SortButton/>
         </StyledProductBar>
     )
@@ -22,7 +22,7 @@ const StyledProductBar = styled.div`
     //background:blue;
     padding:2rem 5rem 0rem 5rem;
     display:flex;
-    justify-content:flex-end;
+    justify-content:space-between;
     align-items:center;
 `;
 
