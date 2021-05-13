@@ -83,17 +83,13 @@ export default function Orden({ id, orden }) {
     }
   }
 
-  // useEffect(() => {
-
-  // }, [data, loading])
-
   let handleOption = async (e) => {
     setSelectedStatus(e.target.value);
     setShow(true);
   };
   if (orden) {
-    let total = 0;
-    orden.price.map((e) => (total = total + e));
+    // let total = 0;
+    // orden.price.map((e) => (total = total + e)); 
     return (
       <StyledOrden>
         <BootBox
@@ -140,7 +136,7 @@ export default function Orden({ id, orden }) {
             <p className="order-cacelled">X</p>
           )}
         </td> */}
-        <td width="10%">{total} </td>
+        <td width="10%">{orden.total} </td>
 
         <td width="10%">
           <div className="edit-button">

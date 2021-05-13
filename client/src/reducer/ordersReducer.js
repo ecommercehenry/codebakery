@@ -19,6 +19,8 @@ const initialState = {
   search: false,
   idError: 0,
   status: false,
+  price: [],
+  total: 0,
   numPage: 0,
   renderPage:[],
   filterStatus: [],
@@ -62,13 +64,16 @@ const reducer = (state = initialState, action) => {
   let modifyFilterOrders;
   switch (action.type) {
     case SAVE_ORDERS:
+      // console.log(action.payload, 'pppppp')
       const data= action.payload?.map((o) => {
+        let arrPrice = o.lineal_order.map((u) => u).map((g) => g.price * g.quantity * ((g.discount/100 ||1)) );
         let filter = {
           id: o.id,
           userId: o.userId,
           date: o.creation,
           status: o.status,
-          price: o.lineal_order.map((u) => u).map((g) => g.price * g.quantity),
+          price: arrPrice,
+          total: arrPrice.reduce((a,b) => a+b),
           cancelled: o.cancelled,
           name: o.name,
         };
@@ -166,11 +171,11 @@ const reducer = (state = initialState, action) => {
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
         //
         filterlow = state.filterOrders.sort(function (a, b) {
-          return a.price[0] - b.price[0];
+          return a.total - b.total;
         });
       } else {
         filterlow = state.orders.sort(function (a, b) {
-          return a.price[0] - b.price[0]; 
+          return a.total - b.total; 
         });
       }
       modifyFilterOrders = filterByStatus({...state, filterOrders: filterlow});
@@ -187,11 +192,11 @@ const reducer = (state = initialState, action) => {
       if (state.orders.length > 0 && state.filterOrders.length > 0) {
         //
         filterhigh = state.filterOrders.sort(function (a, b) {
-          return b.price[0] - a.price[0]; 
+          return b.total - a.total; 
         });
       } else {
         filterhigh = state.orders.sort(function (a, b) {
-          return b.price[0] - a.price[0];
+          return b.total - a.total;
         });
       }
       modifyFilterOrders = filterByStatus({...state, filterOrders: filterhigh});

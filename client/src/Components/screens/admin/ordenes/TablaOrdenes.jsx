@@ -32,7 +32,7 @@ export default function TablaOrdenes({setPromo}) {
   const { search, filterOrders, idError, status, renderPage } = useSelector(
     (state) => state.ordersReducer
   );
-
+  // console.log(renderPage, 'uuuuuuu')
   let dataRENDER;
   if (search && !filterOrders.length) {
     toast(`Search Not Found: "${idError}".`, {
@@ -68,7 +68,7 @@ export default function TablaOrdenes({setPromo}) {
       <tbody>
       { dataRENDER?.length > 0 ? (
         dataRENDER.map((ord) => {
-          return <Orden id={ord.id} key={ord.id} orden={ord} />;
+          return <Orden id={ord.id} key={ord.id} orden={ord} />; 
         })
       ) : dataRENDER?.length === 0 ? (<p>There are no matches for your search</p>):(
         <tr>
