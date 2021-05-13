@@ -184,7 +184,7 @@ const StyledCheckout = styled.div`
   @media (min-width: 648px){}
 
 .makeStyles-paper-3 {
-    color: black; /*letra de titulo "checkout" */
+    color:  #855eb7; /*letra de titulo "checkout" */
     padding: 24px;
     background: white;
     margin-top: 48px;
@@ -239,6 +239,16 @@ button.save {
 .MuiButton-root {
     padding: 0px 0px;
    
+}
+.MuiStepIcon-root.MuiStepIcon-active {
+    color:  #855eb7;
+}
+.MuiStepIcon-root.MuiStepIcon-completed {
+    color:  #855eb7;
+}
+.MuiGrid-spacing-xs-2 > .MuiGrid-item {
+    padding: 8px;
+    margin-top: 20px;
 }
 
 `;
