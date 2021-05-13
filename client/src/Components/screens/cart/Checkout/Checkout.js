@@ -53,13 +53,13 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(6),
       padding: theme.spacing(3),
-      color: "#f4f2f8",
-      background: "#8a6db1", //fondo del form
+      color: "#8a6db1",
+      // background: "#8a6db1", //fondo del form
     },
   },
   stepper: {
     padding: theme.spacing(3, 10, 3),
-    background: "#8a6db1", //fondo de steps
+    // background: "#8a6db1", //fondo de steps
   },
   buttons: {
     display: "flex",
@@ -68,8 +68,8 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
-    color: "#f4f2f8",
-    background: "#402e57",
+    // color: "#f4f2f8",
+    // background: "#402e57",
   },
 }));
 
