@@ -217,6 +217,29 @@ button.save {
     border-radius: 9px;
     border: none;
 }
+.makeStyles-button-6 {
+    color: #f4f2f8;
+    background: #f8f9fa;
+    margin-top: 24px;
+    margin-left: 8px;
+}
+.MuiButton-contained:hover {
+    box-shadow: none;
+    background-color: #d5d5d5;
+}
+.MuiButton-contained {
+    color: rgba(0, 0, 0, 0.87);
+    box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 20%), 0px 0px 0px 0px rgb(0 0 0 / 14%), 0px 0px 0px 0px rgb(0 0 0 / 12%);
+    background-color: white;
+}
+.MuiButton-contained:hover{    
+    background-color: #ffffff00;
+}
+
+.MuiButton-root {
+    padding: 0px 0px;
+   
+}
 
 `;
 
