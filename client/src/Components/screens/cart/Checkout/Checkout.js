@@ -195,16 +195,27 @@ const StyledCheckout = styled.div`
     background: white;
 }
 .MuiButton-label {
-    width: 100%;
-    display: inherit;
-    align-items: inherit;
-    justify-content: center;
-    background-color: #8677bf;
-    padding: 6px;
-    position: relative;
+   
+    
     top: 7px;
     right: -15px;
+    background-color: #5e3f71;
+    color: #cecece;
+    position: relative;
+    left: 9px;
+    padding: 6px;
+    border-radius: 9px;
+    border: none;
 
+}
+button.save {
+    background-color: #5e3f71;
+    color: #cecece;
+    position: relative;
+    left: 9px;
+    padding: 6px;
+    border-radius: 9px;
+    border: none;
 }
 
 `;
