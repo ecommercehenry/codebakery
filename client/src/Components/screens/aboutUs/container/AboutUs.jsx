@@ -40,6 +40,7 @@ const AboutUs = ({ name, title, img, git, linkedin }) => {
   );
 };
 
+
 const AboutUsConteiner = styled.div`
   * {
     margin: 0;
@@ -97,8 +98,6 @@ const AboutUsConteiner = styled.div`
     padding: 0.2rem;
   }
 
-  
-
   .card:hover > .icons {
     transform: translate(0);
   }
@@ -127,6 +126,57 @@ const AboutUsConteiner = styled.div`
   .icon-insta:hover {
     opacity: 0.7;
     padding: 5px;
+  }
+
+  @media (max-width: 768px) and (min-width: 481px) {
+    .card {
+      width: 10rem;
+      height: 10rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 9999px;
+    }
+
+    .main {
+      width: 100%;
+      margin-left:20px;
+      margin-right:20px;
+      margin-top: 40px;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .card {
+      width: 8rem;
+      height: 8rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 9999px;
+    }
+
+    .main {
+      width: 80%;
+      margin-left:25px;
+      margin-right:25px;
+      margin-top: 40px;
+    }
+  }
+
+  @media (min-width: 150px) and (max-width: 319px) {
+    .card {
+      width: 7rem;
+      height: 7rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 9999px;
+    }
+
+    .main {
+      width: 80%;
+      margin-left:25px;
+      margin-right:25px;
+      margin-top: 40px;
+    }
   }
 `;
 
