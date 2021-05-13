@@ -42,7 +42,7 @@ const BillCard = () => {
   });
 
   const subTotal = result[0]?.lineal_order
-    ?.map((r) => r.price * r.quantity)
+    ?.map((r) => r.price * r.quantity * ((r.discount/100 ||1)))
     .reduce((a, b) => a + b, 0)
     .toFixed(2);
 
@@ -111,6 +111,7 @@ const BillCard = () => {
               image={res.image}
               price={res.price}
               quantity={res.quantity}
+              discount = {res.discount}
             />
           ))}
         </div>
