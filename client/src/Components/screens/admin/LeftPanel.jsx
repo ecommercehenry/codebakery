@@ -67,7 +67,7 @@ const LeftPanel = () => {
               className="text-decoration-none text-white"
               to="/admin/slider"
             >
-              <div className={`tab ${activeTab.sliders}`}>
+              <div className={`tab ${activeTab.slider}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Slider</span>
               </div>
@@ -76,7 +76,7 @@ const LeftPanel = () => {
               className="text-decoration-none text-white"
               to="/admin/newsletter"
             >
-              <div className={`tab ${activeTab.newsletters}`}>
+              <div className={`tab ${activeTab.newsletter}`}>
                 <HiOutlineUser size="1.3rem" className="icon" />
                 <span className="tabName">Newsletter</span>
               </div>

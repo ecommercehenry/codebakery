@@ -14,8 +14,10 @@ const Landing = () => {
 
     return (
         <>
+
             <NavBar color='black'/>
             <NavBarMobile color='white'/>
+
             <StyledLanding variants={pageAnimation} initial='hidden' animate='show' exit='exit'>
                 <div className="background-photo">
                     <img src={bread1} alt="" id="bread1" />
