@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 // Y realizar los Detalles de css
 const OrderDetail = (props) => {
-  const { name, image, price, quantity } = props;
+  const { name, image, price, quantity, discount } = props;
 
   return (
     <StyledOrden>
@@ -23,11 +23,11 @@ const OrderDetail = (props) => {
           </div>
           <div className="text-container-odtls">
             <span>Price</span>
-            <p>{price}</p>
+            <p>{price} {discount ?  `(-${discount}%)`: ''}</p>
           </div>
           <div className="text-container-odtls">
             <span>Sub Total</span>
-            <p>{price * quantity}</p>
+            <p>{price * quantity * ((discount/100 ||1))}</p>
           </div>
         </div>
       </div>
