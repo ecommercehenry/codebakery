@@ -45,6 +45,7 @@ const NavBarMobile = ({ color }) => {
 
   let logout = () => {
     localStorage.clear();
+    window.location.href = "/";
   };
 
   let storage = window.localStorage;

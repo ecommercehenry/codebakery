@@ -38,8 +38,8 @@ const NavBar = ({ color }) => {
 
   let logout = () => {
     localStorage.clear();
-    // window.location.href = "http://localhost:3000/";
-    window.location.replace("http://localhost:3000/")
+    window.location.href = "/";
+    /* window.location.replace("http://localhost:3000/") */
     // window.location.reload();
   };
 

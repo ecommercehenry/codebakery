@@ -31,6 +31,7 @@ const LeftPanel = () => {
 
   let logout = () => {
     localStorage.clear();
+    window.location.href = "/";
   };
 
   return (
