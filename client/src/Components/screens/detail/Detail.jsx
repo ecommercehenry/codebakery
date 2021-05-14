@@ -43,6 +43,8 @@ const Detail = ({ refetchCatalogue }) => {
       <StyledDetail className="detailCard" light={status}>
         {data?.productById ? (
           <>
+          <div className="detail-content-scroll">
+          <div className="detail-content">
             <div className="imageSide">
               <img
                 src={data?.productById.image}
@@ -75,6 +77,8 @@ const Detail = ({ refetchCatalogue }) => {
               </>
             </div>
             <ProductReview id={parseInt(idCart.id)} />
+            </div>
+            </div>
           </>
         ) : (
           "loading..."
@@ -122,6 +126,18 @@ const StyledDetail = styled.div`
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
+  overflow-y: auto;
+
+  .detail-content-scroll{
+    display: block;
+    width: 100%;
+  }
+
+  .detail-content{
+    display: flex;
+    width: 100%;
+    align-items: center;
+  }
 
   .imageSide {
     display: flex;
@@ -229,6 +245,25 @@ const StyledDetail = styled.div`
 
   .purple-btn:hover {
     background-color: #532c6b;
+  }
+
+  @media(max-width: 900px){
+    .detail-content-scroll{
+      height: 100%;
+    }
+
+    .detail-content{
+      flex-direction: column;
+
+      .imageSide{
+        width: 70%
+      }
+
+      .dataSide{
+        
+        width: 100%;
+      }
+    }
   }
 `;
 
